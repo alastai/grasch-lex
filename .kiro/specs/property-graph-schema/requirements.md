@@ -870,7 +870,27 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 
 ### Requirement 42
 
-**User Story:** As a developer, I want to work with unified graph schema graphs that combine schema graphs and content type lattices with proper connections to the Catalog, so that I can have a complete connected graph representation of each graph type.
+**User Story:** As a developer, I want Grasch to be thread-safe with thread-associated user sessions, so that I can use the library safely in multi-threaded applications where each thread maintains its own isolated session state.
+
+#### Acceptance Criteria
+
+1. WHEN I use Grasch in a multi-threaded application THEN the system SHALL ensure thread-safe access to all shared resources and data structures
+2. WHEN I create user sessions THEN the system SHALL associate each session with its creating thread using thread-local storage or similar mechanisms
+3. WHEN I work with catalog operations THEN the system SHALL ensure that concurrent access to the same catalog from different threads is properly synchronized
+4. WHEN I access session-specific data THEN the system SHALL automatically provide the correct session data for the current thread
+5. WHEN I work with Kuzu database operations THEN the system SHALL ensure thread-safe database access and connection management
+6. WHEN I use PSO interface objects THEN the system SHALL ensure that object creation and manipulation are thread-safe
+7. WHEN I work with content type lattices THEN the system SHALL ensure that lattice operations and caching are thread-safe
+8. WHEN I perform validation operations THEN the system SHALL ensure that validation state and caches are properly isolated between threads
+9. WHEN I use DDL or YAML interfaces THEN the system SHALL ensure that parsing and execution are thread-safe
+10. WHEN I work with schema derivation THEN the system SHALL ensure that graph analysis and core reduction operations are thread-safe
+11. WHEN I access catalog locks THEN the system SHALL use thread-safe locking mechanisms that prevent deadlocks and race conditions
+12. WHEN I work with serialization THEN the system SHALL ensure that concurrent serialization operations don't interfere with each other
+13. WHEN I use visualization features THEN the system SHALL ensure that g.V() integration and graph extraction are thread-safe
+14. WHEN I work with session defaults THEN the system SHALL ensure that each thread's session maintains its own independent default settings
+15. WHEN I handle errors and exceptions THEN the system SHALL ensure that error states are properly isolated between threads
+16. WHEN I work with type checking and validation THEN the system SHALL ensure that type system operations are thread-safe and don't share mutable state
+17. WHEN I design the architecture THEN the system SHALL use immutable data structures where possible to minimize synchronization overhead
 
 #### Acceptance Criteria
 
