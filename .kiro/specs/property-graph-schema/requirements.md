@@ -279,7 +279,81 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 #### Acceptance Criteria
 
 1. WHEN I define property types within content record types using JSON Schema THEN the system SHALL support an extension mechanism for specifying GQL and SQL datatypes
-2. WHEN I work with JSON Schema extensions THEN the system SHALL provide a standardized library of predefined types that specialize JSON's builtin types (string, number, boolean, etc.)
+2. WHEN I work with JSON Schema extensions THEN the system SHALL provide a standardized library of predefined types that specialize JSON's builtin types (string, number, boolean, array, object) to match GQL and SQL datatypes
+3. WHEN I use library-defined types THEN the system SHALL provide predefined extensions for common GQL datatypes (integer, float, datetime, duration, etc.)
+4. WHEN I use library-defined types THEN the system SHALL provide predefined extensions for common SQL datatypes (varchar, decimal, timestamp, etc.)
+5. WHEN I define custom extensions THEN the system SHALL allow me to create new specialized types based on JSON Schema's base types
+6. WHEN I validate property values THEN the system SHALL enforce both JSON Schema constraints and the additional GQL/SQL datatype constraints
+7. WHEN I serialize schemas with extensions THEN the system SHALL preserve the extension information for proper reconstruction
+8. WHEN I work with different JSON Schema processors THEN the system SHALL ensure extension compatibility across different implementations
+
+### Requirement 17
+
+**User Story:** As a developer, I want to distinguish between GQL:graph and LEX:graph concepts, so that I can understand the structural equivalence and constraint extensions that LEX provides over the GQL standard.
+
+#### Acceptance Criteria
+
+1. WHEN I work with GQL:graph concepts THEN the system SHALL recognize them as ISO GQL Standard graph definitions without value constraints
+2. WHEN I work with LEX:GQL:graph concepts THEN the system SHALL treat them as structurally equivalent to GQL:graph (same type/structure)
+3. WHEN I work with LEX:graph concepts THEN the system SHALL recognize them as extended graphs that may have value constraints applied
+4. WHEN I define a LEX:graph THEN the system SHALL allow it to have key constraints on elements (which GQL:graph cannot have)
+5. WHEN I define a LEX:graph THEN the system SHALL allow it to have cardinality constraints on elements (which GQL:graph cannot have)
+6. WHEN I work with constraint-free LEX:graph instances THEN the system SHALL recognize them as functionally equivalent to GQL:graph instances
+7. WHEN I reference concepts without prefixes THEN the system SHALL assume LEX: namespace implicitly
+8. WHEN I establish equivalence between standards THEN the system SHALL support notation like "GQL:concept = LEX:concept" for identical concepts
+9. WHEN I use synonym notation THEN the system SHALL support "GQL:LEX:concept" as shorthand for equivalence statements
+
+### Requirement 18
+
+**User Story:** As a developer, I want to work with LEX constraint systems that are version-specific and user-configurable, so that I can apply appropriate value constraints to graphs based on the LEX version capabilities.
+
+#### Acceptance Criteria
+
+1. WHEN I work with GQL:graph instances THEN the system SHALL provide zero constraint options (no value constraints available)
+2. WHEN I work with LEX-2026:graph instances THEN the system SHALL provide a specific set of n constraint types available for user selection
+3. WHEN I work with future LEX-202x:graph instances THEN the system SHALL provide an expanded set of m > n constraint types where m exceeds the LEX-2026 constraint count
+4. WHEN I design a graph THEN the system SHALL allow me to choose which available constraints to apply from the version-specific constraint catalog
+5. WHEN I apply constraints THEN the system SHALL allow me to set specific constraint values according to my requirements
+6. WHEN I work with constraint catalogs THEN the system SHALL ensure LEX-2026 includes at minimum key constraints and cardinality constraints
+7. WHEN I upgrade LEX versions THEN the system SHALL maintain backward compatibility with existing constraint types while adding new constraint capabilities
+8. WHEN I query available constraints THEN the system SHALL provide the complete list of constraint types available for the current LEX version
+9. WHEN I validate graphs THEN the system SHALL enforce only the constraints that have been explicitly applied by the user
+10. WHEN I work with constraint evolution THEN the system SHALL ensure that constraint capabilities expand monotonically across LEX versions (newer versions have all constraints of older versions plus additional ones)
+
+### Requirement 19
+
+**User Story:** As a developer, I want to apply constraints at both individual graph level and schema level, so that I can have flexible constraint management for different use cases.
+
+#### Acceptance Criteria
+
+1. WHEN I define constraints for an individual LEX:graph THEN the system SHALL allow me to apply constraints directly to that specific graph instance
+2. WHEN I define constraints within a LEX:graph schema THEN the system SHALL allow me to specify constraints that apply to all graphs conforming to that schema
+3. WHEN I work with graph-level constraints THEN the system SHALL apply them only to the specific graph instance where they are defined
+4. WHEN I work with schema-level constraints THEN the system SHALL apply them to all graph instances that conform to that schema
+5. WHEN I have both graph-level and schema-level constraints THEN the system SHALL apply both sets of constraints with appropriate precedence rules
+6. WHEN I validate a graph with schema-level constraints THEN the system SHALL check constraint conformance as part of schema validation
+7. WHEN I validate a graph with graph-level constraints THEN the system SHALL check constraint conformance as part of instance validation
+8. WHEN I modify constraints THEN the system SHALL allow independent modification of graph-level and schema-level constraints
+9. WHEN I query constraint sources THEN the system SHALL clearly indicate whether constraints originate from the graph instance or its schema
+10. WHEN I work with constraint inheritance THEN the system SHALL define clear rules for how graph-level constraints interact with schema-level constraints
+
+### Requirement 20
+
+**User Story:** As a developer, I want to work with LEX:graph schema as a composition of GQL:graph type and LEX:constraints, so that I can have unified schema definitions that handle both structural and value validation.
+
+#### Acceptance Criteria
+
+1. WHEN I define a LEX:graph schema THEN the system SHALL require it to contain exactly one GQL:graph type component
+2. WHEN I define a LEX:graph schema THEN the system SHALL require it to contain a set of LEX:constraints (which may be empty)
+3. WHEN I work with LEX:graph schema composition THEN the system SHALL treat it as the combination: LEX:graph schema = GQL:graph type + LEX:constraints
+4. WHEN I validate a LEX:graph against a LEX:graph schema THEN the system SHALL perform structural conformance validation against the GQL:graph type component
+5. WHEN I validate a LEX:graph against a LEX:graph schema THEN the system SHALL perform value conformance validation against the LEX:constraints component
+6. WHEN I query a LEX:graph schema THEN the system SHALL provide access to both the structural definition (GQL:graph type) and constraint definitions (LEX:constraints)
+7. WHEN I modify a LEX:graph schema THEN the system SHALL allow independent modification of the GQL:graph type and LEX:constraints components
+8. WHEN I create a LEX:graph schema with empty constraints THEN the system SHALL function as a pure structural schema equivalent to GQL:graph type
+9. WHEN I work with schema conformance THEN the system SHALL ensure LEX:graph instances satisfy both structural requirements (from GQL:graph type) and value requirements (from LEX:constraints)
+10. WHEN I serialize LEX:graph schemas THEN the system SHALL preserve both the GQL:graph type structure and the LEX:constraints definitions
+11. WHEN I reference LEX:graph schemas THEN the system SHALL provide clear identification of which component (structure or constraints) is being accessed or modifiedlean, etc.)
 3. WHEN I specify a property datatype THEN the system SHALL allow me to use library-defined types such as "gql:integer", "gql:float", "gql:datetime", "sql:varchar", "sql:decimal", etc.
 4. WHEN I use a library-defined type THEN the system SHALL map it to the appropriate GQL or SQL datatype while maintaining JSON Schema validation capabilities
 5. WHEN I define custom library types THEN the system SHALL allow me to create new standardized types that extend the base library
