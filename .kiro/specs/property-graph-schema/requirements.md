@@ -966,16 +966,65 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 16. WHEN I work with type checking and validation THEN the system SHALL ensure that type system operations are thread-safe and don't share mutable state
 17. WHEN I design the architecture THEN the system SHALL use immutable data structures where possible to minimize synchronization overhead
 
+### Requirement 43
+
+**User Story:** As a developer, I want to work with Nested Properties Record Schemas as a category of Primary Catalog Object, so that I can define reusable record structures independently of graph structure using multiple schema definition languages.
+
 #### Acceptance Criteria
 
-1. WHEN I create a graph type THEN the system SHALL create a unified Information Schema Graph (ISG) that combines the schema graph and content type lattice as a single connected graph structure
-2. WHEN I work with an ISG THEN the system SHALL distinguish it from a "schema graph" (which is just the element type portion without the content type lattice)
-3. WHEN I create an ISG THEN the system SHALL include edges connecting schema graph nodes to content type lattice nodes (directly for node types, through edge-reflection nodes for edge types)
-4. WHEN I create a graph type THEN the system SHALL create a type node that represents the graph type itself with properties including the graph type name
-5. WHEN I work with a type node THEN the system SHALL ensure it connects directly or indirectly to all other nodes in the ISG
-6. WHEN I store a graph type in the Catalog THEN the system SHALL connect the type node to the corresponding leaf node (GQL-schema) in the Catalog tree
-7. WHEN I navigate from the Catalog to a graph type THEN the system SHALL provide access through the connection between the Catalog leaf node and the graph type's type node
-8. WHEN I analyze the complete system THEN the system SHALL provide a unified graph structure where the Catalog tree connects to multiple ISGs through type nodes
-9. WHEN I work with graph connectivity THEN the system SHALL ensure every node in an ISG is reachable from the type node through some path
-10. WHEN I serialize the complete system THEN the system SHALL preserve the connections between Catalog nodes and type nodes, as well as the internal structure of each ISG
-11. WHEN I query a graph type THEN the system SHALL provide access to both the structural elements (schema graph portion) and the type system (content type lattice portion) through the unified ISG
+1. WHEN I work with Primary Catalog Objects THEN the system SHALL recognize Nested Properties Record Schemas as a distinct PCO category alongside graphs, graph types, tables, and procedures
+2. WHEN I create a Nested Properties Record Schema THEN the system SHALL allow me to define it using JSON Schema as the primary schema definition language
+3. WHEN I work with schema definition languages THEN the system SHALL support multiple comparable record schema definition languages beyond JSON Schema
+4. WHEN I use alternative schema languages THEN the system SHALL support Parquet schema definitions for columnar data representations
+5. WHEN I use alternative schema languages THEN the system SHALL support Apache Arrow schema definitions for analytics-friendly data structures
+6. WHEN I design record schemas THEN the system SHALL allow me to work on content record types independently of any specific graph structure
+7. WHEN I reference record schemas THEN the system SHALL allow content record types in graph types to reference Nested Properties Record Schemas by their catalog names
+8. WHEN I update a Nested Properties Record Schema THEN the system SHALL automatically propagate changes to all content record types that reference it
+9. WHEN I work with schema processors THEN the system SHALL provide pluggable architecture to support different validation libraries for different schema languages
+10. WHEN I leverage existing tools THEN the system SHALL integrate with commonly-used libraries and tooling for each supported schema definition language
+11. WHEN I work with developer skills THEN the system SHALL allow developers to use their existing knowledge of JSON Schema, Parquet, Arrow, or other schema languages
+12. WHEN I serialize Nested Properties Record Schemas THEN the system SHALL preserve the original schema definition language and format
+13. WHEN I validate content records THEN the system SHALL use the appropriate validator for the schema definition language of the referenced Nested Properties Record Schema
+14. WHEN I work with schema evolution THEN the system SHALL support versioning and migration of Nested Properties Record Schemas
+15. WHEN I design modular systems THEN the system SHALL enable teams to develop record schemas and graph structures independently and combine them later
+
+### Requirement 44
+
+**User Story:** As a developer, I want to conceptualize property graphs as graphs of trees (documents), so that I can understand and work with the hierarchical nature of graph elements where each element represents a document tree structure.
+
+#### Acceptance Criteria
+
+1. WHEN I work with property graphs THEN the system SHALL conceptualize them as graphs of trees where each element (node or edge) represents a document tree
+2. WHEN I work with graph elements as trees THEN the system SHALL ensure that values are only associated with leaf nodes of each element's tree structure
+3. WHEN I define minimal elements THEN the system SHALL support elements that consist only of themselves as the root node (no properties)
+4. WHEN I define flat property records THEN the system SHALL support elements with root plus level 1 leaf nodes representing traditional key-value properties
+5. WHEN I define full hierarchical elements THEN the system SHALL support elements with multi-level nested document structures of arbitrary depth
+6. WHEN I work with element tree complexity THEN the system SHALL provide a spectrum from minimal trees (root only) to full hierarchies (deep nesting)
+7. WHEN I conceptualize the structure THEN the system SHALL treat each graph element as the root of its own document tree with properties as child nodes
+8. WHEN I work with nested properties THEN the system SHALL organize them as tree structures where intermediate nodes represent nested objects/maps and leaf nodes contain actual values
+9. WHEN I validate element structures THEN the system SHALL ensure that the tree structure of each element conforms to its content record type definition
+10. WHEN I serialize elements THEN the system SHALL be able to represent each element as both a graph node/edge and as a complete document tree
+11. WHEN I work with graph traversal THEN the system SHALL provide operations that work at both the graph level (element-to-element relationships) and tree level (within-element property navigation)
+12. WHEN I analyze property graphs THEN the system SHALL recognize them as two-level hierarchical structures: graphs (element relationships) containing trees (element internal structure)
+
+### Requirement 45
+
+**User Story:** As a developer, I want to represent graph elements using tabular structures with flexible record schemas, so that I can leverage columnar formats and analytics tools while maintaining the hierarchical nature of element data.
+
+#### Acceptance Criteria
+
+1. WHEN I work with graph element storage THEN the system SHALL support representing elements as records in tables where each record represents a graph element or part of a graph element
+2. WHEN I use record schemas for tabular representation THEN the system SHALL support multiple schema formats including JSON Schema, Parquet schema, and Apache Arrow schema
+3. WHEN I work with node tables THEN the system SHALL allow tables where each record represents a complete node element with its full tree structure
+4. WHEN I work with edge tables THEN the system SHALL allow tables where each record represents a complete edge element with its full tree structure
+5. WHEN I work with partitioned representations THEN the system SHALL support node tables that represent parts or blocks of a set partition for nodes
+6. WHEN I work with partitioned representations THEN the system SHALL support edge tables that represent parts or blocks of a set partition for edges
+7. WHEN I use columnar formats THEN the system SHALL leverage Parquet or Arrow schemas to define efficient columnar representations of element tree structures
+8. WHEN I work with analytics integration THEN the system SHALL enable graph elements to be processed by analytics tools that work with columnar data formats
+9. WHEN I define table schemas THEN the system SHALL ensure that the record schema can represent the full hierarchical tree structure of graph elements
+10. WHEN I work with set partitioning THEN the system SHALL provide mechanisms to distribute large graphs across multiple table partitions while maintaining referential integrity
+11. WHEN I query tabular representations THEN the system SHALL support both relational-style queries on element properties and graph-style traversal operations
+12. WHEN I work with hybrid storage THEN the system SHALL enable combinations of graph topology storage (for relationships) and tabular element storage (for element data)
+13. WHEN I use different record formats THEN the system SHALL allow the same logical graph to be represented using different physical record schema formats based on use case requirements
+14. WHEN I work with large-scale analytics THEN the system SHALL enable integration with data lake and data warehouse architectures through standard columnar formats
+15. WHEN I serialize graph data THEN the system SHALL support export to both graph formats (preserving topology) and tabular formats (preserving element data structure)
