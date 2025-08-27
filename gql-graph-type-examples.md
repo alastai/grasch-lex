@@ -25,13 +25,13 @@ The following examples demonstrate identical semantic content expressed in both 
 ```gql
 CREATE GRAPH TYPE PersonCompanyGraph {
   // Node type definitions using pattern syntax with key label sets and multiple labels
-  (person :Person => :Person & Audit & DataQuality {
+  (person :Person => Audit & DataQuality {
     name STRING,
     lastModified TIMESTAMP,
     principal STRING,
     governanceStatus STRING
   }),
-  (company :Company => :Company & Audit & DataQuality {
+  (company :Company => Audit & DataQuality {
     name STRING,
     lastModified TIMESTAMP,
     principal STRING,
@@ -83,13 +83,13 @@ In LEX (as opposed to GQL), single-member key label sets can be used directly as
 ```lex
 CREATE GRAPH TYPE PersonCompanyGraph {
   // Node type definitions with key label sets (same as GQL)
-  (person :Person => :Person & Audit & DataQuality {
+  (person :Person => Audit & DataQuality {
     name STRING,
     lastModified TIMESTAMP,
     principal STRING,
     governanceStatus STRING
   }),
-  (company :Company => :Company & Audit & DataQuality {
+  (company :Company => Audit & DataQuality {
     name STRING,
     lastModified TIMESTAMP,
     principal STRING,

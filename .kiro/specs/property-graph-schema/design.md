@@ -2,24 +2,28 @@
 
 ## Overview
 
-Grasch is a Python library that implements a GQL Catalog with LEX-2026 extensions, providing a comprehensive system for managing property graphs with advanced constraint capabilities. The system bridges traditional graph databases with modern analytics architectures through a hybrid approach that treats property graphs as "graphs of trees" - where each element is a document tree structure.
+Grasch is a Python library that implements a LEX-extended GQL Catalog, providing a comprehensive system for managing property graphs with advanced constraint capabilities and configurable compliance levels. The system follows the orthogonal architecture of Profile + Language Level, where profiles define feature subsets and implementation choices while language levels (GQL or LEX) determine syntax and extension capabilities.
 
 The design leverages Kuzu as an embedded graph database for storing the complete system as interconnected graph structures: the Catalog tree, Information Schema Graphs (ISGs), and content type lattices. This creates a unified graph-theoretic foundation while supporting multiple representation formats including tabular/columnar storage for analytics integration.
+
+**Profile + Language Level Architecture**: Grasch supports multiple profiles (e.g., Cypher Profile, Full Profile) that can be combined with different language levels (GQL, LEX) to create a matrix of permissible configurations. This allows targeting specific compatibility requirements (like openCypher compatibility) while maintaining the flexibility to use LEX extensions where profile constraints permit.
 
 ## Architecture
 
 ### Core Architectural Principles
 
-1. **Graph-Centric Storage**: All system components (Catalog, ISGs, content type lattices) are stored as graphs in Kuzu
-2. **Multi-Format Support**: Leverage existing schema languages (JSON Schema, Parquet, Arrow) rather than inventing new ones
-3. **Constraint Evolution**: Version-specific constraint catalogs (LEX-2026 → LEX-202x) with monotonic capability expansion
-4. **Thread Safety**: Thread-local user sessions with proper synchronization for shared resources
-5. **Strong Typing**: Comprehensive Python type annotations for portability to other strongly-typed languages
-6. **Modular Design**: Independent development of record schemas and graph structures
+1. **Profile + Language Level Orthogonality**: Profiles define feature subsets and implementation choices independently of language level (GQL vs LEX)
+2. **Graph-Centric Storage**: All system components (Catalog, ISGs, content type lattices) are stored as graphs in Kuzu
+3. **Multi-Format Support**: Leverage existing schema languages (JSON Schema, Parquet, Arrow) rather than inventing new ones
+4. **Constraint Evolution**: Version-specific constraint catalogs (LEX-2026 → LEX-202x) with monotonic capability expansion
+5. **Thread Safety**: Thread-local user sessions with proper synchronization for shared resources
+6. **Strong Typing**: Comprehensive Python type annotations for portability to other strongly-typed languages
+7. **Modular Design**: Independent development of record schemas and graph structures
+8. **Compatibility Matrix**: Clear documentation of which profile-language combinations are permissible and supported
 
-### Three-Layer API Model
+### Profile-Aware Three-Layer API Model
 
-The core API follows a three-layer model that separates concerns between object manipulation, declarative statements, and delta-based modifications:
+The core API follows a three-layer model that separates concerns between object manipulation, declarative statements, and delta-based modifications, with all layers respecting the active profile and language level configuration:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -106,6 +110,79 @@ The core API follows a three-layer model that separates concerns between object 
   
   new_catalog_state = apply_delta(current_catalog, catalog_delta)
   ```
+
+## Profile and Language Level Management
+
+### Profile System Architecture
+
+Grasch implements a sophisticated profile system that defines subsets of language features and implementation-defined choices. Profiles are orthogonal to language levels, creating a matrix of supported configurations.
+
+#### Profile Types
+
+**Cypher Profile**:
+- Compatible with openCypher/Cypher 9/Cypher 5.0
+- No catalog support (GC04 disabled)
+- Edge label cardinality: min=1, max=1 (IL001)
+- Key label sets are singleton and equal to the single edge label
+- Simplified graph type system
+
+**Full Profile**:
+- All optional GQL features enabled
+- Full catalog management (GC04 enabled)
+- Multiple edge labels supported (IL001: min=0, max=unlimited)
+- Advanced graph type features (GG25, etc.)
+- Complete ISG support
+
+#### Language Levels
+
+**GQL Language Level**:
+- Standard GQL syntax and semantics
+- Features limited by active profile
+- No LEX extensions
+
+**LEX Language Level**:
+- GQL syntax plus LEX extensions
+- LEX extensions must be compatible with active profile
+- Additional DDL commands (CREATE/DROP DIRECTORY, SHOW commands)
+- IRI-based catalog identification
+
+#### Profile-Language Compatibility Matrix
+
+```
+                    | GQL Language Level | LEX Language Level
+--------------------|-------------------|-------------------
+Cypher Profile      | ✓ Supported       | ⚠️  Limited LEX*
+Full Profile        | ✓ Supported       | ✓ Full LEX Support
+
+* LEX extensions that conflict with Cypher Profile constraints are rejected
+```
+
+### Profile Configuration Interface
+
+```python
+class ProfileConfiguration:
+    """Defines a specific GQL/LEX profile"""
+    name: str
+    optional_features: Set[str]  # e.g., {'GC04', 'GG25'}
+    implementation_defined: Dict[str, Any]  # e.g., {'IL001': {'min': 1, 'max': 1}}
+    lex_compatibility: LEXCompatibility
+    
+class LEXCompatibility(Enum):
+    FULL = "full"           # All LEX extensions allowed
+    LIMITED = "limited"     # Some LEX extensions may be rejected
+    NONE = "none"          # No LEX extensions allowed
+
+class LanguageLevel(Enum):
+    GQL = "gql"
+    LEX = "lex"
+
+class SessionConfiguration:
+    """Session-level configuration"""
+    profile: ProfileConfiguration
+    language_level: LanguageLevel
+    default_catalog_path: Optional[str]
+    json_schema_processor: ISchemaProcessor
+```
 
 ## Components and Interfaces
 
@@ -221,13 +298,29 @@ class AlterConstraintsOperation(DeltaOperation):
 
 ### 2. Catalog Management Component
 
-**Purpose**: Manages the hierarchical filesystem-like structure of the GQL Catalog.
+**Purpose**: Manages the hierarchical filesystem-like structure of the GQL Catalog with LEX extensions for directory and schema management.
 
 **Key Classes**:
-- `Catalog`: Root container with thread-safe access control
+- `Catalog`: Root container with thread-safe access control and IRI identification support
 - `Directory`: Internal nodes in the catalog tree
 - `GQLSchema`: Leaf nodes containing Primary Catalog Objects
-- `CatalogPath`: Strongly-typed path representation
+- `CatalogPath`: Strongly-typed path representation supporting both traditional paths and IRIs
+- `LEXCatalogDDL`: LEX extensions for catalog DDL commands
+
+**GQL Standard Features**:
+- `USE <graph_expression>` for working graph specification
+- `AT <schema_reference>` for schema context in procedures
+- Schema references with absolute/relative paths
+
+**LEX Extensions** (when LEX language level is active and profile permits):
+- `CREATE DIRECTORY <path>` - Create catalog directories
+- `DROP DIRECTORY <path>` - Remove catalog directories  
+- `CREATE GQL SCHEMA <path>` - Create GQL-schema containers
+- `DROP GQL SCHEMA <path>` - Remove GQL-schema containers
+- `SHOW DIRECTORIES [AT <path>]` - List directory contents
+- `SHOW SCHEMAS [AT <path>]` - List GQL-schemas
+- `SHOW GRAPH SCHEMA <schema_name>` - Display ISG structure
+- IRI-based catalog identification (e.g., `catalog://example.com/production#/schemas/customer`)
 
 **Interfaces**:
 ```python
@@ -236,11 +329,22 @@ class ICatalog(Protocol):
     def create_gql_schema(self, path: CatalogPath) -> GQLSchema
     def get_object(self, fqn: str) -> Optional[PrimaryCatalogObject]
     def list_contents(self, path: CatalogPath) -> List[Union[Directory, GQLSchema]]
+    
+    # LEX extensions (available when language_level == LEX)
+    def create_directory_ddl(self, ddl: str) -> None
+    def drop_directory_ddl(self, ddl: str) -> None
+    def show_directories_ddl(self, ddl: str) -> List[Directory]
 
 class IGQLSchema(Protocol):
     def add_object(self, obj: PrimaryCatalogObject) -> None
     def get_object(self, name: str) -> Optional[PrimaryCatalogObject]
     def list_objects(self) -> List[PrimaryCatalogObject]
+
+class ICatalogIRI(Protocol):
+    """LEX extension for IRI-based catalog identification"""
+    def resolve_iri(self, iri: str) -> CatalogPath
+    def to_iri(self, path: CatalogPath) -> str
+    def validate_iri(self, iri: str) -> ValidationResult
 ```
 
 ### 2. Primary Catalog Objects (PCO) Component
@@ -366,6 +470,7 @@ class CatalogNode:
     parent: Optional['CatalogNode']
     children: Dict[str, 'CatalogNode']
     node_type: Literal['directory', 'gql_schema']
+    iri: Optional[str] = None  # LEX extension for IRI identification
 
 @dataclass
 class PrimaryCatalogObject:
@@ -373,6 +478,15 @@ class PrimaryCatalogObject:
     object_type: PCOType
     fully_qualified_name: str
     schema_container: 'GQLSchema'
+    profile_requirements: Set[str]  # Required profile features
+    language_level: LanguageLevel   # Minimum language level required
+
+@dataclass
+class CatalogPath:
+    """Unified path representation supporting traditional paths and IRIs"""
+    path: str
+    is_iri: bool = False
+    base_iri: Optional[str] = None
 ```
 
 #### 2. Graph Type and Constraint Model

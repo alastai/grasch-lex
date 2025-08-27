@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This feature involves creating a Python library called Grasch that acts as a GQL Catalog according to the GQL (Graph Query Language) specification. The library will provide a structured way to define and manage named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions) within a hierarchical filesystem-like structure. The Catalog has a root directory ("/"), directories forming a tree structure with unique names among siblings, and GQL-schemas (leaf nodes) containing named primary catalog objects with fully-qualified names. Directories can only contain other directories or GQL-schemas, while GQL-schemas can only contain named primary catalog objects.
+This feature involves creating a Python library called Grasch that acts as a LEX-extended GQL Catalog according to the GQL (Graph Query Language) specification with LEX (Language Extensions) capabilities. LEX is an extension of GQL, and Grasch implements both the GQL core and LEX extensions with configurable compliance modes. The library will provide a structured way to define and manage named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions) within a hierarchical filesystem-like structure. The Catalog has a root directory ("/"), directories forming a tree structure with unique names among siblings, and GQL-schemas (leaf nodes) containing named primary catalog objects with fully-qualified names. Directories can only contain other directories or GQL-schemas, while GQL-schemas can only contain named primary catalog objects.
+
+**LEX Architecture Principle**: Grasch follows the pattern of GQL core + LEX extensions at all levels of detail, with both GQL and LEX supporting profile mechanisms. Profiles and GQL vs LEX are orthogonal in principle but form a matrix of permissible combinations in practice. The system can be configured with a profile (defining feature subsets and implementation choices) and a language level (GQL or LEX), with this pattern applying to builders, APIs, scripting mechanisms, and all other components.
 
 **Terminology Note**: In Grasch, "schema" refers to a description of a set of instances (following standard computer science usage). We distinguish between:
 - **Graph schemas**: Graph types with additional user-defined constraints (descriptions of graph structure)
@@ -84,21 +86,29 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 
 ### Requirement 5
 
-**User Story:** As a developer, I want to configure Grasch with defaults and default defaults, so that I can customize behavior while having sensible fallbacks for unspecified settings.
+**User Story:** As a developer, I want to configure Grasch with GQL/LEX compliance modes and customizable defaults, so that I can control whether LEX extensions are allowed and customize behavior while having sensible fallbacks for unspecified settings.
 
 #### Acceptance Criteria
 
 1. WHEN I initialize Grasch THEN the system SHALL provide each user with a dedicated, discrete copy of the library for their user session
-2. WHEN I initialize my user session THEN the system SHALL provide a set of "default defaults" for all configurable settings including a default JSON Schema processor
-3. WHEN I configure my session THEN the system SHALL allow me to swap out the JSON Schema processor implementation for a different one
-4. WHEN I set user defaults in my session THEN the system SHALL use my defaults instead of the default defaults for my session only
-5. WHEN I don't specify a default for a setting THEN the system SHALL use the corresponding default default
-6. WHEN I work with path names in my session THEN the system SHALL allow me to set one default Catalog path at any time
-6. WHEN no default path prefix is set in my session THEN the system SHALL use "/" (solidus) as the default default path prefix
-7. WHEN the root directory is also a GQL-schema THEN the system SHALL allow primary catalog objects to be placed directly at the root level
-8. WHEN I define a primary catalog object named "Foo" within a GQL-schema at my session's default path THEN the system SHALL assign it the fully-qualified name "<default_path>/Foo"
-9. WHEN my session's default path is the default default "/" THEN primary catalog objects get FQNs of the form "/<name>"
-10. WHEN I change my session's default path THEN the system SHALL apply the new default path to subsequent unqualified path operations
+2. WHEN I initialize my user session THEN the system SHALL allow me to specify a profile (e.g., Cypher Profile, Full Profile) that defines supported optional features and implementation-defined choices
+3. WHEN I initialize my user session THEN the system SHALL allow me to specify a language level: GQL or LEX
+4. WHEN I operate with GQL language level THEN the system SHALL enforce GQL syntax and semantics within the constraints of the specified profile
+5. WHEN I operate with LEX language level THEN the system SHALL allow LEX extensions that are compatible with the specified profile, rejecting incompatible combinations
+6. WHEN I initialize my user session THEN the system SHALL provide a set of "default defaults" for all configurable settings including a default JSON Schema processor, a default profile, and a default language level
+7. WHEN I configure my session THEN the system SHALL allow me to swap out the JSON Schema processor implementation for a different one
+8. WHEN I set user defaults in my session THEN the system SHALL use my defaults instead of the default defaults for my session only
+9. WHEN I don't specify a default for a setting THEN the system SHALL use the corresponding default default
+10. WHEN I work with path names in my session THEN the system SHALL allow me to set one default Catalog path at any time (if catalog support is included in the active GQL profile)
+11. WHEN no default path prefix is set in my session THEN the system SHALL use "/" (solidus) as the default default path prefix (if catalog support is available)
+12. WHEN the root directory is also a GQL-schema THEN the system SHALL allow primary catalog objects to be placed directly at the root level (if catalog support is available)
+13. WHEN I define a primary catalog object named "Foo" within a GQL-schema at my session's default path THEN the system SHALL assign it the fully-qualified name "<default_path>/Foo"
+14. WHEN my session's default path is the default default "/" THEN primary catalog objects get FQNs of the form "/<name>"
+15. WHEN I change my session's default path THEN the system SHALL apply the new default path to subsequent unqualified path operations
+16. WHEN I attempt to use LEX extensions with GQL language level THEN the system SHALL provide clear error messages indicating that LEX features require LEX language level
+17. WHEN I attempt to use LEX extensions incompatible with the active profile THEN the system SHALL provide clear error messages indicating the specific profile constraint that is violated
+18. WHEN I attempt to use features not included in the active profile THEN the system SHALL provide clear error messages indicating the specific feature that requires a different profile
+19. WHEN I switch profiles or language levels during a session THEN the system SHALL validate that existing catalog contents are compatible with the new profile-language combination
 
 ### Requirement 6
 
@@ -279,7 +289,102 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 #### Acceptance Criteria
 
 1. WHEN I define property types within content record types using JSON Schema THEN the system SHALL support an extension mechanism for specifying GQL and SQL datatypes
-2. WHEN I work with JSON Schema extensions THEN the system SHALL provide a standardized library of predefined types that specialize JSON's builtin types (string, number, boolean, array, object) to match GQL and SQL datatypes
+2. WHEN I work with JSON Schema extensions THEN the system SHALL provide a standardized library of predefined types that specialize JSON's builtin types (string, number, boolean, etc.)
+3. WHEN I use library-defined types THEN the system SHALL map them to appropriate GQL and SQL datatypes for cross-system compatibility
+4. WHEN I validate property values THEN the system SHALL enforce both JSON Schema constraints and the additional GQL/SQL datatype constraints
+5. WHEN I serialize schemas THEN the system SHALL preserve both the JSON Schema structure and the library-defined type extensions
+
+### Requirement 17
+
+**User Story:** As a developer, I want to use LEX catalog DDL commands to create and manage directory structures and GQL-schemas in the catalog, so that I can organize my schemas hierarchically using DDL syntax that extends GQL's existing capabilities.
+
+**GQL Standard Summary**: GQL provides USE <graph_expression> for specifying working graphs in statements and AT <schema_reference> for schema context in procedures. Schema references support absolute paths like "/production/analytics/schema1" and relative paths like "../schema2", "HOME_SCHEMA", "CURRENT_SCHEMA". However, GQL lacks DDL commands to CREATE/DROP directories or GQL-schemas, and has no SHOW commands for catalog inspection.
+
+**Examples of GQL Standard Usage**:
+- `USE /production/graphs/customer_graph` (absolute graph reference)
+- `AT /production/schemas/customer_schema` (absolute schema reference in procedure)
+- `USE ../test_graphs/sample_graph` (relative graph reference)
+- `AT HOME_SCHEMA` (predefined schema reference)
+
+#### Acceptance Criteria
+
+1. WHEN I use LEX catalog DDL THEN the system SHALL provide CREATE DIRECTORY syntax for creating catalog directories (missing from GQL standard)
+2. WHEN I use LEX catalog DDL THEN the system SHALL provide DROP DIRECTORY syntax for removing catalog directories (missing from GQL standard)
+3. WHEN I use LEX catalog DDL THEN the system SHALL provide CREATE GQL SCHEMA syntax for creating GQL-schema containers (missing from GQL standard)
+4. WHEN I use LEX catalog DDL THEN the system SHALL provide DROP GQL SCHEMA syntax for removing GQL-schema containers (missing from GQL standard)
+5. WHEN I create directories or schemas THEN the system SHALL support both absolute paths (starting with "/") and relative paths from the current default path
+6. WHEN I create nested directories THEN the system SHALL support CREATE DIRECTORY with recursive creation (similar to mkdir -p)
+7. WHEN I work with GQL's existing USE clause THEN the system SHALL support USE <graph_expression> for specifying the working graph within statements (GQL standard feature)
+8. WHEN I work with GQL's existing AT clause THEN the system SHALL support AT <schema_reference> for specifying the schema context within procedures (GQL standard feature)
+9. WHEN I use GQL schema references THEN the system SHALL support absolute paths (e.g., "/dir1/dir2/schema_name") and relative paths (e.g., "../schema_name", "HOME_SCHEMA", "CURRENT_SCHEMA") as defined in the GQL standard
+10. WHEN I work with LEX SHOW commands THEN the system SHALL provide SHOW DIRECTORIES, SHOW SCHEMAS, and SHOW GRAPH SCHEMA commands for catalog navigation and ISG examination (LEX extension, not in GQL or SQL standards)
+11. WHEN I use SHOW GRAPH SCHEMA THEN the system SHALL display the Information Schema Graph (ISG) structure for examining graph schema metadata
+12. WHEN I create directories or schemas THEN the system SHALL validate that names are unique among siblings and follow GQL naming conventions
+13. WHEN I perform directory operations THEN the system SHALL maintain referential integrity for all contained GQL-schemas and their primary catalog objects
+14. WHEN I use LEX directory/schema DDL in GQL-strict mode THEN the system SHALL reject CREATE/DROP DIRECTORY and CREATE/DROP GQL SCHEMA commands with clear error messages
+15. WHEN I use LEX SHOW commands in GQL-strict mode THEN the system SHALL reject these commands as they are LEX extensions not present in GQL or SQL standards
+16. WHEN I use LEX catalog DDL in LEX-extended mode THEN the system SHALL execute all LEX directory, schema, and SHOW commands as extensions to the GQL standard
+17. WHEN I work with builders and APIs THEN the system SHALL provide both GQL-strict methods (using existing USE and AT clauses with schema references) and LEX-extended methods (including CREATE/DROP DIRECTORY/SCHEMA and SHOW commands)
+
+### Requirement 18
+
+**User Story:** As a developer, I want to identify catalogs using IRI (Internationalized Resource Identifier) syntax as a LEX extension to GQL, so that I can uniquely identify and reference catalogs across distributed systems.
+
+#### Acceptance Criteria
+
+1. WHEN I create or reference a catalog THEN the system SHALL support IRI syntax as a LEX extension for catalog identification
+2. WHEN I specify a catalog IRI THEN the system SHALL support standard IRI components (scheme, authority, path, query, fragment)
+3. WHEN I work with catalog IRIs THEN the system SHALL provide validation to ensure IRI syntax compliance according to RFC 3987
+4. WHEN I use catalog IRIs THEN the system SHALL support both absolute IRIs and relative IRI references
+5. WHEN I resolve IRI references THEN the system SHALL provide base IRI resolution according to RFC 3986 rules
+6. WHEN I work with distributed catalogs THEN the system SHALL use IRIs to establish unique identity across different catalog instances
+7. WHEN I serialize catalog references THEN the system SHALL preserve IRI information for cross-system compatibility
+8. WHEN I configure catalog connections THEN the system SHALL support IRI-based catalog discovery and connection establishment
+9. WHEN I use IRI identification in GQL-strict mode THEN the system SHALL reject IRI syntax and require standard GQL catalog naming
+10. WHEN I use IRI identification in LEX-extended mode THEN the system SHALL treat this as a LEX extension with full IRI support
+11. WHEN I work with IRI-identified catalogs THEN the system SHALL provide mapping between IRI references and local catalog paths for internal operations
+12. WHEN I validate IRI syntax THEN the system SHALL provide clear error messages for malformed IRIs with specific guidance on correction
+13. WHEN I work with IRI fragments THEN the system SHALL support using fragments to reference specific objects within a catalog (e.g., catalog-iri#/path/to/schema/object)
+14. WHEN I work with builders and APIs THEN the system SHALL provide both GQL-strict catalog naming methods and LEX-extended IRI-based methods
+
+### Requirement 19
+
+**User Story:** As a developer, I want Grasch to support profiles that define specific subsets of language features and implementation-defined choices for both GQL and LEX, so that I can target specific compatibility requirements while maintaining orthogonality between profile selection and language level.
+
+#### Acceptance Criteria
+
+1. WHEN I initialize Grasch THEN the system SHALL allow me to specify both a profile (defining feature subsets) and a language level (GQL or LEX)
+2. WHEN I work with profiles THEN the system SHALL support profile definitions that specify values for implementation-defined features (like minimum/maximum label set cardinalities) that apply to both GQL and LEX
+3. WHEN I use a Cypher Profile THEN the system SHALL limit features to those compatible with openCypher/Cypher 9/Cypher 5.0 including no catalog support and edge label cardinality of min=1, max=1
+4. WHEN I use a Cypher Profile with GQL THEN the system SHALL enforce GQL syntax and semantics within the Cypher feature subset (e.g., singleton edge label sets with GQL syntax)
+5. WHEN I use a Cypher Profile with LEX THEN the system SHALL determine whether LEX extensions are compatible with the Cypher Profile constraints, potentially rejecting LEX features that conflict with profile limitations
+6. WHEN I use a Full Profile THEN the system SHALL support all optional features including full catalog management, multiple edge labels, and advanced graph type features
+7. WHEN I define a profile THEN the system SHALL specify which optional features are included (e.g., GC04 for Graph management, GG25 for relaxed key label set uniqueness)
+8. WHEN I define a profile THEN the system SHALL specify values for implementation-defined choices (e.g., IL001 for label set cardinalities, IL003 for key label set cardinalities)
+9. WHEN I work with profile documents THEN the system SHALL support profile definitions as structured documents or objects that can be used by libraries like Grasch
+10. WHEN I operate under a specific profile and language level THEN the system SHALL reject features not included in that profile-language combination with clear error messages
+11. WHEN I validate against a profile-language combination THEN the system SHALL ensure all graph types, constraints, and operations conform to both the profile's feature set and the language level's capabilities
+12. WHEN I work with the profile-language matrix THEN the system SHALL provide clear documentation of which combinations are permissible and which LEX extensions may be incompatible with restrictive profiles
+13. WHEN I serialize or export configurations THEN the system SHALL include both profile and language level information to ensure compatibility when sharing schemas or configurations
+
+### Requirement 20
+
+**User Story:** As a developer, I want all Grasch builders, APIs, and scripting mechanisms to follow the profile + language level pattern, so that I can consistently control feature availability and syntax across all system components.
+
+#### Acceptance Criteria
+
+1. WHEN I work with any Grasch builder THEN the system SHALL provide methods that respect the active profile and language level combination
+2. WHEN I work with any Grasch API THEN the system SHALL clearly distinguish between profile-defined features and language-level capabilities
+3. WHEN I use scripting mechanisms THEN the system SHALL support scripts that comply with the active profile-language combination with clear mode indicators
+4. WHEN I configure a builder with a specific profile THEN the system SHALL reject features not included in that profile regardless of language level
+5. WHEN I configure a builder with LEX language level THEN the system SHALL allow LEX extensions that are compatible with the active profile
+6. WHEN I work with constraint definitions THEN the system SHALL distinguish between profile-available constraints and language-level constraint syntax
+7. WHEN I use DDL (Data Definition Language) statements THEN the system SHALL support syntax appropriate to the language level within the constraints of the active profile
+8. WHEN I work with validation mechanisms THEN the system SHALL provide validation for both profile compliance and language level compliance
+9. WHEN I serialize or export configurations THEN the system SHALL clearly mark which features require specific profiles vs specific language levels
+10. WHEN I migrate between profile-language combinations THEN the system SHALL provide tools to identify and handle features that would be incompatible with the target combination
+11. WHEN I work with error handling THEN the system SHALL provide profile and language-aware error messages that indicate whether issues are profile violations or language level problems
+12. WHEN I use any system component THEN the system SHALL maintain the profile + language level pattern consistently across all levels of detaillean, array, object) to match GQL and SQL datatypes
 3. WHEN I use library-defined types THEN the system SHALL provide predefined extensions for common GQL datatypes (integer, float, datetime, duration, etc.)
 4. WHEN I use library-defined types THEN the system SHALL provide predefined extensions for common SQL datatypes (varchar, decimal, timestamp, etc.)
 5. WHEN I define custom extensions THEN the system SHALL allow me to create new specialized types based on JSON Schema's base types
