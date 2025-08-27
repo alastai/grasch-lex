@@ -1,0 +1,1179 @@
+<?xml version="1.0"?>
+<!--
+1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+-->
+<!DOCTYPE ReferencedDocuments SYSTEM "ReferencedDocuments.dtd" [
+<!-- Include the definition of entities to guide the type of build   -->
+  <!ENTITY % winansi SYSTEM "./winansi.entities">
+  %winansi;
+]>
+
+<ReferencedDocuments>
+
+<!-- ISO and ISO/IEC (and some ANSI) standards -->
+
+<iso-iec-std id="ISO646">
+<docIdentifier>ISO/IEC 646</docIdentifier>
+<docTitle>Information technology &mdash;
+ISO 7-bit coded character set for information interchange</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO1539-1">
+<docIdentifier>ISO/IEC 1539-1</docIdentifier>
+<docDate>2018</docDate>
+<docTitle>Information technology &mdash; Programming languages &mdash; Fortran &mdash;
+Part&nbsp;1: Base language</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO1539-2">
+<docIdentifier>ISO/IEC 1539-2</docIdentifier>
+<docDate>2000</docDate>
+<docTitle>Information technology &mdash; Programming languages &mdash; Fortran &mdash;
+Part&nbsp;2: Varying length character strings
+</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO1989">
+<docIdentifier>ISO 1989</docIdentifier>
+<docDate>2014</docDate>
+<docTitle>Information technology &mdash; Programming languages &mdash; COBOL
+</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO6160">
+<docIdentifier>ISO 6160</docIdentifier>
+<docDate>1979</docDate>
+<docTitle>Programming languages &mdash; PL/I (Endorsement of ANSI X3.53-1976)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO6429">
+<docIdentifier>ISO/IEC 6429</docIdentifier>
+<docTitle>Information technology &mdash;
+Control functions for coded character sets</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO7185">
+<docIdentifier>ISO 7185</docIdentifier>
+<docDate>1990</docDate>
+<docTitle>Information technology &mdash; Programming languages &mdash; Pascal</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO8601-1">
+<docIdentifier>ISO 8601-1</docIdentifier>
+<docTitle>Date and time &mdash; Representations for information interchange
+&mdash; Part 1: Basic rules
+</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO8601-1_2019">
+<docIdentifier>ISO 8601-1</docIdentifier>
+<docDate>2019</docDate>
+<docTitle>Date and time &mdash; Representations for information interchange
+&mdash; Part 1: Basic rules
+</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO8601-2">
+<docIdentifier>ISO 8601-2</docIdentifier>
+<docTitle>Date and time &mdash; Representations for information interchange 
+&mdash; Part 2: Extensions</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO8601-2_2019">
+<docIdentifier>ISO 8601-2</docIdentifier>
+<docDate>2019</docDate>
+<docTitle>Date and time &mdash; Representations for information interchange 
+&mdash; Part 2: Extensions</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO8652">
+<docIdentifier>ISO/IEC 8652</docIdentifier>
+<docDate>2012</docDate>
+<docTitle>Information technology &mdash; Programming languages &mdash; Ada</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO8652_Cor1">
+<docIdentifier>ISO/IEC 8652:2012/Cor.1</docIdentifier>
+<docDate>2016</docDate>
+<docTitle>Information technology &mdash; Programming languages &mdash; Ada &mdash;
+Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO8859-1">
+<docIdentifier>ISO/IEC 8859-1</docIdentifier>
+<docTitle>Information technology &mdash; 8-bit single-byte coded graphic character 
+sets &mdash; Part&nbsp;1: Latin alphabet No. 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO8907">
+<docIdentifier>ISO 8907</docIdentifier>
+<docDate>1987</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; NDL</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075">
+<docIdentifier>ISO/IEC 9075 series</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-1">
+<docIdentifier>ISO/IEC 9075-1</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;1: 
+Framework (SQL/Framework)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-1_2023">
+<docIdentifier>ISO/IEC 9075-1</docIdentifier>
+<docDate>2023</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;1: 
+Framework (SQL/Framework)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-2">
+<docIdentifier>ISO/IEC 9075-2</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;2: 
+Foundation (SQL/Foundation)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-2_2023">
+<docIdentifier>ISO/IEC 9075-2</docIdentifier>
+<docDate>2023</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;2: 
+Foundation (SQL/Foundation)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-3">
+<docIdentifier>ISO/IEC 9075-3</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;3: Call-Level Interface (SQL/CLI)</docTitle>
+</iso-iec-std>
+
+<comment>Editorial: Email Peter Eisentraut 2020-05-11 08:04 Correct spelling in title</comment>
+<iso-iec-std id="ISO9075-4">
+<docIdentifier>ISO/IEC 9075-4</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;4: Persistent Stored Modules (SQL/PSM)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-9">
+<docIdentifier>ISO/IEC 9075-9</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;9: Management of External Data (SQL/MED)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-10">
+<docIdentifier>ISO/IEC 9075-10</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;10: 
+Object Language Bindings (SQL/OLB)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-11">
+<docIdentifier>ISO/IEC 9075-11</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;11: 
+Information and Definition Schemas (SQL/Schemata)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-13">
+<docIdentifier>ISO/IEC 9075-13</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;13: 
+SQL Routines and Types Using the Java&trade; Programming Language (SQL/JRT)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-14">
+<docIdentifier>ISO/IEC 9075-14</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;14: XML-Related Specifications (SQL/XML)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-15">
+<docIdentifier>ISO/IEC 9075-15</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash;
+Part&nbsp;15: Multidimensional Arrays (SQL/MDA)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-16">
+<docIdentifier>ISO/IEC 9075-16</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash;
+Part&nbsp;16: Property Graph Queries (SQL/PGQ)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-1_Cor1">
+<docIdentifier>ISO/IEC 9075-1:2016/Cor.1:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;1:
+Framework (SQL/Framework) &mdash; Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-2_Cor1">
+<docIdentifier>ISO/IEC 9075-2:2016/Cor.1:2019(E)</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;2:
+Foundation (SQL/Foundation) &mdash; Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-2_Cor2">
+<docIdentifier>ISO/IEC 9075-2:2016/Cor.2:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;2:
+Foundation (SQL/Foundation) &mdash; Technical Corrigendum 2</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-3_Cor1">
+<docIdentifier>ISO/IEC 9075-3:2016/Cor.1:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;3: Call-Level Interface (SQL/CLI) &mdash; Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-4_Cor1">
+<docIdentifier>ISO/IEC 9075-4:2016/Cor.1:2019(E)</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;4: Persistent Stored Modules (SQL/PSM) &mdash; Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-4_Cor2">
+<docIdentifier>ISO/IEC 9075-4:2016/Cor.2:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;4: Persistent Stored Modules (SQL/PSM) &mdash; Technical Corrigendum 2</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-9_Cor1">
+<docIdentifier>ISO/IEC 9075-9:2016/Cor.1:2019(E)</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;9: Management of External Data (SQL/MED) &mdash; Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-9_Cor2">
+<docIdentifier>ISO/IEC 9075-9:2016/Cor.2:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;9: Management of External Data (SQL/MED) &mdash; Technical Corrigendum 2</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-10_Cor1">
+<docIdentifier>ISO/IEC 9075-10:2016/Cor.1:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;10: 
+Object Language Bindings (SQL/OLB) &mdash; Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-11_Cor1">
+<docIdentifier>ISO/IEC 9075-11:2016/Cor.1:2019(E)</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;11: 
+Information and Definition Schemas (SQL/Schemata) &mdash; Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-11_Cor2">
+<docIdentifier>ISO/IEC 9075-11:2016/Cor.2:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;11: 
+Information and Definition Schemas (SQL/Schemata) &mdash; Technical Corrigendum 2</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-13_Cor1">
+<docIdentifier>ISO/IEC 9075-13:2016/Cor.1:2019(E)</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;13: 
+SQL Routines and Types Using the Java&trade; Programming Language (SQL/JRT) &mdash;
+Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-13_Cor2">
+<docIdentifier>ISO/IEC 9075-13:2016/Cor.2:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash; Part&nbsp;13: 
+SQL Routines and Types Using the Java&trade; Programming Language (SQL/JRT) &mdash;
+Technical Corrigendum 2</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-14_Cor1">
+<docIdentifier>ISO/IEC 9075-14:2016/Cor.1:2019(E)</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;14: XML-Related Specifications (SQL/XML) &mdash; Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-14_Cor2">
+<docIdentifier>ISO/IEC 9075-14:2016/Cor.2:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash;
+Database languages &mdash; SQL &mdash;
+Part&nbsp;14: XML-Related Specifications (SQL/XML) &mdash; Technical Corrigendum 2</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9075-15_Cor1">
+<docIdentifier>ISO/IEC 9075-15:2016/Cor.1:2022(E)</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL &mdash;
+Part&nbsp;15: Multidimensional Arrays (SQL/MDA) &mdash; Technical Corrigendum 1</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9579">
+<docIdentifier>ISO/IEC 9579</docIdentifier>
+<docTitle>Information technology &mdash; Remote database access for SQL with 
+security enhancement</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO9899">
+<docIdentifier>ISO/IEC 9899</docIdentifier>
+<docDate>2018</docDate>
+<docTitle>Information technology &mdash; Programming languages &mdash; C</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO10206">
+<docIdentifier>ISO/IEC 10206</docIdentifier>
+<docDate>1991</docDate>
+<docTitle>Information technology &mdash; Programming languages &mdash; 
+Extended Pascal</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO10646">
+<docIdentifier>ISO/IEC 10646</docIdentifier>
+<docTitle>Information technology &mdash; Universal Multi-Octet Coded Character Set (UCS)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO10646_2020">
+<docIdentifier>ISO/IEC 10646</docIdentifier>
+<docDate>2020</docDate>
+<docTitle>Information technology &mdash; Universal Multi-Octet Coded Character Set (UCS)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO11404">
+<docIdentifier>ISO/IEC 11404</docIdentifier>
+<docDate>2007</docDate>
+<docTitle>Information technology &mdash; General-Purpose Datatypes (GPD)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO11756">
+<docIdentifier>ISO/IEC 11756</docIdentifier>
+<docDate>1999</docDate>
+<docTitle>Information technology &mdash; Programming languages &mdash; M</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO13886">
+<docIdentifier>ISO/IEC 13886</docIdentifier>
+<docDate>2007</docDate>
+<docTitle>Information technology &mdash; Language-Independent Procedure Calling (LIPC)</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO14651">
+<docIdentifier>ISO/IEC 14651</docIdentifier>
+<docTitle>Information technology &mdash; International string ordering and comparison 
+&mdash; Method for comparing character strings and description of the common template tailorable 
+ordering</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO14651_2020">
+<docIdentifier>ISO/IEC 14651</docIdentifier>
+<docDate>2020</docDate>
+<docTitle>Information technology &mdash; International string ordering and comparison 
+&mdash; Method for comparing character strings and description of the common template tailorable 
+ordering</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO19075-1">
+<docIdentifier>ISO/IEC 19075-1</docIdentifier>
+<docTitle>Information technology &mdash;
+Guidance for the use of database language SQL &mdash;
+Part&nbsp;1: XQuery regular expressions</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO19075-2">
+<docIdentifier>ISO/IEC 19075-2</docIdentifier>
+<docTitle>Information technology &mdash;
+Guidance for the use of database language SQL &mdash;
+Part&nbsp;2: Time-Related Information</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO19075-3">
+<docIdentifier>ISO/IEC 19075-3</docIdentifier>
+<docTitle>Information technology &mdash; 
+Guidance for the use of database language SQL &mdash;
+Part 3: SQL embedded in programs using the Java&trade; programming language
+</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO19075-4">
+<docIdentifier>ISO/IEC 19075-4</docIdentifier>
+<docTitle>Information technology &mdash; 
+Guidance for the use of database language SQL &mdash;
+Part 4: SQL with Routines and Types Using the Java&trade; Programming Language
+</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO19075-5">
+<docIdentifier>ISO/IEC 19075-5</docIdentifier>
+<docTitle>Information technology &mdash;
+Guidance for the use of database language SQL &mdash;
+Part&nbsp;5: Row pattern recognition</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO19075-6">
+<docIdentifier>ISO/IEC 19075-6</docIdentifier>
+<docTitle>Information technology &mdash;
+Guidance for the use of database language SQL &mdash;
+Part&nbsp;6: Support for JSON</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO19075-7">
+<docIdentifier>ISO/IEC 19075-7</docIdentifier>
+<docTitle>Information technology &mdash;
+Guidance for the use of database language SQL &mdash;
+Part&nbsp;7: Polymorphic table functions</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO19075-8">
+<docIdentifier>ISO/IEC 19075-8</docIdentifier>
+<docTitle>Information technology &mdash;
+Guidance for the use of database language SQL &mdash;
+Part 8: Multi-dimensional arrays</docTitle>
+</iso-iec-std>
+
+<!-- PLANNED -->
+<iso-iec-std id="ISO19075-9">
+<docIdentifier>ISO/IEC 19075-9</docIdentifier>
+<docTitle>Information technology &mdash;
+Guidance for the use of database language SQL &mdash;
+Part&nbsp;9: Online analytic processing (OLAP) capabilities</docTitle>
+</iso-iec-std>
+
+<!-- PLANNED -->
+<iso-iec-std id="ISO19075-10">
+<docIdentifier>ISO/IEC 19075-10</docIdentifier>
+<docTitle>Information technology &mdash;
+Guidance for the use of database language SQL &mdash;
+Part&nbsp;10: Property graph queries</docTitle>
+</iso-iec-std>
+
+<!-- PLANNED -->
+<iso-iec-std id="ISO19075-11">
+<docIdentifier>ISO/IEC 19075-11</docIdentifier>
+<docTitle>Information technology &mdash;
+Guidance for the use of database language SQL &mdash;
+Part&nbsp;11: SQL model</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="ISO19123">
+<docIdentifier>ISO 19123</docIdentifier>
+<docDate>2005</docDate>
+<docTitle>Geographic information &mdash; Schema for coverage geometry and functions</docTitle>
+</iso-iec-std>
+
+<!-- PLANNED -->
+<iso-iec-std id="ISO29075">
+<docIdentifier>ISO/IEC 29075 (all parts)</docIdentifier>
+<docTitle>Information technology &mdash;
+          Function libraries for advanced analytics in data management</docTitle>
+</iso-iec-std>
+
+<!-- PLANNED -->
+<iso-iec-std id="ISO29075-1">
+<docIdentifier>ISO/IEC 29075-1</docIdentifier>
+<docTitle>Information technology &mdash;
+          Function libraries for advanced analytics in data management &mdash;
+          Part&nbsp;1: Framework</docTitle>
+</iso-iec-std>
+
+<!-- PLANNED -->
+<iso-iec-std id="ISO29075-2">
+<docIdentifier>ISO/IEC 29075-2</docIdentifier>
+<docTitle>Information technology &mdash;
+          Function libraries for advanced analytics in data management &mdash;
+          Part&nbsp;2: Statistical functions</docTitle>
+</iso-iec-std>
+
+<!-- PLANNED -->
+<iso-iec-std id="ISO29075-3">
+<docIdentifier>ISO/IEC 29075-3</docIdentifier>
+<docTitle>Information technology &mdash;
+          Function libraries for advanced analytics in data management &mdash;
+          Part&nbsp;3: Arrays, vectors, and matrices</docTitle>
+</iso-iec-std>
+
+<!-- PLANNED -->
+<iso-iec-std id="ISOCD39075">
+<docIdentifier>ISO/IEC CD 39075</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; GQL</docTitle>
+</iso-iec-std>
+
+<!-- PLANNED -->
+<iso-iec-std id="ISO39075">
+<docIdentifier>ISO/IEC 39075</docIdentifier>
+<docTitle>Information technology &mdash; Database languages &mdash; GQL</docTitle>
+</iso-iec-std>
+
+<!-- WG3:BER-048 replaced this reference
+<iso-iec-std id="ECMAScript">
+<docIdentifier>ISO/IEC 22275</docIdentifier>
+<docDate>2018</docDate>
+<docTitle>Information technology &mdash;
+Programming languages, their environments and system software interfaces &mdash; 
+ECMAScript<super>&reg;</super> Specification Suite;
+also available as Standard ECMA-414 ECMAScript<super>&reg;</super> 
+Specification Suite</docTitle>
+<URI>https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-414.pdf</URI>
+</iso-iec-std>
+-->
+
+<iso-iec-std id="POSIX">
+<docIdentifier>ISO/IEC/IEEE 9945</docIdentifier>
+<docTitle>Information technology &mdash; Portable Operating System Interface (POSIX&reg;) 
+Base Specifications</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="IEEE754">
+<docIdentifier>IEEE Std 754</docIdentifier>
+<docDate>2019</docDate>
+<docTitle>IEEE Standard for Floating-Point Arithmetic</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="NDL-ANSI">
+<docIdentifier>ANSI X3.133</docIdentifier>
+<docDate>1986</docDate>
+<docTitle>American National Standard for Information Systems &mdash;
+Database Language NDL</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-86-87-ANSI">
+<docIdentifier>ANSI X3.135</docIdentifier>
+<docDate>1986</docDate>
+<docTitle>American National Standard for Information Systems &mdash;
+Database Language &mdash; SQL</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-86-87-ISO">
+<docIdentifier>ISO 9075</docIdentifier>
+<docDate>1987</docDate>
+<docTitle>Information processing systems &mdash;
+Database Language &mdash; SQL</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-89-ANSI">
+<docIdentifier>ANSI X3.135</docIdentifier>
+<docDate>1989</docDate>
+<docTitle>American National Standard for Information Systems &mdash;
+Database Language &mdash; SQL with Integrity Enhancement</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-89-ISO">
+<docIdentifier>ISO 9075</docIdentifier>
+<docDate>1989</docDate>
+<docTitle>Information processing systems &mdash;
+Database Language &mdash; SQL with Integrity Enhancement</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="EmbSQL-89">
+<docIdentifier>ANSI X3.168</docIdentifier>
+<docDate>1989</docDate>
+<docTitle>American National Standard for Information Systems &mdash;
+Database Language &mdash; Embedded SQL</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-92-ANSI">
+<docIdentifier>ANSI X3.135</docIdentifier>
+<docDate>1992</docDate>
+<docTitle>American National Standard for Information Systems &mdash;
+Database Language &mdash; SQL</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-92-ISO">
+<docIdentifier>ISO/IEC 9075</docIdentifier>
+<docDate>1992</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-1999">
+<docIdentifier>ISO/IEC 9075</docIdentifier>
+<docDate>1999</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL
+&mdash; Part 1: Framework, Part 2: Foundation, Part 3: Call-Level Interface,
+Part 4: Persistent Stored Modules, and Part 5: Host Language Bindings</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-2003">
+<docIdentifier>ISO/IEC 9075</docIdentifier>
+<docDate>2003</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL
+&mdash; Part 1: Framework, Part 2: Foundation, Part 3: Call-Level Interface,
+Part 4: Persistent Stored Modules, Part 9: Management of External Data,
+Part 10: Object Language Bindings, Part 11: Information and Definition Schemas,
+Part 13: Java&trade; Routines and Types, and Part 14: XML-Related Specifications</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-2008">
+<docIdentifier>ISO/IEC 9075</docIdentifier>
+<docDate>2008</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL
+&mdash; Part 1: Framework, Part 2: Foundation, Part 3: Call-Level Interface,
+Part 4: Persistent Stored Modules, Part 9: Management of External Data,
+Part 10: Object Language Bindings, Part 11: Information and Definition Schemas,
+Part 13: Java&trade; Routines and Types, and Part 14: XML-Related Specifications</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-2011">
+<docIdentifier>ISO/IEC 9075</docIdentifier>
+<docDate>2011</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL
+&mdash; Part 1: Framework, Part 2: Foundation,
+Part 4: Persistent Stored Modules, Par 11: Information and Definition Schemas,
+and Part 14: XML-Related Specifications</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="SQL-2016">
+<docIdentifier>ISO/IEC 9075</docIdentifier>
+<docDate>2016</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL
+&mdash; Part 1: Framework, Part 2: Foundation, Part 3: Call-Level Interface,
+Part 4: Persistent Stored Modules, Part 9: Management of External Data,
+Part 10: Object Language Bindings, Par 11: Information and Definition Schemas,
+Part 13: Java&trade; Routines and Types, and Part 14: XML-Related Specifications</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="MDA-2019">
+<docIdentifier>ISO/IEC 9075-15</docIdentifier>
+<docDate>2019</docDate>
+<docTitle>Information technology &mdash; Database languages &mdash; SQL
+&mdash; Part 15: Multi-dimensional arrays</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="RMDM">
+<docIdentifier>ISO/IEC 10032</docIdentifier>
+<docDate>1995</docDate>
+<docTitle>Information technology &mdash; Reference Model of Data Management</docTitle>
+</iso-iec-std>
+
+<iso-iec-std id="RDA">
+<docIdentifier>ISO/IEC 9579</docIdentifier>
+<docDate>1993</docDate>
+<docTitle>Information technology &mdash; Open System Interconnection &mdash;
+Remote Database Access &mdash; Part 1: Generic Model, Service, and Protocol,
+and Part 2: SQL Specialization</docTitle>
+</iso-iec-std>
+
+
+<!-- ELECTRONIC DOCUMENTS, BOOKS, ETC. -->
+
+<electronic-doc id="avro" primary-responsibility="Apache Software Foundation"
+                publisher="The Apache Software Foundation" type-of-medium="online"
+                edition="Version 1.9.1" publication-date="2019-09-02"
+                publication-place="Forest Hill, Maryland, USA">
+<docIdentifier>Avro</docIdentifier>
+<docTitle comma="no">Apache Avro</docTitle>
+<URI>https://avro.apache.org/</URI>
+</electronic-doc>
+
+<electronic-doc id="bson" edition="Version 1.1"
+                primary-responsibility="bsonspec.org"
+                type-of-medium="online">
+<docIdentifier>BSON</docIdentifier>
+<docTitle comma="no">Binary JSON</docTitle>
+<URI>https://bsonspec.org/</URI>
+</electronic-doc>
+
+<div-std id="CanonicalXML" subordinate-responsibility="Boyer, John; Marcy, Glenn"
+                publication-date="2 May 2008" edition="Version 1.1"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>Canonical XML 1.1</docIdentifier>
+<docTitle comma="no">Canonical XML, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xml-c14n</URI>
+</div-std>
+
+<electronic-doc id="bounding-boxes" primary-responsibility="Davies, Jason"
+                citation-date="2016-12-30" type-of-medium="online">
+<docIdentifier>Geographic Bounding Boxes</docIdentifier>
+<docTitle comma="no">Geographic Bounding Boxes</docTitle>
+<URI>https://www.jasondavies.com/maps/bounds/</URI>
+</electronic-doc>
+
+<!-- WG3:BER-079 -->
+<electronic-doc id="ECMAScript2022" primary-responsibility="ECMA International"
+                citation-date="2011-06" type-of-medium="online"
+                publication-place="Geneva, CHE">
+  <docIdentifier>ECMAScript Language Specification 13th Edition</docIdentifier>
+  <docTitle comma="no">ECMA-262 &mdash;
+                       ECMAScript&reg; Language Specification (2022)</docTitle>
+  <URI>https://262.ecma-international.org/13.0</URI>
+</electronic-doc>
+
+<!-- WG3:BER-048 -->
+<electronic-doc id="ECMAScript" primary-responsibility="ECMA International"
+                citation-date="2011-06" type-of-medium="online">
+  <docIdentifier>ECMAScript Language Specification 5.1 Edition</docIdentifier>
+  <docTitle comma="no">ECMA-262 &mdash; 
+                       ECMAScript&reg; Language Specification 5.1 Edition</docTitle>
+  <URI>https://262.ecma-international.org/5.1/ECMA-262.pdf</URI>
+</electronic-doc>
+
+
+<div-std id="IANA" subordinate-responsibility="Freed, N. &amp; Dürst, M."
+                publisher="Internet Assigned Numbers Authority (IANA)"
+                publication-date="Oct 2000" revision-date="2022-07-14" type-of-medium="online"
+                publication-place="Los Angeles, California, USA">
+<docIdentifier>Character Sets</docIdentifier>
+<docTitle comma="no">Character sets</docTitle>
+<URI>https://www.iana.org/assignments/character-sets</URI>
+</div-std>
+
+<electronic-doc id="TZDB" primary-responsibility="IANA" 
+                publisher="Internet Assigned Numbers Authority"
+                type-of-medium="online"
+                publication-place="Los Angeles, California, USA">
+<docIdentifier>IANA Time Zone Database</docIdentifier>
+<docTitle comma="no">Time Zone Database</docTitle>
+<docNotes>The Time Zone Database (often called tz or zoneinfo)
+contains code and data that represent the history of local time
+for many representative locations around the globe. 
+It is updated periodically to reflect changes made by political bodies
+to time zone boundaries, UTC offsets, and daylight-saving rules.
+</docNotes>
+<URI>https://www.iana.org/time-zones</URI>
+</electronic-doc>
+
+<div-std id="Infoset" subordinate-responsibility="Cowan, John; Tobin, Richard"
+                publication-date="4 February 2004" edition="Second Edition"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XML Information Set</docIdentifier>
+<docTitle comma="no">XML Information Set, W3C Recommendation.</docTitle>
+<URI>https://www.w3.org/TR/xml-infoset</URI>
+</div-std>
+
+<electronic-doc id="Java" primary-responsibility="Java Community Process" publisher="Oracle"
+                type-of-medium="online" edition="Java SE 13 Edition"
+                publication-place="Redwood Shores, California, USA">
+<docIdentifier>Java</docIdentifier>
+<docTitle comma="no">The Java&trade; Language Specification</docTitle>
+<URI>https://docs.oracle.com/javase/specs/jls/se13/jls13.pdf</URI>
+</electronic-doc>
+
+<electronic-doc id="JavaAPI" primary-responsibility="Java Community Process" publisher="Oracle"
+                type-of-medium="online" edition="Standard Edition 7"
+                publication-place="Redwood Shores, California, USA">
+<docIdentifier>JavaAPI</docIdentifier>
+<docTitle comma="no">Java&trade; Platform Standard Edition 7 API Specification</docTitle>
+<URI>https://docs.oracle.com/en/java/javase/13/docs/api/index.html</URI>
+</electronic-doc>
+
+<electronic-doc id="JavaBeans" primary-responsibility="Java Community Process" publisher="Oracle"
+                type-of-medium="online" edition="Edition 3.0"
+                publication-place="Redwood Shores, California, USA">
+<docIdentifier>JavaBeans</docIdentifier>
+<docTitle comma="no">The JavaBeans&trade; 3.0 Specification</docTitle>
+<URI>https://download.oracle.com/otndocs/jcp/ejb-3_0-pr-spec-oth-JSpec/</URI>
+</electronic-doc>
+
+<electronic-doc id="JDBC" primary-responsibility="Java Community Process" publisher="Oracle"
+                type-of-medium="online" edition="Edition 4.3"
+                publication-place="Redwood Shores, California, USA">
+<docIdentifier>JDBC</docIdentifier>
+<docTitle comma="no">JDBC&trade; 4.3 Specification</docTitle>
+<URI>https://download.oracle.com/otn-pub/jcp/jdbc-4_3-mrel3-eval-spec/jdbc4.3-fr-spec.pdf</URI>
+</electronic-doc>
+
+<electronic-doc id="JNDI" primary-responsibility="Java Community Process" publisher="Oracle"
+                type-of-medium="online"
+                publication-place="Redwood Shores, California, USA">
+<docIdentifier>JNDI</docIdentifier>
+<docTitle comma="no">Java Naming and Directory Interface&trade;</docTitle>
+<URI>https://docs.oracle.com/javase/8/docs/technotes/guides/jndi/index.html</URI>
+</electronic-doc>
+
+<electronic-doc id="JVMS" primary-responsibility="Java Community Process" publisher="Oracle"
+                type-of-medium="online" edition="Java SE 13 Edition"
+                publication-place="Redwood Shores, California, USA">
+<docIdentifier>JVMS</docIdentifier>
+<docTitle comma="no">The Java&trade; Virtual Machine Specification</docTitle>
+<URI>https://docs.oracle.com/javase/specs/jvms/se13/jvms13.pdf</URI>
+</electronic-doc>
+
+<electronic-doc id="ian17"
+                primary-responsibility="Freed, N. &amp; Kucherawy, M."
+                publication-date="2017" revision-date="2020-02-03"
+                publisher="Internet Assigned Numbers Authority"
+                publication-place="Los Angeles, California, USA">
+<docIdentifier>Media Types</docIdentifier>
+<docTitle comma="no">Media Types</docTitle>
+<URI>https://www.iana.org/assignments/media-types/media-types.xhtml</URI>
+</electronic-doc>
+
+<div-std id="Namespaces" 
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XML Namespaces</docIdentifier>
+<docTitle comma="no">XML Namespaces is used to reference either <docref ref="Namespaces10"/> or
+<docref ref="Namespaces11"/> when there is no significant difference between the two for the 
+purposes of a given citation</docTitle>
+</div-std>
+
+<div-std id="Namespaces10" subordinate-responsibility="Bray, Tim, et al."
+                publication-date="8 December 2009" edition="Third Edition"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>Namespaces in XML 1.0</docIdentifier>
+<docTitle comma="no">Namespaces in XML 1.0, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xml-names</URI>
+</div-std>
+
+<div-std id="Namespaces11" subordinate-responsibility="Bray, Tim, et al."
+                publication-date="16 August 2006" edition="Second Edition"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>Namespaces in XML 1.1</docIdentifier>
+<docTitle comma="no">Namespaces in XML 1.1, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xml-names11</URI>
+</div-std>
+
+<electronic-doc id="POSIX-reg-ex" primary-responsibility="The Open Group"
+                type-of-medium="online" edition="2018"
+                publisher="The Open Group" number="IEEE 1003.1-2017"
+                publication-place="San Francisco, California, USA">
+<docIdentifier>Posix</docIdentifier>
+<docTitle comma="no">(Open Group Base Specifications, Issue 7), Standard for Information
+Technology &mdash; Portable Operating System Interface (POSIX) 2001</docTitle>
+<URI>https://pubs.opengroup.org/onlinepubs/7908799/xbdix.html</URI>
+</electronic-doc>
+
+<electronic-doc id="PL_R" primary-responsibility="R Foundation for Statistical Computing"
+                publisher="R Foundation for Statistical Computing"
+                publication-date="(various publication dates)" type-of-medium="online"
+                publication-place="Vienna, Austria">
+<docIdentifier>Programming Language R</docIdentifier>
+<docTitle comma="no">Programming Language R</docTitle>
+<URI>https://www.r-project.org/</URI>
+</electronic-doc>
+
+<div-std id="RFC2045"
+                subordinate-responsibility="Freed, N. &amp; Borenstein, N."
+                publication-date="November 1996" publisher="Internet Engineering Task Force (IETF)"
+                publication-place="Wilmington, Delaware, USA">
+<docIdentifier>RFC 2045</docIdentifier>
+<docTitle comma="no">Multipurpose Internet Mail Extensions (MIME) Part One:
+Format of Internet Message Bodies</docTitle>
+<URI>https://tools.ietf.org/html/rfc2045</URI>
+</div-std>
+
+<div-std id="RFC2046" subordinate-responsibility="Freed, N."
+                publication-date="November 1996"
+                publisher="Internet Engineering Task Force (IETF)" type-of-medium="online"
+                publication-place="Wilmington, Delaware, USA">
+<docIdentifier>RFC 2046</docIdentifier>
+<docTitle comma="no">Multipurpose Internet Mail Extensions (MIME), Part Two: Media Types</docTitle>
+<URI>https://tools.ietf.org/html/rfc2046</URI>
+</div-std>
+
+<div-std id="RFC2368" subordinate-responsibility="Hoffman, P., Masinter, L., Zawinski, J."
+                publication-date="July 1998"
+                publisher="Internet Engineering Task Force (IETF)" type-of-medium="online"
+                publication-place="Wilmington, Delaware, USA">
+<docIdentifier>RFC 2368</docIdentifier>
+<docTitle>The mailto URL scheme</docTitle>
+<URI>https://www.ietf.org/rfc/rfc2368.txt</URI>
+</div-std>
+
+<div-std id="RFC3986" subordinate-responsibility="Berners-Lee, T., Fielding, R., Masinter, L."
+                publication-date="January 2005"
+                publisher="Internet Engineering Task Force (IETF)" type-of-medium="online"
+                publication-place="Wilmington, Delaware, USA">
+<docIdentifier>RFC 3986</docIdentifier>
+<docTitle>Uniform Resource Identifier (URI): Generic Syntax</docTitle>
+<URI>https://www.ietf.org/rfc/rfc3986.txt</URI>
+</div-std>
+
+<div-std id="RFC3987" subordinate-responsibility="Duerst, M., Suignard, M."
+                publication-date="January 2005"
+                publisher="Internet Engineering Task Force (IETF)" type-of-medium="online"
+                publication-place="Wilmington, Delaware, USA">
+<docIdentifier>RFC 3978</docIdentifier>
+<docTitle>Internationalized Resource Identifiers (IRI)</docTitle>
+<URI>https://www.ietf.org/rfc/rfc3987.txt</URI>
+</div-std>
+
+<electronic-doc id="WHATWG-URL" primary-responsibility="van Kesteren, A."
+                publisher="WHATWG" type-of-medium="online">
+<docIdentifier>WHATWG URL</docIdentifier>
+<docTitle comma="no">URL Living Standard</docTitle>
+<URI>https://url.spec.whatwg.org</URI>
+</electronic-doc>
+
+<div-std id="RFC4627"
+                subordinate-responsibility="Crockford, D."
+                publication-date="July 2006" publisher="Internet Engineering Task Force"
+                type-of-medium="online"
+                publication-place="Wilmington, Delaware, USA">
+<docIdentifier>RFC 4627</docIdentifier>
+<docTitle comma="no">The application/json Media Type for JavaScript Object Notation (JSON)
+</docTitle>
+<URI>https://www.ietf.org/rfc/rfc4627</URI>
+</div-std>
+
+<div-std id="RFC8259" subordinate-responsibility="Miller, Matthew"
+                publication-date="December 2018"
+                publisher="Internet Engineering Task Force (IETF)" type-of-medium="online"
+                publication-place="Wilmington, Delaware, USA">
+<docIdentifier>RFC 8259</docIdentifier>
+<docTitle comma="no">The JavaScript Object Notation (JSON) Data Interchange Format</docTitle>
+<URI>https://datatracker.ietf.org/doc/rfc8259/</URI>
+</div-std>
+
+<electronic-doc id="JavaSerialization" primary-responsibility="Java Community Process"
+                publisher="Oracle"
+                type-of-medium="online"
+                publication-place="Redwood Shores, California, USA">
+<docIdentifier>Java Serialization</docIdentifier>
+<docTitle comma="no">Java&trade; Object Serialization Specification</docTitle>
+<URI>https://docs.oracle.com/en/java/javase/13/docs/specs/serialization/serial-arch.html</URI>
+</electronic-doc>
+
+<electronic-doc id="Perl-reg-ex" primary-responsibility="Wall, Larry" type-of-medium="online"
+                publisher="Publisher unknown">
+<docIdentifier>Perl</docIdentifier>
+<docTitle comma="no">Perl Manual Pages (perlre)</docTitle>
+<URI>https://perldoc.perl.org/perlre.html</URI>
+</electronic-doc>
+
+<electronic-doc id="IANA-timezone-database" primary-responsibility="IANA"
+                publisher="Internet Assigned Numbers Authority" type-of-medium="online"
+                publication-place="Los Angeles, California, USA">
+<docIdentifier>IANA Time Zone Database</docIdentifier>
+<docTitle comma="no">Time Zone Database</docTitle>
+<docNotes>The Time Zone Database (often called tz or zoneinfo)
+contains code and data that represent the history of local time
+for many representative locations around the globe. 
+It is updated periodically to reflect changes made by political bodies
+to time zone boundaries, UTC offsets, and daylight-saving rules.
+</docNotes>
+<URI>https://www.iana.org/time-zones</URI>
+</electronic-doc>
+
+<electronic-doc id="Unicode" primary-responsibility="The Unicode Consortium"
+                publisher="The Unicode Consortium" type-of-medium="online"
+                publication-place="Mountain View, California, USA">
+<docIdentifier>The Unicode<super>&reg;</super> Standard</docIdentifier>
+<docTitle comma="no">The Unicode Standard
+(Information about the latest version of the Unicode standard
+can be found by using the <quote>Latest Version</quote> link on the 
+<quote>Enumerated Versions of The Unicode Standard</quote> page.)</docTitle>
+<URI>https://www.unicode.org/versions/enumeratedversions.html</URI>
+</electronic-doc>
+
+<electronic-doc id="Unicode10" primary-responsibility="The Unicode Consortium"
+                publisher="The Unicode Consortium" type-of-medium="online"
+                publication-place="Mountain View, California, USA">
+<docIdentifier>Unicode Technical Standard #10</docIdentifier>
+<docTitle comma="no">Unicode Collation Algorithm</docTitle>
+<URI>https://www.unicode.org/reports/tr10/</URI>
+</electronic-doc>
+
+<electronic-doc id="Unicode15" primary-responsibility="The Unicode Consortium"
+                publisher="The Unicode Consortium" type-of-medium="online"
+                publication-place="Mountain View, California, USA">
+<docIdentifier>Unicode Standard Annex #15</docIdentifier>
+<docTitle comma="no">Unicode Normalization Forms</docTitle>
+<URI>https://www.unicode.org/reports/tr15/</URI>
+</electronic-doc>
+
+<electronic-doc id="Unicode18" primary-responsibility="The Unicode Consortium"
+                publisher="The Unicode Consortium" type-of-medium="online"
+                publication-date="2020-06-17" edition="21"
+                publication-place="Mountain View, California, USA">
+<docIdentifier>Unicode Technical Standard #18</docIdentifier>
+<docTitle comma="no">Unicode Regular Expressions</docTitle>
+<URI>https://www.unicode.org/reports/tr18/tr18-21.html</URI>
+</electronic-doc>
+
+<electronic-doc id="Unicode31" primary-responsibility="The Unicode Consortium"
+                publisher="The Unicode Consortium" 
+                publication-place="Mountain View, California, USA" 
+                type-of-medium="online">
+<docIdentifier>Unicode Standard Annex #31</docIdentifier>
+<docTitle comma="no">Unicode Identifier and Pattern Syntax</docTitle>
+<URI>https://www.unicode.org/reports/tr31/</URI>
+</electronic-doc>
+
+<electronic-doc id="Unicode36" primary-responsibility="The Unicode Consortium"
+                publisher="The Unicode Consortium" 
+                publication-place="Mountain View, California, USA" 
+                type-of-medium="online">
+<docIdentifier>Unicode Standard Annex #36</docIdentifier>
+<docTitle comma="no">Unicode Security Considerations</docTitle>
+<URI>https://www.unicode.org/reports/tr36/</URI>
+</electronic-doc>
+
+<div-std id="UniXML" subordinate-responsibility="Phillips, Addison"
+                publication-date="13 July 2017"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>Unicode in XML and Other Markup Languages</docIdentifier>
+<docTitle comma="no">Unicode in XML and Other Markup Languages, W3C Working Group Note</docTitle>
+<URI>https://www.w3.org/TR/unicode-xml/</URI>
+</div-std>
+
+<electronic-doc id="XML">
+<docIdentifier>XML</docIdentifier>
+<docTitle comma="no">XML is used to reference 
+either <docref ref="XML10"/> or <docref ref="XML11"/>
+when there is no significant difference between the two for the purposes of a given citation 
+</docTitle>
+</electronic-doc>
+
+<div-std id="XML10" subordinate-responsibility="Bray, Tim et al."
+                publication-date="26 November 2008"
+                edition="Fifth Edition"
+                revision-date="7 February 2013"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XML 1.0</docIdentifier>
+<docTitle comma="no">Extensible Markup Language (XML) Version 1.0, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xml</URI>
+</div-std>
+
+<div-std id="XML11" subordinate-responsibility="Bray, Tim et al."
+                publication-date="16 August 2006"
+                edition="Second Edition"
+                revision-date="29 September 2006"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XML 1.1</docIdentifier>
+<docTitle comma="no">Extensible Markup Language (XML) Version 1.1, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xml11</URI>
+</div-std>
+
+<div-std id="XPath" subordinate-responsibility="Robie, J; Dyck, M; &amp; Spiegel, J."
+                publication-date="21 March 2017"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XML Path Language (XPath) 3.1</docIdentifier>
+<docTitle comma="no">XML Path Language (XPath) 3.1, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xpath-31/</URI>
+</div-std>
+
+<div-std id="XQuery" subordinate-responsibility="Robie, J; Dyck, M; &amp; Spiegel, J."
+                publication-date="21 March 2017"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XQuery 3.1: an XML Query Language</docIdentifier>
+<docTitle comma="no">XQuery 3.1: an XML Query Language, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xquery-31/</URI>
+</div-std>
+
+<div-std id="XQueryDM" subordinate-responsibility="Walsh, N.; Snelson, J.; &amp; Coleman, A."
+                publication-date="21 March 2017"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XQuery and XPath Data Model 3.1</docIdentifier>
+<docTitle comma="no">XQuery and XPath Data Model 3.1, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xpath-datamodel/</URI>
+</div-std>
+
+<div-std id="XQueryFS" subordinate-responsibility="Draper, Denise, et al."
+                publication-date="14 December 2010" edition="Second Edition"
+                revision-date="7 September 2015"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XQuery 1.0 and XPath 2.0 Formal Semantics</docIdentifier>
+<docTitle comma="no">XQuery 1.0 and XPath 2.0 Formal Semantics, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xquery-semantics/</URI>
+</div-std>
+
+<div-std id="XQueryUpdate" subordinate-responsibility="Robie, Jonathan et al."
+                publication-date="17 March 2011"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XQuery Update Facility 1.0</docIdentifier>
+<docTitle comma="no">XQuery Update Facility 1.0, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xquery-update-10/</URI>
+</div-std>
+
+<div-std id="Schema1" subordinate-responsibility="Thompson, Henry S et al."
+                publication-date="28 October 2004"
+                edition="Second Edition"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XML Schema Part 1: Structures</docIdentifier>
+<docTitle comma="no">XML Schema Part 1: Structures, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xmlschema-1/</URI>
+</div-std>
+
+<div-std id="Schema2" subordinate-responsibility="Biron, Paul V.; Malhotra, Ashok"
+                publication-date="28 October 2004"
+                edition="Second Edition"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XML Schema Part 2: Datatypes</docIdentifier>
+<docTitle comma="no">XML Schema Part 2: Datatypes, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xmlschema-2/</URI>
+</div-std>
+
+<div-std id="XS-Serialization"
+                subordinate-responsibility="Coleman Andrew; Sperberg-McQueen, C M."
+                publication-date="21 March 2017"
+                edition="3.1"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XSLT and XQuery Serialization 3.1</docIdentifier>
+<docTitle comma="no">XSLT and XQuery Serialization 3.1, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xslt-xquery-serialization-31/</URI>
+</div-std>
+
+<div-std id="XQueryFO" subordinate-responsibility="Malhotra, Ashok et al."
+                publication-date="21 March 2017"
+                publisher="W3C" type-of-medium="online"
+                publication-place="Cambridge, Massachusetts, USA">
+<docIdentifier>XQuery and XPath Functions and Operators 3.1</docIdentifier>
+<docTitle comma="no">XQuery and XPath Functions and Operators 3.1, W3C Recommendation</docTitle>
+<URI>https://www.w3.org/TR/xpath-functions/</URI>
+</div-std>
+
+<electronic-doc id="JSONschema" publisher="The JSON Schema Project"
+                type-of-medium="online" edition="2019-09">
+<docIdentifier>JSONschema</docIdentifier>
+<docTitle comma="no">JSON Schema</docTitle>
+<URI>https://json-schema.org</URI>
+</electronic-doc>
+
+<electronic-doc id="NoSQLDB" primary-responsibility="Edlich, Stefan" publisher="NoSQL Database Org"
+                type-of-medium="online">
+<docIdentifier>NoSQLDB</docIdentifier>
+<docTitle comma="no">NoSQL Databases</docTitle>
+<URI>https://hostingdata.co.uk/nosql-database/</URI>
+</electronic-doc>
+
+<electronic-doc id="ACIDtxns" primary-responsibility="Gray, J. &amp; Reuter, A."
+                publication-date="1993" publication-place="San Francisco"
+                publisher="Morgan Kaufmann" type-of-medium="book" number="ISBN 1-55860-190-2">
+<docIdentifier>Distributed Transaction Processing</docIdentifier>
+<docTitle comma="no">Distributed Transaction Processing: Concepts and Techniques</docTitle>
+</electronic-doc>
+
+<electronic-doc id="UTC-SLS" primary-responsibility="Kuhn, Markus"
+                publication-date="January 2006" publication-place="University of Cambridge"
+                publisher="IETF" type-of-medium="online">
+<docIdentifier>UTC-SLS</docIdentifier>
+<docTitle comma="no">Coordinated Universal Time with Smoothed Leap Seconds (UTC-SLS)</docTitle>
+<URI>https://tools.ietf.org/html/draft-kuhn-leapsecond-00</URI>
+</electronic-doc>
+
+<electronic-doc id="RelationalModel" primary-responsibility="Codd, E. F."
+                publication-date="June 1970" publication-place="New York"
+                publisher="Association of Computing Machinery"
+                type-of-medium="paper">
+<docIdentifier>Relational Model</docIdentifier>
+<docTitle comma="no">A Relational Model of Data for Large Shared Data Banks</docTitle>
+</electronic-doc>
+
+<electronic-doc id="Melton-Simon-SQL92" primary-responsibility="Melton, J. and Simon, A."
+                publication-date="1993" publication-place="San Francisco"
+                publisher="Morgan Kaurmann" type-of-medium="book" number="ISBN 1-55860-245-3">
+<docIdentifier>Understanding the New SQL</docIdentifier>
+<docTitle comma="no">Understanding the New SQL: A Complete Guide"</docTitle>
+</electronic-doc>
+
+<electronic-doc id="CVE-2021-42574"
+                publisher="The Mitre Corporation" 
+                publication-date="2021" publication-place="Bedford, Massachusetts, USA"
+                type-of-medium="online" number="CVE-2021-42574">
+<docIdentifier>CVE-2021-42574</docIdentifier>
+<docTitle comma="no">Common vulnerabilities and exposures database</docTitle>
+<URI>https://www.cve.org/CVERecord?id=CVE-2021-42574</URI>
+</electronic-doc>
+
+</ReferencedDocuments>

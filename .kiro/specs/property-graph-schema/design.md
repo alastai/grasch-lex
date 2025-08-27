@@ -248,11 +248,51 @@ class IGQLSchema(Protocol):
 **Purpose**: Implements the various types of objects that can be stored in GQL-schemas.
 
 **Key Classes**:
-- `GraphType`: GQL:graph type definitions with LEX constraint extensions
-- `Graph`: Graph instances conforming to graph types
-- `Table`: Tabular representations of graph elements
-- `Procedure`: Stored procedures for graph operations
-- `NestedPropertiesRecordSchema`: Reusable record structure definitions
+- `GraphType`: GQL:graph type definitions (PCOs) with LEX constraint extensions
+- `Graph`: Graph instances (PCOs) conforming to graph types  
+- `Table`: Tabular representations of graph elements (PCOs)
+- `Procedure`: Stored procedures for graph operations (PCOs)
+- `NestedPropertiesRecordSchema`: Reusable record structure definitions (PCOs)
+
+**GQL Command Distinction**:
+- `CREATE GRAPH TYPE`: Creates a Primary Catalog Object that specifies permitted structure and property datatypes for graphs
+- `CREATE GRAPH`: Creates a graph instance (also a PCO) that conforms to a graph type's structural and datatype constraints
+
+**GQL CREATE GRAPH TYPE Structure** (from ISO standard):
+```sql
+CREATE [OR REPLACE] [PROPERTY] GRAPH TYPE [IF NOT EXISTS] 
+    <catalog_graph_type_parent_and_name> 
+    <graph_type_source>
+
+-- Where graph_type_source can be:
+-- 1. [AS] COPY OF <graph_type_reference>
+-- 2. <graph_type_like_graph>  
+-- 3. [AS] <nested_graph_type_specification>
+```
+
+**LEX Extensions to GQL CREATE GRAPH TYPE**:
+- Add constraint specifications to the graph type definition
+- Support for LEX-specific constraint types (key constraints, cardinality constraints)  
+- Version-specific constraint catalogs (LEX-2026 vs future versions)
+
+**LEX CREATE OR REPLACE GRAPH SCHEMA Syntax** (Layer 2 - Declarative):
+```sql
+CREATE OR REPLACE GRAPH SCHEMA <schema_path> AS {
+    -- GQL:graph type structure (nodes, edges, properties)
+    gql_graph_type: <nested_graph_type_specification>,
+    
+    -- LEX constraint extensions
+    constraints: [
+        KEY CONSTRAINT ON <element_type> (<attribute_list>),
+        CARDINALITY CONSTRAINT ON <relationship> (min: <n>, max: <m>),
+        -- Additional LEX-2026 constraints...
+    ]
+}
+```
+
+This creates a `LEX:graph schema` PCO that combines:
+1. **GQL:graph type** - structural definition (nodes, edges, property datatypes)
+2. **LEX:constraints** - value constraints that govern graph instances
 
 **Constraint System**:
 ```python
