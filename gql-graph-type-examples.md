@@ -24,14 +24,14 @@ The following examples demonstrate identical semantic content expressed in both 
 
 ```gql
 CREATE GRAPH TYPE PersonCompanyGraph {
-  // Node type definitions using pattern syntax with multiple labels and properties
-  (person :Person & AUDIT & DATA_QUALITY {
+  // Node type definitions using pattern syntax with key label sets and multiple labels
+  (person :Person => :Person & Audit & DataQuality {
     name STRING,
     lastModified TIMESTAMP,
     principal STRING,
     governanceStatus STRING
   }),
-  (company :Company & AUDIT & DATA_QUALITY {
+  (company :Company => :Company & Audit & DataQuality {
     name STRING,
     lastModified TIMESTAMP,
     principal STRING,
@@ -39,7 +39,7 @@ CREATE GRAPH TYPE PersonCompanyGraph {
   }),
   
   // Edge type definition using pattern syntax with multiple labels and properties
-  (person)-[:WORKS_FOR & AUDIT & DATA_QUALITY {
+  (person)-[:WORKS_FOR & Audit & DataQuality {
     since DATE,
     lastModified TIMESTAMP,
     principal STRING,
@@ -53,13 +53,13 @@ CREATE GRAPH TYPE PersonCompanyGraph {
 ```gql
 CREATE GRAPH TYPE PersonCompanyGraph {
   -- Node type definitions using phrase syntax with multiple labels and properties
-  NODE TYPE Person :Person & AUDIT & DATA_QUALITY {
+  NODE TYPE Person :Person & Audit & DataQuality {
     name STRING,
     lastModified TIMESTAMP,
     principal STRING,
     governanceStatus STRING
   },
-  NODE TYPE Company :Company & AUDIT & DATA_QUALITY {
+  NODE TYPE Company :Company & Audit & DataQuality {
     name STRING,
     lastModified TIMESTAMP,
     principal STRING,
@@ -67,7 +67,7 @@ CREATE GRAPH TYPE PersonCompanyGraph {
   },
   
   /* Edge type definition using phrase syntax with FROM...TO */
-  DIRECTED EDGE TYPE WorksFor :WORKS_FOR & AUDIT & DATA_QUALITY {
+  DIRECTED EDGE TYPE WorksFor :WORKS_FOR & Audit & DataQuality {
     since DATE,
     lastModified TIMESTAMP,
     principal STRING,
@@ -75,6 +75,44 @@ CREATE GRAPH TYPE PersonCompanyGraph {
   } CONNECTING (person TO company)
 }
 ```
+
+### Example 3: LEX Extension - Direct Key Label Reference
+
+In LEX (as opposed to GQL), single-member key label sets can be used directly as node type references in edge patterns. This leverages the mathematical notation where `{A}` and `A` are synonymous for singleton sets.
+
+```lex
+CREATE GRAPH TYPE PersonCompanyGraph {
+  // Node type definitions with key label sets (same as GQL)
+  (person :Person => :Person & Audit & DataQuality {
+    name STRING,
+    lastModified TIMESTAMP,
+    principal STRING,
+    governanceStatus STRING
+  }),
+  (company :Company => :Company & Audit & DataQuality {
+    name STRING,
+    lastModified TIMESTAMP,
+    principal STRING,
+    governanceStatus STRING
+  }),
+  
+  // LEX extension: Direct key label reference in edge pattern
+  // Since {Person} has only one member, Person can represent the set
+  (Person)-[:WORKS_FOR & Audit & DataQuality {
+    since DATE,
+    lastModified TIMESTAMP,
+    principal STRING,
+    governanceStatus STRING
+  }]->(Company)
+}
+```
+
+**LEX Innovation Notes:**
+- `Person` directly references the node type with key label set `{Person}`
+- `Company` directly references the node type with key label set `{Company}`
+- This notation abuse treats singleton sets `{A}` as equivalent to their single member `A`
+- This is illegal in standard GQL but legal in LEX for improved readability
+- The mathematical convenience allows direct semantic reference without intermediate aliases
 
 ## Graph Instance Creation and Data Examples
 
@@ -89,19 +127,19 @@ CREATE GRAPH CompanyEmployeeData OF TYPE PersonCompanyGraph
 
 ```gql
 -- Insert person nodes with realistic property values
-INSERT (p1 :Person & AUDIT & DATA_QUALITY {
+INSERT (p1 :Person & Audit & DataQuality {
   name: 'Alice Johnson',
   lastModified: TIMESTAMP '2024-08-22 10:30:00',
   principal: 'system.etl.process',
   governanceStatus: 'VERIFIED'
 }),
-(p2 :Person & AUDIT & DATA_QUALITY {
+(p2 :Person & Audit & DataQuality {
   name: 'Bob Smith',
   lastModified: TIMESTAMP '2024-08-22 09:15:00',
   principal: 'hr.data.import',
   governanceStatus: 'PENDING_REVIEW'
 }),
-(p3 :Person & AUDIT & DATA_QUALITY {
+(p3 :Person & Audit & DataQuality {
   name: 'Carol Davis',
   lastModified: TIMESTAMP '2024-08-21 16:45:00',
   principal: 'manual.data.entry',
@@ -109,13 +147,13 @@ INSERT (p1 :Person & AUDIT & DATA_QUALITY {
 })
 
 -- Insert company nodes with realistic property values
-INSERT (c1 :Company & AUDIT & DATA_QUALITY {
+INSERT (c1 :Company & Audit & DataQuality {
   name: 'TechCorp Solutions',
   lastModified: TIMESTAMP '2024-08-20 14:20:00',
   principal: 'corporate.registry.sync',
   governanceStatus: 'VERIFIED'
 }),
-(c2 :Company & AUDIT & DATA_QUALITY {
+(c2 :Company & Audit & DataQuality {
   name: 'DataFlow Industries',
   lastModified: TIMESTAMP '2024-08-19 11:30:00',
   principal: 'external.api.feed',
@@ -123,21 +161,21 @@ INSERT (c1 :Company & AUDIT & DATA_QUALITY {
 })
 
 -- Insert employment relationships with multiple instances
-INSERT (p1)-[:WORKS_FOR & AUDIT & DATA_QUALITY {
+INSERT (p1)-[:WORKS_FOR & Audit & DataQuality {
   since: DATE '2022-03-15',
   lastModified: TIMESTAMP '2024-08-22 10:35:00',
   principal: 'hr.system.update',
   governanceStatus: 'VERIFIED'
 }]->(c1),
 
-(p2)-[:WORKS_FOR & AUDIT & DATA_QUALITY {
+(p2)-[:WORKS_FOR & Audit & DataQuality {
   since: DATE '2023-07-01',
   lastModified: TIMESTAMP '2024-08-22 09:20:00',
   principal: 'hr.data.import',
   governanceStatus: 'PENDING_REVIEW'
 }]->(c1),
 
-(p3)-[:WORKS_FOR & AUDIT & DATA_QUALITY {
+(p3)-[:WORKS_FOR & Audit & DataQuality {
   since: DATE '2021-11-08',
   lastModified: TIMESTAMP '2024-08-21 16:50:00',
   principal: 'manual.data.entry',
