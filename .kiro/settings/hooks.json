@@ -1,26 +1,6 @@
 {
   "hooks": [
     {
-      "name": "Auto-commit Spec Changes",
-      "description": "Automatically commit changes to any files in the .kiro/specs directory",
-      "trigger": {
-        "type": "file_save",
-        "pattern": ".kiro/specs/**/*"
-      },
-      "enabled": true,
-      "script": ".kiro/hooks/auto-commit-specs.md"
-    },
-    {
-      "name": "Auto-commit Requirements Changes", 
-      "description": "Automatically commit changes to requirements.md when it's modified",
-      "trigger": {
-        "type": "file_save",
-        "pattern": ".kiro/specs/property-graph-schema/requirements.md"
-      },
-      "enabled": true,
-      "script": ".kiro/hooks/auto-commit-requirements.md"
-    },
-    {
       "name": "Auto-commit All Changes",
       "description": "Automatically commit and push any file changes in the repository",
       "trigger": {
