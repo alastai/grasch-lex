@@ -11,16 +11,7 @@ import os
 import tempfile
 from typing import Dict
 
-# Try to import pytest, but make it optional
-try:
-    import pytest
-    PYTEST_AVAILABLE = True
-except ImportError:
-    PYTEST_AVAILABLE = False
-    # Create a dummy pytest fixture decorator for standalone mode
-    def pytest_fixture_dummy(func):
-        return func
-    pytest = type('pytest', (), {'fixture': pytest_fixture_dummy})
+import pytest
 
 from grasch import (
     GraschSession,
@@ -42,6 +33,7 @@ from grasch import (
 class TestGraschFunctional:
     """Comprehensive functional test for Grasch library"""
     
+    @pytest.fixture
     def session_config(self) -> SessionConfiguration:
         """Create a test session configuration"""
         full_profile = ProfileConfiguration(
