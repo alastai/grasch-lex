@@ -45,10 +45,8 @@ class ContentRecordType:
         self.type_key = key_labels
 
 
-class Direction(Enum):
-    """Direction for edge types"""
-    UNDIRECTED = "undirected"
-    DIRECTED = "directed"
+# Alias for clarity in ElementType context
+RecordContentType = ContentRecordType
 
 
 class ElementType(ABC):
@@ -63,20 +61,106 @@ class ElementType(ABC):
         pass
 
 
-class NodeType:
+class NodeType(ElementType):
     """Node type based on content record type"""
     def __init__(self, name: str, content_type: ContentRecordType):
-        self.name = name
-        self.content_type = content_type
+        super().__init__(name, content_type)
+        self.content_type = content_type  # Keep for backward compatibility
+    
+    def get_element_kind(self) -> str:
+        return "node"
 
 
-class EdgeType:
-    """Edge type with source/target node types and arc content type"""
-    def __init__(self, name: str, source_type: NodeType, target_type: NodeType, arc_content_type: ContentRecordType):
-        self.name = name
-        self.source_type = source_type
-        self.target_type = target_type
-        self.arc_content_type = arc_content_type
+class EdgeDirection:
+    """Direction specification as an ordered pair (tail_reference, head_reference)"""
+    def __init__(self, tail_reference: str, head_reference: str):
+        """
+        Create a direction specification.
+        
+        Args:
+            tail_reference: Either "first" or "second" - which endpoint is the tail
+            head_reference: Either "first" or "second" - which endpoint is the head
+        """
+        if tail_reference not in ("first", "second"):
+            raise ValueError("tail_reference must be 'first' or 'second'")
+        if head_reference not in ("first", "second"):
+            raise ValueError("head_reference must be 'first' or 'second'")
+        
+        self.tail_reference = tail_reference
+        self.head_reference = head_reference
+    
+    def __repr__(self):
+        return f"EdgeDirection(tail={self.tail_reference}, head={self.head_reference})"
+    
+    @classmethod
+    def first_to_second(cls):
+        """Convenience method: direction from first node to second node"""
+        return cls("first", "second")
+    
+    @classmethod
+    def second_to_first(cls):
+        """Convenience method: direction from second node to first node"""
+        return cls("second", "first")
+
+
+class EdgeType(ElementType):
+    """Edge type with endpoint node types, direction, and arc content type"""
+    def __init__(self, name: str, first_node_type: NodeType, second_node_type: NodeType, 
+                 arc_content_type: ContentRecordType, direction: Optional[EdgeDirection] = None):
+        super().__init__(name, arc_content_type)
+        self.first_node_type = first_node_type
+        self.second_node_type = second_node_type
+        self.arc_content_type = arc_content_type  # Keep for backward compatibility
+        self.direction = direction
+    
+    def get_element_kind(self) -> str:
+        return "edge"
+    
+    @property
+    def is_directed(self) -> bool:
+        """Check if the edge type has a direction specified"""
+        return self.direction is not None
+    
+    @property
+    def is_undirected(self) -> bool:
+        """Check if the edge type has no direction specified"""
+        return self.direction is None
+    
+    @property
+    def tail_node_type(self) -> Optional[NodeType]:
+        """Get the tail (source) node type for directed edges, None for undirected"""
+        if not self.is_directed:
+            return None
+        
+        if self.direction.tail_reference == "first":
+            return self.first_node_type
+        else:
+            return self.second_node_type
+    
+    @property
+    def head_node_type(self) -> Optional[NodeType]:
+        """Get the head (target) node type for directed edges, None for undirected"""
+        if not self.is_directed:
+            return None
+        
+        if self.direction.head_reference == "first":
+            return self.first_node_type
+        else:
+            return self.second_node_type
+    
+    @property
+    def source_type(self) -> NodeType:
+        """Backward compatibility property - maps to tail for directed edges, first for undirected"""
+        if self.is_directed:
+            return self.tail_node_type
+        return self.first_node_type
+    
+    @property
+    def target_type(self) -> NodeType:
+        """Backward compatibility property - maps to head for directed edges, second for undirected"""
+        if self.is_directed:
+            return self.head_node_type
+        return self.second_node_type
 
 
 class GraphType:
