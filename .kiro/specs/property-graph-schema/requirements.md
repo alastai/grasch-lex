@@ -369,6 +369,59 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 
 ### Requirement 20
 
+**User Story:** As a developer, I want Grasch to implement content record types as unified sets of attribute types with proper lattice ordering based on mandatory vs optional properties, so that I can work with mathematically sound subtyping relationships that reflect GQL semantics.
+
+#### Acceptance Criteria
+
+1. WHEN I define a content record type THEN the system SHALL represent it as a set of attribute types where each attribute type has a name and datatype
+2. WHEN I work with attribute types THEN the system SHALL support both label types (with LABEL_TYPE datatype containing a singleton constant) and property types (with standard datatypes like STRING, INT, etc.)
+3. WHEN I specify element types with optional and mandatory properties THEN the system SHALL generate exactly two content record types: mandatory content record type (mcrt) containing only mandatory attribute types, and complete content record type (ccrt) containing all attribute types
+4. WHEN I work with content type lattices THEN the system SHALL order content types such that a wider set of attribute types is a subtype of a narrower set (CRT₁ ≤ CRT₂ iff CRT₁ ⊆ CRT₂)
+5. WHEN I define multiple element types THEN the system SHALL ensure each content record type appears exactly once in the content type lattice, discarding duplicates that arise from different element type specifications
+6. WHEN I attempt to define a graph type where two node types generate identical content types THEN the system SHALL reject the specification as invalid
+7. WHEN I attempt to define a graph type where two edge types generate identical content types THEN the system SHALL reject the specification as invalid
+8. WHEN different element types (one node type, one edge type) generate the same content types THEN the system SHALL accept this as valid and discard the duplicate content type
+9. WHEN I work with content type ordering THEN the system SHALL ensure mcrt ≤ ccrt for each element type since the mandatory attribute types are a subset of all attribute types
+10. WHEN I validate element instances THEN the system SHALL allow instances of subtypes to satisfy supertype constraints since subtypes contain all supertype attributes plus additional ones
+
+### Requirement 21
+
+**User Story:** As a developer, I want Grasch to support both structural and nominal-like typing through strategic use of labels, so that I can achieve type safety while maintaining GQL's structural flexibility.
+
+#### Acceptance Criteria
+
+1. WHEN I work with content record types THEN the system SHALL implement structural typing where two content types are identical if and only if their attribute type sets are equal (order irrelevant)
+2. WHEN I compare content types structurally THEN the system SHALL treat {name:STRING, age:INT} as identical to {age:INT, name:STRING} since set equality ignores order
+3. WHEN I want to distinguish structurally identical types THEN the system SHALL allow me to add distinguishing labels that make the attribute type sets different
+4. WHEN I use distinguishing labels THEN the system SHALL treat {Person, name:STRING, age:INT} as different from {Employee, name:STRING, age:INT} due to different label attributes
+5. WHEN I define type keys (key label sets) THEN the system SHALL use them as pseudo-identifiers for content types
+6. WHEN I use singleton key label sets THEN the system SHALL allow the single label identifier to serve as a pseudo-type name (e.g., key {Person} enables "Person" as type name)
+7. WHEN I use multi-label key sets THEN the system SHALL treat them as compound identifiers for the content type
+8. WHEN I work with type validation THEN the system SHALL enforce that elements conform to their content type's complete attribute type set
+9. WHEN I perform type checking THEN the system SHALL use structural comparison for type compatibility while respecting label-based type discrimination
+10. WHEN I serialize or display types THEN the system SHALL provide both structural representation (full attribute type set) and nominal representation (using key label sets as type names when available)
+
+### Requirement 22
+
+**User Story:** As a developer, I want Grasch to implement spectral types for element conformance based on mandatory and optional properties, so that I can validate graph instances against the proper interval of acceptable content record types.
+
+#### Acceptance Criteria
+
+1. WHEN I define element types with mandatory and optional properties THEN the system SHALL create a spectral type as an inclusive interval [ccrt, mcrt] where ccrt is the complete content record type and mcrt is the mandatory content record type
+2. WHEN I work with lattice ordering THEN the system SHALL ensure ccrt ≤ mcrt (complete type is subtype of mandatory type) since smaller attribute sets are higher in the lattice than larger attribute sets
+3. WHEN I validate element instances THEN the system SHALL check that the element's content record lies within the spectral type interval [ccrt, mcrt]
+4. WHEN an element is conformant in the spectrum of a type THEN the system SHALL accept it as valid for that element type
+5. WHEN I use GQL property type syntax THEN the system SHALL support property name and datatype separation using space (e.g., "name STRING NOT NULL") or double colon (e.g., "name :: STRING NOT NULL") or TYPED keyword (e.g., "name TYPED STRING NOT NULL")
+6. WHEN I specify property nullability THEN the system SHALL treat NOT NULL as a type modifier, not a separate type, with properties defaulting to NULL-allowed unless explicitly marked NOT NULL
+7. WHEN I work with mandatory properties THEN the system SHALL include only NOT NULL properties in the mandatory content record type (mcrt)
+8. WHEN I work with complete properties THEN the system SHALL include all properties (both NOT NULL and NULL-allowed) in the complete content record type (ccrt)
+9. WHEN I validate property values THEN the system SHALL enforce that mandatory properties must be present and non-null, while optional properties may be absent or null
+10. WHEN I display spectral types THEN the system SHALL show the conformance interval clearly indicating the range of acceptable content record variations
+11. WHEN I work with element instances THEN the system SHALL allow any content record that falls between the complete type (lower bound) and mandatory type (upper bound) in the lattice ordering
+12. WHEN I serialize spectral type information THEN the system SHALL preserve both the interval bounds and the GQL syntax for property type specifications
+
+### Requirement 23
+
 **User Story:** As a developer, I want all Grasch builders, APIs, and scripting mechanisms to follow the profile + language level pattern, so that I can consistently control feature availability and syntax across all system components.
 
 #### Acceptance Criteria
@@ -384,7 +437,9 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 9. WHEN I serialize or export configurations THEN the system SHALL clearly mark which features require specific profiles vs specific language levels
 10. WHEN I migrate between profile-language combinations THEN the system SHALL provide tools to identify and handle features that would be incompatible with the target combination
 11. WHEN I work with error handling THEN the system SHALL provide profile and language-aware error messages that indicate whether issues are profile violations or language level problems
-12. WHEN I use any system component THEN the system SHALL maintain the profile + language level pattern consistently across all levels of detaillean, array, object) to match GQL and SQL datatypes
+12. WHEN I use any system component THEN the system SHALL maintain the profile + language level pattern consistently across all levels of detail
+13. WHEN I work with content type lattices THEN the system SHALL ensure all lattice operations respect the active profile's constraints on attribute types and structural features
+14. WHEN I work with spectral types THEN the system SHALL ensure all spectral type operations and validations respect the active profile and language level configurationlean, array, object) to match GQL and SQL datatypes
 3. WHEN I use library-defined types THEN the system SHALL provide predefined extensions for common GQL datatypes (integer, float, datetime, duration, etc.)
 4. WHEN I use library-defined types THEN the system SHALL provide predefined extensions for common SQL datatypes (varchar, decimal, timestamp, etc.)
 5. WHEN I define custom extensions THEN the system SHALL allow me to create new specialized types based on JSON Schema's base types
