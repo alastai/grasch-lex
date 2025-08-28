@@ -55,26 +55,29 @@ class TestGraschFunctional:
     def create_content_types(self) -> Dict[str, ContentRecordType]:
         """Define content record types for the graph"""
         # Person content type
-        person_content = ContentRecordType("PersonContent")
-        person_content.add_label_type(LabelType("Person"))
-        person_content.add_property_type(PropertyType("name", "STRING", not_null=True))
-        person_content.add_property_type(PropertyType("age", "INTEGER"))
-        person_content.add_property_type(PropertyType("email", "STRING"))
-        person_content.set_type_key([LabelType("Person")])
+        person_content = ContentRecordType("PersonContent") \
+            .add_label_type(LabelType("Person")) \
+            .add_property_type(PropertyType("name", "STRING", not_null=True)) \
+            .add_property_type(PropertyType("age", "INTEGER")) \
+            .add_property_type(PropertyType("email", "STRING")) \
+            .set_type_key([LabelType("Person")]) \
+            .create()
         
         # Company content type
-        company_content = ContentRecordType("CompanyContent")
-        company_content.add_label_type(LabelType("Company"))
-        company_content.add_property_type(PropertyType("name", "STRING", not_null=True))
-        company_content.add_property_type(PropertyType("industry", "STRING"))
-        company_content.set_type_key([LabelType("Company")])
+        company_content = ContentRecordType("CompanyContent") \
+            .add_label_type(LabelType("Company")) \
+            .add_property_type(PropertyType("name", "STRING", not_null=True)) \
+            .add_property_type(PropertyType("industry", "STRING")) \
+            .set_type_key([LabelType("Company")]) \
+            .create()
         
         # Employment relationship content type
-        employment_content = ContentRecordType("EmploymentContent")
-        employment_content.add_label_type(LabelType("WORKS_FOR"))
-        employment_content.add_property_type(PropertyType("position", "STRING"))
-        employment_content.add_property_type(PropertyType("start_date", "DATE"))
-        employment_content.set_type_key([LabelType("WORKS_FOR")])
+        employment_content = ContentRecordType("EmploymentContent") \
+            .add_label_type(LabelType("WORKS_FOR")) \
+            .add_property_type(PropertyType("position", "STRING")) \
+            .add_property_type(PropertyType("start_date", "DATE")) \
+            .set_type_key([LabelType("WORKS_FOR")]) \
+            .create()
         
         return {
             "person": person_content,
@@ -302,6 +305,7 @@ def run_functional_test():
         session_config = SessionConfiguration(
             profile=full_profile,
             language_level=LanguageLevel.LEX,
+            catalog_root="file:.",
             default_catalog_path="/",
             nested_record_schema_processor_type="JSON Schema",
             nested_record_schema_processor="default"
