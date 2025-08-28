@@ -37,7 +37,8 @@ class SessionConfiguration:
     """Session-level configuration"""
     profile: ProfileConfiguration
     language_level: LanguageLevel
-    default_catalog_path: Optional[str] = "/"
+    catalog_root: str = "file:."  # IRI for catalog base location
+    default_catalog_path: Optional[str] = "/"  # Path relative to catalog_root
     nested_record_schema_processor_type: str = "JSON Schema"
     nested_record_schema_processor: Optional[str] = "default"
 
