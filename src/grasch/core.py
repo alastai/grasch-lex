@@ -38,7 +38,8 @@ class SessionConfiguration:
     profile: ProfileConfiguration
     language_level: LanguageLevel
     default_catalog_path: Optional[str] = "/"
-    json_schema_processor: Optional[str] = "default"
+    nested_record_schema_processor_type: str = "JSON Schema"
+    nested_record_schema_processor: Optional[str] = "default"
 
 
 class GraschSession:
