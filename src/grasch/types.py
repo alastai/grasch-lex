@@ -3,6 +3,8 @@ Type system for content record types, element types, and graph types.
 """
 
 from typing import List, Dict, Any, Optional
+from abc import ABC, abstractmethod
+from enum import Enum
 
 
 class AttributeType:
@@ -41,6 +43,24 @@ class ContentRecordType:
     
     def set_type_key(self, key_labels: List[LabelType]):
         self.type_key = key_labels
+
+
+class Direction(Enum):
+    """Direction for edge types"""
+    UNDIRECTED = "undirected"
+    DIRECTED = "directed"
+
+
+class ElementType(ABC):
+    """Abstract base class for all element types (nodes and edges)"""
+    def __init__(self, name: str, identifying_content_type: ContentRecordType):
+        self.name = name
+        self.identifying_content_type = identifying_content_type
+    
+    @abstractmethod
+    def get_element_kind(self) -> str:
+        """Return the kind of element (node or edge)"""
+        pass
 
 
 class NodeType:
