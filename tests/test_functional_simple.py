@@ -15,10 +15,10 @@ from grasch import (
     ProfileConfiguration,
     LanguageLevel,
     LEXCompatibility,
-    ContentRecordType,
+    ContentRecordTypeBuilder,
     LabelType,
     PropertyType,
-    NodeType,
+    NodeTypeBuilder,
     EdgeType,
     GraphType,
     Graph,
@@ -38,34 +38,39 @@ def create_session_config() -> SessionConfiguration:
     return SessionConfiguration(
         profile=full_profile,
         language_level=LanguageLevel.LEX,
+        catalog_root="file:.",
         default_catalog_path="/",
-        json_schema_processor="default"
+        nested_record_schema_processor_type="JSON Schema",
+        nested_record_schema_processor="default"
     )
 
 
-def create_content_types() -> Dict[str, ContentRecordType]:
+def create_content_types():
     """Define content record types for the graph"""
     # Person content type
-    person_content = ContentRecordType("PersonContent")
-    person_content.add_label_type(LabelType("Person"))
-    person_content.add_property_type(PropertyType("name", "STRING", not_null=True))
-    person_content.add_property_type(PropertyType("age", "INTEGER"))
-    person_content.add_property_type(PropertyType("email", "STRING"))
-    person_content.set_type_key([LabelType("Person")])
+    person_content = ContentRecordTypeBuilder("PersonContent") \
+        .add_label_type(LabelType("Person")) \
+        .add_property_type(PropertyType("name", "STRING", not_null=True)) \
+        .add_property_type(PropertyType("age", "INTEGER")) \
+        .add_property_type(PropertyType("email", "STRING")) \
+        .set_type_key([LabelType("Person")]) \
+        .create()
     
     # Company content type
-    company_content = ContentRecordType("CompanyContent")
-    company_content.add_label_type(LabelType("Company"))
-    company_content.add_property_type(PropertyType("name", "STRING", not_null=True))
-    company_content.add_property_type(PropertyType("industry", "STRING"))
-    company_content.set_type_key([LabelType("Company")])
+    company_content = ContentRecordTypeBuilder("CompanyContent") \
+        .add_label_type(LabelType("Company")) \
+        .add_property_type(PropertyType("name", "STRING", not_null=True)) \
+        .add_property_type(PropertyType("industry", "STRING")) \
+        .set_type_key([LabelType("Company")]) \
+        .create()
     
     # Employment relationship content type
-    employment_content = ContentRecordType("EmploymentContent")
-    employment_content.add_label_type(LabelType("WORKS_FOR"))
-    employment_content.add_property_type(PropertyType("position", "STRING"))
-    employment_content.add_property_type(PropertyType("start_date", "DATE"))
-    employment_content.set_type_key([LabelType("WORKS_FOR")])
+    employment_content = ContentRecordTypeBuilder("EmploymentContent") \
+        .add_label_type(LabelType("WORKS_FOR")) \
+        .add_property_type(PropertyType("position", "STRING")) \
+        .add_property_type(PropertyType("start_date", "DATE")) \
+        .set_type_key([LabelType("WORKS_FOR")]) \
+        .create()
     
     return {
         "person": person_content,
@@ -74,11 +79,11 @@ def create_content_types() -> Dict[str, ContentRecordType]:
     }
 
 
-def create_graph_schema(content_types: Dict[str, ContentRecordType]) -> GraphType:
+def create_graph_schema(content_types) -> GraphType:
     """Create a graph type with ALL ELEMENT TYPES KEYED constraint"""
-    # Create element types
-    person_node_type = NodeType("Person", content_types["person"])
-    company_node_type = NodeType("Company", content_types["company"])
+    # Create element types using builders
+    person_node_type = NodeTypeBuilder(content_types["person"]).create()
+    company_node_type = NodeTypeBuilder(content_types["company"]).create()
     
     works_for_edge_type = EdgeType(
         "WORKS_FOR",

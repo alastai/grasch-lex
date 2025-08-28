@@ -5,6 +5,7 @@ Type system for content record types, element types, and graph types.
 from typing import List, Dict, Any, Optional
 from abc import ABC, abstractmethod
 from enum import Enum
+import uuid
 
 
 class AttributeType:
@@ -29,20 +30,39 @@ class PropertyType(AttributeType):
 
 class ContentRecordType:
     """Hierarchical record structure with label types and property structure"""
+    def __init__(self, name: str, label_types: List[LabelType], property_types: List[PropertyType], type_key: Optional[List[LabelType]] = None):
+        self.name = name
+        self.label_types = tuple(label_types)  # Make immutable tuple
+        self.property_types = tuple(property_types)  # Make immutable tuple
+        self.type_key = tuple(type_key) if type_key else None
+
+
+class ContentRecordTypeBuilder:
+    """Builder for ContentRecordType instances"""
     def __init__(self, name: str):
         self.name = name
-        self.label_types: List[LabelType] = []
-        self.property_types: List[PropertyType] = []
-        self.type_key: Optional[List[LabelType]] = None
+        self._label_types: List[LabelType] = []
+        self._property_types: List[PropertyType] = []
+        self._type_key: Optional[List[LabelType]] = None
     
-    def add_label_type(self, label_type: LabelType):
-        self.label_types.append(label_type)
+    def add_label_type(self, label_type: LabelType) -> 'ContentRecordTypeBuilder':
+        """Add a label type and return self for chaining"""
+        self._label_types.append(label_type)
+        return self
     
-    def add_property_type(self, property_type: PropertyType):
-        self.property_types.append(property_type)
+    def add_property_type(self, property_type: PropertyType) -> 'ContentRecordTypeBuilder':
+        """Add a property type and return self for chaining"""
+        self._property_types.append(property_type)
+        return self
     
-    def set_type_key(self, key_labels: List[LabelType]):
-        self.type_key = key_labels
+    def set_type_key(self, key_labels: List[LabelType]) -> 'ContentRecordTypeBuilder':
+        """Set the type key and return self for chaining"""
+        self._type_key = key_labels
+        return self
+    
+    def create(self) -> ContentRecordType:
+        """Create and return the ContentRecordType instance"""
+        return ContentRecordType(self.name, self._label_types, self._property_types, self._type_key)
 
 
 # Alias for clarity in ElementType context
@@ -52,6 +72,7 @@ RecordContentType = ContentRecordType
 class ElementType(ABC):
     """Abstract base class for all element types (nodes and edges)"""
     def __init__(self, name: str, identifying_content_type: ContentRecordType):
+        self.element_id = str(uuid.uuid4())  # System-generated UUID
         self.name = name
         self.identifying_content_type = identifying_content_type
     
@@ -63,12 +84,23 @@ class ElementType(ABC):
 
 class NodeType(ElementType):
     """Node type based on content record type"""
-    def __init__(self, name: str, content_type: ContentRecordType):
-        super().__init__(name, content_type)
+    def __init__(self, content_type: ContentRecordType):
+        # NodeType name is derived from content type, no user input needed
+        super().__init__(content_type.name, content_type)
         self.content_type = content_type  # Keep for backward compatibility
     
     def get_element_kind(self) -> str:
         return "node"
+
+
+class NodeTypeBuilder:
+    """Builder for NodeType instances"""
+    def __init__(self, content_type: ContentRecordType):
+        self.content_type = content_type
+    
+    def create(self) -> NodeType:
+        """Create and return the NodeType instance"""
+        return NodeType(self.content_type)
 
 
 class EdgeDirection:

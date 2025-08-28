@@ -180,8 +180,10 @@ class SessionConfiguration:
     """Session-level configuration"""
     profile: ProfileConfiguration
     language_level: LanguageLevel
-    default_catalog_path: Optional[str]
-    json_schema_processor: ISchemaProcessor
+    catalog_root: str  # IRI for catalog base location (default: "file:.")
+    default_catalog_path: Optional[str]  # Path relative to catalog_root
+    nested_record_schema_processor_type: str  # e.g., "JSON Schema", "Parquet", "Arrow"
+    nested_record_schema_processor: ISchemaProcessor  # Implementation class
 ```
 
 ## Components and Interfaces
@@ -305,6 +307,7 @@ class AlterConstraintsOperation(DeltaOperation):
 - `Directory`: Internal nodes in the catalog tree
 - `GQLSchema`: Leaf nodes containing Primary Catalog Objects
 - `CatalogPath`: Strongly-typed path representation supporting both traditional paths and IRIs
+- `CatalogRootResolver`: Handles catalog_root IRI resolution and path combination
 - `LEXCatalogDDL`: LEX extensions for catalog DDL commands
 
 **GQL Standard Features**:
@@ -345,6 +348,14 @@ class ICatalogIRI(Protocol):
     def resolve_iri(self, iri: str) -> CatalogPath
     def to_iri(self, path: CatalogPath) -> str
     def validate_iri(self, iri: str) -> ValidationResult
+
+class ICatalogRootResolver(Protocol):
+    """Handles catalog_root IRI configuration and path resolution"""
+    def set_catalog_root(self, root_iri: str) -> None
+    def get_catalog_root(self) -> str
+    def resolve_relative_path(self, relative_path: str) -> str
+    def validate_root_iri(self, iri: str) -> ValidationResult
+    def get_supported_schemes(self) -> Set[str]
 ```
 
 ### 2. Primary Catalog Objects (PCO) Component
@@ -487,6 +498,29 @@ class CatalogPath:
     path: str
     is_iri: bool = False
     base_iri: Optional[str] = None
+
+@dataclass
+class CatalogRootConfiguration:
+    """Configuration for catalog root IRI and path resolution"""
+    catalog_root: str  # IRI for catalog base location (e.g., "file:.", "file:///data/catalogs")
+    supported_schemes: Set[str] = field(default_factory=lambda: {"file"})
+    
+    def resolve_path(self, relative_path: str) -> str:
+        """Combine catalog_root IRI with relative path"""
+        if self.catalog_root.startswith("file:"):
+            # Handle file: scheme resolution
+            base_path = self.catalog_root[5:]  # Remove "file:" prefix
+            if base_path == ".":
+                return relative_path
+            return f"{base_path}/{relative_path.lstrip('/')}"
+        else:
+            # Handle other IRI schemes
+            return f"{self.catalog_root.rstrip('/')}/{relative_path.lstrip('/')}"
+    
+    def validate_iri(self, iri: str) -> bool:
+        """Validate that IRI uses supported scheme"""
+        scheme = iri.split(":", 1)[0] if ":" in iri else ""
+        return scheme in self.supported_schemes
 ```
 
 #### 2. Graph Type and Constraint Model

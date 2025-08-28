@@ -19,10 +19,10 @@ from grasch import (
     ProfileConfiguration,
     LanguageLevel,
     LEXCompatibility,
-    ContentRecordType,
+    ContentRecordTypeBuilder,
     LabelType,
     PropertyType,
-    NodeType,
+    NodeTypeBuilder,
     EdgeType,
     GraphType,
     Graph,
@@ -52,10 +52,10 @@ class TestGraschFunctional:
             nested_record_schema_processor="default"
         )
     
-    def create_content_types(self) -> Dict[str, ContentRecordType]:
+    def create_content_types(self):
         """Define content record types for the graph"""
         # Person content type
-        person_content = ContentRecordType("PersonContent") \
+        person_content = ContentRecordTypeBuilder("PersonContent") \
             .add_label_type(LabelType("Person")) \
             .add_property_type(PropertyType("name", "STRING", not_null=True)) \
             .add_property_type(PropertyType("age", "INTEGER")) \
@@ -64,7 +64,7 @@ class TestGraschFunctional:
             .create()
         
         # Company content type
-        company_content = ContentRecordType("CompanyContent") \
+        company_content = ContentRecordTypeBuilder("CompanyContent") \
             .add_label_type(LabelType("Company")) \
             .add_property_type(PropertyType("name", "STRING", not_null=True)) \
             .add_property_type(PropertyType("industry", "STRING")) \
@@ -72,7 +72,7 @@ class TestGraschFunctional:
             .create()
         
         # Employment relationship content type
-        employment_content = ContentRecordType("EmploymentContent") \
+        employment_content = ContentRecordTypeBuilder("EmploymentContent") \
             .add_label_type(LabelType("WORKS_FOR")) \
             .add_property_type(PropertyType("position", "STRING")) \
             .add_property_type(PropertyType("start_date", "DATE")) \
@@ -85,11 +85,11 @@ class TestGraschFunctional:
             "employment": employment_content
         }
     
-    def create_graph_schema(self, content_types: Dict[str, ContentRecordType]) -> GraphType:
+    def create_graph_schema(self, content_types) -> GraphType:
         """Create a graph type with ALL ELEMENT TYPES KEYED constraint"""
-        # Create element types
-        person_node_type = NodeType("Person", content_types["person"])
-        company_node_type = NodeType("Company", content_types["company"])
+        # Create element types using builders
+        person_node_type = NodeTypeBuilder(content_types["person"]).create()
+        company_node_type = NodeTypeBuilder(content_types["company"]).create()
         
         works_for_edge_type = EdgeType(
             "WORKS_FOR",
@@ -320,7 +320,78 @@ def run_functional_test():
         
         # Create test instance and run
         test_instance = TestGraschFunctional()
-        test_instance.test_complete_workflow()
+        
+        # Create session for standalone mode
+        grasch_session = GraschSession(session_config, database_path)
+        
+        # Step 1: Create catalog structure
+        print("\n1. Creating catalog structure...")
+        grasch_session.create_catalog_structure()
+        
+        # Verify catalog structure
+        assert grasch_session.catalog.root.children["production"] is not None
+        assert grasch_session.catalog.root.children["development"] is not None
+        print("   ✓ Catalog directories created successfully")
+        
+        # Step 2: Define content types
+        print("\n2. Defining content record types...")
+        content_types = test_instance.create_content_types()
+        
+        # Verify content types
+        assert len(content_types) == 3
+        assert content_types["person"].type_key is not None
+        assert content_types["company"].type_key is not None
+        assert content_types["employment"].type_key is not None
+        print("   ✓ Content record types with type keys defined")
+        
+        # Step 3: Create graph schema with constraints
+        print("\n3. Creating graph type with LEX constraints...")
+        graph_type = test_instance.create_graph_schema(content_types)
+        
+        # Verify graph type
+        assert graph_type.all_element_types_keyed is True
+        assert len(graph_type.node_types) == 2
+        assert len(graph_type.edge_types) == 1
+        assert len(graph_type.constraints) == 3
+        print("   ✓ Graph type with ALL ELEMENT TYPES KEYED constraint created")
+        
+        # Step 4: Create and populate graph
+        print("\n4. Creating and populating graph instance...")
+        graph = test_instance.create_and_populate_graph(graph_type)
+        
+        # Verify graph population
+        assert len(graph.nodes) == 4
+        assert len(graph.edges) == 2
+        assert graph.graph_type == graph_type
+        print(f"   ✓ Graph populated with {len(graph.nodes)} nodes and {len(graph.edges)} edges")
+        
+        # Step 5: Store in catalog
+        print("\n5. Storing objects in catalog...")
+        schema = grasch_session.catalog.create_gql_schema("/production/customer_data", "employee_schema")
+        schema.add_graph_type(graph_type)
+        schema.add_graph(graph)
+        
+        # Verify catalog storage
+        assert "employee_schema" in grasch_session.catalog.root.children["production"].children["customer_data"].schemas
+        stored_schema = grasch_session.catalog.root.children["production"].children["customer_data"].schemas["employee_schema"]
+        assert "EmployeeGraph" in stored_schema.graph_types
+        assert "employee_data" in stored_schema.graphs
+        print("   ✓ Objects stored in catalog at /production/customer_data/employee_schema")
+        
+        # Step 6: Demonstrate queries
+        print("\n6. Demonstrating Cypher queries...")
+        grasch_session.demonstrate_cypher_queries()
+        
+        # Step 7: Demonstrate spectral typing concepts
+        print("\n7. Demonstrating spectral typing concepts...")
+        grasch_session.demonstrate_spectral_typing()
+        
+        print("\n" + "=" * 60)
+        print("✓ FUNCTIONAL TEST COMPLETED SUCCESSFULLY!")
+        print("✓ All Grasch library features demonstrated")
+        print("✓ Graph data persisted in Kuzu database")
+        print("✓ Cypher queries executed successfully")
+        print("=" * 60)
 
 
 if __name__ == "__main__":

@@ -16,6 +16,7 @@ from .core import (
     ProfileConfiguration,
     LanguageLevel,
     LEXCompatibility,
+    CatalogRootConfiguration,
 )
 
 from .catalog import (
@@ -30,7 +31,9 @@ from .types import (
     LabelType,
     PropertyType,
     ContentRecordType,
+    ContentRecordTypeBuilder,
     NodeType,
+    NodeTypeBuilder,
     EdgeType,
     GraphType,
     Graph,
@@ -47,6 +50,7 @@ __all__ = [
     "ProfileConfiguration",
     "LanguageLevel",
     "LEXCompatibility",
+    "CatalogRootConfiguration",
     
     # Catalog management
     "Catalog",
@@ -59,7 +63,9 @@ __all__ = [
     "LabelType",
     "PropertyType", 
     "ContentRecordType",
+    "ContentRecordTypeBuilder",
     "NodeType",
+    "NodeTypeBuilder",
     "EdgeType",
     "GraphType",
     "Graph",

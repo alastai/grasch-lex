@@ -40,8 +40,9 @@ class CatalogPath:
 
 class Catalog:
     """Root catalog with hierarchical structure"""
-    def __init__(self, database_path: str):
+    def __init__(self, database_path: str, catalog_root_config=None):
         self.database_path = database_path
+        self.catalog_root_config = catalog_root_config
         self.root = Directory("/", "/")
         self.current_path = "/"
     

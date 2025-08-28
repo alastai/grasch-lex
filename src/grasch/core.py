@@ -24,6 +24,34 @@ class LEXCompatibility(Enum):
 
 
 @dataclass
+class CatalogRootConfiguration:
+    """Configuration for catalog root IRI and path resolution"""
+    catalog_root: str = "file:."
+    supported_schemes: set[str] = None
+    
+    def __post_init__(self):
+        if self.supported_schemes is None:
+            self.supported_schemes = {"file"}
+    
+    def resolve_path(self, relative_path: str) -> str:
+        """Combine catalog_root IRI with relative path"""
+        if self.catalog_root.startswith("file:"):
+            # Handle file: scheme resolution
+            base_path = self.catalog_root[5:]  # Remove "file:" prefix
+            if base_path == ".":
+                return relative_path
+            return f"{base_path}/{relative_path.lstrip('/')}"
+        else:
+            # Handle other IRI schemes
+            return f"{self.catalog_root.rstrip('/')}/{relative_path.lstrip('/')}"
+    
+    def validate_iri(self, iri: str) -> bool:
+        """Validate that IRI uses supported scheme"""
+        scheme = iri.split(":", 1)[0] if ":" in iri else ""
+        return scheme in self.supported_schemes
+
+
+@dataclass
 class ProfileConfiguration:
     """Defines a specific GQL/LEX profile"""
     name: str
@@ -49,7 +77,17 @@ class GraschSession:
     def __init__(self, config: SessionConfiguration, database_path: str):
         self.config = config
         self.database_path = database_path
-        self.catalog = Catalog(database_path)
+        
+        # Initialize catalog root configuration
+        self.catalog_root_config = CatalogRootConfiguration(
+            catalog_root=config.catalog_root
+        )
+        
+        # Validate catalog root IRI
+        if not self.catalog_root_config.validate_iri(config.catalog_root):
+            raise ValueError(f"Unsupported IRI scheme in catalog_root: {config.catalog_root}")
+        
+        self.catalog = Catalog(database_path, self.catalog_root_config)
         self.kuzu_connection = MockKuzuConnection(database_path)
     
     def create_catalog_structure(self):

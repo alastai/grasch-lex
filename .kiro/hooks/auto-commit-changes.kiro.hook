@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Auto Commit Changes",
+  "description": "Automatically commits any changes made to files in the workspace",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A file has been modified in the workspace. Please automatically commit this change with an appropriate commit message describing what was changed."
+  }
+}

@@ -95,8 +95,8 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 3. WHEN I initialize my user session THEN the system SHALL allow me to specify a language level: GQL or LEX
 4. WHEN I operate with GQL language level THEN the system SHALL enforce GQL syntax and semantics within the constraints of the specified profile
 5. WHEN I operate with LEX language level THEN the system SHALL allow LEX extensions that are compatible with the specified profile, rejecting incompatible combinations
-6. WHEN I initialize my user session THEN the system SHALL provide a set of "default defaults" for all configurable settings including a default JSON Schema processor, a default profile, and a default language level
-7. WHEN I configure my session THEN the system SHALL allow me to swap out the JSON Schema processor implementation for a different one
+6. WHEN I initialize my user session THEN the system SHALL provide a set of "default defaults" for all configurable settings including a default nested record schema processor type and implementation, a default profile, and a default language level
+7. WHEN I configure my session THEN the system SHALL allow me to specify the nested record schema processor type (e.g., "JSON Schema") and swap out the nested record schema processor implementation for a different one
 8. WHEN I set user defaults in my session THEN the system SHALL use my defaults instead of the default defaults for my session only
 9. WHEN I don't specify a default for a setting THEN the system SHALL use the corresponding default default
 10. WHEN I work with path names in my session THEN the system SHALL allow me to set one default Catalog path at any time (if catalog support is included in the active GQL profile)
@@ -109,6 +109,14 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 17. WHEN I attempt to use LEX extensions incompatible with the active profile THEN the system SHALL provide clear error messages indicating the specific profile constraint that is violated
 18. WHEN I attempt to use features not included in the active profile THEN the system SHALL provide clear error messages indicating the specific feature that requires a different profile
 19. WHEN I switch profiles or language levels during a session THEN the system SHALL validate that existing catalog contents are compatible with the new profile-language combination
+20. WHEN I configure my session THEN the system SHALL allow me to specify a catalog_root configuration key with an IRI value to define the base catalog location
+21. WHEN I specify a catalog_root IRI THEN the system SHALL recognize standard IRI schemes including "file:" for local filesystem paths
+22. WHEN no catalog_root is configured THEN the system SHALL use "file:." as the default catalog_root IRI pointing to the current directory
+23. WHEN I use a file: IRI scheme THEN the system SHALL resolve relative paths relative to the specified directory location
+24. WHEN I work with catalog paths THEN the system SHALL combine the catalog_root IRI with relative paths to create fully-qualified catalog locations
+25. WHEN I specify default_catalog_path THEN the system SHALL interpret it as a path relative to the catalog_root IRI location
+26. WHEN I validate IRI schemes THEN the system SHALL ensure the catalog_root uses a recognized IRI scheme format
+27. WHEN I work with different IRI schemes THEN the system SHALL provide extensible support for additional IRI schemes beyond file: (such as http:, https:, or custom schemes)
 
 ### Requirement 6
 
@@ -155,9 +163,9 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 5. WHEN I validate nested map structures THEN the system SHALL recursively validate all levels of the hierarchy similar to JSON schema validation
 6. WHEN I validate an edge THEN the system SHALL verify the source and target nodes are compatible types as defined in the edge type
 7. WHEN I validate elements THEN the system SHALL verify proper record type structure including nested record validation
-8. WHEN I validate an element against a content type that references a JSON Schema definition THEN the system SHALL validate the properties nested data map against the referenced JSON Schema using the configured JSON Schema processor
-9. WHEN I configure Grasch THEN the system SHALL allow me to specify which JSON Schema processor implementation to use
-10. WHEN no JSON Schema processor is configured THEN the system SHALL use a default JSON Schema processor implementation
+8. WHEN I validate an element against a content type that references a nested record schema definition THEN the system SHALL validate the properties nested data map against the referenced schema using the configured nested record schema processor
+9. WHEN I configure Grasch THEN the system SHALL allow me to specify which nested record schema processor type (e.g., "JSON Schema") and which nested record schema processor implementation to use
+10. WHEN no nested record schema processor is configured THEN the system SHALL use a default nested record schema processor type ("JSON Schema") and default nested record schema processor implementation
 11. IF validation fails THEN the system SHALL provide clear error messages indicating what GQL constraints were violated including the specific nesting level and any JSON Schema validation errors
 
 ### Requirement 9
@@ -1244,4 +1252,5 @@ uirement 48
 11. WHEN I work with complex edge schemas THEN the system SHALL support arc content types that incorporate endpoint type information as part of their key label structure
 12. WHEN I design graph schemas with multiple edge types THEN the system SHALL ensure that edge type keys provide unambiguous identification even when edge types share similar arc content structures
 <!-
-- Test comment added to trigger Agent Hook at $(date) -->
+- Test comment added to trigger Agent Hook at $(date) --><!-- 
+Hook test - $(date) -->
