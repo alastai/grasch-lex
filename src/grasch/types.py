@@ -18,7 +18,7 @@ class AttributeType:
 class LabelType(AttributeType):
     """Label type with constant label datatype"""
     def __init__(self, name: str):
-        super().__init__(name, "LABEL_TYPE")
+        super().__init__(name, "LABEL_DATATYPE")
 
 
 class PropertyType(AttributeType):
@@ -53,6 +53,11 @@ class ContentRecordType:
         if self._type_identifier:
             return [LabelType(label_id) for label_id in self._type_identifier]
         return None
+    
+    @property
+    def labels(self) -> List[str]:
+        """Return the label names as strings"""
+        return [label.name for label in self.label_types]
 
 
 class ContentRecordTypeBuilder:
@@ -65,6 +70,21 @@ class ContentRecordTypeBuilder:
     def add_label_type(self, label_type: LabelType) -> 'ContentRecordTypeBuilder':
         """Add a label type and return self for chaining"""
         self._label_types.append(label_type)
+        return self
+    
+    def add_label_types(self, label_types: List[LabelType]) -> 'ContentRecordTypeBuilder':
+        """Add multiple label types and return self for chaining"""
+        self._label_types.extend(label_types)
+        return self
+    
+    def add_label(self, label: str) -> 'ContentRecordTypeBuilder':
+        """Add a label (convenience method that creates LabelType) and return self for chaining"""
+        return self.add_label_type(LabelType(label))
+    
+    def add_labels(self, labels: List[str]) -> 'ContentRecordTypeBuilder':
+        """Add multiple labels (convenience method that creates LabelTypes) and return self for chaining"""
+        for label in labels:
+            self.add_label_type(LabelType(label))
         return self
     
     def add_property_type(self, property_type: PropertyType) -> 'ContentRecordTypeBuilder':

@@ -56,7 +56,7 @@ class TestGraschFunctional:
         """Define content record types for the graph"""
         # Person content type
         person_content = ContentRecordTypeBuilder() \
-            .add_label_type(LabelType("Person")) \
+            .add_label("Person") \
             .add_property_type(PropertyType("name", "STRING", not_null=True)) \
             .add_property_type(PropertyType("age", "INTEGER")) \
             .add_property_type(PropertyType("email", "STRING")) \
@@ -65,7 +65,7 @@ class TestGraschFunctional:
         
         # Company content type
         company_content = ContentRecordTypeBuilder() \
-            .add_label_type(LabelType("Company")) \
+            .add_label("Company") \
             .add_property_type(PropertyType("name", "STRING", not_null=True)) \
             .add_property_type(PropertyType("industry", "STRING")) \
             .add_type_name("Company") \
@@ -73,7 +73,7 @@ class TestGraschFunctional:
         
         # Employment relationship content type
         employment_content = ContentRecordTypeBuilder() \
-            .add_label_type(LabelType("WORKS_FOR")) \
+            .add_label("WORKS_FOR") \
             .add_property_type(PropertyType("position", "STRING")) \
             .add_property_type(PropertyType("start_date", "DATE")) \
             .add_type_name("WORKS_FOR") \
@@ -248,7 +248,8 @@ class TestGraschFunctional:
         person_content = content_types["person"]
         assert len(person_content.label_types) == 1
         assert len(person_content.property_types) == 3
-        assert person_content.label_types[0].datatype == "LABEL_TYPE"
+        assert person_content.label_types[0].datatype == "LABEL_DATATYPE"
+        assert person_content.labels == ["Person"]
         
         # Test type identifier relationships
         assert person_content.name == "Person"

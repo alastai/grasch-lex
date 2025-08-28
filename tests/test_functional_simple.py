@@ -49,7 +49,7 @@ def create_content_types():
     """Define content record types for the graph"""
     # Person content type
     person_content = ContentRecordTypeBuilder() \
-        .add_label_type(LabelType("Person")) \
+        .add_label("Person") \
         .add_property_type(PropertyType("name", "STRING", not_null=True)) \
         .add_property_type(PropertyType("age", "INTEGER")) \
         .add_property_type(PropertyType("email", "STRING")) \
@@ -58,7 +58,7 @@ def create_content_types():
     
     # Company content type
     company_content = ContentRecordTypeBuilder() \
-        .add_label_type(LabelType("Company")) \
+        .add_label("Company") \
         .add_property_type(PropertyType("name", "STRING", not_null=True)) \
         .add_property_type(PropertyType("industry", "STRING")) \
         .add_type_name("Company") \
@@ -66,7 +66,7 @@ def create_content_types():
     
     # Employment relationship content type
     employment_content = ContentRecordTypeBuilder() \
-        .add_label_type(LabelType("WORKS_FOR")) \
+        .add_label("WORKS_FOR") \
         .add_property_type(PropertyType("position", "STRING")) \
         .add_property_type(PropertyType("start_date", "DATE")) \
         .add_type_name("WORKS_FOR") \
