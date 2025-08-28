@@ -1188,3 +1188,58 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 13. WHEN I use different record formats THEN the system SHALL allow the same logical graph to be represented using different physical record schema formats based on use case requirements
 14. WHEN I work with large-scale analytics THEN the system SHALL enable integration with data lake and data warehouse architectures through standard columnar formats
 15. WHEN I serialize graph data THEN the system SHALL support export to both graph formats (preserving topology) and tabular formats (preserving element data structure)
+#
+## Requirement 46
+
+**User Story:** As a developer, I want to understand multi-conformance implications in spectral typing, so that I can handle cases where a single content record may conform to multiple content types and understand how key labels resolve ambiguity.
+
+#### Acceptance Criteria
+
+1. WHEN I have multiple structurally distinct content types THEN the system SHALL recognize that a single content record may conform to more than one content type
+2. WHEN I insert a content record like `(:Person {name:'My name is Foo'})` THEN the system SHALL allow it to conform to multiple content types such as `(:Person {name::STRING NOT NULL, dob::DATE})` and `(:Person {name::STRING NOT NULL, dob::DATE, startDate::DATE})`
+3. WHEN I work with multi-conformance scenarios THEN the system SHALL handle the theoretical possibility of non-specific typing where one record satisfies multiple type constraints
+4. WHEN all content types in a graph type are keyed (have a key label set) THEN the system SHALL prevent type clashes because each content type becomes uniquely identified
+5. WHEN I define key label sets for content types THEN the system SHALL use these keys to disambiguate between otherwise structurally similar content types
+6. WHEN I work with keyed content types THEN the system SHALL ensure that the key label set makes each content type distinct even if their property structures overlap
+7. WHEN I validate content records against multiple potential types THEN the system SHALL use key labels as the primary disambiguation mechanism
+8. WHEN I design graph schemas THEN the system SHALL recommend using key label sets to avoid multi-conformance ambiguity in production systems
+9. WHEN I work with unkeyed content types THEN the system SHALL acknowledge that multi-conformance is theoretically possible but may create ambiguity in type resolution
+10. WHEN I analyze type safety THEN the system SHALL recognize that key labels provide a solution to the multi-conformance problem by making content types nominally distinct
+11. WHEN I work with spectral type conformance intervals THEN the system SHALL handle cases where multiple [ccrt, mcrt] intervals may apply to the same content record
+12. WHEN I resolve type ambiguity THEN the system SHALL prioritize key label matching over structural conformance when both mechanisms are available### R
+equirement 47
+
+**User Story:** As a developer using LEX extensions, I want to create graph schemas with mandatory keyed elements, so that I can enforce that every node and edge type has a key label set to prevent multi-conformance ambiguity.
+
+#### Acceptance Criteria
+
+1. WHEN I use LEX language level THEN the system SHALL support the syntax `CREATE GRAPH SCHEMA foo GRAPH TYPE ALL ELEMENT TYPES KEYED`
+2. WHEN I create a graph schema with ALL ELEMENT TYPES KEYED constraint THEN the system SHALL require every node type and edge type to have a non-empty key label set
+3. WHEN I define a node type A with ALL ELEMENT TYPES KEYED constraint THEN the system SHALL ensure that A has a content type A with a key label set K(A)
+4. WHEN I define an edge type B with ALL ELEMENT TYPES KEYED constraint THEN the system SHALL ensure that B has a content type B with a key label set K(B)
+5. WHEN I work with the mathematical relationship THEN the system SHALL enforce that K(A) ⊆ L(A), where K(A) is the key label set and L(A) is the set of all label types in content type A
+6. WHEN I attempt to create an element type without a key label set in a ALL ELEMENT TYPES KEYED graph schema THEN the system SHALL reject the operation with a clear error message
+7. WHEN I work with ALL ELEMENT TYPES KEYED constraint THEN the system SHALL ensure that multi-conformance ambiguity is eliminated because every content type is uniquely identified by its key labels
+8. WHEN I use GQL language level THEN the system SHALL not support the ALL ELEMENT TYPES KEYED syntax as it is a LEX extension
+9. WHEN I validate elements in a ALL ELEMENT TYPES KEYED graph schema THEN the system SHALL use the key label sets for definitive type identification
+10. WHEN I define key label sets K(A) THEN the system SHALL ensure they consist only of label types (attribute types with LABEL_TYPE datatype) from the content type's label vector
+11. WHEN I work with element type inheritance or subtyping THEN the system SHALL ensure that key label set relationships are preserved according to the content type lattice structure
+12. WHEN I serialize a ALL ELEMENT TYPES KEYED graph schema THEN the system SHALL preserve the constraint information and all key label set definitions### Req
+uirement 48
+
+**User Story:** As a developer working with keyed element types, I want to understand the precise key inheritance semantics between content types and element types, so that I can properly design edge types that include endpoint identity for unique identification.
+
+#### Acceptance Criteria
+
+1. WHEN I define a node type (CTN1) with content type CTN1 THEN the system SHALL ensure that TK((CTN1)) = TK(CTN1), meaning the node type key is inherited directly from its content type key
+2. WHEN I define an edge type (CTNTail)-[CTARC]->(CTNHead) THEN the system SHALL ensure that TK((CTNTail)-[CTARC]->(CTNHead)) = TK(CTARC), meaning the edge type key comes from the arc content type
+3. WHEN I work with edge type uniqueness THEN the system SHALL require that the arc content type CTARC includes the identity of head and tail endpoint nodes in its key if the type key should identify a single edge type rather than a set of edge types with common arc content
+4. WHEN I define arc content types for edges THEN the system SHALL allow the arc content type key to reference or include information about the endpoint node types to ensure edge type uniqueness
+5. WHEN I work with edge types that share arc content structure THEN the system SHALL recognize that without endpoint identity in the arc content type key, multiple edge types may not be uniquely distinguished
+6. WHEN I design edge type keys THEN the system SHALL provide mechanisms to include endpoint type information in the arc content type key to achieve proper edge type disambiguation
+7. WHEN I validate edge type keys THEN the system SHALL ensure that TK(CTARC) provides sufficient information to uniquely identify the edge type within the graph schema
+8. WHEN I work with the mathematical relationship THEN the system SHALL maintain that TK(CTARC) ⊆ L(CTARC), where the arc content type's key is a subset of its label types
+9. WHEN I analyze edge type identity THEN the system SHALL distinguish between arc content type identity (which may be shared) and edge type identity (which must be unique when ALL ELEMENT TYPES KEYED is enforced)
+10. WHEN I serialize edge type definitions THEN the system SHALL preserve the relationship between edge type keys and their arc content type keys including any endpoint identity information
+11. WHEN I work with complex edge schemas THEN the system SHALL support arc content types that incorporate endpoint type information as part of their key label structure
+12. WHEN I design graph schemas with multiple edge types THEN the system SHALL ensure that edge type keys provide unambiguous identification even when edge types share similar arc content structures

@@ -1,0 +1,22 @@
+# Requirements for Grasch Functional Test
+# 
+# Note: This is a mock implementation for demonstration purposes.
+# The actual Grasch library would have these dependencies:
+
+# Core dependencies for the actual Grasch library:
+# kuzu>=0.0.8              # Embedded graph database
+# pydantic>=2.0.0          # Data validation and settings management
+# pyarrow>=12.0.0          # Arrow schema support for tabular representations
+# jsonschema>=4.0.0        # JSON Schema validation
+# pyyaml>=6.0.0            # YAML serialization support
+# typing-extensions>=4.0.0 # Enhanced type annotations
+
+# Development and testing dependencies:
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=23.0.0
+mypy>=1.0.0
+ruff>=0.0.280
+
+# For this mock demonstration:
+# No external dependencies required - uses only Python standard library
