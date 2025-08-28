@@ -48,28 +48,28 @@ def create_session_config() -> SessionConfiguration:
 def create_content_types():
     """Define content record types for the graph"""
     # Person content type
-    person_content = ContentRecordTypeBuilder("PersonContent") \
+    person_content = ContentRecordTypeBuilder() \
         .add_label_type(LabelType("Person")) \
         .add_property_type(PropertyType("name", "STRING", not_null=True)) \
         .add_property_type(PropertyType("age", "INTEGER")) \
         .add_property_type(PropertyType("email", "STRING")) \
-        .set_type_key([LabelType("Person")]) \
+        .add_type_name("Person") \
         .create()
     
     # Company content type
-    company_content = ContentRecordTypeBuilder("CompanyContent") \
+    company_content = ContentRecordTypeBuilder() \
         .add_label_type(LabelType("Company")) \
         .add_property_type(PropertyType("name", "STRING", not_null=True)) \
         .add_property_type(PropertyType("industry", "STRING")) \
-        .set_type_key([LabelType("Company")]) \
+        .add_type_name("Company") \
         .create()
     
     # Employment relationship content type
-    employment_content = ContentRecordTypeBuilder("EmploymentContent") \
+    employment_content = ContentRecordTypeBuilder() \
         .add_label_type(LabelType("WORKS_FOR")) \
         .add_property_type(PropertyType("position", "STRING")) \
         .add_property_type(PropertyType("start_date", "DATE")) \
-        .set_type_key([LabelType("WORKS_FOR")]) \
+        .add_type_name("WORKS_FOR") \
         .create()
     
     return {

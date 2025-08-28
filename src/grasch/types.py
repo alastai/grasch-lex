@@ -30,20 +30,37 @@ class PropertyType(AttributeType):
 
 class ContentRecordType:
     """Hierarchical record structure with label types and property structure"""
-    def __init__(self, name: str, label_types: List[LabelType], property_types: List[PropertyType], type_key: Optional[List[LabelType]] = None):
-        self.name = name
+    def __init__(self, label_types: List[LabelType], property_types: List[PropertyType], type_identifier: Optional[List[str]] = None):
         self.label_types = tuple(label_types)  # Make immutable tuple
         self.property_types = tuple(property_types)  # Make immutable tuple
-        self.type_key = tuple(type_key) if type_key else None
+        self._type_identifier = tuple(type_identifier) if type_identifier else tuple()
+    
+    @property
+    def name(self) -> Optional[str]:
+        """Return the pseudo-name if type identifier is a singleton set, None otherwise"""
+        if len(self._type_identifier) == 1:
+            return self._type_identifier[0]
+        return None
+    
+    @property
+    def identifier(self) -> List[str]:
+        """Return the type identifier as a list of label identifiers"""
+        return list(self._type_identifier)
+    
+    @property
+    def type_key(self) -> Optional[List[LabelType]]:
+        """Backward compatibility: return LabelType objects for the type identifier"""
+        if self._type_identifier:
+            return [LabelType(label_id) for label_id in self._type_identifier]
+        return None
 
 
 class ContentRecordTypeBuilder:
     """Builder for ContentRecordType instances"""
-    def __init__(self, name: str):
-        self.name = name
+    def __init__(self):
         self._label_types: List[LabelType] = []
         self._property_types: List[PropertyType] = []
-        self._type_key: Optional[List[LabelType]] = None
+        self._type_identifier: Optional[List[str]] = None
     
     def add_label_type(self, label_type: LabelType) -> 'ContentRecordTypeBuilder':
         """Add a label type and return self for chaining"""
@@ -55,14 +72,31 @@ class ContentRecordTypeBuilder:
         self._property_types.append(property_type)
         return self
     
-    def set_type_key(self, key_labels: List[LabelType]) -> 'ContentRecordTypeBuilder':
-        """Set the type key and return self for chaining"""
-        self._type_key = key_labels
+    def add_type_name(self, type_name: str) -> 'ContentRecordTypeBuilder':
+        """Add a single type name (convenience method for singleton type identifier)"""
+        return self.add_type_identifier([type_name])
+    
+    def add_type_identifier(self, type_identifier: List[str]) -> 'ContentRecordTypeBuilder':
+        """Set the type identifier (key label set as strings)"""
+        self._type_identifier = type_identifier
         return self
+    
+    def add_type_key(self, type_identifier: List[str]) -> 'ContentRecordTypeBuilder':
+        """Synonym for add_type_identifier"""
+        return self.add_type_identifier(type_identifier)
+    
+    def add_type_key_label_set(self, type_identifier: List[str]) -> 'ContentRecordTypeBuilder':
+        """Synonym for add_type_identifier"""
+        return self.add_type_identifier(type_identifier)
+    
+    def set_type_key(self, key_labels: List[LabelType]) -> 'ContentRecordTypeBuilder':
+        """Backward compatibility: convert LabelType objects to string identifiers"""
+        type_identifier = [label.name for label in key_labels]
+        return self.add_type_identifier(type_identifier)
     
     def create(self) -> ContentRecordType:
         """Create and return the ContentRecordType instance"""
-        return ContentRecordType(self.name, self._label_types, self._property_types, self._type_key)
+        return ContentRecordType(self._label_types, self._property_types, self._type_identifier)
 
 
 # Alias for clarity in ElementType context
@@ -85,8 +119,9 @@ class ElementType(ABC):
 class NodeType(ElementType):
     """Node type based on content record type"""
     def __init__(self, content_type: ContentRecordType):
-        # NodeType name is derived from content type, no user input needed
-        super().__init__(content_type.name, content_type)
+        # NodeType name is derived from content type pseudo-name, or first identifier if available
+        node_name = content_type.name or (content_type.identifier[0] if content_type.identifier else "UnnamedNode")
+        super().__init__(node_name, content_type)
         self.content_type = content_type  # Keep for backward compatibility
     
     def get_element_kind(self) -> str:

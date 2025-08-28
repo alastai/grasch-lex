@@ -55,28 +55,28 @@ class TestGraschFunctional:
     def create_content_types(self):
         """Define content record types for the graph"""
         # Person content type
-        person_content = ContentRecordTypeBuilder("PersonContent") \
+        person_content = ContentRecordTypeBuilder() \
             .add_label_type(LabelType("Person")) \
             .add_property_type(PropertyType("name", "STRING", not_null=True)) \
             .add_property_type(PropertyType("age", "INTEGER")) \
             .add_property_type(PropertyType("email", "STRING")) \
-            .set_type_key([LabelType("Person")]) \
+            .add_type_name("Person") \
             .create()
         
         # Company content type
-        company_content = ContentRecordTypeBuilder("CompanyContent") \
+        company_content = ContentRecordTypeBuilder() \
             .add_label_type(LabelType("Company")) \
             .add_property_type(PropertyType("name", "STRING", not_null=True)) \
             .add_property_type(PropertyType("industry", "STRING")) \
-            .set_type_key([LabelType("Company")]) \
+            .add_type_name("Company") \
             .create()
         
         # Employment relationship content type
-        employment_content = ContentRecordTypeBuilder("EmploymentContent") \
+        employment_content = ContentRecordTypeBuilder() \
             .add_label_type(LabelType("WORKS_FOR")) \
             .add_property_type(PropertyType("position", "STRING")) \
             .add_property_type(PropertyType("start_date", "DATE")) \
-            .set_type_key([LabelType("WORKS_FOR")]) \
+            .add_type_name("WORKS_FOR") \
             .create()
         
         return {
@@ -250,10 +250,10 @@ class TestGraschFunctional:
         assert len(person_content.property_types) == 3
         assert person_content.label_types[0].datatype == "LABEL_TYPE"
         
-        # Test type key relationships
-        assert person_content.type_key is not None
-        assert len(person_content.type_key) == 1
-        assert person_content.type_key[0].name == "Person"
+        # Test type identifier relationships
+        assert person_content.name == "Person"
+        assert person_content.identifier == ["Person"]
+        assert len(person_content.identifier) == 1
         
         print("   ✓ Unified attribute type model validated")
         print("   ✓ Type key inheritance relationships verified")
@@ -339,10 +339,13 @@ def run_functional_test():
         
         # Verify content types
         assert len(content_types) == 3
-        assert content_types["person"].type_key is not None
-        assert content_types["company"].type_key is not None
-        assert content_types["employment"].type_key is not None
-        print("   ✓ Content record types with type keys defined")
+        assert content_types["person"].name == "Person"
+        assert content_types["company"].name == "Company"
+        assert content_types["employment"].name == "WORKS_FOR"
+        assert content_types["person"].identifier == ["Person"]
+        assert content_types["company"].identifier == ["Company"]
+        assert content_types["employment"].identifier == ["WORKS_FOR"]
+        print("   ✓ Content record types with type identifiers defined")
         
         # Step 3: Create graph schema with constraints
         print("\n3. Creating graph type with LEX constraints...")
