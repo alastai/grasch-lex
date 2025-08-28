@@ -46,8 +46,10 @@ class TestGraschFunctional:
         return SessionConfiguration(
             profile=full_profile,
             language_level=LanguageLevel.LEX,
+            catalog_root="file:.",
             default_catalog_path="/",
-            json_schema_processor="default"
+            nested_record_schema_processor_type="JSON Schema",
+            nested_record_schema_processor="default"
         )
     
     def create_content_types(self) -> Dict[str, ContentRecordType]:
@@ -301,7 +303,8 @@ def run_functional_test():
             profile=full_profile,
             language_level=LanguageLevel.LEX,
             default_catalog_path="/",
-            json_schema_processor="default"
+            nested_record_schema_processor_type="JSON Schema",
+            nested_record_schema_processor="default"
         )
         
         # Initialize Grasch session
