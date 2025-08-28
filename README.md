@@ -1,4 +1,6 @@
-# Grasch - GQL Catalog and LEX-2026 Schema Library
+# Grasch
+
+*Testing auto commit hook* - GQL Catalog and LEX-2026 Schema Library
 
 Grasch is a Python library that implements a GQL (Graph Query Language) Catalog according to the GQL specification, extended with LEX-2026 (LDBC Extended GQL Schema) capabilities.
 
