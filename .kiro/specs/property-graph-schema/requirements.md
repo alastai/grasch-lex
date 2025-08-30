@@ -1329,6 +1329,25 @@ Analysis:
 4. WHEN I analyze mixed mandatory/optional conflicts THEN the system SHALL recognize that incompatible optional properties can block spectral subtyping even when mandatory relationships exist
 5. WHEN I compare spectral typing to simple subtyping THEN the system SHALL acknowledge that optionality creates scenarios where the two approaches yield different results
 
+## Requirement 50
+
+**User Story:** As a developer working with edge type subtyping, I want to understand the orientation constraints that differ between GQL and LEX language levels, so that I can properly define edge subtype relationships according to the appropriate standard.
+
+#### Acceptance Criteria
+
+1. WHEN I work with GQL language level edge subtyping set est(<:) tet THEN the system SHALL require that both set and tet have the same orientation (both directed or both undirected)
+2. WHEN I define directed edge subtyping in GQL THEN the system SHALL require that both set and tet have the same direction (both run from first endpoint to second endpoint, or both run from second endpoint to first endpoint)
+3. WHEN I define undirected edge subtyping in GQL THEN the system SHALL require that both set and tet are undirected
+4. WHEN I attempt to create GQL edge subtyping between directed and undirected edge types THEN the system SHALL reject the operation with a clear error message indicating orientation mismatch
+5. WHEN I work with LEX language level edge subtyping set est(<:) tet THEN the system SHALL allow more flexible orientation rules
+6. WHEN I define LEX edge subtyping where tet is undirected THEN the system SHALL allow set to be either directed or undirected
+7. WHEN I define LEX edge subtyping where tet is directed THEN the system SHALL require set to be directed with the same direction (maintaining GQL compatibility for this case)
+8. WHEN I validate edge subtype relationships THEN the system SHALL apply the appropriate orientation rules based on the current language level (GQL or LEX)
+9. WHEN I work with mixed orientation scenarios in LEX THEN the system SHALL recognize that a directed edge type can be a subtype of an undirected edge type (directed is more specific than undirected)
+10. WHEN I serialize edge type hierarchies THEN the system SHALL preserve orientation information and subtype relationships according to the language level rules
+11. WHEN I switch between GQL and LEX language levels THEN the system SHALL validate that existing edge subtype relationships comply with the target language level's orientation constraints
+12. WHEN I document edge subtyping rules THEN the system SHALL clearly distinguish between GQL's strict orientation matching and LEX's relaxed rules for undirected supertypes
+
 <!-
 - Test comment added to trigger Agent Hook at $(date) --><!-- 
 Hook test - $(date) -->
