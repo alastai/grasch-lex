@@ -1251,6 +1251,84 @@ uirement 48
 10. WHEN I serialize edge type definitions THEN the system SHALL preserve the relationship between edge type keys and their arc content type keys including any endpoint identity information
 11. WHEN I work with complex edge schemas THEN the system SHALL support arc content types that incorporate endpoint type information as part of their key label structure
 12. WHEN I design graph schemas with multiple edge types THEN the system SHALL ensure that edge type keys provide unambiguous identification even when edge types share similar arc content structures
+
+## Requirement 49 (Provisional)
+
+**User Story:** As a developer working with spectral subtyping, I want to understand when spectral subtyping does NOT apply between content types, so that I can correctly identify cases where types are related but do not have subtype relationships.
+
+#### Acceptance Criteria
+
+**Context**: 
+- Labels are always mandatory (in mcrt)
+- Property TYPED datatype NOT NULL: mandatory (in mcrt)
+- Property TYPED datatype (nullable): optional (in ccrt but not mcrt)
+- Spectral subtyping: scrt sst(<:) tcrt iff mcrt(scrt) <: mcrt(tcrt) AND ccrt(scrt) <: ccrt(tcrt)
+
+**Counterexample Cases**:
+
+**Case 1: Asymmetric Spectral Subtyping Failure**
+```
+:CT1 => Person, name TYPED STRING NOT NULL, age TYPED INT, email TYPED STRING
+
+mcrt(CT1) = {Person, name TYPED STRING NOT NULL}
+ccrt(CT1) = {Person, name TYPED STRING NOT NULL, age TYPED INT, email TYPED STRING}
+
+:CT2 => Person, name TYPED STRING NOT NULL, employee_id TYPED STRING NOT NULL, department TYPED STRING
+
+mcrt(CT2) = {Person, name TYPED STRING NOT NULL, employee_id TYPED STRING NOT NULL}
+ccrt(CT2) = {Person, name TYPED STRING NOT NULL, employee_id TYPED STRING NOT NULL, department TYPED STRING}
+```
+
+Analysis:
+- mcrt(CT1) ⊂ mcrt(CT2) ✓ ({Person, name TYPED STRING NOT NULL} ⊂ {Person, name TYPED STRING NOT NULL, employee_id TYPED STRING NOT NULL})
+- ccrt(CT1) ⊄ ccrt(CT2) ✗ (age TYPED INT, email TYPED STRING not in CT2)
+- Result: CT1 sst(<:) CT2 fails despite mandatory subset relationship
+
+**Case 2: Conflicting Optional Property Extensions**
+```
+:CT1 => Student, name TYPED STRING NOT NULL, gpa TYPED FLOAT, major TYPED STRING
+
+mcrt(CT1) = {Student, name TYPED STRING NOT NULL}
+ccrt(CT1) = {Student, name TYPED STRING NOT NULL, gpa TYPED FLOAT, major TYPED STRING}
+
+:CT2 => Student, name TYPED STRING NOT NULL, graduation_year TYPED INT, advisor TYPED STRING
+
+mcrt(CT2) = {Student, name TYPED STRING NOT NULL}
+ccrt(CT2) = {Student, name TYPED STRING NOT NULL, graduation_year TYPED INT, advisor TYPED STRING}
+```
+
+Analysis:
+- mcrt(CT1) = mcrt(CT2) ✓ (same mandatory parts)
+- ccrt(CT1) ⊄ ccrt(CT2) ✗ (gpa TYPED FLOAT, major TYPED STRING not in CT2)
+- ccrt(CT2) ⊄ ccrt(CT1) ✗ (graduation_year TYPED INT, advisor TYPED STRING not in CT1)
+- Result: Equal mandatory parts but disjoint optional extensions prevent spectral subtyping
+
+**Case 3: Mixed Mandatory/Optional Conflict**
+```
+:CT1 => Vehicle, make TYPED STRING NOT NULL, model TYPED STRING, year TYPED INT
+
+mcrt(CT1) = {Vehicle, make TYPED STRING NOT NULL}
+ccrt(CT1) = {Vehicle, make TYPED STRING NOT NULL, model TYPED STRING, year TYPED INT}
+
+:CT2 => Vehicle, make TYPED STRING NOT NULL, engine_type TYPED STRING NOT NULL, doors TYPED INT
+
+mcrt(CT2) = {Vehicle, make TYPED STRING NOT NULL, engine_type TYPED STRING NOT NULL}
+ccrt(CT2) = {Vehicle, make TYPED STRING NOT NULL, engine_type TYPED STRING NOT NULL, doors TYPED INT}
+```
+
+Analysis:
+- mcrt(CT1) ⊂ mcrt(CT2) ✓ ({Vehicle, make TYPED STRING NOT NULL} ⊂ {Vehicle, make TYPED STRING NOT NULL, engine_type TYPED STRING NOT NULL})
+- ccrt(CT1) ⊄ ccrt(CT2) ✗ (model TYPED STRING, year TYPED INT not in CT2)
+- Result: Spectral subtyping fails because optional properties in CT1 are incompatible with CT2
+
+**Key Insight**: Optionality creates spectral typing scenarios where simple subtyping (if everything were mandatory) would behave differently. The mandatory/complete decomposition reveals incompatibilities that wouldn't exist in a purely mandatory system.
+
+1. WHEN I analyze spectral subtyping relationships THEN the system SHALL require BOTH mcrt(scrt) <: mcrt(tcrt) AND ccrt(scrt) <: ccrt(tcrt) to establish scrt sst(<:) tcrt
+2. WHEN I encounter asymmetric mandatory relationships THEN the system SHALL recognize that mcrt subset relationships alone are insufficient for spectral subtyping
+3. WHEN I work with conflicting optional extensions THEN the system SHALL identify that equal mandatory parts with disjoint optional parts prevent spectral subtyping
+4. WHEN I analyze mixed mandatory/optional conflicts THEN the system SHALL recognize that incompatible optional properties can block spectral subtyping even when mandatory relationships exist
+5. WHEN I compare spectral typing to simple subtyping THEN the system SHALL acknowledge that optionality creates scenarios where the two approaches yield different results
+
 <!-
 - Test comment added to trigger Agent Hook at $(date) --><!-- 
 Hook test - $(date) -->
