@@ -52,64 +52,64 @@ class TestGraschFunctional:
             nested_record_schema_processor="default"
         )
     
-    def create_content_types(self):
+    def createContentTypes(self):
         """Define content record types for the graph"""
         # Person content type
-        person_content = ContentRecordTypeBuilder() \
-            .add_label("Person") \
-            .add_property_type(PropertyType("name", "STRING", not_null=True)) \
-            .add_property_type(PropertyType("age", "INTEGER")) \
-            .add_property_type(PropertyType("email", "STRING")) \
-            .add_type_name("Person") \
+        personContent = ContentRecordTypeBuilder() \
+            .addLabel("Person") \
+            .addPropertyType(PropertyType("name", "STRING", nullable=False)) \
+            .addPropertyType(PropertyType("age", "INTEGER")) \
+            .addPropertyType(PropertyType("email", "STRING")) \
+            .addTypeName("Person") \
             .create()
         
         # Company content type
-        company_content = ContentRecordTypeBuilder() \
-            .add_label("Company") \
-            .add_property_type(PropertyType("name", "STRING", not_null=True)) \
-            .add_property_type(PropertyType("industry", "STRING")) \
-            .add_type_name("Company") \
+        companyContent = ContentRecordTypeBuilder() \
+            .addLabel("Company") \
+            .addPropertyType(PropertyType("name", "STRING", nullable=False)) \
+            .addPropertyType(PropertyType("industry", "STRING")) \
+            .addTypeName("Company") \
             .create()
         
         # Employment relationship content type
-        employment_content = ContentRecordTypeBuilder() \
-            .add_label("WORKS_FOR") \
-            .add_property_type(PropertyType("position", "STRING")) \
-            .add_property_type(PropertyType("start_date", "DATE")) \
-            .add_type_name("WORKS_FOR") \
+        employmentContent = ContentRecordTypeBuilder() \
+            .addLabel("WORKS_FOR") \
+            .addPropertyType(PropertyType("position", "STRING")) \
+            .addPropertyType(PropertyType("startDate", "DATE")) \
+            .addTypeName("WORKS_FOR") \
             .create()
         
         return {
-            "person": person_content,
-            "company": company_content,
-            "employment": employment_content
+            "person": personContent,
+            "company": companyContent,
+            "employment": employmentContent
         }
     
-    def create_graph_schema(self, content_types) -> GraphType:
+    def createGraphSchema(self, contentTypes) -> GraphType:
         """Create a graph type with ALL ELEMENT TYPES KEYED constraint"""
         # Create element types using builders
-        person_node_type = NodeTypeBuilder(content_types["person"]).create()
-        company_node_type = NodeTypeBuilder(content_types["company"]).create()
+        personNodeType = NodeTypeBuilder(contentTypes["person"]).create()
+        companyNodeType = NodeTypeBuilder(contentTypes["company"]).create()
         
-        works_for_edge_type = EdgeType(
+        worksForEdgeType = EdgeType(
             "WORKS_FOR",
-            person_node_type,
-            company_node_type,
-            content_types["employment"]
+            personNodeType,
+            companyNodeType,
+            contentTypes["employment"]
         )
         
         # Create graph type with ALL ELEMENT TYPES KEYED constraint
-        graph_type = GraphType("EmployeeGraph", all_element_types_keyed=True)
-        graph_type.add_node_type(person_node_type)
-        graph_type.add_node_type(company_node_type)
-        graph_type.add_edge_type(works_for_edge_type)
+        graphType = GraphType("EmployeeGraph", allElementTypesKeyed=True)
+        graphType.addNodeType(personNodeType)
+        graphType.addNodeType(companyNodeType)
+        graphType.addEdgeType(worksForEdgeType)
         
         # Add key constraints (required by ALL ELEMENT TYPES KEYED)
-        graph_type.add_constraint(KeyConstraint("Person", ["Person"]))
-        graph_type.add_constraint(KeyConstraint("Company", ["Company"]))
-        graph_type.add_constraint(KeyConstraint("WORKS_FOR", ["WORKS_FOR"]))
+        graphType.addConstraint(KeyConstraint("Person", ["Person"]))
+        graphType.addConstraint(KeyConstraint("Company", ["Company"]))
+        graphType.addConstraint(KeyConstraint("WORKS_FOR", ["WORKS_FOR"]))
         
-        return graph_type
+        return graphType
     
     def create_and_populate_graph(self, graph_type: GraphType) -> Graph:
         """Create a graph instance and populate it with data"""
