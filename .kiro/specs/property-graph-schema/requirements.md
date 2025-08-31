@@ -1389,7 +1389,7 @@ classDiagram
     GQL --|> LEX : "is subset of"
     PGQ --|> LEX : "is subset of"  
     GSQL_NEO --|> GQL : "is subset of"
-    GQL -.-> PGQ : "is structural superset of"
+    PGQ --|> GQL : "is structural subset of"
     
     note for GQL "GQL is structural superset of PGQ\nbut PGQ has key constraints\nnot present in GQL"
 ```
