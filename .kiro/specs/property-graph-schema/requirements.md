@@ -1348,6 +1348,89 @@ Analysis:
 11. WHEN I switch between GQL and LEX language levels THEN the system SHALL validate that existing edge subtype relationships comply with the target language level's orientation constraints
 12. WHEN I document edge subtyping rules THEN the system SHALL clearly distinguish between GQL's strict orientation matching and LEX's relaxed rules for undirected supertypes
 
+## Requirement 51
+
+**User Story:** As a developer working with diverse property graph systems, I want Grasch to support a four-language dependency graph that covers the major property graph schema capabilities, so that I can emulate the schema systems most widely used in the industry while having LEX as the sink node with maximum capability.
+
+#### Acceptance Criteria
+
+**Language Dependency Graph Structure:**
+
+```mermaid
+classDiagram
+    class LEX {
+        <<Language>>
+        +dataModel: Capability
+        +structure: Capability  
+        +constraints: Capability
+    }
+    
+    class GQL {
+        <<Language>>
+        +dataModel: Capability
+        +structure: Capability
+        +constraints: Capability
+    }
+    
+    class PGQ {
+        <<Language>>
+        +dataModel: Capability
+        +structure: Capability
+        +constraints: Capability
+    }
+    
+    class GSQL_NEO {
+        <<Language>>
+        +dataModel: Capability
+        +structure: Capability
+        +constraints: Capability
+    }
+    
+    GQL --|> LEX : "is subset of"
+    PGQ --|> LEX : "is subset of"  
+    GSQL_NEO --|> GQL : "is subset of"
+    GQL -.-> PGQ : "is structural superset of"
+    
+    note for GQL "GQL is structural superset of PGQ\nbut PGQ has key constraints\nnot present in GQL"
+```
+
+**Dependency Relationships:**
+
+1. WHEN I work with the dependency graph THEN the system SHALL recognize LEX as the sink node with maximum capabilities
+2. WHEN I analyze subset relationships THEN the system SHALL enforce that GQL ⊂ LEX (GQL is subset of LEX)
+3. WHEN I analyze subset relationships THEN the system SHALL enforce that PGQ ⊂ LEX (PGQ is subset of LEX)
+4. WHEN I analyze subset relationships THEN the system SHALL enforce that GSQL/NEO ⊂ GQL (GSQL/NEO is subset of GQL)
+5. WHEN I work with structural relationships THEN the system SHALL recognize that GQL is a structural superset of PGQ (GQL ⊃ PGQ structurally)
+6. WHEN I analyze constraint capabilities THEN the system SHALL acknowledge that PGQ has key constraints that are not present in GQL
+7. WHEN I work with the dependency graph THEN the system SHALL NOT treat this as a linear hierarchy but as a directed acyclic graph with LEX as the sink
+
+**Language-Specific Capabilities:**
+
+8. **LEX (Sink Node)**:
+   - WHEN I use LEX THEN the system SHALL provide maximum dataModel, structure, and constraints capabilities
+   - WHEN I work with LEX THEN the system SHALL support all features from GQL and PGQ plus LEX-specific extensions
+
+9. **GQL (Structural Superset of PGQ)**:
+   - WHEN I use GQL THEN the system SHALL provide ISO GQL standard compliance with comprehensive structural capabilities
+   - WHEN I compare GQL to PGQ THEN the system SHALL recognize GQL as structurally more capable but lacking some PGQ constraint features
+
+10. **PGQ (Constraint-Rich Subset)**:
+    - WHEN I use PGQ THEN the system SHALL provide SQL:2023 Property Graph Query capabilities with specialized constraint features
+    - WHEN I work with PGQ THEN the system SHALL support key constraints not available in GQL
+    - WHEN I analyze PGQ constraints THEN the system SHALL recognize capabilities that complement GQL's structural features
+
+11. **GSQL/NEO (Base Capabilities)**:
+    - WHEN I use GSQL/NEO THEN the system SHALL provide basic property graph schema capabilities as found in early graph database systems
+    - WHEN I work with GSQL/NEO THEN the system SHALL emulate Neo4j-style and similar basic graph schema approaches
+
+**Dependency Graph Validation:**
+
+12. WHEN I configure a session with any language level THEN the system SHALL validate compatibility based on the dependency graph relationships
+13. WHEN I attempt to use features not available in the selected language THEN the system SHALL provide clear error messages referencing the dependency graph
+14. WHEN I switch between languages THEN the system SHALL validate schema compatibility according to the subset and structural relationships
+15. WHEN I work with cross-language compatibility THEN the system SHALL handle the asymmetric relationship between GQL and PGQ (structural vs constraint capabilities)
+16. WHEN I serialize schemas THEN the system SHALL preserve dependency graph positioning and validate relationships during deserialization
+
 <!-
 - Test comment added to trigger Agent Hook at $(date) --><!-- 
 Hook test - $(date) -->
