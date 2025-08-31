@@ -47,3 +47,36 @@
   - Test IRI validation with valid and invalid schemes
   - Test path combination logic with various relative paths
   - _Requirements: 5.20, 5.21, 5.22, 5.23, 5.24, 5.25, 5.26, 5.27_
+
+- [ ] 9. Research and evaluate EERM/FCA design tools
+  - Research open-source tools that support Extended Entity-Relationship Modeling (EERM) with subtyping/subclassing
+  - Evaluate tools that support Formal Concept Analysis (FCA) for lattice-based modeling
+  - Identify tools that support attributes on both entities and relationships
+  - Test import/export capabilities and file formats for selected tools
+  - Document findings and recommend best tool for EERM-to-LEX transformation prototype
+  - _Requirements: 52.14, 52.15, 52.16, 52.17_
+
+- [ ] 10. Replace Kuzu mock with actual Kuzu embedded database
+  - Remove kuzu_mock.py and replace with actual Kuzu Python library integration
+  - Implement KuzuDatabaseClient class that uses real Kuzu embedded database
+  - Update all catalog and schema storage operations to use actual Kuzu database files
+  - Implement proper transaction handling and error management for Kuzu operations
+  - Update tests to work with real Kuzu databases instead of mock objects
+  - _Requirements: 11.1, 11.2, 11.8, 11.9, 53.1, 53.2, 53.3, 53.4, 53.5_
+
+- [ ] 11. Implement pluggable graph database architecture
+  - Create IGraphDatabaseClient interface for abstracting database operations
+  - Implement KuzuEmbeddedClient as the default implementation
+  - Design database client factory for selecting appropriate client based on configuration
+  - Add support for Bolt driver connections to external graph databases
+  - Implement connection string parsing and validation for different database types
+  - _Requirements: 53.6, 53.7, 53.8, 53.9, 53.10, 53.11, 53.12, 53.20, 53.21, 53.22_
+
+- [ ] 12. Create EERM-to-LEX transformation prototype
+  - Implement basic EERM model parser for selected tool format
+  - Create transformation engine that maps EERM entities to LEX node types
+  - Implement relationship mapping from EERM relationships to LEX edge types
+  - Add support for EERM generalization/specialization hierarchies to content type lattices
+  - Generate LEX schema output with proper subtyping relationships
+  - Create validation and testing framework for transformation accuracy
+  - _Requirements: 52.8, 52.9, 52.10, 52.11, 52.19, 52.20, 52.21_

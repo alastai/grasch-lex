@@ -1431,6 +1431,169 @@ classDiagram
 15. WHEN I work with cross-language compatibility THEN the system SHALL handle the asymmetric relationship between GQL and PGQ (structural vs constraint capabilities)
 16. WHEN I serialize schemas THEN the system SHALL preserve dependency graph positioning and validate relationships during deserialization
 
+## Requirement 52
+
+**User Story:** As a conceptual data modeler, I want Grasch to support transformation from Extended Entity-Relationship Models (EERM) to LEX schemas, so that I can leverage established conceptual modeling practices and tools to generate property graph schemas with proper subtyping relationships.
+
+#### Acceptance Criteria
+
+**EERM to LEX Correspondence:**
+
+1. WHEN I work with conceptual data modeling THEN the system SHALL recognize the fundamental correspondence between Extended Entity-Relationship Models (EERM) and LEX property graph schemas
+2. WHEN I analyze the data model correspondence THEN the system SHALL acknowledge that property graphs are very similar to Chen ERM data models
+3. WHEN I work with LEX subtyping THEN the system SHALL recognize that attribute type subsetting (based on Formal Concept Analysis) provides the key capability of Extended ERM generalization/specialization
+4. WHEN I define EERM entities THEN the system SHALL map them to LEX node types with corresponding content record types
+5. WHEN I define EERM relationships THEN the system SHALL map them to LEX edge types with content record types that can include attributes on the relationships themselves
+6. WHEN I define EERM generalization/specialization hierarchies THEN the system SHALL map them to LEX subtyping relationships within content type lattices
+7. WHEN I work with EERM attributes THEN the system SHALL map entity attributes to node content record properties and relationship attributes to edge content record properties
+
+**EERM Import and Transformation:**
+
+8. WHEN I import an EERM model THEN the system SHALL transform it into a LEX schema (GQL graph type with subtyping extensions)
+9. WHEN I transform EERM entities with ISA relationships THEN the system SHALL create corresponding content type lattices with proper subtype relationships
+10. WHEN I transform EERM relationships with attributes THEN the system SHALL create edge types with content record types that include the relationship attributes
+11. WHEN I process EERM cardinality constraints THEN the system SHALL translate them into appropriate LEX constraints where possible
+12. WHEN I handle EERM weak entities THEN the system SHALL create appropriate key dependencies in the LEX schema
+13. WHEN I transform EERM composite attributes THEN the system SHALL map them to nested record structures in LEX content types
+
+**Conceptual Modeling Tool Integration:**
+
+14. WHEN I work with conceptual modeling tools THEN the system SHALL support import from standard EERM modeling formats
+15. WHEN I identify suitable EERM tools THEN the system SHALL prioritize tools that support full Chen EERM including subtyping/subclassing capabilities
+16. WHEN I evaluate EERM tools THEN the system SHALL require support for attributes on both entities (nodes) and relationships (edges)
+17. WHEN I import from EERM tools THEN the system SHALL generate LEX schemas as a first pass that can be refined and extended
+18. WHEN I work with tool integration THEN the system SHALL provide clear mapping documentation from EERM concepts to LEX constructs
+
+**Schema Generation and Refinement:**
+
+19. WHEN I generate LEX schemas from EERM THEN the system SHALL create schema graphs with associated type lattices that reflect the EERM structure
+20. WHEN I refine generated schemas THEN the system SHALL allow manual adjustment of the automatically generated LEX constructs
+21. WHEN I validate EERM transformations THEN the system SHALL ensure that the semantic meaning of the conceptual model is preserved in the LEX schema
+22. WHEN I work with complex EERM models THEN the system SHALL handle multiple inheritance scenarios and complex attribute structures
+23. WHEN I generate documentation THEN the system SHALL maintain traceability between EERM concepts and their corresponding LEX implementations
+24. WHEN I iterate on conceptual models THEN the system SHALL support incremental updates to LEX schemas when the source EERM model changes
+
+**Strategic Positioning:**
+
+25. WHEN I position Grasch strategically THEN the system SHALL leverage the EERM-to-LEX correspondence to bridge traditional conceptual modeling and modern property graph schemas
+26. WHEN I work with enterprise data modeling THEN the system SHALL enable organizations to use familiar EERM practices while targeting advanced LEX capabilities
+27. WHEN I evaluate the conceptual modeling pipeline THEN the system SHALL recognize that EERM → LEX transformation provides a path from conceptual design to implementation-ready schemas
+28. WHEN I document the modeling approach THEN the system SHALL emphasize that LEX extends property graphs with the generalization/specialization capabilities that make EERM transformation natural and complete
+
+## Requirement 53
+
+**User Story:** As a developer working with diverse graph database environments, I want Grasch to use Kuzu embedded as the default "out of the box" solution while supporting any Cypher/GQL-compliant graph database as a pluggable backend, so that I can bring schema capabilities to users of any graph database system.
+
+#### Acceptance Criteria
+
+**Default Kuzu Embedded Configuration:**
+
+1. WHEN I install Grasch THEN the system SHALL use Kuzu embedded as the default "out of the box" graph database for storing catalogs and schemas
+2. WHEN I configure the default setup THEN the system SHALL use file: IRI scheme to specify local filesystem locations for Kuzu database files
+3. WHEN I work with the default configuration THEN the system SHALL require no additional database setup or external dependencies beyond Kuzu embedded
+4. WHEN I initialize a new catalog THEN the system SHALL automatically create a Kuzu embedded database at the specified file: IRI location
+5. WHEN I work with file: IRIs THEN the system SHALL support paths like "file:./my-catalog" or "file:/absolute/path/to/catalog"
+
+**Pluggable Graph Database Architecture:**
+
+6. WHEN I configure alternative graph databases THEN the system SHALL support any Cypher/GQL-compliant graph database as a substitutable backend
+7. WHEN I work with database abstraction THEN the system SHALL provide a clean interface that abstracts database-specific implementation details
+8. WHEN I switch database backends THEN the system SHALL maintain identical schema and catalog functionality regardless of the underlying database
+9. WHEN I configure external databases THEN the system SHALL support connection via Bolt drivers or other standard graph database protocols
+10. WHEN I work with database clients THEN the system SHALL provide pluggable database client implementations for different graph database systems
+
+**Database Client Interface:**
+
+11. WHEN I implement database clients THEN the system SHALL define a standard interface that all graph database backends must implement
+12. WHEN I work with the client interface THEN the system SHALL abstract operations like graph creation, node/edge insertion, querying, and transaction management
+13. WHEN I validate database compatibility THEN the system SHALL ensure that all required Cypher/GQL operations are supported by the target database
+14. WHEN I handle database-specific features THEN the system SHALL gracefully degrade or provide alternatives when advanced features are not available in the target database
+
+**Multi-Database Support Goals:**
+
+15. WHEN I position Grasch strategically THEN the system SHALL bring schema capabilities to users of any graph database system, not just Kuzu
+16. WHEN I work with enterprise environments THEN the system SHALL support existing graph database infrastructure without requiring migration to Kuzu
+17. WHEN I evaluate database options THEN the system SHALL support popular graph databases like Neo4j, Amazon Neptune, ArangoDB, and others that support Cypher/GQL
+18. WHEN I work with cloud environments THEN the system SHALL support both embedded (Kuzu) and cloud-hosted graph database services
+19. WHEN I configure for different use cases THEN the system SHALL allow users to choose between embedded simplicity (Kuzu) and enterprise scalability (external databases)
+
+**Configuration and Connection Management:**
+
+20. WHEN I configure database connections THEN the system SHALL support connection strings, authentication, and other database-specific configuration options
+21. WHEN I manage connections THEN the system SHALL provide connection pooling and error handling appropriate for each database type
+22. WHEN I work with database URIs THEN the system SHALL support various URI schemes beyond file: (such as bolt:, neo4j:, etc.)
+23. WHEN I validate configurations THEN the system SHALL test database connectivity and compatibility during initialization
+24. WHEN I handle errors THEN the system SHALL provide clear error messages when database connections fail or when incompatible databases are used
+
+## Requirement 54
+
+**User Story:** As a developer working across different graph database platforms and serialization formats, I want Grasch to provide comprehensive primitive type support with accurate mappings between GQL, SQL, Cypher, JSON, and GSQL type systems, so that I can maintain type fidelity while supporting interoperability across diverse platforms.
+
+#### Acceptance Criteria
+
+**GQL Type System Support (Primary):**
+
+1. WHEN I work with GQL datatypes THEN the system SHALL support the complete GQL primitive type system as defined in the GQL specification documents
+2. WHEN I reference GQL types THEN the system SHALL implement all GQL datatypes that map well to SQL primitive datatypes while handling GQL-specific differences
+3. WHEN I validate GQL compliance THEN the system SHALL ensure accurate implementation of GQL type semantics and constraints
+4. WHEN I work with GQL as the primary type system THEN the system SHALL treat GQL types as the authoritative source for type definitions in LEX schemas
+
+**Cross-Platform Type Mappings:**
+
+5. **Cypher Type System**:
+   - WHEN I map to Cypher types THEN the system SHALL support the simplified Cypher type system that ignores integer sign/width and float precision differences
+   - WHEN I work with Cypher strings THEN the system SHALL ignore length constraints as per Cypher semantics
+   - WHEN I handle Cypher dates THEN the system SHALL use ISO 8601 date datatypes (following Java's date standard)
+   - WHEN I reference Cypher 2025 THEN the system SHALL support the datatypes documented on the Neo4j website for Cypher 5/2025
+
+6. **JSON Type System**:
+   - WHEN I map to JSON THEN the system SHALL handle JSON's crude type system (string, number, boolean, null, object, array)
+   - WHEN I work with JSON limitations THEN the system SHALL acknowledge that JSON lacks native date support
+   - WHEN I serialize to JSON THEN the system SHALL provide appropriate string representations for types not natively supported by JSON
+
+7. **SQL Type System**:
+   - WHEN I map to SQL THEN the system SHALL support comprehensive SQL primitive datatypes with proper precision and scale handling
+   - WHEN I work with SQL types THEN the system SHALL handle the differences between GQL and SQL type systems accurately
+   - WHEN I validate SQL mappings THEN the system SHALL ensure that GQL types map appropriately to SQL equivalents
+
+8. **GSQL Type System**:
+   - WHEN I support GSQL THEN the system SHALL implement the GSQL type system as documented at tigergraph.com
+   - WHEN I map GSQL types THEN the system SHALL provide accurate bidirectional mappings between GSQL and GQL types
+
+**Bidirectional Mapping Requirements:**
+
+9. **Forward Mappings (GQL → Target Systems)**:
+   - WHEN I map GQL types to JSON THEN the system SHALL provide a mapping from each GQL datatype to an appropriate JSON representation
+   - WHEN I map GQL types to Cypher THEN the system SHALL provide a mapping from each GQL datatype to the corresponding Cypher type
+   - WHEN I map GQL types to SQL THEN the system SHALL provide a mapping from each GQL datatype to the appropriate SQL type with proper constraints
+
+10. **Reverse Mappings (Target Systems → GQL)**:
+    - WHEN I import from JSON THEN the system SHALL define default GQL types for each JSON primitive type
+    - WHEN I import from Cypher THEN the system SHALL define default GQL types for each Cypher datatype
+    - WHEN I import from SQL THEN the system SHALL define default GQL types for each SQL primitive datatype
+    - WHEN I handle reverse mapping ambiguity THEN the system SHALL provide clear rules for selecting the most appropriate GQL type
+
+**JSON Schema Extensions:**
+
+11. WHEN I work with JSON Schema THEN the system SHALL define special JSON Schema types for each GQL datatype to preserve type specificity
+12. WHEN I serialize GQL schemas to JSON Schema THEN the system SHALL use custom type definitions that maintain GQL type semantics
+13. WHEN I validate JSON data against GQL types THEN the system SHALL use the extended JSON Schema definitions to enforce GQL type constraints
+14. WHEN I round-trip through JSON Schema THEN the system SHALL preserve GQL type information without loss of specificity
+
+**Type System Documentation and Validation:**
+
+15. WHEN I document type mappings THEN the system SHALL provide comprehensive mapping tables showing relationships between all supported type systems
+16. WHEN I validate type conversions THEN the system SHALL detect and report potential data loss or precision issues during type mapping
+17. WHEN I work with type compatibility THEN the system SHALL provide clear rules for when types are compatible vs when explicit conversion is required
+18. WHEN I handle type errors THEN the system SHALL provide specific error messages indicating which type systems and specific types are involved in conflicts
+
+**Implementation Strategy:**
+
+19. WHEN I implement the type system THEN the system SHALL use GQL types as the canonical representation with mapping functions to other type systems
+20. WHEN I design the type mapping architecture THEN the system SHALL support pluggable type mappers for different target systems
+21. WHEN I handle type system evolution THEN the system SHALL support versioning of type mappings as different systems evolve their type support
+22. WHEN I optimize for performance THEN the system SHALL cache type mapping results and provide efficient type conversion operations
+
 <!-
 - Test comment added to trigger Agent Hook at $(date) --><!-- 
 Hook test - $(date) -->
