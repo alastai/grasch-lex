@@ -1350,7 +1350,7 @@ Analysis:
 
 ## Requirement 51
 
-**User Story:** As a developer working with diverse property graph systems, I want Grasch to support a four-language dependency graph that covers the major property graph schema capabilities, so that I can emulate the schema systems most widely used in the industry while having LEX as the sink node with maximum capability.
+**User Story:** As a developer working with diverse property graph systems, I want Grasch to support a five-language dependency graph that covers the major property graph schema capabilities, so that I can emulate the schema systems most widely used in the industry while having LEX as an intermediate language and sink node with maximum capability.
 
 #### Acceptance Criteria
 
@@ -1359,13 +1359,20 @@ Analysis:
 ```mermaid
 classDiagram
     class LEX {
-        <<Language>>
+        <<Intermediate Language>>
         +dataModel: Capability
         +structure: Capability  
         +constraints: Capability
     }
     
     class GQL {
+        <<Language>>
+        +dataModel: Capability
+        +structure: Capability
+        +constraints: Capability
+    }
+    
+    class PG_Schema {
         <<Language>>
         +dataModel: Capability
         +structure: Capability
@@ -1387,41 +1394,58 @@ classDiagram
     }
     
     GQL --|> LEX : "is subset of"
+    PG_Schema --|> LEX : "is subset of"
     PGQ --|> LEX : "is subset of"  
     GSQL_NEO --|> GQL : "is subset of"
     PGQ --|> GQL : "is structural subset of"
     
+    note for LEX "LEX serves as an Intermediate Language\nfor property graph schema with\nmaximum expressiveness"
     note for GQL "GQL is structural superset of PGQ\nbut PGQ has key constraints\nnot present in GQL"
 ```
 
 **Dependency Relationships:**
 
-1. WHEN I work with the dependency graph THEN the system SHALL recognize LEX as the sink node with maximum capabilities
+1. WHEN I work with the dependency graph THEN the system SHALL recognize LEX as the sink node and intermediate language with maximum capabilities
 2. WHEN I analyze subset relationships THEN the system SHALL enforce that GQL ⊂ LEX (GQL is subset of LEX)
-3. WHEN I analyze subset relationships THEN the system SHALL enforce that PGQ ⊂ LEX (PGQ is subset of LEX)
-4. WHEN I analyze subset relationships THEN the system SHALL enforce that GSQL/NEO ⊂ GQL (GSQL/NEO is subset of GQL)
-5. WHEN I work with structural relationships THEN the system SHALL recognize that GQL is a structural superset of PGQ (GQL ⊃ PGQ structurally)
-6. WHEN I analyze constraint capabilities THEN the system SHALL acknowledge that PGQ has key constraints that are not present in GQL
-7. WHEN I work with the dependency graph THEN the system SHALL NOT treat this as a linear hierarchy but as a directed acyclic graph with LEX as the sink
+3. WHEN I analyze subset relationships THEN the system SHALL enforce that PG-Schema ⊂ LEX (PG-Schema is subset of LEX)
+4. WHEN I analyze subset relationships THEN the system SHALL enforce that PGQ ⊂ LEX (PGQ is subset of LEX)
+5. WHEN I analyze subset relationships THEN the system SHALL enforce that GSQL/NEO ⊂ GQL (GSQL/NEO is subset of GQL)
+6. WHEN I work with structural relationships THEN the system SHALL recognize that GQL is a structural superset of PGQ (GQL ⊃ PGQ structurally)
+7. WHEN I analyze constraint capabilities THEN the system SHALL acknowledge that PGQ has key constraints that are not present in GQL
+8. WHEN I work with the dependency graph THEN the system SHALL NOT treat this as a linear hierarchy but as a directed acyclic graph with LEX as the sink
+9. WHEN I use LEX as an intermediate language THEN the system SHALL enable translation between different property graph schema languages through LEX as a common representation
 
 **Language-Specific Capabilities:**
 
-8. **LEX (Sink Node)**:
-   - WHEN I use LEX THEN the system SHALL provide maximum dataModel, structure, and constraints capabilities
-   - WHEN I work with LEX THEN the system SHALL support all features from GQL and PGQ plus LEX-specific extensions
+10. **LEX (Intermediate Language & Sink Node)**:
+    - WHEN I use LEX THEN the system SHALL provide maximum dataModel, structure, and constraints capabilities
+    - WHEN I work with LEX THEN the system SHALL support all features from GQL, PG-Schema, and PGQ plus LEX-specific extensions
+    - WHEN I use LEX as an intermediate language THEN the system SHALL enable bidirectional translation between supported property graph schema languages
+    - WHEN I work with LEX THEN the system SHALL provide the most expressive type system for property graph schemas
 
-9. **GQL (Structural Superset of PGQ)**:
-   - WHEN I use GQL THEN the system SHALL provide ISO GQL standard compliance with comprehensive structural capabilities
-   - WHEN I compare GQL to PGQ THEN the system SHALL recognize GQL as structurally more capable but lacking some PGQ constraint features
+11. **GQL (Structural Superset of PGQ)**:
+    - WHEN I use GQL THEN the system SHALL provide ISO GQL standard compliance with comprehensive structural capabilities
+    - WHEN I compare GQL to PGQ THEN the system SHALL recognize GQL as structurally more capable but lacking some PGQ constraint features
+    - WHEN I work with GQL THEN the system SHALL support standard graph query language schema definitions
 
-10. **PGQ (Constraint-Rich Subset)**:
+12. **PG-Schema (Parallel to GQL)**:
+    - WHEN I use PG-Schema THEN the system SHALL provide a simplified property graph schema language focused on essential graph modeling
+    - WHEN I compare PG-Schema to GQL THEN the system SHALL recognize PG-Schema as having different but complementary capabilities
+    - WHEN I work with PG-Schema THEN the system SHALL support streamlined schema definitions without the full complexity of GQL
+    - WHEN I use PG-Schema THEN the system SHALL provide a more accessible entry point for basic property graph schema modeling
+
+13. **PGQ (Constraint-Rich Subset)**:
     - WHEN I use PGQ THEN the system SHALL provide SQL:2023 Property Graph Query capabilities with specialized constraint features
     - WHEN I work with PGQ THEN the system SHALL support key constraints not available in GQL
-    - WHEN I analyze PGQ constraints THEN the system SHALL recognize capabilities that complement GQL's structural features
+    - WHEN I compare PGQ to other languages THEN the system SHALL recognize PGQ's unique constraint modeling capabilities
 
-11. **GSQL/NEO (Base Capabilities)**:
+14. **GSQL/NEO (Base Capabilities)**:
     - WHEN I use GSQL/NEO THEN the system SHALL provide basic property graph schema capabilities as found in early graph database systems
     - WHEN I work with GSQL/NEO THEN the system SHALL emulate Neo4j-style and similar basic graph schema approaches
+    - WHEN I compare GSQL/NEO to GQL THEN the system SHALL recognize GSQL/NEO as a proper subset with foundational graph modeling features
+    - WHEN I analyze PGQ constraints THEN the system SHALL recognize capabilities that complement GQL's structural features
+
+
 
 **Dependency Graph Validation:**
 
