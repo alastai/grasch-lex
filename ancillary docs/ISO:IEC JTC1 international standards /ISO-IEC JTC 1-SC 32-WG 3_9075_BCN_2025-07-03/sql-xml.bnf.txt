@@ -1,0 +1,733 @@
+
+************************************************************************************************
+This file is a "digital artifact" that contains the grammar specified by a part of ISO/IEC 9075.
+
+This grammar may be used by implementers of SQL-implementations when generating parsers for the 
+SQL language.
+************************************************************************************************
+
+<reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+        
+  | XML
+  | XMLAGG
+  | XMLATTRIBUTES
+  | XMLBINARY
+  | XMLCAST
+  | XMLCOMMENT
+  | XMLCONCAT
+        
+  | XMLDOCUMENT
+  | XMLELEMENT
+  | XMLEXISTS
+  | XMLFOREST
+  | XMLITERATE
+  | XMLNAMESPACES
+        
+  | XMLPARSE
+  | XMLPI
+  | XMLQUERY
+  | XMLSERIALIZE
+  | XMLTABLE
+  | XMLTEXT
+  | XMLVALIDATE
+
+<non-reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | ACCORDING
+  | BASE64
+  | BOM
+  | COLUMNS
+  | CONTENT
+  | DOCUMENT
+  | ENCODING
+  | HEX
+  | ID
+  | INDENT
+  | LOCATION
+  | NAMESPACE
+  | NIL
+  | PATH
+  | PRESERVE
+  | SEQUENCE
+  | STRIP
+  | UNTYPED
+  | URI
+  | VALID
+  | VERSION
+  | XMLDECLARATION
+  | XMLSCHEMA
+
+<upper-case hexit> ::=
+    <digit>
+  | A
+  | B
+  | C
+  | D
+  | E
+  | F
+
+<registered XML schema name> ::=
+    <schema qualified name>
+
+<predefined type> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <XML type>
+
+<XML type> ::=
+    XML [ <left paren> <XML type modifier> <right paren> ]
+
+<XML type modifier> ::=
+    <primary XML type modifier>
+         [ <left paren> <secondary XML type modifier> <right paren> ]
+
+<primary XML type modifier> ::=
+    DOCUMENT
+  | CONTENT
+  | SEQUENCE
+
+<secondary XML type modifier> ::=
+    ANY
+  | UNTYPED
+  | XMLSCHEMA <XML valid according to what> [ <XML valid element clause> ]
+
+<non-parenthesized value expression primary> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <XML cast specification>
+
+<target specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <SQL parameter reference> <XML passing mechanism>
+  | <column reference> <XML passing mechanism>
+  | <target array element specification> <XML passing mechanism>
+
+<when operand> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <XML content predicate part 2>
+  | <XML document predicate part 2>
+  | <XML valid predicate part 2>
+
+<cast specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | CAST <left paren> <cast operand> AS <cast target>
+         [ FORMAT <cast template> ]
+         <XML passing mechanism>
+         [ <cast error behavior> ON CONVERSION ERROR ]
+         <right paren>
+
+<XML cast specification> ::=
+    XMLCAST <left paren> <XML cast operand> AS
+         <XML cast target> [ <XML passing mechanism> ] <right paren>
+
+<XML cast operand> ::=
+    <value expression>
+  | <implicitly typed value specification>
+
+<XML cast target> ::=
+    <domain name>
+  | <data type>
+
+<common value expression> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <XML value expression>
+
+<character value function> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <XML character string serialization>
+
+<XML character string serialization> ::=
+    XMLSERIALIZE <left paren> [ <document or content> ]
+         <XML value expression> AS <data type>
+         [ <XML serialize bom> ]
+         [ <XML serialize version> ]
+         [ <XML declaration option> ]
+         [ <XML serialize indent> ]
+         <right paren>
+
+<XML serialize version> ::=
+    VERSION <character string literal>
+
+<XML serialize bom> ::=
+    WITH [ NO ] BOM
+
+<XML declaration option> ::=
+    INCLUDING XMLDECLARATION
+  | EXCLUDING XMLDECLARATION
+
+<XML serialize indent> ::=
+    [ NO ] INDENT
+
+<document or content> ::=
+    DOCUMENT
+  | CONTENT
+
+<binary value function> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <XML binary string serialization>
+
+<XML binary string serialization> ::=
+    XMLSERIALIZE <left paren> [ <document or content> ]
+         <XML value expression> AS <data type>
+         [ ENCODING <XML encoding specification> ]
+         [ <XML serialize bom> ]
+         [ <XML serialize version> ]
+         [ <XML declaration option> ]
+         [ <XML serialize indent> ]
+         <right paren>
+
+<XML encoding specification> ::=
+    <XML encoding name>
+
+<XML encoding name> ::=
+    <SQL language identifier>
+
+<XML value expression> ::=
+    <XML primary>
+
+<XML primary> ::=
+    <value expression primary>
+  | <XML value function>
+
+<XML value function> ::=
+    <XML comment>
+  | <XML concatenation>
+  | <XML document>
+  | <XML element>
+  | <XML forest>
+  | <XML parse>
+  | <XML PI>
+  | <XML query>
+  | <XML text>
+  | <XML validate>
+
+<XML comment> ::=
+    XMLCOMMENT <left paren> <character value expression>
+         [ <XML returning clause> ] <right paren>
+
+<XML concatenation> ::=
+    XMLCONCAT <left paren> <XML value expression>
+         { <comma> <XML value expression> }...
+         [ <XML returning clause> ] <right paren>
+
+<XML document> ::=
+    XMLDOCUMENT <left paren> <XML value expression>
+         [ <XML returning clause> ] <right paren>
+
+<XML element> ::=
+    XMLELEMENT <left paren> NAME <XML element name>
+         [ <comma> <XML namespace declaration> ] [ <comma> <XML attributes> ]
+         [ { <comma> <XML element content> }...
+         [ OPTION <XML content option> ] ]
+         [ <XML returning clause> ] <right paren>
+
+<XML element name> ::=
+    <identifier>
+
+<XML attributes> ::=
+    XMLATTRIBUTES <left paren> <XML attribute list> <right paren>
+
+<XML attribute list> ::=
+    <XML attribute> [ { <comma> <XML attribute> }... ]
+
+<XML attribute> ::=
+    <XML attribute value> [ AS <XML attribute name> ]
+
+<XML attribute value> ::=
+    <value expression>
+
+<XML attribute name> ::=
+    <identifier>
+
+<XML element content> ::=
+    <value expression>
+
+<XML content option> ::=
+    NULL ON NULL
+  | EMPTY ON NULL
+  | ABSENT ON NULL
+  | NIL ON NULL
+  | NIL ON NO CONTENT
+
+<XML forest> ::=
+    XMLFOREST <left paren> [ <XML namespace declaration> <comma> ]
+         <forest element list>
+         [ OPTION <XML content option> ]
+         [ <XML returning clause> ]
+         <right paren>
+
+<forest element list> ::=
+    <forest element> [ { <comma> <forest element> }... ]
+
+<forest element> ::=
+    <forest element value> [ AS <forest element name> ]
+
+<forest element value> ::=
+    <value expression>
+
+<forest element name> ::=
+    <identifier>
+
+<XML parse> ::=
+    XMLPARSE <left paren> <document or content> <string value expression>
+         <XML whitespace option> <right paren>
+
+<XML whitespace option> ::=
+    { PRESERVE
+  | STRIP } WHITESPACE
+
+<XML PI> ::=
+    XMLPI <left paren> NAME <XML PI target>
+         [ <comma> <character value expression> ]
+         [ <XML returning clause> ]
+         <right paren>
+
+<XML PI target> ::=
+    <identifier>
+
+<XML query> ::=
+    XMLQUERY <left paren>
+         <XQuery expression>
+         [ <XML query argument list> ]
+         [ <XML returning clause>
+         [ <XML query returning mechanism> ] ]
+         <XML query empty handling option>
+         <right paren>
+
+<XQuery expression> ::=
+    <character string literal>
+
+<XML query argument list> ::=
+    PASSING <XML query default passing mechanism>
+         <XML query argument>
+         [ { <comma> <XML query argument> }... ]
+
+<XML query default passing mechanism> ::=
+    <XML passing mechanism>
+
+<XML query argument> ::=
+    <XML query context item>
+  | <XML query variable>
+
+<XML query context item> ::=
+    <value expression> [ <XML passing mechanism> ]
+
+<XML query variable> ::=
+    <value expression> AS <identifier>
+         [ <XML passing mechanism> ]
+
+<XML query returning mechanism> ::=
+    <XML passing mechanism>
+
+<XML query empty handling option> ::=
+    NULL ON EMPTY
+  | EMPTY ON EMPTY
+
+<XML text> ::=
+    XMLTEXT <left paren> <character value expression>
+         [ <XML returning clause> ] <right paren>
+
+<XML validate> ::=
+    XMLVALIDATE <left paren>
+         <document or content or sequence>
+         <XML value expression>
+         [ <XML valid according to clause> ]
+         <right paren>
+
+<document or content or sequence> ::=
+    <document or content>
+  | SEQUENCE
+
+<table primary> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <XML iterate> [ AS ] <correlation name>
+         <left paren> <derived column list> <right paren>
+  | <XML table> [ AS ] <correlation name>
+         [ <left paren> <derived column list> <right paren> ]
+
+<XML iterate> ::=
+    XMLITERATE <left paren> <XML value expression> <right paren>
+
+<XML table> ::=
+    XMLTABLE <left paren>
+         [ <XML namespace declaration> <comma> ]
+         <XML table row pattern>
+         [ <XML table argument list> ]
+         COLUMNS <XML table column definitions> <right paren>
+
+<XML table row pattern> ::=
+    <character string literal>
+
+<XML table argument list> ::=
+    PASSING <XML table argument passing mechanism>
+         <XML query argument>
+         [ { <comma> <XML query argument> }... ]
+
+<XML table argument passing mechanism> ::=
+    <XML passing mechanism>
+
+<XML table column definitions> ::=
+    <XML table column definition>
+         [ { <comma> <XML table column definition> }... ]
+
+<XML table column definition> ::=
+    <XML table ordinality column definition>
+  | <XML table regular column definition>
+
+<XML table ordinality column definition> ::=
+    <column name> FOR ORDINALITY
+
+<XML table regular column definition> ::=
+    <column name> <data type> [ <XML passing mechanism> ]
+         [ <default clause> ]
+         [ PATH <XML table column pattern> ]
+
+<XML table column pattern> ::=
+    <character string literal>
+
+<with clause> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | WITH <XML lexically scoped options> [ <comma> [ RECURSIVE ] <with list> ]
+
+<predicate> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <XML content predicate>
+  | <XML document predicate>
+  | <XML exists predicate>
+  | <XML valid predicate>
+
+<XML content predicate> ::=
+    <row value predicand> <XML content predicate part 2>
+
+<XML content predicate part 2> ::=
+    IS [ NOT ] CONTENT
+
+<XML document predicate> ::=
+    <row value predicand> <XML document predicate part 2>
+
+<XML document predicate part 2> ::=
+    IS [ NOT ] DOCUMENT
+
+<XML exists predicate> ::=
+    XMLEXISTS <left paren> <XQuery expression>
+         [ <XML query argument list> ] <right paren>
+
+<XML valid predicate> ::=
+    <row value predicand> <XML valid predicate part 2>
+
+<XML valid predicate part 2> ::=
+    IS [ NOT ] VALID
+         <document or content or sequence>
+         [ <XML valid according to clause> ]
+
+<aggregate function> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <XML aggregate>
+
+<XML aggregate> ::=
+    XMLAGG <left paren> <XML value expression>
+         [ ORDER BY <sort specification list> ]
+         [ <XML returning clause> ]
+         <right paren>
+
+<XML lexically scoped options> ::=
+    <XML lexically scoped option> [ <comma> <XML lexically scoped option> ]
+
+<XML lexically scoped option> ::=
+    <XML namespace declaration>
+  | <XML binary encoding>
+
+<XML namespace declaration> ::=
+    XMLNAMESPACES <left paren> <XML namespace declaration item>
+         [ { <comma> <XML namespace declaration item> }... ] <right paren>
+
+<XML namespace declaration item> ::=
+    <XML regular namespace declaration item>
+  | <XML default namespace declaration item>
+
+<XML namespace prefix> ::=
+    <identifier>
+
+<XML namespace URI> ::=
+    <character string literal>
+
+<XML regular namespace declaration item> ::=
+    <XML namespace URI> AS <XML namespace prefix>
+
+<XML default namespace declaration item> ::=
+    DEFAULT <XML namespace URI>
+  | NO DEFAULT
+
+<XML binary encoding> ::=
+    XMLBINARY [ USING ] { BASE64
+  | HEX }
+
+<XML returning clause> ::=
+    RETURNING { CONTENT
+  | SEQUENCE }
+
+<XML passing mechanism> ::=
+    BY REF
+  | BY VALUE
+
+<XML valid according to clause> ::=
+    ACCORDING TO XMLSCHEMA <XML valid according to what>
+         [ <XML valid element clause> ]
+
+<XML valid according to what> ::=
+    <XML valid according to URI>
+  | <XML valid according to identifier>
+
+<XML valid according to URI> ::=
+    URI <XML valid target namespace URI> [ <XML valid schema location> ]
+  | NO NAMESPACE [ <XML valid schema location> ]
+
+<XML valid target namespace URI> ::=
+    <XML URI>
+
+<XML URI> ::=
+    <character string literal>
+
+<XML valid schema location> ::=
+    LOCATION <XML valid schema location URI>
+
+<XML valid schema location URI> ::=
+    <XML URI>
+
+<XML valid according to identifier> ::=
+    ID <registered XML schema name>
+
+<XML valid element clause> ::=
+    <XML valid element name specification>
+  | <XML valid element namespace specification>
+         [ <XML valid element name specification> ]
+
+<XML valid element name specification> ::=
+    ELEMENT <XML valid element name>
+
+<XML valid element namespace specification> ::=
+    NO NAMESPACE
+  | NAMESPACE <XML valid element namespace URI>
+
+<XML valid element namespace URI> ::=
+    <XML URI>
+
+<XML valid element name> ::=
+    <identifier>
+
+<generation expression> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <left paren> WITH <XML lexically scoped options>
+         <value expression> <right paren>
+
+<check constraint definition> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | CHECK <left paren> WITH <XML lexically scoped options>
+         <search condition> <right paren>
+
+<assertion definition> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | CREATE ASSERTION <constraint name>
+         CHECK <left paren> WITH <XML lexically scoped options>
+         <search condition> <right paren>
+         [ <constraint characteristics> ]
+
+<SQL parameter declaration> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | [ <parameter mode> ]
+         [ <SQL parameter name> ]
+         <parameter type>
+         [ RESULT ]
+         [ DEFAULT <parameter default> ]
+         <XML passing mechanism>
+
+<parameter type> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <data type>
+         <document or content> <string type option>
+
+<returns clause> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | RETURNS <returns type> <XML passing mechanism>
+
+<returns data type> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <data type>
+         <document or content> <string type option>
+
+<string type option> ::=
+    AS <character string type>
+
+<SQL session statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <set XML option statement>
+
+<delete statement: searched> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | DELETE WITH <XML lexically scoped options> FROM <target table>
+         [ FOR PORTION OF <application time period name>
+         FROM <point in time 1> TO <point in time 2> ]
+         [ [ AS ] <correlation name> ]
+         [ WHERE <search condition> ]
+
+<insert statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | INSERT WITH <XML lexically scoped options> INTO <insertion target>
+         <insert columns and source>
+
+<merge statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | MERGE WITH <XML lexically scoped options> INTO <target table>
+         [ [ AS ] <merge correlation name> ]
+         USING <table reference> ON <search condition>
+         <merge operation specification>
+
+<update statement: positioned> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | UPDATE WITH <XML lexically scoped options>
+         <target table> [ [ AS ] <correlation name> ]
+         SET <set clause list> WHERE CURRENT OF <cursor name>
+
+<update statement: searched> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | UPDATE WITH <XML lexically scoped options> <target table>
+         [ FOR PORTION OF <application time period name>
+         FROM <point in time 1> TO <point in time 2> ]
+         [ [ AS ] <correlation name> ]
+         SET <set clause list>
+         [ WHERE <search condition> ]
+
+<compound statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | [ <beginning label> <colon> ]
+         BEGIN [ [ NOT ] ATOMIC ]
+         DECLARE <XML lexically scoped options> <semicolon>
+         [ <local declaration list> ]
+         [ <local cursor declaration list> ]
+         [ <local handler declaration list> ]
+         [ <SQL statement list> ]
+         END [ <ending label> ]
+
+<singleton variable assignment> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | SET <assignment target> <equals operator> <assignment source>
+         <XML passing mechanism>
+
+<set XML option statement> ::=
+    SET XML OPTION <document or content>
+
+<Ada derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <Ada XML CLOB variable>
+  | <Ada XML BLOB variable>
+
+<Ada XML BLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS BLOB <left paren> <large object length> <right paren>
+
+<Ada XML CLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS CLOB <left paren> <character large object length> <right paren>
+         [ CHARACTER SET [ IS ] <character set specification> ]
+
+<C derived variable> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <C XML VARCHAR variable>
+  | <C XML CLOB variable>
+  | <C XML BLOB variable>
+
+<C XML VARCHAR variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS VARCHAR
+         [ CHARACTER SET [ IS ] <character set specification> ]
+         <C host identifier> <C array specification> [ <C initial value> ]
+         [ { <comma> <C host identifier> <C array specification> [ <C initial value> ] }... ]
+
+<C XML CLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS CLOB <left paren> <character large object length> <right paren>
+         [ CHARACTER SET [ IS ] <character set specification> ]
+         <C host identifier> [ <C initial value> ]
+         [ { <comma> <C host identifier> [ <C initial value> ] }... ]
+
+<C XML BLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS BLOB <left paren> <large object length> <right paren>
+         <C host identifier> [ <C initial value> ]
+         [ { <comma> <C host identifier> [ <C initial value> ] }... ]
+
+<COBOL derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <COBOL XML CLOB variable>
+  | <COBOL XML BLOB variable>
+
+<COBOL XML BLOB variable> ::=
+    [ USAGE [ IS ] ] SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS BLOB <left paren> <large object length> <right paren>
+
+<COBOL XML CLOB variable> ::=
+    [ USAGE [ IS ] ] SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS CLOB <left paren> <character large object length> <right paren>
+         [ CHARACTER SET [ IS ] <character set specification> ]
+
+<Fortran derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <Fortran XML CLOB variable>
+  | <Fortran XML BLOB variable>
+
+<Fortran XML BLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS BLOB <left paren> <large object length> <right paren>
+
+<Fortran XML CLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS CLOB <left paren> <character large object length> <right paren>
+         [ CHARACTER SET [ IS ] <character set specification> ]
+
+<Pascal derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <Pascal XML CLOB variable>
+  | <Pascal XML BLOB variable>
+
+<Pascal XML CLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS CLOB <left paren> <character large object length> <right paren>
+         [ CHARACTER SET [ IS ] <character set specification> ]
+
+<Pascal XML BLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS BLOB <left paren> <large object length> <right paren>
+
+<PL/I derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <PL/I XML VARCHAR variable>
+  | <PL/I XML CLOB variable>
+  | <PL/I XML BLOB variable>
+
+<PL/I XML VARCHAR variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS VARCHAR <left paren> <character length> <right paren>
+         [ CHARACTER SET [ IS ] <character set specification> ]
+
+<PL/I XML CLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS CLOB <left paren> <character large object length> <right paren>
+         [ CHARACTER SET [ IS ] <character set specification> ]
+
+<PL/I XML BLOB variable> ::=
+    SQL TYPE IS XML [ <document or content> ]
+         [ <XML whitespace option> ]
+         AS BLOB <left paren> <large object length> <right paren>
+

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA055</code>
+      <description>The choice of whether to use a value that represents a seconds value greater than 59 seconds in a datetime value or to raise an exception condition.</description>
+   </impDef>
+   <impDef>
+      <code>IA089</code>
+      <description>Whether external DTDs are supported.</description>
+   </impDef>
+   <impDef>
+      <code>IA091</code>
+      <description>The mapping of an SQL character set to Unicode.</description>
+   </impDef>
+   <impDef>
+      <code>IA092</code>
+      <description>The mapping of Unicode to a character set in the SQL-environment.</description>
+   </impDef>
+   <impDef>
+      <code>IA093</code>
+      <description>The mapping of numeric SQL types INTEGER, SMALLINT, and BIGINT to XML schema types.</description>
+   </impDef>
+   <impDef>
+      <code>IA100</code>
+      <description>Whether annotations are generated to represent the SQL metadata that is not directly relevant to XML.</description>
+   </impDef>
+   <impDef>
+      <code>IA101</code>
+      <description>The set of XML encoding names supported for XML binary string serialization.</description>
+   </impDef>
+   <impDef>
+      <code>IA102</code>
+      <description>Whether the default XML passing mechanism is BY REF or BY VALUE.</description>
+   </impDef>
+   <impDef>
+      <code>IA103</code>
+      <description>The subset of mandatory and optional features of XQuery supported by an SQL/XML implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IA104</code>
+      <description>The mapping of numeric SQL types INTEGER, SMALLINT, and BIGINT to XML schema types.</description>
+   </impDef>
+   <impDef>
+      <code>IA105</code>
+      <description>The mapping of the SQL type BOOLEAN to an XML schema type.</description>
+   </impDef>
+   <impDef>
+      <code>IA106</code>
+      <description>The mapping of approximate numeric SQL types REAL or DOUBLE PRECISION to XML schema types.</description>
+   </impDef>
+   <impDef>
+      <code>IA107</code>
+      <description>Whether the declared type of XML document is XML(CONTENT(UNTYPED)) or XML(CONTENT(ANY)) when RETURNING CONTENT is specified or implied.</description>
+   </impDef>
+   <impDef>
+      <code>IA108</code>
+      <description>The subset of normative rules of XQuery expressions that are found in the and [XQueryUpdate] to which an XQuery expression is to conform.</description>
+   </impDef>
+   <impDef>
+      <code>IA109</code>
+      <description>The mapping of an SQL identifier to an XML Name when the SQL identifier contains characters for which no mapping to Unicode exists.</description>
+   </impDef>
+   <impDef>
+      <code>IA110</code>
+      <description>The treatment of an XML Name containing an escape sequence of the form _xNNNN_ or _xNNNNNN_ whose corresponding Unicode code point is not a Unicode assigned character.</description>
+   </impDef>
+   <impDef>
+      <code>IA111</code>
+      <description>Whether an exception is raised when mapping of a TIME or TIMESTAMP value whose SECOND field is greater than or equal to 60.</description>
+   </impDef>
+   <impDef>
+      <code>IA112</code>
+      <description>The mapping of a TIME or TIMESTAMP value whose SECOND field is greater than or equal to 60 when an exception is not raised.</description>
+   </impDef>
+   <impDef>
+      <code>IA113</code>
+      <description>Whether the version of XML that is generated is 1.1 or 1.0 when 1.0 is sufficient.</description>
+   </impDef>
+   <impDef>
+      <code>IA115</code>
+      <description>The rules that determine whether an XML query is deterministic.</description>
+   </impDef>
+   <impDef>
+      <code>IA116</code>
+      <description>The rules that determine whether an XML table is deterministic.</description>
+   </impDef>
+   <impDef>
+      <code>IA117</code>
+      <description>The rules that determine whether an XML exists predicate is deterministic.</description>
+   </impDef>
+   <impDef>
+      <code>IA118</code>
+      <description>Whether INCLUDING XMLDECLARATION or EXCLUDING XMLDECLARATION is used in an invocation of XMLSERIALIZE to determine the character string value of an XML type.</description>
+   </impDef>
+   <impDef>
+      <code>IA119</code>
+      <description>Whether STRIP WHITESPACE or PRESERVE WHITESPACE is used in determining the value of the result of an SQL-invoked function of XML type.</description>
+   </impDef>
+   <impDef>
+      <code>IA120</code>
+      <description>Whether STRIP WHITESPACE or PRESERVE WHITESPACE is used in determining the value of the result of an SQL-invoked procedure of XML type.</description>
+   </impDef>
+   <impDef>
+      <code>IA121</code>
+      <description>Whether STRIP WHITESPACE or PRESERVE WHITESPACE is used in determining the value of a dynamic input parameter of XML type.</description>
+   </impDef>
+   <impDef>
+      <code>IA122</code>
+      <description>Whether the omit-xml-declaration parameter of the XML output method of XSLT and XQuery Serialization 3.1 is yes or no when serializing a DOCUMENT and the XML declaration option has not been specified, the encoding is either UTF8 or UTF16, the version is "1.0", and the standalone parameter is none.</description>
+   </impDef>
+   <impDef>
+      <code>IA123</code>
+      <description>Whether the undeclared-prefixes parameter of the XML output method of XSLT and XQuery Serialization 3.1 is yes or no when the version is not 1.0.</description>
+   </impDef>
+   <impDef>
+      <code>IA124</code>
+      <description>Whether the [notations] property and the [unparsed entities] property of the XML document information item is supported.</description>
+   </impDef>
+   <impDef>
+      <code>IA126</code>
+      <description>Whether the indicated registered XML schema shall have the indicated XML namespace among its unordered collection of namespaces.</description>
+   </impDef>
+   <impDef>
+      <code>IA127</code>
+      <description>Whether the indicated registered XML schema shall have a global element declaration schema component whose namespace is the indicated XML namespace and whose XML NCName is the XML valid element name when XML valid element name is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IA128</code>
+      <description>Whether BY REF or BY VALUE is implicit when the declared type of an SQL parameter declaration of an SQL routine is an XML type or a distinct type whose source type is an XML type, and the SQL parameter declaration does not contain an XML passing mechanism.</description>
+   </impDef>
+   <impDef>
+      <code>IA129</code>
+      <description>Whether BY REF or BY VALUE is implicit when the declared type of the returns type of an SQL routine that is an SQL-invoked function is an XML type or a distinct type whose source type is an XML type, and the returns clause does not contain an XML passing mechanism.</description>
+   </impDef>
+   <impDef>
+      <code>IA130</code>
+      <description>Whether the NCNAME domain specifies all variable-length character string values that conform to the rules for formation and representation of an XML 1.0 or XML 1.1 NCName.</description>
+   </impDef>
+   <impDef>
+      <code>IA131</code>
+      <description>Whether STRIP WHITESPACE or PRESERVE WHITESPACE is the XML whitespace option of a XML CLOB, BLOB, or VARCHAR host variable.</description>
+   </impDef>
+   <impDef>
+      <code>ID200</code>
+      <description>The initial XML option of an SQL-session.</description>
+   </impDef>
+   <impDef>
+      <code>ID201</code>
+      <description>The choice of xs:hexBinary or xs:base64Binary as the default encoding of binary strings.</description>
+   </impDef>
+   <impDef>
+      <code>ID202</code>
+      <description>The implicit XML type modifier when not explicitly specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID203</code>
+      <description>The implicit secondary XML type modifier when not explicitly specified but an XML type modifier is.</description>
+   </impDef>
+   <impDef>
+      <code>ID204</code>
+      <description>The implicit XML passing mechanism when not explicitly specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID205</code>
+      <description>The default XML serialize version for an XML character string serialization.</description>
+   </impDef>
+   <impDef>
+      <code>ID206</code>
+      <description>The implicit XML encoding name when an XML encoding specification is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID208</code>
+      <description>The implicit XML returning clause when an XML returning clause is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID212</code>
+      <description>The byte order mark parameter of the XML output method of XSLT and XQuery Serialization 3.1 when serializing a binary string type and the encoding is not UTF16, and the byte order mark has not been explicitly determined.</description>
+   </impDef>
+   <impDef>
+      <code>ID217</code>
+      <description>The implicit character set in an Ada, C, COBOL, Fortran, Pascal, or PL/I XML CLOB variable, or in a C or PL/I XML VARCHAR variable.</description>
+   </impDef>
+   <impDef>
+      <code>ID218</code>
+      <description>Whether DOCUMENT or CONTENT when not explicitly specified, is implicit in the specification of an XML CLOB, BLOB, or VARCHHAR host variable.</description>
+   </impDef>
+   <impDef>
+      <code>IE011</code>
+      <description>Any additional rules that the SQL-implementation may use to determine the nullability characteristic of a column.</description>
+      <feature code="T101"/>
+   </impDef>
+   <impDef>
+      <code>IL006</code>
+      <description>The maximum length of a variable-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL200</code>
+      <description>The maximum length of an XML 1.0 NCName or XML 1.1 NCName.</description>
+   </impDef>
+   <impDef>
+      <code>IL201</code>
+      <description>The maximum length of an XML URI.</description>
+   </impDef>
+   <impDef>
+      <code>IV097</code>
+      <description>The XQuery variables defined by the SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IV111</code>
+      <description>The presence and value of the schemaLocation hint of the xs:import in the generated XML schema document.</description>
+   </impDef>
+   <impDef>
+      <code>IV125</code>
+      <description>The value used when the SQL-implementation chooses to use a value representing a seconds value greater than 59 seconds.</description>
+   </impDef>
+   <impDef>
+      <code>IV200</code>
+      <description>The registered XML schema names and schema location URIs of the permanently registered XML schemas.</description>
+   </impDef>
+   <impDef>
+      <code>IV204</code>
+      <description>The in-scope schema definitions component of an XQuery static context consisting a collection of registered XML schemas for which the current user has USAGE privilege.</description>
+   </impDef>
+   <impDef>
+      <code>IV205</code>
+      <description>Whether the declared type of XML parse is XML(DOCUMENT(UNTYPED)) or XML(DOCUMENT(ANY)) when DOCUMENT is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IV206</code>
+      <description>Whether the declared type of XML parse is XML(CONTENT(UNTYPED)) or XML(CONTENT(ANY)) when CONTENT is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IV207</code>
+      <description>The subtype, if any, of the XQuery formal type notation that is determined for an XQuery variable.</description>
+   </impDef>
+   <impDef>
+      <code>IV233</code>
+      <description>The character set whose character repertoire is UCS used in the definition of the domains NCName and URI.</description>
+   </impDef>
+   <impDef>
+      <code>IV234</code>
+      <description>The character encoding of the result of mapping an SQL object to XML.</description>
+   </impDef>
+   <impDef>
+      <code>IV235</code>
+      <description>The value of an output SQL parameter of XML type on the invocation of an SQL-invoked routine.</description>
+   </impDef>
+   <impDef>
+      <code>IV236</code>
+      <description>The validation mode of an XQuery expression context.</description>
+   </impDef>
+   <impDef>
+      <code>IV237</code>
+      <description>The value of the standalone parameter of the XML output method of XSLT and XQuery Serialization 3.1 when serializing an XML value.</description>
+   </impDef>
+   <impDef>
+      <code>IV238</code>
+      <description>The values used to initialize the XQuery static and dynamic context as permitted by the XQuery document.</description>
+   </impDef>
+   <impDef>
+      <code>IV239</code>
+      <description>The inferred XML type of a dynamic parameter specification that is an XML value expression simply contained in XML character string serialization, XML binary string serialization, XML concatenation, XML document, XML validate, XML content predicate, XML document predicate, or XML valid predicate.</description>
+   </impDef>
+   <impDef>
+      <code>IW062</code>
+      <description>The algorithm that chooses a registered XML schema name, and that is repeatable in the sense that if the algorithm is re-evaluated with the same collection of registered XML schemas for which the user has USAGE privilege then the same registered XML schema name will be chosen when XML valid according to URI is specified and there exist more than one registered XML schema whose target namespace URIs and possibly schema location URIs match that of the specified XML valid target namespace URI and XML valid schema location URI, if any.</description>
+   </impDef>
+   <impDef>
+      <code>IW200</code>
+      <description>The means by which an XML schema is registered.</description>
+   </impDef>
+   <impDef>
+      <code>IW201</code>
+      <description>The means by which USAGE privileges on registered XML schemas are granted or revoked.</description>
+   </impDef>
+</implementationDefined>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA002</code>
+      <description>Whether a result that cannot be represented exactly in the result type is rounded or truncated.</description>
+      <feature code="NONE"/>
+      <feature code="T839"/>
+   </impDef>
+   <impDef>
+      <code>IA003</code>
+      <description>The set of collations supported by an SQL-implementation. These may be defined by a standard or by the SQL-implementation itself. Each supported collation has a name, its definition, the list of character sets to which it can be applied, and whether or not padding with spaces is to be used when comparing two strings of unequal length.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA004</code>
+      <description>The set of host languages supported by an SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IA005</code>
+      <description>Which other Unicode characters, if any besides space, with the Unicode property White_Space are permitted to be used where ISO/IEC 9075 specifies the use of whitespace.</description>
+   </impDef>
+   <impDef>
+      <code>IA006</code>
+      <description>The restrictions on the use of Unicode characters in a character literal over and above the restrictions of the appropriate character set.</description>
+   </impDef>
+   <impDef>
+      <code>IA008</code>
+      <description>Whether an invocation of an SQL-invoked function that is non-deterministic or possibly modifies SQL-data is considered to be essential or inessential.</description>
+   </impDef>
+   <impDef>
+      <code>IA009</code>
+      <description>Whether an SQL Flagger flags implementation-defined features.</description>
+   </impDef>
+   <impDef>
+      <code>IA012</code>
+      <description>Whether an SQL-implementation chooses to make implementation-defined features visible through the SQL_FEATURES view of the Information Schema.</description>
+   </impDef>
+   <impDef>
+      <code>IA094</code>
+      <description>The constraints on explicit module names.</description>
+   </impDef>
+   <impDef>
+      <code>ID006</code>
+      <description>The default catalog name for preparable statements.</description>
+   </impDef>
+   <impDef>
+      <code>IE005</code>
+      <description>Any additional statements provided by an SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IE006</code>
+      <description>Any additional non-standard SQL-invoked routines.</description>
+   </impDef>
+   <impDef>
+      <code>IE007</code>
+      <description>Any additional non-standard argument values for SQL-invoked routines.</description>
+   </impDef>
+   <impDef>
+      <code>IL001</code>
+      <description>The maximum length of a fixed-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL002</code>
+      <description>The maximum length of a large object character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL003</code>
+      <description>The maximum length of a fixed-length binary string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL004</code>
+      <description>The maximum length of a large object binary string type.</description>
+   </impDef>
+   <impDef>
+      <code>IW002</code>
+      <description>The SQL-agent used for the direct execution of SQL.</description>
+   </impDef>
+   <impDef>
+      <code>IW003</code>
+      <description>The mechanism by which an SQL-client module is explicitly created and dropped.</description>
+   </impDef>
+   <impDef>
+      <code>IW005</code>
+      <description>The mechanism by which a catalog is explicitly created and destroyed.</description>
+   </impDef>
+   <impDef>
+      <code>IW006</code>
+      <description>The alternative mechanism by which a schema may be explicitly created and destroyed.</description>
+   </impDef>
+   <impDef>
+      <code>IW007</code>
+      <description>The mechanism for the SQL-client module binding style by which a user specifies that a module to be used as an SQL-client module.</description>
+   </impDef>
+   <impDef>
+      <code>IW008</code>
+      <description>The method and time of binding between an external routine’s reference to a compilation unit and that compilation unit.</description>
+   </impDef>
+   <impDef>
+      <code>IW009</code>
+      <description>In direct invocation of SQL statements, the method of invoking SQL-statements, the method of raising conditions that result from the execution of such statements, the method of accessing the diagnostics information that results from the execution of such statements, and the method of returning the results.</description>
+   </impDef>
+   <impDef>
+      <code>IW168</code>
+      <description>The method of raising an exception condition on the direct execution of a statement.</description>
+   </impDef>
+</implementationDefined>

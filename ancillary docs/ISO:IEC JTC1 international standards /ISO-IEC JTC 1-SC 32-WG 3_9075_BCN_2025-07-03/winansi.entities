@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+
+<!-- Portions © International Organization for Standardization 1986
+     Permission to copy in any form is granted for use with conforming 
+     SGML systems and applications as defined in ISO 8879, provided 
+     this notice is included in all copies.
+-->
+
+<!--
+     Copyright © 1999, 2000, 2002, 2005, 2010, 2028, 2019, 2020, 2021 Jim Melton
+     Copyright © 2021 Editors of ISO/IEC JTC 1/SC 32/WG 3:
+                 Jim Melton, Stephen Cannan, Jörn Bartels, Stefan Plantikow
+                 (Granted by Jim Melton, 2021-10-21)
+-->
+
+<!-- This file is used by the standards transformations     -->
+
+<!-- ================================================================== -->
+<!-- Version 1.1 - - 2018-11-27                                         -->
+<!-- Maintainer: Jim Melton                                             -->
+<!-- ================================================================== -->
+
+<!-- Character entity set.  Typical invocation:
+     <!ENTITY % winansi SYSTEM "winansi.entities">
+     %winansi;
+-->
+
+<!-- ***********************************************************-->
+<!-- C0 Controls and Basic Latin character set  (partial)       -->
+<!-- ***********************************************************-->
+
+<!ENTITY LF         "&#x000A;"> <!-- line feed, U+000A ISOnum -->
+
+<!ENTITY grave      "&#x0060;"> <!-- grave, U+0060 ISOdia -->
+
+<!-- ***********************************************************-->
+<!-- C1 Controls and Latin-1 Supplement character set (partial) -->
+<!-- ***********************************************************-->
+
+<!ENTITY nbsp       "&#x00A0;"> <!-- no-break space = non-breaking space, U+00A0 ISOnum -->
+<!ENTITY iexcl      "&#x00A1;"> <!-- inverted exclamation mark, U+00A1 ISOnum -->
+<!ENTITY cent       "&#x00A2;"> <!-- cent sign, U+00A2 ISOnum -->
+<!ENTITY pound      "&#x00A3;"> <!-- pound sign, U+00A3 ISOnum -->
+<!ENTITY curren     "&#x00A4;"> <!-- currency sign, U+00A4 ISOnum -->
+<!ENTITY yen        "&#x00A5;"> <!-- yen sign = yuan sign, U+00A5 ISOnum -->
+<!ENTITY brvbar     "&#x00A6;"> <!-- broken bar = broken vertical bar, U+00A6 ISOnum -->
+<!ENTITY sect       "&#x00A7;"> <!-- section sign, U+00A7 ISOnum -->
+<!ENTITY uml        "&#x00A8;"> <!-- diaeresis = spacing diaeresis, U+00A8 ISOdia -->
+<!ENTITY copy       "&#x00A9;"> <!-- copyright sign, U+00A9 ISOnum -->
+<!ENTITY ordf       "&#x00AA;"> <!-- feminine ordinal indicator, U+00AA ISOnum -->
+<!ENTITY laquo      "&#x00AB;"> <!-- left-pointing double angle quotation mark
+                                   = left pointing guillemet, U+00AB ISOnum -->
+<!ENTITY not        "&#x00AC;"> <!-- not sign, U+00AC ISOnum -->
+<!ENTITY shy        "&#x00AD;"> <!-- soft hyphen = discretionary hyphen, U+00AD ISOnum -->
+<!ENTITY reg        "&#x00AE;"> <!-- registered sign = registered trade mark sign, U+00AE ISOnum -->
+<!ENTITY macr       "&#x00AF;"> <!-- macron = spacing macron = overline
+                                   = APL overbar, U+00AF ISOdia -->
+<!ENTITY deg        "&#x00B0;"> <!-- degree sign, U+00B0 ISOnum -->
+<!ENTITY plusmn     "&#x00B1;"> <!-- plus-minus sign = plus-or-minus sign, U+00B1 ISOnum -->
+<!ENTITY sup2       "&#x00B2;"> <!-- superscript two = superscript digit two
+                                   = squared, U+00B2 ISOnum -->
+<!ENTITY sup3       "&#x00B3;"> <!-- superscript three = superscript digit three
+                                   = cubed, U+00B3 ISOnum -->
+<!ENTITY acute      "&#x00B4;"> <!-- acute accent = spacing acute, U+00B4 ISOdia -->
+<!ENTITY micro      "&#x00B5;"> <!-- micro sign, U+00B5 ISOnum -->
+<!ENTITY para       "&#x00B6;"> <!-- pilcrow sign = paragraph sign, U+00B6 ISOnum -->
+<!ENTITY middot     "&#x00B7;"> <!-- middle dot = Georgian comma
+                                   = Greek middle dot, U+00B7 ISOnum -->
+<!ENTITY cedil      "&#x00B8;"> <!-- cedilla = spacing cedilla, U+00B8 ISOdia -->
+<!ENTITY sup1       "&#x00B9;"> <!-- superscript one = superscript digit one, U+00B9 ISOnum -->
+<!ENTITY ordm       "&#x00BA;"> <!-- masculine ordinal indicator, U+00BA ISOnum -->
+<!ENTITY raquo      "&#x00BB;"> <!-- right-pointing double angle quotation mark
+                                   = right pointing guillemet, U+00BB ISOnum -->
+<!ENTITY frac14     "&#x00BC;"> <!-- vulgar fraction one quarter
+                                   = fraction one quarter, U+00BC ISOnum -->
+<!ENTITY frac12     "&#x00BD;"> <!-- vulgar fraction one half
+                                   = fraction one half, U+00BD ISOnum -->
+<!ENTITY frac34     "&#x00BE;"> <!-- vulgar fraction three quarters
+                                   = fraction three quarters, U+00BE ISOnum -->
+<!ENTITY iquest     "&#x00BF;"> <!-- inverted question mark
+                                   = turned question mark, U+00BF ISOnum -->
+<!ENTITY Agrave     "&#x00C0;"> <!-- latin capital letter A with grave
+                                   = latin capital letter A grave, U+00C0 ISOlat1 -->
+<!ENTITY Aacute     "&#x00C1;"> <!-- latin capital letter A with acute, U+00C1 ISOlat1 -->
+<!ENTITY Acirc      "&#x00C2;"> <!-- latin capital letter A with circumflex, U+00C2 ISOlat1 -->
+<!ENTITY Atilde     "&#x00C3;"> <!-- latin capital letter A with tilde, U+00C3 ISOlat1 -->
+<!ENTITY Auml       "&#x00C4;"> <!-- latin capital letter A with diaeresis, U+00C4 ISOlat1 -->
+<!ENTITY Aring      "&#x00C5;"> <!-- latin capital letter A with ring above
+                                   = latin capital letter A ring, U+00C5 ISOlat1 -->
+<!ENTITY AElig      "&#x00C6;"> <!-- latin capital letter AE
+                                   = latin capital ligature AE, U+00C6 ISOlat1 -->
+<!ENTITY Ccedil     "&#x00C7;"> <!-- latin capital letter C with cedilla, U+00C7 ISOlat1 -->
+<!ENTITY Egrave     "&#x00C8;"> <!-- latin capital letter E with grave, U+00C8 ISOlat1 -->
+<!ENTITY Eacute     "&#x00C9;"> <!-- latin capital letter E with acute, U+00C9 ISOlat1 -->
+<!ENTITY Ecirc      "&#x00CA;"> <!-- latin capital letter E with circumflex, U+00CA ISOlat1 -->
+<!ENTITY Euml       "&#x00CB;"> <!-- latin capital letter E with diaeresis, U+00CB ISOlat1 -->
+<!ENTITY Igrave     "&#x00CC;"> <!-- latin capital letter I with grave, U+00CC ISOlat1 -->
+<!ENTITY Iacute     "&#x00CD;"> <!-- latin capital letter I with acute, U+00CD ISOlat1 -->
+<!ENTITY Icirc      "&#x00CE;"> <!-- latin capital letter I with circumflex, U+00CE ISOlat1 -->
+<!ENTITY Iuml       "&#x00CF;"> <!-- latin capital letter I with diaeresis, U+00CF ISOlat1 -->
+<!ENTITY ETH        "&#x00D0;"> <!-- latin capital letter ETH, U+00D0 ISOlat1 -->
+<!ENTITY Ntilde     "&#x00D1;"> <!-- latin capital letter N with tilde, U+00D1 ISOlat1 -->
+<!ENTITY Ograve     "&#x00D2;"> <!-- latin capital letter O with grave, U+00D2 ISOlat1 -->
+<!ENTITY Oacute     "&#x00D3;"> <!-- latin capital letter O with acute, U+00D3 ISOlat1 -->
+<!ENTITY Ocirc      "&#x00D4;"> <!-- latin capital letter O with circumflex, U+00D4 ISOlat1 -->
+<!ENTITY Otilde     "&#x00D5;"> <!-- latin capital letter O with tilde, U+00D5 ISOlat1 -->
+<!ENTITY Ouml       "&#x00D6;"> <!-- latin capital letter O with diaeresis, U+00D6 ISOlat1 -->
+<!ENTITY times      "&#x00D7;"> <!-- multiplication sign, U+00D7 ISOnum -->
+<!ENTITY Oslash     "&#x00D8;"> <!-- latin capital letter O with stroke
+                                   = latin capital letter O slash, U+00D8 ISOlat1 -->
+<!ENTITY Ugrave     "&#x00D9;"> <!-- latin capital letter U with grave, U+00D9 ISOlat1 -->
+<!ENTITY Uacute     "&#x00DA;"> <!-- latin capital letter U with acute, U+00DA ISOlat1 -->
+<!ENTITY Ucirc      "&#x00DB;"> <!-- latin capital letter U with circumflex, U+00DB ISOlat1 -->
+<!ENTITY Uuml       "&#x00DC;"> <!-- latin capital letter U with diaeresis, U+00DC ISOlat1 -->
+<!ENTITY Yacute     "&#x00DD;"> <!-- latin capital letter Y with acute, U+00DD ISOlat1 -->
+<!ENTITY THORN      "&#x00DE;"> <!-- latin capital letter THORN, U+00DE ISOlat1 -->
+<!ENTITY szlig      "&#x00DF;"> <!-- latin small letter sharp s = ess-zed, U+00DF ISOlat1 -->
+<!ENTITY agrave     "&#x00E0;"> <!-- latin small letter a with grave
+                                   = latin small letter a grave, U+00E0 ISOlat1 -->
+<!ENTITY aacute     "&#x00E1;"> <!-- latin small letter a with acute, U+00E1 ISOlat1 -->
+<!ENTITY acirc      "&#x00E2;"> <!-- latin small letter a with circumflex, U+00E2 ISOlat1 -->
+<!ENTITY atilde     "&#x00E3;"> <!-- latin small letter a with tilde, U+00E3 ISOlat1 -->
+<!ENTITY auml       "&#x00E4;"> <!-- latin small letter a with diaeresis, U+00E4 ISOlat1 -->
+<!ENTITY aring      "&#x00E5;"> <!-- latin small letter a with ring above
+                                   = latin small letter a ring, U+00E5 ISOlat1 -->
+<!ENTITY aelig      "&#x00E6;"> <!-- latin small letter ae
+                                   = latin small ligature ae, U+00E6 ISOlat1 -->
+<!ENTITY ccedil     "&#x00E7;"> <!-- latin small letter c with cedilla, U+00E7 ISOlat1 -->
+<!ENTITY egrave     "&#x00E8;"> <!-- latin small letter e with grave, U+00E8 ISOlat1 -->
+<!ENTITY eacute     "&#x00E9;"> <!-- latin small letter e with acute, U+00E9 ISOlat1 -->
+<!ENTITY ecirc      "&#x00EA;"> <!-- latin small letter e with circumflex, U+00EA ISOlat1 -->
+<!ENTITY euml       "&#x00EB;"> <!-- latin small letter e with diaeresis, U+00EB ISOlat1 -->
+<!ENTITY igrave     "&#x00EC;"> <!-- latin small letter i with grave, U+00EC ISOlat1 -->
+<!ENTITY iacute     "&#x00ED;"> <!-- latin small letter i with acute, U+00ED ISOlat1 -->
+<!ENTITY icirc      "&#x00EE;"> <!-- latin small letter i with circumflex, U+00EE ISOlat1 -->
+<!ENTITY iuml       "&#x00EF;"> <!-- latin small letter i with diaeresis, U+00EF ISOlat1 -->
+<!ENTITY eth        "&#x00F0;"> <!-- latin small letter eth, U+00F0 ISOlat1 -->
+<!ENTITY ntilde     "&#x00F1;"> <!-- latin small letter n with tilde, U+00F1 ISOlat1 -->
+<!ENTITY ograve     "&#x00F2;"> <!-- latin small letter o with grave, U+00F2 ISOlat1 -->
+<!ENTITY oacute     "&#x00F3;"> <!-- latin small letter o with acute, U+00F3 ISOlat1 -->
+<!ENTITY ocirc      "&#x00F4;"> <!-- latin small letter o with circumflex, U+00F4 ISOlat1 -->
+<!ENTITY otilde     "&#x00F5;"> <!-- latin small letter o with tilde, U+00F5 ISOlat1 -->
+<!ENTITY ouml       "&#x00F6;"> <!-- latin small letter o with diaeresis, U+00F6 ISOlat1 -->
+<!ENTITY divide     "&#x00F7;"> <!-- division sign, U+00F7 ISOnum -->
+<!ENTITY oslash     "&#x00F8;"> <!-- latin small letter o with stroke,
+                                   = latin small letter o slash, U+00F8 ISOlat1 -->
+<!ENTITY ugrave     "&#x00F9;"> <!-- latin small letter u with grave, U+00F9 ISOlat1 -->
+<!ENTITY uacute     "&#x00FA;"> <!-- latin small letter u with acute, U+00FA ISOlat1 -->
+<!ENTITY ucirc      "&#x00FB;"> <!-- latin small letter u with circumflex, U+00FB ISOlat1 -->
+<!ENTITY uuml       "&#x00FC;"> <!-- latin small letter u with diaeresis, U+00FC ISOlat1 -->
+<!ENTITY yacute     "&#x00FD;"> <!-- latin small letter y with acute, U+00FD ISOlat1 -->
+<!ENTITY thorn      "&#x00FE;"> <!-- latin small letter thorn, U+00FE ISOlat1 -->
+<!ENTITY yuml       "&#x00FF;"> <!-- latin small letter y with diaeresis, U+00FF ISOlat1 -->
+
+<!-- ***********************************************************-->
+<!-- Latin Extended-A character set (partial)                   -->
+<!-- ***********************************************************-->
+
+<!ENTITY OElig      "&#x0152;"> <!-- latin capital ligature OE, U+0152 ISOlat2 -->
+<!ENTITY oelig      "&#x0153;"> <!-- latin small ligature oe, U+0153 ISOlat2 -->
+
+<!ENTITY Scaron     "&#x0160;"> <!-- latin capital letter S with caron, U+0160 ISOlat2 -->
+<!ENTITY scaron     "&#x0161;"> <!-- latin small letter s with caron, U+0161 ISOlat2 -->
+
+<!ENTITY Yuml       "&#x0178;"> <!-- latin capital letter Y with diaeresis, U+0178 ISOlat2 -->
+
+<!ENTITY Zcaron     "&#x017D;"> <!-- capital Z with caron, U+017D -->
+<!ENTITY zcaron     "&#x017E;"> <!-- lowercase z with caron, U+017E -->
+
+<!-- ***********************************************************-->
+<!-- Latin Extended-B character set (partial)                   -->
+<!-- ***********************************************************-->
+
+<!ENTITY fnof       "&#x0192;"> <!-- Latin small letter f with hook 
+                                   = function symbol -->
+
+<!-- ***********************************************************-->
+<!-- Spacing Modifier Letters character set (partial)           -->
+<!-- ***********************************************************-->
+
+<!ENTITY circ       "&#x02C6;"> <!-- modifier letter circumflex accent, U+02C6 ISOpub -->
+
+<!ENTITY tilde      "&#x02DC;"> <!-- small tilde, U+02DC ISOdia -->
+
+<!-- ***********************************************************-->
+<!-- Greek and Coptic character set (partial)                   -->
+<!-- ***********************************************************-->
+
+<!ENTITY XI         "&#x039E;"> <!-- Capital letter Xi, U+039E  -->
+
+<!ENTITY PI         "&#x03A0;"> <!-- Capital letter Pi, U+03A0  -->
+
+<!ENTITY Sigma      "&#x03A3;"> <!-- Capital letter Sigma, U+03A3 -->
+
+<!ENTITY omega      "&#x03C9;"> <!-- Greek small letter omega, U+03C9 -->
+
+<!ENTITY mu         "&#x03BC;"> <!-- Greek small letter mu, U+03BC -->
+
+<!-- ***********************************************************-->
+<!-- General Punctuation character set (partial)                -->
+<!-- ***********************************************************-->
+
+<!ENTITY nspace     "&#x2002;"> <!-- en space, U+2002 -->
+<!ENTITY mspace     "&#x2003;"> <!-- em space, U+2003 -->
+<!ENTITY thinspace  "&#x2009;"> <!-- thin space, U+2009 -->
+<!ENTITY hairspace  "&#x200A;"> <!-- hair space, U+200A -->
+
+<!ENTITY ndash      "&#x2013;"> <!-- en dash, U+2013 ISOpub -->
+<!ENTITY mdash      "&#x2014;"> <!-- em dash, U+2014 ISOpub -->
+<!ENTITY fdash      "&#x2012;"> <!-- figure dash, U+2012 -->
+
+<!ENTITY lsquo      "&#x2018;"> <!-- left single quotation mark, U+2018 ISOnum -->
+<!ENTITY rsquo      "&#x2019;"> <!-- right single quotation mark, U+2019 ISOnum -->
+<!ENTITY sbquo      "&#x201A;"> <!-- single low-9 quotation mark, U+201A NEW -->
+
+<!ENTITY ldquo      "&#x201C;"> <!-- left double quotation mark, U+201C ISOnum -->
+<!ENTITY rdquo      "&#x201D;"> <!-- right double quotation mark, U+201D ISOnum -->
+<!ENTITY bdquo      "&#x201E;"> <!-- double low-9 quotation mark, U+201E NEW -->
+
+<!ENTITY dagger     "&#x2020;"> <!-- dagger, U+2020 ISOpub -->
+<!ENTITY Dagger     "&#x2021;"> <!-- double dagger, U+2021 ISOpub -->
+<!ENTITY bull       "&#x2022;"> <!-- bullet, U+2022 -->
+
+<!ENTITY hellip     "&#x2026;"> <!-- horizontal ellipsis, U+2026 -->
+
+<!ENTITY narrownbsp "&#x202F;"> <!-- narrow no-break space 
+                                     = narrow non-breaking space, U+202F ISOnum -->
+
+<!ENTITY permil     "&#x2030;"> <!-- per mille sign, U+2030 ISOtech -->
+
+<!ENTITY prime      "&#x2032;"> <!-- prime, U+2032 ISOtech -->
+
+<!ENTITY lsaquo     "&#x2039;"> <!-- single left-pointing angle quotation mark, U+2039 
+                                     ISO proposed -->
+<!ENTITY rsaquo     "&#x203A;"> <!-- single right-pointing angle quotation mark, U+203A 
+                                     ISO proposed -->
+
+<!-- ***********************************************************-->
+<!-- Currency Symbols character set (partial)                   -->
+<!-- ***********************************************************-->
+
+<!ENTITY euro       "&#x20AC;"> <!-- euro sign, U+20AC NEW -->
+
+<!-- ***********************************************************-->
+<!-- Letterlike Symbols character set (partial)                 -->
+<!-- ***********************************************************-->
+
+<!ENTITY trade      "&#x2122;"> <!-- trademark symbol, U+2122 -->
+
+<!-- ***********************************************************-->
+<!-- Arrows character set (partial)                             -->
+<!-- ***********************************************************-->
+
+<!ENTITY rarrow     "&#x2192;"> <!-- rightwards arrow, U+2192 -->
+
+<!ENTITY rarrowb    "&#x21A6;"> <!-- right arrow from bar, U+21A6 -->
+
+<!ENTITY dblltarr   "&#x21D0;"> <!-- leftwards double arrow, U+21D0 -->
+<!ENTITY dblrtarr   "&#x21D2;"> <!-- rightwards double arrow, U+21D2 -->
+
+<!ENTITY dblltrtarr "&#x21D4;"> <!-- left right double arrow, U+21D4 -->
+
+
+<!-- ***********************************************************-->
+<!-- Mathematical Operators character set (partial)             -->
+<!-- ***********************************************************-->
+
+<!ENTITY infinity   "&#x221E;"> <!-- infinity symbol, U+221E -->
+
+<!ENTITY setunion   "&#x222A;"> <!-- union symbol, U+222A -->
+		
+<!ENTITY simeq      "&#x2243;"> <!-- asymptotically equal to symbol, U+2243 -->
+
+<!ENTITY neq        "&#x2260;"> <!-- not-equal sign, U+2260 -->
+
+<!ENTITY le         "&#x2264;"> <!-- less-than-or-equal sign, U+2264 -->
+<!ENTITY ge         "&#x2265;"> <!-- greater-than-or-equal sign, U+2265 -->
+
+<!ENTITY precedes   "&#x227A;"> <!-- precedes symbol, U+227A -->
+<!ENTITY succeeds   "&#x227B;"> <!-- succeeds symbol, U+227B -->
+
+<!ENTITY sdot       "&#x22C5;"> <!-- dot operator, U+22C5 -->
+
+<!ENTITY minus      "&#x2212;"> <!-- mathematical minus operator, U+2212 -->
+
+<!ENTITY subset     "&#x2282;"> <!-- subset of, U+2282 -->
+
+<!ENTITY forall     "&#x2200;"> <!-- for all, U+2200 -->
+
+<!ENTITY exists     "&#x2203;"> <!-- there exists, U+2203-->
+
+<!ENTITY element    "&#x2208;"> <!-- element of, U+2208 -->
+
+<!ENTITY ceilL      "&#x2308;"> <!-- ceiling left -->
+
+<!ENTITY ceilR      "&#x2309;"> <!-- ceiling right -->
+
+<!ENTITY floorL     "&#x230A;"> <!-- floor left -->
+
+<!ENTITY floorR     "&#x230B;"> <!-- floor right -->
+
+<!-- ***********************************************************-->
+<!-- Miscellaneous Technical character set (partial)            -->
+<!-- ***********************************************************-->
+
+<!ENTITY cbe        "&#x23AA;"> <!-- Curly Bracket Extension, U+23AA -->
+<!ENTITY rcbuh      "&#x23AB;"> <!-- Right Curly Bracket Upper Hook, U+23AB -->
+<!ENTITY rcbmp      "&#x23AC;"> <!-- Right Curly Bracket Middle Piece, U+23AC -->
+<!ENTITY rcblh      "&#x23AD;"> <!-- Right Curly Bracket Lower Hook, U+23AD -->
+
+<!-- ***********************************************************-->
+<!-- Multiplication and division sign operators (partial)       -->
+<!-- ***********************************************************-->
+
+<!ENTITY cp         "&#x2A2F;"> <!-- Vector or Cross Product, U+2A2F -->

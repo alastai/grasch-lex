@@ -1,0 +1,663 @@
+
+************************************************************************************************
+This file is a "digital artifact" that contains the grammar specified by a part of ISO/IEC 9075.
+
+This grammar may be used by implementers of SQL-implementations when generating parsers for the 
+SQL language.
+************************************************************************************************
+
+<non-reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | BLOCKED
+  | CONTROL
+  | DB
+  | FILE
+  | FS
+  | INTEGRITY
+  | LIBRARY
+  | LIMIT
+  | LINK
+  | MAPPING
+  | OFF
+  | PASSTHROUGH
+  | PERMISSION
+  | RECOVERY
+  | REQUIRING
+  | RESTORE
+  | SELECTIVE
+  | SERVER
+  | TOKEN
+  | UNLINK
+  | VERSION
+  | WRAPPER
+  | YES
+
+<reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | DATALINK
+  | DLNEWCOPY
+  | DLPREVIOUSCOPY
+  | DLURLCOMPLETE
+  | DLURLCOMPLETEONLY
+   
+  | DLURLCOMPLETEWRITE
+  | DLURLPATH
+  | DLURLPATHONLY
+  | DLURLPATHWRITE
+   
+  | DLURLSCHEME
+  | DLURLSERVER
+  | DLVALUE
+  | IMPORT
+
+<foreign server name> ::=
+    [ <catalog name> <period> ] <unqualified foreign server name>
+
+<foreign-data wrapper name> ::=
+    [ <catalog name> <period> ] <unqualified foreign-data wrapper name>
+
+<unqualified foreign server name> ::=
+    <qualified identifier>
+
+<unqualified foreign-data wrapper name> ::=
+    <qualified identifier>
+
+<option name> ::=
+    <identifier body>
+
+<routine mapping name> ::=
+    <identifier>
+
+<predefined type> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <datalink type>
+
+<datalink type> ::=
+    DATALINK [ <datalink control definition> ]
+
+<datalink control definition> ::=
+    NO LINK CONTROL
+  | FILE LINK CONTROL <datalink file control option>
+
+<datalink file control option> ::=
+    <integrity control option> <read permission option> <write permission option>
+         <recovery option> [ <unlink option> ]
+
+<integrity control option> ::=
+    INTEGRITY ALL
+  | INTEGRITY SELECTIVE
+
+<read permission option> ::=
+    READ PERMISSION FS
+  | READ PERMISSION DB
+
+<write permission option> ::=
+    WRITE PERMISSION FS
+  | WRITE PERMISSION ADMIN <access token indication>
+  | WRITE PERMISSION BLOCKED
+
+<access token indication> ::=
+    REQUIRING TOKEN FOR UPDATE
+  | NOT REQUIRING TOKEN FOR UPDATE
+
+<recovery option> ::=
+    RECOVERY NO
+  | RECOVERY YES
+
+<unlink option> ::=
+    ON UNLINK RESTORE
+  | ON UNLINK DELETE
+
+<common value expression> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <datalink value expression>
+
+<character value function> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <url complete expression>
+  | <url complete for write expression>
+  | <url complete only expression>
+  | <url path expression>
+  | <url path for write expression>
+  | <url path only expression>
+  | <url scheme expression>
+  | <url server expression>
+
+<url complete expression> ::=
+    DLURLCOMPLETE <left paren> <datalink value expression> <right paren>
+
+<url complete for write expression> ::=
+    DLURLCOMPLETEWRITE <left paren> <datalink value expression> <right paren>
+
+<url complete only expression> ::=
+    DLURLCOMPLETEONLY <left paren> <datalink value expression> <right paren>
+
+<url path expression> ::=
+    DLURLPATH <left paren> <datalink value expression> <right paren>
+
+<url path for write expression> ::=
+    DLURLPATHWRITE <left paren> <datalink value expression> <right paren>
+
+<url path only expression> ::=
+    DLURLPATHONLY <left paren> <datalink value expression> <right paren>
+
+<url scheme expression> ::=
+    DLURLSCHEME <left paren> <datalink value expression> <right paren>
+
+<url server expression> ::=
+    DLURLSERVER <left paren> <datalink value expression> <right paren>
+
+<datalink value expression> ::=
+    <datalink value function>
+  | <value expression primary>
+
+<datalink value function> ::=
+    <datalink value constructor>
+
+<datalink value constructor> ::=
+    DLVALUE <left paren> <data location> <right paren>
+  | DLNEWCOPY <left paren> <data location> <comma> <token indication> <right paren>
+  | DLPREVIOUSCOPY <left paren> <data location> <comma> <token indication> <right paren>
+
+<data location> ::=
+    <character value expression>
+
+<token indication> ::=
+    <unsigned integer>
+
+<generic options> ::=
+    OPTIONS <left paren> <generic option list> <right paren>
+
+<generic option list> ::=
+    <generic option> [ { <comma> <generic option> }... ]
+
+<generic option> ::=
+    <option name> [ <option value> ]
+
+<option value> ::=
+    <character string literal>
+
+<alter generic options> ::=
+    OPTIONS <left paren> <alter generic option list> <right paren>
+
+<alter generic option list> ::=
+    <alter generic option> [ { <comma> <alter generic option> }... ]
+
+<alter generic option> ::=
+    [ <alter operation> ] <option name> [ <option value> ]
+
+<alter operation> ::=
+    ADD
+  | SET
+  | DROP
+
+<schema element> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <foreign table definition>
+
+<column option list> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+         [ <datalink control definition> ]
+
+<foreign table definition> ::=
+    CREATE FOREIGN TABLE <table name>
+         [ <left paren> <basic column definition list> <right paren> ]
+         SERVER <foreign server name> [ <table generic options> ]
+
+<table generic options> ::=
+    <generic options>
+
+<basic column definition list> ::=
+    <basic column definition> [ { <comma> <basic column definition> }... ]
+
+<basic column definition> ::=
+    <column name> <data type> [ <column generic options> ]
+
+<column generic options> ::=
+    <generic options>
+
+<alter foreign table statement> ::=
+    ALTER FOREIGN TABLE <table name> <alter foreign table action>
+
+<alter foreign table action> ::=
+    <add basic column definition>
+  | <alter basic column definition>
+  | <drop basic column definition>
+  | <alter generic options>
+
+<add basic column definition> ::=
+    ADD [ COLUMN ] <basic column definition>
+
+<alter basic column definition> ::=
+    ALTER [ COLUMN ] <column name> <alter basic column action>
+
+<alter basic column action> ::=
+    <alter generic options>
+
+<drop basic column definition> ::=
+    DROP [ COLUMN ] <column name> <drop behavior>
+
+<drop foreign table statement> ::=
+    DROP FOREIGN TABLE <table name> <drop behavior>
+
+<object name> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | FOREIGN DATA WRAPPER <foreign-data wrapper name>
+  | FOREIGN SERVER <foreign server name>
+
+<user mapping definition> ::=
+    CREATE USER MAPPING FOR <specific or generic authorization identifier>
+         SERVER <foreign server name> [ <generic options> ]
+
+<specific or generic authorization identifier> ::=
+    <authorization identifier>
+  | USER
+  | CURRENT_USER
+  | PUBLIC
+
+<alter user mapping statement> ::=
+    ALTER USER MAPPING <specific or generic authorization identifier>
+         SERVER <foreign server name> <alter generic options>
+
+<drop user mapping statement> ::=
+    DROP USER MAPPING FOR <specific or generic authorization identifier>
+         SERVER <foreign server name>
+
+<SQL schema definition statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <foreign table definition>
+  | <foreign server definition>
+  | <foreign-data wrapper definition>
+  | <user mapping definition>
+  | <routine mapping definition>
+
+<SQL schema manipulation statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <alter foreign table statement>
+  | <drop foreign table statement>
+  | <alter foreign server statement>
+  | <drop foreign server statement>
+  | <alter foreign-data wrapper statement>
+  | <drop foreign-data wrapper statement>
+  | <alter user mapping statement>
+  | <drop user mapping statement>
+  | <alter routine mapping statement>
+  | <drop routine mapping statement>
+
+<SQL session statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <set passthrough statement>
+
+<set passthrough statement> ::=
+    SET PASSTHROUGH <passthrough specification>
+
+<passthrough specification> ::=
+    <value specification>
+  | OFF
+
+<Ada derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <Ada DATALINK variable>
+
+<Ada DATALINK variable> ::=
+    SQL TYPE IS <datalink type>
+
+<C derived variable> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <C DATALINK variable>
+
+<C DATALINK variable> ::=
+    SQL TYPE IS <datalink type> <C host identifier> [ <C initial value> ]
+         [ { <comma> <C host identifier> [ <C initial value> ] }... ]
+
+<COBOL derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <COBOL DATALINK variable>
+
+<COBOL DATALINK variable> ::=
+    [ USAGE [ IS ] ] SQL TYPE IS <datalink type>
+
+<Fortran derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <Fortran DATALINK variable>
+
+<Fortran DATALINK variable> ::=
+    SQL TYPE IS <datalink type>
+
+<MUMPS derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <MUMPS DATALINK variable>
+
+<MUMPS DATALINK variable> ::=
+    SQL TYPE IS <datalink type>
+
+<Pascal derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <Pascal DATALINK variable>
+
+<Pascal DATALINK variable> ::=
+    SQL TYPE IS <datalink type>
+
+<PL/I derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <PL/I DATALINK variable>
+
+<PL/I DATALINK variable> ::=
+    SQL TYPE IS <datalink type>
+
+<CLI routine> ::=
+    !! All alternatives from ISO/IEC 9075-03.
+  | BuildDataLink
+  | GetDataLinkAttr
+
+<url> ::=
+    <http url>
+  | <file url>
+
+<http url> ::=
+    <http> <colon> <solidus> <solidus> <host port> [ <solidus> <hpath> ]
+
+<http> ::=
+    { h
+  | H } { t
+  | T } { t
+  | T } { p
+  | P }
+
+<host port> ::=
+    <host> [ <colon> <port> ]
+
+<host> ::=
+    <host name>
+  | <host number>
+
+<host name> ::=
+    [ { <domain label> <period> }... ] <top label>
+
+<domain label> ::=
+    <letter or digit>
+  | <letter or digit> <label tail>
+
+<letter or digit> ::=
+    <simple Latin letter>
+  | <digit>
+
+<label tail> ::=
+    [ { <letter or digit>
+  | <minus sign> }... ] <letter or digit>
+
+<top label> ::=
+    <simple Latin letter>
+  | <simple Latin letter> <label tail>
+
+<host number> ::=
+    <digits> <period> <digits> <period> <digits> <period> <digits>
+
+<digits> ::=
+    <digit>...
+
+<port> ::=
+    <digits>
+
+<hpath> ::=
+    <hsegment> [ { <solidus> <hsegment> }... ]
+
+<hsegment> ::=
+    [ <hsegment character>... ]
+
+<hsegment character> ::=
+    <uchar>
+  | <colon>
+  | <commercial at>
+  | <ampersand>
+  | <equals operator>
+
+<uchar> ::=
+    <unreserved>
+  | <escape>
+
+<unreserved> ::=
+    <simple Latin letter>
+  | <digit>
+  | <safe>
+  | <extra>
+
+<safe> ::=
+    <dollar sign>
+  | <minus sign>
+  | <underscore>
+  | <period>
+  | <plus sign>
+
+<extra> ::=
+    <exclamation point>
+  | <asterisk>
+  | <quote>
+  | <left paren>
+  | <right paren>
+  | <comma>
+
+<escape> ::=
+    <percent> <hexit> <hexit>
+
+<file url> ::=
+    <file> <colon> <solidus> <solidus> <host> <solidus> <fpath>
+
+<file> ::=
+    { f
+  | F } { i
+  | I } { l
+  | L } { e
+  | E }
+
+<fpath> ::=
+    <fsegment> [ { <solidus> <fsegment> }... ]
+
+<fsegment> ::=
+    [ <fsegment character>... ]
+
+<fsegment character> ::=
+    <uchar>
+  | <question mark>
+  | <colon>
+  | <commercial at>
+  | <ampersand>
+  | <equals operator>
+
+<commercial at> ::=
+    @    !! U+0040
+
+<exclamation point> ::=
+    !    !! U+0021
+
+<foreign server definition> ::=
+    CREATE SERVER <foreign server name>
+         [ TYPE <server type> ] [ VERSION <server version> ]
+         FOREIGN DATA WRAPPER <foreign-data wrapper name> [ <generic options> ]
+
+<server type> ::=
+    !! See the Syntax Rules.
+
+<server version> ::=
+    !! See the Syntax Rules.
+
+<alter foreign server statement> ::=
+    ALTER SERVER <foreign server name> [ <new version> ] [ <alter generic options> ]
+
+<new version> ::=
+    VERSION <server version>
+
+<drop foreign server statement> ::=
+    DROP SERVER <foreign server name> <drop behavior>
+
+<foreign-data wrapper definition> ::=
+    CREATE FOREIGN DATA WRAPPER <foreign-data wrapper name>
+         [ <library name specification> ] <language clause> [ <generic options> ]
+
+<library name specification> ::=
+    LIBRARY <library name>
+
+<library name> ::=
+    <character string literal>
+
+<alter foreign-data wrapper statement> ::=
+    ALTER FOREIGN DATA WRAPPER <foreign-data wrapper name>
+         [ <library name specification> ] [ <alter generic options> ]
+
+<drop foreign-data wrapper statement> ::=
+    DROP FOREIGN DATA WRAPPER <foreign-data wrapper name> <drop behavior>
+
+<import foreign schema statement> ::=
+    IMPORT FOREIGN SCHEMA <foreign schema name> [ <import qualifications> ]
+         FROM SERVER <foreign server name> INTO <local schema name>
+
+<import qualifications> ::=
+    LIMIT TO <left paren> <table name list> <right paren>
+  | EXCEPT <left paren> <table name list> <right paren>
+
+<table name list> ::=
+    <table name> [ { <comma> <table name> }... ]
+
+<foreign schema name> ::=
+    <schema name>
+
+<local schema name> ::=
+    <schema name>
+
+<routine mapping definition> ::=
+    CREATE ROUTINE MAPPING <routine mapping name> FOR <specific routine designator>
+         SERVER <foreign server name> [ <generic options> ]
+
+<alter routine mapping statement> ::=
+    ALTER ROUTINE MAPPING <routine mapping name> <alter generic options>
+
+<drop routine mapping statement> ::=
+    DROP ROUTINE MAPPING <routine mapping name>
+
+<foreign-data wrapper interface routine> ::=
+    <foreign-data wrapper interface routine prefix>
+         <foreign-data wrapper interface routine generic>
+
+<foreign-data wrapper interface routine prefix> ::=
+    MED
+
+<foreign-data wrapper interface routine generic> ::=
+    <foreign-data wrapper interface routine name>
+         <foreign-data wrapper parameter list>
+         [ <foreign-data wrapper returns clause> ]
+
+<foreign-data wrapper interface routine name> ::=
+    AdvanceInitRequest
+  | AllocDescriptor
+  | AllocQueryContext
+  | AllocWrapperEnv
+  | Close
+  | ConnectServer
+  | FreeDescriptor
+  | FreeExecutionHandle
+  | FreeFSConnection
+  | FreeQueryContext
+  | FreeReplyHandle
+  | FreeWrapperEnv
+  | GetAuthorizationId
+  | GetBoolVE
+  | GetDescriptor
+  | GetDiagnostics
+  | GetDistinct
+  | GetNextReply
+  | GetNumBoolVE
+  | GetNumChildren
+  | GetNumOrderByElems
+  | GetNumReplyBoolVE
+  | GetNumReplyOrderBy
+  | GetNumReplySelectElems
+  | GetNumReplyTableRefs
+  | GetNumRoutMapOpts
+  | GetNumSelectElems
+  | GetNumServerOpts
+  | GetNumTableColOpts
+  | GetNumTableOpts
+  | GetNumTableRefElems
+  | GetNumUserOpts
+  | GetNumWrapperOpts
+  | GetOpts
+  | GetOrderByElem
+  | GetReplyBoolVE
+  | GetReplyCardinality
+  | GetReplyDistinct
+  | GetReplyExecCost
+  | GetReplyFirstCost
+  | GetReplyOrderElem
+  | GetReplyReExecCost
+  | GetReplySelectElem
+  | GetReplyTableRef
+  | GetRoutineMapping
+  | GetRoutMapOpt
+  | GetRoutMapOptName
+  | GetSelectElem
+  | GetSelectElemType
+  | GetServerName
+  | GetServerOpt
+  | GetServerOptByName
+  | GetServerType
+  | GetServerVersion
+  | GetSPDHandle
+  | GetSQLString
+  | GetSRDHandle
+  | GetStatistics
+  | GetTableColOpt
+  | GetTableColOptByName
+  | GetTableOpt
+  | GetTableOptByName
+  | GetTableRefElem
+  | GetTableRefElemType
+  | GetTableRefTableName
+  | GetTableServerName
+  | GetTRDHandle
+  | GetUserOpt
+  | GetUserOptByName
+  | GetValExprColName
+  | GetValueExpDesc
+  | GetValueExpKind
+  | GetValueExpName
+  | GetValueExpTable
+  | GetVEChild
+  | GetWPDHandle
+  | GetWrapperLibraryName
+  | GetWrapperName
+  | GetWrapperOpt
+  | GetWrapperOptByName
+  | GetWRDHandle
+  | InitRequest
+  | Iterate
+  | Open
+  | ReOpen
+  | SetDescriptor
+  | TransmitRequest
+
+<foreign-data wrapper parameter list> ::=
+    <left paren> <foreign-data wrapper parameter declaration>
+         [ { <comma> <foreign-data wrapper parameter declaration> }... ] <right paren>
+
+<foreign-data wrapper parameter declaration> ::=
+    <foreign-data wrapper parameter name>
+         <foreign-data wrapper parameter mode>
+         <foreign-data wrapper parameter data type>
+
+<foreign-data wrapper parameter name> ::=
+    !! See the Syntax Rules.
+
+<foreign-data wrapper parameter mode> ::=
+    IN
+  | OUT
+  | INOUT
+
+<foreign-data wrapper parameter data type> ::=
+    INTEGER
+  | SMALLINT
+  | ANY
+  | CHARACTER <left paren> <length> <right paren>
+
+<foreign-data wrapper returns clause> ::=
+    RETURNS SMALLINT
+

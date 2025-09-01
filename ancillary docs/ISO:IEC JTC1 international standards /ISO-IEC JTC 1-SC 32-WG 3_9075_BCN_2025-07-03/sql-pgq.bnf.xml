@@ -1,0 +1,2598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is a "digital artifact" that contains the grammar specified by
+a part of ISO/IEC 9075.
+
+The grammar is specified using the XML vocabulary used to specify
+ISO/IEC 9075 itself. This file contains an XML DTD that specifies
+that XML vocabulary. 
+
+This grammar may be used by implementers of SQL-implementations
+when generating parsers for the SQL language.
+  -->
+ 
+<!DOCTYPE grammar [
+
+<!-- Element definitions 
+-->
+
+<!-- A grammar consists of a set of BNF definitions. 
+-->
+<!ELEMENT grammar ( BNFdef* )>
+
+
+<!-- A BNFdef element defines a syntactic component.
+-->
+<!ELEMENT BNFdef (rhs)>
+<!-- The attributes of BNFdef are:
+      * name is the name of the component.
+      * predicative is an indication of whether it is a production rule that defines a syntactic
+        element not only in terms of the production rule itself but also in terms of further
+        restrictions imposed on it by additional Syntax Rules such that the production rule cannot
+        sufficiently distinguish the syntactic element from the syntactic elements defined by
+        another production rule in an alternative between those two production rules without
+        considering those restrictions.
+-->
+<!ATTLIST BNFdef
+  name CDATA #REQUIRED
+  predicative ( yes | no ) #IMPLIED 
+>
+
+
+<!-- The rhs element specifies the production for the syntactic component being defined.
+-->
+<!ELEMENT rhs ( seeTheRules
+              | ( ( alt )+, seeTheRules? )
+              | ( ( opt 
+                  | group 
+                  | terminalsymbol 
+                  | kw | sjkw
+                  | repeat 
+                  | BNF 
+                  ), seeTheRules? )+
+              )>
+
+
+<!-- An alt element specifies one alternative production for the syntactic component being defined.
+-->
+<!ELEMENT alt (#PCDATA | allAltsFrom | opt | group | terminalsymbol | kw | sjkw  
+                | bold | repeat | BNF )* >
+
+
+<!-- A BNF element references a BNFdef
+-->
+<!ELEMENT BNF EMPTY>
+<!-- The attributes of BNF are:
+      * name is the name of the BNFdef.
+      * part is the number of the part in which the BNFdef is defined if not this document.
+      * standard is the number of the standard in which the BNFdef is defined if not this standard.
+-->
+<!ATTLIST BNF
+  name CDATA #REQUIRED
+  part CDATA #IMPLIED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An allAltsFrom element represents "!! All alternatives from ..." 
+     where ... identifies the other part.
+-->
+<!ELEMENT allAltsFrom EMPTY>
+<!-- The attributes of allAltsFrom are:
+      * part is the number of the part in which the BNFdef is originally defined.
+      * standard is the number of the standard in which the BNFdef is originally defined if not
+        this standard.
+-->
+<!ATTLIST allAltsFrom
+  part CDATA #REQUIRED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An opt element defines an optional component of a production.
+     This is shown by enclosure between [ and ].
+-->
+<!ELEMENT opt (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw 
+                 | repeat | BNF )*>
+
+
+<!-- A group element groups two or more components of a production as an inseparable component.
+     This is shown by enclosure between { and }.
+-->
+<!ELEMENT group (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw  
+                 | repeat | BNF )*>
+
+
+<!-- A repeat indicates possible repetition of a component.
+     This is shown as three dots...
+-->
+<!ELEMENT repeat EMPTY>
+
+
+<!-- A terminalsymbol element defines literal characters in the production.
+-->
+<!ELEMENT terminalsymbol (#PCDATA)*>
+<!-- The attribute of terminalsymbol is:
+     * unicode defines the code point(s). 
+           These are defined as the 4, 5 or 6 hex character(s) separated by commas.
+           For example, unicode="0026" or unicode="007E,005B"
+-->
+<!ATTLIST terminalsymbol
+  unicode CDATA #IMPLIED
+>
+
+<!-- A kw element defines its contents as a normal keyword.
+-->
+<!ELEMENT kw (#PCDATA)>
+
+
+<!-- An sjkw element defines its contents as a SQL/JSON keyword.
+-->
+<!ELEMENT sjkw (#PCDATA)>
+
+ 
+<!-- A bold indicates the use of a bold-faced type font.
+-->
+<!ELEMENT bold (#PCDATA)>
+
+
+<!-- A seeTheRules element represents the sequence "!! See the Syntax Rules".
+-->
+<!ELEMENT seeTheRules EMPTY>
+]>
+
+<grammar>
+   <BNFdef name="SQL special character" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="tilde"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="tilde" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="007E">~</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="delimiter token" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="bracket right arrow"/>
+         </alt>
+         <alt>
+            <BNF name="bracket tilde right arrow"/>
+         </alt>
+         <alt>
+            <BNF name="left arrow"/>
+         </alt>
+         <alt>
+            <BNF name="left arrow bracket"/>
+         </alt>
+         <alt>
+            <BNF name="left arrow tilde"/>
+         </alt>
+         <alt>
+            <BNF name="left arrow tilde bracket"/>
+         </alt>
+         <alt>
+            <BNF name="left minus right"/>
+         </alt>
+         <alt>
+            <BNF name="left minus slash"/>
+         </alt>
+         <alt>
+            <BNF name="left tilde slash"/>
+         </alt>
+         <alt>
+            <BNF name="minus left bracket"/>
+         </alt>
+         <alt>
+            <BNF name="minus slash"/>
+         </alt>
+         <alt>
+            <BNF name="multiset alternation operator"/>
+         </alt>
+         <alt>
+            <BNF name="right bracket minus"/>
+         </alt>
+         <alt>
+            <BNF name="right bracket tilde"/>
+         </alt>
+         <alt>
+            <BNF name="slash minus"/>
+         </alt>
+         <alt>
+            <BNF name="slash minus right"/>
+         </alt>
+         <alt>
+            <BNF name="slash tilde"/>
+         </alt>
+         <alt>
+            <BNF name="slash tilde right"/>
+         </alt>
+         <alt>
+            <BNF name="tilde left bracket"/>
+         </alt>
+         <alt>
+            <BNF name="tilde right arrow"/>
+         </alt>
+         <alt>
+            <BNF name="tilde slash"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="bracket right arrow" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="005D, 002D, 003E">]-&gt;</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="bracket tilde right arrow" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="005D, 007E, 003E">]~&gt;</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="left arrow" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="003C, 002D">&lt;-</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="left arrow bracket" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="003C, 002D, 005B">&lt;-[</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="left arrow tilde" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="003C, 007E">&lt;~</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="left arrow tilde bracket" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="003C, 007E, 005B">&lt;~[</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="left minus right" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="003C, 002D, 003E">&lt;-&gt;</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="left minus slash" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="003C, 002D, 002F">&lt;-/</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="left tilde slash" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="003C, 007E, 002F">&lt;~/</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="minus left bracket" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="002D, 005B">-[</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="minus slash" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="002D, 002F">-/</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="multiset alternation operator" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="007C,002B,007C">|+|</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="right bracket minus" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="005D, 002D">]-</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="right bracket tilde" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="005D, 007E">]~</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="slash minus" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="002F, 002D">/-</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="slash minus right" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="002F, 002D, 003E">/-&gt;</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="slash tilde" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="002F, 007E">/~</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="slash tilde right" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="002F, 007E, 003E">/~&gt;</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="tilde left bracket" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="007E,005B">~[</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="tilde right arrow" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="007E,003E">~&gt;</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="tilde slash" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="007E, 002F">~/</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>ALL_DIFFERENT</kw>
+         </alt>
+         <alt>
+            <kw>BINDING_COUNT</kw>
+         </alt>
+         <alt>
+            <kw>ELEMENT_ID</kw>
+         </alt>
+         <alt>
+            <kw>ELEMENT_NUMBER</kw>
+         </alt>
+         <alt>
+            <kw>EXPORT</kw>
+         </alt>
+         <alt>
+            <kw>GRAPH</kw>
+         </alt>
+         <alt>
+            <kw>GRAPH_TABLE</kw>
+         </alt>
+         <alt>
+            <kw>MATCHNUM</kw>
+         </alt>
+         <alt>
+            <kw>PATH_LENGTH</kw>
+         </alt>
+         <alt>
+            <kw>PATH_NAME</kw>
+         </alt>
+         <alt>
+            <kw>PROPERTY_EXISTS</kw>
+         </alt>
+         <alt>
+            <kw>SAME</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="non-reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>ACYCLIC</kw>
+         </alt>
+         <alt>
+            <kw>BINDINGS</kw>
+         </alt>
+         <alt>
+            <kw>BOUND</kw>
+         </alt>
+         <alt>
+            <kw>DESTINATION</kw>
+         </alt>
+         <alt>
+            <kw>DIFFERENT</kw>
+         </alt>
+         <alt>
+            <kw>DIRECTED</kw>
+         </alt>
+         <alt>
+            <kw>EDGE</kw>
+         </alt>
+         <alt>
+            <kw>EDGES</kw>
+         </alt>
+         <alt>
+            <kw>ELEMENTS</kw>
+         </alt>
+         <alt>
+            <kw>LABEL</kw>
+         </alt>
+         <alt>
+            <kw>LABELED</kw>
+         </alt>
+         <alt>
+            <kw>NODE</kw>
+         </alt>
+         <alt>
+            <kw>PATHS</kw>
+         </alt>
+         <alt>
+            <kw>PROPERTIES</kw>
+         </alt>
+         <alt>
+            <kw>PROPERTY</kw>
+         </alt>
+         <alt>
+            <kw>PROPERTY_GRAPH_CATALOG</kw>
+         </alt>
+         <alt>
+            <kw>PROPERTY_GRAPH_NAME</kw>
+         </alt>
+         <alt>
+            <kw>PROPERTY_GRAPH_SCHEMA</kw>
+         </alt>
+         <alt>
+            <kw>RELATIONSHIP</kw>
+         </alt>
+         <alt>
+            <kw>RELATIONSHIPS</kw>
+         </alt>
+         <alt>
+            <kw>SHORTEST</kw>
+         </alt>
+         <alt>
+            <kw>SINGLETONS</kw>
+         </alt>
+         <alt>
+            <kw>STEP</kw>
+         </alt>
+         <alt>
+            <kw>TABLES</kw>
+         </alt>
+         <alt>
+            <kw>TRAIL</kw>
+         </alt>
+         <alt>
+            <kw>VERTEX</kw>
+         </alt>
+         <alt>
+            <kw>WALK</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="edge synonym" predicative="no">
+      <rhs>
+         <alt>
+            <kw>EDGE</kw>
+         </alt>
+         <alt>
+            <kw>RELATIONSHIP</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="edges synonym" predicative="no">
+      <rhs>
+         <alt>
+            <kw>EDGES</kw>
+         </alt>
+         <alt>
+            <kw>RELATIONSHIPS</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex synonym" predicative="no">
+      <rhs>
+         <alt>
+            <kw>NODE</kw>
+         </alt>
+         <alt>
+            <kw>VERTEX</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="destination vertex table alias" predicative="no">
+      <rhs>
+         <BNF name="vertex table alias"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="edge table alias" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element table name" predicative="no">
+      <rhs>
+         <BNF name="table name" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element table alias" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph pattern variable" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="element variable"/>
+         </alt>
+         <alt>
+            <BNF name="path or subpath variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path or subpath variable" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="path variable"/>
+         </alt>
+         <alt>
+            <BNF name="subpath variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element variable" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label name" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path variable" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="subpath variable" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="property graph name" predicative="no">
+      <rhs>
+         <BNF name="schema qualified name" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="property name" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="source vertex table alias" predicative="no">
+      <rhs>
+         <BNF name="vertex table alias"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex table alias" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="non-parenthesized value expression primary" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="property reference"/>
+         </alt>
+         <alt>
+            <BNF name="graphical value expression primary"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graphical value expression primary" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="element_id function"/>
+         </alt>
+         <alt>
+            <BNF name="graphical match number function"/>
+         </alt>
+         <alt>
+            <BNF name="graphical path name function"/>
+         </alt>
+         <alt>
+            <BNF name="graphical element number function"/>
+         </alt>
+         <alt>
+            <BNF name="graphical path length function"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="case operand" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="element reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="when operand" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="directed predicate part 2"/>
+         </alt>
+         <alt>
+            <BNF name="labeled predicate part 2"/>
+         </alt>
+         <alt>
+            <BNF name="source predicate part 2"/>
+         </alt>
+         <alt>
+            <BNF name="destination predicate part 2"/>
+         </alt>
+         <alt>
+            <BNF name="bound predicate part 2"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="property reference" predicative="no">
+      <rhs>
+         <BNF name="basic identifier chain" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element_id function" predicative="no">
+      <rhs>
+         <kw>ELEMENT_ID</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="element reference"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graphical match number function" predicative="no">
+      <rhs>
+         <kw>MATCHNUM</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graphical path name function" predicative="no">
+      <rhs>
+         <kw>PATH_NAME</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graphical element number function" predicative="no">
+      <rhs>
+         <kw>ELEMENT_NUMBER</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="element reference"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graphical path length function" predicative="no">
+      <rhs>
+         <kw>PATH_LENGTH</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="path reference"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="table primary" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="graph table derived table"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph table derived table" predicative="no">
+      <rhs>
+         <BNF name="graph table"/>
+         <opt>
+            <BNF name="correlation or recognition" part="02"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph table" predicative="no">
+      <rhs>
+         <kw>GRAPH_TABLE</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="graph reference"/>
+         <kw>MATCH</kw>
+         <BNF name="graph pattern"/>
+         <BNF name="graph table shape"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph table shape" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="graph table rows clause"/>
+         </opt>
+         <opt>
+            <BNF name="graph table columns clause"/>
+         </opt>
+         <opt>
+            <BNF name="graph table export clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph table rows clause" predicative="no">
+      <rhs>
+         <alt>
+            <kw>ONE</kw>
+            <kw>ROW</kw>
+            <kw>PER</kw>
+            <kw>MATCH</kw>
+         </alt>
+         <alt>
+            <BNF name="one row per iteration"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="one row per iteration" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="one row per vertex"/>
+         </alt>
+         <alt>
+            <BNF name="one row per step"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="one row per vertex" predicative="no">
+      <rhs>
+         <kw>ONE</kw>
+         <kw>ROW</kw>
+         <kw>PER</kw>
+         <BNF name="vertex synonym"/>
+         <BNF name="left paren" part="02"/>
+         <BNF name="vertex variable"/>
+         <BNF name="right paren" part="02"/>
+         <opt>
+            <BNF name="in paths clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="one row per step" predicative="no">
+      <rhs>
+         <kw>ONE</kw>
+         <kw>ROW</kw>
+         <kw>PER</kw>
+         <kw>STEP</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="vertex variable 1"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="edge variable"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="vertex variable 2"/>
+         <BNF name="right paren" part="02"/>
+         <opt>
+            <BNF name="in paths clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex variable" predicative="no">
+      <rhs>
+         <BNF name="element variable"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex variable 1" predicative="no">
+      <rhs>
+         <BNF name="element variable"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="edge variable" predicative="no">
+      <rhs>
+         <BNF name="element variable"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex variable 2" predicative="no">
+      <rhs>
+         <BNF name="element variable"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="in paths clause" predicative="no">
+      <rhs>
+         <kw>IN</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="path variable"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="path variable"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph table columns clause" predicative="no">
+      <rhs>
+         <kw>COLUMNS</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="graph table column definition"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="graph table column definition"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph table column definition" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="value expression" part="02"/>
+            <opt>
+               <kw>AS</kw>
+               <BNF name="column name" part="02"/>
+            </opt>
+         </alt>
+         <alt>
+            <BNF name="all properties reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="all properties reference" predicative="no">
+      <rhs>
+         <BNF name="element reference"/>
+         <BNF name="period" part="02"/>
+         <BNF name="asterisk" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph table export clause" predicative="no">
+      <rhs>
+         <alt>
+            <kw>EXPORT</kw>
+            <kw>ALL</kw>
+            <kw>SINGLETONS</kw>
+            <opt>
+               <BNF name="export except"/>
+            </opt>
+         </alt>
+         <alt>
+            <kw>EXPORT</kw>
+            <kw>SINGLETONS</kw>
+            <BNF name="left paren" part="02"/>
+            <BNF name="export variable list"/>
+            <BNF name="right paren" part="02"/>
+         </alt>
+         <alt>
+            <kw>EXPORT</kw>
+            <kw>NO</kw>
+            <kw>SINGLETONS</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="export except" predicative="no">
+      <rhs>
+         <kw>EXCEPT</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="export variable list"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="export variable list" predicative="no">
+      <rhs>
+         <BNF name="graph pattern variable"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="graph pattern variable"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="select sublist" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="all properties reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="predicate" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="graph element predicate"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph element predicate" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="directed predicate"/>
+         </alt>
+         <alt>
+            <BNF name="labeled predicate"/>
+         </alt>
+         <alt>
+            <BNF name="source/destination predicate"/>
+         </alt>
+         <alt>
+            <BNF name="all_different predicate"/>
+         </alt>
+         <alt>
+            <BNF name="same predicate"/>
+         </alt>
+         <alt>
+            <BNF name="bound predicate"/>
+         </alt>
+         <alt>
+            <BNF name="property_exists predicate"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="directed predicate" predicative="no">
+      <rhs>
+         <BNF name="element reference"/>
+         <BNF name="directed predicate part 2"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="directed predicate part 2" predicative="no">
+      <rhs>
+         <kw>IS</kw>
+         <opt>
+            <kw>NOT</kw>
+         </opt>
+         <kw>DIRECTED</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="labeled predicate" predicative="no">
+      <rhs>
+         <BNF name="element reference"/>
+         <BNF name="labeled predicate part 2"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="labeled predicate part 2" predicative="no">
+      <rhs>
+         <kw>IS</kw>
+         <opt>
+            <kw>NOT</kw>
+         </opt>
+         <kw>LABELED</kw>
+         <BNF name="label expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="source/destination predicate" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="vertex reference"/>
+            <BNF name="source predicate part 2"/>
+         </alt>
+         <alt>
+            <BNF name="vertex reference"/>
+            <BNF name="destination predicate part 2"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex reference" predicative="no">
+      <rhs>
+         <BNF name="element reference"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="source predicate part 2" predicative="no">
+      <rhs>
+         <kw>IS</kw>
+         <opt>
+            <kw>NOT</kw>
+         </opt>
+         <kw>SOURCE</kw>
+         <kw>OF</kw>
+         <BNF name="edge reference"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="destination predicate part 2" predicative="no">
+      <rhs>
+         <kw>IS</kw>
+         <opt>
+            <kw>NOT</kw>
+         </opt>
+         <kw>DESTINATION</kw>
+         <kw>OF</kw>
+         <BNF name="edge reference"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="edge reference" predicative="no">
+      <rhs>
+         <BNF name="element reference"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="all_different predicate" predicative="no">
+      <rhs>
+         <kw>ALL_DIFFERENT</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="element reference"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="element reference"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="element reference"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="same predicate" predicative="no">
+      <rhs>
+         <kw>SAME</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="element reference"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="element reference"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="element reference"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="bound predicate" predicative="no">
+      <rhs>
+         <BNF name="element reference"/>
+         <BNF name="bound predicate part 2"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="bound predicate part 2" predicative="no">
+      <rhs>
+         <kw>IS</kw>
+         <opt>
+            <kw>NOT</kw>
+         </opt>
+         <kw>BOUND</kw>
+         <opt>
+            <kw>AS</kw>
+            <BNF name="primary element variable"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="primary element variable" predicative="no">
+      <rhs>
+         <BNF name="element variable"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="property_exists predicate" predicative="no">
+      <rhs>
+         <kw>PROPERTY_EXISTS</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="element reference"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="property name"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="aggregate function" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="element variable count function"/>
+            <opt>
+               <BNF name="filter clause" part="02"/>
+            </opt>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element variable count function" predicative="no">
+      <rhs>
+         <kw>BINDING_COUNT</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="element reference"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="sort specification list" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="path order clause"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path order clause" predicative="no">
+      <rhs>
+         <kw>PATH</kw>
+         <kw>ORDER</kw>
+         <opt>
+            <BNF name="ordering specification" part="02"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph reference" predicative="no">
+      <rhs>
+         <BNF name="property graph name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph pattern" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="match mode"/>
+         </opt>
+         <BNF name="path pattern list"/>
+         <opt>
+            <BNF name="keep clause"/>
+         </opt>
+         <opt>
+            <BNF name="graph pattern where clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="match mode" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="repeatable elements match mode"/>
+         </alt>
+         <alt>
+            <BNF name="different edges match mode"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="repeatable elements match mode" predicative="no">
+      <rhs>
+         <kw>REPEATABLE</kw>
+         <BNF name="element bindings or elements"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="different edges match mode" predicative="no">
+      <rhs>
+         <kw>DIFFERENT</kw>
+         <BNF name="edge bindings or edges"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element bindings or elements" predicative="no">
+      <rhs>
+         <alt>
+            <kw>ELEMENT</kw>
+            <opt>
+               <kw>BINDINGS</kw>
+            </opt>
+         </alt>
+         <alt>
+            <kw>ELEMENTS</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="edge bindings or edges" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="edge synonym"/>
+            <opt>
+               <kw>BINDINGS</kw>
+            </opt>
+         </alt>
+         <alt>
+            <BNF name="edges synonym"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path pattern list" predicative="no">
+      <rhs>
+         <BNF name="path pattern"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="path pattern"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path pattern" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="path variable declaration"/>
+         </opt>
+         <opt>
+            <BNF name="path pattern prefix"/>
+         </opt>
+         <BNF name="path pattern expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path variable declaration" predicative="no">
+      <rhs>
+         <BNF name="path variable"/>
+         <BNF name="equals operator" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="keep clause" predicative="no">
+      <rhs>
+         <kw>KEEP</kw>
+         <BNF name="path pattern prefix"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph pattern where clause" predicative="no">
+      <rhs>
+         <kw>WHERE</kw>
+         <BNF name="search condition" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path pattern prefix" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="path mode prefix"/>
+         </alt>
+         <alt>
+            <BNF name="path search prefix"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path mode prefix" predicative="no">
+      <rhs>
+         <BNF name="path mode"/>
+         <opt>
+            <BNF name="path or paths"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path mode" predicative="no">
+      <rhs>
+         <alt>
+            <kw>WALK</kw>
+         </alt>
+         <alt>
+            <kw>TRAIL</kw>
+         </alt>
+         <alt>
+            <kw>SIMPLE</kw>
+         </alt>
+         <alt>
+            <kw>ACYCLIC</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path search prefix" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="all path search"/>
+         </alt>
+         <alt>
+            <BNF name="any path search"/>
+         </alt>
+         <alt>
+            <BNF name="shortest path search"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="all path search" predicative="no">
+      <rhs>
+         <kw>ALL</kw>
+         <opt>
+            <BNF name="path mode"/>
+         </opt>
+         <opt>
+            <BNF name="path or paths"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path or paths" predicative="no">
+      <rhs>
+         <alt>
+            <kw>PATH</kw>
+         </alt>
+         <alt>
+            <kw>PATHS</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="any path search" predicative="no">
+      <rhs>
+         <kw>ANY</kw>
+         <opt>
+            <BNF name="number of paths"/>
+         </opt>
+         <opt>
+            <BNF name="path mode"/>
+         </opt>
+         <opt>
+            <BNF name="path or paths"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="number of paths" predicative="no">
+      <rhs>
+         <BNF name="simple value specification" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="shortest path search" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="all shortest path search"/>
+         </alt>
+         <alt>
+            <BNF name="any shortest path search"/>
+         </alt>
+         <alt>
+            <BNF name="counted shortest path search"/>
+         </alt>
+         <alt>
+            <BNF name="counted shortest group search"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="all shortest path search" predicative="no">
+      <rhs>
+         <kw>ALL</kw>
+         <kw>SHORTEST</kw>
+         <opt>
+            <BNF name="path mode"/>
+         </opt>
+         <opt>
+            <BNF name="path or paths"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="any shortest path search" predicative="no">
+      <rhs>
+         <kw>ANY</kw>
+         <kw>SHORTEST</kw>
+         <opt>
+            <BNF name="path mode"/>
+         </opt>
+         <opt>
+            <BNF name="path or paths"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="counted shortest path search" predicative="no">
+      <rhs>
+         <kw>SHORTEST</kw>
+         <BNF name="number of paths"/>
+         <opt>
+            <BNF name="path mode"/>
+         </opt>
+         <opt>
+            <BNF name="path or paths"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="counted shortest group search" predicative="no">
+      <rhs>
+         <kw>SHORTEST</kw>
+         <opt>
+            <BNF name="number of groups"/>
+         </opt>
+         <opt>
+            <BNF name="path mode"/>
+         </opt>
+         <opt>
+            <BNF name="path or paths"/>
+         </opt>
+         <group>
+            <alt>
+               <kw>GROUP</kw>
+            </alt>
+            <alt>
+               <kw>GROUPS</kw>
+            </alt>
+         </group>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="number of groups" predicative="no">
+      <rhs>
+         <BNF name="simple value specification" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path pattern expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="path term"/>
+         </alt>
+         <alt>
+            <BNF name="path multiset alternation"/>
+         </alt>
+         <alt>
+            <BNF name="path pattern union"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path multiset alternation" predicative="no">
+      <rhs>
+         <BNF name="path term"/>
+         <BNF name="multiset alternation operator"/>
+         <BNF name="path term"/>
+         <opt>
+            <group>
+               <BNF name="multiset alternation operator"/>
+               <BNF name="path term"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path pattern union" predicative="no">
+      <rhs>
+         <BNF name="path term"/>
+         <BNF name="vertical bar" part="02"/>
+         <BNF name="path term"/>
+         <opt>
+            <group>
+               <BNF name="vertical bar" part="02"/>
+               <BNF name="path term"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path term" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="path factor"/>
+         </alt>
+         <alt>
+            <BNF name="path concatenation"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path concatenation" predicative="no">
+      <rhs>
+         <BNF name="path term"/>
+         <BNF name="path factor"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path factor" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="path primary"/>
+         </alt>
+         <alt>
+            <BNF name="quantified path primary"/>
+         </alt>
+         <alt>
+            <BNF name="questioned path primary"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="quantified path primary" predicative="no">
+      <rhs>
+         <BNF name="path primary"/>
+         <BNF name="graph pattern quantifier"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="questioned path primary" predicative="no">
+      <rhs>
+         <BNF name="path primary"/>
+         <BNF name="question mark" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path primary" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="element pattern"/>
+         </alt>
+         <alt>
+            <BNF name="parenthesized path pattern expression"/>
+         </alt>
+         <alt>
+            <BNF name="simplified path pattern expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element pattern" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="vertex pattern"/>
+         </alt>
+         <alt>
+            <BNF name="edge pattern"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex pattern" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="element pattern filler"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element pattern filler" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="element variable declaration"/>
+         </opt>
+         <opt>
+            <BNF name="is label expression"/>
+         </opt>
+         <opt>
+            <BNF name="element pattern where clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element variable declaration" predicative="no">
+      <rhs>
+         <BNF name="element variable"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="is label expression" predicative="no">
+      <rhs>
+         <BNF name="is or colon"/>
+         <BNF name="label expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="is or colon" predicative="no">
+      <rhs>
+         <alt>
+            <kw>IS</kw>
+         </alt>
+         <alt>
+            <BNF name="colon" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element pattern where clause" predicative="no">
+      <rhs>
+         <kw>WHERE</kw>
+         <BNF name="search condition" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="edge pattern" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="full edge pattern"/>
+         </alt>
+         <alt>
+            <BNF name="abbreviated edge pattern"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="full edge pattern" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="full edge pointing left"/>
+         </alt>
+         <alt>
+            <BNF name="full edge undirected"/>
+         </alt>
+         <alt>
+            <BNF name="full edge pointing right"/>
+         </alt>
+         <alt>
+            <BNF name="full edge left or undirected"/>
+         </alt>
+         <alt>
+            <BNF name="full edge undirected or right"/>
+         </alt>
+         <alt>
+            <BNF name="full edge left or right"/>
+         </alt>
+         <alt>
+            <BNF name="full edge any direction"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="full edge pointing left" predicative="no">
+      <rhs>
+         <BNF name="left arrow bracket"/>
+         <BNF name="element pattern filler"/>
+         <BNF name="right bracket minus"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="full edge undirected" predicative="no">
+      <rhs>
+         <BNF name="tilde left bracket"/>
+         <BNF name="element pattern filler"/>
+         <BNF name="right bracket tilde"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="full edge pointing right" predicative="no">
+      <rhs>
+         <BNF name="minus left bracket"/>
+         <BNF name="element pattern filler"/>
+         <BNF name="bracket right arrow"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="full edge left or undirected" predicative="no">
+      <rhs>
+         <BNF name="left arrow tilde bracket"/>
+         <BNF name="element pattern filler"/>
+         <BNF name="right bracket tilde"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="full edge undirected or right" predicative="no">
+      <rhs>
+         <BNF name="tilde left bracket"/>
+         <BNF name="element pattern filler"/>
+         <BNF name="bracket tilde right arrow"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="full edge left or right" predicative="no">
+      <rhs>
+         <BNF name="left arrow bracket"/>
+         <BNF name="element pattern filler"/>
+         <BNF name="bracket right arrow"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="full edge any direction" predicative="no">
+      <rhs>
+         <BNF name="minus left bracket"/>
+         <BNF name="element pattern filler"/>
+         <BNF name="right bracket minus"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="abbreviated edge pattern" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="left arrow"/>
+         </alt>
+         <alt>
+            <BNF name="tilde"/>
+         </alt>
+         <alt>
+            <BNF name="right arrow" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="left arrow tilde"/>
+         </alt>
+         <alt>
+            <BNF name="tilde right arrow"/>
+         </alt>
+         <alt>
+            <BNF name="left minus right"/>
+         </alt>
+         <alt>
+            <BNF name="minus sign" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="parenthesized path pattern expression" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <opt>
+            <BNF name="subpath variable declaration"/>
+         </opt>
+         <opt>
+            <BNF name="path mode prefix"/>
+         </opt>
+         <BNF name="path pattern expression"/>
+         <opt>
+            <BNF name="parenthesized path pattern where clause"/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="subpath variable declaration" predicative="no">
+      <rhs>
+         <BNF name="subpath variable"/>
+         <BNF name="equals operator" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="parenthesized path pattern where clause" predicative="no">
+      <rhs>
+         <kw>WHERE</kw>
+         <BNF name="search condition" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="graph pattern quantifier" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="asterisk" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="plus sign" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="fixed quantifier"/>
+         </alt>
+         <alt>
+            <BNF name="general quantifier"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="fixed quantifier" predicative="no">
+      <rhs>
+         <BNF name="left brace" part="02"/>
+         <BNF name="unsigned integer" part="02"/>
+         <BNF name="right brace" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="general quantifier" predicative="no">
+      <rhs>
+         <BNF name="left brace" part="02"/>
+         <opt>
+            <BNF name="lower bound"/>
+         </opt>
+         <BNF name="comma" part="02"/>
+         <opt>
+            <BNF name="upper bound"/>
+         </opt>
+         <BNF name="right brace" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="lower bound" predicative="no">
+      <rhs>
+         <BNF name="unsigned integer" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="upper bound" predicative="no">
+      <rhs>
+         <BNF name="unsigned integer" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="label term"/>
+         </alt>
+         <alt>
+            <BNF name="label disjunction"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label disjunction" predicative="no">
+      <rhs>
+         <BNF name="label expression"/>
+         <BNF name="vertical bar" part="02"/>
+         <BNF name="label term"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label term" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="label factor"/>
+         </alt>
+         <alt>
+            <BNF name="label conjunction"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label conjunction" predicative="no">
+      <rhs>
+         <BNF name="label term"/>
+         <BNF name="ampersand" part="02"/>
+         <BNF name="label factor"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label factor" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="label primary"/>
+         </alt>
+         <alt>
+            <BNF name="label negation"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label negation" predicative="no">
+      <rhs>
+         <BNF name="exclamation mark" part="02"/>
+         <BNF name="label primary"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label primary" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="label name"/>
+         </alt>
+         <alt>
+            <BNF name="wildcard label"/>
+         </alt>
+         <alt>
+            <BNF name="parenthesized label expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="wildcard label" predicative="no">
+      <rhs>
+         <BNF name="percent" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="parenthesized label expression" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="label expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified path pattern expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simplified defaulting left"/>
+         </alt>
+         <alt>
+            <BNF name="simplified defaulting undirected"/>
+         </alt>
+         <alt>
+            <BNF name="simplified defaulting right"/>
+         </alt>
+         <alt>
+            <BNF name="simplified defaulting left or undirected"/>
+         </alt>
+         <alt>
+            <BNF name="simplified defaulting undirected or right"/>
+         </alt>
+         <alt>
+            <BNF name="simplified defaulting left or right"/>
+         </alt>
+         <alt>
+            <BNF name="simplified defaulting any direction"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified defaulting left" predicative="no">
+      <rhs>
+         <BNF name="left minus slash"/>
+         <BNF name="simplified contents"/>
+         <BNF name="slash minus"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified defaulting undirected" predicative="no">
+      <rhs>
+         <BNF name="tilde slash"/>
+         <BNF name="simplified contents"/>
+         <BNF name="slash tilde"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified defaulting right" predicative="no">
+      <rhs>
+         <BNF name="minus slash"/>
+         <BNF name="simplified contents"/>
+         <BNF name="slash minus right"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified defaulting left or undirected" predicative="no">
+      <rhs>
+         <BNF name="left tilde slash"/>
+         <BNF name="simplified contents"/>
+         <BNF name="slash tilde"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified defaulting undirected or right" predicative="no">
+      <rhs>
+         <BNF name="tilde slash"/>
+         <BNF name="simplified contents"/>
+         <BNF name="slash tilde right"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified defaulting left or right" predicative="no">
+      <rhs>
+         <BNF name="left minus slash"/>
+         <BNF name="simplified contents"/>
+         <BNF name="slash minus right"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified defaulting any direction" predicative="no">
+      <rhs>
+         <BNF name="minus slash"/>
+         <BNF name="simplified contents"/>
+         <BNF name="slash minus"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified contents" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simplified term"/>
+         </alt>
+         <alt>
+            <BNF name="simplified path union"/>
+         </alt>
+         <alt>
+            <BNF name="simplified multiset alternation"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified path union" predicative="no">
+      <rhs>
+         <BNF name="simplified term"/>
+         <BNF name="vertical bar" part="02"/>
+         <BNF name="simplified term"/>
+         <opt>
+            <group>
+               <BNF name="vertical bar" part="02"/>
+               <BNF name="simplified term"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified multiset alternation" predicative="no">
+      <rhs>
+         <BNF name="simplified term"/>
+         <BNF name="multiset alternation operator"/>
+         <BNF name="simplified term"/>
+         <opt>
+            <group>
+               <BNF name="multiset alternation operator"/>
+               <BNF name="simplified term"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified term" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simplified factor low"/>
+         </alt>
+         <alt>
+            <BNF name="simplified concatenation"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified concatenation" predicative="no">
+      <rhs>
+         <BNF name="simplified term"/>
+         <BNF name="simplified factor low"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified factor low" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simplified factor high"/>
+         </alt>
+         <alt>
+            <BNF name="simplified conjunction"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified conjunction" predicative="no">
+      <rhs>
+         <BNF name="simplified factor low"/>
+         <BNF name="ampersand" part="02"/>
+         <BNF name="simplified factor high"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified factor high" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simplified tertiary"/>
+         </alt>
+         <alt>
+            <BNF name="simplified quantified"/>
+         </alt>
+         <alt>
+            <BNF name="simplified questioned"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified quantified" predicative="no">
+      <rhs>
+         <BNF name="simplified tertiary"/>
+         <BNF name="graph pattern quantifier"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified questioned" predicative="no">
+      <rhs>
+         <BNF name="simplified tertiary"/>
+         <BNF name="question mark" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified tertiary" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simplified direction override"/>
+         </alt>
+         <alt>
+            <BNF name="simplified secondary"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified direction override" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simplified override left"/>
+         </alt>
+         <alt>
+            <BNF name="simplified override undirected"/>
+         </alt>
+         <alt>
+            <BNF name="simplified override right"/>
+         </alt>
+         <alt>
+            <BNF name="simplified override left or undirected"/>
+         </alt>
+         <alt>
+            <BNF name="simplified override undirected or right"/>
+         </alt>
+         <alt>
+            <BNF name="simplified override left or right"/>
+         </alt>
+         <alt>
+            <BNF name="simplified override any direction"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified override left" predicative="no">
+      <rhs>
+         <BNF name="left angle bracket" part="02"/>
+         <BNF name="simplified secondary"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified override undirected" predicative="no">
+      <rhs>
+         <BNF name="tilde"/>
+         <BNF name="simplified secondary"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified override right" predicative="no">
+      <rhs>
+         <BNF name="simplified secondary"/>
+         <BNF name="right angle bracket" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified override left or undirected" predicative="no">
+      <rhs>
+         <BNF name="left arrow tilde"/>
+         <BNF name="simplified secondary"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified override undirected or right" predicative="no">
+      <rhs>
+         <BNF name="tilde"/>
+         <BNF name="simplified secondary"/>
+         <BNF name="right angle bracket" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified override left or right" predicative="no">
+      <rhs>
+         <BNF name="left angle bracket" part="02"/>
+         <BNF name="simplified secondary"/>
+         <BNF name="right angle bracket" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified override any direction" predicative="no">
+      <rhs>
+         <BNF name="minus sign" part="02"/>
+         <BNF name="simplified secondary"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified secondary" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simplified primary"/>
+         </alt>
+         <alt>
+            <BNF name="simplified negation"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified negation" predicative="no">
+      <rhs>
+         <BNF name="exclamation mark" part="02"/>
+         <BNF name="simplified primary"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simplified primary" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="label name"/>
+         </alt>
+         <alt>
+            <BNF name="left paren" part="02"/>
+            <BNF name="simplified contents"/>
+            <BNF name="right paren" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element reference" predicative="no">
+      <rhs>
+         <BNF name="element variable"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="path reference" predicative="no">
+      <rhs>
+         <BNF name="path variable"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="schema element" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="property graph definition"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="property graph definition" predicative="no">
+      <rhs>
+         <kw>CREATE</kw>
+         <kw>PROPERTY</kw>
+         <kw>GRAPH</kw>
+         <BNF name="property graph name"/>
+         <opt>
+            <BNF name="property graph content"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="property graph content" predicative="no">
+      <rhs>
+         <BNF name="vertex tables clause"/>
+         <opt>
+            <BNF name="edge tables clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex tables clause" predicative="no">
+      <rhs>
+         <BNF name="vertex synonym"/>
+         <kw>TABLES</kw>
+         <BNF name="parenthesized vertex table list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="parenthesized vertex table list" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="vertex table definition"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="vertex table definition"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex table definition" predicative="no">
+      <rhs>
+         <BNF name="element table definition"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element table definition" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="element table name"/>
+            <opt>
+               <kw>AS</kw>
+               <BNF name="element table alias"/>
+            </opt>
+            <opt>
+               <BNF name="element table key clause"/>
+            </opt>
+            <opt>
+               <BNF name="source vertex table"/>
+               <BNF name="destination vertex table"/>
+            </opt>
+            <opt>
+               <BNF name="element table label and properties clause"/>
+            </opt>
+         </alt>
+         <alt>
+            <BNF name="table subquery" part="02"/>
+            <kw>AS</kw>
+            <BNF name="element table alias"/>
+            <BNF name="element table key clause"/>
+            <opt>
+               <BNF name="source vertex table"/>
+               <BNF name="destination vertex table"/>
+            </opt>
+            <opt>
+               <BNF name="element table label and properties clause"/>
+            </opt>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element table key clause" predicative="no">
+      <rhs>
+         <kw>KEY</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="column name list" part="02"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element table label and properties clause" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="element table properties clause"/>
+         </alt>
+         <alt>
+            <BNF name="label and properties"/>
+            <repeat/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element table properties clause" predicative="no">
+      <rhs>
+         <alt>
+            <kw>NO</kw>
+            <kw>PROPERTIES</kw>
+         </alt>
+         <alt>
+            <kw>PROPERTIES</kw>
+            <BNF name="element table properties alternatives"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element table properties alternatives" predicative="no">
+      <rhs>
+         <alt>
+            <opt>
+               <kw>ARE</kw>
+            </opt>
+            <kw>ALL</kw>
+            <kw>COLUMNS</kw>
+            <opt>
+               <kw>EXCEPT</kw>
+               <BNF name="left paren" part="02"/>
+               <BNF name="except column name list"/>
+               <BNF name="right paren" part="02"/>
+            </opt>
+         </alt>
+         <alt>
+            <BNF name="element table parenthesized derived property list"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="except column name list" predicative="no">
+      <rhs>
+         <BNF name="column name list" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element table parenthesized derived property list"
+           predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="derived property"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="derived property"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="derived property" predicative="no">
+      <rhs>
+         <BNF name="value expression" part="02"/>
+         <opt>
+            <kw>AS</kw>
+            <BNF name="property name"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label and properties" predicative="no">
+      <rhs>
+         <BNF name="element table label clause"/>
+         <opt>
+            <BNF name="element table properties clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="element table label clause" predicative="no">
+      <rhs>
+         <alt>
+            <kw>LABEL</kw>
+            <BNF name="label name"/>
+         </alt>
+         <alt>
+            <kw>DEFAULT</kw>
+            <kw>LABEL</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="edge tables clause" predicative="no">
+      <rhs>
+         <BNF name="edge synonym"/>
+         <kw>TABLES</kw>
+         <BNF name="parenthesized edge table list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="parenthesized edge table list" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="edge table definition"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="edge table definition"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="edge table definition" predicative="no">
+      <rhs>
+         <BNF name="element table definition"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="source vertex table" predicative="no">
+      <rhs>
+         <kw>SOURCE</kw>
+         <opt>
+            <BNF name="source vertex table key clause"/>
+            <kw>REFERENCES</kw>
+         </opt>
+         <BNF name="source vertex reference"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="source vertex table key clause" predicative="no">
+      <rhs>
+         <BNF name="element table key clause"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="source vertex reference" predicative="no">
+      <rhs>
+         <BNF name="source vertex table alias"/>
+         <opt>
+            <BNF name="left paren" part="02"/>
+            <BNF name="referenced source column list"/>
+            <BNF name="right paren" part="02"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="referenced source column list" predicative="no">
+      <rhs>
+         <BNF name="column name list" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="destination vertex table" predicative="no">
+      <rhs>
+         <kw>DESTINATION</kw>
+         <opt>
+            <BNF name="destination vertex table key clause"/>
+            <kw>REFERENCES</kw>
+         </opt>
+         <BNF name="destination vertex reference"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="destination vertex table key clause" predicative="no">
+      <rhs>
+         <BNF name="element table key clause"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="destination vertex reference" predicative="no">
+      <rhs>
+         <BNF name="destination vertex table alias"/>
+         <opt>
+            <BNF name="left paren" part="02"/>
+            <BNF name="referenced destination column list"/>
+            <BNF name="right paren" part="02"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="referenced destination column list" predicative="no">
+      <rhs>
+         <BNF name="column name list" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter property graph statement" predicative="no">
+      <rhs>
+         <kw>ALTER</kw>
+         <kw>PROPERTY</kw>
+         <kw>GRAPH</kw>
+         <BNF name="property graph name"/>
+         <BNF name="alter property graph action"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter property graph action" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="add element table definition"/>
+         </alt>
+         <alt>
+            <BNF name="drop element table definition"/>
+         </alt>
+         <alt>
+            <BNF name="alter element table definition"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="add element table definition" predicative="no">
+      <rhs>
+         <alt>
+            <kw>ADD</kw>
+            <BNF name="vertex tables clause"/>
+            <opt>
+               <kw>ADD</kw>
+               <BNF name="edge tables clause"/>
+            </opt>
+         </alt>
+         <alt>
+            <kw>ADD</kw>
+            <BNF name="edge tables clause"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop element table definition" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <BNF name="vertex or edge"/>
+         <kw>TABLES</kw>
+         <BNF name="parenthesized element table alias list"/>
+         <BNF name="drop behavior" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="vertex or edge" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="vertex synonym"/>
+         </alt>
+         <alt>
+            <BNF name="edge synonym"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="parenthesized element table alias list" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="element table alias"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="element table alias"/>
+            </group>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter element table definition" predicative="no">
+      <rhs>
+         <kw>ALTER</kw>
+         <BNF name="vertex or edge"/>
+         <kw>TABLE</kw>
+         <BNF name="element table alias"/>
+         <BNF name="alter element table action"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter element table action" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="add element table label clause"/>
+         </alt>
+         <alt>
+            <BNF name="drop element table label clause"/>
+         </alt>
+         <alt>
+            <BNF name="alter element table label properties"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="add element table label clause" predicative="no">
+      <rhs>
+         <BNF name="add element table label"/>
+         <repeat/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="add element table label" predicative="no">
+      <rhs>
+         <kw>ADD</kw>
+         <kw>LABEL</kw>
+         <BNF name="label name"/>
+         <BNF name="element table properties clause"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop element table label clause" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <kw>LABEL</kw>
+         <BNF name="label name"/>
+         <BNF name="drop behavior" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter element table label properties" predicative="no">
+      <rhs>
+         <kw>ALTER</kw>
+         <kw>LABEL</kw>
+         <BNF name="label name"/>
+         <BNF name="alter label action"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter label action" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="add property definition"/>
+         </alt>
+         <alt>
+            <BNF name="drop property definition"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="add property definition" predicative="no">
+      <rhs>
+         <kw>ADD</kw>
+         <kw>PROPERTIES</kw>
+         <BNF name="element table parenthesized derived property list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop property definition" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <kw>PROPERTIES</kw>
+         <BNF name="parenthesized property name list"/>
+         <BNF name="drop behavior" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="parenthesized property name list" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="property name list"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="property name list" predicative="no">
+      <rhs>
+         <BNF name="property name"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="property name"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop property graph statement" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <kw>PROPERTY</kw>
+         <kw>GRAPH</kw>
+         <BNF name="property graph name"/>
+         <BNF name="drop behavior" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="object name" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>PROPERTY</kw>
+            <kw>GRAPH</kw>
+            <BNF name="property graph name"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL schema definition statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="property graph definition"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL schema manipulation statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="alter property graph statement"/>
+         </alt>
+         <alt>
+            <BNF name="drop property graph statement"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="condition information item name" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>PROPERTY_GRAPH_CATALOG</kw>
+         </alt>
+         <alt>
+            <kw>PROPERTY_GRAPH_NAME</kw>
+         </alt>
+         <alt>
+            <kw>PROPERTY_GRAPH_SCHEMA</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+</grammar>

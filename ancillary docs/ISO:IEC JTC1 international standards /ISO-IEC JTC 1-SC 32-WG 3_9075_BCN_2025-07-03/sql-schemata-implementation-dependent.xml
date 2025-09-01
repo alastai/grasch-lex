@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" contains an XML element 
+(implementationDependent) that identifies every aspect of a part of ISO/IEC 9075 that is specified to be 
+"implementation-dependent".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-dependent codes is always U. 
+This distinguishes it from the codes used for optional features and implementation-defined 
+features.
+The second letter of implementation-dependent codes have the following meanings:
+    A Actions
+    D Defaults
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+-->
+
+
+
+<!DOCTYPE implementationDependent [
+  
+<!-- The implementationDependent element defines the implementation-dependent features of 
+a standard (part). -->
+<!ELEMENT implementationDependent (unDef*)>
+
+<!-- An unDef element defines a specific implementation-dependent feature. -->
+<!ELEMENT unDef (code, description)>
+
+<!-- A code element specifies the unique code for an implementation-dependent feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-dependent feature.
+-->
+<!ELEMENT description (#PCDATA)>
+
+]>
+
+<implementationDependent>
+   <unDef>
+      <code>UV006</code>
+      <description>The value of DTD_IDENTIFIER that uniquely identifies the data type descriptor among all data type descriptors contained in the schema.</description>
+   </unDef>
+   <unDef>
+      <code>UW003</code>
+      <description>The manner in which an INFORMATION_SCHEMA and its underlying DEFINITION_SCHEMA are created at the time that a catalog is created.</description>
+   </unDef>
+</implementationDependent>

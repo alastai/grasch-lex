@@ -1,0 +1,1367 @@
+<EditorNotes>
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+   This is a list of all problems in the corresponding
+   document that are not yet resolved.
+
+Possible
+Problem         Category
+Number         ==========
+=======
+
+OLB-000  (pseudo-PP showing Editor's Notes convention)
+OLB-031        Language Opportunity
+OLB-032        Language Opportunity
+OLB-033      **Major Technical**
+
+
+OLB-0           *Opportunity*
+OLB-0       **Major Technical**
+OLB-0        *Minor Technical*
+
+======= Largest SQL/OLB Possible Problem number so far *** OLB-033 *** =======
+======= This is the end of the problem number list =======
+
+-->
+
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPolb" number="OLB-" severity="major" realm="technical">
+
+<reference><specref ref="olb_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPolb" number="OLB-" severity="minor" realm="technical">
+
+<reference><specref ref="olb_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPolb" number="OLB-" severity="major" realm="editorial">
+
+<reference><specref ref="olb_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPolb" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="olb_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPolb" number="OLB-">
+
+<reference><specref ref="olb_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPolb000" number="OLB-000" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editor.
+</source>
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point
+that requires particular attention, highlighted thus:
+</para>
+
+<ednote>Text of the problem.
+</ednote>
+
+</problem>
+
+</PP>
+
+
+<LO id="PPolb031" number="OLB-031">
+
+<reference><specref ref="olb_conc_datatypeprops"/>.
+</reference>
+
+<source>WG3:WLG-057 = H2-2005-326r1.
+</source>
+
+<problem>
+
+<para>When JDBC supports an SQL data type, SQL/OLB should be enhanced to provide support of that 
+data type. 
+This LO should be addressed when possible, but should not be considered fully resolved as long as 
+JDBC continues to evolve.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPolb032" number="OLB-032">
+
+<reference>No particular location
+</reference>
+
+<source>Wellington ballot resolution meeting, WG3:WLG-101r1.
+</source>
+
+<problem>
+
+<para>In responding to comments on WG3:WLG-052 and WG3:WLG-092, WG3:WLG-101r1 moved a paragraph
+of <specref ref="olb_semantics_exceptions"/>,
+to a new subclause <quote>Batching</quote> in the tutorial Annex E, and suggested that
+other items from Concepts could be added to that subclause.
+</para>
+
+</problem>
+
+</LO>
+
+
+<PP id="PPolb33" number="OLB-033" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:GYD-024.
+</source>
+
+<problem>
+
+<para>Functionality, if any, to support the Vector type needs to be provided.
+
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<!-- Placed closed PPs and LOs after this line
+
+<COMMENT>===Resolved by WG3:PER-146/H2-2001-???
+
+
+<P>
+<BOX>(<EMPHASIS>(OLB-016\BOLD))
+<X>(<BOX>(OLB-016))
+On the first FCD ballot (1999), comment GBR-P10-020 noted the following
+Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10-No specific location
+
+<LE>Source: First FCD ballot, comment GBR-P10-020
+
+<LE>Description:
+
+<P>
+We do not think it is appropriate at this time to publish another
+extension to SQL:1992.  The document should be aligned with the SQL:1999
+that is about to be published and should specify support for all relevant
+features of Parts 2, 4 and 5 of that standard.
+
+
+<LE>Proposed Solution: None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-180R1/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(OLB-001\BOLD))
+<X>(<BOX>(OLB-001))
+X3H2-99-???/WG3:RTM-085 noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P10-04.03.07, SQL Character Sets
+
+<LE>Source: X3H2-99-???/WG3:RTM-085
+
+<LE>Description:
+
+<P>
+For more natural interoperability between Java and SQL, future versions of
+SQL/OLB should require DBMS support of UNICODE.
+
+
+<LE>Proposed Solution: None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-200/H2-2001-??? and WG3:YYJ-078/H2-2002-???
+
+<P>
+<BOX>(<EMPHASIS>(OLB-020\BOLD))
+<X>(<BOX>(OLB-020))
+The following Possible Problem has been noted:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P10, No specific location
+
+<LE>Source: WG3:HEL-044R1/H2-2000-479
+
+<LE>Description:
+
+<P>
+The impact of the <LB>merge statement> introduced into SQL/Foundation by
+WG3:HEL-044 on SQL/OLB should be investigated.
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:E3C-034 = H2-2002-350
+
+<P>
+<BOX>(<EMPHASIS>(OLB-023\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(OLB-023))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10, SQL/OLB, <REFERENCE>(olb_ref_pas\FULL)
+
+<LE>Note at: None.
+
+<LE>Source: WG3:PER-179R2/H2-2001-???
+
+
+<LE>Language Opportunity:
+
+<P>
+As of the first CD Editing Meeting for SQL/OLB:200n in mid-2001, JDBC 3.0
+is not yet in a final form.  Whenever it has been published in its final
+form, the JDBC reference in the SQL/OLB draft must be updated.
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:E3C-033 = H2-2002-349
+
+<P>
+<BOX>(<EMPHASIS>(OLB-005\BOLD))
+<X>(<BOX>(OLB-005))
+Paul Cotton noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Editorial
+
+<LE>Reference: P10-E, SQL Feature Taxonomy
+
+<LE>Source: Paul Cotton, following RTM meeting
+
+<LE>Description:
+
+<P>
+<REFERENCE>(olb_taxonomy\FULL),
+<REFERENCE>(olb_noncore_taxonomy_table\FULL), needs to be modified to
+describe all of the optional features of SQLJ.  In partiular, the
+following items could be made into optional subfeatures:
+
+<LIST>(UNNUMBERED)
+
+<LE><REFERENCE>(olb_sqljconc_calls\FULL), the Note that says "Support for
+calls to stored procedures and functions is not required for conformance
+to Core SQLJ."
+
+<P>
+See also <REFERENCE>(olb_procedureclause\FULL), the note that says
+"Support for <LB>procedure clause> is not required for conformance to Core
+SQLJ."
+
+<P>
+See also <REFERENCE>(olb_functionclause\FULL), the note that says
+"Support for <LB>function clause> is not required for conformance to Core
+SQLJ."
+
+<LE><REFERENCE>(olb_sqljconc_execctrl\FULL), the note that says "Runtime
+support of the above ExecutionContext Java fields, if set to anything
+other than their default values, is not part of Core SQLJ."
+
+<P>
+See also <REFERENCE>(olb_sqljrunexecctx\FULL), which says "Providing
+runtime support of the ExecutionContext Java fields with the following
+routines, if set to anything other than their default values, is not part
+of Core SQLJ."
+
+<LE><REFERENCE>(olb_sqljconc_dyninterop_sqljjdbc_o\FULL), which says "Support
+for the <EMPHASIS>(getResultSet\BOLD) method is runtime
+<impDef annex="no" code="None"/>, and is not part of Core SQLJ."
+
+<LE><REFERENCE>(olb_sqlblocks\FULL), D&R1), which says "An <LB>SQL block
+clause> is a non-Core extension to the set of SQLJ <LB>statement spec
+clause>s.
+
+<ENDLIST>
+
+<P>
+In addition, the OLB conformance clause should reference the existence of
+these new optional subfeatures.
+
+
+<LE>Proposed Solution: None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:E3C-039 = H2-2002-352
+
+<P>
+<BOX>(<EMPHASIS>(OLB-024\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(OLB-024))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10, SQL/OLB, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:PER-196/H2-2001-???
+
+
+<LE>Language Opportunity:
+
+<P>
+SQL/OLB should support the SQL/MED- and JDBC 3.0-supported data type
+DATALINK.  This cannot be done until JDBC 3.0 has been finalized.
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-074R1/H2-2002-___
+
+<P>
+<BOX>(<EMPHASIS>(OLB-021\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(OLB-021))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Editorial
+
+<LE>Reference: P10, SQL/OLB, <REFERENCE>(olb_objectid\FULL)
+
+<LE>Note at: None.
+
+<LE>Source: WG3:PER-164/H2-2001-???
+
+
+<LE>Possible Problem:
+
+<P>
+The text "200n" must be replaced by the correct year at the FCD Editing
+Meeting.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-092/H2-2002-459
+
+<P>
+<BOX>(<EMPHASIS>(OLB-007\BOLD))
+<X>(<BOX>(OLB-007))
+On the first FCD ballot (1999), comment DEU-P10-003 noted the following
+Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10-04.01.03, Host expressions
+
+<LE>Source: First FCD ballot, comment DEU-P10-003
+
+<LE>Description:
+
+<P>
+The paragraph "In the above example ... execution." is unclear and needs
+some rewording.
+
+
+<LE>Proposed Solution: None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-092/H2-2002-459
+
+<P>
+<BOX>(<EMPHASIS>(OLB-008\BOLD))
+<X>(<BOX>(OLB-008))
+On the first FCD ballot (1999), comment DEU-P10-008 noted the following
+Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10-04.02.02, SQLJ execution control and status
+
+<LE>Source: First FCD ballot, comment DEU-P10-008
+
+<LE>Description:
+
+<P>
+Note 7 contains text defining <impDef annex="no" code="None"/> aspects.  
+This seems to be inappropriate for a note.
+
+
+<LE>Proposed Solution: None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-092/H2-2002-459
+
+<P>
+<BOX>(<EMPHASIS>(OLB-019\BOLD))
+<X>(<BOX>(OLB-019))
+Paul Cotton noted the following Possible Problem derived from  WG3:SAF-052R1:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P10
+
+<LE>Source: Paul Cotton, WG3:SAF-052R1
+
+<LE>Description:
+
+<P>
+Dynamic SQL and CLI use the descriptor fields SCOPE_CATALOG, SCOPE_SCHEMA
+and SCOPE_NAME to describe the scope of a REF column when a DESCRIBE
+OUTPUT is specified.  In addition these interfaces permit the scope of 
+an input parameter value to be specified in these descriptor fields.
+
+<P>
+SAF-052R1 added support to SQL/OLB for references but there is no
+mechanism in SQL/OLB to permit an application to determine the scope of 
+a REF column or to specify the scope of a REF parameter.
+
+
+<LE>Proposed Solution:
+
+<P>
+An additional setRef method could be added that took an addiitonal
+parameter(s) to specify the scope of the supplied REF value.  Some method
+of obtaining the scope of a REF value should also be supplied.  Since the
+scope is constant for a column this is best returned as part of the
+column's metadata.
+
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+
+<COMMENT>===Resolved by WG3:DRS-080/H2-2002-458
+
+<P>
+<BOX>(<EMPHASIS>(OLB-012\BOLD))
+<X>(<BOX>(OLB-012))
+On the first FCD ballot (1999), comment CAN-P10-020 noted the following
+Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10-05.06.06, EntryInfo overview
+
+<LE>Source: First FCD ballot, comment CAN-P10-020
+
+<LE>Description:
+
+<P>
+Table 2 "SQLJ type properties" includes reference to a BIT data type that
+appears to be different than the SQL BIT data type.  This problem must be
+resolved if support for the SQL BIT and BIT VARYING data types are added.
+
+
+<LE>Proposed Solution: None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-080/H2-2002-458
+
+<P>
+<BOX>(<EMPHASIS>(OLB-013\BOLD))
+<X>(<BOX>(OLB-013))
+On the first FCD ballot (1999), comment USA-P10-011 noted the following
+Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10-05.08, SQLJ datatype properties
+
+<LE>Source: First FCD ballot, comment USA-P10-011
+
+<LE>Description:
+
+<P>
+The support for SQL3 datatypes in JDBC 2.0 has to be reflected in the
+SQL/OLB document, which is heavily based on JDBC in terms of the runtime
+packages defined.  In particular, the new JDBC support for large objects,
+reference types, arrays, and structured types has to be carried over into
+the SQL/OLB spec.
+
+
+<LE>Proposed Solution: None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:ZSH-053 = H2-2003-___
+
+<P>
+<BOX>(<EMPHASIS>(OLB-006\BOLD))
+<X>(<BOX>(OLB-006))
+On the first FCD ballot (1999), comment GBR-P10-013 noted the following
+Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10-03., Introduction
+
+<LE>Source: First FCD ballot, comment GBR-P10-013
+
+<LE>Description:
+
+<P>
+Much of the material in clause 3 is of a tutorial nature and inappropriate
+for inclusion in a standard.  Other elements provide necessary information,
+but are in unusual or inappropriate places compared to the common
+placement of such material in other parts of the SQL standard.  The
+contents of the clause should be reviewed and either discarded or
+relocated, as is appropriate for each element.  In general terms, much of
+3.1, Overview, should be discarded, but some is a candidate for inclusion
+in a 'Concepts' clause.  'Design goals' are not normally expressed in the
+normative parts of a standard, so 3.2, 'Design goals', should be discarded.
+In other parts of the SQL standard, conformance requirements are specified
+in a separate clause, the final normative clause of each part, so 3.3,
+'Conformance' should be relocated to conform to this precedent.  The
+comparisons with binding styles for other host languages should be
+discarded from 3.5 and 3.6, with the remaining material being considered
+for inclusion in a Concepts clause.
+
+
+<LE>Proposed Solution: None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:WLG-057/H2-2005-326r1
+
+<P>
+<BOX>(<EMPHASIS>(OLB-010\BOLD))
+<X>(<BOX>(OLB-010))
+First FCD ballot, comment CAN-P10-018 and WG3:PER-098R1/H2-2001-059
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10, SQL/OLB, <REFERENCE>(olb_conc_entryinfo\FULL)
+
+<LE>Source: First FCD ballot, comment CAN-P10-018 and WG3:PER-098R1/H2-2001-059
+
+<LE>Description:
+
+<P>
+<REFERENCE>(olb_conc_typeprop\FULL),
+must be extended to support the new SQL-99
+data types (e.g., <kw>ARRAY</kw>, <kw>MULTISET</kw>, and <kw>ROW</kw>).
+
+<P>
+Support for <kw>ARRAY</kw> has been provided by WG3:DRS-080/H2-2002-458.  It is not
+anticipated that support for either <kw>MULTISET</kw> or <kw>ROW</kw> will be provided by
+SQL/OLB until such time as JDBC provides such support.
+
+
+<LE>Proposed Solution:
+
+<P>
+None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:WLG-057/H2-2005-326r1
+
+<P>
+<BOX>(<EMPHASIS>(OLB-011\BOLD))
+<X>(<BOX>(OLB-011))
+First FCD ballot, comment CAN-P10-019
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10, SQL/OLB, <REFERENCE>(olb_conc_entryinfo\FULL)
+
+<LE>Source: First FCD ballot, comment CAN-P10-019
+
+<LE>Description:
+
+<P>
+<REFERENCE>(olb_conc_typeprop\FULL),
+must be extended to support the SQL-92 data
+types not mentioned (e.g. <kw>DECIMAL</kw>, BIT, BIT <kw>VARYING</kw>, and <kw>INTERVAL</kw>).
+
+<P>
+Support for <kw>DECIMAL</kw> is provided via the java.sql.Types values <kw>NUMERIC</kw> and
+<kw>DECIMAL</kw>.  Further, per SQL/Foundaiton, <REFERENCE>(fnd_incompat\FULL), ISO/IEC
+9075-2:1999 defined data types BIT and BIT <kw>VARYING</kw>, but those types have
+been deleted from this edition of ISO/IEC 9075.  It is not anticipated
+that support for <kw>INTERVAL</kw> will be provided by SQL/OLB until such time as
+JDBC provides such support.
+
+
+<LE>Proposed Solution:
+
+<P>
+None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:WLG-055/H2-2005-304r1
+
+<P>
+<BOX>(<EMPHASIS>(OLB-014\BOLD))
+<X>(<BOX>(OLB-014))
+First FCD ballot, comment DEU-P10-015
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10, SQL/OLB, 06.01, Grammar notation (which no longer exists!)
+
+<LE>Source: First FCD ballot, comment DEU-P10-015
+
+<LE>Description:
+
+<P>
+This subclause contains conventional material that has traditionally been
+provided in other parts of 9075 as a subclause of Clause 3.  In order to
+avoid a major rewrite, such a Conventions Subclause should be added to
+this part; it should merely outline where and how the information one
+would have expected at that clause is actually provided in this part of
+9075.
+
+
+<LE>Proposed Solution:
+
+<P>
+None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:WLG-051/H2-2005-280r1
+
+<P>
+<BOX>(<EMPHASIS>(OLB-025\BOLD))
+<X>(<BOX>(OLB-025))
+Email from Fred Zemke, 2001-11-05, from unknown source
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P10, SQL/OLB, No specific location
+
+<LE>Source: Email from Fred Zemke, 2001-11-05, from unknown source
+
+<LE>Description:
+
+<P>
+There are many paragraphs that say "An SQLException will be thrown"
+without saying what that condition is! Is the implementation free to raise
+any exception that it feels like, possibly even one chosen randomly?  If
+not, then the standard must say what condition is thrown! These places are
+usually accompanied by an editor's note, which should be removed whenever
+the problem at that location is solved.
+
+
+<LE>Proposed Solution:
+
+<P>
+None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:URC-035 = H2-2006-312r1
+
+<P>
+<BOX>(<EMPHASIS>(OLB-015\BOLD))
+<X>(<BOX>(OLB-015))
+First FCD ballot, comment GBR-P10-019
+
+<LIST>(SIMPLE)
+
+<LE>Reference: P10, SQL/OLB, 09.05 (no title given)
+
+<LE>Source: First FCD ballot, comment GBR-P10-019
+
+<LE>Description:
+
+<P>
+"Binary portability", more properly "portability of intermediate object
+code representation", is an objective of the originators of the Java
+language.  Clause 5 does not sufficiently distinguish between statements
+of intent, tutorial matter and concrete specification.  The clause should
+be merged into the general Concepts clause, and should be further revised
+to clarify the distinction between things that are part of the SQL-Java
+binding and features of those things that are part of Java.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:URC-037 = H2-2006-313
+
+<P>
+<BOX>(<EMPHASIS>(OLB-002\BOLD))
+<X>(<BOX>(OLB-002))
+First FCD ballot, comment CAN-P10-017
+
+<LIST>(SIMPLE)
+
+<LE>Reference: P10, SQL/OLB, <REFERENCE>(olb_conc_roletbl\FULL)
+
+<LE>Source: First FCD ballot, comment CAN-P10-017
+
+<LE>Description:
+
+<P>
+The exact set of class of statements that <REFERENCE>(olb_conc_roletbl\FULL) refers to could be 
+more explicitly defined.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:ZSH-118R1 = H2-2003-___
+
+<P>
+<BOX>(<EMPHASIS>(OLB-026\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(OLB-026))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Editorial
+
+<LE>Reference: P10, SQL/OLB, <REFERENCE>(olb_iterdecl\FULL), CR 1)
+
+<LE>Note at: CR 1).
+
+<LE>Source: Email from Stephen Cannan, 2002-10-27
+
+
+<LE>Possible Problem:
+
+<P>
+Conformance Rule 1) should be a General Rule and a new Conformance Rule
+added to restrict what the user can write.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:ZSH-118R1 = H2-2003-___
+
+<P>
+<BOX>(<EMPHASIS>(OLB-027\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(OLB-027))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Editorial
+
+<LE>Reference: P10, SQL/OLB, <REFERENCE>(olb_executable\FULL), CR 1) and 2)
+
+<LE>Note at: CR 1), CR 2))
+
+<LE>Source: Email from Stephen Cannan, 2002-10-27
+
+
+<LE>Possible Problem:
+
+<P>
+Conformance Rules 1), 2), and 3) should be General Rules and new
+Conformance Rules added to restrict what the user can write.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-074R1 = H2-2002-___
+
+<P>
+<BOX>(<EMPHASIS>(OLB-022\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(OLB-022))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Mminor Editorial
+
+<LE>Reference: P10, <REFERENCE>(olb_sql_languages_base_table)
+
+<LE>Ssource: WG3:PER-164/H2-2001-???
+
+<LE>Description:
+
+<P>
+The text "200n" must be replaced by the correct year at the FCD Editing Meeting.
+
+<LE>Proposed Solution:
+
+<P>
+None submitted with comment
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPolb028" number="OLB-028">
+
+<reference>
+P10, SQL/OLB,
+<extref part="10" ref="olb_sqljconc_defconnctx"/>
+</reference>
+
+
+<source>
+WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+A problem arises because both SQL/OLB and SQL/JRT have mechanisms for
+referencing their default SQL-environment.  In SQL/OLB, the JNDI
+registered "jdbc/defaultDataSource" name will, if present, identify the
+default data source for SQL operations to be performed against.  In
+SQL/JRT, the JDBC URL "jdbc:default:connection" identifies a JDBC
+connection to the current SQLimplementation, SQL-session, and
+SQL-transaction.  This raises the question: When, if ever, are the
+following logically equivalent?
+</para>
+
+<slist>
+
+<item>1) Connection con = DriverManager.getConnection(
+"jdbc:default:connection" );
+</item>
+
+<item>2) Connection con =
+sqlj.runtime.ref.DefaultContext.getDefaultContext().getConnection();
+</item>
+
+<item>3) #sql context Ctx with (dataSource="jdbc/defaultDataSource");
+Connection con =(new Ctx()).getConnection();
+</item>
+
+<item>4) Context ctx = new InitialContext();
+DataSource ds = (DataSource) ctx.lookup( "jdbc/defaultDataSource" );
+Connection con = ds.getConnection();
+</item>
+
+</slist>
+
+<para>
+That is, when is the java.sql.Connection con, appearing in the above code
+sequences providing a JDBC connection to the same SQL-implementation?  We
+believe it is desirable, if not required, for an application to be able to
+run either inside a database as a "stored procedure" or outside as a regular application without 
+having to be recoded, so we ask that above be
+issue be clarified.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPolb009" number="OLB-009">
+
+<reference>
+P10, SQL/OLB,
+<extref part="10" ref="olb_conc_custinterface"/>
+</reference>
+
+
+<source>
+First FCD ballot, comment DEU-P10-014
+</source>
+
+
+<problem>
+
+<para>
+Something needs to be said about how the operations "acceptsConnention" in
+this subclause and in subclause 5.6, 'Customization interface', relate to
+each other.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPolb003" number="OLB-003">
+
+<reference>
+P10, SQL/OLB,
+No specific location
+</reference>
+
+
+<source>
+First FCD ballot, comments CAN-P10-023, CAN-P10-024, and CAN-P10-025
+</source>
+
+
+<problem>
+
+<para>
+There may be many opportunities to replace D&amp;Rs in SQL/OLB with an informative Note that says 
+something like "Conformance to SQL/OLB requires
+support only for the ... keywords", when referencing statements or other
+syntax defined in Foundation or other parts.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPolb004" number="OLB-004">
+
+<reference>
+P10, SQL/OLB,
+No specific location
+</reference>
+
+
+<source>
+First FCD ballot, comment CAN-P10-026, reinstated by WG3:ZSH-047 = H2-2003-028
+</source>
+
+
+<problem>
+
+<para>
+SQL/OLB could benefit from supporting the optional <kw>LOCAL</kw> keyword in
+SQL:1999's <BNF name="set transaction statement"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPolb017" number="OLB-017">
+
+<reference>
+P10, SQL/OLB,
+No specific location
+</reference>
+
+
+<source>
+First FCD ballot, comment USA-P10-025
+</source>
+
+
+<problem>
+
+<para>
+This document contains "Definitions and Rules" clauses that sometimes
+appear analogous to SQL "Syntax Rules" and sometimes like "General Rules".
+However, unlike "Syntax Rules" and "General Rules" there is no general
+specification of the effect of violating a "Definition and Rules" nor of
+when the "Definition and Rules" are validated/performed.  The validation
+time of and the effect of violation of a "Definition and Rules" rule
+should be specified.
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPolb018" number="OLB-018">
+
+<reference>
+P10, SQL/OLB,
+No specific location
+</reference>
+
+
+<source>
+First FCD ballot, comment DEU-P10-020
+</source>
+
+
+<problem>
+
+<para>
+To improve readability, more cross-references are needed.  E.g., when the
+interfaces are specified that are implemented by some class definition
+(see for instance 10.2.1) it would be helpful to have reference to the
+subclause defining that interface.  The author of this comment is aware
+that there is abundant precedence for such cross-references in the
+document (see "See also" sections).
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPolb029" number="OLB-029">
+
+<reference>
+P10, SQL/OLB,
+No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+SQL/OLB should make it possible for an SQL/OLB application to use the JDBC
+3.0 support of what JDBC 3.0 refers to as 'Auto Generated Keys' without
+having to use JDBC to do so.  This capability is often used to access what
+many DBMSs refer to as a Row ID of a just inserted or updated row.  And
+while SQL/Foundation doesn't standardize a Row ID, the facility would have
+utility by allowing access to what SQL/Foundation refers to as 'Identity
+columns' or 'Generated columns'.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPolb030" number="OLB-030">
+
+<reference>
+P10, SQL/OLB,
+No specific location
+</reference>
+
+
+<source>
+Email from Mark Ashworth, 2004-07-22, SIA Action Item (see minutes for SIA-025)
+</source>
+
+
+<problem>
+
+<para>
+WG3:SIA-025R1, "A Shorthand for Getting ALL Diagnostics" proposes to add a new
+diagnostics option to embedded SQL but ignores the question of whether it
+should also be added to CLI or the SQLJ (SQL/OLB) binding.
+</para>
+
+</problem>
+
+</LO>
+
+
+
+
+<comment>Resolved by WG3:MEM-032</comment>
+<comment>WG3:KOA-030 = DM32.2-2011-00098</comment>
+<PP id="PPolb033" number="OLB-033" severity="major" realm="technical">
+
+<reference>
+P10, SQL/OLB,
+<extref part="10" ref="olb_esql"/>
+</reference>
+
+
+<noteAt>
+!! Delete this element if its content is empty!!
+</noteAt>
+
+
+<source>
+WG3:KOA-030 = DM32.2-2011-00098
+</source>
+
+
+<problem>
+
+<para>
+Should the references to <BNF name="data type" part="02"/> in
+<specref ref="olb_esql"/>, <itemref type="SR" ref="olb_esql_SR_exprtype"/>
+really be <BNF name="host parameter data type" part="02"/>? 
+See WG3:KOA-030/DM32.2-2011-00098.
+</para>
+
+</problem>
+
+</PP>
+
+-->
+
+</EditorNotes>

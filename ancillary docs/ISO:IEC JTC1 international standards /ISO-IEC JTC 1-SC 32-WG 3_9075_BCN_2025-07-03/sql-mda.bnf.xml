@@ -1,0 +1,1810 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is a "digital artifact" that contains the grammar specified by
+a part of ISO/IEC 9075.
+
+The grammar is specified using the XML vocabulary used to specify
+ISO/IEC 9075 itself. This file contains an XML DTD that specifies
+that XML vocabulary. 
+
+This grammar may be used by implementers of SQL-implementations
+when generating parsers for the SQL language.
+  -->
+ 
+<!DOCTYPE grammar [
+
+<!-- Element definitions 
+-->
+
+<!-- A grammar consists of a set of BNF definitions. 
+-->
+<!ELEMENT grammar ( BNFdef* )>
+
+
+<!-- A BNFdef element defines a syntactic component.
+-->
+<!ELEMENT BNFdef (rhs)>
+<!-- The attributes of BNFdef are:
+      * name is the name of the component.
+      * predicative is an indication of whether it is a production rule that defines a syntactic
+        element not only in terms of the production rule itself but also in terms of further
+        restrictions imposed on it by additional Syntax Rules such that the production rule cannot
+        sufficiently distinguish the syntactic element from the syntactic elements defined by
+        another production rule in an alternative between those two production rules without
+        considering those restrictions.
+-->
+<!ATTLIST BNFdef
+  name CDATA #REQUIRED
+  predicative ( yes | no ) #IMPLIED 
+>
+
+
+<!-- The rhs element specifies the production for the syntactic component being defined.
+-->
+<!ELEMENT rhs ( seeTheRules
+              | ( ( alt )+, seeTheRules? )
+              | ( ( opt 
+                  | group 
+                  | terminalsymbol 
+                  | kw | sjkw
+                  | repeat 
+                  | BNF 
+                  ), seeTheRules? )+
+              )>
+
+
+<!-- An alt element specifies one alternative production for the syntactic component being defined.
+-->
+<!ELEMENT alt (#PCDATA | allAltsFrom | opt | group | terminalsymbol | kw | sjkw  
+                | bold | repeat | BNF )* >
+
+
+<!-- A BNF element references a BNFdef
+-->
+<!ELEMENT BNF EMPTY>
+<!-- The attributes of BNF are:
+      * name is the name of the BNFdef.
+      * part is the number of the part in which the BNFdef is defined if not this document.
+      * standard is the number of the standard in which the BNFdef is defined if not this standard.
+-->
+<!ATTLIST BNF
+  name CDATA #REQUIRED
+  part CDATA #IMPLIED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An allAltsFrom element represents "!! All alternatives from ..." 
+     where ... identifies the other part.
+-->
+<!ELEMENT allAltsFrom EMPTY>
+<!-- The attributes of allAltsFrom are:
+      * part is the number of the part in which the BNFdef is originally defined.
+      * standard is the number of the standard in which the BNFdef is originally defined if not
+        this standard.
+-->
+<!ATTLIST allAltsFrom
+  part CDATA #REQUIRED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An opt element defines an optional component of a production.
+     This is shown by enclosure between [ and ].
+-->
+<!ELEMENT opt (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw 
+                 | repeat | BNF )*>
+
+
+<!-- A group element groups two or more components of a production as an inseparable component.
+     This is shown by enclosure between { and }.
+-->
+<!ELEMENT group (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw  
+                 | repeat | BNF )*>
+
+
+<!-- A repeat indicates possible repetition of a component.
+     This is shown as three dots...
+-->
+<!ELEMENT repeat EMPTY>
+
+
+<!-- A terminalsymbol element defines literal characters in the production.
+-->
+<!ELEMENT terminalsymbol (#PCDATA)*>
+<!-- The attribute of terminalsymbol is:
+     * unicode defines the code point(s). 
+           These are defined as the 4, 5 or 6 hex character(s) separated by commas.
+           For example, unicode="0026" or unicode="007E,005B"
+-->
+<!ATTLIST terminalsymbol
+  unicode CDATA #IMPLIED
+>
+
+<!-- A kw element defines its contents as a normal keyword.
+-->
+<!ELEMENT kw (#PCDATA)>
+
+
+<!-- An sjkw element defines its contents as a SQL/JSON keyword.
+-->
+<!ELEMENT sjkw (#PCDATA)>
+
+ 
+<!-- A bold indicates the use of a bold-faced type font.
+-->
+<!ELEMENT bold (#PCDATA)>
+
+
+<!-- A seeTheRules element represents the sequence "!! See the Syntax Rules".
+-->
+<!ELEMENT seeTheRules EMPTY>
+]>
+
+<grammar>
+   <BNFdef name="reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>MDAGGREGATE</kw>
+         </alt>
+         <alt>
+            <kw>MDALL</kw>
+         </alt>
+         <alt>
+            <kw>MDANY</kw>
+         </alt>
+         <alt>
+            <kw>MDARRAY</kw>
+         </alt>
+         <alt>
+            <kw>MDAVG</kw>
+         </alt>
+         <alt>
+            <kw>MDAXIS_HIGH</kw>
+         </alt>
+         <alt>
+            <kw>MDAXIS_INDEX</kw>
+         </alt>
+         <alt>
+            <kw>MDAXIS_LOW</kw>
+         </alt>
+         <alt>
+            <kw>MDAXIS_NAME</kw>
+         </alt>
+         <alt>
+            <kw>MDAXIS_NAMES</kw>
+         </alt>
+         <alt>
+            <kw>MDCONCAT</kw>
+         </alt>
+         <alt>
+            <kw>MDCOUNT</kw>
+         </alt>
+         <alt>
+            <kw>MDCOUNT_FALSE</kw>
+         </alt>
+         <alt>
+            <kw>MDCOUNT_TRUE</kw>
+         </alt>
+         <alt>
+            <kw>MDCOUNT_UNKNOWN</kw>
+         </alt>
+         <alt>
+            <kw>MDDECODE</kw>
+         </alt>
+         <alt>
+            <kw>MDDIMENSION</kw>
+         </alt>
+         <alt>
+            <kw>MDENCODE</kw>
+         </alt>
+         <alt>
+            <kw>MDEXTENT</kw>
+         </alt>
+         <alt>
+            <kw>MDJOIN</kw>
+         </alt>
+         <alt>
+            <kw>MDMAX</kw>
+         </alt>
+         <alt>
+            <kw>MDMAX_EXTENT</kw>
+         </alt>
+         <alt>
+            <kw>MDMIN</kw>
+         </alt>
+         <alt>
+            <kw>MDRESHAPE</kw>
+         </alt>
+         <alt>
+            <kw>MDSCALE</kw>
+         </alt>
+         <alt>
+            <kw>MDSHIFT</kw>
+         </alt>
+         <alt>
+            <kw>MDSUM</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="non-reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>ELEMENTS</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis variable" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="collection type" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array type"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array type" predicative="no">
+      <rhs>
+         <BNF name="data type" part="02"/>
+         <kw>MDARRAY</kw>
+         <BNF name="maximum md-extent"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="maximum md-extent" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="left bracket or trigraph" part="02"/>
+            <BNF name="maximum md-axis list"/>
+            <BNF name="right bracket or trigraph" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="left bracket or trigraph" part="02"/>
+            <BNF name="maximum md-axis list anonymous"/>
+            <BNF name="right bracket or trigraph" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="maximum md-axis list" predicative="no">
+      <rhs>
+         <BNF name="maximum md-axis"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="maximum md-axis"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="maximum md-axis list anonymous" predicative="no">
+      <rhs>
+         <BNF name="maximum md-axis anonymous"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="maximum md-axis anonymous"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="maximum md-axis" predicative="no">
+      <rhs>
+         <BNF name="md-axis name"/>
+         <opt>
+            <BNF name="left paren" part="02"/>
+            <BNF name="maximum md-axis lower limit"/>
+            <BNF name="colon" part="02"/>
+            <BNF name="maximum md-axis upper limit"/>
+            <BNF name="right paren" part="02"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="maximum md-axis anonymous" predicative="no">
+      <rhs>
+         <BNF name="maximum md-axis lower limit"/>
+         <BNF name="colon" part="02"/>
+         <BNF name="maximum md-axis upper limit"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="maximum md-axis lower limit" predicative="no">
+      <rhs>
+         <BNF name="md-axis limit"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="maximum md-axis upper limit" predicative="no">
+      <rhs>
+         <BNF name="md-axis limit"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis limit" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-axis limit fixed"/>
+         </alt>
+         <alt>
+            <BNF name="asterisk" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis limit fixed" predicative="no">
+      <rhs>
+         <BNF name="signed numeric literal" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis name" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="non-parenthesized value expression primary" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array aggregation expression"/>
+         </alt>
+         <alt>
+            <BNF name="md-axis variable"/>
+         </alt>
+         <alt>
+            <BNF name="md-array element reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="collection value constructor" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array value constructor"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array subset" predicative="no">
+      <rhs>
+         <BNF name="md-array value expression"/>
+         <BNF name="left bracket or trigraph" part="02"/>
+         <BNF name="md-axis subset list"/>
+         <BNF name="right bracket or trigraph" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis subset list" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-axis subset list named"/>
+         </alt>
+         <alt>
+            <BNF name="md-axis subset list positional"/>
+         </alt>
+         <alt>
+            <BNF name="md-array subset extent"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis subset list named" predicative="no">
+      <rhs>
+         <BNF name="md-axis subset named"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-axis subset named"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis subset list positional" predicative="no">
+      <rhs>
+         <BNF name="md-axis subset positional"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-axis subset positional"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis subset named" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-axis limits named"/>
+         </alt>
+         <alt>
+            <BNF name="md-axis slice named"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis subset positional" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-axis limits positional"/>
+         </alt>
+         <alt>
+            <BNF name="md-axis slice positional"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis limits named" predicative="no">
+      <rhs>
+         <BNF name="md-axis name"/>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-interval expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis limits positional" predicative="no">
+      <rhs>
+         <BNF name="md-interval expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-interval expression" predicative="no">
+      <rhs>
+         <BNF name="md-axis lower limit expression"/>
+         <BNF name="colon" part="02"/>
+         <BNF name="md-axis upper limit expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis lower limit expression" predicative="no">
+      <rhs>
+         <BNF name="md-axis limit expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis upper limit expression" predicative="no">
+      <rhs>
+         <BNF name="md-axis limit expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis limit expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="numeric value expression" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="asterisk" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis slice named" predicative="no">
+      <rhs>
+         <BNF name="md-axis name"/>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-axis slice positional"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis slice positional" predicative="no">
+      <rhs>
+         <BNF name="numeric value expression" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array subset extent" predicative="no">
+      <rhs>
+         <kw>MDEXTENT</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array aggregation expression" predicative="no">
+      <rhs>
+         <kw>MDAGGREGATE</kw>
+         <BNF name="md-array aggregation operator"/>
+         <kw>OVER</kw>
+         <BNF name="md-extent alternative"/>
+         <kw>USING</kw>
+         <BNF name="value expression primary" part="02"/>
+         <opt>
+            <kw>WHERE</kw>
+            <BNF name="search condition" part="02"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array aggregation operator" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="plus sign" part="02"/>
+         </alt>
+         <alt>
+            <kw>AND</kw>
+         </alt>
+         <alt>
+            <kw>OR</kw>
+         </alt>
+         <alt>
+            <kw>MAX</kw>
+         </alt>
+         <alt>
+            <kw>MIN</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="searched when clause" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>WHEN</kw>
+            <BNF name="md-array boolean expression"/>
+            <kw>THEN</kw>
+            <BNF name="result" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="cast target" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array cast"/>
+         </alt>
+         <alt>
+            <BNF name="md-array base type cast"/>
+         </alt>
+         <alt>
+            <BNF name="md-array maximum md-extent cast"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array cast" predicative="no">
+      <rhs>
+         <BNF name="data type" part="02"/>
+         <kw>MDARRAY</kw>
+         <BNF name="md-array axis names"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array base type cast" predicative="no">
+      <rhs>
+         <BNF name="data type" part="02"/>
+         <kw>MDARRAY</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array maximum md-extent cast" predicative="no">
+      <rhs>
+         <kw>MDARRAY</kw>
+         <BNF name="maximum md-extent cast alternative"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="maximum md-extent cast alternative" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="maximum md-extent"/>
+         </alt>
+         <alt>
+            <BNF name="md-array axis names"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis explicit name list" predicative="no">
+      <rhs>
+         <BNF name="left bracket or trigraph" part="02"/>
+         <BNF name="md-axis name"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-axis name"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right bracket or trigraph" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array axis names" predicative="no">
+      <rhs>
+         <kw>MDAXIS_NAMES</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="collection value expression" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array value expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="numeric value function" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array dimension"/>
+         </alt>
+         <alt>
+            <BNF name="md-array axis index function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array lower axis limit"/>
+         </alt>
+         <alt>
+            <BNF name="md-array upper axis limit"/>
+         </alt>
+         <alt>
+            <BNF name="md-array aggregation function"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array dimension" predicative="no">
+      <rhs>
+         <kw>MDDIMENSION</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array axis index function" predicative="no">
+      <rhs>
+         <kw>MDAXIS_INDEX</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-axis name"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array lower axis limit" predicative="no">
+      <rhs>
+         <kw>MDAXIS_LOW</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array md-axis"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array upper axis limit" predicative="no">
+      <rhs>
+         <kw>MDAXIS_HIGH</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array md-axis"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array aggregation function" predicative="no">
+      <rhs>
+         <BNF name="md-array aggregation function name"/>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array aggregation function name" predicative="no">
+      <rhs>
+         <alt>
+            <kw>MDALL</kw>
+         </alt>
+         <alt>
+            <kw>MDANY</kw>
+         </alt>
+         <alt>
+            <kw>MDAVG</kw>
+         </alt>
+         <alt>
+            <kw>MDCOUNT</kw>
+         </alt>
+         <alt>
+            <kw>MDCOUNT_FALSE</kw>
+         </alt>
+         <alt>
+            <kw>MDCOUNT_TRUE</kw>
+         </alt>
+         <alt>
+            <kw>MDCOUNT_UNKNOWN</kw>
+         </alt>
+         <alt>
+            <kw>MDMAX</kw>
+         </alt>
+         <alt>
+            <kw>MDMIN</kw>
+         </alt>
+         <alt>
+            <kw>MDSUM</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="string value function" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array encode function"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="character value function" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array axis name function"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array axis name function" predicative="no">
+      <rhs>
+         <kw>MDAXIS_NAME</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="numeric value expression" part="02"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array encode function" predicative="no">
+      <rhs>
+         <kw>MDENCODE</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="format identifier"/>
+         <opt>
+            <BNF name="md-array encode returning clause"/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="format identifier" predicative="no">
+      <rhs>
+         <BNF name="character string literal" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array encode returning clause" predicative="no">
+      <rhs>
+         <kw>RETURNING</kw>
+         <BNF name="data type" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array value expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array boolean expression"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric expression"/>
+         </alt>
+         <alt>
+            <BNF name="md-array primary"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array boolean term"/>
+         </alt>
+         <alt>
+            <BNF name="md-array boolean expression left"/>
+         </alt>
+         <alt>
+            <BNF name="md-array boolean expression right"/>
+         </alt>
+         <alt>
+            <BNF name="md-array boolean expression both"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean expression left" predicative="no">
+      <rhs>
+         <BNF name="md-array boolean expression"/>
+         <kw>OR</kw>
+         <BNF name="boolean term" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean expression right" predicative="no">
+      <rhs>
+         <BNF name="boolean value expression" part="02"/>
+         <kw>OR</kw>
+         <BNF name="md-array boolean term"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean expression both" predicative="no">
+      <rhs>
+         <BNF name="md-array boolean expression"/>
+         <kw>OR</kw>
+         <BNF name="md-array boolean term"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean term" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array boolean factor"/>
+         </alt>
+         <alt>
+            <BNF name="md-array boolean term left"/>
+         </alt>
+         <alt>
+            <BNF name="md-array boolean term right"/>
+         </alt>
+         <alt>
+            <BNF name="md-array boolean term both"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean term left" predicative="no">
+      <rhs>
+         <BNF name="md-array boolean term"/>
+         <kw>AND</kw>
+         <BNF name="boolean factor" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean term right" predicative="no">
+      <rhs>
+         <BNF name="boolean term" part="02"/>
+         <kw>AND</kw>
+         <BNF name="md-array boolean factor"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean term both" predicative="no">
+      <rhs>
+         <BNF name="md-array boolean term"/>
+         <kw>AND</kw>
+         <BNF name="md-array boolean factor"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean factor" predicative="no">
+      <rhs>
+         <opt>
+            <kw>NOT</kw>
+         </opt>
+         <BNF name="md-array boolean test"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean test" predicative="no">
+      <rhs>
+         <BNF name="md-array comparison expression"/>
+         <opt>
+            <kw>IS</kw>
+            <opt>
+               <kw>NOT</kw>
+            </opt>
+            <BNF name="truth value" part="02"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array comparison expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array boolean primary"/>
+         </alt>
+         <alt>
+            <BNF name="md-array comparison expression left"/>
+         </alt>
+         <alt>
+            <BNF name="md-array comparison expression right"/>
+         </alt>
+         <alt>
+            <BNF name="md-array comparison expression both"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array comparison expression left" predicative="no">
+      <rhs>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="comp op" part="02"/>
+         <BNF name="numeric value expression" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array comparison expression right" predicative="no">
+      <rhs>
+         <BNF name="numeric value expression" part="02"/>
+         <BNF name="comp op" part="02"/>
+         <BNF name="md-array numeric expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array comparison expression both" predicative="no">
+      <rhs>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="comp op" part="02"/>
+         <BNF name="md-array numeric expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array boolean primary" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array primary"/>
+         </alt>
+         <alt>
+            <BNF name="parenthesized md-array boolean expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="parenthesized md-array boolean expression" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array boolean expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array numeric term"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric expression left"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric expression right"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric expression both"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric expression left" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array numeric expression"/>
+            <BNF name="plus sign" part="02"/>
+            <BNF name="term" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric expression"/>
+            <BNF name="minus sign" part="02"/>
+            <BNF name="term" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric expression right" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="numeric value expression" part="02"/>
+            <BNF name="plus sign" part="02"/>
+            <BNF name="md-array numeric term"/>
+         </alt>
+         <alt>
+            <BNF name="numeric value expression" part="02"/>
+            <BNF name="minus sign" part="02"/>
+            <BNF name="md-array numeric term"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric expression both" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array numeric expression"/>
+            <BNF name="plus sign" part="02"/>
+            <BNF name="md-array numeric term"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric expression"/>
+            <BNF name="minus sign" part="02"/>
+            <BNF name="md-array numeric term"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric term" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array numeric factor"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric term left"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric term right"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric term both"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric term left" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array numeric term"/>
+            <BNF name="asterisk" part="02"/>
+            <BNF name="factor" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric term"/>
+            <BNF name="solidus" part="02"/>
+            <BNF name="factor" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric term right" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="term" part="02"/>
+            <BNF name="asterisk" part="02"/>
+            <BNF name="md-array numeric factor"/>
+         </alt>
+         <alt>
+            <BNF name="term" part="02"/>
+            <BNF name="solidus" part="02"/>
+            <BNF name="md-array numeric factor"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric term both" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array numeric term"/>
+            <BNF name="asterisk" part="02"/>
+            <BNF name="md-array numeric factor"/>
+         </alt>
+         <alt>
+            <BNF name="md-array numeric term"/>
+            <BNF name="solidus" part="02"/>
+            <BNF name="md-array numeric factor"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric factor" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="sign" part="02"/>
+         </opt>
+         <BNF name="md-array numeric primary"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array numeric primary" predicative="no">
+      <rhs>
+         <BNF name="md-array primary"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array field reference" predicative="no">
+      <rhs>
+         <BNF name="md-array primary"/>
+         <BNF name="period" part="02"/>
+         <BNF name="field name" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array primary" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="value expression primary" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array subset"/>
+         </alt>
+         <alt>
+            <BNF name="md-array value function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array field reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array value function" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array shift function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array reshape function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array scale function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array absolute value expression"/>
+         </alt>
+         <alt>
+            <BNF name="md-array natural logarithm"/>
+         </alt>
+         <alt>
+            <BNF name="md-array common logarithm"/>
+         </alt>
+         <alt>
+            <BNF name="md-array exponential function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array square root"/>
+         </alt>
+         <alt>
+            <BNF name="md-array floor function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array ceiling function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array trigonometric function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array power function"/>
+         </alt>
+         <alt>
+            <BNF name="md-array modulus expression"/>
+         </alt>
+         <alt>
+            <BNF name="md-array concatenation"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array reshape function" predicative="no">
+      <rhs>
+         <kw>MDRESHAPE</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-axis limits list"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array shift function" predicative="no">
+      <rhs>
+         <kw>MDSHIFT</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="left bracket or trigraph" part="02"/>
+         <BNF name="md-axis slice list"/>
+         <BNF name="right bracket or trigraph" part="02"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array scale function" predicative="no">
+      <rhs>
+         <kw>MDSCALE</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-axis limits list"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis limits list" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="left bracket or trigraph" part="02"/>
+            <BNF name="md-axis limits list positional"/>
+            <BNF name="right bracket or trigraph" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="left bracket or trigraph" part="02"/>
+            <BNF name="md-axis limits list named"/>
+            <BNF name="right bracket or trigraph" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array extent"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis limits list positional" predicative="no">
+      <rhs>
+         <BNF name="left bracket or trigraph" part="02"/>
+         <BNF name="md-axis limits positional"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-axis limits positional"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right bracket or trigraph" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis limits list named" predicative="no">
+      <rhs>
+         <BNF name="left bracket or trigraph" part="02"/>
+         <BNF name="md-axis limits named"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-axis limits named"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right bracket or trigraph" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array power function" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array power function left"/>
+         </alt>
+         <alt>
+            <BNF name="md-array power function right"/>
+         </alt>
+         <alt>
+            <BNF name="md-array power function both"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array power function left" predicative="no">
+      <rhs>
+         <kw>POWER</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="numeric value expression" part="02"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array power function right" predicative="no">
+      <rhs>
+         <kw>POWER</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="numeric value expression" part="02"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array power function both" predicative="no">
+      <rhs>
+         <kw>POWER</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array modulus expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array modulus function left"/>
+         </alt>
+         <alt>
+            <BNF name="md-array modulus function right"/>
+         </alt>
+         <alt>
+            <BNF name="md-array modulus function both"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array modulus function left" predicative="no">
+      <rhs>
+         <kw>MOD</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="numeric value expression" part="02"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array modulus function right" predicative="no">
+      <rhs>
+         <kw>MOD</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="numeric value expression" part="02"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array modulus function both" predicative="no">
+      <rhs>
+         <kw>MOD</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array absolute value expression" predicative="no">
+      <rhs>
+         <kw>ABS</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array natural logarithm" predicative="no">
+      <rhs>
+         <kw>LN</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array common logarithm" predicative="no">
+      <rhs>
+         <kw>LOG10</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array exponential function" predicative="no">
+      <rhs>
+         <kw>EXP</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array square root" predicative="no">
+      <rhs>
+         <kw>SQRT</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array floor function" predicative="no">
+      <rhs>
+         <kw>FLOOR</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array ceiling function" predicative="no">
+      <rhs>
+         <group>
+            <alt>
+               <kw>CEIL</kw>
+            </alt>
+            <alt>
+               <kw>CEILING</kw>
+            </alt>
+         </group>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array trigonometric function" predicative="no">
+      <rhs>
+         <BNF name="trigonometric function name" part="02"/>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array numeric expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array concatenation" predicative="no">
+      <rhs>
+         <kw>MDCONCAT</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-array md-axis"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array value constructor" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array value constructor by enumeration"/>
+         </alt>
+         <alt>
+            <BNF name="md-array value constructor by query"/>
+         </alt>
+         <alt>
+            <BNF name="md-array value constructor by iteration"/>
+         </alt>
+         <alt>
+            <BNF name="md-array value constructor by decoding"/>
+         </alt>
+         <alt>
+            <BNF name="md-array value constructor by join"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array value constructor by enumeration" predicative="no">
+      <rhs>
+         <kw>MDARRAY</kw>
+         <BNF name="md-extent alternative"/>
+         <BNF name="md-array element list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array element list" predicative="no">
+      <rhs>
+         <BNF name="left bracket or trigraph" part="02"/>
+         <BNF name="md-array element list inner"/>
+         <BNF name="right bracket or trigraph" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array element list inner" predicative="no">
+      <rhs>
+         <BNF name="md-array element"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-array element"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array element" predicative="no">
+      <rhs>
+         <BNF name="value expression" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array value constructor by query" predicative="no">
+      <rhs>
+         <kw>MDARRAY</kw>
+         <BNF name="md-extent alternative"/>
+         <BNF name="table subquery" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array value constructor by iteration" predicative="no">
+      <rhs>
+         <kw>MDARRAY</kw>
+         <BNF name="md-extent alternative"/>
+         <kw>ELEMENTS</kw>
+         <BNF name="md-array element"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array value constructor by decoding" predicative="no">
+      <rhs>
+         <kw>MDDECODE</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="string value expression" part="02"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="format identifier"/>
+         <BNF name="md-array returning clause"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array returning clause" predicative="no">
+      <rhs>
+         <kw>RETURNING</kw>
+         <BNF name="md-array type"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array value constructor by join" predicative="no">
+      <rhs>
+         <kw>MDJOIN</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression as field"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-array value expression as field"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-array value expression as field"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array value expression as field" predicative="no">
+      <rhs>
+         <BNF name="md-array value expression"/>
+         <opt>
+            <kw>AS</kw>
+            <BNF name="field name" part="02"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array element reference" predicative="no">
+      <rhs>
+         <BNF name="md-array value expression"/>
+         <BNF name="left bracket or trigraph" part="02"/>
+         <BNF name="md-axis slice list"/>
+         <BNF name="right bracket or trigraph" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis slice list" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-axis slice list named"/>
+         </alt>
+         <alt>
+            <BNF name="md-axis slice list positional"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis slice list named" predicative="no">
+      <rhs>
+         <BNF name="md-axis slice named"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-axis slice named"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis slice list positional" predicative="no">
+      <rhs>
+         <BNF name="md-axis slice positional"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-axis slice positional"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="table primary" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-array extent function"/>
+            <BNF name="correlation or recognition" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array extent function" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-array extent"/>
+         </alt>
+         <alt>
+            <BNF name="md-array max extent"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array extent" predicative="no">
+      <rhs>
+         <kw>MDEXTENT</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array max extent" predicative="no">
+      <rhs>
+         <kw>MDMAX_EXTENT</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-array value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-extent alternative" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="md-extent"/>
+         </alt>
+         <alt>
+            <BNF name="md-array subset extent"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-extent" predicative="no">
+      <rhs>
+         <BNF name="left bracket or trigraph" part="02"/>
+         <BNF name="md-axis list"/>
+         <BNF name="right bracket or trigraph" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis list" predicative="no">
+      <rhs>
+         <BNF name="md-axis"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="md-axis"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis" predicative="no">
+      <rhs>
+         <BNF name="md-axis name"/>
+         <BNF name="left paren" part="02"/>
+         <BNF name="md-axis lower limit"/>
+         <BNF name="colon" part="02"/>
+         <BNF name="md-axis upper limit"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis lower limit" predicative="no">
+      <rhs>
+         <BNF name="numeric value expression" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis upper limit" predicative="no">
+      <rhs>
+         <BNF name="numeric value expression" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-array md-axis" predicative="no">
+      <rhs>
+         <BNF name="md-array value expression"/>
+         <BNF name="comma" part="02"/>
+         <BNF name="md-axis identifier"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="md-axis identifier" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="unsigned integer" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="md-axis name"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="update target" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="object column" part="02"/>
+            <BNF name="left bracket or trigraph" part="02"/>
+            <BNF name="md-axis slice list"/>
+            <BNF name="right bracket or trigraph" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="object column" part="02"/>
+            <BNF name="left bracket or trigraph" part="02"/>
+            <BNF name="md-axis subset list"/>
+            <BNF name="right bracket or trigraph" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="descriptor item name" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>MDDIMENSION</kw>
+         </alt>
+         <alt>
+            <kw>MDAXIS_LOW</kw>
+         </alt>
+         <alt>
+            <kw>MDAXIS_HIGH</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Ada derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="Ada md-array locator variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Ada md-array locator variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="md-array type"/>
+         <kw>AS</kw>
+         <kw>LOCATOR</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="C derived variable" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="C md-array locator variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="C md-array locator variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="md-array type"/>
+         <kw>AS</kw>
+         <kw>LOCATOR</kw>
+         <BNF name="C host identifier" part="02"/>
+         <opt>
+            <BNF name="C initial value" part="02"/>
+         </opt>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="C host identifier" part="02"/>
+               <opt>
+                  <BNF name="C initial value" part="02"/>
+               </opt>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="COBOL derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="COBOL md-array locator variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="COBOL md-array locator variable" predicative="no">
+      <rhs>
+         <opt>
+            <kw>USAGE</kw>
+            <opt>
+               <kw>IS</kw>
+            </opt>
+         </opt>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="md-array type"/>
+         <kw>AS</kw>
+         <kw>LOCATOR</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Fortran derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="Fortran md-array locator variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Fortran md-array locator variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="md-array type"/>
+         <kw>AS</kw>
+         <kw>LOCATOR</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="MUMPS derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="MUMPS md-array locator variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="MUMPS md-array locator variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="md-array type"/>
+         <kw>AS</kw>
+         <kw>LOCATOR</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="PL/I derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="PL/I md-array locator variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="PL/I md-array locator variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="md-array type"/>
+         <kw>AS</kw>
+         <kw>LOCATOR</kw>
+      </rhs>
+   </BNFdef>
+</grammar>

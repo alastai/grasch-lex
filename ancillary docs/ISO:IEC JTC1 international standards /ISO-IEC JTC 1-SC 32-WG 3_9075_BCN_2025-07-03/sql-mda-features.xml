@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element ("features") that 
+identifies every optional language feature defined in ("used in") a part of ISO/IEC 9075. 
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to specify the natural-language text that describes the features
+implemented in a particular SQL-implementation.  
+It may also be used by documentation writers and translators to identify those features in the 
+natural languages of users of those SQL-implementations.
+-->
+
+
+ 
+<!DOCTYPE features [
+  
+<!-- The features element defines the features of a standard (part). -->
+<!ELEMENT features ((feature)*)>
+
+<!-- A feature element defines a specific feature. -->
+<!ELEMENT feature (code, description, implies?)>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the feature. -->
+<!ELEMENT description (#PCDATA | squote)*>
+
+<!-- An implies element provides a set of implied features. -->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)*>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT impliedFeature (#PCDATA)>
+
+<!-- An atLeastOneOf element provides a set of implied features where only one is required. -->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+]>
+
+<features>
+   <feature>
+      <code>A011</code>
+      <description>MD-array BOOLEAN element type</description>
+      <implies>
+         <impliedFeature>T031</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>A012</code>
+      <description>MD-array truth value tests</description>
+      <implies>
+         <impliedFeature>A011</impliedFeature>
+         <impliedFeature>F571</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>A013</code>
+      <description>MD-array row element type support</description>
+      <implies>
+         <impliedFeature>T051</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>A014</code>
+      <description>MDA encode/decode functions media type: application/json</description>
+   </feature>
+   <feature>
+      <code>A015</code>
+      <description>MDA encode/decode functions with implementation-defined behavior</description>
+      <implies>
+         <impliedFeature>A014</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>A016</code>
+      <description>Persistent MDA values</description>
+   </feature>
+</features>

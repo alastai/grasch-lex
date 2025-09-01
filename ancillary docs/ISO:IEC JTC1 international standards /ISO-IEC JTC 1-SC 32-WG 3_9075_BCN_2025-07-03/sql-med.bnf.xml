@@ -1,0 +1,2042 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is a "digital artifact" that contains the grammar specified by
+a part of ISO/IEC 9075.
+
+The grammar is specified using the XML vocabulary used to specify
+ISO/IEC 9075 itself. This file contains an XML DTD that specifies
+that XML vocabulary. 
+
+This grammar may be used by implementers of SQL-implementations
+when generating parsers for the SQL language.
+  -->
+ 
+<!DOCTYPE grammar [
+
+<!-- Element definitions 
+-->
+
+<!-- A grammar consists of a set of BNF definitions. 
+-->
+<!ELEMENT grammar ( BNFdef* )>
+
+
+<!-- A BNFdef element defines a syntactic component.
+-->
+<!ELEMENT BNFdef (rhs)>
+<!-- The attributes of BNFdef are:
+      * name is the name of the component.
+      * predicative is an indication of whether it is a production rule that defines a syntactic
+        element not only in terms of the production rule itself but also in terms of further
+        restrictions imposed on it by additional Syntax Rules such that the production rule cannot
+        sufficiently distinguish the syntactic element from the syntactic elements defined by
+        another production rule in an alternative between those two production rules without
+        considering those restrictions.
+-->
+<!ATTLIST BNFdef
+  name CDATA #REQUIRED
+  predicative ( yes | no ) #IMPLIED 
+>
+
+
+<!-- The rhs element specifies the production for the syntactic component being defined.
+-->
+<!ELEMENT rhs ( seeTheRules
+              | ( ( alt )+, seeTheRules? )
+              | ( ( opt 
+                  | group 
+                  | terminalsymbol 
+                  | kw | sjkw
+                  | repeat 
+                  | BNF 
+                  ), seeTheRules? )+
+              )>
+
+
+<!-- An alt element specifies one alternative production for the syntactic component being defined.
+-->
+<!ELEMENT alt (#PCDATA | allAltsFrom | opt | group | terminalsymbol | kw | sjkw  
+                | bold | repeat | BNF )* >
+
+
+<!-- A BNF element references a BNFdef
+-->
+<!ELEMENT BNF EMPTY>
+<!-- The attributes of BNF are:
+      * name is the name of the BNFdef.
+      * part is the number of the part in which the BNFdef is defined if not this document.
+      * standard is the number of the standard in which the BNFdef is defined if not this standard.
+-->
+<!ATTLIST BNF
+  name CDATA #REQUIRED
+  part CDATA #IMPLIED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An allAltsFrom element represents "!! All alternatives from ..." 
+     where ... identifies the other part.
+-->
+<!ELEMENT allAltsFrom EMPTY>
+<!-- The attributes of allAltsFrom are:
+      * part is the number of the part in which the BNFdef is originally defined.
+      * standard is the number of the standard in which the BNFdef is originally defined if not
+        this standard.
+-->
+<!ATTLIST allAltsFrom
+  part CDATA #REQUIRED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An opt element defines an optional component of a production.
+     This is shown by enclosure between [ and ].
+-->
+<!ELEMENT opt (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw 
+                 | repeat | BNF )*>
+
+
+<!-- A group element groups two or more components of a production as an inseparable component.
+     This is shown by enclosure between { and }.
+-->
+<!ELEMENT group (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw  
+                 | repeat | BNF )*>
+
+
+<!-- A repeat indicates possible repetition of a component.
+     This is shown as three dots...
+-->
+<!ELEMENT repeat EMPTY>
+
+
+<!-- A terminalsymbol element defines literal characters in the production.
+-->
+<!ELEMENT terminalsymbol (#PCDATA)*>
+<!-- The attribute of terminalsymbol is:
+     * unicode defines the code point(s). 
+           These are defined as the 4, 5 or 6 hex character(s) separated by commas.
+           For example, unicode="0026" or unicode="007E,005B"
+-->
+<!ATTLIST terminalsymbol
+  unicode CDATA #IMPLIED
+>
+
+<!-- A kw element defines its contents as a normal keyword.
+-->
+<!ELEMENT kw (#PCDATA)>
+
+
+<!-- An sjkw element defines its contents as a SQL/JSON keyword.
+-->
+<!ELEMENT sjkw (#PCDATA)>
+
+ 
+<!-- A bold indicates the use of a bold-faced type font.
+-->
+<!ELEMENT bold (#PCDATA)>
+
+
+<!-- A seeTheRules element represents the sequence "!! See the Syntax Rules".
+-->
+<!ELEMENT seeTheRules EMPTY>
+]>
+
+<grammar>
+   <BNFdef name="non-reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>BLOCKED</kw>
+         </alt>
+         <alt>
+            <kw>CONTROL</kw>
+         </alt>
+         <alt>
+            <kw>DB</kw>
+         </alt>
+         <alt>
+            <kw>FILE</kw>
+         </alt>
+         <alt>
+            <kw>FS</kw>
+         </alt>
+         <alt>
+            <kw>INTEGRITY</kw>
+         </alt>
+         <alt>
+            <kw>LIBRARY</kw>
+         </alt>
+         <alt>
+            <kw>LIMIT</kw>
+         </alt>
+         <alt>
+            <kw>LINK</kw>
+         </alt>
+         <alt>
+            <kw>MAPPING</kw>
+         </alt>
+         <alt>
+            <kw>OFF</kw>
+         </alt>
+         <alt>
+            <kw>PASSTHROUGH</kw>
+         </alt>
+         <alt>
+            <kw>PERMISSION</kw>
+         </alt>
+         <alt>
+            <kw>RECOVERY</kw>
+         </alt>
+         <alt>
+            <kw>REQUIRING</kw>
+         </alt>
+         <alt>
+            <kw>RESTORE</kw>
+         </alt>
+         <alt>
+            <kw>SELECTIVE</kw>
+         </alt>
+         <alt>
+            <kw>SERVER</kw>
+         </alt>
+         <alt>
+            <kw>TOKEN</kw>
+         </alt>
+         <alt>
+            <kw>UNLINK</kw>
+         </alt>
+         <alt>
+            <kw>VERSION</kw>
+         </alt>
+         <alt>
+            <kw>WRAPPER</kw>
+         </alt>
+         <alt>
+            <kw>YES</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>DATALINK</kw>
+         </alt>
+         <alt>
+            <kw>DLNEWCOPY</kw>
+         </alt>
+         <alt>
+            <kw>DLPREVIOUSCOPY</kw>
+         </alt>
+         <alt>
+            <kw>DLURLCOMPLETE</kw>
+         </alt>
+         <alt>
+            <kw>DLURLCOMPLETEONLY</kw>
+         </alt>
+         <alt>
+            <kw>DLURLCOMPLETEWRITE</kw>
+         </alt>
+         <alt>
+            <kw>DLURLPATH</kw>
+         </alt>
+         <alt>
+            <kw>DLURLPATHONLY</kw>
+         </alt>
+         <alt>
+            <kw>DLURLPATHWRITE</kw>
+         </alt>
+         <alt>
+            <kw>DLURLSCHEME</kw>
+         </alt>
+         <alt>
+            <kw>DLURLSERVER</kw>
+         </alt>
+         <alt>
+            <kw>DLVALUE</kw>
+         </alt>
+         <alt>
+            <kw>IMPORT</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign server name" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="catalog name" part="02"/>
+            <BNF name="period" part="02"/>
+         </opt>
+         <BNF name="unqualified foreign server name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper name" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="catalog name" part="02"/>
+            <BNF name="period" part="02"/>
+         </opt>
+         <BNF name="unqualified foreign-data wrapper name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="unqualified foreign server name" predicative="no">
+      <rhs>
+         <BNF name="qualified identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="unqualified foreign-data wrapper name" predicative="no">
+      <rhs>
+         <BNF name="qualified identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="option name" predicative="no">
+      <rhs>
+         <BNF name="identifier body" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="routine mapping name" predicative="no">
+      <rhs>
+         <BNF name="identifier" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="predefined type" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="datalink type"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="datalink type" predicative="no">
+      <rhs>
+         <kw>DATALINK</kw>
+         <opt>
+            <BNF name="datalink control definition"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="datalink control definition" predicative="no">
+      <rhs>
+         <alt>
+            <kw>NO</kw>
+            <kw>LINK</kw>
+            <kw>CONTROL</kw>
+         </alt>
+         <alt>
+            <kw>FILE</kw>
+            <kw>LINK</kw>
+            <kw>CONTROL</kw>
+            <BNF name="datalink file control option"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="datalink file control option" predicative="no">
+      <rhs>
+         <BNF name="integrity control option"/>
+         <BNF name="read permission option"/>
+         <BNF name="write permission option"/>
+         <BNF name="recovery option"/>
+         <opt>
+            <BNF name="unlink option"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="integrity control option" predicative="no">
+      <rhs>
+         <alt>
+            <kw>INTEGRITY</kw>
+            <kw>ALL</kw>
+         </alt>
+         <alt>
+            <kw>INTEGRITY</kw>
+            <kw>SELECTIVE</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="read permission option" predicative="no">
+      <rhs>
+         <alt>
+            <kw>READ</kw>
+            <kw>PERMISSION</kw>
+            <kw>FS</kw>
+         </alt>
+         <alt>
+            <kw>READ</kw>
+            <kw>PERMISSION</kw>
+            <kw>DB</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="write permission option" predicative="no">
+      <rhs>
+         <alt>
+            <kw>WRITE</kw>
+            <kw>PERMISSION</kw>
+            <kw>FS</kw>
+         </alt>
+         <alt>
+            <kw>WRITE</kw>
+            <kw>PERMISSION</kw>
+            <kw>ADMIN</kw>
+            <BNF name="access token indication"/>
+         </alt>
+         <alt>
+            <kw>WRITE</kw>
+            <kw>PERMISSION</kw>
+            <kw>BLOCKED</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="access token indication" predicative="no">
+      <rhs>
+         <alt>
+            <kw>REQUIRING</kw>
+            <kw>TOKEN</kw>
+            <kw>FOR</kw>
+            <kw>UPDATE</kw>
+         </alt>
+         <alt>
+            <kw>NOT</kw>
+            <kw>REQUIRING</kw>
+            <kw>TOKEN</kw>
+            <kw>FOR</kw>
+            <kw>UPDATE</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="recovery option" predicative="no">
+      <rhs>
+         <alt>
+            <kw>RECOVERY</kw>
+            <kw>NO</kw>
+         </alt>
+         <alt>
+            <kw>RECOVERY</kw>
+            <kw>YES</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="unlink option" predicative="no">
+      <rhs>
+         <alt>
+            <kw>ON</kw>
+            <kw>UNLINK</kw>
+            <kw>RESTORE</kw>
+         </alt>
+         <alt>
+            <kw>ON</kw>
+            <kw>UNLINK</kw>
+            <kw>DELETE</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="common value expression" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="datalink value expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="character value function" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="url complete expression"/>
+         </alt>
+         <alt>
+            <BNF name="url complete for write expression"/>
+         </alt>
+         <alt>
+            <BNF name="url complete only expression"/>
+         </alt>
+         <alt>
+            <BNF name="url path expression"/>
+         </alt>
+         <alt>
+            <BNF name="url path for write expression"/>
+         </alt>
+         <alt>
+            <BNF name="url path only expression"/>
+         </alt>
+         <alt>
+            <BNF name="url scheme expression"/>
+         </alt>
+         <alt>
+            <BNF name="url server expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="url complete expression" predicative="no">
+      <rhs>
+         <kw>DLURLCOMPLETE</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="datalink value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="url complete for write expression" predicative="no">
+      <rhs>
+         <kw>DLURLCOMPLETEWRITE</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="datalink value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="url complete only expression" predicative="no">
+      <rhs>
+         <kw>DLURLCOMPLETEONLY</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="datalink value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="url path expression" predicative="no">
+      <rhs>
+         <kw>DLURLPATH</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="datalink value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="url path for write expression" predicative="no">
+      <rhs>
+         <kw>DLURLPATHWRITE</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="datalink value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="url path only expression" predicative="no">
+      <rhs>
+         <kw>DLURLPATHONLY</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="datalink value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="url scheme expression" predicative="no">
+      <rhs>
+         <kw>DLURLSCHEME</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="datalink value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="url server expression" predicative="no">
+      <rhs>
+         <kw>DLURLSERVER</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="datalink value expression"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="datalink value expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="datalink value function"/>
+         </alt>
+         <alt>
+            <BNF name="value expression primary" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="datalink value function" predicative="no">
+      <rhs>
+         <BNF name="datalink value constructor"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="datalink value constructor" predicative="no">
+      <rhs>
+         <alt>
+            <kw>DLVALUE</kw>
+            <BNF name="left paren" part="02"/>
+            <BNF name="data location"/>
+            <BNF name="right paren" part="02"/>
+         </alt>
+         <alt>
+            <kw>DLNEWCOPY</kw>
+            <BNF name="left paren" part="02"/>
+            <BNF name="data location"/>
+            <BNF name="comma" part="02"/>
+            <BNF name="token indication"/>
+            <BNF name="right paren" part="02"/>
+         </alt>
+         <alt>
+            <kw>DLPREVIOUSCOPY</kw>
+            <BNF name="left paren" part="02"/>
+            <BNF name="data location"/>
+            <BNF name="comma" part="02"/>
+            <BNF name="token indication"/>
+            <BNF name="right paren" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="data location" predicative="no">
+      <rhs>
+         <BNF name="character value expression" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="token indication" predicative="no">
+      <rhs>
+         <BNF name="unsigned integer" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="generic options" predicative="no">
+      <rhs>
+         <kw>OPTIONS</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="generic option list"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="generic option list" predicative="no">
+      <rhs>
+         <BNF name="generic option"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="generic option"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="generic option" predicative="no">
+      <rhs>
+         <BNF name="option name"/>
+         <opt>
+            <BNF name="option value"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="option value" predicative="no">
+      <rhs>
+         <BNF name="character string literal" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter generic options" predicative="no">
+      <rhs>
+         <kw>OPTIONS</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="alter generic option list"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter generic option list" predicative="no">
+      <rhs>
+         <BNF name="alter generic option"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="alter generic option"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter generic option" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="alter operation"/>
+         </opt>
+         <BNF name="option name"/>
+         <opt>
+            <BNF name="option value"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter operation" predicative="no">
+      <rhs>
+         <alt>
+            <kw>ADD</kw>
+         </alt>
+         <alt>
+            <kw>SET</kw>
+         </alt>
+         <alt>
+            <kw>DROP</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="schema element" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="foreign table definition"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="column option list" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+            <opt>
+               <BNF name="datalink control definition"/>
+            </opt>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign table definition" predicative="no">
+      <rhs>
+         <kw>CREATE</kw>
+         <kw>FOREIGN</kw>
+         <kw>TABLE</kw>
+         <BNF name="table name" part="02"/>
+         <opt>
+            <BNF name="left paren" part="02"/>
+            <BNF name="basic column definition list"/>
+            <BNF name="right paren" part="02"/>
+         </opt>
+         <kw>SERVER</kw>
+         <BNF name="foreign server name"/>
+         <opt>
+            <BNF name="table generic options"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="table generic options" predicative="no">
+      <rhs>
+         <BNF name="generic options"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="basic column definition list" predicative="no">
+      <rhs>
+         <BNF name="basic column definition"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="basic column definition"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="basic column definition" predicative="no">
+      <rhs>
+         <BNF name="column name" part="02"/>
+         <BNF name="data type" part="02"/>
+         <opt>
+            <BNF name="column generic options"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="column generic options" predicative="no">
+      <rhs>
+         <BNF name="generic options"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter foreign table statement" predicative="no">
+      <rhs>
+         <kw>ALTER</kw>
+         <kw>FOREIGN</kw>
+         <kw>TABLE</kw>
+         <BNF name="table name" part="02"/>
+         <BNF name="alter foreign table action"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter foreign table action" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="add basic column definition"/>
+         </alt>
+         <alt>
+            <BNF name="alter basic column definition"/>
+         </alt>
+         <alt>
+            <BNF name="drop basic column definition"/>
+         </alt>
+         <alt>
+            <BNF name="alter generic options"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="add basic column definition" predicative="no">
+      <rhs>
+         <kw>ADD</kw>
+         <opt>
+            <kw>COLUMN</kw>
+         </opt>
+         <BNF name="basic column definition"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter basic column definition" predicative="no">
+      <rhs>
+         <kw>ALTER</kw>
+         <opt>
+            <kw>COLUMN</kw>
+         </opt>
+         <BNF name="column name" part="02"/>
+         <BNF name="alter basic column action"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter basic column action" predicative="no">
+      <rhs>
+         <BNF name="alter generic options"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop basic column definition" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <opt>
+            <kw>COLUMN</kw>
+         </opt>
+         <BNF name="column name" part="02"/>
+         <BNF name="drop behavior" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop foreign table statement" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <kw>FOREIGN</kw>
+         <kw>TABLE</kw>
+         <BNF name="table name" part="02"/>
+         <BNF name="drop behavior" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="object name" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>FOREIGN</kw>
+            <kw>DATA</kw>
+            <kw>WRAPPER</kw>
+            <BNF name="foreign-data wrapper name"/>
+         </alt>
+         <alt>
+            <kw>FOREIGN</kw>
+            <kw>SERVER</kw>
+            <BNF name="foreign server name"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="user mapping definition" predicative="no">
+      <rhs>
+         <kw>CREATE</kw>
+         <kw>USER</kw>
+         <kw>MAPPING</kw>
+         <kw>FOR</kw>
+         <BNF name="specific or generic authorization identifier"/>
+         <kw>SERVER</kw>
+         <BNF name="foreign server name"/>
+         <opt>
+            <BNF name="generic options"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="specific or generic authorization identifier" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="authorization identifier" part="02"/>
+         </alt>
+         <alt>
+            <kw>USER</kw>
+         </alt>
+         <alt>
+            <kw>CURRENT_USER</kw>
+         </alt>
+         <alt>
+            <kw>PUBLIC</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter user mapping statement" predicative="no">
+      <rhs>
+         <kw>ALTER</kw>
+         <kw>USER</kw>
+         <kw>MAPPING</kw>
+         <BNF name="specific or generic authorization identifier"/>
+         <kw>SERVER</kw>
+         <BNF name="foreign server name"/>
+         <BNF name="alter generic options"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop user mapping statement" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <kw>USER</kw>
+         <kw>MAPPING</kw>
+         <kw>FOR</kw>
+         <BNF name="specific or generic authorization identifier"/>
+         <kw>SERVER</kw>
+         <BNF name="foreign server name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL schema definition statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="foreign table definition"/>
+         </alt>
+         <alt>
+            <BNF name="foreign server definition"/>
+         </alt>
+         <alt>
+            <BNF name="foreign-data wrapper definition"/>
+         </alt>
+         <alt>
+            <BNF name="user mapping definition"/>
+         </alt>
+         <alt>
+            <BNF name="routine mapping definition"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL schema manipulation statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="alter foreign table statement"/>
+         </alt>
+         <alt>
+            <BNF name="drop foreign table statement"/>
+         </alt>
+         <alt>
+            <BNF name="alter foreign server statement"/>
+         </alt>
+         <alt>
+            <BNF name="drop foreign server statement"/>
+         </alt>
+         <alt>
+            <BNF name="alter foreign-data wrapper statement"/>
+         </alt>
+         <alt>
+            <BNF name="drop foreign-data wrapper statement"/>
+         </alt>
+         <alt>
+            <BNF name="alter user mapping statement"/>
+         </alt>
+         <alt>
+            <BNF name="drop user mapping statement"/>
+         </alt>
+         <alt>
+            <BNF name="alter routine mapping statement"/>
+         </alt>
+         <alt>
+            <BNF name="drop routine mapping statement"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL session statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="set passthrough statement"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="set passthrough statement" predicative="no">
+      <rhs>
+         <kw>SET</kw>
+         <kw>PASSTHROUGH</kw>
+         <BNF name="passthrough specification"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="passthrough specification" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="value specification" part="02"/>
+         </alt>
+         <alt>
+            <kw>OFF</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Ada derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="Ada DATALINK variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Ada DATALINK variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="datalink type"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="C derived variable" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="C DATALINK variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="C DATALINK variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="datalink type"/>
+         <BNF name="C host identifier" part="02"/>
+         <opt>
+            <BNF name="C initial value" part="02"/>
+         </opt>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="C host identifier" part="02"/>
+               <opt>
+                  <BNF name="C initial value" part="02"/>
+               </opt>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="COBOL derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="COBOL DATALINK variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="COBOL DATALINK variable" predicative="no">
+      <rhs>
+         <opt>
+            <kw>USAGE</kw>
+            <opt>
+               <kw>IS</kw>
+            </opt>
+         </opt>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="datalink type"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Fortran derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="Fortran DATALINK variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Fortran DATALINK variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="datalink type"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="MUMPS derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="MUMPS DATALINK variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="MUMPS DATALINK variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="datalink type"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Pascal derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="Pascal DATALINK variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Pascal DATALINK variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="datalink type"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="PL/I derived type specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="PL/I DATALINK variable"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="PL/I DATALINK variable" predicative="no">
+      <rhs>
+         <kw>SQL</kw>
+         <kw>TYPE</kw>
+         <kw>IS</kw>
+         <BNF name="datalink type"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="CLI routine" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="03"/>
+         </alt>
+         <alt>
+            <terminalsymbol>BuildDataLink</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetDataLinkAttr</terminalsymbol>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="url" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="http url"/>
+         </alt>
+         <alt>
+            <BNF name="file url"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="http url" predicative="no">
+      <rhs>
+         <BNF name="http"/>
+         <BNF name="colon" part="02"/>
+         <BNF name="solidus" part="02"/>
+         <BNF name="solidus" part="02"/>
+         <BNF name="host port"/>
+         <opt>
+            <BNF name="solidus" part="02"/>
+            <BNF name="hpath"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="http" predicative="no">
+      <rhs>
+         <group>
+            <alt>
+               <terminalsymbol>h</terminalsymbol>
+            </alt>
+            <alt>
+               <terminalsymbol>H</terminalsymbol>
+            </alt>
+         </group>
+         <group>
+            <alt>
+               <terminalsymbol>t</terminalsymbol>
+            </alt>
+            <alt>
+               <terminalsymbol>T</terminalsymbol>
+            </alt>
+         </group>
+         <group>
+            <alt>
+               <terminalsymbol>t</terminalsymbol>
+            </alt>
+            <alt>
+               <terminalsymbol>T</terminalsymbol>
+            </alt>
+         </group>
+         <group>
+            <alt>
+               <terminalsymbol>p</terminalsymbol>
+            </alt>
+            <alt>
+               <terminalsymbol>P</terminalsymbol>
+            </alt>
+         </group>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="host port" predicative="no">
+      <rhs>
+         <BNF name="host"/>
+         <opt>
+            <BNF name="colon" part="02"/>
+            <BNF name="port"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="host" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="host name"/>
+         </alt>
+         <alt>
+            <BNF name="host number"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="host name" predicative="no">
+      <rhs>
+         <opt>
+            <group>
+               <BNF name="domain label"/>
+               <BNF name="period" part="02"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="top label"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="domain label" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="letter or digit"/>
+         </alt>
+         <alt>
+            <BNF name="letter or digit"/>
+            <BNF name="label tail"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="letter or digit" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simple Latin letter" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="digit" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="label tail" predicative="no">
+      <rhs>
+         <opt>
+            <group>
+               <alt>
+                  <BNF name="letter or digit"/>
+               </alt>
+               <alt>
+                  <BNF name="minus sign" part="02"/>
+               </alt>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="letter or digit"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="top label" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simple Latin letter" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="simple Latin letter" part="02"/>
+            <BNF name="label tail"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="host number" predicative="no">
+      <rhs>
+         <BNF name="digits"/>
+         <BNF name="period" part="02"/>
+         <BNF name="digits"/>
+         <BNF name="period" part="02"/>
+         <BNF name="digits"/>
+         <BNF name="period" part="02"/>
+         <BNF name="digits"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="digits" predicative="no">
+      <rhs>
+         <BNF name="digit" part="02"/>
+         <repeat/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="port" predicative="no">
+      <rhs>
+         <BNF name="digits"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="hpath" predicative="no">
+      <rhs>
+         <BNF name="hsegment"/>
+         <opt>
+            <group>
+               <BNF name="solidus" part="02"/>
+               <BNF name="hsegment"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="hsegment" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="hsegment character"/>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="hsegment character" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="uchar"/>
+         </alt>
+         <alt>
+            <BNF name="colon" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="commercial at"/>
+         </alt>
+         <alt>
+            <BNF name="ampersand" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="equals operator" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="uchar" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="unreserved"/>
+         </alt>
+         <alt>
+            <BNF name="escape"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="unreserved" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simple Latin letter" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="digit" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="safe"/>
+         </alt>
+         <alt>
+            <BNF name="extra"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="safe" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="dollar sign" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="minus sign" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="underscore" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="period" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="plus sign" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="extra" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="exclamation point"/>
+         </alt>
+         <alt>
+            <BNF name="asterisk" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="quote" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="left paren" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="right paren" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="comma" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="escape" predicative="no">
+      <rhs>
+         <BNF name="percent" part="02"/>
+         <BNF name="hexit" part="02"/>
+         <BNF name="hexit" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="file url" predicative="no">
+      <rhs>
+         <BNF name="file"/>
+         <BNF name="colon" part="02"/>
+         <BNF name="solidus" part="02"/>
+         <BNF name="solidus" part="02"/>
+         <BNF name="host"/>
+         <BNF name="solidus" part="02"/>
+         <BNF name="fpath"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="file" predicative="no">
+      <rhs>
+         <group>
+            <alt>
+               <terminalsymbol>f</terminalsymbol>
+            </alt>
+            <alt>
+               <terminalsymbol>F</terminalsymbol>
+            </alt>
+         </group>
+         <group>
+            <alt>
+               <terminalsymbol>i</terminalsymbol>
+            </alt>
+            <alt>
+               <terminalsymbol>I</terminalsymbol>
+            </alt>
+         </group>
+         <group>
+            <alt>
+               <terminalsymbol>l</terminalsymbol>
+            </alt>
+            <alt>
+               <terminalsymbol>L</terminalsymbol>
+            </alt>
+         </group>
+         <group>
+            <alt>
+               <terminalsymbol>e</terminalsymbol>
+            </alt>
+            <alt>
+               <terminalsymbol>E</terminalsymbol>
+            </alt>
+         </group>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="fpath" predicative="no">
+      <rhs>
+         <BNF name="fsegment"/>
+         <opt>
+            <group>
+               <BNF name="solidus" part="02"/>
+               <BNF name="fsegment"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="fsegment" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="fsegment character"/>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="fsegment character" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="uchar"/>
+         </alt>
+         <alt>
+            <BNF name="question mark" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="colon" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="commercial at"/>
+         </alt>
+         <alt>
+            <BNF name="ampersand" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="equals operator" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="commercial at" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="0040">@</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="exclamation point" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="0021">!</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign server definition" predicative="no">
+      <rhs>
+         <kw>CREATE</kw>
+         <kw>SERVER</kw>
+         <BNF name="foreign server name"/>
+         <opt>
+            <kw>TYPE</kw>
+            <BNF name="server type"/>
+         </opt>
+         <opt>
+            <kw>VERSION</kw>
+            <BNF name="server version"/>
+         </opt>
+         <kw>FOREIGN</kw>
+         <kw>DATA</kw>
+         <kw>WRAPPER</kw>
+         <BNF name="foreign-data wrapper name"/>
+         <opt>
+            <BNF name="generic options"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="server type" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="server version" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter foreign server statement" predicative="no">
+      <rhs>
+         <kw>ALTER</kw>
+         <kw>SERVER</kw>
+         <BNF name="foreign server name"/>
+         <opt>
+            <BNF name="new version"/>
+         </opt>
+         <opt>
+            <BNF name="alter generic options"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="new version" predicative="no">
+      <rhs>
+         <kw>VERSION</kw>
+         <BNF name="server version"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop foreign server statement" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <kw>SERVER</kw>
+         <BNF name="foreign server name"/>
+         <BNF name="drop behavior" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper definition" predicative="no">
+      <rhs>
+         <kw>CREATE</kw>
+         <kw>FOREIGN</kw>
+         <kw>DATA</kw>
+         <kw>WRAPPER</kw>
+         <BNF name="foreign-data wrapper name"/>
+         <opt>
+            <BNF name="library name specification"/>
+         </opt>
+         <BNF name="language clause" part="02"/>
+         <opt>
+            <BNF name="generic options"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="library name specification" predicative="no">
+      <rhs>
+         <kw>LIBRARY</kw>
+         <BNF name="library name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="library name" predicative="no">
+      <rhs>
+         <BNF name="character string literal" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter foreign-data wrapper statement" predicative="no">
+      <rhs>
+         <kw>ALTER</kw>
+         <kw>FOREIGN</kw>
+         <kw>DATA</kw>
+         <kw>WRAPPER</kw>
+         <BNF name="foreign-data wrapper name"/>
+         <opt>
+            <BNF name="library name specification"/>
+         </opt>
+         <opt>
+            <BNF name="alter generic options"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop foreign-data wrapper statement" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <kw>FOREIGN</kw>
+         <kw>DATA</kw>
+         <kw>WRAPPER</kw>
+         <BNF name="foreign-data wrapper name"/>
+         <BNF name="drop behavior" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="import foreign schema statement" predicative="no">
+      <rhs>
+         <kw>IMPORT</kw>
+         <kw>FOREIGN</kw>
+         <kw>SCHEMA</kw>
+         <BNF name="foreign schema name"/>
+         <opt>
+            <BNF name="import qualifications"/>
+         </opt>
+         <kw>FROM</kw>
+         <kw>SERVER</kw>
+         <BNF name="foreign server name"/>
+         <kw>INTO</kw>
+         <BNF name="local schema name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="import qualifications" predicative="no">
+      <rhs>
+         <alt>
+            <kw>LIMIT</kw>
+            <kw>TO</kw>
+            <BNF name="left paren" part="02"/>
+            <BNF name="table name list"/>
+            <BNF name="right paren" part="02"/>
+         </alt>
+         <alt>
+            <kw>EXCEPT</kw>
+            <BNF name="left paren" part="02"/>
+            <BNF name="table name list"/>
+            <BNF name="right paren" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="table name list" predicative="no">
+      <rhs>
+         <BNF name="table name" part="02"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="table name" part="02"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign schema name" predicative="no">
+      <rhs>
+         <BNF name="schema name" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="local schema name" predicative="no">
+      <rhs>
+         <BNF name="schema name" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="routine mapping definition" predicative="no">
+      <rhs>
+         <kw>CREATE</kw>
+         <kw>ROUTINE</kw>
+         <kw>MAPPING</kw>
+         <BNF name="routine mapping name"/>
+         <kw>FOR</kw>
+         <BNF name="specific routine designator" part="02"/>
+         <kw>SERVER</kw>
+         <BNF name="foreign server name"/>
+         <opt>
+            <BNF name="generic options"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="alter routine mapping statement" predicative="no">
+      <rhs>
+         <kw>ALTER</kw>
+         <kw>ROUTINE</kw>
+         <kw>MAPPING</kw>
+         <BNF name="routine mapping name"/>
+         <BNF name="alter generic options"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop routine mapping statement" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <kw>ROUTINE</kw>
+         <kw>MAPPING</kw>
+         <BNF name="routine mapping name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper interface routine" predicative="no">
+      <rhs>
+         <BNF name="foreign-data wrapper interface routine prefix"/>
+         <BNF name="foreign-data wrapper interface routine generic"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper interface routine prefix" predicative="no">
+      <rhs>
+         <terminalsymbol>MED</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper interface routine generic" predicative="no">
+      <rhs>
+         <BNF name="foreign-data wrapper interface routine name"/>
+         <BNF name="foreign-data wrapper parameter list"/>
+         <opt>
+            <BNF name="foreign-data wrapper returns clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper interface routine name" predicative="no">
+      <rhs>
+         <alt>
+            <terminalsymbol>AdvanceInitRequest</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>AllocDescriptor</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>AllocQueryContext</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>AllocWrapperEnv</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>Close</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>ConnectServer</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>FreeDescriptor</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>FreeExecutionHandle</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>FreeFSConnection</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>FreeQueryContext</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>FreeReplyHandle</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>FreeWrapperEnv</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetAuthorizationId</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetBoolVE</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetDescriptor</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetDiagnostics</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetDistinct</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNextReply</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumBoolVE</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumChildren</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumOrderByElems</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumReplyBoolVE</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumReplyOrderBy</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumReplySelectElems</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumReplyTableRefs</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumRoutMapOpts</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumSelectElems</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumServerOpts</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumTableColOpts</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumTableOpts</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumTableRefElems</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumUserOpts</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetNumWrapperOpts</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetOpts</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetOrderByElem</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetReplyBoolVE</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetReplyCardinality</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetReplyDistinct</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetReplyExecCost</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetReplyFirstCost</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetReplyOrderElem</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetReplyReExecCost</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetReplySelectElem</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetReplyTableRef</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetRoutineMapping</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetRoutMapOpt</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetRoutMapOptName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetSelectElem</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetSelectElemType</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetServerName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetServerOpt</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetServerOptByName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetServerType</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetServerVersion</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetSPDHandle</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetSQLString</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetSRDHandle</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetStatistics</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetTableColOpt</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetTableColOptByName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetTableOpt</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetTableOptByName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetTableRefElem</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetTableRefElemType</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetTableRefTableName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetTableServerName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetTRDHandle</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetUserOpt</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetUserOptByName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetValExprColName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetValueExpDesc</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetValueExpKind</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetValueExpName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetValueExpTable</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetVEChild</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetWPDHandle</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetWrapperLibraryName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetWrapperName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetWrapperOpt</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetWrapperOptByName</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>GetWRDHandle</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>InitRequest</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>Iterate</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>Open</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>ReOpen</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>SetDescriptor</terminalsymbol>
+         </alt>
+         <alt>
+            <terminalsymbol>TransmitRequest</terminalsymbol>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper parameter list" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="foreign-data wrapper parameter declaration"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="foreign-data wrapper parameter declaration"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper parameter declaration" predicative="no">
+      <rhs>
+         <BNF name="foreign-data wrapper parameter name"/>
+         <BNF name="foreign-data wrapper parameter mode"/>
+         <BNF name="foreign-data wrapper parameter data type"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper parameter name" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper parameter mode" predicative="no">
+      <rhs>
+         <alt>
+            <kw>IN</kw>
+         </alt>
+         <alt>
+            <kw>OUT</kw>
+         </alt>
+         <alt>
+            <kw>INOUT</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper parameter data type" predicative="no">
+      <rhs>
+         <alt>
+            <kw>INTEGER</kw>
+         </alt>
+         <alt>
+            <kw>SMALLINT</kw>
+         </alt>
+         <alt>
+            <kw>ANY</kw>
+         </alt>
+         <alt>
+            <kw>CHARACTER</kw>
+            <BNF name="left paren" part="02"/>
+            <BNF name="length" part="02"/>
+            <BNF name="right paren" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="foreign-data wrapper returns clause" predicative="no">
+      <rhs>
+         <kw>RETURNS</kw>
+         <kw>SMALLINT</kw>
+      </rhs>
+   </BNFdef>
+</grammar>

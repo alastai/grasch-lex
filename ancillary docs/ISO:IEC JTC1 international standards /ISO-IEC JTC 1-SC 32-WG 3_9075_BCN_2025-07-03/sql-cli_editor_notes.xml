@@ -1,0 +1,2418 @@
+<EditorNotes>
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+   This is a list of all problems in the corresponding
+   document that are not yet resolved. 
+
+Possible       
+Problem         Category
+Number         ==========
+=======
+
+CLI-000  (pseudo-PP showing Editor's Notes convention)
+CLI-064        *Opportunity*
+CLI-065     **Major Technical**
+
+
+CLI-0           *Opportunity*
+CLI-0       **Major Technical**
+CLI-0        *Minor Technical*
+
+======= Largest SQL/CLI Possible Problem number so far *** CLI-065 *** =======
+======= This is the end of the problem number list =======
+-->
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPcli" number="CLI-" severity="major" realm="technical">
+
+<reference><specref ref="cli_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPcli" number="CLI-" severity="minor" realm="technical">
+
+<reference><specref ref="cli_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPcli" number="CLI-" severity="major" realm="editorial">
+
+<reference><specref ref="cli_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPcli" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="cli_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPcli" number="CLI-">
+
+<reference><specref ref="cli_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+<!-- ======================================= -->
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPcli000" number="CLI-000" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editor. 
+</source>
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point
+that requires particular attention, highlighted thus: 
+</para>
+
+<ednote>Text of the problem.
+</ednote>
+
+</problem>
+
+</PP>
+
+
+<LO id="PPcli064" number="CLI-064">
+
+<reference>No specific location.
+</reference>
+
+
+<source>WG3:GLA-040 = DM32.2-2015-00034R1.
+</source>
+
+<problem>
+
+<para>It might be useful to define extensions to CLI to support polymorphic table routines.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment. 
+</para>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPcli065" number="CLI-065" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:GYD-024.
+</source>
+
+<problem>
+
+<para>Functionality, if any, to support the Vector type needs to be provided.
+
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<!-- Placed closed PPs and LOs after this line
+
+{COMMENT>===Resolved by DBL:MAD-213/X3H2-96-645R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-007\BOLD))
+{X>({BOX>(CLI-007))
+Discussion of DBL:MCI-125 noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>SQL/CLI needs to define that there may be <impDef annex="no" code="None"/>
+descriptor fields, diagnostic fields, and Environment, Connection, and
+Statement attributes.  This can be done by adding rows to
+{REFERENCE>(cli_diagfieldcodes\FULL),
+{REFERENCE>(cli_environmentcodes\FULL),
+{REFERENCE>(cli_codes_for_connections\FULL),
+{REFERENCE>(cli_codes_for_statements\FULL), and
+{REFERENCE>(cli_codes_for_descriptors\FULL), to define the code ranges for
+<impDef annex="no" code="None"/> fields, diagnostic fields, or attributes. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>=== Resolved by DBL:LGW-086/X3H2-97-173
+
+{P>
+{BOX>({EMPHASIS>(CLI-004\BOLD))
+{X>({BOX>(CLI-004))
+X3H2-95-463/DBL:LHR-075 noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>The GetSubstring function does not use the value of the BufferLength
+paramater.  It should do so in General Rule 15)a) in a way analogous to
+{REFERENCE>(cli_getdata\FULL), General Rule 27)b)ii)1).
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by DBL:LGW-089/X3H2-97-176R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-006\BOLD))
+{X>({BOX>(CLI-006))
+Discussion of DBL:MCI-114 noted the following Language Opportunity:
+
+{LIST>(SIMPLE)
+
+{LE>SQL/CLI might wish to define how the SetConnectAttr, SetEnvAttr, and
+SetStmtAttr routines should process character string attributes.  Even if
+SQL/CLI does not itself define any character string attributes, it might
+be best to specify rules for their processing to permit
+<impDef annex="no" code="None"/> attributes (see Possible Problem
+{BOX>({EMPHASIS>(CLI-007\BOLD))). 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by DBL:LGW-091/X3H2-97-178R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-010\BOLD))
+{X>({BOX>(CLI-010))
+DBL:MAD-212/X3H2-96-644R1 noted the following Possible Problem: 
+
+{LIST>(SIMPLE)
+
+{LE>In {REFERENCE>(cli_putdata\FULL), General Rule
+{REFERENCE>(cli_putdata_GR_ptclob\FULL), does not check to see if the
+CHARACTER LARGE OBJECT value is NULL TERMINATED.  SQL/CLI should be
+modified to permit CLOB values ot be null-terminated on both input and
+output. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by email from Paul Cotton, 2 Aug 1997
+
+{P>
+{BOX>({EMPHASIS>(CLI-005\BOLD))
+{X>({BOX>(CLI-005))
+Discussion of DBL:MCI-114 noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>The followint locations {EMPHASIS>(may) have bad references to "data
+type correspondence tables":
+
+{LIST>(UNNUMBERED)
+
+{LE>{REFERENCE>(cli_routine\FULL), Syntax Rule 12)
+
+{LE>{REFERENCE>(cli_descriptor_description\FULL), Syntax Rule 3)
+
+{LE>{REFERENCE>(cli_bindcol\FULL), General Rule 7)
+
+{LE>{REFERENCE>(cli_bindparam\FULL), General Rule 7)
+
+{ENDLIST>
+
+{P>
+These locations all refer to {QUOTE>({REFERENCE>(psm_typecorr\FULL), in
+part 4 of ISO/IEC 9075).  These references should probably be to
+{QUOTE>({REFERENCE>(cli_typecorr\FULL)) in SQL/CLI3. 
+
+{P>
+(This problem was corrected in DBL:MCI-114, item 2.2, d). 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by X3H2-97-305
+
+{P>
+{BOX>({EMPHASIS>(CLI-008\BOLD))
+{X>({BOX>(CLI-008))
+DBL:MCI-125, item 9, noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>In {REFERENCE>(cli_setconnectattr\FULL), General Rule 3): This routine
+references the "May be set" column in
+{REFERENCE>(cli_codes_for_connections\FULL), and if the value of the "May
+be set" column is "No", then an exception condition is raised.  But
+{REFERENCE>(cli_codes_for_connections\FULL), contains only one row and the
+value of "May be set" is always "No"!  
+So this routine always raises an exception condition when it is invoked. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by X3H2-97-304
+
+{P>
+{BOX>({EMPHASIS>(CLI-001\BOLD)) Paper X3H2-95-335/DBL:YOW-164 noted the
+following
+{X>({BOX>(CLI-001))
+Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>In {REFERENCE>(cli_setdescfield\FULL), and probably other Subclauses
+as well, sometimes we use the phrase "XXX field of IDA" and other times we
+use the phrase "XXX for IDA".  This should be harmonized. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by X3H2-97-306R1/DBL:BBN-034
+
+{P>
+{BOX>({EMPHASIS>(CLI-011\BOLD))
+{X>({BOX>(CLI-011))
+DBL:MAD-041/X3H2-96-370R1 noted the following Possible Problem: 
+
+{LIST>(SIMPLE)
+
+{LE>In {REFERENCE>(cli_locatedupdate\FULL), General Rule
+{REFERENCE>(cli_locatedupdate_GR_indval\FULL), We should not be using the
+explicit value -1.   Rather SQL NULL DATA should be added to
+{REFERENCE>(cli_getdata_codes\FULL), and all places that currently use -1
+should reference the value for SQL NULL DATA in that table. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by DBL:CWB-029/X3H2-98-090
+
+{P>
+{BOX>({EMPHASIS>(CLI-009\BOLD))
+{X>({BOX>(CLI-009))
+The 1st CD Editing Meeting instructions to tag Bindings, noted the
+following Possible Problem: 
+
+{LIST>(SIMPLE)
+
+{LE>The SQL_LANGUAGES table definition is specified in SQL/Foundation,
+SQL/Bindings, and SQL/CLI; the SQL/Foundation version must be augmented or
+replaced by SQL/Bindings and === differently === by SQL/CLI.  This is
+difficult to accomplish if conformance to SQL/Bindings and to SQL/CLI can
+be claimed independently. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by X3H2-98-305
+
+{P>
+{BOX>({EMPHASIS>(CLI-014\BOLD))
+{X>({BOX>(CLI-014))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: P03-05.03.08 Description of CLI item descriptor areas
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+The codes defined in Table 29, "Codes used for GetData and GetParamData
+data types" are also defined in Table 8, "Codes used for application data
+types in SQL/CLI".  There are several application data types added to
+Table 8 since ISO/IEC 9075-3:1995 (e.g. BINARY LARGE OBJECT, BINARY LARGE
+OBJECT LOCATOR, CHARACER LARGE OBJECT, CHARACTER LARGE OBJECT LOCATOR,
+RESULT SET LOCATOR, USER-DEFINED TYPE LOCATOR, and REF) are not in Table
+29. Consideration should also be given to adding  a row for
+"<impDef annex="no" code="None"/> data type"s to Table 29.
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+
+
+{COMMENT>===Resolved by X3H2-98-306
+
+{P>
+{BOX>({EMPHASIS>(CLI-015\BOLD))
+{X>({BOX>(CLI-015))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: P03-06.05 BindCol
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+General Rule 18, "If CN is greater than N ..." implicitly resizes the ARD.
+If there is insufficient memory then the CLI-specific condition - memory
+allocation error should be raised. This error is currently used in several
+places in Subclause 6.3, "AllocHandle" including GR 3)a)ii)1) "If the
+resource to manage an SQL- environment". This same problem occurs in
+Subclause 6.6, "BindParameter" General Rule 25 "If PN is greater than N
+...",  Subclause 6.61, "SetDescField" General Rule 9)a) "If FI indicates
+COUNT"  and Subclause 6.62, "SetDescRec" General 9) since there is no
+error generated if there is insufficient memory.
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+
+{COMMENT>===Resolved by X3H2-98-298
+
+{P>
+{BOX>({EMPHASIS>(CLI-016\BOLD))
+{X>({BOX>(CLI-016))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: P03-06.05 BindCol
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+ISO/IEC 9075-3:1995 was written before the conventions outlined in
+Subclause 3.3.2.1, "New and modified Clauses, Subclauses and Annexes" were
+drafted to describe how parts of SQL:1999 modify SQL/Foundation.  There are
+several other locations in SQL/CLI that include text similar to General
+Rule 19 (e.g. Subclause 6.6 BindParameter GR 26, Subclause 6.22 Fetch GR
+11)a) and 11)b)iv), Subclause 6.23 FetchScroll GR 15)b) and 15)c)iv) and
+Subclause 6.6.1 SetDescField GR 17). Each of these rules must be moved
+earlier in the list of General Rules (i.e. before an exception is raised)
+to ensure that it can have effect and that you can discontinue processing
+the General Rules when an exception is raised.
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+
+{COMMENT>===Solved by DBL:CWB-051R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-017\BOLD))
+{X>({BOX>(CLI-017))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: P03-06.10 Columns
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+Does it matter that UPPER is not sensitive to any national language?  That
+is, UPPER does not convert characters such as o-umlaut to upper-case. 
+Will this be a problem for users with identifiers with diacritical marks?
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+
+{COMMENT>===Resolved by X3H2-98-115R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-018\BOLD))
+{X>({BOX>(CLI-018))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: P03-06.10 Columns
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+General Rule 16)b)ii) "If the value of NL2 is zero...": we can and should
+use explicit syntax to exhibit the ESCAPE clause that is referred to in
+NOTE 15 and NOTE 16.  Use something like "Let ESC be the escape character
+that is indicated by the value of the SEARCH PATTERN ESCAPE information
+type from GetInfo().  Let SCHSTR be the character string TABLE_SCHEM LIKE
+'SCHVAL' ESCAPE 'ESC'.
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+
+
+{COMMENT>===Resolved by X3H2-98-115R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-019\BOLD))
+{X>({BOX>(CLI-019))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: P03-06.10 Columns
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+a) General Rule 17) "Let PRED be the character string ...": This results
+in an invalid predicate if NL4 is zero.
+b) General Rule 18) "Let STMT be the character string ..." This results in
+an invalid statement if NL1, NL2, NL3 and NL4 are all zero.  A solution
+would be to provide that COLSTR is "0=3D0" or some other predicate
+equivalent to true in case NL4 is 0.
+c) General Rule 17) must be changed to insure that there is at least one
+space between the parts of PRED which are concatenated.  This can be done
+by concatenting a blank space after each concatenation "||" symbol.
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+
+
+{COMMENT>===Resolved by DBL:BBN-065 amended by X3H2-98-302
+
+{P>
+{BOX>({EMPHASIS>(CLI-022\BOLD))
+{X>({BOX>(CLI-022))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: P03-06.18 EndTran
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+CLI needs an API to support rollback to a savepoint.
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by DBL:BBN-038/X3H2 97-303R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-023\BOLD))
+{X>({BOX>(CLI-023))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: P03-06.18 EndTran
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+General Rule 11) "for every open cursor..." instructs us to close every
+cursor at end of a transaction.  This should be enhanced to support held
+cursors. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:SLD-075R2
+
+{P>
+{BOX>({EMPHASIS>(CLI-002\BOLD))
+{X>({BOX>(CLI-002))
+X3H2-94-103/DBL:SOU-076 noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Possible impacts of ROW_TYPE to CLI need to be checked, in addition to
+the data type correspondences for host languages. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-012\BOLD))
+{X>({BOX>(CLI-012))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: P03-04.02 Return Codes
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+A description of  LOB locator descriptor areas is required.  There are
+references to "LOB locator descriptor area" in the following locations:
+
+{LIST>(UNNUMBERED\===)
+
+{LE>{REFERENCE>(cli_describelocator\FULL), General Rule 8) "Let LLDA be
+the LOB locator descriptor area"
+
+{LE>{REFERENCE>(cli_setlocatorattr\FULL), General Rule 8) "Let LLDA be the
+LOB locator descriptor area"
+
+{LE>The values of LOB locator attribute are defined in
+{REFERENCE>(cli_codes_for_locators\FULL), through
+{REFERENCE>(cli_holdability_values\FULL). 
+
+{ENDLIST>
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:SLD-034, WG3:SLD-035, WG3:SLD-036, and WG3:SLD-040
+
+{P>
+{BOX>({EMPHASIS>(CLI-027\BOLD))
+{X>({BOX>(CLI-027))
+X3H2-98-295/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: P03-06.51 Parameters, P03-06.56 RoutinePrivileges, and
+P03-06.57 Routines
+
+{LE>Source: X3H2-98-295/DBL:BBN-???
+
+{LE>Note at: Referenced General Rules
+
+{LE>Description:
+
+{P>
+The privilege listed in the following General Rules should be the execute
+privilege rather than the select privilege. 
+
+{LIST>(UNNUMBERED\===)
+
+{LE>{REFERENCE>(cli_parameters\FULL), GR6)a) ("If the value of the
+ACCESSIBLE_ROUTINES...")
+
+{LE>{REFERENCE>(cli_routineprivileges\FULL), GR6)a) ("If the value of the
+ACCESSIBLE_ROUTINES...")
+
+{LE>{REFERENCE>(cli_routines\FULL), GR6)a) ("If the value of the
+ACCESSIBLE_ROUTINES...")
+
+{ENDLIST>
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:SLD-034, WG3:SLD-035, WG3:SLD-036, and WG3:SLD-040
+
+{P>
+{BOX>({EMPHASIS>(CLI-028\BOLD))
+{X>({BOX>(CLI-028))
+X3H2-98-299/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: {REFERENCE>(cli_parameters\FULL), General Rule 7)j)
+
+{LE>Source: X3H2-98-299/DBL:BBN-??? (Paul Cotton, 28 May, 1998)
+
+{LE>Note at: {REFERENCE>(cli_parameters\FULL), General Rule 7)j)
+
+{LE>Description:
+
+{P>
+{REFERENCE>(cli_parameters\FULL), General Rule 7)j):
+
+{LIST>(SIMPLE)
+
+7) For every row of the table PARAMETERS_QUERY:
+
+{LIST>(SIMPLE)
+
+j) The value of {EMPHASIS>(DECIMAL_DIGITS\BOLD) in
+{EMPHASIS>(PARAMETERS_QUERY) is
+
+{P>
+Case:
+
+{LIST>(SIMPLE)
+
+i) If the value of DATA_TYPE in the COLUMNS view is one of
+'DATE{REFERENCE>(nul1)', 'TIME{REFERENCE>(nul1)',
+'TIMESTAMP{REFERENCE>(nul1)', 'TIME{REFERENCE>(nul1) WITH{REFERENCE>(nul1)
+TIME{REFERENCE>(nul1) ZONE{REFERENCE>(nul1)', or
+'TIMESTAMP{REFERENCE>(nul1) WITH{REFERENCE>(nul1) TIME{REFERENCE>(nul1)
+ZONE{REFERENCE>(nul1)', then the value of DECIMAL_DIGITS in
+{EMPHASIS>(PARAMETERS_QUERY) is the value of the DATETIME_PRECISION column
+in the PARAMETERS view. 
+
+ii) If the value of DATA_TYPE in the COLUMNS view is one of
+'DECIMAL', 'INTEGER', 'NUMERIC', or
+'SMALLINT', then the value of DECIMAL_DIGITS in
+{EMPHASIS>(PARAMETERS_QUERY) is the value of the NUMERIC_SCALE column in
+the PARAMETERS view.
+
+iii) Otherwise, the value of DECIMAL_DIGITS in {EMPHASIS>(PARAMETERS_QUERY)
+is the null value. 
+
+{ENDLIST>
+
+{ENDLIST>
+
+{ENDLIST>
+
+{P>
+does not deal with the INTERVAL data type explicitly.  [Paul believes]
+this should be fixed to define the value of DECIMAL_DIGITS for the
+INTERVAL data type. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:SLD-034, WG3:SLD-035, WG3:SLD-036, and WG3:SLD-040
+
+{P>
+{BOX>({EMPHASIS>(CLI-029\BOLD))
+{X>({BOX>(CLI-029))
+X3H2-98-299/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: {REFERENCE>(cli_parameters\FULL)
+
+{LE>Source: X3H2-98-299/DBL:BBN-??? (Paul Cotton, 28 May, 1998)
+
+{LE>Note at: None.
+
+{LE>Description:
+
+{P>
+DBL:CWB-048 "Supporting shrink-wrapped applications in SQL3" and
+DBL:CWB-138R1 "Information and Definition Schemas for methods" added
+methods as a new routine type and the appropriate changes to the
+Information and Definition Schema for supporting methods.  Several of the
+CLI catalog routines must now be changed to add support for methods and
+various new columns in the respective Information Schema views.  Certainly
+the CLI routines Columns, Parameters and Routines.must be checked.  Note
+that DBL:CWB-138R1 also fixes several unrelated problems (e.g. missing
+columns such as one for the "NULL CALL" characteristic in Information
+Schema views). 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-030\BOLD))
+{X>({BOX>(CLI-030))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_locatedupdate\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+The variable IR referenced in General Rule 5 is not defined. 
+
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-031\BOLD))
+{X>({BOX>(CLI-031))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_setlocatorattr\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+General Rule 7, "If A is neither", refers to
+"SQL_ATTR_LOB_LOC_SOURCE_TABLE" and "SQL_ATTR_LOB_LOC_SOURCE_COLUMN", but
+the values that occur in {REFERENCE>(cli_codes_for_locators\FULL), are
+"SOURCE TABLE" and "SOURCE COLUMN". 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-032\BOLD))
+{X>({BOX>(CLI-032))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_setlocatorattr\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+General Rule 7, "If A is neither" refers to
+{REFERENCE>(cli_codes_for_locators\FULL), but no test is made of the
+column entitled "May be set".  See {REFERENCE>(cli_setconnectattr\FULL),
+General Rule 3 "If A is not one" for an example of how to draft the
+correct rule. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-033\BOLD))
+{X>({BOX>(CLI-033))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_setlocatorattr\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+General Rule 7, "If A is neither" refers to
+{REFERENCE>(cli_codes_for_locators\FULL), seems to be able to set a locator attribute but NONE of 
+the rows in {REFERENCE>(cli_codes_for_locators\FULL), have a "May be set" value of "Yes". 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-034\BOLD))
+{X>({BOX>(CLI-034))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_setlocatorattr\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+General Rule 9, "The value of the field of LLDA", sets the value of the
+locator attribute without checking to see if value of Value is appropriate
+for the attribute A.  The valid values appear to be defined in
+{REFERENCE>(cli_production_values\FULL), through
+{REFERENCE>(cli_holdability_values\FULL). 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-035\BOLD))
+{X>({BOX>(CLI-035))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_setlocatorattr\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+When setting a locator attribute, the General Rules must first check if
+the attribute value is supported as determined by the related GetInfo
+value (e.g., the LOB LOCATOR SENSITIVITY GetInfo should be checked for the
+setting of the SENSITIVITY attribute).  Note that this requires some
+restructuring of the GetInfo items. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-036\BOLD))
+{X>({BOX>(CLI-036))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_descriptor_description\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+{REFERENCE>(cli_codes_for_connections\FULL), contains entries for "LOB
+LOCATOR SENSITIVITY", "LOB LOCATOR POTENTIAL UPDATABILITY", and "LOB
+LOCATOR HOLDABILITY" but these attributes are not mentioned in the General
+Rules in {REFERENCE>(cli_getconnectattr\FULL), and
+{REFERENCE>(cli_setconnectattr\FULL).  Note that each connection attribute
+added to SQL/CLI needs to be mentioned explicity in these routines and in
+particular the value to be set by SetConnectAttr must be checked to ensure
+it is appropriate for the connection attribute being modified. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-037\BOLD))
+{X>({BOX>(CLI-037))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_getinfo\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+{LIST>(UNNUMBERED)
+
+{LE>General Rule 9)s) "If IT indicators LOB LOCATOR" says "supports LOB
+LOCATORS" instead of "supports large object locators". 
+
+{LE>General Rule 9)t) "If IT indicates LOB LOCATOR PERSISTENCE" says
+"freeability of LOB LOCATORS" instead of "freeability of large object
+locators". 
+
+{ENDLIST>
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-038\BOLD))
+{X>({BOX>(CLI-038))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_getinfo\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+{LIST>(UNNUMBERED)
+
+{LE>General Rule 9)v)ii) "If the implementation supports the use of the
+LocatedUpdate ... SQL_LOB_LOC_DIRECT attribute" refers to
+"SQL_LOB_LOC_DIRECT attribute".  This must be reworded to refer to the
+PRODUCTION locator attribute. 
+
+{LE>General Rule 9)v)iii) "If the implementation supports the use of the
+LocatedUpdate ... SQL_LOB_LOC_INDIRECT_SUBSTRING attribute" refers to
+"SQL_LOB_LOC_SUBSTRING attribute".  This must be reworded to refer to the
+PRODUCTION locator attribute. 
+
+{LE>General Rule 9)v)iv) "If the implementation supports the use of the
+LocatedUpdate ... SQL_LOC_LOC_INDIRECT_SIMPE attribute" refers to
+"SQL_LOB_LOC_INDIRECT_SIMPLE attribute".  This must be reworded to refer
+to the PRODUCTION locator attribute. 
+
+{ENDLIST>
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-039\BOLD))
+{X>({BOX>(CLI-039))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_getinfo\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+General Rules 9)v)v), vi) and vii) refer to the values "INPLACE EXACT",
+"INPLACE FILL", and "LITERAL ONLY" from
+{REFERENCE>(cli_getinfo_lob_locator_updat\FULL). 
+But these values do not occur in
+{REFERENCE>(cli_getinfo_lob_locator_updat\FULL). 
+Table 46. These values are
+also missing from {REFERENCE>(cli_sqlcli_h\FULL), and
+{REFERENCE>(cli_sqlcli_cbh\FULL). 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-040\BOLD))
+{X>({BOX>(CLI-040))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_sqlcli_cbh\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+The information types requested by SQLRGETINFO for LOB locators are not
+correct. 
+
+{LIST>(UNNUMBERED)
+
+{LE>The data type for the four entries (currently last in the list)
+SQL-LOB-LOCATOR, SQL-API-LOCATOR- PERSISTENCE,
+SQL-API-LOCATOR-SENSITIVITY, and SQL-API-LOCATOR-UPDATABILITY should be
+"PIC S9(4)" instead of "PIC S9(9)". 
+
+{LE>The names SQL-API-LOCATOR-PERSISTENCE, SQL-API-LOCATOR-SENSITIVITY,
+and SQL-API-LOCATOR-UPDATABILITY should use "LOB" and not "API". 
+
+{ENDLIST>
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-041\BOLD))
+{X>({BOX>(CLI-041))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_sqlcli_h\FULL), and {REFERENCE>(cli_sqlcli_cbh\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+The value for the SQL_DIAG_FREE_LOCATOR for the "dynamic function codes
+returned in the diagnostics area" is 85 but this is a duplicate of the
+value for SQL_DIAG_SELECT_CURSOR. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-042\BOLD))
+{X>({BOX>(CLI-042))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_codes_for_connections\FULL), versus
+{REFERENCE>(cli_sqlcli_h\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+In {REFERENCE>(cli_associated_table\FULL),
+{REFERENCE>(cli_codes_for_connections\FULL), indicates that LOB LOCATOR
+SENSITIVITY, LOB LOCATOR POTENTIAL UPDATABILILTY and LOB LOCATOR
+HOLDABILITY are connection attributes. But these values are indicated to
+be statement attributes in {REFERENCE>(cli_sqlcli_h\FULL).  These values
+are correctly positioned in {REFERENCE>(cli_sqlcli_cbh\FULL), as
+connection attributes. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-043\BOLD))
+{X>({BOX>(CLI-043))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_getinfo\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+General Rule 9)w) "If IT indicated LOB LOCATOR REVIVABILITY" refers to the
+GetInfo item LOB LOCATOR REVIVABILITY but this is not defined elsewhere in
+SQL/CLI. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-044\BOLD))
+{X>({BOX>(CLI-044))
+X3H2-98-076/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: {REFERENCE>(cli_attributetypes\FULL)
+
+{LE>Source: X3H2-98-076/DBL:BBN-???
+
+{LE>Note at: None
+
+{LE>Description:
+
+{P>
+The various locator attributes defined in
+{REFERENCE>(cli_codes_for_locators\FULL), have their valid values defined
+in {REFERENCE>(cli_production_values\FULL), through
+{REFERENCE>(cli_holdability_values\FULL), but the other environment,
+connection and statement attributes have their values defined in
+{REFERENCE>(cli_attributetypes\FULL).  Since  in
+{REFERENCE>(cli_production_values\FULL), through
+{REFERENCE>(cli_holdability_values\FULL), do not include a data type
+column, this means that the data type of the locator attributes have never
+been defined. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-021\BOLD))
+{X>({BOX>(CLI-021))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: P03-06.16 DescribeLocator
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+General Rule 12)b) "Otherwise, Value is set to V": this does not answer
+what StringLength is set to. CLI seems to be inconsistent about whether
+the value of StringLength is set if the value returned is not a character
+string value.  For example, in Subclause 6.32, "GetData" General Rule
+27)a) "StrLen_or_Ind is set to 0 (zero)." sets the value to zero for all
+cases (both character string and non-character string) but in Subclause
+6.39, "GetInfo" the value of StringLength is only defined if the value
+being returned is a character string.  I cannot find a specific location
+in CLI that states that any output parameter not explicitly set is
+<unDef annex="no" code="None"/> but perhaps CLI needs such an overriding rule?
+
+{LE>Proposed Solution:
+
+{P>
+Create a new subclause after {REFERENCE>(cli_return_codes\FULL), entitled
+4.x, "Output arguments".  Move the paragraph after the bulleted list from
+the current {REFERENCE>(cli_return_codes\FULL), that starts "If the CLI
+routine did not execute successfully" to this new subclause.  
+Add an additional paragraph to state that the value of all output arguments not
+explicitly set by the General Rules of a routine are <unDef annex="no" code="None"/>. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:SLD-039R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-024\BOLD))
+{X>({BOX>(CLI-024))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: P03-07.02 Claims of conformance
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+Conformance claims need to harmonize with SQL:1999, which abolished levels
+and substituted core plus packages.
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:SLD-039R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-025\BOLD))
+{X>({BOX>(CLI-025))
+X3H2-98-077R1/DBL:BBN-??? noted the following Possible Problem:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: P03-07.02 Claims of conformance
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+LOB locator should not be required for CLI conformance, since LOB locators
+are not part of Core Foundation.
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:SLD-075R2
+
+{P>
+{BOX>({EMPHASIS>(CLI-003\BOLD))
+{X>({BOX>(CLI-003))
+X3H2-94-103/DBL:SOU-076 noted the following Language Opportunity:
+
+{LIST>(SIMPLE)
+
+{LE>X3H2-94-103/DBL:SOU-076 only introduced a ROW_TYPE for SQL (i.e., for
+SQL variables, parameters, results, and columns).  The host language data
+types are still the scalar types specified in SQL-86, SQL-89, and SQL-92. 
+Thus, the proposal doesn't add the new SQL ROW_TYPE to the host language
+mappings for module language, embedded syntax, or external routine
+parameters. 
+
+{P>
+Support for host language ROW_TYPEs would require specifying the forms of
+host language record declarations that are recognized in embedded syntax,
+and adding such host language record types to the data type
+correspondences for embedded syntax, module language, and external
+routines. 
+
+{P>
+Such a proposal would presumably include the ability to reference such
+host language variables as targets of FETCH, SELECT, and assignment
+statements, as sources of INSERT, UPDATE, and assignment statements, and
+as arguments of IN, OUT, and INOUT parameters. 
+
+{P>
+See also Language Opportunities {BOX>({EMPHASIS>(468\BOLD)) (in
+SQL/Foundation Editor's Notes), {BOX>({EMPHASIS>(PSM-078\BOLD)), and
+{BOX>({EMPHASIS>(BIND-003\BOLD)). 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:FRA-029R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-020\BOLD))
+{X>({BOX>(CLI-020))
+X3H2-98-077R1/DBL:BBN-??? noted the following Language Opportunity:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Technical
+
+{LE>Reference: P03-06.16 DescribeLocator
+
+{LE>Source: Paul Cotton, March 1, 1998
+
+{LE>Description:
+
+{P>
+DescribeLocator should be extended to support all kinds of locators (e.g.
+locators to user-defined types and arrays).
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:SLD-064R1
+
+{P>
+{BOX>({EMPHASIS>(CLI-045\BOLD))
+{X>({BOX>(CLI-045))
+FCD (1999) ballot comment USA-P03-026 noted the following Language
+Opportunity:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Language Opportunity
+
+{LE>Reference: P03-No specific location
+
+{LE>Source: SQL/CLI FCD/1999 Editing Meeting
+
+{LE>Description:
+
+{P>
+Since Core SQL:1999 provides a SET TRANSACTION statement, it may be
+approprieate to use one or more existing functions to do the same things,
+since COMMIT and ROLLBACK are function calls rather than parsed syntax in
+CLI. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:SLD-057
+
+{P>
+{BOX>({EMPHASIS>(CLI-046\BOLD))
+{X>({BOX>(CLI-046))
+WG3:SLD-010R1/X3H2-99-027R3 noted the following Language Opportunity:
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Language Opportunity
+
+{LE>Reference: P03-No specific location
+
+{LE>Source: WG3:SLD-010R1/X3H2-99-027R3
+
+{LE>Description:
+
+{P>
+There are several fields in the CLI descriptor area that are pointers:
+DATA_POINTER, INDICATOR_POINTER, OCTET_LENGTH_POINTER,
+ARRAY_STATUS_POINTER, and ROWS_PROCESSED_POINTER.  Of these, only the
+DATA_POINTER can point to any arbitrary data type.  All the rest point to
+well known data types:
+
+{LIST>(UNNUMBERED)
+
+{LE>INDICATOR_POINTER points to INTEGER
+
+{LE>OCTET_LENGTH_POINTER points to INTEGER
+
+{LE>ARRAY_STATUS_POINTER points to an array each of whose elements is an INTEGER
+
+{LE>ROWS_PROCESSED_POINTER points to an INTEGER.
+
+{ENDLIST>
+
+{P>
+The CLI document should be enhanced to include this information. 
+
+{LE>Proposed Solution: None submitted with comment
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:PER-166/H2-2001-???
+
+{P>
+{BOX>({EMPHASIS>(CLI-050\BOLD)) The following Possible Problem has been noted:
+{X>({BOX>(CLI-050))
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Major Technical
+
+{LE>Reference: P03, SQL/CLI, No particular location
+
+{LE>Note at: None. 
+
+{LE>Source: Email discussion between Jim Melton and Paul Cotton, 2000-08-29
+
+{LE>Possible Problem:
+
+{P>
+Jim asked:
+
+{P>
+In CLI Subclause 6.22, "FetchScroll", GR 
+16) defines the symbol RPP to be the value of ROWS_PROCESSED_POINTER, and 
+GR 17) checks to see whether that value is a null pointer or a (presumably) 
+valid pointer; if it is not a null pointer, then the host variable to which 
+it points is initialized to 0.  In Subclause 6.21, "Fetch", GRs 11) and 12) 
+do the same things.  However, in neither Subclause is anything further done 
+with the symbol RPP.  In particular, neither Subclause causes any value 
+other than 0 ever to be placed into the host variable to which RPP and 
+ROWS_PROCESSED_POINTER point.  I would have expected that, after all rows 
+have been retrieved by Fetch or FetchScroll, the value of ROWS_PROCESSED 
+would have been stored into the host variable to which RPP and 
+ROWS_PROCESSED_POINTER point.  Is something needed to correct this problem?
+
+
+{P>
+Paul responded:
+
+{P>
+PBC: ODBC 3.0 Chapter 11 "Retrieving Results (Advanced)" Section "Using
+Block Cursors" Subsection "Number of Rows Fetched and Status" (Page 197,
+ODBC Programmer's Reference, Volume 1) states:
+"If the SQL_ATTR_ROWS_FETCHED_PTR statement attribute has been set, it
+specifies a buffer that returns the number of rows fetched by the call to
+SQLFetch or SQLFetchScroll, and error rows. (This number is a count of all
+rows that do not have the status SQL_ROW_NO_ROWS)."
+
+{P>
+PBC: Having found this description in this "popular implementation", I
+believe Jim is correct that when the ROWS_PROCESSED_POINTER is not null then
+the final value of RPP in Subclause 6.21 "Fetch" and Subclause 6.22
+"FetchScroll" should be returned in the location pointed to by
+ROWS_PROCESSED_POINTER.  
+
+{P>
+PBC: Multi-row fetch was added by SLD-010 a paper written by myself and
+Murali Venkatrao.  I have checked the original paper and it appears to have
+been applied correctly and it contains the source of this error.
+
+{P>
+PBC: In hindsite I believe that the rules in this paper simply assumed there
+to be a "magic" link between the variable ROWS_PROCESSED and the "host
+variable" addressed by the ROWS_PROCESSED_POINTER.  Of course this is WRONG!
+A possible solution is to add the following text at the end of Subclause
+6.21 "Fetch" GR 14) "Case:" iv) "The General Rules ..." 1) "If
+ROWS_PROCESSED is greater than 0 (zero) ...":
+
+{P>
+"If RPP is not a null pointer, then the value of the host variable addressed
+by RPP is set to the value of ROWS_PROCESSED."
+
+{P>
+PBC: In addition the same change needs to be made at the end of Subclause
+6.22 "FetchScroll" GR 19) "Case:" iv) "The general rules ..." 1) "If
+ROWS_PROCESSED is greater than 0 (zero) ...".
+
+{P>
+PBC: I leave it to others to recommend how significant this change is and
+how it should be made.
+
+
+{LE>Proposed Solution:
+
+{P>
+None provided with comment. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+{COMMENT>===Resolved by WG3:DRS-074
+
+{P>
+{BOX>({EMPHASIS>(CLI-052\BOLD)) The following Possible Problem has been noted:
+{X>({BOX>(CLI-052))
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Editorial
+
+{LE>Reference: P03, SQL/CLI, {REFERENCE>(cli_sql_languages_base_table\FULL)
+
+{LE>Note at: None. 
+
+{LE>Source: WG3:PER-164/H2-2001-???
+
+
+{LE>Possible Problem:
+
+{P>
+The text "200n" must be replaced by the correct year at the FCD Editing
+Meeting. 
+
+
+{LE>Proposed Solution:
+
+{P>
+None provided with comment. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+
+{COMMENT>===Resolved by WG3:DRS-074R1/H2-2002-___
+
+{P>
+{BOX>({EMPHASIS>(CLI-051\BOLD)) The following Possible Problem has been noted:
+{X>({BOX>(CLI-051))
+
+{LIST>(SIMPLE)
+
+{LE>Severity: Minor Editorial
+
+{LE>Reference: P03, SQL/CLI, {REFERENCE>(cli_objectid\FULL)
+
+{LE>Note at: None. 
+
+{LE>Source: WG3:PER-164/H2-2001-???
+
+
+{LE>Possible Problem:
+
+{P>
+The text "200n" must be replaced by the correct year at the FCD Editing
+Meeting. 
+
+
+{LE>Proposed Solution:
+
+{P>
+None provided with comment. 
+
+{ENDLIST>
+
+{ENDCOMMENT>
+
+
+<comment>Resolved by CD1 Editing Meeting 2 (WLG) discussion on CD1/2004, NLD-P02-002</comment>
+<LO id="PPcli026" number="CLI-026">
+
+<reference>
+<extref part="03" ref="cli_conformance_claims"/>
+</reference>
+
+<source>
+X3H2-98-077R1/DBL:BBN-??? and Source: Paul Cotton, March 1, 1998
+</source>
+
+<problem>
+
+<para>
+Would it make sense to have a CLI flagger which discovers nonportable
+extensions?  One way to do this would be to set an environment attribute
+(if there is such a thing) saying that any use of a nonportable argument
+will return a special status code.  CLI should support this requirement
+only if it is also required for conformance to dynamic SQL.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by H2-2006-119R1 = WG3:E3E-023</comment>
+<comment>X3H2-98-077R1/DBL:BBN-???</comment>
+<LO id="PPcli013" number="CLI-013">
+
+<reference>
+<extref part="03" ref="cli_implicit_cursor"/>
+</reference>
+
+<source>
+X3H2-98-077R1/DBL:BBN-??? and Paul Cotton, March 1, 1998
+</source>
+
+<problem>
+
+<para>
+General Rule 7)e) "Case" i) "If CR specifies <kw>INSENSITIVE</kw>..." carries out
+the same functionality as expressed in the General Rules of SQL/Foundation
+<BNF name="open cursor"/>.  It is a Language Opportunity to reference the
+appropriate rules in SQL/Foundation instead of repeating them here. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Inserted by STX-053</comment>
+<comment>Resolved by URC-070R1</comment>
+<PP id="PPcli055" number="CLI-055" severity="minor" realm="technical">
+
+<reference>
+<extref part="03" ref="cli_endtran"/>
+</reference>
+
+<source>
+WG3:STX-053 Addressing Action Item n) from Xian on SIA031
+</source>
+
+<problem>
+
+<para>
+SIA-031 Para 2.1.1 made Changes to Working Draft SQL/Foundation 
+<extref part="02" ref="fnd_commit"/>
+This change should be made to the COMMIT rules in EndTran.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPcli049" number="CLI-049">
+
+<reference>
+<extref part="03" ref="cli_fetch"/>
+</reference>
+
+<source>
+WG3:SLD-010/X3H2-99-027R3
+</source>
+
+<problem>
+
+<para>
+The arrays that receive the results from multi-row fetches must be
+contiguous. For example, if you are performing
+</para>
+
+<code>
+<kw>SELECT</kw> EMPNO, <kw>NAME</kw> <kw>FROM</kw> EMP
+</code>
+
+<para>
+the application cannot create a record structure with fields for EMPNO and
+<kw>NAME</kw>, and then create an array of these structures. The reason is that all the EMPNOs 
+will be delivered in a single contiguous array, and all of the
+NAMEs will be delivered in a separate array. It would be useful to provide
+for an offset with a record structure or a "stride" (distance between
+successive elements of an array). This is a method of binding known as
+row-wise binding. 
+</para>
+
+<para>
+Row-wise binding was deliberately not part of the paper that proposed
+multi-row fetch since it is an orthogonal enhancement and therefore
+benefits by being considered in a separate proposal. We note in passing
+that row-wise binding can be accomplished simply and elegantly by
+introducing a new descriptor field that informs whether the buffers are
+laid out as 'regular' (or column-wise) binding, or as row-wise binding. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<comment>Inserted by STX-053</comment>
+<PP id="PPcli056" number="CLI-056" severity="minor" realm="technical">
+
+<reference>
+<extref part="03" ref="cli_diagareas"/> and 
+<extref part="03" ref="cli_sqlcli_cbh"/>
+</reference>
+
+<source>
+WG3:STX-053 Addressing Action Item n) from Xian on SIA031
+</source>
+
+<problem>
+
+<para>
+SIA-031 Para 2.2.3 made Changes to SQL/Foundation 
+<extref part="02" ref="fnd_impdef"/>
+</para>
+<para>
+The diagnostics areas in CLI are different than those of embedded/module SQL. But there does not 
+appear to be any indication in CLI of whether it covers the relationship of the CLI diagnostics 
+area to the impact of a ROLLBACK to a SAVEPOINT.
+</para>
+<para>
+We may need to modify CLI to make the impact on the CLI diagnostics area 
+<impDef annex="no" code="None"/> 
+but before doing this we might want to check what CLI implementations do today.
+</para>
+
+</problem>
+
+</PP>
+
+<comment>DCOR/2004 WG3-P03-001</comment>
+<comment>Resolved by E3E-023</comment>
+<PP id="PPcli057" number="CLI-057" severity="major" realm="technical">
+
+<reference>
+<extref part="03" ref="cli_implicit_cursor"/>
+</reference>
+
+<noteAt>
+<extitemref part="03" ref="cli_implicit_cursor_GRopen_dcl" type="GR"/>.
+</noteAt>
+
+<source>
+DCOR/2004 WG3-P03-001
+</source>
+
+<problem>
+
+<para>
+<extitemref part="03" ref="cli_implicit_cursor_GRopen_dcl" type="GR"/> <quote>The General Rules 
+of <extref part="02" ref="fnd_dcl"/>, in ISO/IEC 9075-2 are applied to <sym>CR</sym>.</quote>
+Doesn’t work because it doesn’t say what CR is equivalent to in 
+<BNF name="declare cursor"/>, and in any case I don’t think there is anything to be equivalent to.
+<sym>CR</sym> is not defined in <BNF name="declare cursor"/> only in <BNF name="open cursor"/>.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<comment>WG3:HBA-042 = H2-2003-___</comment>
+<PP id="PPcli053" number="CLI-053" severity="minor" realm="editorial">
+
+<reference>
+<extref part="03" ref="cli_getdiagfield"/>
+</reference>
+
+<source>
+WG3:HBA-042 = H2-2003-___
+</source>
+
+<problem>
+
+<para>
+Hanging between In General Rule 12) i), hanging between Subrules ii) C) and iii), is the
+sentence:
+</para>
+
+<slist>
+
+<item>If the value of TABLE_NAME identifies a declared local temporary table, then the value of 
+CATALOG_NAME is <BNF name="space"/>s and the value of SCHEMA_NAME is 'MODULE'.
+</item>
+
+</slist>
+
+<para>
+The second sentence of General Rule 12) i) iii) 1) is:
+</para>
+
+<slist>
+
+<item>If TABLE_NAME refers to a declared local temporary table, then
+CATALOG_NAME is <BNF name="space"/>s and SCHEMA_NAME contains 'MODULE'. 
+</item>
+
+</slist>
+
+<para>
+It rather looks as though the former was intended to replace the latter, since the style of 
+wording it uses seems to be more prevalent. 
+</para>
+
+<para>
+SQL:1999 contains the same error. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+Replace the second sentence of General Rule 12) i) iii) 1) (as quoted above) with:
+</para>
+
+<slist>
+
+<item>If the value of TABLE_NAME identifies a declared local temporary table, then the value of 
+CATALOG_NAME is <BNF name="space"/>s and the value of SCHEMA_NAME is 'MODULE'. 
+</item>
+
+</slist>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<comment>Email from Mark Ashcroft (2004-07-22)</comment>
+<LO id="PPcli054" number="CLI-054">
+
+<reference>
+<extref part="03" ref="cli_getdiagrec"/>
+</reference>
+
+<source>
+WG3:STX-001 Action Item n) Mark Ashcroft. Additional to SIA-025R1
+</source>
+
+<problem>
+
+<para>
+SIA-025R1, "A Shorthand for Getting ALL Diagnostics" proposes to add a new
+diagnostics option to embedded SQL but ignores the question of whether it
+should also be added to CLI or the SQLJ binding.
+</para>
+
+</problem>
+
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPcli047" number="CLI-047">
+
+<reference>
+P03-No specific location
+</reference>
+
+<source>
+FCD (1999) ballot comment USA-P03-024
+</source>
+
+<problem>
+
+<para>
+WG3:SLD-010/X3H2-98-027R3 provides for fetching multiple rows in one CLI routine invocation.  
+It would be appropriate to be able to provide an array of input parameter values to a single 
+statement execution in a similar fashion. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPcli048" number="CLI-048">
+
+<reference>
+P03-No specific location
+</reference>
+
+<source>
+FCD (1999) ballot comment USA-P03-025
+</source>
+
+<problem>
+
+<para>
+WG3:SLD-010/X3H2-98-027R3 provides for fetching multiple rows into an array of variables.  
+CLI should also be able to specify 'row-wise binding', so that the application can bind to an array 
+of record structures, where fields of the record structure are the input or output parameters. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:YYZ-047R2 = DM32.2-2014-00___</comment>
+<comment>WG3:KOA-025 = DM32.2-2011-00090</comment>
+<PP id="PPcli063" number="CLI-063" severity="major" realm="technical">
+
+<reference>
+<extref part="03" ref="cli_getfeatureinfo"/>
+</reference>
+
+
+<noteAt>
+<itemref type="GR" ref="cli_getfeatureinfo_GR_exception"/>. 
+</noteAt>
+
+
+<source>
+WG3:KOA-025 = DM32.2-2011-00090
+</source>
+
+
+<problem>
+
+<para>
+There is no column in INFORMATION_SCHEMA.SQL_FEATURES called
+FEATURE_SUBFEATURE_PACKAGE_CODE. It seems that
+DEFINITION_SCHEMA.SQL_CONFORMANCE.TYPE is meant; however,
+a column of the Definition Schema may not be referenced. See also
+WG3:KOA-025 and WG3:SLD-037r3.
+</para>
+
+</problem>
+
+
+<solution>
+
+</solution>
+
+</PP>
+
+
+<comment>FCD/2007 GBR-P03-030</comment>
+<PP id="PP062" number="CLI-062" severity="minor" realm="technical">
+
+<reference>
+<extref part="03" ref="cli_getdiagfield"/>
+</reference>
+
+<source>
+Ballot Comment FCD/2007 GBR-P03-030
+</source>
+
+<problem>
+<para>
+<extitemref part="03" ref="cli_getdiagfield_PP062_2" type="GR"/> is followed by a paragraph that is
+not obviously part of any specific rule or subrule. Its alignment suggests that it is probably 
+intended to be read as part of <extitemref part="03" ref="cli_getdiagfield_PP062_1" type="GR"/>. 
+Its content is reasonable in the context of cases A) and B) of the rule, and there is a similar 
+statement, in a similar context in 
+<extitemref part="03" ref="cli_getdiagfield_PP062_3" type="GR"/>.
+The hanging paragraph may therefore have been factored out of cases A) and B). 
+Note that this analysis differs from that in Possible Problem CLI-053.
+One possible solution is to delete the paragraph and add its only sentence as a final sentence to 
+both case A) and case B).
+Another possible solution is to delete the sentence, and the similar sentence
+from <extitemref part="03" ref="cli_getdiagfield_PP062_3" type="GR"/>, perhaps adding a Note to the
+effect that the rules <extref part="02" ref="fnd_temptab"/> in ISO/IEC 9075-2, specify that the 
+schema qualifier for a temporary table is “MODULE”. 
+However, “<BNF name="temporary table declaration" part="02"/>” does not specify a default
+catalog for a temporary table, although it appears that a catalog can be specified without
+constraint.
+</para>
+</problem>
+
+</PP>
+
+
+<PP id="PPcli060" number="CLI-060" severity="major" realm="technical">
+
+<reference>
+P03-No specific location
+</reference>
+
+<source>WG3:UKB-015
+</source>
+
+<problem>
+
+<para>
+Paper UKB-015 said "The current proposal does not address the changes to [cliWD] that would be 
+necessary to support access to the new Information Schema columns through the CLI catalog routines.
+Should this proposal be accepted, then further action will be needed to add the capability to CLI."
+This further action needs to be taken
+</para>
+
+</problem>
+
+</PP>
+
+
+
+<comment>Resolved by WG3:MEM-031 = DM32.2-2016-00___</comment>
+<PP id="PPcli061" number="CLI-061" severity="major" realm="technical">
+
+<reference>
+P03, <specref ref="cli_fetching_rowset"/>
+</reference>
+
+<noteAt>
+<extitemref part="03" ref="cli_fetching_rowset_GR_next" type="GR"/>
+</noteAt>
+
+<source>
+H2-2006-119R1 = WG3:E3E-023
+</source>
+
+<problem>
+
+<para>
+Perhaps it is a bug that FetchScroll with a direction of NEXT does
+not fetch starting with the next row after the previous rowset, the
+way that Fetch does. For example, if the result set is {A, B, C, D},
+the ARRAY_SIZE is 3 and the first rowset {A, B, C} has already
+been fetched, then the next Fetch() will get {D} whereas the next
+FetchScroll in the direction NEXT will get {B, C, D}. 
+</para>
+
+</problem>
+
+</PP>
+
+
+
+<comment>Resolved by WG3:MEM-035 = DM32.2-2016-00___</comment>
+<comment>DCOR/2004 WG3-P03-003</comment>
+<PP id="PPcli059" number="CLI-059" severity="major" realm="technical">
+
+<reference>
+<extref part="03" ref="cli_execdirect"/>
+<extref part="03" ref="cli_execute"/>
+</reference>
+
+<source>
+DCOR/2004 WG3-P03-003
+</source>
+
+<problem>
+
+<para>
+This subclause needs to be examined to see if it needs similar treatment to that
+proposed in SIA-029 (and accepted) for Foundation, 
+<extref part="02" ref="fnd_dynexec"/>.
+A similar comment applies to <extref part="03" ref="cli_execute"/>.
+The drafting of this P.P. completes Action Item k), recorded in STX-012,
+<quote>Action Items from Xi’an</quote>.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by editorial action on WG3:MEM-017, comment P03-USA-210</comment>
+<comment>DCOR/2004 WG3-P03-002</comment>
+<PP id="PPcli058" number="CLI-058" severity="major" realm="technical">
+
+<reference>
+<extref part="03" ref="cli_paramdata"/>
+</reference>
+
+<noteAt>
+<extitemref part="03" ref="cli_paramdata_2_cast" type="GR"/>.
+</noteAt>
+<source>
+DCOR/2004 WG3-P03-002
+</source>
+
+<problem>
+
+<para>
+In <extitemref part="03" ref="cli_paramdata_2_cast" type="GR"/> (in two places):
+</para>
+<para>
+<quote>If the <BNF name="cast specification" part="02"/>
+<ellipsis/> does not conform to the General Rules of 
+<extref part="02" ref="fnd_cast"/>, in ISO/IEC 9075-2, then an exception condition is raised in 
+accordance with the General Rules of 
+<extref part="02" ref="fnd_cast"/>, in ISO/IEC 9075-2.</quote>
+</para>
+<para>I don’t think you can conform to <quote>General Rules</quote>.
+Also why is this rule not covered by the following subrule (III) which
+(effectively) invokes the syntax and General Rules of 
+<extref part="02" ref="fnd_cast"/>.
+</para>
+
+</problem>
+
+</PP>
+
+-->
+
+</EditorNotes>

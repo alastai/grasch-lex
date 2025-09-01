@@ -1,0 +1,385 @@
+<EditorNotes>
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+   This is a list of all problems in the corresponding
+   document that are not yet resolved. 
+
+Possible       
+Problem         Category
+Number         ==========
+=======
+
+JRT-000  (pseudo-PP showing Editor's Notes convention)
+JRT-004         *Opportunity*
+JRT-005        **Major Technical**
+
+
+JRT-0           *Opportunity*
+JRT-0       **Major Technical**
+JRT-0        *Minor Technical*
+
+======= Largest SQL/JRT Possible Problem number *** JRT-004 *** =======
+======= This is the end of the problem number list =======
+
+-->
+
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPjrt" number="JRT-" severity="major" realm="technical">
+
+<reference><specref ref="jrt_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPjrt" number="JRT-" severity="minor" realm="technical">
+
+<reference><specref ref="jrt_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPjrt" number="JRT-" severity="major" realm="editorial">
+
+<reference><specref ref="jrt_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPjrt" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="jrt_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPjrt" number="JRT-">
+
+<reference><specref ref="jrt_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+
+<!-- ======================================= -->
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPjrt000" number="JRT-000" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editor. 
+</source>
+
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point
+that requires particular attention, highlighted thus: 
+</para>
+
+<ednote>Text of the problem.
+</ednote>
+
+</problem>
+
+</PP>
+
+
+
+<LO id="PPjrt004" number="JRT-004">
+
+<reference>No specific location
+</reference>
+
+
+<source>WG3:GLA-040 = DM32.2-2015-00034R1
+</source>
+
+
+<problem>
+
+<para>It might be useful to define extensions to JRT to support polymorphic table routines.
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>None provided with comment. 
+</para>
+
+</solution>
+
+</LO>
+
+<comment></comment>
+<PP id="PPjrt005" number="JRT-005" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+
+<source>WG3:GYD-024
+</source>
+
+
+<problem>
+
+<para>Functionality, if any, to support the Vector type needs to be provided.
+
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<!-- Placed closed PPs and LOs after this line
+
+<COMMENT>===Resolved by WG3:DRS-067/H2-2002-426
+
+<P>
+<BOX>(<EMPHASIS>(JRT-002\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(JRT-002))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Editorial
+
+<LE>Reference: P13, SQL/JRT, No specific location
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:YYJ-077 = H2-2001-___
+
+
+<LE>Possible Problem:
+
+<P>
+Some (many!) of the part tags in SQL/JRT are based on ISO/IEC 9075:1999.
+These need to be replaced with the correct (symbolic) tags for ISO/IEC
+9075:200n.  This applies particularly to the paragraph numbers, but also
+includes many of the rule numbers, which are often hard-coded in the
+source files and not done by symbolic reference.  (Hard-coding is
+appropriate for the 1999 version, however.)
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:ZSH-118R1 = H2-2003-___
+
+<P>
+<BOX>(<EMPHASIS>(JRT-003\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(JRT-003))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P13, SQL/JRT, <REFERENCE>(jrt_newspec\FULL), CR 1)
+
+<LE>Note at: CR 1)
+
+<LE>Source: Email from Stephen Cannan, 2002-10-27
+
+
+<LE>Possible Problem:
+
+<P>
+The last sentence of Conformance Rule 1) is really a General Rule. 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPjrt001" number="JRT-001">
+
+<reference>
+P13, SQL/JRT,
+No specific location
+</reference>
+
+
+<source>
+WG3:YYJ-041 = H2-2001-405
+</source>
+
+
+<problem>
+
+<para>
+<extref part="13" ref="jrt_using_serializable"/>, should perhaps say
+<quote>implements <mono>java.io.Serializable</mono> or any Java
+equivalent</quote>.  This would also permit, for example, implementing
+Externalizable, which can often be done with better performance and space
+usage than Serializable. 
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+
+</para>
+
+</solution>
+
+</LO>
+
+-->
+
+</EditorNotes>

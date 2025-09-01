@@ -1,0 +1,183 @@
+class Foo:
+    def __init__(self):
+        pass
+
+    def multiply(self, x, y):
+        return x * y
+
+class FooSub(Foo):
+    def __init__(self, x: int, y: int):
+        super().__init__()
+        self._x = x
+        self._y = y
+
+    def product(self) -> int:
+        return super().multiply(x=self._x, y=self._y)
+
+    def __str__(self):
+        return str(self.product())
+
+    def __hash__(self):
+        #return hash((super().__hash__(), self.product()))
+
+        return hash(self.product())
+
+    def __eq__(self, other):
+        return super().__eq__(other) and self.product() == other.product()
+
+git class RecordType(Orderable):
+    pass
+
+class FlatRecordType(RecordType, SortedDict[str, Datatype]):
+    # This class ensures that sets of labels or of property types have distinct names
+# This class is not right
+    def __init__(self, attributeTypes: FrozenSet[AttributeType]):
+    def attributes(self) -> [AttributeType]:
+    def attributeNames(self) -> SortedSet[str]:
+    def isEmpty(self) -> bool:
+    def isSingleton(self) -> bool:
+    def singletonMemberName(self) -> str | None:
+    def __add__(self, other: FlatRecordType):
+    class Ordered:
+    class Unordered:
+    def orderAgainst(self, other: FlatRecordType) -> FlatRecordType.Ordered | FlatRecordType.Unordered:
+        # The comparison of two Records S and T must observe these rules:
+
+class PropertyTypesRecordType(FlatRecordType):
+    def __init__(self, propertyTypeSet: FrozenSet[PropertyType]):
+            # RecordType is just a marker, no __init__ to call
+            SortedDict.__init__(self,((propertyType.name, propertyType.datatype) for propertyType in propertyTypeSet))
+
+class Label(AttributeType):
+    def __init__(self, name: str):
+        super().__init__(name, LABEL)
+
+class LabelsRecordType(FlatRecordType):
+    def __init__(self, labels: List[str]):
+        super().__init__(frozenset(labelSet))
+
+NO_LABELS = LabelsRecordType([])
+
+class PropertyType(AttributeType):
+    def __init__(self, name: str, datatype: Datatype):
+        super().__init__(name, datatype)
+
+class PropertyTypesModel(PropertyTypesRecordType):
+    def __init__(self, baseModel: BaseModel):
+        self.__baseModel = BaseModel
+
+class JSONSchemaPropertyTypes(PropertyTypesRecordType):
+    def __init__(self, JSONSchema: str):
+        self.__JSONSchema = JSONSchema
+
+class FlatPropertyTypes(PropertyTypesRecordType):
+    def __init__(self, propertyTypeSet: List[PropertyType]):
+        FlatRecordType.__init__(self, frozenset(propertyTypeSet))
+
+NO_PROPERTY_TYPES = FlatPropertyTypes(set())
+
+def orderRecordTypes(first: FlatRecordType, second: FlatRecordType) \
+        -> FlatRecordType.Ordered | FlatRecordType.Unordered:
+
+class ContentTypeInterface(Protocol):
+    def labels(self) -> LabelsRecordType:
+    def mandatoryPropertyTypes(self) -> FlatPropertyTypes:
+    def optionalPropertyTypes(self) -> FlatPropertyTypes:
+    def keyedContentTypes(self) -> SortedDict[LabelsRecordType, KeyedContentTypeInterface]:
+
+class KeyedContentTypeInterface(ContentTypeInterface):
+    def name(self) -> str | None:
+    def keyLabels(self) -> LabelsRecordType:
+    def otherLabels(self) -> LabelsRecordType:
+    def mandatoryPropertyTypes(self) -> FlatPropertyTypes:
+    def optionalPropertyTypes(self) -> FlatPropertyTypes:
+
+We start with a clumsy API
+We add builders to emulate "just strings"
+
+The right way to combine two objects of the same class (like ContentType) is to support __or__.
+
+See following example where permission masks are ORed
+
+from typing import Union
+
+class Permissions:
+    def __init__(self, can_read: bool = False, can_write: bool = False, can_execute: bool = False):
+        self.can_read = can_read
+        self.can_write = can_write
+        self.can_execute = can_execute
+
+    def __or__(self, other: 'Permissions') -> 'Permissions':
+        return Permissions(
+            self.can_read or other.can_read,
+            self.can_write or other.can_write,
+            self.can_execute or other.can_execute
+        )
+
+    def __str__(self):
+        return f"Permissions(read={self.can_read}, write={self.can_write}, execute={self.can_execute})"
+
+
+# Example usage
+perm1 = Permissions(can_read=True, can_write=False)
+perm2 = Permissions(can_write=True, can_execute=True)
+combined_perm = perm1 | perm2
+print(combined_perm)  # Output: Permissions(read=True, write=True, execute=True)
+
+This is described as a "union" (which it is) but it has nothing to do with union typing.
+We implement self-intersection typing by providing logical __or__
+
+create
+(:Employee {name:"Julia Strelnikova", id:"NP24567564", dob:date('1994-06-15')}),
+(:Employee {name:"Andy Schwerig", id:"NP24527864", dob:date('1979-04-12')}),
+(:Employee {name:"Fabien Habile", id:"NP29067564", dob:date('1967-06-06')}),
+(:Employee {name:"Martina Doyle", id:"NP87767564", dob:date('1984-07-13')}),
+(:Employee {name:"Moira Grahame", id:"NP89667564", dob:date('2001-12-23')}),
+(:Employee {name:"Xi Qialeng", id:"NP04507564", dob:date('1996-11-21')})
+
+@age.setter
+    def age(self, value):
+        """Setter method for age with validation"""
+        print("Setting age")
+        if value < 0:
+            raise ValueError("Age cannot be negative")
+        self._age = value
+
+a type lattice can be empty
+it can have only nodes
+it can have subtype relations (edges from lower to higher), which are always mirrored by supertype relations (reverse edges,
+from higher to lower)
+if it is a top-bounded semilattice then it cannot have edges unless they all flow to the top
+if it is a bottom-bounded semilattice then it cannot have edges unless they all flow to the top
+
+maximum = greatest element
+superemum = least upper bound
+lattrice = set S where the join of any two elements has a supremum, and meet of any two elements has an infimum.
+join-semilattice, and meet-semilattice: has a supremum, has an infimum respectively
+
+If two exist over the same set and with the same binary operator then the two together are a lattice.
+
+A bounded lattice is one where the infimum and supremum are the minimum and maximum of the poset.
+
+This is our case. We add to our set of content types two elements, one a content type {{},{},{},{}} which is ANY,
+and another which {{...},{...},{...},{...}} which is NOTHING.
+
+We have no unbounded lattices, but it's irrelevant, so we denote them however we want.
+
+https://en.wikipedia.org/wiki/Join_and_meet
+
+https://docs.google.com/document/d/1xJKoFOjA_4T_1DTb2KOg2Jlp_zRcBBgYxSQKaDUcTDQ/edit?usp=sharing
+
+The comment is good.
+
+
+So I have a set of nodes. I want to order them so they end up stratified.
+level 0 (T)     6
+level 1         1, 5, 2
+level 2         4, 3
+level 3         7
+level n (B)     8
+
+So I could start at the top -- this implies we always have a top
+X
+is X < T yes, is it < than all direct subtypes of T, if it gets to B, we insert it between its superiors and B

@@ -1,0 +1,517 @@
+<EditorNotes>
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+   This is a list of all problems in the corresponding
+   document that are not yet resolved. 
+
+Possible       
+Problem           Category
+Number           ==========
+=======
+MDA-001         *Opportunity*
+MDA-002         *Opportunity*
+MDA-003         *Opportunity*
+MDA-004         *Opportunity*
+MDA-005         *Opportunity*
+MDA-006         *Opportunity*
+MDA-008         *Opportunity*
+MDA-009         *Opportunity*
+MDA-012        **Major Technical**
+
+
+MDA-0          *Opportunity*
+MDA-0       **Major Technical**
+MDA-0        *Minor Technical*
+
+======= Largest SQL/MDA Possible Problem so far *** MDA-012 *** =======
+======= This is the end of the problem number list =======
+-->
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPmda" number="MDA-" severity="major" realm="technical">
+
+<reference><specref ref="mda_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPmda" number="MDA-" severity="minor" realm="technical">
+
+<reference><specref ref="mda_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPmda" number="MDA-" severity="major" realm="editorial">
+
+<reference><specref ref="mda_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPmda" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="mda_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPmda" number="MDA-">
+
+<reference><specref ref="mda_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+<comment>WG3:BRE-028R1 = DM32.2-2016-00079</comment>
+<LO id="PPmda001" number="MDA-001">
+
+<reference>N specific location.
+</reference>
+
+<source>WG3:BRE-028R1 = DM32.2-2016-00079
+</source>
+
+<problem>
+
+<para>With the current specification, it is not possible to write
+a single SQL-invoked routine whose input is a generic MD-array type with an unspecified 
+(or maximum) dimension and use that routine to operate on any MD-array with a concrete
+(or lower than maximum) dimension and have logic within
+the routine to distinguish the different dimensions. 
+Instead what needs to be done is to write n routines
+(where n is the number of different dimensions that need to be dealt with)
+and duplicate the programming logic (and maintenance effort) n times. 
+For n > 2, this may become a usability issue.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPmda002" number="MDA-002">
+
+<reference><specref ref="mda_cast"/>.
+</reference>
+
+<source>WG3:BRE-045, WG3:BRE-017R1 = DM32.2-2017-00026R7, comment P15-USA-256.
+</source>
+
+<problem>
+
+<para>It should be easily possible to cast a 1-dimensional MD-array to a regular array and 
+vice versa.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPmda003" number="MDA-003">
+
+<reference><specref ref="mda_type"/>.
+</reference>
+
+<source>WG3:BRE-017R1 = DM32.2-2017-00026R7, comment P15-USA-127
+</source>
+
+<problem>
+
+<para>Currently the lower and upper limits for an MD-axis are restricted to be literals. 
+It could be beneficial to make them more dynamic to allow the limits of one MD-array type
+to be based on the limits of another existing MD-array (value).
+</para>
+
+<para>Similar considerations apply for the names of the MD-axes and the whole MD-extent.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPmda004" number="MDA-004">
+
+<reference>No specific location.
+</reference>
+
+
+<source>WG3:BRE-017R1 = DM32.2-2017-00026R7, comment P15-USA-765.
+</source>
+
+<problem>
+
+<para>With the current specification, it is not possible to write
+a single SQL-invoked routine whose input is a generic MD-array type
+with an unspecified (or maximum) dimension and use that routine
+to operate on any MD-array with a concrete (or lower than maximum)
+dimension and have logic within the routine to distinguish the different dimensions. 
+Instead what needs to be done is to write n routines (where n is the number of
+different dimensions that need to be dealt with) and duplicate the programming logic
+(and maintenance effort) n times. 
+For n > 2, this may become a usability issue.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPmda005" number="MDA-005">
+
+<reference>PNo specific location.
+</reference>
+
+<source>WG3:BRE-017R1 = DM32.2-2017-00026R7, comment P15-USA-840.
+</source>
+
+<problem>
+
+<para>Given an n-dimensional MD-array X, it may be beneficial
+to define an alias Y for it that has less dimensions
+(<eg/> Y[i] = X[i, i], or Y[x, y] = X[f(x), g(y), h(x, y), <etc/>)
+and then use that alias in a query (declared in the WITH clause)
+or in a PSM block (declared in the DECLARE section). 
+The alias would not be a new value but just a <quote>pointer</quote> into the existing MD-array.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPmda006" number="MDA-006">
+
+<reference><specref ref="mda_arrayvalconst"/>.
+</reference>
+
+<source>WG3:BRE-017R1 = DM32.2-2017-00026R7, comment P15-USA-511.
+</source>
+
+<problem>
+
+<para>Ada provides the method of aggregate notation, both positional and named,
+to initialize a multidimensional array. 
+Similar functionality would be beneficial for MD-arrays as well.
+</para>
+
+<para>Ada Examples:
+</para>
+
+<code>
+type MY_ARRAY is array(1..5) of INTEGER;
+Total : MY_ARRAY := (12, 27, -13, 122, 44);
+First : MY_ARRAY := (1 => 14, 2 => 57, 3 => 111,
+                     5 => -27, 4 => 21);
+
+Another : MY_ARRAY := (2 => 13, 5 => 57, others => 3);
+
+One_More : MY_ARRAY := (2..4 => 13, 1 | 5 => 27);
+
+type MATRIX is array(INTEGER range 1..3,
+                     INTEGER range 1..4) of INTEGER;
+
+Square_Board : MATRIX := ((4, 7, 3, 5),
+                          (3, 8, 2, 0),
+                          (1, 5, 9, 9));
+
+Checker_Board : MATRIX := (2 => (3, 8, 2, 0),
+                           3 => (1, 5, 9, 9),
+                           1 => (4, 7, 3, 5));
+
+Chess_Board : MATRIX := (2 => (3, 8, 2, 0),
+                         3 => (1, 5, 9, 9),
+                         1 => (4 => 5, 2 => 7,
+                               1 => 4, 3 => 3));
+</code>
+
+</problem>
+
+</LO>
+
+
+<bar note="WG3:XRH-012"/>
+<LO id="PPmda008" number="MDA-008">
+
+<reference><specref ref="mda_implied_featurerelations"/>.
+</reference>
+
+<source>Unkown. 
+Consequence of WG3:XRH-011R1 Changed A010 to A013
+</source>
+
+<problem>
+
+<para>Some of the functionality that is currently included in <feature code="A013"/>,
+has a dependency on <feature code="T051"/>. 
+This needs to be recorded. 
+But in its basic support, <feature code="A013"/> should not have a dependency on 
+<feature code="T051"/>. 
+Anything that depends on <feature code="T051"/> should be moved into a separate/higher conformance 
+feature. 
+</para>
+
+</problem>
+
+</LO>
+<endbar/>
+
+<bar note="WG3:XRH-012"/>
+
+<LO id="PPmda009" number="MDA-009">
+
+<reference><specref ref="mda_implied_featurerelations"/>.
+</reference>
+
+<source>Unkown.
+Consequence of WG3:XRH-011R1: Changed A010 to A011
+</source>
+
+<problem>
+
+<para>Some of the functionality that is currently included in <feature code="A011"/>, has 
+a dependency on <feature code="T031"/>. 
+This needs to be recorded. 
+But in its basic support, <feature code="A011"/> should not have a dependency on 
+<feature code="T031"/>. 
+Anything that depends on <feature code="T031"/> should be moved into a separate/higher conformance 
+feature. 
+</para>
+
+</problem>
+
+</LO>
+<endbar/>
+
+
+<PP id="PPmda012" number="MDA-012" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:GYD-024.
+</source>
+
+<problem>
+
+<para>Functionality, if any, to support the Vector type needs to be provided.
+
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<!-- Placed closed PPs and LOs after this line
+
+<LO id="PPmda007" number="MDA-007">
+
+<reference>
+P15, SQL/MDA,
+<specref ref="mda_xmlsm_conformance_claims"/>
+</reference>
+
+
+<problem>
+
+<para>
+This Subclause is incomplete. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPmda010" number="MDA-010">
+
+<reference>
+P15, SQL/MDA,
+no specific location
+</reference>
+
+
+<problem>
+
+<para>
+There is value in manipulating MD-arrays in PSM only,
+without the need/requirement to persistent
+the MD-arrays in the database. 
+SQL/MDA needs to cater for this use case. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<PP id="PPmda011" number="MDA-011" severity="major" realm="technical">
+
+<reference>P15, SQL/MDA, <specref ref="mda_potential_non_determinism"/>
+</reference>
+
+
+<noteAt><itemref type="SR" ref="mda_potential_non_determinism_SR_cons_by_query"/>
+</noteAt>
+
+
+<source>WG3:OKJ-021R1 = DM32.2-2017-00047R2
+</source>
+
+
+<problem>
+
+<para>WG3:OKJ-021r1 rearranged the definition of possible non-determinism. 
+SQL/MDA did not participate in this rearrangement because it was progressed against
+Foundation:2016. 
+The next time SQL/MDA is progressed it should be harmonized
+with the changes in WG3:OKJ-021r1.
+</para>
+
+</problem>
+
+
+</PP>
+
+
+-->
+
+</EditorNotes>

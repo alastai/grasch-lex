@@ -1,0 +1,3865 @@
+<EditorNotes>
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+   This is a list of all problems in the corresponding
+   document that are not yet resolved.
+
+Possible       
+Problem         Category
+Number         ==========
+=======
+
+PGQ-000  (pseudo-PP showing Editor's Notes convention)
+PGQ-001         *Opportunity*
+PGQ-002         *Opportunity*
+PGQ-004         *Opportunity*
+PGQ-013         *Opportunity*
+PGQ-016         *Opportunity*
+PGQ-019         *Opportunity*
+PGQ-032         *Opportunity*
+PGQ-035         *Opportunity*
+PGQ-036         *Opportunity*
+PGQ-047         *Opportunity*
+PGQ-049         *Opportunity*
+PGQ-050         *Opportunity*
+PGQ-051         *Opportunity*
+PGQ-052         *Opportunity*
+PGQ-053         *Opportunity*
+PGQ-054         *Opportunity*
+PGQ-055         *Opportunity*
+PGQ-056         *Opportunity*
+PGQ-060         *Opportunity*
+PGQ-062         *Opportunity*
+PGQ-063         *Opportunity*
+PGQ-069         *Opportunity*
+PGQ-070         *Opportunity*
+PGQ-071         *Opportunity*
+PGQ-076         *Opportunity*
+PGQ-077         *Opportunity*
+PGQ-078         *Opportunity*
+PGQ-079         *Opportunity*
+PGQ-080         *Opportunity*
+PGQ-081         *Opportunity*
+PGQ-082         *Opportunity*
+PGQ-084         *Opportunity*
+PGQ-085         *Opportunity*
+PGQ-086         *Opportunity*
+PGQ-087         *Opportunity*
+PGQ-088         *Opportunity*
+PGQ-089         *Opportunity*
+PGQ-090         *Opportunity*
+PGQ-091         *Opportunity*
+PGQ-092         *Opportunity*
+PGQ-093         *Opportunity*
+PGQ-094         *Opportunity*
+PGQ-095         *Opportunity*
+PGQ-096         *Opportunity*
+PGQ-098       *Minor Technical*
+PGQ-099       *Minor Editorial*
+PGQ-100       *Minor Editorial*
+PGQ-101       **Major Technical**
+PGQ-102      **Major Technical**
+PGQ-103       *Minor Technical*
+PGQ-104      **Major Technical**
+
+
+PGQ-0           *Opportunity*
+PGQ-0        **Major Technical**
+PGQ-0         *Minor Technical*
+PGQ-0        **Major Editorial**
+PGQ-0         *Minor Editorial*
+
+======= Largest SQL/PGQ Possible Problem number *** PGQ-104 *** =======
+======= This is the end of the problem number list ========
+-->
+
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPpgq" number="PGQ-" severity="major" realm="technical">
+
+<reference><specref ref="pgq_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPpgq" number="PGQ-" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPpgq" number="PGQ-" severity="major" realm="editorial">
+
+<reference><specref ref="pgq_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPpgq" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="pgq_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPpgq" number="PGQ-">
+
+<reference><specref ref="pgq_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPpgq000" number="PGQ-000" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editor.
+</source>
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point
+that requires particular attention, highlighted thus: 
+</para>
+
+<ednote>Text of the problem.
+</ednote>
+
+</problem>
+
+</PP>
+
+
+<LO id="PPpgq001" number="PGQ-001">
+
+<reference><specref ref="pgq_predicates"/>.
+</reference>
+
+<source>WG3:ERF-034.
+</source>
+
+<problem>
+
+<para>An SQL predicate named GRAPH_EXISTS has been proposed, to test whether a pattern
+is satisfied in a property graph.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq002" number="PGQ-002">
+
+<reference><specref ref="pgq_scalars"/>.
+</reference>
+
+<source>WG3:ERF-034.
+</source>
+
+<problem>
+
+<para>An SQL value expression named GRAPH_VALUE has been proposed, to extract a value
+from a property graph.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq004" number="PGQ-004">
+
+<reference><specref ref="pgq_tabref"/>.
+</reference>
+
+<source>WG3:ERF-034.
+</source>
+
+<problem>
+
+<para>It may be desirable for GRAPH_TABLE to support multiple input graphs.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq013" number="PGQ-013">
+
+<reference><specref ref="pgq_pg_defn"/>.
+</reference>
+
+<source>WG3:BNE-027R1.
+</source>
+
+<problem>
+
+<para>Convenience syntax may be provided for edge tables that model a 1:n
+relationship through a foreign key in a vertex table to another vertex table or itself.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq019" number="PGQ-019">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_bne034_3"/>.
+</noteAt>
+
+<source>WG3:BNE-034, WG3:SXM-052.
+</source>
+
+<problem>
+
+<para>Path pattern union is not defined using left recursion.
+SXM-052 believed that it should be possible to support left recursion but declined to do
+so for expediency.
+It is a Language Opportunity to support left recursion.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql025" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq032" number="PGQ-032">
+
+<reference><specref ref="pgq_tabref"/>.
+</reference>
+
+<source>WG3:MMX-026.
+</source>
+
+<problem>
+
+<para>As WG3:MMX-026 has shown, there is currently no need to add a keyword before the 
+<BNF name="graph reference"/> in a <BNF name="graph table"/>.
+However, in the future it may become necessary to add such a keyword to allow for multiple 
+<BNF name="graph reference"/>s and <kw>MATCH</kw> clauses within the same 
+<BNF name="graph table"/> (and/or to align with GQL).
+The exact keyword has yet to be determined.
+Examples include (but are not limited to) FROM, ON, USE, and WITHIN.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq035" number="PGQ-035">
+
+<reference><specref ref="pgq_simpl_path_patt_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_mmx060_2"/>.
+</noteAt>
+
+<source>WG3:MMX-060.
+</source>
+
+<problem>
+
+<para>It has been proposed that a macro name may be a <BNF name="simplified primary"/> in 
+a <BNF name="simplified path pattern expression"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql034" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq036" number="PGQ-036">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_PP036_1"/>.
+</noteAt>
+
+<source>WG3:W01-014.
+</source>
+
+<problem>
+
+<para>It may be possible to permit nested quantifiers.
+WG3:W01-014 contained a discussion of a way to support aggregates at different depths of 
+aggregation if there are nested quantifiers.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql036" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq047" number="PGQ-047">
+
+<reference><specref ref="pgq_eval_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_10"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>It may be possible to enforce implicit joins of unconditional singletons
+exposed by a <BNF name="path concatenation"/> as part of the GRs for 
+<BNF name="path concatenation"/>.
+This was discussed in a SQL/PG ad hoc meeting on September 8, 2020.
+It was decided not to attempt that change as part of WG3:W04-009R1, leaving it as a future 
+possibility.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql044" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq049" number="PGQ-049">
+
+<reference><specref ref="pgq_graph_pattern"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_12"/>.
+</noteAt>
+
+<source>WG3:W04-009R1, WG3:W09-031.
+</source>
+
+<problem>
+
+<para>It has been suggested that it might be possible to treat the 
+<BNF name="path pattern prefix"/> specified in <BNF name="keep clause"/> as merely providing 
+a default <BNF name="path pattern prefix"/> rather than a mandatory one for each 
+<BNF name="path pattern"/>.
+Whereas nested <BNF name="path pattern prefix"/> is prohibited, this may be 
+a feasible avenue of growth.
+On the other hand, perhaps a less definitive verb than <kw>KEEP</kw> may be appropriate when 
+specifying a default <BNF name="path pattern prefix"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql057" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq050" number="PGQ-050">
+
+<reference><specref ref="pgq_graph_pattern"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_13"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>It has been proposed that unconditional singletons exposed by prior <kw>MATCH</kw>
+clauses may also be joined implicitly.
+</para>
+
+<para>Was linked to &lt;ExtPPref ref="PPgql059" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq051" number="PGQ-051">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_14"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>WG3:W04-009R1 recognized that a graph query may have a sequence of <kw>MATCH</kw> 
+clauses, with the bindings of one <kw>MATCH</kw> clause visible in all subsequent 
+<kw>MATCH</kw> clauses in the same invocation of <BNF name="graph table"/>, and that it 
+should be permissible to reference such variables in any 
+<BNF name="parenthesized path pattern where clause"/> simply contained in a subsequent 
+<kw>MATCH</kw> clause.
+</para>
+
+<para>See also <PPref ref="PPpgq070"/>.
+</para>
+
+<comment>Editorial: Jim Melton 2024-09-30</comment>
+<para>The equivalent LO in GQL, GQL-051, was resolved by WG3:GYD-031.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq052" number="PGQ-052">
+
+<reference><specref ref="pgq_path_pattern_prefix"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_15"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>The ability to specify <quote>cheapest</quote> queries (analogous to <kw>SHORTEST</kw>, 
+but minimizing the sum of costs along a path) is desirable.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql052" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq053" number="PGQ-053">
+
+<reference><specref ref="pgq_path_pattern_prefix"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_16"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>In addition to <kw>SHORTEST</kw> <kw>GROUP</kw>, it has been proposed to 
+support <kw>SHORTEST</kw> [ <sym>k</sym> ] <kw>WITH</kw> <kw>TIES</kw>, with the semantics to 
+return the first <sym>k</sym> matches (where <sym>k</sym> defaults to 1) when sorting matches in 
+ascending order on number of edges, and also return any matches that have the same number of edges 
+as the last of the <sym>k</sym> matches.
+This is the semantics of <kw>WITH</kw> <kw>TIES</kw> in <extref part="02" ref="fnd_qexp"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql053" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq054" number="PGQ-054">
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W04-009R1, WG3:W09-031.
+</source>
+
+<problem>
+
+<para>WG3:W04-009R1 believed it should be possible to support nested selectors using
+recursion, but did not undertake that.
+It is a Language Opportunity to support nested selectors.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql054" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq055" number="PGQ-055">
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W04-009R1, WG3:W09-031.
+</source>
+
+<problem>
+
+<para>WG3:W04-009R1 believed it should be possible to support selectors within
+quantifiers with a finite upper bound, but did not undertake that.
+(This comment applies to a static upper bound, not dynamic, since we are forbidding multiple
+selectors within a restrictor.) 
+It is a Language Opportunity to support selectors within quantifiers with a finite upper bound.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql055" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq056" number="PGQ-056">
+
+<reference><specref ref="pgq_path_pattern_prefix"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_19"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>With more work, it is possible to recognize when a vertex variable is declared uniformly in 
+the first or the last position in every operand of a <BNF name="path pattern union"/>.
+However, WG3:W04-009R1 declined to make the effort because it is easy for the user to factor out 
+such a vertex pattern.
+For example, instead of
+</para>
+<code>(X) -> (Y) | (X) -> (Z)
+</code>
+<para>the user can write
+</para>
+<code>(X) ( -> (Y) | -> (Z))
+</code>
+<para>Thus a more general definition of right or left boundary variable is possible.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql056" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq060" number="PGQ-060">
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W08-018, WG3:W09-031.
+</source>
+
+<problem>
+
+<para>WG3:W08-018 prohibited a selector contained in a <BNF name="path pattern union"/> or 
+<BNF name="path multiset alternation"/> <symdef>PU</symdef>, but believed that if <sym>PU</sym> is 
+at the <quote>top</quote> of a path pattern, and a selector is at the <quote>top</quote> of 
+an operand of <sym>PU</sym>, then this scenario does not violate compositionality. 
+It is a Language Opportunity to permit this scenario.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql181" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq062" number="PGQ-062">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pqg_w09017"/>.
+</noteAt>
+
+<source>WG3:W09-017.
+</source>
+
+<problem>
+
+<para>In the BNF for <BNF name="full edge any direction"/>, the delimiter 
+tokens &lt;~[ ]~&gt; have been suggested as a synonym for -[ ]-.
+The synonym for the <BNF name="abbreviated edge pattern"/> - (<BNF name="minus sign" part="02"/>) 
+would then be &lt;~&gt;, the synonym for <BNF name="simplified defaulting any direction"/> would 
+use the delimiter tokens &lt;~/ /~&gt; and the synonym for 
+<BNF name="simplified override any direction"/> would use the tokens &lt;~ and &gt; surrounding 
+a label as originally proposed in WG3:MMX-060. 
+These synonyms might be considered to make the table of edge patterns more harmonious and 
+internally consistent.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql212" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq063" number="PGQ-063">
+
+<reference><specref ref="pgq_pg_defn"/>.
+</reference>
+
+<noteAt><specref ref="w09010"/>.
+</noteAt>
+
+<source>Discussion of WG3:W09-010 and Email from Jan &amp; Keith.
+</source>
+
+<problem>
+
+<para>During the discussion of WG3:W09-010 <quote>Disallow mixed property types</quote>, 
+it was noted that it could be beneficial to PGQ users to relax the restriction imposed by 
+WG3:W09-010 that all properties with the same name within a given graph must have the same 
+data type. 
+Any approach to allow mixed property types needs to address the problems with doing so as outlined 
+in WG3:W09-010.
+Note that the effect of WG3:W09-010 was replaced by W09-034 but the comment still applies.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq069" number="PGQ-069">
+
+<reference><specref ref="pgq_app_bind_eval_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w13018_1"/>.
+</noteAt>
+
+<source>WG3:MMX-035r2, WG3:W13-018.
+</source>
+
+<problem>
+
+<para>The bindings of a group reference flatten nested lists. 
+This may be acceptable for SQL aggregates, which have no support for nested groupings, 
+but may be inadequate to fully capture the semantics of a group reference in a graph pattern.
+MMX-035r2 section 4.1 <quote>Desynchronized lists</quote> pointed out a problem with reducing 
+group variables to lists: two lists may be interleaved, but the reduction to separate lists can 
+lose this information. 
+The example given is
+</para>
+
+<code>
+(   (A:Person) -[:SPOUSE]-> ()
+  | (B:Person) -[:FRIEND]-> () ){3}
+</code>
+
+<para>A solution may find matches to A and B in any order. 
+With separate lists of matches of A and B, it will not be easy to reconstruct the precise
+sequence of interleaved matches to A and B.
+</para>
+
+<para>A similar problem can arise with nested quantifiers. 
+MMX-035r2 section 4.2 <quote>Nested quantifiers</quote> gives this example:
+</para>
+
+<code>
+( (C1:CORP) (-[:TRANSFERS]->(B:BANK))*
+  -[:TRANSFERS]-> (C2:CORP) )*
+</code>
+
+<para>With this pattern, there can be 0 or more bindings to B between any two consecutive 
+bindings to C1 and C2. 
+With just independent lists of matches to C1, B and C2, it will not be easy to determine which
+bindings to B lie between which bindings to C1 and C2.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql233" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq070" number="PGQ-070">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w13018_2"/>, <specref ref="pgq_w13018_2"/>.
+</noteAt>
+
+<source>WG3:W13-018.
+</source>
+
+<problem>
+
+<para>Syntax Rules and Conformance Rules regarding permissible 
+<BNF name="element reference"/>s must be revisited if we permit a sequence of <kw>MATCH</kw> 
+clauses. 
+</para>
+
+<para>See also <PPref ref="PPpgq051"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq071" number="PGQ-071">
+
+<reference><specref ref="pgq_src_dest_pred"/>.
+</reference>
+
+<noteAt>No specific location.
+</noteAt>
+
+<source>WG3:W15-022.
+</source>
+
+<problem>
+
+<para>The <BNF name="source/destination predicate"/> is expressed as a predicate about the vertex, 
+while it is most often used to pose questions about the edge. 
+If an alternative form of these predicates was available that put the edge as the first operand, 
+this predicate would be more useful in combination with <BNF name="simple case" part="02"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql231" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq076" number="PGQ-076">
+
+<reference><specref ref="pgq_func"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w20030_1"/>.
+</noteAt>
+
+<source>WG3:W20-030.
+</source>
+
+<problem>
+
+<para>WG3:W20-030 only proposed support for graph aggregates with exactly one 
+aggregated element reference. 
+This leaves the following unsupported:
+</para>
+
+<code>
+      <kw>MATCH</kw> <kw>TRAIL</kw> ((A) -> (B))+
+      <kw>WHERE</kw> <kw>CORR</kw> (A.X, B.X) > 0.5
+</code>
+
+<para>A possible work-around is a LET clause enabling the definition of properties
+of subpath variables, like this:
+</para>
+
+<code>
+      <kw>MATCH</kw> <kw>TRAIL</kw> (P = (A) -> (B)
+                     LET AX = A.X, BX = B.X)+
+      <kw>WHERE</kw> <kw>CORR</kw> (P.AX, P.BX) > 0.5
+</code>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq077" number="PGQ-077">
+
+<reference><specref ref="pgq_func"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w20030_2"/>.
+</noteAt>
+
+<source>WG3:W20-030.
+</source>
+
+<problem>
+
+<para>WG3:W20-030 acknowledged that support for aggregates of vertex variables is poor. 
+For example, given the pattern
+</para>
+
+<code>
+<kw>MATCH</kw> <kw>TRAIL</kw> ((P) -> (Q))*
+</code>
+
+<para>there is no element variable for all vertices: P references all but the last
+vertex, and Q references all but the first vertex. 
+For certain aggregates such as <kw>SUM</kw>, <kw>AVG</kw>, <kw>MAX</kw> and <kw>MIN</kw> there is 
+a work-around, to add one singleton vertex variable to the pattern to capture the vertex that is 
+missed at one end of the quantified path pattern or the other. 
+Thus
+</para>
+
+<code>
+      <kw>MATCH</kw> <kw>TRAIL</kw> ((P) -> (Q))+ (PP)
+      <kw>WHERE</kw> (<kw>CASE</kw> <kw>WHEN</kw> <kw>SUM</kw>(P.X) <kw>IS</kw> <kw>NOT</kw> <kw>NULL</kw>
+                  <kw>THEN</kw> <kw>SUM</kw>(P.X) <kw>ELSE</kw> 0)
+          + (<kw>CASE</kw> <kw>WHEN</kw> PP.X <kw>IS</kw> <kw>NOT</kw> <kw>NULL</kw> <kw>THEN</kw> PP.X
+                  <kw>ELSE</kw> 0 <kw>END</kw> ) > 10
+</code>
+
+<para>tests whether the sum of property X on all vertices totals more than 10.
+However, this work-around does not help with percentiles, and is an ugly imposition on the user 
+in any case.
+</para>
+
+<para>RPR (row pattern recognition) has a notion of union variables which might be adapted to 
+address this problem. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq078" number="PGQ-078">
+
+<reference><specref ref="pgq_ele_ref"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w20030_3"/>.
+</noteAt>
+
+<source>WG3:W20-030.
+</source>
+
+<problem>
+
+<para>WG3:W07-014 discusses some approaches that might be followed if it is
+desired to permit non-local references to group element variables.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq079" number="PGQ-079">
+
+<reference><specref ref="pgq_tabref"/>.
+</reference>
+
+<noteAt><specref ref="w21048_1"/>
+</noteAt>
+
+<source>WG3:W21-048.
+</source>
+
+<problem>
+
+<para>It may be possible to permit one <kw>GRAPH_TABLE</kw> nested within another to share
+an element variable, with implicit equijoin semantics.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq080" number="PGQ-080">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W21-048.
+</source>
+
+<problem>
+
+<para>WG3:W16-013 proposed concatenated <kw>MATCH</kw> to express lateral inner join.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq081" number="PGQ-081">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W21-048.
+</source>
+
+<problem>
+
+<para>WG3:W16-013 proposed OPTIONAL <kw>MATCH</kw> to express lateral left outer join.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq082" number="PGQ-082">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W21-048.
+</source>
+
+<problem>
+
+<para>WG3:W16-013 proposed <kw>EXISTS</kw> (<kw>MATCH</kw> <ellipsis/>) as a predicate to test 
+for the existence of a match.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq084" number="PGQ-084">
+
+<reference><specref ref="pgq_graph_pattern"/>.
+</reference>
+
+<noteAt><specref ref="w21050_2"/>.
+</noteAt>
+
+<source>WG3:W21-050.
+</source>
+
+<problem>
+
+<para>It might be valuable to add an option to the <BNF name="keep clause"/> 
+(KEEP DISTINCT) to allow reducing to a set of distinct bindings to global singletons.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq085" number="PGQ-085">
+
+<reference><specref ref="pgq_graph_patt_var_ref"/>.
+</reference>
+
+<noteAt><specref ref="pgq_ber031_1"/>.
+</noteAt>
+
+<source>WG3:BER-031.
+</source>
+
+<problem>
+
+<para>It is a Language Opportunity to support references to subpath variables, for
+example, in <BNF name="graphical path length function"/>, or a TOTAL_COST function once
+CHEAPEST is defined.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql279" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq086" number="PGQ-086">
+
+<reference><specref ref="pgq_path_ref"/>.
+</reference>
+
+<noteAt><specref ref="pgq_ber031_2"/>.
+</noteAt>
+
+<source>WG3:BER-031.
+</source>
+
+<problem>
+
+<para>The only use of <BNF name="path reference"/> is in 
+<BNF name="graphical path length function"/>, which WG3:RKE-031 limited to the COLUMNS clause in 
+SQL/PGQ (see section 5.10 <quote>Predicates on PATH_LENGTH</quote>). 
+It is a Language Opportunity to analyze predicates on PATH_LENGTH. 
+Possibly restrictions might be added to <specref ref="pgq_path_ref"/>, since they are likely to 
+apply to any other scalar functions or predicates on <BNF name="path reference"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq087" number="PGQ-087">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-047.
+</source>
+
+<problem>
+
+<para>GQL provides the ability to express a set of properties to be matched using equality 
+semantics using a shorthand syntax derived from JSON object notation. 
+Such syntax has been accepted into the draft GQL standard. 
+In order to maintain syntactic compatibility between GQL and SQL/PGQ adding this syntax to 
+SQL/PGQ should be considered as well.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq088" number="PGQ-088">
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-047.
+</source>
+
+<problem>
+
+<para>It would be useful to be have a function to export an element binding, a path binding, 
+or a multipath binding in JSON.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq089" number="PGQ-089">
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-047.
+</source>
+
+<problem>
+
+<para>In addition to the ALTER PROPERTY GRAPH operations outlined in BNE-027r1, it it would be 
+potentially useful to support an operation that modifies a single label that is implemented by 
+more than one element table.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq090" number="PGQ-090">
+
+<reference><defnref ref="pgq_vertex"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-057.
+</source>
+
+<problem>
+
+<para>The definition of vertex says that it is 
+a <quote>fundamental unit of which a property graph [<ellipsis/>] is formed</quote>. 
+The same could be said of edges but that definition does not say so. 
+Some alignment might be desirable.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq091" number="PGQ-091">
+
+<reference><specref ref="pgq_machinery_graph_pattern_matching"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-057.
+</source>
+
+<problem>
+
+<para>Following the lead text of <itemref ref="pgq_pgq091_1" type="GR"/>, 
+<specref ref="pgq_pgq091_2"/> talks about an empty path binding. 
+It could also be noted here that a subpath binding may be empty.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq092" number="PGQ-092">
+
+<reference><specref ref="pgq_eval_sel_paren_path_pattern_expr"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-057, WG3:W07-013, WG3:MMX-059.
+</source>
+
+<problem>
+
+<para>Consider <quote>NO PARTITIONING</quote> semantics for selective path patterns,
+alongside the extant partition-by-endpoint semantics. 
+In <itemref ref="pgq_pgq092_1" type="GR"/> this would mean a way of finding the shortest path
+among all CANDIDATES, rather than within each PART. 
+This discussion was last surfaced (albeit inconclusively) in WG3:MMX-059, and was recently referred 
+to in passing in WG3:W07-013.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq093" number="PGQ-093">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-057, WG3:YTZ-036.
+</source>
+
+<problem>
+
+<para>Regarding <BNF name="parenthesized path pattern where clause"/>, 
+YTZ-036 section 4.6.2 proposed <quote>WHERE FOR k REPS</quote> syntax to address the use case of
+expressing a condition that stretches over multiple repetitions of 
+a <BNF name="parenthesized path pattern expression"/>. 
+This addition should be considered.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq094" number="PGQ-094">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-057, WG3:W07-009.
+</source>
+
+<problem>
+
+<para>The rules for patterns allowed within a <BNF name="quantified path primary"/> may be
+unnecessarily strict. 
+The Syntax Rules do not allow a <BNF name="questioned path primary"/> to be contained within 
+a <BNF name="quantified path primary"/>. 
+This is however equivalent to the <BNF name="questioned path primary"/> containing 
+a <BNF name="path pattern union"/> where one of the operands has a minimum path length of
+zero, which is allowed. 
+The Syntax Rules could be changed according to Section 7.2 in [W07-009].
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq095" number="PGQ-095">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-057, WG3:W07-009.
+</source>
+
+<problem>
+
+<para>The rules for patterns allowed within a <BNF name="questioned path primary"/> may be
+unnecessarily strict. 
+The Syntax Rules do not allow another <BNF name="questioned path primary"/> within 
+a <BNF name="questioned path primary"/>. 
+This is essentially a no-op and therefore harmless. 
+It is also possible to express the same semantics using a <BNF name="path pattern union"/> where 
+one of the operands has a minimum path length of zero. 
+The Syntax Rules further do not allow a <BNF name="quantified path primary"/> within 
+a <BNF name="questioned path primary"/>. 
+This is equivalent to an alternation between the <BNF name="quantified path primary"/> in question 
+and a pattern with a path length of zero. 
+The Syntax Rules could be changed according to Section 7.2 in [W07-009].
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPpgq096" number="PGQ-096">
+
+<reference><specref ref="pgq_pg_defn"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-057.
+</source>
+
+<problem>
+
+<para>From a schema evolution point-of-view, sometimes it might be better if the
+SELECT privilege on a property graph were not grantable, even if the
+user has all the right privileges in place for it to be grantable. 
+An option on the CREATE PROPERTY GRAPH statement should be provided to allow for that possibility.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPpgq098" number="PGQ-098" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_label_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_PP098"/>.
+</noteAt>
+
+<source>Email from Peter Eisentraut 2023-09-25.
+</source>
+
+<problem>
+
+<para>For the phrases <quote><sym>LE</sym> shall identify a vertex label of <sym>PG</sym></quote>
+and <quote><sym>LE</sym> shall identify an edge label of <sym>PG</sym></quote>, this document does 
+not appear to provide a definition of <quote>vertex label</quote> or <quote>edge label</quote>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPpgq099" number="PGQ-099" severity="minor" realm="editorial">
+
+<reference><specref ref="pgq_conc_graph_patt_match_path_patt_match"/>.
+</reference>
+
+<noteAt><specref ref="pgq_PPpgq099_1"/> and <specref ref="pgq_PPpgq099_2"/>.
+</noteAt>
+
+<source>LDBC GQL-IP-009.
+</source>
+
+<problem>
+
+<para><specref ref="pgq_reject_pb"/> and <specref ref="pgq_inf_sets"/> refer to 
+<quote>formal semantics</quote>. 
+It is not clear what formal semantics means. 
+It does not mean the formal semantics as it would be meant conventionally in CS 
+(denotational, operational, axiomatic).
+Perhaps the <quote>formal semantic</quote> refers to the stepwise presentation of the semantics 
+specified in <specref ref="pgq_eval_path_pattern_expr"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql392" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPpgq100" number="PGQ-100" severity="minor" realm="editorial">
+
+<reference><specref ref="pgq_conc_graph_patt_match_path_mode"/>.
+</reference>
+
+<noteAt><specref ref="pgq_PPpgq100"/>.
+</noteAt>
+
+<source>LDBC GQL-IP-010.
+</source>
+
+<problem>
+
+<para>Pattern in <specref ref="pgq_path_mode_hier"/> is inconsistent with the text.
+The pattern ()-()-() cannot be matched in a graph ()~[]~().
+The pattern ()-[]-() can be. 
+Is that what was intended?
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql393" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPpgq101" number="PGQ-101" severity="major" realm="technical">
+
+<reference><specref ref="pgq_conv_tpg_ppg"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:SYX-039.
+</source>
+
+<problem>
+
+<para>When a tabular property graph is converted to a pure property graph, the specification uses 
+language like <quote>such that the value of the edge source key of ER is equal to the value of the 
+source vertex key of SR</quote>. 
+But it is not specified what collation applies to this equality operation.
+</para>
+
+</problem>
+
+<solution>
+
+<para>The collation for these equality operations should be derived via 
+<extref ref="fnd_equality_ops" part="02"/> in SQL/Foundation.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPpgq102" number="PGQ-102" severity="major" realm="technical">
+
+<reference><specref ref="pgq_create_edge_tbl_desc"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:SYX-039.
+</source>
+
+<problem>
+
+<para>If the linkage between the edge table and the source/destination vertex tables is 
+established via explicit key columns 
+(<itemref ref="pgq_create_edge_tbl_desc_SR_src_vert_key" type="SR"/> and 
+<itemref ref="pgq_create_edge_tbl_desc_SR_dest_vert_key" type="SR"/>), then 
+there are no requirements that the data types and collations (if applicable) of the 
+corresponding key columns are compatible in a way that they can be compared for equality. 
+In the alternative case that the linkage is provided by an existing foreign key, the requirements 
+for foreign keys provide such restrictions.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Add syntax rules that the data types and collations of the corresponding key columns need 
+to match in the same way as they would for a foreign key definition.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPpgq103" number="PGQ-103" severity="minor" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:SYX-039.
+</source>
+
+<problem>
+
+<para>The declared type collation of properties is not specified.
+</para>
+
+</problem>
+
+<solution>
+
+<para>The declared type collation of a property of a particular label is derived from the 
+definition of the property using the usual rules for deriving the collation of expressions.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPpgq104" number="PGQ-104" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:GYD-024.
+</source>
+
+<problem>
+
+<para>Functionality, if any, to support the Vector type needs to be provided.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<!-- Place closed PPs and LOs after this line
+
+<comment>Resolved by MMX-026</comment>
+<PP id="PPpgq003" number="PGQ-003" severity="major" realm="technical">
+
+<reference><specref ref="pgq_tabref"/>
+</reference>
+
+<source>ERF-034
+</source>
+
+<problem>
+
+<para>It may be preferable to make the property graph an infix operand of GRAPH_TABLE
+rather than a prefix operand.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by MMX-046</comment>
+<PP id="PPpgq005" number="PGQ-005" severity="major" realm="technical">
+
+<reference><specref ref="pgq_graph_ref"/>
+</reference>
+
+<noteAt><specref ref="pgq_ednote_PP005"/>
+</noteAt>
+
+<source>ERF-034
+</source>
+
+<problem>
+
+<para>There are no Access Rules for <BNF name="graph reference"/>.
+We need to specify the privileges necessary to access a property graph.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:W21-050</comment>
+<LO id="PPpgq006" number="PGQ-006">
+
+<reference><specref ref="pgq_label_expr"/>.
+</reference>
+
+<source>BNE-001 - Discussion of ERF-035
+</source>
+
+<problem>
+
+<para>It should be possible to use both symbols and keywords in a <BNF name="label expression"/>.
+See <specref ref="pgq_sym_kw"/>.
+</para>
+
+<table id="pgq_sym_kw">
+<tableTitle>Symbol/Keywords for <BNF name="label expression"/>s</tableTitle>
+
+<table-common>
+
+<table-setup numcols="2">
+<table-coldef colnum="1" colwidth="0.8in"/>
+<table-coldef colnum="2" colwidth="0.8in"/>
+</table-setup>
+
+<table-heads>
+<table-head>Symbol</table-head>
+<table-head>Keyword</table-head>
+</table-heads>
+
+</table-common>
+
+<table-body>
+
+<table-row>
+<table-cell> : </table-cell>
+<table-cell> IS </table-cell>
+</table-row>
+
+<table-row>
+<table-cell> | </table-cell>
+<table-cell> OR </table-cell>
+</table-row>
+
+<table-row>
+<table-cell> ! </table-cell>
+<table-cell> NOT </table-cell>
+</table-row>
+
+<table-row>
+<table-cell> &amp; </table-cell>
+<table-cell> AND </table-cell>
+</table-row>
+
+</table-body>
+
+</table>
+
+<para>However, in an e-mail about this possible problem, Fred Zemke provided a preliminary response
+to this suggested possible problem:
+</para>
+<para>I think that allowing AND OR NOT in <BNF name="label expression"/> is a bad idea because we 
+anticipate an &lt;is labeled predicate&gt;, which will incorporate <BNF name="label expression"/> 
+at the end, for example:
+</para>
+<code>WHERE P IS LABELED Emp &amp; !Customer</code>
+<para>If we allow this using AND OR NOT it becomes
+</para>
+<code>WHERE P IS LABELED Emp AND NOT Customer</code>
+<para>and now we are in for all kinds of ambiguities because columns can be of boolean type,
+so perhaps Customer is a boolean column as well as a label.
+We already faced that problem with predicates such as
+</para>
+<code>WHERE A IS BETWEEN B AND C AND D</code>
+<para>which becomes difficult to parse in the presence of boolean columns A, B, C and D.
+I have forgotten how we resolved it (even though I wrote the paper).
+This is why 6.28 <BNF name="value expression" part="02"/> makes a special case of
+<BNF name="boolean value expression" part="02"/>.
+As a result it is a nightmare trying to understand the disambiguation of predicates such as the 
+preceding.
+Therefore I am inclined to say that it is good that <BNF name="label expression"/> uses its own 
+symbols instead of AND OR NOT.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPpgq007" number="PGQ-007">
+
+<reference><specref ref="pgq_label_expr"/>
+</reference>
+
+
+<source>BNE-001 - Discussion of ERF-035
+</source>
+
+
+<problem>
+
+<para>Consider the nesting of square brackets and parenthesis and how they can be nested for 
+grouping in label expressions.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:BER-030</comment>
+<PP id="PPpgq008" number="PGQ-008" severity="major" realm="technical">
+
+<reference>Multiple locations
+</reference>
+
+
+<noteAt><specref ref="pgq_bne027r1_28"/>.
+</noteAt>
+
+<source>BNE-027R1
+</source>
+
+<problem>
+
+<para>All occurrences of Editor<apos/>s Notes introduced by as a result of WG3:BNE-027r1 need to be
+fixed before the document completes the CD stage, except possibly for 
+<specref ref="pgq_bne027r1_28"/>, which needs to be fixed before the document completes the DIS 
+stage.
+</para>
+
+</problem>
+
+<solution>
+
+<para>MMX-046 resolved two of the places identified.
+W11-020 resolved all but three of the remaining.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W11-020</comment>
+<PP id="PPpgq009" number="PGQ-009" severity="major" realm="technical">
+
+<reference>No specific location
+</reference>
+
+<source>BNE-027R1
+</source>
+
+<problem>
+
+<para>The privilege model and corresponding access rules need to be put in place for
+property graphs before the document completes the CD stage.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by W11-020</comment>
+<PP id="PPpgq010" number="PGQ-010" severity="major" realm="technical">
+
+<reference>No specific location
+</reference>
+
+<source>BNE-027R1
+</source>
+
+<problem>
+
+<para>The dependency model and corresponding actions for REVOKE need to be put
+in place for property graphs before the document completes the CD stage.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by W19-012R2</comment>
+<PP id="PPpgq011" number="PGQ-011" severity="major" realm="technical">
+
+<reference>No specific location
+</reference>
+
+<source>BNE-027R1
+</source>
+
+<problem>
+
+<para>The information and definition schema for property graphs need to be provided
+before the document completes the CD stage.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:BER-057</comment>
+<PP id="PPpgq012" number="PGQ-012" severity="major" realm="technical">
+
+<reference><specref ref="pgq_conc"/>.
+</reference>
+
+<source>BNE-027R1
+</source>
+
+<problem>
+
+<para>The Concepts sections for property graphs needs to be fleshed out before the
+document completes the CD stage.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by SXM-053R1</comment>
+<LO id="PPpgq014" number="PGQ-014">
+
+<reference><specref ref="pgq_pg_defn"/>
+</reference>
+
+<source>BNE-027R1
+</source>
+
+<problem>
+
+<para>Currently, there is a check to ensure that vertex tables names are unique (same for edge 
+table names) within a given property graph.
+More research is needed to see whether this uniqueness requirement could be lifted.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:BER-047 and WG3:W22-001 (Minutes)</comment>
+<LO id="PPpgq015" number="PGQ-015">
+
+<reference><specref ref="pgq_alter_element_tab_defn"/>.
+</reference>
+
+<source>BNE-027R1
+</source>
+
+<problem>
+
+<para>Currently this Subclause allows only for a single graph table to be altered at a time.
+There is an opportunity to expand this to multiple tables.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by W11-020</comment>
+<LO id="PPpgq016" number="PGQ-016">
+
+<reference>No specific location
+</reference>
+
+<source>BNE-027R1
+</source>
+
+<problem>
+
+<para>The Syntax Rules of <BNF name="property graph definition"/> and Subclauses associated with 
+altering a property graph duplicate many of the rules to ensure that the resulting SQL-property 
+graph is consistent.
+There is an opportunity to consolidate these rules into a single Subclause that acts as 
+a subroutine to ensure the consistency of the graph.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by W04-009R1</comment>
+<PP id="PPpgq017" number="PGQ-017" severity="major" realm="technical">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<noteAt><specref ref="pgq_bne034_1"/>
+</noteAt>
+
+<source>BNE-034
+</source>
+
+<problem>
+
+<para>Unbounded quantifiers permit an infinite set of results from a <BNF name="graph pattern"/>.
+</para>
+
+</problem>
+</PP>
+
+
+<comment>Resolved by SXM-052</comment>
+<LO id="PPpgq018" number="PGQ-018">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<noteAt><specref ref="pgq_bne034_2"/>
+</noteAt>
+
+<source>BNE-034
+</source>
+
+<problem>
+
+<para>It has been proposed to permit shared graph pattern variables in different operands of 
+a multiset alternation.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by SXM-052</comment>
+<LO id="PPpgq020" number="PGQ-020">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<noteAt><specref ref="pgq_bne034_4"/>
+</noteAt>
+
+<source>BNE-034
+</source>
+
+<problem>
+
+<para>WG3:BNE-034 restricts set disjunction to not support shared variables and therefore
+does not consider the following example to be a syntactically valid <BNF name="graph pattern"/>:
+</para>
+<code>
+(a)-[IS LOVES]-&gt;(b) | (a)-[IS KNOWS]-&gt;(x)-[IS LOVES]-&gt;(b)
+</code>
+<para>However it seems natural and intuitive to support such syntax: (1) It allows a user to
+combine two patterns that she has previously written using cut and paste easily (2)
+This syntax spells out the alternative patterns directly and easy to read, in the same
+way as one would draw them on a whiteboard and without resorting to a nesting
+construct.
+</para>
+<para>Semantically, shared variables in set disjunctions could be supported by introducing
+the additional restriction that a path matches a set disjunction if and only if all of the
+matching arms do not produce conflicting variable bindings.
+</para>
+<para>As a consequence, the example discussed in WG3:BNE-034 Section 2.3.10 "Shared
+variables between operands" that matches the pattern (x)-&gt;(y) | (y)-&gt;(z)
+against the graph (1)-&gt;(2) would not produce any matches under this additional
+restriction because even while both arms successfully match the same path they still
+lead to conflicting bindings for y since &lt;x: 1, y: 2&gt; and &lt;y: 1, z: 2&gt; cannot be 
+unified.
+</para>
+<para>To also give a positively matching example, consider the pattern
+</para>
+<code>
+(a)-[IS KNOWS]-(x)-[IS TRAVELED_WITH]-(b)
+| (a)-[IS LOVES]-&gt;(y)-[IS TRAVELED_WITH]-(b)
+</code>
+<para>over the graph with multiple labels per edge
+</para>
+<code>
+(1)-[IS KNOWS&amp;LOVES]-&gt;(2)-[IS TRAVELED_WITH]-&gt;(3)
+</code>
+<para>Both arms will match the path (1)-&gt;(2)-&gt;(3) and produce the bindings &lt;a: 1, x:2, y:
+NULL, b: 3&gt; and &lt;a: 1, x: NULL, y:2, b: 3&gt; which may be unified to the result
+binding &lt;a: 1, x:2, y: 2, b: 3&gt;.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Email: Fred Zemke 2019-02-28 21:54.</comment>
+<LO id="PPpgq021" number="PGQ-021">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<source>BNE-034
+</source>
+
+<problem>
+
+<para>Path set disjunction does not support nested path set disjunction (and consequently
+was not defined using left recursion).
+WG3:BNE-034 believed that it should be possible to support nested path set disjunction (and left 
+recursion) but declined to do
+so, believing that the extraction of the path must be defined in the same recursion with the 
+regular language and the set of
+local matches, making the derivation too complicated.
+It is a Language Opportunity to support nested path set disjunction.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:W21-024R1</comment>
+<PP id="PPpgq023" number="PGQ-023" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_bne049R1_2"/>.
+</noteAt>
+
+<source>BNE-049R1
+</source>
+
+<problem>
+
+<para>The ability to use square brackets as an alternative to round parentheses for grouping in 
+path patterns introduces an ambiguity in the grammar where a bare edge pattern followed by a group 
+(<ellipsis/> - [ <ellipsis/>) looks a lot like the start of an edge pattern 
+(<ellipsis/> -[ <ellipsis/>), the difference being only whitespace.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql046" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Remove the alternative that uses <BNF name="left bracket" part="02"/> and 
+<BNF name="right bracket" part="02"/>, making the production:
+<BNF name="parenthesized path pattern expression"/> ::=
+<BNF name="left paren" part="02"/> <BNF name="path pattern expression"/>
+[ <BNF name="parenthesized path pattern where clause"/> ]
+<BNF name="right paren" part="02"/>
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:W21-049</comment>
+<PP id="PPpgq026" number="PGQ-026" severity="major" realm="technical">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w16034_1"/>, <specref ref="pgq_w16034_2"/>, 
+<specref ref="pgq_sxm052_1"/>. 
+</noteAt>
+
+<source>SXM-052, WG3:W16-034R2.
+</source>
+
+<problem>
+
+<para>SXM-052 added the BNF for <BNF name="cost clause"/> but did not provide any Syntax Rules 
+or General Rules for it.
+Furthermore, W16-034R2 did not mention it in Concepts.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql024" standard="39075"/>.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by W10-019R1</comment>
+<PP id="PPpgq029" number="PGQ-029" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_definitions"/>
+</reference>
+
+<source>MMX-038, MMX-053, Email: Peter Eisentraut 2020-06-16
+</source>
+
+<problem>
+
+<para>The definition of <quote>label – collection of zero or more properties</quote> should 
+mention that a label has a name.
+The definition <quote>property graph – data structure consisting of zero or more vertices and
+zero or more edges</quote> is merely the definition of a graph, not a property graph.
+More detail should be added about what makes a graph a property graph.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Suggestion: <quote>label – named collection of zero or more properties</quote>.
+For <quote>property graph</quote>, consider adapting the definition from GQL (MMX-010r3):
+<quote>property graph – data object comprising zero or more labels, zero or more 
+properties, zero or more nodes [should be <squote>vertices</squote> in SQL/PGQ] and zero or more 
+edges between those nodes</quote>.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by SXM-052</comment>
+<PP id="PPpgq022" number="PGQ-022" severity="major" realm="technical">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<noteAt>Grammar production for <BNF name="path pattern expression"/>,
+<specref ref="pgq_bne049R1_1"/>
+</noteAt>
+
+<source>BNE-049R1
+</source>
+
+<problem>
+
+<para>The design of Multiset Alternation and Set Disjunction has not been thoroughly verified, 
+and implies confusing similarity with subtle differences between the two.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Unless otherwise resolved, remove the features of Multiset Alternation and Set Disjunction.
+At the time of noting this Possible Problem, the following places are known to need editing for 
+such removal:
+• Grammar production of <BNF name="path pattern expression"/>
+• Grammar production of <BNF name="path multiset alternation"/>
+• Grammar production of <BNF name="path set disjunction"/>
+• Syntax rule 3.1.1
+• Syntax rule 3.2
+• General Rule 3.4-3.7
+• General Rule 3.10)c)
+• General Rule 3.12)c)ii)
+• General Rule 3.13)c)
+• General Rule 3.16
+• General Rule 3.16)g)
+• General Rule 3.16)h)
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by SXM-052</comment>
+<LO id="PPpgq024" number="PGQ-024">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<noteAt><itemref ref="pgq_graph_pattern_2_dist_vertex_patt" type="SR"/>
+</noteAt>
+
+<source>BNE-049R1
+</source>
+
+<problem>
+
+<para>There are interesting real world patterns that repeat the same variable within the scope of 
+one single quantifier.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Change <itemref ref="pgq_graph_pattern_2_dist_vertex_patt" type="SR"/> to be:
+</para>
+<para>Two distinct <BNF name="vertex pattern"/>s declared at the same depth of graph pattern 
+matching shall not declare equivalent graph pattern variables in different scopes if at least one 
+of these <BNF name="vertex pattern"/>s is a group graph pattern in any scope.
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved by SXM-052</comment>
+<LO id="PPpgq025" number="PGQ-025">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<noteAt><itemref ref="pgq_graph_pattern_2_dist_edge_patt" type="SR"/>
+</noteAt>
+
+<source>BNE-049R1
+</source>
+
+<problem>
+
+<para>There are interesting real world patterns where it is useful to repeat the same edge 
+variable in order to match different aspects of the same edge.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Change <itemref ref="pgq_graph_pattern_2_dist_edge_patt" type="SR"/> to be :
+</para>
+<para>Two distinct <BNF name="edge pattern"/>s declared at the same depth of graph pattern 
+matching shall not declare equivalent graph pattern variables in different scopes if at least one 
+of these <BNF name="edge pattern"/>s is a group graph pattern in any scope.
+</para>
+
+</solution>
+
+</LO>
+
+
+
+<comment>Resolved by W01-014</comment>
+<PP id="PPpgq027" number="PGQ-027" severity="major" realm="technical">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<noteAt><itemref ref="pgq_graph_pattern_2_dist_edge_patt" type="SR"/>
+</noteAt>
+
+<source>SXM-052
+</source>
+
+<problem>
+
+<para>SXM-052 adopted the solution in Language Opportunity PGQ-025 (first proposed in BNE-049r1 
+section 3.5 <quote>Repeated edge variables</quote>), permitting multiple declarations of edge 
+variables provided they are all singletons in global scope.
+However, this will not permit patterns such as
+</para>
+<code>
+((a) -[e]-&gt; (b))* | (a) -[e]-&gt; (b)
+</code>
+<para>which was intended to be permitted.
+Additional work on permissible and impermissible multiple declarations of edge variables is 
+required.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by W01-014</comment>
+<PP id="PPpgq028" number="PGQ-028" severity="major" realm="technical">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<noteAt><itemref ref="pgq_graph_pattern_2_dist_vertex_patt" type="SR"/>
+</noteAt>
+
+<source>SXM-052
+</source>
+
+<problem>
+
+<para>SXM-052 adopted the solution in Language Opportunity PGQ-024 (first proposed in BNE-049r1 
+section 3.4 <quote>Repeated vertex variables</quote>), permitting multiple declarations of vertex 
+variables provided they are all singletons in global scope.
+However, this will not permit patterns such as
+</para>
+<code>
+((p) -> (q))* | (p) -> (q)
+</code>
+<para>which was intended to be permitted (see for example ARK-012 section 
+6.2 “Quantified patterns”, example 8, item 3, pages 33-34).
+Additional work on permissible and impermissible multiple declarations of vertex variables is 
+required.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by W09-034</comment>
+<PP id="PPpgq030" number="PGQ-030" severity="major" realm="technical">
+
+<reference><specref ref="pgq_pg_defn"/>
+</reference>
+
+<source>MMX-038, MMX-053, Email: Peter Eisentraut 2020-06-16
+</source>
+
+<problem>
+
+<para>In the syntax of <BNF name="source vertex table"/> and 
+<BNF name="destination vertex table"/>,
+both the referencing and the referenced column list are optional (as long as appropriate table 
+constraints exist), but they are not required to be present either together or neither.
+This might lead to nonsensical situations where, say, the referencing key is omitted and thus 
+a foreign key is used, but the referenced key is specified and thus overrides the referenced 
+columns of the foreign key picked in the first step.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Add syntax rules to prevent this.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W13-019R1</comment>
+<PP id="PPpgq031" number="PGQ-031" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_conform_summary"/>
+</reference>
+
+<source>MMX-038, MMX-053, Email: Peter Eisentraut 2020-06-16, W13-015.
+</source>
+
+<problem>
+
+<para><feature code="G950"/>, appears to be a bucket of unrelated features.
+Consider splitting it into two features:
+one that contains <BNF name="element table key clause"/>, 
+<BNF name="source vertex table key clause"/>, 
+and <BNF name="destination vertex table key clause"/>, and a second one that contains everything 
+related to labels and properties.
+</para>
+
+<para>This would allow implementations to better slice what they want to implement.
+For example, an implementation that does not support foreign keys might want to rely on explicit 
+key specifications, but then this feature would pull in various unrelated rules related to labels 
+and properties.
+Or an implementation might want to omit explicitly exposing the concepts of label and property 
+and rely only on the table and column names as labels and properties.
+Then they couldn’t claim conformance to G011 even if they implement all the graph key 
+functionality.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Split up G011 into two features, say G011a, 
+<quote>Extended DDL for SQL-property graphs</quote> 
+(contains graph key clause etc.) G011b, <quote>DDL for labels and properties</quote>
+(contains labels, properties, etc.), which then also more clearly relates by name to 
+<feature code="G912"/>.
+</para>
+
+<para>During the discussion of W13-015, several other related conformance rule issues
+were identified. While W13-015 addressed much of this PP, the PP is retained as 
+a reminder of the additional conformance rule work.
+</para>
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W02-013</comment>
+<PP id="PPpgq033" number="PGQ-033" severity="major" realm="editorial">
+
+<reference><specref ref="pgq_privs"/>, <specref ref="pgq_revoke"/>
+</reference>
+
+<noteAt><specref ref="pgq_ednote_PP033_3"/>
+</noteAt>
+
+<source>Discussion of MMX-046
+</source>
+
+<problem>
+
+<para>MMX-046 introduced 3 instance of a merge instruction using the very dangerous 
+<quote>Replace</quote> option.
+These should be replaced where at all possible with <quote>Insert</quote> or <quote>Augment</quote>
+alternatives, modifying SQL/Foundation, if neccessary, to accommodate this.
+</para>
+
+</problem>
+
+<solution>
+
+<para>The occurrence noted at <specref ref="pgq_ednote_PP033_3"/> can probably be solved by moving 
+the entire replacement rule to SQL/Foundation.
+The other two cases need more research.
+</para>
+
+<para>The other two cases were solved by W01-013.
+</para>
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:BER-057</comment>
+<PP id="PPpgq034" number="PGQ-034" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_label_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_mmx060_1"/>.
+</noteAt>
+
+<source>MMX-060
+</source>
+
+<problem>
+
+<para>Various options for <BNF name="wildcard label"/> were discussed in the SQL/PGQ and GQL ad
+hocs.
+The GQL ad hoc paper gql-2020-006 <quote>Edge patterns revisited</quote>,
+section 5.6.2 <quote>Query language support for edges with no label</quote> discussed some 
+alternatives:
+</para>
+
+<para>Asterisk — conflicts with its use as a quantifier (the Kleene star operator)
+</para>
+
+<para>Underscore — may be regarded as an identifier by some implementations.
+A workaround might be to declare that underscore is a reserved identifier and not available
+for use as a label
+</para>
+
+<para>Period or dot — should be reserved for possible dot-qualification in simplified syntax
+</para>
+
+<para>So the SQL/PGQ ad hoc settled on percent sign as the best choice.
+</para>
+
+<para>In the GQL ad hoc the next week, it was suggested that we might use a reserved word
+such as ANY.
+This would still allow "ANY" (a quoted identifier) as a label.
+However, other participants said that implementations try to avoid imposing the standard’s
+reserved words on their users.
+</para>
+
+<para>It was agreed to propose <BNF name="wildcard label"/> as percent sign, 
+but add this Possible Problem so that the issue can be revisited.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql033" standard="39075"/>.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:BER-031</comment>
+<PP id="PPpgq037" number="PGQ-037" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><itemref ref="pgq_ev" type="SR"/>.
+</noteAt>
+
+<source>Fred Zemke (email 2020-08-03 20:39) re W01-014
+</source>
+
+<problem>
+
+<para>The editor noted that <itemref type="SR" ref="pgq_ev"/> has 
+an <quote>element variable</quote> <emph>contained</emph> in BNF item, <sym>GPVD</sym>.
+It is not clear why this is not <quote>&lt;element variable></quote>.
+Compare <itemref type="SR" ref="pgq_ele_var_1"/>.
+We may need to make a distinction between an element variable and 
+an <BNF name="element variable"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql037" standard="39075"/>.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by W20-022</comment>
+<PP id="PPpgq038" number="PGQ-038" severity="major" realm="technical">
+
+<reference><specref ref="pgq_token"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_1"/>.
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>If we make the <BNF name="path mode"/>s <kw>WALK</kw>, <kw>TRAIL</kw>, <kw>SIMPLE</kw> and 
+<kw>ACYCLIC</kw> <BNF name="reserved word"/>s, then they can be used in 
+a <BNF name="simplified path pattern expression"/> to provide fine-grained path mode control within
+syntax such as
+</para>
+
+<code>-/ TRAIL Like* /-
+</code>
+
+<para>WG3:W04-009R1 felt it better to leave them as <BNF name="non-reserved word"/>s so that, in
+this example, TRAIL is treated as a label rather than a <BNF name="path mode"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql040" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W13-018</comment>
+<PP id="PPpgq039" number="PGQ-039" severity="major" realm="technical">
+
+<reference><specref ref="pgq_eval_path_pattern_expr"/>
+</reference>
+
+<noteAt><specref ref="pgq_w04009_2"/>
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>The Syntax Rules proposed in WG3:W04-009R1 would permit the <kw>WHERE</kw> 
+clause of a <BNF name="parenthesized path pattern expression"/> <symdef>PPPE</symdef> to be 
+evaluated during the generation of the set of local matches for <sym>PPPE</sym>; 
+however, WG3:W04-009R1 adhered to a computational model that supported delayed predicate 
+evaluation.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql041" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W08-018</comment>
+<PP id="PPpgq040" number="PGQ-040" severity="major" realm="technical">
+
+<reference><specref ref="pgq_eval_path_pattern_expr"/>
+</reference>
+
+<noteAt><specref ref="pgq_w04009_3"/>
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>Binding the boundary variables of a selector in stage 1 is only useful if
+they can be referenced in the <BNF name="parenthesized path pattern where clause"/> of another 
+<BNF name="parenthesized path pattern expression"/>, but they cannot.
+This binding is defined in case the rules are liberalized as originally proposed in [W03-030] 
+section 5.1, rather than the restriction adopted in that paper, section 8.1.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W08-018</comment>
+<PP id="PPpgq041" number="PGQ-041" severity="major" realm="technical">
+
+<reference><specref ref="pgq_graph_pattern"/>
+</reference>
+
+<noteAt><specref ref="pgq_w04009_4"/>
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>The formation of equivalence classes in the General Rules in 
+<specref ref="pgq_graph_pattern"/> may not be necessary to support the patterns allowed by the 
+Syntax Rules.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:BER-030</comment>
+<PP id="PPpgq042" number="PGQ-042" severity="major" realm="technical">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_5"/>.
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>The rule that prohibits two successive <BNF name="element pattern"/>s 
+that are <BNF name="vertex pattern"/>s in a <BNF name="path concatenation"/> may be over-broad; 
+for example, we want to allow
+</para>
+<code>((P) -> (Q)) (R)
+</code>
+
+<para>Linked to <ExtPPref ref="PPgql048" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W13-018</comment>
+<PP id="PPpgq043" number="PGQ-043" severity="major" realm="technical">
+
+<reference><specref ref="pgq_path_pattern_expr"/>
+</reference>
+
+<noteAt><specref ref="pgq_w04009_6"/>
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>The definition of the scope of an <BNF name="element variable"/> should be revisited in the 
+light of the compromise in WG3:W03-030 section 8.1 <quote>Discussion of WHERE clauses and implicit 
+joins</quote>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql049" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:W20-030</comment>
+<PP id="PPpgq044" number="PGQ-044" severity="major" realm="technical">
+
+<reference><specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_7"/>.
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>WG3:W04-009R1 defined <quote>effectively bounded group variable</quote> but did not use the
+definition.
+The definition will be used when we define predicates on aggregates, at which time we will want 
+a Syntax Rules stating that if a group variable <symdef>GV</symdef> is referenced in 
+a <kw>WHERE</kw> clause,
+then it shall be effectively bounded and the reference shall be contained in an aggregated 
+argument of an <BNF name="aggregate function" part="02"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql050" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved bt WG3:BER-052R1</comment>
+<LO id="PPpgq045" number="PGQ-045">
+
+<reference><specref ref="pgq_token"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_8"/>.
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>WG3:W04-009R1 did not do a thorough analysis of whether <kw>KEEP</kw> needs to be 
+a <BNF name="reserved word"/>.
+It is a Language Opportunity to investigate this and possibly make it 
+a <BNF name="non-reserved word"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql039" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved by WG3:W21-050</comment>
+<LO id="PPpgq046" number="PGQ-046">
+
+<reference><specref ref="pgq_eval_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w04009_9"/>.
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>Perhaps we do not need to define the regular language.
+WG3:W04-009R1 refrained from removing it, but suspects that it is not needed.
+The author does believe it is useful in an explanatory sense; perhaps it belongs in a Technical
+Report or Guide rather than the standard.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql043" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved by W08-018</comment>
+<LO id="PPpgq048" number="PGQ-048">
+
+<reference><specref ref="pgq_eval_sel_paren_path_pattern_expr"/>
+</reference>
+
+<noteAt><specref ref="pgq_w04009_11"/>
+</noteAt>
+
+<source>W04-009R1
+</source>
+
+<problem>
+
+<para>With more work we might be able to support selectors inside quantifiers; the
+interface to <specref ref="pgq_eval_sel_paren_path_pattern_expr"/> might need to communicate 
+which specific instance of ellipsis symbol to evaluate.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved by W09-031</comment>
+<LO id="PPpgq057" number="PGQ-057">
+
+<reference><specref ref="pgq_graph_pattern"/> and <specref ref="pgq_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_pp057_2"/> and <specref ref="pgq_pp057_1"/>.
+</noteAt>
+
+<source>Minutes of the W04 meeting (W05-001)
+</source>
+
+<problem>
+
+<para>Concern was expressed during the W04 meeting that the semantics of the 
+<BNF name="graph pattern where clause"/> and the 
+<BNF name="parenthesized path pattern where clause"/> can lead to radically different results but
+for the end user the difference may not be obvious as the distinction is only whether or not they 
+are enclosed within parentheses.
+</para>
+
+<para>The use of a different keyword was suggested as a possible solution.
+<kw>HAVING</kw> has been suggested but has met the objection that it has different semantics is 
+other places.
+An alternative, <kw>FILTER</kw>, has also been suggested as having a similar use as a local 
+<kw>WHERE</kw> clause in <BNF name="aggregate function" part="02"/> in SQL/Foundation.
+</para>
+
+<para>No conclusion has yet been reached on the desirability of an alternative keyword or on what 
+that keyword should be.
+</para>
+
+</problem>
+
+<solution>
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved by W20-022</comment>
+<PP id="PPpgq058" number="PGQ-058" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_conc_graph_patt_match"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w05001"/>, <specref ref="pgq_selector_use_6"/>.
+</noteAt>
+
+<source>W05-001 &amp; Email Fred Zemke  2020-11-10 04:33
+</source>
+
+<problem>
+
+<para>In the minutes (W05-001), Stephen noted that the terms <quote>selector</quote> and 
+<quote>restrictor</quote>, which are currently only used in Notes (and one place in the informative
+Annex for <unDef annex="no" code="None"/> item [now removed]) are never defined in the resulting WD.
+He said he assumed that this will be done in the Concepts section 
+<specref ref="pgq_conc_graph_patt_match"/>.
+In an email (Fred Zemke 2020-11-10 04:33) to the editor, Fred agreed and asked that this PP 
+be created to say that <quote>those terms should be defined or replaced</quote>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql060" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:W21-048</comment>
+<PP id="PPpgq059" number="PGQ-059" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_eval_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="pgq_PP_059"/>.
+</noteAt>
+
+<source>W08-018
+</source>
+
+<problem>
+
+<para>W08-018 made the <sym>PARTIAL MATCH</sym> parameter of 
+<specref ref="pgq_eval_path_pattern_expr"/> and 
+<specref ref="pgq_eval_sel_paren_path_pattern_expr"/> unnecessary. 
+It did not delete this parameter in the expectation that it could be part of the solution of 
+<PPref ref="PPpgq050"/> and <PPref ref="PPpgq051"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql180" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W09-031</comment>
+<PP id="PPpgq061" number="PGQ-061" severity="minor" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>W08-025
+</source>
+
+<problem>
+
+<para>W08-025 said:
+</para>
+
+<para><bold>Context.</bold> The proposal for the use of selectors and restrictors [W04-009r1] was 
+very liberal in terms of the nesting of selectors and restrictors in graph pattern. 
+The Formal Semantics group found numerous problems with it [W06-014] and suggested several options 
+of avoiding these problems; of these, the one called RSR (radical syntax restriction) found most 
+support at the SQL/PGQ-GQL ad hoc on 12 January 2021, at which both authors of this paper were 
+present as guests. 
+Two subsequent papers by Fred Zemke moved towards a modified proposal based on RSR, culminating in 
+the change proposal [W08-018] submitted on the 5th of February.
+</para>
+
+<para>The FSWG thinks that [W07-013] and especially [W08-018] are steps in the right direction but
+they don’t go far enough and leave some of the syntactic rules unnecessarily complex. 
+This short paper outlines our problems with the latest proposal and indicates possible changes that 
+will further simplify syntactic rules without endangering the expressivness of the language 
+(at least in its first release).
+</para>
+
+<para><bold>Executive summary:</bold> The rules are still too complex and could be further 
+simplified.
+</para>
+
+<para>The essence of the current proposal: selectors only allowed at the top (as prescribed by 
+RSR).
+<quote>Top</quote> here means right after MATCH, or a comma, but with several exceptions such as
+parentheses, adding ALL WALK, or naming paths (p=… or even p = [p1 = …. )
+</para>
+
+<para>These seem unnecessary, as shown by comments below.
+</para>
+
+<para><bold>Comment 1.</bold> For example, it appears that
+</para>
+
+<para>MATCH ALL WALK ALL SHORTEST &lt;pattern> is OK
+</para>
+
+<para>while
+MATCH ALL TRAIL ALL SHORTEST &lt;pattern> is not
+</para>
+
+<para>and while ALL WALK is indeed a no-op semantically, somehow it is treated differently despite 
+the syntactic similarity of statements. 
+This will confuse programmers (it will definitely confuse students who will eventually become 
+programmers). 
+We think this should be avoided.
+</para>
+
+<para><bold>Comment 2.</bold> The current proposal allows flexibility that appears unnecessary, 
+<eg/>
+</para>
+
+<para>MATCH p = ALL WALK (p2 = (ALL SHORTEST &lt;pattern>)) is allowed though it is equivalent
+</para>
+
+<para>MATCH ALL SHORTEST (p = (p2 = (&lt;pattern>)))
+</para>
+
+<para>which avoids the complication of allowing naming patterns before a selector appears at the 
+top.
+</para>
+
+<para><bold>Comment 3.</bold> Is WHERE a postfilter or prefilter? 
+Postfilters are problematic with selectors in our view, 
+<eg/> MATCH ANY &lt;pattern> WHERE &lt;condition> may return nothing when there are perfectly 
+acceptable outputs.
+</para>
+
+<para><bold>Comment 4: selectors are not operators.</bold> Taking this view, it’s better to think 
+of them as matching modes. 
+In an abstract world, we would have several match operators for different modes like
+</para>
+
+<para>MATCHALLSHORTEST, MATCHANYWALK etc
+</para>
+
+<para>writing MATCHALLSHORTEST TRAIL &lt;pattern1>, MATCHANYWALK &lt;pattern2> etc
+</para>
+
+<para>That is, MATCHwhatever works until the next comma.
+</para>
+
+<para>But in reality we don’t do this of course - the language must be neat and usable - and 
+write one MATCH, <eg/>
+</para>
+
+<para>MATCH ALL SHORTEST TRAIL &lt;pattern1>, ANY WALK &lt;pattern2>
+</para>
+
+<para>thinking though of the above interpretation, i.e., the mode works until the comma. 
+Then postfilters if any are implemented in KEEP.
+</para>
+
+<para><bold>Conclusion.</bold> In view of these we think it’s better if selectors follow MATCH 
+(or a comma in case of several patterns) with nothing in between.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved Editorially</comment>
+<PP id="PPpgq064" number="PGQ-064" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_create_ele_tbl_desc"/>, 
+<specref ref="pgq_create_vrt_tbl_desc"/>,
+<specref ref="pgq_create_edge_tbl_desc"/>, <specref ref="pgq_pg_defn"/>, 
+<specref ref="pgq_add_element_tab_defn"/>, <specref ref="pgq_add_element_tab_labl"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Discussion of W09-034, see W10-001.
+</source>
+
+<problem>
+
+<para>Descriptors are usually only created in general rules, however W09-034 causes them to also be 
+generated by Syntax Rules.
+This needs to be reviewed.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:BER-073</comment>
+<PP id="PPpgq065" number="PGQ-065" severity="major" realm="technical">
+
+<reference><specref ref="pgq_definitions"/>.
+</reference>
+
+<noteAt><specref ref="pgq_PP065_2"/>.
+</noteAt>
+
+<source>W10-019R1, W21-023.
+</source>
+
+<problem>
+
+<para>The definition of <quote>property</quote> has not yet reached consensus.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql013" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:W21-060</comment>
+<PP id="PPpgq066" number="PGQ-066" severity="major" realm="technical">
+
+<reference><specref ref="pgq_alt_pg"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w11020_1"/>.
+</noteAt>
+
+<source>W11-020
+</source>
+
+<problem>
+
+<para>The use of <quote>generally contain</quote> in 
+<itemref ref="pgq_alt_pg_SR_gen_contains" type="SR"/> of <specref ref="pgq_alt_pg"/>, may make it 
+necessary to enhance the definition of <quote>general containment</quote>.
+</para>
+
+<para>The cases <itemref ref="pgq_alt_pg_SR_gen_contains" type="SR"/> is supposed to prevent are 
+as follows (not necessarily complete):
+</para>
+
+<ulist>
+
+<item>Property graph <sym>PG1</sym> exists. 
+<sym>PG1</sym> is altered to include an element table that references <sym>PG1</sym> through 
+an in-line view.
+</item>
+
+<item>Property graph <sym>PG1</sym> exists. 
+View <sym>V1</sym> is created that references <sym>PG1</sym>. 
+<sym>PG1</sym> is altered to add an element table that is based on <sym>V1</sym>.
+</item>
+
+<item>Property graph <sym>PG1</sym> exists. 
+Property graph <sym>PG2</sym> is created that references <sym>PG1</sym> (through an in-line view 
+element table). 
+<sym>PG1</sym> is altered to add an element table that is based on <sym>PG2</sym>.
+</item>
+
+<item>Plus all permutations of the above where there is any number of views and
+property graphs in between <sym>PG1</sym> and the altering of <sym>PG1</sym> that would
+potentially lead to a circular reference of <sym>PG1</sym> back to itself.
+</item>
+
+</ulist>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W13-020</comment>
+<PP id="PPpgq067" number="PGQ-067" severity="major" realm="technical">
+
+<reference><specref ref="pgq_revoke"/>
+</reference>
+
+<noteAt><specref ref="pgq_w11020_2"/>, <specref ref="pgq_w11020_3"/>.
+</noteAt>
+
+<source>Editor as a result of W11-020.
+</source>
+
+<problem>
+
+<para>The equivalent rule for View, etc. to those identified at <specref ref="pgq_w11020_2"/> and 
+<specref ref="pgq_w11020_3"/> has the following rule appended to it by PSM:
+</para>
+<slist>
+<item><kw>EXECUTE</kw> privilege on every SQL-server module that includes one or more SQL-invoked 
+routines that are among the subject routines of a <BNF name="routine invocation" part="02"/>, 
+<BNF name="method invocation" part="02"/>, <BNF name="static method invocation" part="02"/>, or 
+<BNF name="method reference" part="02"/> that is contained in the <sym>QE</sym>.
+</item>
+</slist>
+
+<para>A solution for SQL/PGQ is required.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by W19-013</comment>
+<PP id="PPpgq068" number="PGQ-068" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_ppg"/>.
+</reference>
+
+<noteAt><specref ref="w13018_1"/>.
+</noteAt>
+
+<source>W13-018.
+</source>
+
+<problem>
+
+<para>It has been questioned whether the term <quote>label set</quote> might give 
+the wrong impression, that any set of labels constitutes a label set, whereas it is only those
+sets of labels designated in the construction of a graph that qualify as label sets.
+Some suggestions for alternative terms are <quote>label combination</quote>, 
+<quote>label grouping</quote> and <quote>labeling</quote>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql232" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:BER-031</comment>
+<LO id="PPpgq072" number="PGQ-072">
+
+<reference><specref ref="pgq_conc_graph_patt_match_path_patt_match"/>.
+</reference>
+
+<noteAt><specref ref="pgq_w16034_3"/>.
+</noteAt>
+
+<source>WG3:W16-034R2.
+</source>
+
+<problem>
+
+<para>Discussion in the SQL/PGQ expert group on October 12, 2021 indicated that it would
+be good to enhance the discussion of <specref ref="pgq_conc_graph_patt_match_path_patt_match"/>, 
+with more details, for example, about the concepts of path binding and multi-path binding.
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql238" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved by WG3:BER-047 and WG3:W22-001 (Minutes)</comment>
+<LO id="PPpgq073" number="PGQ-073">
+
+<source>Email from: Petra Selmer, 2021-10-20 1644
+(Reflecting the discussion of WG3:W15-020)
+</source>
+
+<problem>
+
+<para>Consider replacing uses of <BNF name="simple value specification" standard="9075" part="02"/>
+with the more precise <BNF name="unsigned integer specification" standard="39075" part="00"/>
+to maintain parity with GQL.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:W18-026</comment>
+<PP id="PPpgq074" number="PGQ-074" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_ppg"/>.
+</reference>
+
+<noteAt><specref ref="pgq074-1"/>, <specref ref="pgq074-2"/>, <specref ref="pgq074-3"/>,
+<specref ref="pgq074-4"/>, <specref ref="pgq074-5"/>, <specref ref="pgq074-6"/>, 
+<specref ref="pgq074-7"/>, <specref ref="pgq074-8"/>,<specref ref="pgq074-9"/>.
+</noteAt>
+
+<source>W17-021.
+</source>
+
+<problem>
+
+<para>There are currently no rules that determine whether a property is mandatory or not.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:BER-091</comment>
+<PP id="PPpgq075" number="PGQ-075" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_dropschema"/>
+</reference>
+
+<source>WG3:W18-018R1.
+</source>
+
+<problem>
+
+<para>The only General Rule in this Subclause uses the phrase
+<quote>without further Access Rule checking</quote>. 
+The corresponding rules in the corresponding Subclause of
+SQL/Foundation do not use that phrase. 
+This should be examined to determine whether the phrase should be
+added to corresponding rules in SQL/Foundation or deleted here. 
+See also <ExtPPref part="02" ref="PPfndA39"/>. 
+</para>
+
+</problem>
+
+</PP>
+
+02
+<comment>Resolved by WG3:BER-032R3</comment>
+<LO id="PPpgq083" number="PGQ-083">
+
+<reference><specref ref="pgq_machinery_graph_pattern_matching"/>.
+</reference>
+
+<noteAt><specref ref="w21050_1"/>.
+</noteAt>
+
+<source>WG3:W21-050.
+</source>
+
+<problem>
+
+<para>Existing Graph Pattern Querying solutions, such as the widely used Cypher
+language, support different pattern matching modes for graph patterns than homomorphism which is 
+effectively what is being proposed here. 
+Support for other such graph matching modes, such as isomorphism (with variants of both edge
+isomorphism and vertex isomorphism), should be included. 
+For a multi-path binding to be an edge isomorphism, vertex isomorphism, or full isomorphism could 
+be defined in <specref ref="pgq_machinery_graph_pattern_matching"/>, with appropriate defaults or 
+syntax specified elsewhere to specify when pattern matching should result in such isomorphic 
+multi-path bindings. 
+See also WG3:W01-015 section 1.3 list item 1 and WG3:W16-012. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved by WG3:UTC-075</comment>
+<PP id="PPpgq097" number="PGQ-097" severity="minor" realm="technical">
+
+<reference><specref ref="pgq_graph_pattern"/>. 
+</reference>
+
+<noteAt><specref ref="PPpgq097_1"/>. 
+</noteAt>
+
+<source>Email from Jim Melton, 2022-12-08. 
+</source>
+
+<problem>
+
+<para>The second sentence (<quote>The degree of exposure of <sym>PV</sym> and the
+path variable that it identifies is unconditional singleton.</quote>) makes no sense to [Jim]. 
+Basically, it says that <quote>A and B identifies is unconditional singleton.</quote> 
+At a minimum, the verb (<quote>is</quote>) should be plural (<quote>are</quote>),
+but [Jim doesn't] understand what that would mean. 
+[Jim thinks] a rewrite of the sentence is called for.
+</para>
+
+<para>In addition, most uses of <quote>degree of exposure</quote> are followed by a NOTE that
+points the reader to the place where the term is defined. 
+</para>
+
+<para>Linked to <ExtPPref ref="PPgql351" standard="39075"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+-->
+
+</EditorNotes>

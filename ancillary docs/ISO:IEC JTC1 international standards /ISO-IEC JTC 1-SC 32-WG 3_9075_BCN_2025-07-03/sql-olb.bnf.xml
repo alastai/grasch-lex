@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is a "digital artifact" that contains the grammar specified by
+a part of ISO/IEC 9075.
+
+The grammar is specified using the XML vocabulary used to specify
+ISO/IEC 9075 itself. This file contains an XML DTD that specifies
+that XML vocabulary. 
+
+This grammar may be used by implementers of SQL-implementations
+when generating parsers for the SQL language.
+  -->
+ 
+<!DOCTYPE grammar [
+
+<!-- Element definitions 
+-->
+
+<!-- A grammar consists of a set of BNF definitions. 
+-->
+<!ELEMENT grammar ( BNFdef* )>
+
+
+<!-- A BNFdef element defines a syntactic component.
+-->
+<!ELEMENT BNFdef (rhs)>
+<!-- The attributes of BNFdef are:
+      * name is the name of the component.
+      * predicative is an indication of whether it is a production rule that defines a syntactic
+        element not only in terms of the production rule itself but also in terms of further
+        restrictions imposed on it by additional Syntax Rules such that the production rule cannot
+        sufficiently distinguish the syntactic element from the syntactic elements defined by
+        another production rule in an alternative between those two production rules without
+        considering those restrictions.
+-->
+<!ATTLIST BNFdef
+  name CDATA #REQUIRED
+  predicative ( yes | no ) #IMPLIED 
+>
+
+
+<!-- The rhs element specifies the production for the syntactic component being defined.
+-->
+<!ELEMENT rhs ( seeTheRules
+              | ( ( alt )+, seeTheRules? )
+              | ( ( opt 
+                  | group 
+                  | terminalsymbol 
+                  | kw | sjkw
+                  | repeat 
+                  | BNF 
+                  ), seeTheRules? )+
+              )>
+
+
+<!-- An alt element specifies one alternative production for the syntactic component being defined.
+-->
+<!ELEMENT alt (#PCDATA | allAltsFrom | opt | group | terminalsymbol | kw | sjkw  
+                | bold | repeat | BNF )* >
+
+
+<!-- A BNF element references a BNFdef
+-->
+<!ELEMENT BNF EMPTY>
+<!-- The attributes of BNF are:
+      * name is the name of the BNFdef.
+      * part is the number of the part in which the BNFdef is defined if not this document.
+      * standard is the number of the standard in which the BNFdef is defined if not this standard.
+-->
+<!ATTLIST BNF
+  name CDATA #REQUIRED
+  part CDATA #IMPLIED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An allAltsFrom element represents "!! All alternatives from ..." 
+     where ... identifies the other part.
+-->
+<!ELEMENT allAltsFrom EMPTY>
+<!-- The attributes of allAltsFrom are:
+      * part is the number of the part in which the BNFdef is originally defined.
+      * standard is the number of the standard in which the BNFdef is originally defined if not
+        this standard.
+-->
+<!ATTLIST allAltsFrom
+  part CDATA #REQUIRED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An opt element defines an optional component of a production.
+     This is shown by enclosure between [ and ].
+-->
+<!ELEMENT opt (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw 
+                 | repeat | BNF )*>
+
+
+<!-- A group element groups two or more components of a production as an inseparable component.
+     This is shown by enclosure between { and }.
+-->
+<!ELEMENT group (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw  
+                 | repeat | BNF )*>
+
+
+<!-- A repeat indicates possible repetition of a component.
+     This is shown as three dots...
+-->
+<!ELEMENT repeat EMPTY>
+
+
+<!-- A terminalsymbol element defines literal characters in the production.
+-->
+<!ELEMENT terminalsymbol (#PCDATA)*>
+<!-- The attribute of terminalsymbol is:
+     * unicode defines the code point(s). 
+           These are defined as the 4, 5 or 6 hex character(s) separated by commas.
+           For example, unicode="0026" or unicode="007E,005B"
+-->
+<!ATTLIST terminalsymbol
+  unicode CDATA #IMPLIED
+>
+
+<!-- A kw element defines its contents as a normal keyword.
+-->
+<!ELEMENT kw (#PCDATA)>
+
+
+<!-- An sjkw element defines its contents as a SQL/JSON keyword.
+-->
+<!ELEMENT sjkw (#PCDATA)>
+
+ 
+<!-- A bold indicates the use of a bold-faced type font.
+-->
+<!ELEMENT bold (#PCDATA)>
+
+
+<!-- A seeTheRules element represents the sequence "!! See the Syntax Rules".
+-->
+<!ELEMENT seeTheRules EMPTY>
+]>
+
+<grammar>
+   <BNFdef name="SQL special character" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="number sign"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="number sign" predicative="no">
+      <rhs>
+         <terminalsymbol unicode="0023">#</terminalsymbol>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="comment" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="Java comment"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Java comment" predicative="no">
+      <rhs>
+         <BNF name="Java comment introducer"/>
+         <opt>
+            <BNF name="comment character" part="02"/>
+            <repeat/>
+         </opt>
+         <BNF name="newline" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Java comment introducer" predicative="no">
+      <rhs>
+         <BNF name="solidus" part="02"/>
+         <BNF name="solidus" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="non-reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="fetch statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>FETCH</kw>
+            <opt>
+               <opt>
+                  <BNF name="fetch orientation" part="02"/>
+               </opt>
+               <kw>FROM</kw>
+            </opt>
+            <BNF name="iterator host expression"/>
+            <kw>INTO</kw>
+            <BNF name="fetch target list" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="delete statement: positioned" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>DELETE</kw>
+            <kw>FROM</kw>
+            <BNF name="target table" part="02"/>
+            <kw>WHERE</kw>
+            <kw>CURRENT</kw>
+            <kw>OF</kw>
+            <BNF name="iterator host expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="iterator host expression" predicative="no">
+      <rhs>
+         <BNF name="embedded Java expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="update statement: positioned" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>UPDATE</kw>
+            <BNF name="target table" part="02"/>
+            <kw>SET</kw>
+            <BNF name="set clause list" part="02"/>
+            <kw>WHERE</kw>
+            <kw>CURRENT</kw>
+            <kw>OF</kw>
+            <BNF name="iterator host expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="embedded SQL host program" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="embedded SQL Java program"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="statement or declaration" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="SQLJ specific clause"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL prefix" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="number sign"/>
+            <terminalsymbol>sql</terminalsymbol>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="embedded variable name" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="embedded Java expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="embedded SQL Java program" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="modifiers" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="java class name" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="java id" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="java datatype" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="java constant expression" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="embedded Java expression" predicative="no">
+      <rhs>
+         <BNF name="colon" part="02"/>
+         <opt>
+            <BNF name="parameter mode" part="02"/>
+         </opt>
+         <BNF name="expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simple variable"/>
+         </alt>
+         <alt>
+            <BNF name="left paren" part="02"/>
+            <BNF name="complex expression"/>
+            <BNF name="right paren" part="02"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simple variable" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="complex expression" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="Rval expression"/>
+         </alt>
+         <alt>
+            <BNF name="Lval expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Rval expression" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="Lval expression" predicative="no">
+      <rhs>
+         <seeTheRules/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="implements clause" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="interface list"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="interface list" predicative="no">
+      <rhs>
+         <BNF name="interface element"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="interface element"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="interface element" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="predefined interface class"/>
+         </alt>
+         <alt>
+            <BNF name="user defined interface class"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="user defined interface class" predicative="no">
+      <rhs>
+         <BNF name="java class name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="predefined interface class" predicative="no">
+      <rhs>
+         <alt>
+            <bold>sqlj.runtime.ForUpdate</bold>
+         </alt>
+         <alt>
+            <bold>sqlj.runtime.Scrollable</bold>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="declaration with clause" predicative="no">
+      <rhs>
+         <BNF name="left paren" part="02"/>
+         <BNF name="declaration with list"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="declaration with list" predicative="no">
+      <rhs>
+         <BNF name="with element"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="with element"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="with element" predicative="no">
+      <rhs>
+         <BNF name="with keyword"/>
+         <BNF name="equals operator" part="02"/>
+         <BNF name="with value"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="with keyword" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="predefined iterator with keyword"/>
+            <BNF name="predefined connection with keyword"/>
+         </alt>
+         <alt>
+            <BNF name="user defined with keyword"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="predefined iterator with keyword" predicative="no">
+      <rhs>
+         <alt>
+            <sjkw>sensitivity</sjkw>
+         </alt>
+         <alt>
+            <sjkw>holdability</sjkw>
+         </alt>
+         <alt>
+            <sjkw>updateColumns</sjkw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="predefined connection with keyword" predicative="no">
+      <rhs>
+         <alt>
+            <sjkw>dataSource</sjkw>
+         </alt>
+         <alt>
+            <sjkw>typeMap</sjkw>
+         </alt>
+         <alt>
+            <sjkw>path</sjkw>
+         </alt>
+         <alt>
+            <sjkw>transformGroup</sjkw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="user defined with keyword" predicative="no">
+      <rhs>
+         <BNF name="java id"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="with value" predicative="no">
+      <rhs>
+         <BNF name="java constant expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQLJ specific clause" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="connection declaration clause"/>
+         </alt>
+         <alt>
+            <BNF name="iterator declaration clause"/>
+         </alt>
+         <alt>
+            <BNF name="executable clause"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="connection declaration clause" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="modifiers"/>
+         </opt>
+         <BNF name="java class name"/>
+         <opt>
+            <BNF name="implements clause"/>
+         </opt>
+         <opt>
+            <BNF name="declaration with clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="iterator declaration clause" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="modifiers"/>
+         </opt>
+         <BNF name="java class name"/>
+         <opt>
+            <BNF name="implements clause"/>
+         </opt>
+         <opt>
+            <BNF name="declaration with clause"/>
+         </opt>
+         <BNF name="left paren" part="02"/>
+         <BNF name="iterator spec declaration"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="iterator spec declaration" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="positioned iterator"/>
+         </alt>
+         <alt>
+            <BNF name="named iterator"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="positioned iterator" predicative="no">
+      <rhs>
+         <BNF name="java type list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="java type list" predicative="no">
+      <rhs>
+         <BNF name="java datatype"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="java datatype"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="named iterator" predicative="no">
+      <rhs>
+         <BNF name="java pair list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="java pair list" predicative="no">
+      <rhs>
+         <BNF name="java pair"/>
+         <opt>
+            <group>
+               <BNF name="comma" part="02"/>
+               <BNF name="java pair"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="java pair" predicative="no">
+      <rhs>
+         <BNF name="java datatype"/>
+         <BNF name="java id"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="executable clause" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="context clause"/>
+         </opt>
+         <BNF name="executable spec clause"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="executable spec clause" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="statement clause"/>
+         </alt>
+         <alt>
+            <BNF name="assignment clause"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="context clause" predicative="no">
+      <rhs>
+         <BNF name="left bracket" part="02"/>
+         <BNF name="context spec clause"/>
+         <BNF name="right bracket" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="context spec clause" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="connection context"/>
+         </alt>
+         <alt>
+            <BNF name="execution context"/>
+         </alt>
+         <alt>
+            <BNF name="connection context"/>
+            <BNF name="comma" part="02"/>
+            <BNF name="execution context"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="connection context" predicative="no">
+      <rhs>
+         <BNF name="java id"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="execution context" predicative="no">
+      <rhs>
+         <BNF name="java id"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="statement clause" predicative="no">
+      <rhs>
+         <BNF name="left brace" part="02"/>
+         <BNF name="statement spec clause"/>
+         <BNF name="right brace" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="statement spec clause" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="SQL procedure statement" part="02"/>
+         </alt>
+         <alt>
+            <BNF name="compound statement" part="04"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="assignment clause" predicative="no">
+      <rhs>
+         <BNF name="Lval expression"/>
+         <BNF name="equals operator" part="02"/>
+         <BNF name="left brace" part="02"/>
+         <BNF name="assignment spec clause"/>
+         <BNF name="right brace" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="assignment spec clause" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="query clause"/>
+         </alt>
+         <alt>
+            <BNF name="function clause"/>
+         </alt>
+         <alt>
+            <BNF name="iterator conversion clause"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="query clause" predicative="no">
+      <rhs>
+         <BNF name="query expression" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="function clause" predicative="no">
+      <rhs>
+         <kw>VALUES</kw>
+         <BNF name="left paren" part="02"/>
+         <BNF name="routine invocation" part="02"/>
+         <BNF name="right paren" part="02"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="iterator conversion clause" predicative="no">
+      <rhs>
+         <kw>CAST</kw>
+         <BNF name="result set expression"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="result set expression" predicative="no">
+      <rhs>
+         <BNF name="embedded Java expression"/>
+      </rhs>
+   </BNFdef>
+</grammar>

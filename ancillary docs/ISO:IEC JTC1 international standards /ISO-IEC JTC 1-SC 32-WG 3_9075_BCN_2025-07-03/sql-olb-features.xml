@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element ("features") that 
+identifies every optional language feature defined in ("used in") a part of ISO/IEC 9075. 
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to specify the natural-language text that describes the features
+implemented in a particular SQL-implementation.  
+It may also be used by documentation writers and translators to identify those features in the 
+natural languages of users of those SQL-implementations.
+-->
+
+
+ 
+<!DOCTYPE features [
+  
+<!-- The features element defines the features of a standard (part). -->
+<!ELEMENT features ((feature)*)>
+
+<!-- A feature element defines a specific feature. -->
+<!ELEMENT feature (code, description, implies?)>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the feature. -->
+<!ELEMENT description (#PCDATA | squote)*>
+
+<!-- An implies element provides a set of implied features. -->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)*>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT impliedFeature (#PCDATA)>
+
+<!-- An atLeastOneOf element provides a set of implied features where only one is required. -->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+]>
+
+<features>
+   <feature>
+      <code>J002</code>
+      <description>ResultSetIterator access to JDBC ResultSet</description>
+   </feature>
+   <feature>
+      <code>J003</code>
+      <description>Execution control</description>
+   </feature>
+   <feature>
+      <code>J004</code>
+      <description>Batch update</description>
+   </feature>
+   <feature>
+      <code>J005</code>
+      <description>Call statement</description>
+   </feature>
+   <feature>
+      <code>J006</code>
+      <description>Assignment function statement</description>
+   </feature>
+   <feature>
+      <code>J007</code>
+      <description>Compound statement</description>
+   </feature>
+   <feature>
+      <code>J008</code>
+      <description>Datalinks via SQL language</description>
+      <implies>
+         <impliedFeature>M001</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>J009</code>
+      <description>Multiple open ResultSets</description>
+   </feature>
+   <feature>
+      <code>J010</code>
+      <description>XML via SQL language</description>
+   </feature>
+   <feature>
+      <code>S071</code>
+      <description>SQL paths in function and type name resolution</description>
+   </feature>
+   <feature>
+      <code>S241</code>
+      <description>Transform functions</description>
+   </feature>
+   <feature>
+      <code>T271</code>
+      <description>Savepoints</description>
+   </feature>
+</features>

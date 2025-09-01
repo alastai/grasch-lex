@@ -1,0 +1,125 @@
+
+************************************************************************************************
+This file is a "digital artifact" that contains the grammar specified by a part of ISO/IEC 9075.
+
+This grammar may be used by implementers of SQL-implementations when generating parsers for the 
+SQL language.
+************************************************************************************************
+
+<reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+
+<non-reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+
+<CLI routine> ::=
+    <CLI routine name> <CLI parameter list> [ <CLI returns clause> ]
+
+<CLI routine name> ::=
+    <CLI name prefix> <CLI generic name>
+
+<CLI name prefix> ::=
+    <CLI by-reference prefix>
+  | <CLI by-value prefix>
+
+<CLI by-reference prefix> ::=
+    SQLR
+
+<CLI by-value prefix> ::=
+    SQL
+
+<CLI generic name> ::=
+    AllocConnect
+  | AllocEnv
+  | AllocHandle
+  | AllocStmt
+  | BindCol
+  | BindParameter
+  | Cancel
+  | CloseCursor
+  | ColAttribute
+  | ColumnPrivileges
+  | Columns
+  | Connect
+  | CopyDesc
+  | DataSources
+  | DescribeCol
+  | Disconnect
+  | EndTran
+  | Error
+  | ExecDirect
+  | Execute
+  | Fetch
+  | FetchScroll
+  | ForeignKeys
+  | FreeConnect
+  | FreeEnv
+  | FreeHandle
+  | FreeStmt
+  | GetConnectAttr
+  | GetCursorName
+  | GetData
+  | GetDescField
+  | GetDescRec
+  | GetDiagField
+  | GetDiagRec
+  | GetEnvAttr
+  | GetFeatureInfo
+  | GetFunctions
+  | GetInfo
+  | GetLength
+  | GetParamData
+  | GetPosition
+  | GetSessionInfo
+  | GetStmtAttr
+  | GetSubString
+  | GetTypeInfo
+  | MoreResults
+  | NextResult
+  | NumResultCols
+  | ParamData
+  | Prepare
+  | PrimaryKeys
+  | PutData
+  | RowCount
+  | SetConnectAttr
+  | SetCursorName
+  | SetDescField
+  | SetDescRec
+  | SetEnvAttr
+  | SetStmtAttr
+  | SpecialColumns
+  | StartTran
+  | TablePrivileges
+  | Tables
+  | <implementation-defined CLI generic name>
+
+<CLI parameter list> ::=
+    <left paren> <CLI parameter declaration>
+         [ { <comma> <CLI parameter declaration> }... ] <right paren>
+
+<CLI parameter declaration> ::=
+    <CLI parameter name> <CLI parameter mode> <CLI parameter data type>
+
+<CLI parameter name> ::=
+    !! See the Syntax Rules.
+
+<CLI parameter mode> ::=
+    IN
+  | OUT
+  | DEFIN
+  | DEFOUT 
+  | DEF
+
+<CLI parameter data type> ::=
+    INTEGER
+  | SMALLINT
+  | ANY
+  | CHARACTER <left paren> <length> <right paren>
+
+<CLI returns clause> ::=
+    RETURNS SMALLINT
+
+<implementation-defined CLI generic name> ::=
+    !! See the Syntax Rules.
+

@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" contains an XML element 
+(implementationDependent) that identifies every aspect of a part of ISO/IEC 9075 that is specified to be 
+"implementation-dependent".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-dependent codes is always U. 
+This distinguishes it from the codes used for optional features and implementation-defined 
+features.
+The second letter of implementation-dependent codes have the following meanings:
+    A Actions
+    D Defaults
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+-->
+
+
+
+<!DOCTYPE implementationDependent [
+  
+<!-- The implementationDependent element defines the implementation-dependent features of 
+a standard (part). -->
+<!ELEMENT implementationDependent (unDef*)>
+
+<!-- An unDef element defines a specific implementation-dependent feature. -->
+<!ELEMENT unDef (code, description)>
+
+<!-- A code element specifies the unique code for an implementation-dependent feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-dependent feature.
+-->
+<!ELEMENT description (#PCDATA)>
+
+]>
+
+<implementationDependent>
+   <unDef>
+      <code>UA045</code>
+      <description>Whether or not result sets are returned, whose positions are greater than the specified maximum number of returned result sets.</description>
+   </unDef>
+   <unDef>
+      <code>UA046</code>
+      <description>The effect on the position and state of an open cursor when an error occurs during the execution of an SQL-statement that identifies the cursor.</description>
+   </unDef>
+   <unDef>
+      <code>UA047</code>
+      <description>The particular SQL-statement identifying an open cursor on which a completion condition is returned.</description>
+   </unDef>
+   <unDef>
+      <code>UA048</code>
+      <description>The visibility in an open asensitive cursor of significant changes made to SQL-data from within the same SQL-transaction other than through that cursor.</description>
+   </unDef>
+   <unDef>
+      <code>UA049</code>
+      <description>The schema definitions that are implicitly read on behalf of executing an SQL-statement, the checking of integrity constraints, and the execution of referential actions associated with referential constraints.</description>
+   </unDef>
+   <unDef>
+      <code>UA051</code>
+      <description>The effect on diagnostic information of incompatibilities between the character repertoires supported by the SQL-client and SQL-server.</description>
+   </unDef>
+   <unDef>
+      <code>UA052</code>
+      <description>The the assignment of rows to partitions when the declared type of a join partitioning column is a user-defined type and the comparison of that column results in Unknown for two rows.</description>
+   </unDef>
+   <unDef>
+      <code>UA053</code>
+      <description>The assignment of rows to groups when the declared type of a grouping column is a user-defined type and the comparison of that column results in Unknown for two rows.</description>
+   </unDef>
+   <unDef>
+      <code>UA054</code>
+      <description>The results of the execution of a program that does not conform to the standard or other specifications for the language of the program.</description>
+   </unDef>
+   <unDef>
+      <code>UA055</code>
+      <description>The results of an external routine that specifies DETERMINISTIC when different executions of that routine with identical SQL argument value lists do not produce identical results.</description>
+   </unDef>
+   <unDef>
+      <code>UA056</code>
+      <description>The partitioning of a table argument with row semantics.</description>
+   </unDef>
+   <unDef>
+      <code>UA057</code>
+      <description>Whether to omit members of a JSON object with redundant duplicate keys and if the choice is to omit redundant duplicate keys, then which duplicate member to selected for retention.</description>
+   </unDef>
+   <unDef>
+      <code>UA058</code>
+      <description>The number of SQL/JSON members with redundant duplicate keys to omit when processing a ‹JSON wildcard member accessor› or a ‹JSON item method›.</description>
+   </unDef>
+   <unDef>
+      <code>UA059</code>
+      <description>The effect of a call by an SQL-agent of an externally-invoked procedure that is not a program that conforms to the specifications of the programming language specified by the language clause of the SQL-client module definition.</description>
+   </unDef>
+   <unDef>
+      <code>UA060</code>
+      <description>The choice of whether a rollback statement or a commit statement is executed after the last call of an externally-invoked procedure, or invocation of a direct SQL-statement, when no unrecoverable error or unexpected termination has occurred, and all enforced constraints are satisfied.</description>
+   </unDef>
+   <unDef>
+      <code>UA061</code>
+      <description>The determination of whether an SQL-agent has terminated unexpectedly.</description>
+   </unDef>
+   <unDef>
+      <code>UA062</code>
+      <description>Whether or not values are assigned to the targets identified by the ‹select target list› when the cardinality of the result of the ‹query specification› is greater than 1 (one).</description>
+   </unDef>
+   <unDef>
+      <code>UA063</code>
+      <description>The manner of generation of the value of a derived self-referencing column.</description>
+   </unDef>
+   <unDef>
+      <code>UA065</code>
+      <description>The association between ‹condition number› values and specific conditions raised during evaluation of the General Rules of an SQL-statement when the condition number has a value other than 1 (one).</description>
+   </unDef>
+   <unDef>
+      <code>UA066</code>
+      <description>Which ‹embedded exception declaration› is chosen from amongst the ‹embedded exception declaration›s that specify either CONSTRAINT or the constraint name of a constraint when a constraint is violated by execution of an SQL procedure statement in an embedded SQL host program.</description>
+   </unDef>
+   <unDef>
+      <code>UA067</code>
+      <description>Which of the corresponding SQLSTATE values is returned in the SQLSTATE status parameter when multiple completion conditions: “warning (01000)” or multiple exception conditions are raised.</description>
+   </unDef>
+   <unDef>
+      <code>UA068</code>
+      <description>Whether the result of X › Y is either RF (X, Y) = 1 or RF (Y, X) = -1 and whether the result of X ›= Y is either RF (X, Y) = 1 OR X = Y or RF (Y, X) = -1 OR X = Y when the comparing of values of user-defined types and the comparison category is RELATIVE, and the comparison function is taken to be RF.</description>
+   </unDef>
+   <unDef>
+      <code>UA069</code>
+      <description>Whether or not a holdable cursor that is held over a COMMIT at a specific time in one SQL-session sees changes that have been committed in another in another SQL-session between the time that cursor was opened and time of the commit.</description>
+   </unDef>
+   <unDef>
+      <code>UA070</code>
+      <description>Which of the exception conditions is raised when multiple exception conditions are determined during the processing of a JSOM method that specifies datetime.</description>
+   </unDef>
+   <unDef>
+      <code>UA071</code>
+      <description>Whether one externally-invoked procedure in an implied SQL-client module definition&gt;can of an embedded SQL host program correspond to more than one SQL procedure statement.</description>
+   </unDef>
+   <unDef>
+      <code>UA073</code>
+      <description>Whether the result of a ‹JSON comparison predicate› is True or Unknown when at least one comparison is invalid and at least one comparison is True.</description>
+   </unDef>
+   <unDef>
+      <code>UA074</code>
+      <description>Whether the result is True or False when comparing values of a user-defined type whose comparison form is RELATIVE or MAP for equality and the result of that test is Unknown.</description>
+   </unDef>
+   <unDef>
+      <code>UA075</code>
+      <description>Which member of an SQL/JSON object is chosen by a ‹JSON member accessor› when duplicate member keys exist and no exception condition has been raised.</description>
+   </unDef>
+   <unDef>
+      <code>UD008</code>
+      <description>The ‹correlation name› used in the ‹all predicate›.</description>
+   </unDef>
+   <unDef>
+      <code>UL002</code>
+      <description>The maximum number of diagnostics areas per diagnostics area stack.</description>
+   </unDef>
+   <unDef>
+      <code>UL003</code>
+      <description>The maximum number of condition areas per diagnostics area, unless explicitly set.</description>
+   </unDef>
+   <unDef>
+      <code>US028</code>
+      <description>The ordering of rows within a window ordering group.</description>
+   </unDef>
+   <unDef>
+      <code>US029</code>
+      <description>The ordering of rows in each row pattern partition when no ‹row pattern order by› is specified or if the ordering specified by the ‹row pattern order by› does not determine the relative order of two or more rows in the row pattern partition.</description>
+   </unDef>
+   <unDef>
+      <code>US030</code>
+      <description>The ordering of the information about conditions placed into the diagnostics area, except that the first condition in the diagnostics area always corresponds to the condition corresponding to the SQLSTATE value.</description>
+   </unDef>
+   <unDef>
+      <code>US031</code>
+      <description>The order of the rows of the result set of a cursor when either the ‹cursor specification› does not contain an ‹order by clause› or the ‹order by clause› does not completely specify the order. In the latter case the rows of the result set have an order that is defined only to the extent that the ‹order by clause› specifies an order.</description>
+   </unDef>
+   <unDef>
+      <code>US032</code>
+      <description>The order of rows in each row pattern partition when no ‹row pattern order by› is specified.</description>
+   </unDef>
+   <unDef>
+      <code>US033</code>
+      <description>The order in which the nodes of a plan tree of a JSON table are enumerated.</description>
+   </unDef>
+   <unDef>
+      <code>US034</code>
+      <description>The window ordering when the window ordering clause of a window structure descriptor is absent.</description>
+   </unDef>
+   <unDef>
+      <code>US035</code>
+      <description>The window ordering of peer rows within a window partition.</description>
+   </unDef>
+   <unDef>
+      <code>US036</code>
+      <description>The order of rows in the result table of a ‹query expression› when an ‹order by clause› is not specified.</description>
+   </unDef>
+   <unDef>
+      <code>US037</code>
+      <description>The order in which the SQL arguments that are not specified as DEFAULT are evaluated.</description>
+   </unDef>
+   <unDef>
+      <code>US038</code>
+      <description>The order in which the SQL arguments that are specified as DEFAULT are evaluated.</description>
+   </unDef>
+   <unDef>
+      <code>US039</code>
+      <description>The order in which the members of a JSON object are enumerated.</description>
+   </unDef>
+   <unDef>
+      <code>US040</code>
+      <description>The order in which the members of an SQL/JSON object are enumerated.</description>
+   </unDef>
+   <unDef>
+      <code>US041</code>
+      <description>The ordering of the elements in the result array of an ‹array aggregate function› that does not specify ORDER BY.</description>
+   </unDef>
+   <unDef>
+      <code>US042</code>
+      <description>The relative ordering of two values that are not the null value when the result of comparison is Unknown.</description>
+   </unDef>
+   <unDef>
+      <code>US043</code>
+      <description>The relative ordering of two rows that are not distinct with respect to the ‹sort specification›.</description>
+   </unDef>
+   <unDef>
+      <code>US044</code>
+      <description>The order of elements of a JSON array constructed without a ‹JSON array aggregate order by clause›.</description>
+   </unDef>
+   <unDef>
+      <code>US046</code>
+      <description>The order of assignment to targets in the ‹select target list› of values returned by a ‹select statement: single row› or a ‹fetch statement›.</description>
+   </unDef>
+   <unDef>
+      <code>US047</code>
+      <description>The position of a cursor following a positioned update that modifies a column in a base table that affects the evaluation of some sort key contained in the cursor specification.</description>
+   </unDef>
+   <unDef>
+      <code>US048</code>
+      <description>The order in which the transitions in the state changes of a row-level trigger are taken.</description>
+   </unDef>
+   <unDef>
+      <code>US049</code>
+      <description>The order of processing current or dormant SQL-connections in a disconnect statement.</description>
+   </unDef>
+   <unDef>
+      <code>US050</code>
+      <description>The order in which the statement information items and the condition information items of a particular condition area are presented when ALL is specified.</description>
+   </unDef>
+   <unDef>
+      <code>US051</code>
+      <description>The order of the instances of ‹host parameter declaration› in each externally-invoked procedure in the implied SQL-client module definition derived from an embedded SQL host program.</description>
+   </unDef>
+   <unDef>
+      <code>US052</code>
+      <description>The order in which a range variable ranges over the rows of a table.</description>
+   </unDef>
+   <unDef>
+      <code>UV043</code>
+      <description>The four-octet value that represents a locator.</description>
+   </unDef>
+   <unDef>
+      <code>UV048</code>
+      <description>The values of all the bound targets when an exception condition is raised during the derivation of any target value.</description>
+   </unDef>
+   <unDef>
+      <code>UV060</code>
+      <description>The physical representation of a value of a data type.</description>
+   </unDef>
+   <unDef>
+      <code>UV061</code>
+      <description>The window name of a window defined implicitly by an ‹in-line window specification›.</description>
+   </unDef>
+   <unDef>
+      <code>UV062</code>
+      <description>The chosen value from amongst the qualifying values of an aggregate function when the ANY_VALUE option is specified.</description>
+   </unDef>
+   <unDef>
+      <code>UV063</code>
+      <description>The names of PTF private variables, PTF descriptor areas, and PTF cursors.</description>
+   </unDef>
+   <unDef>
+      <code>UV064</code>
+      <description>The names and declared types of pass-through input surrogate columns and pass-through output surrogate columns.</description>
+   </unDef>
+   <unDef>
+      <code>UV065</code>
+      <description>The four-octet integer value generated as a locator value.</description>
+   </unDef>
+   <unDef>
+      <code>UV068</code>
+      <description>The unique SQL-session identifier associated with an SQL-session.</description>
+   </unDef>
+   <unDef>
+      <code>UV069</code>
+      <description>The name of the SQL-client module that is effectively materialized on an SQL-server.</description>
+   </unDef>
+   <unDef>
+      <code>UV070</code>
+      <description>The precise value chosen for a group-invariant column reference when the most specific type of the group-invariant column reference is character string, datetime with time zone, or a user-defined type, where that value is not distinct from the value of the column referenced in every row of a given group of the qualifying query of the group-invariant column reference.</description>
+   </unDef>
+   <unDef>
+      <code>UV071</code>
+      <description>The name assigned to an in-line window specification.</description>
+   </unDef>
+   <unDef>
+      <code>UV072</code>
+      <description>The range variable that is substituted for the row pattern variable in a ‹value expression›.</description>
+   </unDef>
+   <unDef>
+      <code>UV074</code>
+      <description>The result of a function or expression that specifies USING OCTETS when the octet whose position is given by the start position is not the first octet of a character.</description>
+   </unDef>
+   <unDef>
+      <code>UV075</code>
+      <description>The start datetime used for converting intervals to scalars for subtraction purposes.</description>
+   </unDef>
+   <unDef>
+      <code>UV076</code>
+      <description>The names of the columns used to transform a ‹table value constructor by query› into a ‹multiset value constructor by query›.</description>
+   </unDef>
+   <unDef>
+      <code>UV077</code>
+      <description>The names of the fields of a ‹row value constructor› that specifies a ‹row value constructor element list›.</description>
+   </unDef>
+   <unDef>
+      <code>UV078</code>
+      <description>The names of the fields of a ‹contextually typed row value constructor›.</description>
+   </unDef>
+   <unDef>
+      <code>UV079</code>
+      <description>The column names of a ‹table value constructor› or a ‹contextually typed table value constructor›.</description>
+   </unDef>
+   <unDef>
+      <code>UV080</code>
+      <description>The implicit ‹row pattern input name› when not explicitly specified.</description>
+   </unDef>
+   <unDef>
+      <code>UV081</code>
+      <description>The implicit ‹row pattern output name› when not explicitly specified.</description>
+   </unDef>
+   <unDef>
+      <code>UV082</code>
+      <description>The universal row pattern variable of a ‹row pattern recognition clause›.</description>
+   </unDef>
+   <unDef>
+      <code>UV083</code>
+      <description>The implicit correlation name for a NATURAL join, or a ‹named columns join› that does not explicitly specify one.</description>
+   </unDef>
+   <unDef>
+      <code>UV084</code>
+      <description>The implicit ‹JSON table path name› when not explicitly specified.</description>
+   </unDef>
+   <unDef>
+      <code>UV085</code>
+      <description>The values of items involved in the syntactic transformation of a ‹JSON table› into a ‹JSON table primitive› that are not significant to the final result.</description>
+   </unDef>
+   <unDef>
+      <code>UV086</code>
+      <description>The value of a group-invariant column reference whose most specific type is character string, datetime with time zone or a user-defined type. However, the value is not distinct from the value of the column in each row of the group.</description>
+   </unDef>
+   <unDef>
+      <code>UV087</code>
+      <description>The name of the column when a column is not named by an ‹as clause› and is not derived from a single column reference.</description>
+   </unDef>
+   <unDef>
+      <code>UV088</code>
+      <description>The precise values retained in a column after eliminating redundant duplicates when the ‹set quantifier› DISTINCT is specified and the most specific type of a result column is character string, datetime with time zone, or a user-defined type.</description>
+   </unDef>
+   <unDef>
+      <code>UV089</code>
+      <description>The name of the result column of an INTERSECT, UNION, or EXCEPT between two tables when the column names of the pair of corresponding columns are not equivalent.</description>
+   </unDef>
+   <unDef>
+      <code>UV090</code>
+      <description>The specific value selected from the set of equal values when any of the operations MAX, MIN, and DISTINCT reference a grouping column, the GREATEST and LEAST functions, and UNION, EXCEPT, and INTERSECT operators refer to character strings.</description>
+   </unDef>
+   <unDef>
+      <code>UV091</code>
+      <description>The pad character, different from any character in the character set of the comparands, that is used when When comparing character strings with unequal length and the collation has the NO PAD characteristic.</description>
+   </unDef>
+   <unDef>
+      <code>UV093</code>
+      <description>The value chosen when the host language is Ada and no value has been assigned when passing a value from the SQL-server to a host language.</description>
+   </unDef>
+   <unDef>
+      <code>UV094</code>
+      <description>The field names of the result of combining row types in those positions where the combining row types have differing field names in the same ordinal position.</description>
+   </unDef>
+   <unDef>
+      <code>UV095</code>
+      <description>The range variable exposed by a ‹table argument› that does not simply contain a correlation name and that is not a ‹table argument proper› that is a ‹table function invocation› that invokes a polymorphic table function, and that is not a ‹table or query name›.</description>
+   </unDef>
+   <unDef>
+      <code>UV096</code>
+      <description>The integer value passed to an external routine as an output locator parameter.</description>
+   </unDef>
+   <unDef>
+      <code>UV097</code>
+      <description>The result of serializing an SQL/JSON item.</description>
+   </unDef>
+   <unDef>
+      <code>UV099</code>
+      <description>The result of the aggregate functions MAX and MIN when the data type of the argument to the function is a user-defined type and the comparison of two values results in Unknown.</description>
+   </unDef>
+   <unDef>
+      <code>UV100</code>
+      <description>The name of a table constraint if not explicitly specified.</description>
+   </unDef>
+   <unDef>
+      <code>UV101</code>
+      <description>The expression used to compute the value of the self-referencing column of a referenceable view whose reference type has a derived representation.</description>
+   </unDef>
+   <unDef>
+      <code>UV102</code>
+      <description>The implicit specific method name, whose schema name is equivalent to the schema name part of the name of user-defined type or SQL-invoked routine, when not explicitly specified.</description>
+   </unDef>
+   <unDef>
+      <code>UV103</code>
+      <description>The representations of the user-defined type argument values that are the return values of the functions created for a user-defined type definition.</description>
+   </unDef>
+   <unDef>
+      <code>UV104</code>
+      <description>The results when an SQL-agent performs calls of externally-invoked procedures from more than one Ada task.</description>
+   </unDef>
+   <unDef>
+      <code>UV105</code>
+      <description>The values of targets other than status parameters when an error occurs during assignment of a value to a target during the execution of a ‹select statement: single row›.</description>
+   </unDef>
+   <unDef>
+      <code>UV106</code>
+      <description>The values of targets other than status parameters when an error occurs during assignment of a value to a target during the execution of a ‹select statement: single row› or a ‹fetch statement›.</description>
+   </unDef>
+   <unDef>
+      <code>UV107</code>
+      <description>The schema name of the schema that contains a temporary table.</description>
+   </unDef>
+   <unDef>
+      <code>UV109</code>
+      <description>The unique SQL-session identifier.</description>
+   </unDef>
+   <unDef>
+      <code>UV110</code>
+      <description>The values of the fields (other than LEVEL) when an SQL descriptor area is allocated.</description>
+   </unDef>
+   <unDef>
+      <code>UV111</code>
+      <description>The values of all targets when an error occurs during the execution of a ‹get descriptor statement›.</description>
+   </unDef>
+   <unDef>
+      <code>UV112</code>
+      <description>The value retrieved by a ‹get descriptor statement› for any component whose value is undefined.</description>
+   </unDef>
+   <unDef>
+      <code>UV113</code>
+      <description>The values of all fields other than TYPE and LEVEL in an item descriptor area when the descriptor item name is TYPE.</description>
+   </unDef>
+   <unDef>
+      <code>UV114</code>
+      <description>The values of all elements of the item descriptor areas specified in a ‹set descriptor statement› when an exception condition is raised.</description>
+   </unDef>
+   <unDef>
+      <code>UV115</code>
+      <description>The values of DATA and INDICATOR and those fields that are not applicable for a particular value of TYPE when an SQL item descriptor area is set.</description>
+   </unDef>
+   <unDef>
+      <code>UV116</code>
+      <description>The ‹SQL statement name› used to prepare the ‹cursor specification› of a received cursor.</description>
+   </unDef>
+   <unDef>
+      <code>UV117</code>
+      <description>The ‹statement name› of the statement prepared when an ‹execute immediate statement› is executed.</description>
+   </unDef>
+   <unDef>
+      <code>UV118</code>
+      <description>The SQL-client module name of the implied SQL-client module definition derived from an embedded SQL host program unless omitted.</description>
+   </unDef>
+   <unDef>
+      <code>UV119</code>
+      <description>The procedure name of each externally-invoked procedure in the implied SQL-client module definition derived from an embedded SQL host program.</description>
+   </unDef>
+   <unDef>
+      <code>UV120</code>
+      <description>The ‹host parameter name› replacing each distinct embedded variable name in each externally-invoked procedure in the implied SQL-client module definition derived from an embedded SQL host program.</description>
+   </unDef>
+   <unDef>
+      <code>UV121</code>
+      <description>The value of ROW_COUNT following the execution of an SQL-statement that does not directly result in the execution of a ‹delete statement: searched›, an ‹insert statement›, a ‹merge statement›, or an ‹update statement: searched›.</description>
+   </unDef>
+   <unDef>
+      <code>UV122</code>
+      <description>The column name of a derived column that does not specify AS and is neither a single column reference nor single SQL parameter reference.</description>
+   </unDef>
+   <unDef>
+      <code>UV123</code>
+      <description>The declared string type of a JSON table primitive chaining column.</description>
+   </unDef>
+   <unDef>
+      <code>UV129</code>
+      <description>The query expression that selects the rows of a partition of an input table of a polymorphic table function with row semantics.</description>
+   </unDef>
+   <unDef>
+      <code>UV130</code>
+      <description>The name of a PTF extended cursor.</description>
+   </unDef>
+   <unDef>
+      <code>UV131</code>
+      <description>The names of PTF private variables, PTF extended names, and the PTF status variable.</description>
+   </unDef>
+   <unDef>
+      <code>UV132</code>
+      <description>The column names and correlation name used in the syntactic transformation of a group by clause.</description>
+   </unDef>
+   <unDef>
+      <code>UV133</code>
+      <description>The names and declared types of pass-through input surrogate columns and pass-through output surrogate columns.</description>
+   </unDef>
+   <unDef>
+      <code>UV134</code>
+      <description>The value of NAME when an SQL item descriptor area describes dynamic parameter specification.</description>
+   </unDef>
+   <unDef>
+      <code>UV135</code>
+      <description>The value of NAME when an SQL item descriptor area does not describe a column, a dynamic parameter specification, or a field of a row.</description>
+   </unDef>
+   <unDef>
+      <code>UV136</code>
+      <description>The data type with an exact numeric value with scale 0 (zero) to store a fetch first row count limit.</description>
+   </unDef>
+   <unDef>
+      <code>UW010</code>
+      <description>The manner in which, following the execution of an SQL procedure statement by an SQL-server, diagnostic information is passed into the SQL-agent’s diagnostics area stack in the SQL-client.</description>
+   </unDef>
+   <unDef>
+      <code>UW012</code>
+      <description>The way rows are retained in fetch first partitioning.</description>
+   </unDef>
+</implementationDependent>

@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is a "digital artifact" that contains the grammar specified by
+a part of ISO/IEC 9075.
+
+The grammar is specified using the XML vocabulary used to specify
+ISO/IEC 9075 itself. This file contains an XML DTD that specifies
+that XML vocabulary. 
+
+This grammar may be used by implementers of SQL-implementations
+when generating parsers for the SQL language.
+  -->
+ 
+<!DOCTYPE grammar [
+
+<!-- Element definitions 
+-->
+
+<!-- A grammar consists of a set of BNF definitions. 
+-->
+<!ELEMENT grammar ( BNFdef* )>
+
+
+<!-- A BNFdef element defines a syntactic component.
+-->
+<!ELEMENT BNFdef (rhs)>
+<!-- The attributes of BNFdef are:
+      * name is the name of the component.
+      * predicative is an indication of whether it is a production rule that defines a syntactic
+        element not only in terms of the production rule itself but also in terms of further
+        restrictions imposed on it by additional Syntax Rules such that the production rule cannot
+        sufficiently distinguish the syntactic element from the syntactic elements defined by
+        another production rule in an alternative between those two production rules without
+        considering those restrictions.
+-->
+<!ATTLIST BNFdef
+  name CDATA #REQUIRED
+  predicative ( yes | no ) #IMPLIED 
+>
+
+
+<!-- The rhs element specifies the production for the syntactic component being defined.
+-->
+<!ELEMENT rhs ( seeTheRules
+              | ( ( alt )+, seeTheRules? )
+              | ( ( opt 
+                  | group 
+                  | terminalsymbol 
+                  | kw | sjkw
+                  | repeat 
+                  | BNF 
+                  ), seeTheRules? )+
+              )>
+
+
+<!-- An alt element specifies one alternative production for the syntactic component being defined.
+-->
+<!ELEMENT alt (#PCDATA | allAltsFrom | opt | group | terminalsymbol | kw | sjkw  
+                | bold | repeat | BNF )* >
+
+
+<!-- A BNF element references a BNFdef
+-->
+<!ELEMENT BNF EMPTY>
+<!-- The attributes of BNF are:
+      * name is the name of the BNFdef.
+      * part is the number of the part in which the BNFdef is defined if not this document.
+      * standard is the number of the standard in which the BNFdef is defined if not this standard.
+-->
+<!ATTLIST BNF
+  name CDATA #REQUIRED
+  part CDATA #IMPLIED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An allAltsFrom element represents "!! All alternatives from ..." 
+     where ... identifies the other part.
+-->
+<!ELEMENT allAltsFrom EMPTY>
+<!-- The attributes of allAltsFrom are:
+      * part is the number of the part in which the BNFdef is originally defined.
+      * standard is the number of the standard in which the BNFdef is originally defined if not
+        this standard.
+-->
+<!ATTLIST allAltsFrom
+  part CDATA #REQUIRED
+  standard CDATA #IMPLIED
+>
+
+
+<!-- An opt element defines an optional component of a production.
+     This is shown by enclosure between [ and ].
+-->
+<!ELEMENT opt (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw 
+                 | repeat | BNF )*>
+
+
+<!-- A group element groups two or more components of a production as an inseparable component.
+     This is shown by enclosure between { and }.
+-->
+<!ELEMENT group (#PCDATA | alt | opt | group| terminalsymbol | kw | sjkw  
+                 | repeat | BNF )*>
+
+
+<!-- A repeat indicates possible repetition of a component.
+     This is shown as three dots...
+-->
+<!ELEMENT repeat EMPTY>
+
+
+<!-- A terminalsymbol element defines literal characters in the production.
+-->
+<!ELEMENT terminalsymbol (#PCDATA)*>
+<!-- The attribute of terminalsymbol is:
+     * unicode defines the code point(s). 
+           These are defined as the 4, 5 or 6 hex character(s) separated by commas.
+           For example, unicode="0026" or unicode="007E,005B"
+-->
+<!ATTLIST terminalsymbol
+  unicode CDATA #IMPLIED
+>
+
+<!-- A kw element defines its contents as a normal keyword.
+-->
+<!ELEMENT kw (#PCDATA)>
+
+
+<!-- An sjkw element defines its contents as a SQL/JSON keyword.
+-->
+<!ELEMENT sjkw (#PCDATA)>
+
+ 
+<!-- A bold indicates the use of a bold-faced type font.
+-->
+<!ELEMENT bold (#PCDATA)>
+
+
+<!-- A seeTheRules element represents the sequence "!! See the Syntax Rules".
+-->
+<!ELEMENT seeTheRules EMPTY>
+]>
+
+<grammar>
+   <BNFdef name="reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>DO</kw>
+         </alt>
+         <alt>
+            <kw>ELSEIF</kw>
+         </alt>
+         <alt>
+            <kw>HANDLER</kw>
+         </alt>
+         <alt>
+            <kw>IF</kw>
+         </alt>
+         <alt>
+            <kw>ITERATE</kw>
+         </alt>
+         <alt>
+            <kw>LEAVE</kw>
+         </alt>
+         <alt>
+            <kw>LOOP</kw>
+         </alt>
+         <alt>
+            <kw>REPEAT</kw>
+         </alt>
+         <alt>
+            <kw>RESIGNAL</kw>
+         </alt>
+         <alt>
+            <kw>SIGNAL</kw>
+         </alt>
+         <alt>
+            <kw>UNTIL</kw>
+         </alt>
+         <alt>
+            <kw>WHILE</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="non-reserved word" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>CONDITION_IDENTIFIER</kw>
+         </alt>
+         <alt>
+            <kw>EXIT</kw>
+         </alt>
+         <alt>
+            <kw>STACKED</kw>
+         </alt>
+         <alt>
+            <kw>UNDO</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL-server module name" predicative="no">
+      <rhs>
+         <BNF part="02" name="schema qualified name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL variable name" predicative="no">
+      <rhs>
+         <BNF part="02" name="identifier"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="condition name" predicative="no">
+      <rhs>
+         <BNF part="02" name="identifier"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="general value specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="SQL variable reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simple value specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="SQL variable reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="target specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="SQL variable reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simple target specification" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="SQL variable reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="target array reference" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="SQL variable reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL variable reference" predicative="no">
+      <rhs>
+         <BNF part="02" name="basic identifier chain"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="sqlstate value" predicative="no">
+      <rhs>
+         <kw>SQLSTATE</kw>
+         <opt>
+            <kw>VALUE</kw>
+         </opt>
+         <BNF part="02" name="character string literal"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="schema element" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="SQL-server module definition"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL-server module definition" predicative="no">
+      <rhs>
+         <kw>CREATE</kw>
+         <kw>MODULE</kw>
+         <BNF name="SQL-server module name"/>
+         <opt>
+            <BNF name="SQL-server module character set specification"/>
+         </opt>
+         <opt>
+            <BNF name="SQL-server module schema clause"/>
+         </opt>
+         <opt>
+            <BNF name="SQL-server module path specification"/>
+         </opt>
+         <opt>
+            <BNF part="02" name="temporary table declaration"/>
+            <repeat/>
+         </opt>
+         <BNF name="SQL-server module contents"/>
+         <repeat/>
+         <kw>END</kw>
+         <kw>MODULE</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL-server module character set specification" predicative="no">
+      <rhs>
+         <kw>NAMES</kw>
+         <kw>ARE</kw>
+         <BNF part="02" name="character set specification"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL-server module schema clause" predicative="no">
+      <rhs>
+         <kw>SCHEMA</kw>
+         <BNF name="default schema name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="default schema name" predicative="no">
+      <rhs>
+         <BNF part="02" name="schema name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL-server module path specification" predicative="no">
+      <rhs>
+         <BNF part="02" name="path specification"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL-server module contents" predicative="no">
+      <rhs>
+         <BNF name="SQL-invoked routine"/>
+         <BNF part="02" name="semicolon"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="drop module statement" predicative="no">
+      <rhs>
+         <kw>DROP</kw>
+         <kw>MODULE</kw>
+         <BNF name="SQL-server module name"/>
+         <BNF part="02" name="drop behavior"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL-invoked routine" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="module routine"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="module routine" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="module procedure"/>
+         </alt>
+         <alt>
+            <BNF name="module function"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="module procedure" predicative="no">
+      <rhs>
+         <opt>
+            <kw>DECLARE</kw>
+         </opt>
+         <BNF part="02" name="SQL-invoked procedure"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="module function" predicative="no">
+      <rhs>
+         <opt>
+            <kw>DECLARE</kw>
+         </opt>
+         <BNF part="02" name="SQL-invoked function"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="object name" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>MODULE</kw>
+            <BNF name="SQL-server module name"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL schema definition statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="SQL-server module definition"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL schema manipulation statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="drop module statement"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL control statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="assignment statement"/>
+         </alt>
+         <alt>
+            <BNF name="compound statement"/>
+         </alt>
+         <alt>
+            <BNF name="case statement"/>
+         </alt>
+         <alt>
+            <BNF name="if statement"/>
+         </alt>
+         <alt>
+            <BNF name="iterate statement"/>
+         </alt>
+         <alt>
+            <BNF name="leave statement"/>
+         </alt>
+         <alt>
+            <BNF name="loop statement"/>
+         </alt>
+         <alt>
+            <BNF name="while statement"/>
+         </alt>
+         <alt>
+            <BNF name="repeat statement"/>
+         </alt>
+         <alt>
+            <BNF name="for statement"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL diagnostics statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <BNF name="signal statement"/>
+         </alt>
+         <alt>
+            <BNF name="resignal statement"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="compound statement" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="beginning label"/>
+            <BNF part="02" name="colon"/>
+         </opt>
+         <kw>BEGIN</kw>
+         <opt>
+            <opt>
+               <kw>NOT</kw>
+            </opt>
+            <kw>ATOMIC</kw>
+         </opt>
+         <opt>
+            <BNF name="local declaration list"/>
+         </opt>
+         <opt>
+            <BNF name="local cursor declaration list"/>
+         </opt>
+         <opt>
+            <BNF name="local handler declaration list"/>
+         </opt>
+         <opt>
+            <BNF name="SQL statement list"/>
+         </opt>
+         <kw>END</kw>
+         <opt>
+            <BNF name="ending label"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="beginning label" predicative="no">
+      <rhs>
+         <BNF name="statement label"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="ending label" predicative="no">
+      <rhs>
+         <BNF name="statement label"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="statement label" predicative="no">
+      <rhs>
+         <BNF part="02" name="identifier"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="local declaration list" predicative="no">
+      <rhs>
+         <BNF name="terminated local declaration"/>
+         <repeat/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="terminated local declaration" predicative="no">
+      <rhs>
+         <BNF name="local declaration"/>
+         <BNF part="02" name="semicolon"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="local declaration" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="SQL variable declaration"/>
+         </alt>
+         <alt>
+            <BNF name="condition declaration"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="local cursor declaration list" predicative="no">
+      <rhs>
+         <BNF name="terminated local cursor declaration"/>
+         <repeat/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="terminated local cursor declaration" predicative="no">
+      <rhs>
+         <BNF part="02" name="declare cursor"/>
+         <BNF part="02" name="semicolon"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="local handler declaration list" predicative="no">
+      <rhs>
+         <BNF name="terminated local handler declaration"/>
+         <repeat/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="terminated local handler declaration" predicative="no">
+      <rhs>
+         <BNF name="handler declaration"/>
+         <BNF part="02" name="semicolon"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL statement list" predicative="no">
+      <rhs>
+         <BNF name="terminated SQL statement"/>
+         <repeat/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="terminated SQL statement" predicative="no">
+      <rhs>
+         <BNF part="02" name="SQL procedure statement"/>
+         <BNF part="02" name="semicolon"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="handler declaration" predicative="no">
+      <rhs>
+         <kw>DECLARE</kw>
+         <BNF name="handler type"/>
+         <kw>HANDLER</kw>
+         <kw>FOR</kw>
+         <BNF name="condition value list"/>
+         <BNF name="handler action"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="handler type" predicative="no">
+      <rhs>
+         <alt>
+            <kw>CONTINUE</kw>
+         </alt>
+         <alt>
+            <kw>EXIT</kw>
+         </alt>
+         <alt>
+            <kw>UNDO</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="handler action" predicative="no">
+      <rhs>
+         <BNF part="02" name="SQL procedure statement"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="condition value list" predicative="no">
+      <rhs>
+         <BNF name="condition value"/>
+         <opt>
+            <group>
+               <BNF part="02" name="comma"/>
+               <BNF name="condition value"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="condition value" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="sqlstate value"/>
+         </alt>
+         <alt>
+            <BNF name="condition name"/>
+         </alt>
+         <alt>
+            <kw>SQLEXCEPTION</kw>
+         </alt>
+         <alt>
+            <kw>SQLWARNING</kw>
+         </alt>
+         <alt>
+            <kw>NOT</kw>
+            <kw>FOUND</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="condition declaration" predicative="no">
+      <rhs>
+         <kw>DECLARE</kw>
+         <BNF name="condition name"/>
+         <kw>CONDITION</kw>
+         <opt>
+            <kw>FOR</kw>
+            <BNF name="sqlstate value"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL variable declaration" predicative="no">
+      <rhs>
+         <kw>DECLARE</kw>
+         <BNF name="SQL variable name list"/>
+         <BNF part="02" name="data type"/>
+         <opt>
+            <BNF part="02" name="default clause"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="SQL variable name list" predicative="no">
+      <rhs>
+         <BNF name="SQL variable name"/>
+         <opt>
+            <group>
+               <BNF part="02" name="comma"/>
+               <BNF name="SQL variable name"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="assignment statement" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="singleton variable assignment"/>
+         </alt>
+         <alt>
+            <BNF name="multiple variable assignment"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="multiple variable assignment" predicative="no">
+      <rhs>
+         <kw>SET</kw>
+         <BNF name="assignment target list"/>
+         <BNF part="02" name="equals operator"/>
+         <BNF part="02" name="assigned row"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="assignment target list" predicative="no">
+      <rhs>
+         <BNF part="02" name="left paren"/>
+         <BNF name="assignment target"/>
+         <opt>
+            <group>
+               <BNF part="02" name="comma"/>
+               <BNF name="assignment target"/>
+            </group>
+            <repeat/>
+         </opt>
+         <BNF part="02" name="right paren"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="singleton variable assignment" predicative="no">
+      <rhs>
+         <kw>SET</kw>
+         <BNF name="assignment target"/>
+         <BNF part="02" name="equals operator"/>
+         <BNF name="assignment source"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="assignment target" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="target specification"/>
+         </alt>
+         <alt>
+            <BNF name="modified field reference"/>
+         </alt>
+         <alt>
+            <BNF name="mutator reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="assignment source" predicative="no">
+      <rhs>
+         <alt>
+            <BNF part="02" name="value expression"/>
+         </alt>
+         <alt>
+            <BNF name="contextually typed source"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="contextually typed source" predicative="no">
+      <rhs>
+         <alt>
+            <BNF part="02" name="implicitly typed value specification"/>
+         </alt>
+         <alt>
+            <BNF part="02" name="contextually typed row value expression"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="modified field reference" predicative="no">
+      <rhs>
+         <BNF name="modified field target"/>
+         <BNF part="02" name="period"/>
+         <BNF part="02" name="field name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="modified field target" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="target specification"/>
+         </alt>
+         <alt>
+            <BNF part="02" name="left paren"/>
+            <BNF name="target specification"/>
+            <BNF part="02" name="right paren"/>
+         </alt>
+         <alt>
+            <BNF name="modified field reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="mutator reference" predicative="no">
+      <rhs>
+         <BNF name="mutated target specification"/>
+         <BNF part="02" name="period"/>
+         <BNF part="02" name="method name"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="mutated target specification" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="target specification"/>
+         </alt>
+         <alt>
+            <BNF part="02" name="left paren"/>
+            <BNF name="target specification"/>
+            <BNF part="02" name="right paren"/>
+         </alt>
+         <alt>
+            <BNF name="mutator reference"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="case statement" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="simple case statement"/>
+         </alt>
+         <alt>
+            <BNF name="searched case statement"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simple case statement" predicative="no">
+      <rhs>
+         <kw>CASE</kw>
+         <BNF part="02" name="case operand"/>
+         <BNF name="simple case statement when clause"/>
+         <repeat/>
+         <opt>
+            <BNF name="case statement else clause"/>
+         </opt>
+         <kw>END</kw>
+         <kw>CASE</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="searched case statement" predicative="no">
+      <rhs>
+         <kw>CASE</kw>
+         <BNF name="searched case statement when clause"/>
+         <repeat/>
+         <opt>
+            <BNF name="case statement else clause"/>
+         </opt>
+         <kw>END</kw>
+         <kw>CASE</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="simple case statement when clause" predicative="no">
+      <rhs>
+         <kw>WHEN</kw>
+         <BNF part="02" name="when operand list"/>
+         <kw>THEN</kw>
+         <BNF name="SQL statement list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="searched case statement when clause" predicative="no">
+      <rhs>
+         <kw>WHEN</kw>
+         <BNF part="02" name="search condition"/>
+         <kw>THEN</kw>
+         <BNF name="SQL statement list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="case statement else clause" predicative="no">
+      <rhs>
+         <kw>ELSE</kw>
+         <BNF name="SQL statement list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="if statement" predicative="no">
+      <rhs>
+         <kw>IF</kw>
+         <BNF part="02" name="search condition"/>
+         <BNF name="if statement then clause"/>
+         <opt>
+            <BNF name="if statement elseif clause"/>
+            <repeat/>
+         </opt>
+         <opt>
+            <BNF name="if statement else clause"/>
+         </opt>
+         <kw>END</kw>
+         <kw>IF</kw>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="if statement then clause" predicative="no">
+      <rhs>
+         <kw>THEN</kw>
+         <BNF name="SQL statement list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="if statement elseif clause" predicative="no">
+      <rhs>
+         <kw>ELSEIF</kw>
+         <BNF part="02" name="search condition"/>
+         <kw>THEN</kw>
+         <BNF name="SQL statement list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="if statement else clause" predicative="no">
+      <rhs>
+         <kw>ELSE</kw>
+         <BNF name="SQL statement list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="iterate statement" predicative="no">
+      <rhs>
+         <kw>ITERATE</kw>
+         <BNF name="statement label"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="leave statement" predicative="no">
+      <rhs>
+         <kw>LEAVE</kw>
+         <BNF name="statement label"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="loop statement" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="beginning label"/>
+            <BNF part="02" name="colon"/>
+         </opt>
+         <kw>LOOP</kw>
+         <BNF name="SQL statement list"/>
+         <kw>END</kw>
+         <kw>LOOP</kw>
+         <opt>
+            <BNF name="ending label"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="while statement" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="beginning label"/>
+            <BNF part="02" name="colon"/>
+         </opt>
+         <kw>WHILE</kw>
+         <BNF part="02" name="search condition"/>
+         <kw>DO</kw>
+         <BNF name="SQL statement list"/>
+         <kw>END</kw>
+         <kw>WHILE</kw>
+         <opt>
+            <BNF name="ending label"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="repeat statement" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="beginning label"/>
+            <BNF part="02" name="colon"/>
+         </opt>
+         <kw>REPEAT</kw>
+         <BNF name="SQL statement list"/>
+         <kw>UNTIL</kw>
+         <BNF part="02" name="search condition"/>
+         <kw>END</kw>
+         <kw>REPEAT</kw>
+         <opt>
+            <BNF name="ending label"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="for statement" predicative="no">
+      <rhs>
+         <opt>
+            <BNF name="beginning label"/>
+            <BNF part="02" name="colon"/>
+         </opt>
+         <kw>FOR</kw>
+         <opt>
+            <BNF name="for loop variable name"/>
+            <kw>AS</kw>
+         </opt>
+         <opt>
+            <BNF part="02" name="cursor name"/>
+            <opt>
+               <BNF part="02" name="cursor sensitivity"/>
+            </opt>
+            <kw>CURSOR</kw>
+            <kw>FOR</kw>
+         </opt>
+         <BNF part="02" name="cursor specification"/>
+         <kw>DO</kw>
+         <BNF name="SQL statement list"/>
+         <kw>END</kw>
+         <kw>FOR</kw>
+         <opt>
+            <BNF name="ending label"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="for loop variable name" predicative="no">
+      <rhs>
+         <BNF part="02" name="identifier"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="get diagnostics statement" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>GET</kw>
+            <opt>
+               <BNF name="which area"/>
+            </opt>
+            <kw>DIAGNOSTICS</kw>
+            <BNF part="02" name="SQL diagnostics information"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="which area" predicative="no">
+      <rhs>
+         <alt>
+            <kw>CURRENT</kw>
+         </alt>
+         <alt>
+            <kw>STACKED</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="condition information item name" predicative="no">
+      <rhs>
+         <alt>
+            <allAltsFrom part="02"/>
+         </alt>
+         <alt>
+            <kw>CONDITION_IDENTIFIER</kw>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="signal statement" predicative="no">
+      <rhs>
+         <kw>SIGNAL</kw>
+         <BNF name="signal value"/>
+         <opt>
+            <BNF name="set signal information"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="signal value" predicative="no">
+      <rhs>
+         <alt>
+            <BNF name="condition name"/>
+         </alt>
+         <alt>
+            <BNF name="sqlstate value"/>
+         </alt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="set signal information" predicative="no">
+      <rhs>
+         <kw>SET</kw>
+         <BNF name="signal information item list"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="signal information item list" predicative="no">
+      <rhs>
+         <BNF name="signal information item"/>
+         <opt>
+            <group>
+               <BNF part="02" name="comma"/>
+               <BNF name="signal information item"/>
+            </group>
+            <repeat/>
+         </opt>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="signal information item" predicative="no">
+      <rhs>
+         <BNF name="condition information item name"/>
+         <BNF part="02" name="equals operator"/>
+         <BNF name="simple value specification"/>
+      </rhs>
+   </BNFdef>
+   <BNFdef name="resignal statement" predicative="no">
+      <rhs>
+         <kw>RESIGNAL</kw>
+         <opt>
+            <BNF name="signal value"/>
+         </opt>
+         <opt>
+            <BNF name="set signal information"/>
+         </opt>
+      </rhs>
+   </BNFdef>
+</grammar>

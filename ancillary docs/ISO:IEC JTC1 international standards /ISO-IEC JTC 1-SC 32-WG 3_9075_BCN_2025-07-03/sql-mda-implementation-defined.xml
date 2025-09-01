@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA095</code>
+      <description>Whether decoding from media types other than application/json is supported.</description>
+   </impDef>
+   <impDef>
+      <code>IA096</code>
+      <description>Whether encoding an array to media types other than application/json is supported.</description>
+   </impDef>
+   <impDef>
+      <code>ID225</code>
+      <description>The implicit character string type when an md-array encode returning clause is not specified and the format identifier is equivalent to 'application/json'.</description>
+   </impDef>
+   <impDef>
+      <code>ID226</code>
+      <description>The implicit string type when an md-array encode returning clause is not specified and the format identifier is not equivalent to 'application/json'.</description>
+   </impDef>
+   <impDef>
+      <code>IL006</code>
+      <description>The maximum length of a variable-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL013</code>
+      <description>The minimum lower limit an MD-axis can have.</description>
+   </impDef>
+   <impDef>
+      <code>IL014</code>
+      <description>The maximum lower limit an MD-axis can have.</description>
+   </impDef>
+   <impDef>
+      <code>IL017</code>
+      <description>The maximum number of dimensions for an MD-array.</description>
+   </impDef>
+   <impDef>
+      <code>IL067</code>
+      <description>The minimum value used as the neutral element of md-array aggregation operator MAX in an md-array aggregation expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL068</code>
+      <description>The minimum value used as the neutral element of md-array aggregation operator MIN in an md-array aggregation expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL202</code>
+      <description>The exponent range of an approximate numeric or decimal floating point value of an md-array aggregation expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL203</code>
+      <description>The maximum number of md-axis in an md-extent.</description>
+   </impDef>
+   <impDef>
+      <code>IV098</code>
+      <description>The MD-array value obtained by decoding the result of the JSON_QUERY(SVE, 'lax $data'), where SVE is the string value expression immediately contained in an md-array value constructor by decoding, according to the format indicated by the format identifier when the md-array value constructor by decoding immediately contains a format identifier that is not equivalent to 'application/json'.</description>
+   </impDef>
+   <impDef>
+      <code>IV201</code>
+      <description>The declared exact numeric type with scale 0 (zero) of md-axis limit fixed and md-axis limit.</description>
+   </impDef>
+   <impDef>
+      <code>IV240</code>
+      <description>The value of an md-array aggregation expression when the declared type of an md-array aggregation expression is the decimal floating point type and the md-array aggregation operator immediately contained in the md-array aggregation expression is the plus sign.</description>
+   </impDef>
+   <impDef>
+      <code>IV241</code>
+      <description>The exact numeric type with scale 0 (zero) that is the declared type of the result of md-array dimension.</description>
+   </impDef>
+   <impDef>
+      <code>IV242</code>
+      <description>The exact numeric type with scale 0 (zero) that is the declared type of the result of the md-array axis index function.</description>
+   </impDef>
+   <impDef>
+      <code>IV243</code>
+      <description>The exact numeric type with scale 0 (zero) that is the declared type of the result of the md-array lower axis limit and the md-array upper axis limit.</description>
+   </impDef>
+   <impDef>
+      <code>IV244</code>
+      <description>The result of an md-array encode function when the format identifier is not equivalent to 'application/json'.</description>
+   </impDef>
+</implementationDefined>

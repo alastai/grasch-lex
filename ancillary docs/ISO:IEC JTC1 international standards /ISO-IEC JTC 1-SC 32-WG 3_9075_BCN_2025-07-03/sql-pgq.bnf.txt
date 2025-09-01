@@ -1,0 +1,961 @@
+
+************************************************************************************************
+This file is a "digital artifact" that contains the grammar specified by a part of ISO/IEC 9075.
+
+This grammar may be used by implementers of SQL-implementations when generating parsers for the 
+SQL language.
+************************************************************************************************
+
+<SQL special character> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <tilde>
+
+<tilde> ::=
+    ~    !! U+007E
+
+<delimiter token> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <bracket right arrow>
+  | <bracket tilde right arrow>
+  | <left arrow>
+  | <left arrow bracket>
+  | <left arrow tilde>
+  | <left arrow tilde bracket>
+  | <left minus right>
+  | <left minus slash>
+  | <left tilde slash>
+  | <minus left bracket>
+  | <minus slash>
+  | <multiset alternation operator>
+  | <right bracket minus>
+  | <right bracket tilde>
+  | <slash minus>
+  | <slash minus right>
+  | <slash tilde>
+  | <slash tilde right>
+  | <tilde left bracket>
+  | <tilde right arrow>
+  | <tilde slash>
+
+<bracket right arrow> ::=
+    ]->    !! <U+005D, U+002D, U+003E>
+
+<bracket tilde right arrow> ::=
+    ]~>    !! <U+005D, U+007E, U+003E>
+
+<left arrow> ::=
+    <-    !! <U+003C, U+002D>
+
+<left arrow bracket> ::=
+    <-[    !! <U+003C, U+002D, U+005B>
+
+<left arrow tilde> ::=
+    <~    !! <U+003C, U+007E>
+
+<left arrow tilde bracket> ::=
+    <~[    !! <U+003C, U+007E, U+005B>
+
+<left minus right> ::=
+    <->    !! <U+003C, U+002D, U+003E>
+
+<left minus slash> ::=
+    <-/    !! <U+003C, U+002D, U+002F>
+
+<left tilde slash> ::=
+    <~/    !! <U+003C, U+007E, U+002F>
+
+<minus left bracket> ::=
+    -[    !! <U+002D, U+005B>
+
+<minus slash> ::=
+    -/    !! <U+002D, U+002F>
+
+<multiset alternation operator> ::=
+    |+|    !! <U+007C, U+002B, U+007C>
+
+<right bracket minus> ::=
+    ]-    !! <U+005D, U+002D>
+
+<right bracket tilde> ::=
+    ]~    !! <U+005D, U+007E>
+
+<slash minus> ::=
+    /-    !! <U+002F, U+002D>
+
+<slash minus right> ::=
+    /->    !! <U+002F, U+002D, U+003E>
+
+<slash tilde> ::=
+    /~    !! <U+002F, U+007E>
+
+<slash tilde right> ::=
+    /~>    !! <U+002F, U+007E, U+003E>
+
+<tilde left bracket> ::=
+    ~[    !! <U+007E, U+005B>
+
+<tilde right arrow> ::=
+    ~>    !! <U+007E, U+003E>
+
+<tilde slash> ::=
+    ~/    !! <U+007E, U+002F>
+
+<reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | ALL_DIFFERENT
+  | BINDING_COUNT
+  | ELEMENT_ID
+  | ELEMENT_NUMBER
+  | EXPORT
+  | GRAPH
+  | GRAPH_TABLE
+  | MATCHNUM
+  | PATH_LENGTH
+  | PATH_NAME
+  | PROPERTY_EXISTS
+  | SAME
+
+<non-reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | ACYCLIC
+  | BINDINGS
+  | BOUND
+  | DESTINATION
+  | DIFFERENT
+  | DIRECTED
+  | EDGE
+  | EDGES
+  | ELEMENTS
+  | LABEL
+  | LABELED
+  | NODE
+  | PATHS
+  | PROPERTIES
+  | PROPERTY
+  | PROPERTY_GRAPH_CATALOG
+  | PROPERTY_GRAPH_NAME
+   
+  | PROPERTY_GRAPH_SCHEMA
+  | RELATIONSHIP
+  | RELATIONSHIPS
+  | SHORTEST
+  | SINGLETONS
+  | STEP
+  | TABLES
+  | TRAIL
+  | VERTEX
+  | WALK
+
+<edge synonym> ::=
+    EDGE
+  | RELATIONSHIP
+
+<edges synonym> ::=
+    EDGES
+  | RELATIONSHIPS
+
+<vertex synonym> ::=
+    NODE
+  | VERTEX
+
+<destination vertex table alias> ::=
+    <vertex table alias>
+
+<edge table alias> ::=
+    <identifier>
+
+<element table name> ::=
+    <table name>
+
+<element table alias> ::=
+    <identifier>
+
+<graph pattern variable> ::=
+    <element variable>
+  | <path or subpath variable>
+
+<path or subpath variable> ::=
+    <path variable>
+  | <subpath variable>
+
+<element variable> ::=
+    <identifier>
+
+<label name> ::=
+    <identifier>
+
+<path variable> ::=
+    <identifier>
+
+<subpath variable> ::=
+    <identifier>
+
+<property graph name> ::=
+    <schema qualified name>
+
+<property name> ::=
+    <identifier>
+
+<source vertex table alias> ::=
+    <vertex table alias>
+
+<vertex table alias> ::=
+    <identifier>
+
+<non-parenthesized value expression primary> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <property reference>
+  | <graphical value expression primary>
+
+<graphical value expression primary> ::=
+    <element_id function>
+  | <graphical match number function>
+  | <graphical path name function>
+  | <graphical element number function>
+  | <graphical path length function>
+
+<case operand> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <element reference>
+
+<when operand> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <directed predicate part 2>
+  | <labeled predicate part 2>
+  | <source predicate part 2>
+  | <destination predicate part 2>
+  | <bound predicate part 2>
+
+<property reference> ::=
+    <basic identifier chain>
+
+<element_id function> ::=
+    ELEMENT_ID <left paren> <element reference> <right paren>
+
+<graphical match number function> ::=
+    MATCHNUM <left paren> <right paren>
+
+<graphical path name function> ::=
+    PATH_NAME <left paren> <right paren>
+
+<graphical element number function> ::=
+    ELEMENT_NUMBER <left paren> <element reference> <right paren>
+
+<graphical path length function> ::=
+    PATH_LENGTH <left paren> <path reference> <right paren>
+
+<table primary> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <graph table derived table>
+
+<graph table derived table> ::=
+    <graph table> [ <correlation or recognition> ]
+
+<graph table> ::=
+    GRAPH_TABLE
+         <left paren> <graph reference> MATCH <graph pattern> <graph table shape>
+         <right paren>
+
+<graph table shape> ::=
+    [ <graph table rows clause> ]
+    [ <graph table columns clause> ]
+    [ <graph table export clause> ]
+
+<graph table rows clause> ::=
+    ONE ROW PER MATCH
+  | <one row per iteration>
+
+<one row per iteration> ::=
+    <one row per vertex>
+  | <one row per step>
+
+<one row per vertex> ::=
+    ONE ROW PER <vertex synonym>
+         <left paren> <vertex variable> <right paren>
+         [ <in paths clause> ]
+
+<one row per step> ::=
+    ONE ROW PER STEP <left paren> <vertex variable 1> <comma> <edge variable>
+         <comma> <vertex variable 2> <right paren>
+         [ <in paths clause> ]
+
+<vertex variable> ::=
+    <element variable>
+
+<vertex variable 1> ::=
+    <element variable>
+
+<edge variable> ::=
+    <element variable>
+
+<vertex variable 2> ::=
+    <element variable>
+
+<in paths clause> ::=
+    IN <left paren> <path variable> [ { <comma> <path variable> }... ] <right paren>
+
+<graph table columns clause> ::=
+    COLUMNS <left paren> <graph table column definition>
+         [ { <comma> <graph table column definition> }... ] <right paren>
+
+<graph table column definition> ::=
+    <value expression> [ AS <column name> ]
+  | <all properties reference>
+
+<all properties reference> ::=
+    <element reference> <period> <asterisk>
+
+<graph table export clause> ::=
+    EXPORT ALL SINGLETONS [ <export except> ]
+  | EXPORT SINGLETONS
+         <left paren> <export variable list> <right paren>
+  | EXPORT NO SINGLETONS
+
+<export except> ::=
+    EXCEPT <left paren> <export variable list> <right paren>
+
+<export variable list> ::=
+    <graph pattern variable> [ { <comma> <graph pattern variable> }... ]
+
+<select sublist> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <all properties reference>
+
+<predicate> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <graph element predicate>
+
+<graph element predicate> ::=
+    <directed predicate>
+  | <labeled predicate>
+  | <source/destination predicate>
+  | <all_different predicate>
+  | <same predicate>
+  | <bound predicate>
+  | <property_exists predicate>
+
+<directed predicate> ::=
+    <element reference> <directed predicate part 2>
+
+<directed predicate part 2> ::=
+    IS [ NOT ] DIRECTED
+
+<labeled predicate> ::=
+    <element reference> <labeled predicate part 2>
+
+<labeled predicate part 2> ::=
+    IS [ NOT ] LABELED <label expression>
+
+<source/destination predicate> ::=
+    <vertex reference> <source predicate part 2>
+  | <vertex reference> <destination predicate part 2>
+
+<vertex reference> ::=
+    <element reference>
+
+<source predicate part 2> ::=
+    IS [ NOT ] SOURCE OF <edge reference>
+
+<destination predicate part 2> ::=
+    IS [ NOT ] DESTINATION OF <edge reference>
+
+<edge reference> ::=
+    <element reference>
+
+<all_different predicate> ::=
+    ALL_DIFFERENT <left paren> <element reference> <comma> <element reference>
+         [ { <comma> <element reference> }... ]
+         <right paren>
+
+<same predicate> ::=
+    SAME <left paren> <element reference> <comma> <element reference>
+         [ { <comma> <element reference> }... ]
+         <right paren>
+
+<bound predicate> ::=
+    <element reference> <bound predicate part 2>
+
+<bound predicate part 2> ::=
+    IS [ NOT ] BOUND [ AS <primary element variable> ]
+
+<primary element variable> ::=
+    <element variable>
+
+<property_exists predicate> ::=
+    PROPERTY_EXISTS <left paren> <element reference> <comma> <property name> <right paren>
+
+<aggregate function> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <element variable count function> [ <filter clause> ]
+
+<element variable count function> ::=
+    BINDING_COUNT <left paren> <element reference> <right paren>
+
+<sort specification list> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <path order clause>
+
+<path order clause> ::=
+    PATH ORDER [ <ordering specification> ]
+
+<graph reference> ::=
+    <property graph name>
+
+<graph pattern> ::=
+    [ <match mode> ] <path pattern list>
+         [ <keep clause> ]
+         [ <graph pattern where clause> ]
+
+<match mode> ::=
+    <repeatable elements match mode>
+  | <different edges match mode>
+
+<repeatable elements match mode> ::=
+    REPEATABLE <element bindings or elements>
+
+<different edges match mode> ::=
+    DIFFERENT <edge bindings or edges>
+
+<element bindings or elements> ::=
+    ELEMENT [ BINDINGS ]
+  | ELEMENTS
+
+<edge bindings or edges> ::=
+    <edge synonym> [ BINDINGS ]
+  | <edges synonym>
+
+<path pattern list> ::=
+    <path pattern> [ { <comma> <path pattern> }... ]
+
+<path pattern> ::=
+    [ <path variable declaration> ] [ <path pattern prefix> ] <path pattern expression>
+
+<path variable declaration> ::=
+    <path variable> <equals operator>
+
+<keep clause> ::=
+    KEEP <path pattern prefix>
+
+<graph pattern where clause> ::=
+    WHERE <search condition>
+
+<path pattern prefix> ::=
+    <path mode prefix>
+  | <path search prefix>
+
+<path mode prefix> ::=
+    <path mode> [ <path or paths> ]
+
+<path mode> ::=
+    WALK
+  | TRAIL
+  | SIMPLE
+  | ACYCLIC
+
+<path search prefix> ::=
+    <all path search>
+  | <any path search>
+  | <shortest path search>
+
+<all path search> ::=
+    ALL [ <path mode> ] [ <path or paths> ]
+
+<path or paths> ::=
+    PATH
+  | PATHS
+
+<any path search> ::=
+    ANY [ <number of paths> ] [ <path mode> ] [ <path or paths> ]
+
+<number of paths> ::=
+    <simple value specification>
+
+<shortest path search> ::=
+    <all shortest path search>
+  | <any shortest path search>
+  | <counted shortest path search>
+  | <counted shortest group search>
+
+<all shortest path search> ::=
+    ALL SHORTEST [ <path mode> ] [ <path or paths> ]
+
+<any shortest path search> ::=
+    ANY SHORTEST [ <path mode> ] [ <path or paths> ]
+
+<counted shortest path search> ::=
+    SHORTEST <number of paths> [ <path mode> ] [ <path or paths> ]
+
+<counted shortest group search> ::=
+    SHORTEST [ <number of groups> ] [ <path mode> ] [ <path or paths> ] { GROUP
+  | GROUPS }
+
+<number of groups> ::=
+    <simple value specification>
+
+<path pattern expression> ::=
+    <path term>
+  | <path multiset alternation>
+  | <path pattern union>
+
+<path multiset alternation> ::=
+    <path term> <multiset alternation operator> <path term>
+         [ { <multiset alternation operator> <path term> }... ]
+
+<path pattern union> ::=
+    <path term> <vertical bar> <path term> [ { <vertical bar> <path term> }... ]
+
+<path term> ::=
+    <path factor>
+  | <path concatenation>
+
+<path concatenation> ::=
+    <path term> <path factor>
+
+<path factor> ::=
+    <path primary>
+  | <quantified path primary>
+  | <questioned path primary>
+
+<quantified path primary> ::=
+    <path primary> <graph pattern quantifier>
+
+<questioned path primary> ::=
+    <path primary> <question mark>
+
+<path primary> ::=
+    <element pattern>
+  | <parenthesized path pattern expression>
+  | <simplified path pattern expression>
+
+<element pattern> ::=
+    <vertex pattern>
+  | <edge pattern>
+
+<vertex pattern> ::=
+    <left paren> <element pattern filler> <right paren>
+
+<element pattern filler> ::=
+    [ <element variable declaration> ]
+    [ <is label expression> ]
+    [ <element pattern where clause> ]
+   
+
+<element variable declaration> ::=
+    <element variable>
+
+<is label expression> ::=
+    <is or colon> <label expression>
+
+<is or colon> ::=
+    IS
+  | <colon>
+
+<element pattern where clause> ::=
+    WHERE <search condition>
+
+<edge pattern> ::=
+    <full edge pattern>
+  | <abbreviated edge pattern>
+
+<full edge pattern> ::=
+    <full edge pointing left>
+  | <full edge undirected>
+  | <full edge pointing right>
+  | <full edge left or undirected>
+  | <full edge undirected or right>
+  | <full edge left or right>
+  | <full edge any direction>
+
+<full edge pointing left> ::=
+    <left arrow bracket> <element pattern filler> <right bracket minus>
+
+<full edge undirected> ::=
+    <tilde left bracket> <element pattern filler> <right bracket tilde>
+
+<full edge pointing right> ::=
+    <minus left bracket> <element pattern filler> <bracket right arrow>
+
+<full edge left or undirected> ::=
+    <left arrow tilde bracket> <element pattern filler> <right bracket tilde>
+
+<full edge undirected or right> ::=
+    <tilde left bracket> <element pattern filler> <bracket tilde right arrow>
+
+<full edge left or right> ::=
+    <left arrow bracket> <element pattern filler> <bracket right arrow>
+
+<full edge any direction> ::=
+    <minus left bracket> <element pattern filler> <right bracket minus>
+
+<abbreviated edge pattern> ::=
+    <left arrow>
+  | <tilde>
+  | <right arrow>
+  | <left arrow tilde>
+  | <tilde right arrow>
+  | <left minus right>
+  | <minus sign>
+
+<parenthesized path pattern expression> ::=
+    <left paren>
+         [ <subpath variable declaration> ]
+         [ <path mode prefix> ]
+         <path pattern expression>
+         [ <parenthesized path pattern where clause> ]
+    <right paren>
+
+<subpath variable declaration> ::=
+    <subpath variable> <equals operator>
+
+<parenthesized path pattern where clause> ::=
+    WHERE <search condition>
+
+<graph pattern quantifier> ::=
+    <asterisk>
+  | <plus sign>
+  | <fixed quantifier>
+  | <general quantifier>
+
+<fixed quantifier> ::=
+    <left brace> <unsigned integer> <right brace>
+
+<general quantifier> ::=
+    <left brace> [ <lower bound> ] <comma> [ <upper bound> ] <right brace>
+
+<lower bound> ::=
+    <unsigned integer>
+
+<upper bound> ::=
+    <unsigned integer>
+
+<label expression> ::=
+    <label term>
+  | <label disjunction>
+
+<label disjunction> ::=
+    <label expression> <vertical bar> <label term>
+
+<label term> ::=
+    <label factor>
+  | <label conjunction>
+
+<label conjunction> ::=
+    <label term> <ampersand> <label factor>
+
+<label factor> ::=
+    <label primary>
+  | <label negation>
+
+<label negation> ::=
+    <exclamation mark> <label primary>
+
+<label primary> ::=
+    <label name>
+  | <wildcard label>
+  | <parenthesized label expression>
+
+<wildcard label> ::=
+    <percent>
+
+<parenthesized label expression> ::=
+    <left paren> <label expression> <right paren>
+
+<simplified path pattern expression> ::=
+    <simplified defaulting left>
+  | <simplified defaulting undirected>
+  | <simplified defaulting right>
+  | <simplified defaulting left or undirected>
+  | <simplified defaulting undirected or right>
+  | <simplified defaulting left or right>
+  | <simplified defaulting any direction>
+
+<simplified defaulting left> ::=
+    <left minus slash> <simplified contents> <slash minus>
+
+<simplified defaulting undirected> ::=
+    <tilde slash> <simplified contents> <slash tilde>
+
+<simplified defaulting right> ::=
+    <minus slash> <simplified contents> <slash minus right>
+
+<simplified defaulting left or undirected> ::=
+    <left tilde slash> <simplified contents> <slash tilde>
+
+<simplified defaulting undirected or right> ::=
+    <tilde slash> <simplified contents> <slash tilde right>
+
+<simplified defaulting left or right> ::=
+    <left minus slash> <simplified contents> <slash minus right>
+
+<simplified defaulting any direction> ::=
+    <minus slash> <simplified contents> <slash minus>
+
+<simplified contents> ::=
+    <simplified term>
+  | <simplified path union>
+  | <simplified multiset alternation>
+
+<simplified path union> ::=
+    <simplified term> <vertical bar> <simplified term>
+         [ { <vertical bar> <simplified term> }... ]
+
+<simplified multiset alternation> ::=
+    <simplified term> <multiset alternation operator> <simplified term>
+         [ { <multiset alternation operator> <simplified term> }... ]
+
+<simplified term> ::=
+    <simplified factor low>
+  | <simplified concatenation>
+
+<simplified concatenation> ::=
+    <simplified term> <simplified factor low>
+
+<simplified factor low> ::=
+    <simplified factor high>
+  | <simplified conjunction>
+
+<simplified conjunction> ::=
+    <simplified factor low> <ampersand> <simplified factor high>
+
+<simplified factor high> ::=
+    <simplified tertiary>
+  | <simplified quantified>
+  | <simplified questioned>
+
+<simplified quantified> ::=
+    <simplified tertiary> <graph pattern quantifier>
+
+<simplified questioned> ::=
+    <simplified tertiary> <question mark>
+
+<simplified tertiary> ::=
+    <simplified direction override>
+  | <simplified secondary>
+
+<simplified direction override> ::=
+    <simplified override left>
+  | <simplified override undirected>
+  | <simplified override right>
+  | <simplified override left or undirected>
+  | <simplified override undirected or right>
+  | <simplified override left or right>
+  | <simplified override any direction>
+
+<simplified override left> ::=
+    <left angle bracket> <simplified secondary>
+
+<simplified override undirected> ::=
+    <tilde> <simplified secondary>
+
+<simplified override right> ::=
+    <simplified secondary> <right angle bracket>
+
+<simplified override left or undirected> ::=
+    <left arrow tilde> <simplified secondary>
+
+<simplified override undirected or right> ::=
+    <tilde> <simplified secondary> <right angle bracket>
+
+<simplified override left or right> ::=
+    <left angle bracket> <simplified secondary> <right angle bracket>
+
+<simplified override any direction> ::=
+    <minus sign> <simplified secondary>
+
+<simplified secondary> ::=
+    <simplified primary>
+  | <simplified negation>
+
+<simplified negation> ::=
+    <exclamation mark> <simplified primary>
+
+<simplified primary> ::=
+    <label name>
+  | <left paren> <simplified contents> <right paren>
+
+<element reference> ::=
+    <element variable>
+
+<path reference> ::=
+    <path variable>
+
+<schema element> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <property graph definition>
+
+<property graph definition> ::=
+    CREATE PROPERTY GRAPH <property graph name> [ <property graph content> ]
+
+<property graph content> ::=
+    <vertex tables clause> [ <edge tables clause> ]
+
+<vertex tables clause> ::=
+    <vertex synonym> TABLES <parenthesized vertex table list>
+
+<parenthesized vertex table list> ::=
+    <left paren> <vertex table definition> [ { <comma> <vertex table definition> }... ]
+         <right paren>
+
+<vertex table definition> ::=
+    <element table definition>
+
+<element table definition> ::=
+    <element table name> [ AS <element table alias> ]
+         [ <element table key clause> ]
+         [ <source vertex table> <destination vertex table> ]
+         [ <element table label and properties clause> ]
+  | <table subquery> AS <element table alias>
+         <element table key clause>
+         [ <source vertex table> <destination vertex table> ]
+         [ <element table label and properties clause> ]
+
+<element table key clause> ::=
+    KEY <left paren> <column name list> <right paren>
+
+<element table label and properties clause> ::=
+    <element table properties clause>
+  | <label and properties>...
+
+<element table properties clause> ::=
+    NO PROPERTIES
+  | PROPERTIES <element table properties alternatives>
+
+<element table properties alternatives> ::=
+    [ ARE ] ALL COLUMNS [ EXCEPT <left paren> <except column name list> <right paren> ]
+  | <element table parenthesized derived property list>
+
+<except column name list> ::=
+    <column name list>
+
+<element table parenthesized derived property list> ::=
+    <left paren> <derived property> [ { <comma> <derived property> }... ] <right paren>
+
+<derived property> ::=
+    <value expression> [ AS <property name> ]
+
+<label and properties> ::=
+    <element table label clause> [ <element table properties clause> ]
+
+<element table label clause> ::=
+    LABEL <label name>
+  | DEFAULT LABEL
+
+<edge tables clause> ::=
+    <edge synonym> TABLES <parenthesized edge table list>
+
+<parenthesized edge table list> ::=
+    <left paren> <edge table definition>
+         [ { <comma> <edge table definition> }... ] <right paren>
+
+<edge table definition> ::=
+    <element table definition>
+
+<source vertex table> ::=
+    SOURCE [ <source vertex table key clause> REFERENCES ] <source vertex reference>
+
+<source vertex table key clause> ::=
+    <element table key clause>
+
+<source vertex reference> ::=
+    <source vertex table alias>
+         [ <left paren> <referenced source column list> <right paren> ]
+
+<referenced source column list> ::=
+    <column name list>
+
+<destination vertex table> ::=
+    DESTINATION [ <destination vertex table key clause> REFERENCES ]
+         <destination vertex reference>
+
+<destination vertex table key clause> ::=
+    <element table key clause>
+
+<destination vertex reference> ::=
+    <destination vertex table alias>
+         [ <left paren> <referenced destination column list> <right paren> ]
+
+<referenced destination column list> ::=
+    <column name list>
+
+<alter property graph statement> ::=
+    ALTER PROPERTY GRAPH <property graph name>
+         <alter property graph action>
+
+<alter property graph action> ::=
+    <add element table definition>
+  | <drop element table definition>
+  | <alter element table definition>
+
+<add element table definition> ::=
+    ADD <vertex tables clause> [ ADD <edge tables clause> ]
+  | ADD <edge tables clause>
+
+<drop element table definition> ::=
+    DROP <vertex or edge> TABLES <parenthesized element table alias list> <drop behavior>
+
+<vertex or edge> ::=
+    <vertex synonym>
+  | <edge synonym>
+
+<parenthesized element table alias list> ::=
+    <left paren> <element table alias> [ { <comma> <element table alias> } ] <right paren>
+
+<alter element table definition> ::=
+    ALTER <vertex or edge> TABLE <element table alias>
+         <alter element table action>
+
+<alter element table action> ::=
+    <add element table label clause>
+  | <drop element table label clause>
+  | <alter element table label properties>
+
+<add element table label clause> ::=
+    <add element table label>...
+
+<add element table label> ::=
+    ADD LABEL <label name> <element table properties clause>
+
+<drop element table label clause> ::=
+    DROP LABEL <label name> <drop behavior>
+
+<alter element table label properties> ::=
+    ALTER LABEL <label name> <alter label action>
+
+<alter label action> ::=
+    <add property definition>
+  | <drop property definition>
+
+<add property definition> ::=
+    ADD PROPERTIES <element table parenthesized derived property list>
+
+<drop property definition> ::=
+    DROP PROPERTIES <parenthesized property name list> <drop behavior>
+
+<parenthesized property name list> ::=
+    <left paren> <property name list> <right paren>
+
+<property name list> ::=
+    <property name> [ { <comma> <property name> }... ]
+
+<drop property graph statement> ::=
+    DROP PROPERTY GRAPH <property graph name> <drop behavior>
+
+<object name> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | PROPERTY GRAPH <property graph name>
+
+<SQL schema definition statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <property graph definition>
+
+<SQL schema manipulation statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <alter property graph statement>
+  | <drop property graph statement>
+
+<condition information item name> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | PROPERTY_GRAPH_CATALOG
+  | PROPERTY_GRAPH_NAME
+  | PROPERTY_GRAPH_SCHEMA
+

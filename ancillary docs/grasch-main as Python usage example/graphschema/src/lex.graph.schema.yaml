@@ -1,0 +1,256 @@
+# LEX Strawman -- Graph Schema Level 0
+# Entities and Relationships, No Attributes
+
+---
+graph schema:
+    name: CountryGraphSchema_Level_0
+    graphType:
+        node types:
+            - node type: Continent
+            - node type: Country
+            - node type: City
+        edge types:
+            - directed edge type:
+                name: Country_HAS_CAPITAL_City
+                from: Country
+                to: City
+...
+
+# LEX Strawman — Defaults for our work in the GQL Catalog
+
+---
+# lex.example.defaults.yaml
+defaults:
+    catalog:
+        root: graphs://com.example.data
+        directory: kg/geographical
+    filesystem:
+        root: schema://com.example.data
+        directory: enterprise/dictionary
+    content type:
+        - closed # unless specified
+        - open type interpretation:
+            valid instances: in subtypes
+        - closed type interpretation:
+            valid instances: in exact type
+    element type:
+        cardinality: {0..m}
+    edge type endpoint:
+        participation: {1..m}
+...
+
+# LEX Strawman -- Defining property type maps for a data dictionary
+
+---
+# lex.example.data_dictionary.yaml
+# imaginary include lex.example.defaults.yaml
+property type maps:
+    - json 
+        - properties schema: geo_concept.jsd
+          alias: GeoConcept_PROPS
+        - properties schema: continent.jsd
+          alias: Continent_PROPS
+        - properties schema: country.jsd
+          alias: Country_PROPS  
+        - properties schema: city.jsd
+          alias: City_PROPS
+        - properties schema: associated.jsd # which defines the alias ASSOCIATED_PROPS
+...
+
+# LEX Strawman — Graph Schema Level 1
+# Named Entities + Relationships + Attribution
+
+---
+# lex.example.level_1.yaml
+# imaginary include lex.example.data_dictionary.yaml
+graph schema:
+    name: CountryGraphSchema_Level_1
+    graphType:
+        content types: # closed by default
+            - content type: Continent
+              implies: Continent_PROPS
+            - content type: Country
+              implies: Country_PROPS
+            - content type: City
+              implies: City_PROPS
+            - content type: Country_HAS_CAPITAL_City
+              implies: ASSOCIATED_PROPS
+
+        node types:
+          - node type: Continent
+          - node type:
+              name: Country
+          - node type:
+              content type:
+                name: City
+#            - name: Continent
+#            - name: Country
+#            - name: City
+
+        edge types:
+          - directed edge type:
+              name: Country_HAS_CAPITAL_City
+              from: Country
+              to: City
+...
+
+# LEX Strawman — Graph Schema Level 2
+# Subtyping/classing
+
+---
+# lex.example.content_types.yaml
+# imaginary include lex.example.data_dictionary.yaml
+content types:
+    #  - extends: X -- a reference to a type named X
+    #  - labels: [ X ] -- a label set by value
+    #  - property types: { a: STRING , b: DATE } -- property types by value
+    # all the examples below show named type references
+    open:
+        - content type: GeoConcept
+        # sugar for key labels : [GeoConcept]
+          implies: GeoConcept_PROPS
+          default key: [ geoGlobalId ]
+        - content type:
+            key labels: [ ASSOCIATED ]
+        # salt for name: ASSOCIATED
+            implies: ASSOCIATED_PROPS
+
+    closed:
+        - content type:
+            key labels: [ Continent ]
+            extends: GeoConcept
+            adds: Continent_PROPS
+        - content type:
+            name: Country
+            extends: GeoConcept
+            adds: Country_PROPS
+        - content type: City
+          extends: GeoConcept
+          adds: City_PROPS
+        - content type: Country_HAS_CAPITAL_City
+          extends:
+              [ GeoConcept, ASSOCIATED ]
+...
+
+---
+# lex.example.level_2.yaml
+# imaginary include lex.example.content_types.yaml
+graph schema:
+    name: CountryGraphSchema_Level_2
+    graphType:
+        node types:
+            - node type: GeoConcept
+              valid instances: proper subtypes
+# this implies (Continent), (City) and (Country), but not (GeoConcept)
+
+        edge types:
+            - undirected edge type:
+                first:
+                    content type: GeoConcept
+                    valid instances: in proper subtypes
+                edge:
+                    content type: ASSOCIATED
+                    valid instances: in subtypes
+                second:
+                    content type: GeoConcept
+                    valid instances: in proper subtypes
+                    cannot equal: other endpoint node type
+# this implies (Country)-[Country_HAS_CAPITAL_City]->(City)
+# is possible, although it would also allow an undirected edition
+
+# this is the Level 1 case, without subtypes
+#       node types:
+#            - node type: Continent
+#            - node type: Country
+#            - node type: City
+#
+#        edge types:
+#            - directed edge type:
+#                name: Country_HAS_CAPITAL_City
+#                from: Country
+#                to: City
+...
+
+# LEX Strawman — Graph Schema Level 3
+# Cardinalities and Keys
+
+---
+# lex.example.level_3.yaml
+# imaginary include lex.example.content_types.yaml
+graph schema:
+    name: CountryGraphSchema_Level_3
+    graphType:
+        content types:
+          - content type: # overrides data dictionary
+              name: Country
+              default key: GeoConceptId
+        node types:
+            - node type:
+                content type:
+                    name: GeoConcept
+                    valid instances: proper subtypes
+# this implies (Continent), (City) and (Country), but not (GeoConcept)
+            - node type:
+                name: Country
+                instances: '{0..250}'
+                keys:
+                  [DEFAULT,
+                   ISO_ALPHA-3_country_code,
+                   ISO_ALPHA-2_country_code]
+
+        edge types:
+          - directed edge type:
+              from:
+                  participation: '{1}'
+                  content type: Country
+                  valid instances: exact type
+              edge:
+                  content type: Country_HAS_CAPITAL_City
+              to:
+                  participation: '{1..m}'
+                  content type: City
+                  cannot equal: from
+          - undirected edge type:
+                first:
+                    content type: GeoConcept
+                    valid instances: in proper subtypes
+                edge:
+                    content type: ASSOCIATED
+                    valid instances: in subtypes
+                second:
+                  content type: GeoConcept
+                  valid instances: in proper subtypes
+                  cannot equal: first
+# semi-Open World (free extension)
+...
+
+# LEX Strawman – example of a schema which allows anything
+
+---
+graph schema:
+    name: cypherMetamodel
+    graph type: # references ANY content type
+        node types:
+#           - node type: ANY
+            - node type:
+                - content type: ANY CONTENT
+                    # labels: NONE
+                    # property types: NONE
+                    # valid instances: in subtypes
+
+        edge types:
+            - directed edge type:
+                  from: ANY
+                  edge: ANY
+                  to:
+                    content type: ANY
+                    can equal: from
+# Cypher, unlike GQL, does not support undirected edges
+# A schema-free graph in GQL would also support this:
+#
+#           - undirected edge type:
+#                  first: ANY
+#                  edge: ANY
+#                  second:
+#                    content type: ANY
+#                    can equal: first

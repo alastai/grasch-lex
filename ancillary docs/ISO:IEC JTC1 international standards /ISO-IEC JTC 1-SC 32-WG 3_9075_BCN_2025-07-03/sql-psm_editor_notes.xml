@@ -1,0 +1,4625 @@
+<EditorNotes>
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+   This is a list of all problems in the corresponding
+   document that are not yet resolved. 
+
+Possible       
+Problem         Category
+Number         ==========
+=======
+
+PSM-000  (pseudo-PP showing Editor's Notes convention)
+PSM-165       **Major Technical**
+
+
+PSM-1           *Opportunity*
+PSM-1       **Major Technical**
+PSM-1        *Minor Technical*
+
+======= Largest SQL/PSM Possible Problem number so far *** PSM-165 *** =======
+======= This is the end of the problem number list =======
+
+-->
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPpsm" number="PSM-" severity="major" realm="technical">
+
+<reference><specref ref="psm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPpsm" number="PSM-" severity="minor" realm="technical">
+
+<reference><specref ref="psm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPpsm" number="PSM-" severity="major" realm="editorial">
+
+<reference><specref ref="psm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPpsm" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="psm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPpsm" number="PSM-">
+
+<reference><specref ref="psm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPpsm000" number="PSM-000" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editor. 
+</source>
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point
+that requires particular attention, highlighted thus: 
+</para>
+
+<ednote>Text of the problem.
+</ednote>
+
+</problem>
+
+</PP>
+
+
+<PP id="PPpsm165" number="PSM-165" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:GYD-024.
+</source>
+
+<problem>
+
+<para>Functionality, if any, to support the Vector type needs to be provided.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<!-- Placed closed PPs and LOs after this line
+
+<COMMENT>===Resolved by X3H2-94-317R/RIO-032
+<P>
+<BOX>(<EMPHASIS>(PSM-008\BOLD))
+<X>(<BOX>(PSM-008))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_token\FULL), <LB>local or schema qualifier> and
+<LB>local qualifier> are used, but they are not defined in SQL-92.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by X3H2-94-317R/RIO-032
+<P>
+<BOX>(<EMPHASIS>(PSM-009\BOLD))
+<X>(<BOX>(PSM-009))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_itemref\FULL), <LB>item reference> is used, but is
+not defined in SQL-92. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by X3H2-94-317R/RIO-032
+<P>
+<BOX>(<EMPHASIS>(PSM-014\BOLD))
+<X>(<BOX>(PSM-014))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_mod\FULL), <LB>global declaration> is used, but is
+not defined in SQL-92.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by X3H2-94-317R/RIO-032
+<P>
+<BOX>(<EMPHASIS>(PSM-016\BOLD))
+<X>(<BOX>(PSM-016))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_sqlstatement\FULL), <LB>SQL executable statement>,
+<LB>SQL control statement> are used, but are not defined in SQL-92.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by X3H2-94-408R/RIO-034
+<P>
+<BOX>(<EMPHASIS>(PSM-004\BOLD))
+<X>(<BOX>(PSM-004))
+In the course of discussing X3H2-93-245/MUN-048, the UK noted the
+following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The FOR statement currently permits the inclusion of
+transaction-terminating statements (COMMIT and ROLLBACK).  
+This is a potential problem that requires significant additional thought.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by X3H2-94-408R/RIO-034
+<P>
+<BOX>(<EMPHASIS>(PSM-006\BOLD))
+<X>(<BOX>(PSM-006))
+In the course of discussing X3H2-93-201/SOU-068, the UK (Hugh Darwen)
+noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>General Rule 5) of <REFERENCE>(psm_compound\FULL), is imprecisely
+worded, employing the undefined term "closest encompassing scope".
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by X3H2-94-408R/RIO-034
+<P>
+<BOX>(<EMPHASIS>(PSM-018.b\BOLD))
+<X>(<BOX>(PSM-018.b))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_domains_view\FULL), and
+<REFERENCE>(psm_columns_view\FULL), have stuff about ABSTRACT DATA
+TYPES.  Is that there for future compatibility (with SQL3?).
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:RIO-053/X3H2-94-473R
+
+<P>
+<BOX>(<EMPHASIS>(PSM-010\BOLD))
+<X>(<BOX>(PSM-010))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_qspec\FULL), <LB>used-defined updatability method>
+is used, but is not defined in SQL-92.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by DBL:RIO-053/X3H2-94-473R
+
+<P>
+<BOX>(<EMPHASIS>(PSM-011\BOLD))
+<X>(<BOX>(PSM-011))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In the General Rules of <REFERENCE>(psm_qspec\FULL), there are various
+references to <LB>user-defined xxxx clause>.  None of these are
+defined in SQL-92.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by DBL:RIO-053/X3H2-94-473R
+
+<P>
+<BOX>(<EMPHASIS>(PSM-018.a\BOLD))
+<X>(<BOX>(PSM-018.a))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_domains_view\FULL), and
+<REFERENCE>(psm_columns_view\FULL), these views have the same names as the
+views DOMAINS and COLUMNS in SQL-92.  Therefore they are
+incompatibilities.  
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:RIO-053/X3H2-94-473R
+
+<P>
+<BOX>(<EMPHASIS>(PSM-019\BOLD))
+<X>(<BOX>(PSM-019))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_domains_view\FULL),
+<REFERENCE>(psm_columns_view\FULL), <REFERENCE>(psm_modules_view\FULL),
+<REFERENCE>(psm_routines_view\FULL), and
+<REFERENCE>(psm_parameters_view\FULL), the descriptions are missing. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by DBL:RIO-028/X3H2-94-288R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-012\BOLD))
+<X>(<BOX>(PSM-012))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_privs\FULL), <LB>object name> is used, but is not
+defined in SQL-92.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:RIO-028/X3H2-94-288R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-013\BOLD))
+<X>(<BOX>(PSM-013))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_privs\FULL), Syntax Rule 1) refers to the
+<LB>object name> MODULE.  That isn't in SQL-92 or defined here.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===X3H2-94-546/DBL:RIO-117 partly resolved this problem
+
+<P>
+<BOX>(<EMPHASIS>(PSM-024\BOLD)) X3H2-93-488/MUN-122, part 12,
+<X>(<BOX>(PSM-024))
+noted the following problem:
+
+<LIST>(SIMPLE)
+
+<LE>SR 6 [If RESTRICT ...] of <REFERENCE>(psm_droproutine\FULL), makes no
+mention of the consequences of the routine being dropped being referenced
+in a <LB>routine> or a <LB>module>.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Nelson Mattos said in Rio that this has been done
+
+<P>
+<BOX>(<EMPHASIS>(PSM-025\BOLD)) Paper X3H2-90-050 (BIT data type cleanup), item
+<X>(<BOX>(PSM-025))
+D.4 noted that <REFERENCE>(psm_routine\FULL) (formerly "<LB>external function
+declaration>)", requires extensive additions to the Syntax Rules to
+permit bit strings to be used as parameters.
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by X3H2-95-258/DBL:YOW-144
+
+<P>
+<BOX>(<EMPHASIS>(PSM-015\BOLD))
+<X>(<BOX>(PSM-015))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine\FULL), the interaction between <LB>routine>
+in SQL/PSM and <LB>procedure> in SQL-92 seems unclear.  
+For example, if a schema contains:
+<LIST>(SIMPLE)
+
+<LE>PROCEDURE (........);
+<LINE>
+       Update .......;
+
+<ENDLIST>
+
+<P>
+Does this parse as a <LB>procedure> according to the SQL-92 rules or a <LB>routine> according to 
+the PSM rules.  Perhaps the option is to list
+<LB>procedure> in SQL/PSM's Annex D (incompatibilities) - with a note saying 
+the <LB>procedure> it has been replaced by <LB>routine>.
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>Resolved by X3H2-95-258/DBL:YOW-144
+
+<P>
+<BOX>(<EMPHASIS>(PSM-020\BOLD))
+<X>(<BOX>(PSM-020))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_conform\FULL): Re rule 1, [Ed] thought that levelling
+was removed from PSM; Re rule 2, Usually BSI vote no on standards with
+inadequate conformance clauses - on the grounds that we (nor any other
+nation?) can possibly understand what standard they are voting for if the
+conformance requirements are not there at least in outline.
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>Resolved by X3H2-95-258/DBL:YOW-144
+
+
+<P>
+<BOX>(<EMPHASIS>(PSM-020\BOLD)) Paper SLC-51, point B.21, says: 
+<X>(<BOX>(PSM-020))
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine\FULL) (formerly "<LB>procedure>"), the
+qualifier "base" to the word "type" is used in SR 10 (a) generally and
+then in (b) (ix), (c) (viii), (d) (vi), (f) (vii), (g) (x) but not
+otherwise in subrules (b), (c), (d), (f) or (g).  There appears to be 
+an inconsistency here.  Either  we should use the qualifier "base"
+consistently, or we should delete it from subrules (b) through (f).  We
+are unsure whether "base" is a valid Ada term and are therefore unsure
+whether its use in (a) is correct or not.
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-026\BOLD)) DBL:RIO-096/X3H2-94-495/X3H2-94-513,
+<X>(<BOX>(PSM-026))
+noted the following problem:
+
+<LIST>(SIMPLE)
+
+<LE>The rules for the behavior of unhandled exceptions might not align
+with the semantics of continue handlers.  That is, it is not clear how, or
+if, a RESIGNAL statement will halt processing when used within a CONTINUE
+handler.  The desired semantics of this handler is that, if no other
+handlers are defined by the user, processing halts when an exception is
+raised.  Thus the default semantics would be the same as in SQL-92.  These
+semantics should be investigated and any required elaboration of the rules
+developed. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-036\BOLD)) X3H2-95-039/DBL:RIO-142.UK-46
+<X>(<BOX>(PSM-036))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_compound\FULL), General Rule 5), the term "active
+exception or completion condition" is undefined (mentioned in the
+Concepts, but not defined there, either). 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-037\BOLD)) X3H2-95-039/DBL:RIO-142.UK-47
+<X>(<BOX>(PSM-037))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_compound\FULL), General Rule 5), the term
+"successful completion" is a completion condition, according to the
+SQLSTATE table in SQL-92.  Thus, it seems to us that there is always 
+a completion condition at the completion of an <LB>SQL procedure statement>,
+though we don't know whether it's active or not.  
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-038\BOLD)) X3H2-95-039/DBL:RIO-142.UK-49
+<X>(<BOX>(PSM-038))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_compound\FULL), General Rule 5)b), it doesn't seem
+appropriate always to undo changes to persistent data only. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-039\BOLD)) X3H2-95-039/DBL:RIO-142.UK-51b
+<X>(<BOX>(PSM-039))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_handler_decl\FULL): An exception handler might well
+want to access variables belonging to the interrupted block.  The scope of
+variable names is not well-defined anywhere in this standard, as far as we
+can see, but it is unusual for a subprogram (which is what a <LB>routine>
+is said to be) to be able to access variables belonging to its called
+(except where explicitly "exposed" in languages that support this notion). 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-040\BOLD)) X3H2-95-039/DBL:RIO-142.UK-51d
+<X>(<BOX>(PSM-040))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_handler_decl\FULL): The changes cancelled by REDO
+and UNDO are only changes to persistent data (if any).  FOr one thing, are
+we sure this doesn't interfere unpleasantly with the current transaction
+model?  (We could end up with several different ways of supporting nested
+transactions.)  For another, it seems arbitrary to undo just persistent
+data changes. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-041\BOLD)) X3H2-95-039/DBL:RIO-142.UK-53
+<X>(<BOX>(PSM-041))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_handler_decl\FULL), Syntax Rule 1) mentions
+"<EMPHASIS>(the) <LB>exception value> of any other <LB>handler
+declaration>".  But a <LB>handler declaration> can have several
+<LB>exception value>s (one way or another).  We are not quite sure what
+was intended here. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-042\BOLD)) X3H2-95-039/DBL:RIO-142.UK-54
+<X>(<BOX>(PSM-042))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_handler_decl\FULL), Syntax Rule 4), the phrase "in
+the scope of this declaration or in the same <LB>local declaration list>"
+is imprecise and unclear.  We are not sure what is really meant by it.
+Besides, what purpose does the rule serve?  Alternatively, why aren't the
+other possible productions of <LB>exception value> analogously
+constrained?
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-044\BOLD)) X3H2-95-039/DBL:RIO-142.UK-57
+<X>(<BOX>(PSM-044))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>It is nowhere specified what variables are in scope when a handler is
+executed. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-045\BOLD)) X3H2-95-039/DBL:RIO-142.UK-60
+<X>(<BOX>(PSM-045))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_exception_declaration\FULL), it is apparently
+permitted to have several different <LB>exception name>s for the same
+SQLSTATE value.  We suspect that this was unintended and it surely causes
+some problems. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-046\BOLD)) X3H2-95-039/DBL:RIO-142.UK-61
+<X>(<BOX>(PSM-046))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_exception_declaration\FULL), <LB>exception value>
+is already defined in Subclause 14.5, as something different from what is
+intended here.  In any case, as 14.5's <LB>exception value> is permitted
+to be alist of SQLSTATE values, we would expect <LB>exception declaration>
+to be similar in this respect (i.e., support a list of SQLSTATE values). 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-047\BOLD)) X3H2-95-039/DBL:RIO-142.UK-62
+<X>(<BOX>(PSM-047))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_exception_declaration\FULL), Syntax Rule 1) covers
+the case of an <LB>exception declaration> outside of any <LB>compound
+statement>, but doesn't say anything about one that is in a <LB>compound
+statement>. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-048\BOLD)) X3H2-95-039/DBL:RIO-142.UK-63
+<X>(<BOX>(PSM-048))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_exception_declaration\FULL), Syntax Rule 2) has 
+an unusual style.  Perhaps "provided in" should be changed to "of" or to
+"contained". 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+
+
+<COMMENT>===Resolved by X3H2-95-178/DBL:YOW-048, X3H2-95-201/DBL:YOW-049R, and 
+X3H2-95-179R2/DBL:YOW-050R
+<P>
+<BOX>(<EMPHASIS>(PSM-050\BOLD)) X3H2-95-039/DBL:RIO-142.UK-81
+<X>(<BOX>(PSM-050))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_signal_statement\FULL), why can only <LB>exception
+name> be signalled?  Why can't one signal an SQLSTATE value?  The same
+question applies to <REFERENCE>(psm_resignal_statement\FULL). 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:YOW-137/X3H2-95-267
+
+<P>
+<BOX>(<EMPHASIS>(PSM-023\BOLD)) X3H2-93-488/MUN-122, part 10,
+<X>(<BOX>(PSM-023))
+noted the following problem:
+
+<LIST>(SIMPLE)
+
+<LE>GR 1 [If RF identifies ...] of <REFERENCE>(psm_droproutine\FULL), refers
+(twice) to the FUNCTION privilege.  There is no such privilege; the
+nearest is EXECUTE.  However, rather more is wrong here.  The only
+routines that have privileges defined for them (or grantable to them) are
+external routines.  Otherwise, it is modules that have privileges defined
+upon them (though as noted above in the comment on clause 10.5,
+<LB>privileges>, <LB>module> itself does not generate privilege
+descriptors - and this is probably an error).
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:YOW-048 et al
+<P>
+<BOX>(<EMPHASIS>(PSM-031\BOLD)) X3H2-95-039/DBL:RIO-142.UK-3
+<X>(<BOX>(PSM-031))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_conc_mods_handler_decls\FULL), seventh paragraph
+("If a handler declaration specifies REDO..."), the statement that caused
+the condition to be raised isn't necessarily re-executed, is it?  The
+conditions that caused to be executed in the first place might have
+changed. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-184/X3H2-96-289
+
+<P>
+<BOX>(<EMPHASIS>(PSM-022\BOLD)) MUN-069R/X3H2-93-096 and
+<X>(<BOX>(PSM-022))
+MUN-067/X3H2-93-140 conflict, raising the following problem:
+
+<LIST>(SIMPLE)
+
+<LE>MUN-069R/X3H2-93-096 specified a Syntax Rule in
+<REFERENCE>(psm_routine\FULL), with an explanatory note (to the reader of
+the paper, not to be put into the document) saying:
+
+<LIST>(SIMPLE)
+
+<LE>Recall that a cursor declared in a module must be referenced in
+exactly one OPEN statement in that module.  By including the declare
+cursor in the scope of the routine containing that OPEN statement, we can
+avoid having to special-case such cursors in the new clause "<LB>item
+reference>" below.
+
+<ENDLIST>
+
+<P>
+However, paper MUN-067/X3H2-93-140 relaxed the restriction on having
+exactly one procedure with an OPEN statement.  Therefore, the presumption
+on which the Syntax Rule in <REFERENCE>(psm_routine\FULL), was based is no
+longer valid, suggesting that "special-case" action may be necessary.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-054/X3H2-96-088
+
+<P>
+<BOX>(<EMPHASIS>(PSM-027\BOLD)) X3H2-94-546/DBL:RIO-117,
+<X>(<BOX>(PSM-027))
+noted the following problem:
+
+<LIST>(SIMPLE)
+
+<LE>The SQL/PSM document does not have the extensions to <LB>revoke
+statement> that are necessary to handle the dropping of routines. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-177/X3H2-96-278
+
+<P>
+<BOX>(<EMPHASIS>(PSM-029\BOLD)) X3H2-94-549/DBL:RIO-119
+<X>(<BOX>(PSM-029))
+asked to enter a Possible Problem noting the following problem:
+
+<LIST>(SIMPLE)
+
+<LE>Papers DBL:RIO-109/X3H2-94-510, DBL:RIO-116/X3H2-94-545, and
+DBL:RIO-119/X3H2-94-549 made changes to SQL/PSM to clarify the behavior of
+defaults with respect to certain SQL objects.  Similar changes are
+required for SQL variables, parameters, and attributes of ADTs.
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-148/X3H2-96-218
+
+<P>
+<BOX>(<EMPHASIS>(PSM-032\BOLD)) X3H2-95-039/DBL:RIO-142.UK-6
+<X>(<BOX>(PSM-032))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_statements_by_function\FULL), the list of
+SQL-control statements is incpmplete, but the ones that are missing are
+all ones we are proposing here to move to SQL3 or SQL4. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-050/X3H2-96-084
+
+<P>
+<BOX>(<EMPHASIS>(PSM-033\BOLD)) X3H2-95-039/DBL:RIO-142.UK-20
+<X>(<BOX>(PSM-033))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine\FULL), Syntax Rule 3) requires SQL-92's
+production for <LB>language clause> to include SQL, but it doesn't. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-050/X3H2-96-084
+
+<P>
+<BOX>(<EMPHASIS>(PSM-035\BOLD)) X3H2-95-039/DBL:RIO-142.UK-33
+<X>(<BOX>(PSM-035))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_moddef\FULL), Syntax Rule 4) requires SQL-92's
+production for <LB>language clause> to include SQL, but it doesn't. 
+
+<ENDLIST>
+
+
+
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-172/X3H2-96-266
+
+<P>
+<BOX>(<EMPHASIS>(PSM-043\BOLD)) X3H2-95-039/DBL:RIO-142.UK-55
+<X>(<BOX>(PSM-043))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_handler_decl\FULL), Syntax Rule 5):  Shouldn't
+there be a similar mnemonic term for successful completion?  After all, it
+is apparently permitted (deliberately?) to specify a handler for the
+all-zeros SQLSTATE that signifies this.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-051/X3H2-96-085
+
+<P>
+<BOX>(<EMPHASIS>(PSM-049\BOLD)) X3H2-95-039/DBL:RIO-142.UK-64
+<X>(<BOX>(PSM-049))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_vardecl\FULL), the scope of an SQL variable is
+nowhere defined. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-186/X3H2-96-291
+
+<P>
+<BOX>(<EMPHASIS>(PSM-053\BOLD)) X3H2-95-258/DBL:YOW-144
+<X>(<BOX>(PSM-053))
+proposaed the following Possible Problem related to DIS ballot comment
+USA-67:
+
+<LIST>(SIMPLE)
+
+<LE>General Rules 1) and 2) of <REFERENCE>(psm_if_statement\FULL) 
+("If an <LB>if statement else clause> is specified, then...") need to explain what
+should happen in the false case of a search condition.  They may need to
+be combined to express that. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-055/X3H2-96-090
+
+<P>
+<BOX>(<EMPHASIS>(PSM-055\BOLD)) X3H2-95-258/DBL:YOW-144
+<X>(<BOX>(PSM-055))
+proposed the following Possible Problem related to DIS ballot comment
+USA-75:
+
+<LIST>(SIMPLE)
+
+<LE>There are differences between the DOMAINS view in SQL-92 and
+SQL/PSM-92.  Also, it is not clear why the DOMAINS view is needed at all
+in SQL/PSM. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-055/X3H2-96-090
+
+<P>
+<BOX>(<EMPHASIS>(PSM-056\BOLD)) X3H2-95-258/DBL:YOW-144
+<X>(<BOX>(PSM-056))
+proposed the following Possible Problem related to DIS ballot comment
+USA-79:
+
+<LIST>(SIMPLE)
+
+<LE>Why have 0 and ORDINAL_POSITION been added to the end of the lists on
+the first and third rows, respectively, of the ON clause in the DOMAINS
+view of SQL/PSM-92?
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-055/X3H2-96-090
+
+<P>
+<BOX>(<EMPHASIS>(PSM-057\BOLD)) X3H2-95-258/DBL:YOW-144
+<X>(<BOX>(PSM-057))
+proposed the following Possible Problem related to DIS ballot comment
+USA-81:
+
+<LIST>(SIMPLE)
+
+<LE>There are differences between the COLUMNS view in SQL-92 and
+SQL/PSM-92.  Also, it is not clear why the COLUMNS view is needed at all
+in SQL/PSM. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-055/X3H2-96-090
+
+<P>
+<BOX>(<EMPHASIS>(PSM-058\BOLD)) X3H2-95-258/DBL:YOW-144
+<X>(<BOX>(PSM-058))
+proposed the following Possible Problem related to DIS ballot comment
+USA-83:
+
+<LIST>(SIMPLE)
+
+<LE>Why have 0 and ORDINAL_POSITION been added to the end of the lists on
+the first and third rows, respectively, of the ON clause in the COLUMNS
+view of SQL/PSM-92?
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-061/X3H2-96-107
+
+<P>
+<BOX>(<EMPHASIS>(PSM-059\BOLD)) The amendment to X3H2-95-123/DBL:YOW-037
+<X>(<BOX>(PSM-059))
+proposed the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The definition of the type precedence for SQL data types does not
+cater for the potential differences in the radix of the precision of
+INTEGER (or SMALLINT) and NUMERIC (or DECIMAL). 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-134/X3H2-96-155R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-065\BOLD)) A note from Steve Cannan associated with
+paper X3H2-95-266/DBL:YOW-135
+<X>(<BOX>(PSM-065))
+proposed the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>A fix is needed to Syntax Rule 26) ("Let <EMPHASIS>(AL) be the
+<LB>argument list> of <EMPHASIS>(RI)...") in case a) ("If <EMPHASIS>(RN)
+contains a <LB>local or schema qualifier>...").  This subrule needs to
+actually "select" a candidate subject routine. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-182/X3H2-96-283
+
+<P>
+<BOX>(<EMPHASIS>(PSM-068\BOLD))
+<X>(<BOX>(PSM-068))
+In DBL:RIO-142, comment DIN-6 noted:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_datevalfunc\FULL), General Rule 1) probably is
+intended to weaken General Rule 3) of SQL-92's Subclause 6.8,
+"<LB>datetime value function>", General Rule 3), so that the latter
+General Rule is not applied to <LB>compound statement>s.  It is not
+clearly stated, however, that a modification (rather than an addition) of
+a General Rule is intended.  A straightforwarad interpretation where both
+General Rules are valid would make the weakened one superfluous. 
+
+<P>
+The problem can be solved by a suitable refinement of the notion of
+"generally contained" as used in the General Rule of SQL-92, or else by
+explicitly mentioning such changes to the General Rules of SQL-92. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-139/X3H2-96-257R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-069\BOLD))
+<X>(<BOX>(PSM-069))
+Ames Carlson has raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_mod\FULL), Format, production for <LB>module
+contents>, the alternative for <LB>global declaration> is (implicitly)
+marked for SQL2, SQL3, and SQL4 (by not having any special marking).
+However, Ames Carlson has noted that SQL/Bindings,
+<REFERENCE>(bind_mod\FULL), has marked "All alternatives from Part 4" as
+SQL4-Only.  This appears to be a conflict.  Please note that this conflict
+affects several Syntax and General Rules in <REFERENCE>(psm_mod\FULL), as
+well. 
+
+<P>
+Looking for guidance at DBL:YOW-013, "Splitting SQL3 into Earlier vs Later
+Progression" is little help.  The markup in SQL/PSM is supported by item
+2.10, "SQL variables in modules and compound statements", which places
+that feature into PSM-92; however, items 3.02, "Module variables" and
+3.05, "Module exception declarations", place those features into SQL4!
+This appears to represent the same conflict!
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-139/X3H2-96-257R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-070\BOLD))
+<X>(<BOX>(PSM-070))
+Ames Carlson has raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine\FULL), Syntax Rule 13)i)i)2) ("Effective
+parameter type list entry PN+RN)..." references the <LB>returns data
+type>.  Should this instead reference the CAST FROM data type; if so,
+should it utilize the notion of <EMPHASIS>(externally-returned data type)
+defined a few rules below here? 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-139/X3H2-96-257R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-071\BOLD))
+<X>(<BOX>(PSM-071))
+Ames Carlson has raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine\FULL), in Syntax Rules 13)i)i)5), 13)i)i)6),
+13)i)ii)4), and 13)i)ii)5), does the use of "name of the routine" and
+"specific name" clearly require that the information being passed is the
+fully-qualified name, including the separating <LB>period>s, or is the
+intent is that only the <LB>qualified identifier> be passed? 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-139/X3H2-96-257R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-072\BOLD))
+<X>(<BOX>(PSM-072))
+Ames Carlson has raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine\FULL), Syntax Rule 13)j) ("If PARAMETER STYLE
+GENERAL...") does not talk about hor the return value is represented in
+the call; is this handled outside the scope of parameter passing?  How?
+Where? 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-139/X3H2-96-257R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-073\BOLD))
+<X>(<BOX>(PSM-073))
+Ames Carlson has raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine\FULL), should Syntax Rule 13)l) should be
+present in PSM-92 at all, as it defines a term that is used only in PSM3
+and PSM4? 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-181/X3H2-96-282
+
+<P>
+<BOX>(<EMPHASIS>(PSM-074\BOLD))
+<X>(<BOX>(PSM-074))
+Ames Carlson has raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine\FULL), neither General Rule 2) nor the
+specification of a routine descriptor in <REFERENCE>(psm_routines\FULL),
+provide for the CAST FROM information of a routine. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-185/X3H2-96-290
+
+<P>
+<BOX>(<EMPHASIS>(PSM-075\BOLD))
+<X>(<BOX>(PSM-075))
+Discussion among several participants has raised the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_c_correspondences\FULL), SQL data types with
+<LB>length> of <EMPHASIS>(L) are said to be equivalent to C data types
+with <EMPHASIS>(char\BOLD)[<EMPHASIS>(L)].  This fails to account for
+character sets with a form-of-use other than one octet per character. 
+Some participants have suggested that <EMPHASIS>(char\BOLD)[<MATH>(L*k)]
+would be appropriate, but that seems to be correct only for character sets
+whose form-of-use is fixed <EMPHASIS>(k) octets per character and does not
+account for character sets whose form-of-use is a varying number of octets
+per character. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-059R1/X3H2-96-098R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-076\BOLD))
+<X>(<BOX>(PSM-076))
+Ames Carlson raises the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>There are no MODULE_PRIVILEGES or ROUTINE_PRIVILEGES view.  THere are
+such (privilege-related) views for all other schema objects.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:MCI-139/X3H2-96-257R1
+
+<P>
+<BOX>(<EMPHASIS>(PSM-064\BOLD)) A note from Steve Cannan associated with
+paper X3H2-95-266/DBL:YOW-135
+<X>(<BOX>(PSM-064))
+proposed the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE><LB>routine> <EMPHASIS>(vs) routine, <LB>routine invocation>
+<EMPHASIS>(vs) routine invocation, <EMPHASIS>(etc). (<EMPHASIS>(i.e.),
+usage of BNF notation versus ordinary English words) in
+<REFERENCE>(psm_conc\FULL), is inconsistent. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:RIO-090/X3H2-94-516
+
+<P>
+< C O M M E N T >(From X3H2-93-066/YOK-035 and others)
+<BOX>(<EMPHASIS>(PSM-021\BOLD)) Consideration of X3H2-93-066/YOK-035
+<X>(<BOX>(PSM-021))
+identified the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The information as to whether a parameter is input and/or output
+should be added to the routine descriptor in
+<REFERENCE>(psm_routines\FULL).  Moreover, <LB>routine> in
+<REFERENCE>(psm_routine\FULL), apparently needs to create a routine
+descriptor===this could replace the current GR2 that is a cross-reference
+to the related topic of routine invocation rather than being part of the
+semantics of routine definition.  Then <LB>schema definition> in
+<REFERENCE>(schema\FULL) should also mention routines in GR3, or should be
+simpified or clarified to make it more robust - - it probably need not
+mention "associated descriptors" if the GRs for creating the objects take
+care of those, and in any case what is the force of "effectively" in
+"effectively created" here?
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===partially resolved by DBL:MAD-128/X3H2-96-???
+<P>
+<BOX>(<EMPHASIS>(PSM-099\BOLD))
+<X>(<BOX>(PSM-099))
+In the course of discussing DBL:MCI-176,
+Paul Cotton noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Also, the style of Syntax Rule 1 may need to be enhanced to match
+similar rules in other Subclauses that use TRIM. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by DBL:MAD-188R1/X3H2-96-599R2
+
+<P>
+<BOX>(<EMPHASIS>(PSM-063\BOLD)) Paper X3H2-95-265/DBL:YOW-134
+<X>(<BOX>(PSM-063))
+proposed the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>[Nelson and Rick have] observed that <LB>item reference> in [SQL/PSM]
+subsumes the use of <LB>column reference> from SQL-92.  For SQL-92 with
+SQL/PSM, there are two ways of parsing <LB>column name>.  SQL/PSM includes
+it in <LB>item reference>, while SQL-92 includes it in
+<LB>column reference>.  Similarly, there are two ways to parse
+<LB>embedded variable name>, since <LB>variable specification> can be
+contained in <LB>item reference> or in <LB>general value specification>. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>=== Closed by DBL:CWB-117/X3H2-98-172
+
+<P>
+<BOX>(<EMPHASIS>(PSM-130\BOLD)) In CBR-017/X3H2-92-192, the following
+<X>(<BOX>(PSM-130))
+possible problem was identified:
+
+<LIST>(SIMPLE)
+
+<LE>The interactions between <LB>assignment statement> and
+<REFERENCE>(statements\FULL), is very incomplete.  Given the
+<LB>assignment statement>'s new general role, we believe that its
+classification as an "SQL-control statement"
+(<REFERENCE>(statements\FULL)) is counter-intuitive but perhaps there
+is nowhere else to put it.  More serious, however: as the result of the
+proposal in X3H2-92-083/OTT-011, an <LB>assignment statement> can now
+contain a <LB>dynamic parameter specification>.  We guess that it should
+therefore be listed as a "preparable statement" in
+<REFERENCE>(statements\FULL) (and perhaps other "SQL control
+statements" listed as not preparable?).  Is an <LB>assignment statement>
+immediately executable?  Is it embeddable?  These points also need
+addressing for other "SQL-control statements".
+
+<ENDLIST>
+
+<P>
+This was formerly SQL/Foundation Possible Problem
+<BOX>(<EMPHASIS>(257\BOLD)). 
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:CWB-018/X3H2-97-427
+
+<P>
+<BOX>(<EMPHASIS>(PSM-131\BOLD)) In CBR-017/X3H2-92-192, the following
+<X>(<BOX>(PSM-131))
+possible problem was identified:
+
+<LIST>(SIMPLE)
+
+<LE>On the assumption that <LB>assignment statement> is preparable,
+shouldn't there be some subrule in <REFERENCE>(bind_dynprepare\FULL) (akin to
+General Rules 4 and/or 5) to describe the effect (or allowability?) of
+cases such as SET ? = ?
+
+<ENDLIST>
+
+<P>
+This was formerly SQL/Foundation Possible Problem
+<BOX>(<EMPHASIS>(258\BOLD)). 
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by DBL:CWB-018/X3H2-97-427
+
+<P>
+<BOX>(<EMPHASIS>(PSM-067\BOLD))
+<X>(<BOX>(PSM-067))
+Paper X3H2-95-270R1/DBL:YOW-139 noted the following problem in
+Ottawa, July, 1995:
+
+<LIST>(SIMPLE)
+
+<LE>Nelson Mattos said that he wants a more complete specification of the
+Possible Problem as well as direction from the group that he write the
+solution before the DIS Editing Meeting.  There appears to be two changes
+required: (1) Add syntax (for example, CAST or TREAT) to allow data typing
+of <LB>dynamic parameter specification>s when used as OUTPUT parameters in
+function invocations; and (2) let <LB>dynamic parameter specification>s to
+be used as <LB>target specification>sthis has three subalternatives: (a)
+special case the CALL facility, (b) special case the SET statement, (c)
+generalize the <LB>target specification> use so even SELECT INTO benefits
+from it.  (Of course, any combination of (a), (b), and (c) could be
+chosen.)
+
+<LE>Phil Shaw objected strongly to any use of the CAST keyword to provide
+typing to <LB>dynamic parameter specification>s, so we rephrased it 
+a "syntax for typing <LB>dynamic parameter specification>s".
+
+<LE>Paul Cotton moved that the Editing Meeting resolve that a paper
+proposing <LB>dynamic parameter specification>s as valid alternatives for
+<LB>target specification>s, as already done in SQL3, be prepared for the
+SQL/PSM DIS ballot.  The proposal should also provide some syntax for
+typing <LB>dynamic parameter specification>s.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>Resolved by DBL:BBN-201/X3H2-98-418
+
+<P>
+<BOX>(<EMPHASIS>(PSM-102\BOLD))
+<X>(<BOX>(PSM-102))
+In the course of discussing DBL:MCI-177,
+Paul Cotton noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>DBL:MCI-177 uses the phrase "at the time that the default value is
+required".  Although this phraseology is based on SQL-92, it is not clear
+when a default value is required for an SQL variable (which is not in
+SQL-92).  In particular, is the value required when the variable is
+declared or when it is first accessed?  Although several experts believe
+the latter to be true, there are no rules in SQL/PSM to clearly state
+this.  If the former is true, then an <LB>SQL variable declaration> can be
+a transaction-initiating statement>!
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by DBL:BBN-201/X3H2-98-418
+
+<P>
+<BOX>(<EMPHASIS>(PSM-111\BOLD))
+<X>(<BOX>(PSM-111))
+DBL:MCI-057 and accompanying discussion noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Cannot have qualified cursor names in SQL-92, but the current paper
+proposes such qualifications. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by DBL:BBN-201/X3H2-98-418
+
+<P>
+<BOX>(<EMPHASIS>(PSM-112\BOLD))
+<X>(<BOX>(PSM-112))
+DBL:MCI-057 and accompanying discussion noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE><LB>local qualifier> is used (in PSM-92), but not defined anywhere,
+including in the current proposals.  <LB>local or schema qualifier> might
+have been intended, but SQL-92's use wouldn't make sense of this. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by DBL:BBN-201/X3H2-98-418
+
+<P>
+<BOX>(<EMPHASIS>(PSM-132\BOLD)) Paper YOK-051/X3H2-93-190
+<X>(<BOX>(PSM-132))
+identified the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The scope of an <exception name> is not defined but is used in
+<REFERENCE>(psm_signal_statement\FULL), and in
+<REFERENCE>(psm_resignal_statement\FULL).
+
+<ENDLIST>
+
+<P>
+This was formerly SQL/Foundation Possible Problem
+<BOX>(<EMPHASIS>(287\BOLD)). 
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by DBL:BBN-201/X3H2-98-418
+
+<P>
+<BOX>(<EMPHASIS>(PSM-133\BOLD)) Paper YOK-051/X3H2-93-190
+<X>(<BOX>(PSM-133))
+identified the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_condition_declaration\FULL), Syntax Rule 2) refers to
+the rules of <REFERENCE>(state\FULL).  It is not clear if this refers to
+the general division of the codes into implementation defined and standard
+defined groups or to the table of standard codes. If the intension is to
+allow the user to define new application specific codes then the code
+space needs to be reallocated into implementation, standard and user
+defined areas.
+
+<ENDLIST>
+
+<P>
+This was formerly SQL/Foundation Possible Problem
+<BOX>(<EMPHASIS>(288\BOLD)). 
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BBN-149/X3H2-98-372
+
+<P>
+<BOX>(<EMPHASIS>(PSM-129\BOLD))
+<X>(<BOX>(PSM-129))
+During the SQL/PSM "sneak peek" (for PSM-96), Nelson Mattos noted:
+
+<LIST>(SIMPLE)
+
+<LE>SQL_PATH in the ROUTINES base table must be set when the SQL-invoked
+routine is created by a <LB>preparable statement> or by an SQL-client
+module. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:BBN-155/X3H2-98-378
+
+<P>
+<BOX>(<EMPHASIS>(PSM-098\BOLD))
+<X>(<BOX>(PSM-098))
+In the course of discussing DBL:MCI-173, Paul Cotton noted the following
+Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Section 3.2 of DBL:MCI-173 added a Syntax Rule stating "<LB>assignment
+target> shall not simply contain a <LB>column reference>."  This may not
+be sufficient since an <LB>item reference> can identify a column in 
+a table. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:HEL-068/H2-2000-528
+
+<P>
+<BOX>(<EMPHASIS>(PSM-017\BOLD))
+<X>(<BOX>(PSM-017))
+Private mail from Ed Dee raised the following Possible Problem in SQL/PSM: 
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_assignment\FULL), as well as other places, there
+are references to <LB>attribute reference> and <LB>attribute name> which
+are not in SQL-92 or SQL/PSM.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:HEL-068/H2-2000-528
+
+<P>
+<BOX>(<EMPHASIS>(PSM-028\BOLD)) X3H2-94-493R/DBL:RIO-094
+<X>(<BOX>(PSM-028))
+asked to enter a Possible Problem coresponding to a note put into the
+document by the Editor, noting the following problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine_invocation\FULL), the Editor expected to
+find Rules in this Subclause analogous to those in
+<REFERENCE>(calls_to_proc\FULL), in Part 2, General Rules 10 and 11
+particular and <REFERENCE>(fnd_direct_statement\FULL), In Part 2, General
+Rule 6 in particular and analogous to those formerly found in the now
+defunct Subclause 13.whatever, "<LB>procedure>".  The Rules that the
+Editor expected to find define the behavior of the <LB>routine> whenever
+it is invoked, including making implicit connections, starting
+transactions, etc.
+
+<P>
+All [the Editor finds] here are Rules for setting up the parameters and,
+if the <LB>routine> is a function, returning the value.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-068/H2-2000-528
+
+<P>
+<BOX>(<EMPHASIS>(PSM-034\BOLD)) X3H2-95-039/DBL:RIO-142.UK-23
+<X>(<BOX>(PSM-034))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine\FULL), deferring to Subclause 12.3 of
+SQL-92 seems insufficient.  Subclause 12.3 of SQL-92 has a General Rule
+12) that specifies what happens if the SQL statement is GET DIAGNOSTICS.
+In the PSM, the SQL statement might be compound statement including a GET
+DIAGNOSTICS. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-068/H2-2000-528
+
+<P>
+<BOX>(<EMPHASIS>(PSM-051\BOLD)) X3H2-95-258/DBL:YOW-144
+<X>(<BOX>(PSM-051))
+proposed the following Possible Problem related to DIS ballot comment
+USA-01:
+
+<LIST>(SIMPLE)
+
+<LE>There should be ain Introduction section to the SQL/PSM-92 document,
+providing a summary (or overview) of the key features of SQL/PSM-92.
+Subsequent sections of the Concepts Clause can then explain the details.
+The reader should be able to understand the functionality that is already
+in SQL-92, the functionality introduced by SQL/PSM-92, and the total
+funcctionality of the two combined after reading this Introduction. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-068/H2-2000-528
+
+<P>
+<BOX>(<EMPHASIS>(PSM-052\BOLD)) X3H2-95-258/DBL:YOW-144
+<X>(<BOX>(PSM-052))
+proposed the following Possible Problem related to DIS ballot comment
+USA-14:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_itemref\FULL), Syntax Rule 11) represents the
+Editor's best effort to merge the effects of papers X3H2-93-096/MUN-069R
+and X3H2-93-140/YOK-101/MUN-067. It seems quite likely that additional
+work will be required to rationalize the Editor's Notes of Part 2
+(SQL/Foundation).
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-068/H2-2000-528
+
+<P>
+<BOX>(<EMPHASIS>(PSM-054\BOLD)) X3H2-95-258/DBL:YOW-144
+<X>(<BOX>(PSM-054))
+proposed the following Possible Problem related to DIS ballot comment
+USA-74:
+
+<LIST>(SIMPLE)
+
+<LE>Each view and base table in the Information Schema needs to contain 
+an entry for the source code of SQL routines.  Its contents could be treated
+as comments. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-068/H2-2000-528
+
+<P>
+<BOX>(<EMPHASIS>(PSM-060\BOLD)) The merger of X3H2-95-178/DBL:YOW-048,
+X3H2-95-201/DBL:YOW-049R, and X3H2-95-179R2/DBL:YOW-050R
+<X>(<BOX>(PSM-060))
+proposed the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In DBL:YOW-006, we only say "invoke the <LB>routine>", and do not
+specify what that means. Either there is something in SQL-92 and
+SQL3/Foundation that defines what happens when a routine is invoked, or in
+<REFERENCE>(psm_routine\FULL), there ought to be a rule that reads "When
+the <LB>routine> is invoked, execute the <LB>SQL routine body>. "
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-068/H2-2000-528
+
+<P>
+<BOX>(<EMPHASIS>(PSM-062\BOLD)) Paper X3H2-95-265/DBL:YOW-134
+<X>(<BOX>(PSM-062))
+proposed the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Syntax Rule 11) of <REFERENCE>(psm_itemref\FULL), assumes that
+<LB>SQL variable name>s and <LB>parameter name>s with scopes local to 
+a <LB>compound statement> or a <LB>routine> are visible to the
+<LB>declare cursor> contained in the <LB>module>.  However, these
+variables and parameters are not part of the scope in which the cursor is
+being declared.  As a consequence, such <LB>item reference>s would not be
+resolved based on the Syntax Rules of <LB>query expression> and
+<LB>item reference>, since the <LB>SQL variable name>s and
+<LB>parameter name>s are not visible. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-085\BOLD))
+<X>(<BOX>(PSM-085))
+In the course of discussing DBL:MCI-052,
+Nelson Mattos noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In SQL2, <LB>parameter name>s have <LB>colon>s.  In PSM3,
+<LB>parameter name>s do not have <LB>colon>s, but the rules have not been
+modified to cover parameters without <LB>colon>s. 
+
+<P>
+Solution: 
+
+<P>
+Alternative 1: Introduce thenotion of SQL parameters in PSM2 and separate
+them from SQL2's notion of parameters. 
+
+<P>
+Alternative 2: Reintroduce <LB>colon>s in PSM parameters.
+
+<P>
+If Alternative 1 is adopted, PSM2 needs to handle changes to schema
+objects (e.g., tables) that may impact statements contained in the body of
+routines, module cursors, etc. (It is important to note that column names
+take precedence over parameters and SQL variables.)
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-093\BOLD))
+<X>(<BOX>(PSM-093))
+In the course of discussing PSM DIS ballot comments,
+Hugh Darwen noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE> Problem with <LB>declare cursor>:
+
+<P>
+Syntax Rule 1 of <REFERENCE>(psm_dcl\FULL), requires that every <LB>item
+reference> in the <LB>query expression> to reference a parameter or 
+a varaible, in spite of the fact that people often want to reference
+columns, too!  (In PSM, <LB>item reference> subsumes the <LB>column
+reference> we once had.)
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-103\BOLD))
+<X>(<BOX>(PSM-103))
+In the course of discussing DBL:MCI-184,
+Krishna Kulkarni noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>DBL:MCI-184/X3H2-96-289 extends the scope of SQL variables declared in
+a <LB>compound statement> that contains an <LB>open statement> to include
+the <LB>declare cursor> referenced in the <LB>open statement>.  There
+needs to be a precedence rule to resolve an unqualified <LB>item
+reeference> in the <LB>declare cursor> to either a column of the table or
+an SQL variable in case there is an ambiguity. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-104\BOLD))
+<X>(<BOX>(PSM-104))
+In the course of discussing DBL:MCI-184,
+Nelson Mattos noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>DBL:MCI-184, "Name resolution in cursors" makes changes to the SRs of
+<LB>compound statement> to allow "objects" (e.g., SQL variables) that are
+local to the compound statement to be referenced in a module cursor.  The
+paper achieves that by adding the cursor declaration to the scope of these
+local "objects".  I believe that the paper is incomplete and addresses
+"objects" whose scope should not be extended:
+
+<LIST>(UNNUMBERED)
+
+<LE>The paper does not extend the scope of parameters to include the
+cursor declaration and, as such, parameters cannot be referenced in the
+cursor declaration. 
+
+<LE>The paper changes the scope of condition names and handler
+declarations, but these objects cannot be referenced in cursor
+declarations. 
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-114\BOLD))
+<X>(<BOX>(PSM-114))
+DBL:MCI-057 and accompanying discussion noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>A rule === Syntax Rule 1)a) === in <LB>declare cursor> that
+accidentally prohibits the use of column references causes problems here. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-115\BOLD))
+<X>(<BOX>(PSM-115))
+DBL:MCI-057 and accompanying discussion noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Consider a WHERE clause such as WHERE A = X, if A is a referenced
+variable and X is a column: If a column named X subsequently gets added to
+a table then the cursor gets a new meaning whenever the containing routine
+gets "recompiled". 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-097\BOLD))
+<X>(<BOX>(PSM-097))
+In the course of discussing DBL:MCI-161,
+Krishna Kulkarni noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE> Rules dealing with nondeterminism in all clauses that refer to
+nontererminism need to be extended to include CURRENT_PATH in their
+exclusions. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-113\BOLD))
+<X>(<BOX>(PSM-113))
+DBL:MCI-057 and accompanying discussion noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>FOR statement not necessary in an SQL-server module and its
+SQL-invoked routines. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-142\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(PSM-142))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P04, SQL/PSM, <REFERENCE>(psm_grant\FULL)
+
+<LE>Note at: None. 
+
+<LE>Source: DBL:LGW-083R1/X3H2-97-161R2
+
+<LE>Possible Problem:
+
+<P>
+GRANT privileges involving views should consider the EXECUTE privilege on
+all subject routines of <LB>routine invocation>s contained in the view
+definition as addressed by SQL/PSM-96, Subclause 10.20, "<LB>grant
+statement>", General Rule 1). 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-078/H2-2000-018R3)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-079\BOLD))
+<X>(<BOX>(PSM-079))
+X3H2-94-103/DBL:SOU-076 noted the following Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>PSM2 is the term being used for the initial, SQL-92-based version of
+the Persistent Stored Module facility.  This ROW_TYPE proposal adds a new
+<LB>data type> to SQL3.  As such, this has no effect on PSM2.  PSM3 would
+"inherit" the new data type and the attendant rules of
+<REFERENCE>(retrieval\FULL), in SQL/Foundation.  A follow-on paper could
+propose supporting ROW_TYPE in PSM2. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-079/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-066\BOLD))
+<X>(<BOX>(PSM-066))
+Discussion of paper X3H2-95-163/DBL:YOW-045 noted the following problem in
+Ottawa, July, 1995:
+
+<LIST>(SIMPLE)
+
+<LE>The definition of "direct result of executing an SQL-statement" does not
+tie the execution of some routine with the execution of the referenced
+SQL-statement.  Phil Shaw recognized that the solution to this problem is
+probably the definition of some new variant of "contains" (perhaps 
+an enhanced definition of "generally contains").  See also Possible Problem
+<BOX>(<EMPHASIS>(443\BOLD)) in SQL/Foundation Editor Notes.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-079/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-086\BOLD))
+<X>(<BOX>(PSM-086))
+In the course of discussing DBL:MCI-054,
+Ed Dee noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_dropschema\FULL), Syntax Rule 3) ("If RESTRICT is
+specified..."), the list of persistent objects should include "SQL-schema
+routines" and "modules". 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-079/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-091\BOLD))
+<X>(<BOX>(PSM-091))
+In the course of discussing the DIS ballot,
+Nelson Mattos noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Some of the SRs, GRs, and Functions of SQL-92's
+<REFERENCE>(temptab\FULL), make no sense for temporary tables of
+SQL-server modules. 
+
+<P>
+Solution: Create a new Subclause for <LB>temporary table declaration> in
+PSM2 and clean up the rules, <EMPHASIS>(or) add a new Syntax Rule to the
+new PSM2 <REFERENCE>(psm_mod\FULL), prohibiting SQL-server modules from
+having temporary tables (i.e., move the problem to PSM3). 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-079/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-105\BOLD))
+<X>(<BOX>(PSM-105))
+DBL:MCI-134 noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>[New Syntax Rule 5)g)ii) in <REFERENCE>(psm_routine_invocation\FULL)]
+is not in the correct place.  Whether a parameter is an output, input, or
+inout parameter will not be known until resolution has been completed. 
+Therefore, the above rule cannot rely on the parameter mode.  
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-079/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-109\BOLD))
+<X>(<BOX>(PSM-109))
+DBL:MCI-057 and accompanying discussion noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Local cursors do not exist in PSM-92, so the whole approach used in
+the syntactic transformation [of the FOR statement] is problematic.
+Possible solutions to this problem are:
+
+<LIST>(UNNUMBERED)
+
+<LE>Replace syntactic transformation by General Rules for the <LB>for
+statement>. 
+
+<LE>Specify that the cursor is in the containing module. 
+
+<LE>Move the <LB>for statement> to PSM3.
+
+<LE>Move local cursors to PSM-92
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-079/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-123\BOLD))
+<X>(<BOX>(PSM-123))
+DBL:MCI-062/X3H2-96-171:Germany-09 noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>[PSM, 6.1 "<item reference>", SR 4] does not contain a qualifier whose
+scope is a(n SQL-server) <LB>module>. Consider:
+
+<LIST>(SIMPLE)
+
+<LE><MONO>
+MODULE m LANGUAGE SQL
+<LINE>
+DECLARE x INT DEFAULT 0;
+<LINE>
+PROCEDURE upd_t() UPDATE t SET t.a = t.a + x;
+<LINE>
+..
+<LINE>
+END MODULE
+<ENDMONO>
+
+<ENDLIST>
+
+<P>
+The `x' in the UPDATE cannot reference the global SQL-variable `x' because
+there is no qualifier whose "scope" would include the declaration of the
+global SQL-variable `x'.
+
+<P>
+This also rules out explicit qualification in an <item reference>
+according to [PSM, 6.1, SR 3] because this uses the same qualifiers.
+
+<P>
+(Outline of solution) One could resolve this problem by not constructing
+an implicit <item qualifier> in [PSM, 6.1 "<item reference>", SR 4]. This
+is not desirable, because, in the example above, an SQL programmer cannot
+ensure (easlily) that the `x' in the UPDATE always references the
+SQL-variable, and not a column of `t'.
+
+<P>
+We therefore propose to add <module name>s - - as explicit <item
+qualifier>s to [PSM, 6.1, SR 3], and - - as implicit <item qualifier>s to
+[PSM, 6.1, SR 4]; and to - - add the definition of the "scope" of these
+<module name>s to [PSM, 10.1 "<LB>module>"].
+
+<P>
+More precisely, when the Format of <module name> for an SQL-server module
+is amended in a corrected version of [PSM] to become a <qualified name>
+(or a <schema qualified name>), its <qualified identifier> qualifies as
+qualifier, so that additional qualification with a <schema name> is
+avoided.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-079/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-141\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(PSM-141))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P04, SQL/PSM, <REFERENCE>(psm_compound\FULL)
+
+<LE>Note at: None. 
+
+<LE>Source: DBL:LGW-037/X3H2-97-181, 17 April, 1997
+
+<LE>Possible Problem:
+
+<P>
+The Syntax Rules addressing the omission of <LB>beginning label> and
+<LB>ending label> in <REFERENCE>(psm_compound\FULL), have no counterparts
+in the Subclaues for certain other control statements that can have
+statement labels (specifically, <REFERENCE>(psm_loop_statement\FULL),
+<REFERENCE>(psm_while_statement\FULL), and
+<REFERENCE>(psm_repeat_statement\FULL)).  Further, while
+<REFERENCE>(for_statement\FULL), does have counterparts, they are not
+exact copies of the rules in <REFERENCE>(psm_compound\FULL) === they
+appear in a pervers and possibly misleading order (SR2 covers the omission
+of the ending label, while SR5)b) covers the omission of the beginning
+label). 
+
+<LE>Proposed Solution:
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-079/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-143\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(PSM-143))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P04, SQL/PSM, <REFERENCE>(psm_dynprepare\FULL). 
+
+<LE>Note at: None.
+
+<LE>Source: WG3:BBN-206/X3H2-98-423
+
+
+<LE>Possible Problem:
+
+<P>
+The Rules for determining the data type of a <LB>dynamic parameter
+specification> in <REFERENCE>(psm_dynprepare\FULL), need to be revised to
+account for the expanded form of the <LB>simple case statement>. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-080/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-084\BOLD))
+<X>(<BOX>(PSM-084))
+In the course of discussing DBL:MCI-036, Krishna Kulkarni noted the
+following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Interaction of invokers' rights and definers' rights on the EXECUTE
+privilege on routines needs to be dealth with. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-080/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-108\BOLD))
+<X>(<BOX>(PSM-108))
+Discussion of DBL:MCI-161, section 2.8, noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Whether and how to provide both "invoker's rights" and "definer's
+rights" for stored SQL-invoked routines (especially schema-level routines)
+has yet to be determined. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-080/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-125\BOLD))
+<X>(<BOX>(PSM-125))
+During discussion of DBL:MCI-180/X3H2-96-281, Len Gallagher noted the
+following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Paper DBL:MCI-180/X3H2-96-281 specified the following new base tables in
+the Definition Schema:
+
+<LIST>(UNNUMBERED)
+
+<LE>MODULE_TABLE_USAGE base table
+
+<LE>MODULE_COLUMN_USAGE base table
+
+<LE>ROUTINE_TABLE_USAGE base table
+
+<LE>ROUTINE_COLUMN_USAGE base table
+
+<ENDLIST>
+
+<P>
+In each case, the Function says that the new base table has one row for
+each table (or column) referenced in a module (or routine).  But the word
+"referenced" is not well-defined in the Description of any of these base
+tables.  The meaning of "table referenced in a module", "column referenced
+in a module", "table referenced in a routine", and "column referenced in 
+a routine" needs to be clarified both in the Definition Schema and in the
+Syntax Rules of the <LB>drop table statement> (see SR 5, "If RESTRICT is
+specified, then T shall not be referenced ...") and the <LB>drop column
+definition> (see SR4, "If RESTRICT is specified, then C shall not be
+referenced ..."). This may require modification of the module and routine
+descriptors in a manner analogous to the trigger descriptor modifications
+made by paper DBL:MCI-098/X3H2-96-111. 
+
+<P>
+NOTE:  [Len is] concerned that this may also be a new Possible Problem for
+DIS PSM because DROP TABLE RESTRICT and ALTER TABLE DROP COLUMN RESTRICT
+need Syntax Rules in DIS PSM for when the dropped tables or columns are
+"referenced" in a module or routine.  The May '96 PSM Editing Meeting
+considered some of these cases, but possibly not all of them. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-001\BOLD))
+<X>(<BOX>(PSM-001))
+In the course of discussing X3H2-93-390 (distribution of YOK-190 to X3H2),
+Phil Shaw noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The ALTER MODULE statement introduced by YOK-190 doesn't specify the
+effect when a DROP leaves the module in an invalid state.  
+For example, a DROP CURSOR C, where cursor C is referenced in remaining routines in the
+module. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-002\BOLD))
+<X>(<BOX>(PSM-002))
+In the course of discussing X3H2-93-390 (distribution of YOK-190 to X3H2),
+Phil Shaw noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The ALTER MODULE statement doesn't specify consistency requriements
+for the ALTER suboption: <EMPHASIS>(e.g.), the <LB>module contents> must
+be consistent with the <LB>module contents designator>.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-003\BOLD))
+<X>(<BOX>(PSM-003))
+In X3H2-93-239rev1, the following possible problem was noted:
+
+<LIST>(SIMPLE)
+
+<LE>There is no need to prohibit the definition of functions that cast
+between subtype and supertype.  These functions will never be used by the
+function resolution algorithm because substitutabiltiy will always be
+applied first.  The only place such functions can be used is when the user
+<EMPHASIS>(explicitly) specified CAST (subtype_instance AS supertype) in 
+a <LB>cast specification>.
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-005\BOLD))
+<X>(<BOX>(PSM-005))
+During consideration of YOK-043/X3H2-93-182, the following was noted:
+
+<LIST>(SIMPLE)
+
+<LE>We now have local declared temporary tables inside of compound
+statements courtesy of YOK-032/X3H2-93-054.  Should we extend this
+facility to temporary views?  
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-007\BOLD))
+<X>(<BOX>(PSM-007))
+In the course of discussing X3H2-93-201/SOU-184, Amelia Carlson
+noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>A <LB>routine> that is a <LB>local declaration> does not obscure any
+<LB>label> defined outside of the <LB>routine>, but permits access to such
+<LB>label>s by <LB>leave statement>s (etc.).
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-077\BOLD))
+<X>(<BOX>(PSM-077))
+X3H2-94-103/DBL:SOU-076 noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Functions resolution needs to be extended to handle overloaded
+functions on ROW_TYPEs.  This may affect
+<REFERENCE>(psm_routinedeterm\FULL),
+<REFERENCE>(psm_routine_invocation\FULL), and
+<REFERENCE>(psm_type_prec\FULL). 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-080\BOLD))
+<X>(<BOX>(PSM-080))
+Discussion during X3H2-95-465R/DBL:LHR-076 noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Given a scalar function F on a data type DT and an aggregate function
+F on a set (or multiset) of DT, invocations of F cannot be resolved.  For
+example: 
+
+<LIST>(SIMPLE)
+
+<LE>CREATE FUNCTION f(INTEGER)...
+
+<LE>CREATE AGGREGATE FUNCTION f(MULTISET(INTEGER))...
+
+<ENDLIST>
+
+<P>
+The invocation in:
+
+<LIST>(SIMPLE)
+
+<LE>SELECT f(x) FROM t...
+
+<ENDLIST>
+
+<P>
+where X is an INTEGER column of T cannot be resolved. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-081\BOLD))
+<X>(<BOX>(PSM-081))
+Discussion of X3H2-95-465R/DBL:LHR-076 noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>When functions are defined on ADTs, it is not known until runtime
+which subject routine will actually be invoked.  Given user-defined set
+function that involves ADTs, implementations will not know until runtime
+if an aggregate or scalar function should be invoked for a function
+invocation with an ADT argument.  For example:
+
+<LIST>(SIMPLE)
+
+<LE>CREATE AGGREGATE FUNCTION f(MULTISET(person))...
+
+<LE>CREATE FUNCTION f(employee)...
+
+<ENDLIST>
+
+<P>
+The invocation in:
+
+<LIST>(SIMPLE)
+
+<LE>SELECT f(x) FROM t...
+
+<ENDLIST>
+
+<P>
+where X is a column of T whose type is PERSON (with a subtype EMPLOYEE)
+cannot be resolved until runtime.  Thus, only at runtime will 
+an implementation know whether the invocation of F resolves to a scalar or
+aggregare function.  This has serious implications on query optimizers and
+may cause difficulties in the standard, since it assumes that Syntax Rules
+are not applied at General Rule time.  For example, would:
+
+<LIST>(SIMPLE)
+
+<LE>SELECT y, f(x) FROM t...
+
+<ENDLIST>
+
+<P>
+be valid?  According to the existing Syntax Rules in SQL-92, the preceding
+SELECT statement is invalid (a GROUP BY is required) if F is an aggregate
+function. 
+
+<LIST>(SIMPLE)
+
+<EMPHASIS>(Note from the Editor: The preceding paragraph is not quite
+correct.  SQL-92 and SQL3 require that the Syntax Rules and Access Rules
+<EMPHASIS>(remain valid) when the General Rule invocations are begun; this
+<EMPHASIS>(could) be interpreted to mean that they are completely applied
+in cases where something might have changed.\BOLD)
+
+<ENDLIST>
+
+
+<LIST>(UNNUMBERED)
+
+<LE>The Editor was given a piece of paper at the London (LHR) meeting that
+appears to contain a Possible Problem or a part of one.  The paper has no
+name on it and the Editor does not recognize the handwriting.  The Editor
+thinks that this piece of paper might possibly be related to this Possible
+Problem (<BOX>(<EMPHASIS>(PSM-081\BOLD))) and is therefore putting this
+note here.  Anybody recognizing this text should contact the Editor to
+explain how it was intended to be handled:
+
+<LIST>(SIMPLE)
+
+<LE><REFERENCE>(psm_routine_invocation\FULL):
+<LINE>
+SR === forcing that the call has a single argument
+<LINE>
+SR === cannot mix iterative routines and regular functions in the
+resulting set of subject routines
+
+<P>
+DBL:LHR_076, item 5.2, point 4, subrule d) says that the aggregate
+function must be defined on multiset.  This means that the user-defined
+set function can only be defined and executed on multisets.  
+For example, the following select is not valid:
+
+<LIST>(SIMPLE)
+
+<LE><MONO>
+CREATE AGGREGATE FUNCTION std_dev (MULTISET(INTEGER)) RETURNS DOUBLE...
+<LINE>
+CREATE TABLE t (c1 INTEGER)...
+<LINE>
+SELECT std_dev(c1) FROM t - - ERROR
+<ENDMONO>
+
+<ENDLIST>
+
+<P>
+To solve the problem, the function must be defined on INTEGER and the
+rules for routine invocation (after resolving the invocation) would
+generate the multiset and invoke initialize, iterate, and terminate. 
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-082\BOLD))
+<X>(<BOX>(PSM-082))
+X3H2-95-465R/DBL:LHR-076 noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Consider multiple functions, overloading with the same name.
+Functions F with scalar parameter types and functions CF with collection
+parameter types:
+
+<LIST>(SIMPLE)
+
+<LE>CREATE FUNCTION cf(x MULTISET(INTEGER))...
+
+<LE>CREATE FUNCTION cf(x MULTISET(DOUBLE PRECISION))...
+
+<LE>CREATE FUNCTION cf(x MULTISET(DECIMAL(15,5)))...
+
+<LE>CREATE FUNCTION f(x INTEGER)...
+
+<LE>CREATE FUNCTION f(x DOUBLE PRECISION)...
+
+<LE>CREATE FUNCTION f(x DECIMAL(15,5))...
+
+<ENDLIST>
+
+<P>
+And consider data items such as:
+
+<LIST>(SIMPLE)
+
+<LE>DECLARE I INTEGER; DECLARE I2 SMALLINT;
+
+<LE>DECLARE DP DOUBLE PRECISION; DECLARE DP2 REAL;
+
+<LE>DECLARE D DECIMAL(15,5); DECLARE D2 DECIMAL(5,2);
+
+<LE>DECLARE SI MULTISET(INTEGER); DECLARE SI2 MULTISET(SMALLINT);
+
+<LE>DECLARE SDP MULTISET(DOUBLE PRECISION); DECLARE SDP2 MULTISET(REAL);
+
+<LE>DECLARE SD MULTISET(DECIMAL(15,5)); DECLARE SD2 MULTISET(DECIMAL(5,2));
+
+<ENDLIST>
+
+<P>
+There appears to be two problems:
+
+<LIST>(UNNUMBERED)
+
+<LE>The overloading rules specifies in
+<REFERENCE>(psm_routinedeterm\FULL), <REFERENCE>(psm_type_prec\FULL), and
+<REFERENCE>(psm_routine_invocation\FULL), don't appear to handle the
+colleciton parameter types.  Specifically, <LB>routine invocation>s such
+as F(I), F(DP), F(D) are resolved to the appropriate F function, but
+<LB>routine invocation>s such as CF(SI), CF(SDP), and CF(SD) don't appear
+to be resolved. 
+
+<LE>The parameter passing rules for collections don't accomodate the same
+sort of conversions for collections that are supported for scalars.  
+For example, the following <LB>routine invocation>s are valid and will be
+handled with suitable type conversions by assignment:
+
+<LIST>(SIMPLE)
+
+<LE>F(I2), F(DP2), F(D2)
+
+<ENDLIST>
+
+<P>
+However, the following <LB>routine invocation>s appear to be invalid, dur
+to parameter type mismatches:
+
+<LIST>(SIMPLE)
+
+<LE>CF(SI2), CF(SDP2), CF(SD2)
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-090\BOLD))
+<X>(<BOX>(PSM-090))
+In the course of discussing DIS ballot comments,
+Paul Cotton noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Roles are not considered in the Definition Schema or Information
+Schema for SQL3.
+
+<P>
+Various Definition Schema tables and Information Schema views do not take
+ROLES into consideration.  For example, the Information Schema views
+MODULE_PRIVILEGES and ROUTINE_PRIVILEGES need to consider ROLES in the
+text of the GRANTEE and GRANTOR columns. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-099\BOLD))
+<X>(<BOX>(PSM-099))
+In the course of discussing DBL:MCI-176,
+Paul Cotton noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Adoption of DBL:MCI-176 may need to make SIGNAL/RESIGNAL be
+transaction-initiating statements.  See also <BOX>(<EMPHASIS>(PSM-100\BOLD)).
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-100\BOLD))
+<X>(<BOX>(PSM-100))
+In the course of discussing DBL:MCI-176,
+Paul Cotton noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>DBL:MCI-176 permits an <LB>sqlstate value> to be a <LB>characater
+value expression>, which could access SQL-data.  
+This may cause a <LB>signal statement> toa become a transaction-initiating statement, since
+it could require access to SQL-data to determine the value of the
+<LB>sqlstate value> (e.g., if a <LB>subquery> were involved).  See also
+<BOX>(<EMPHASIS>(PSM-099\BOLD)). 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-116\BOLD))
+<X>(<BOX>(PSM-116))
+DBL:MCI-059R1 noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>There are no MODULE_USAGE or ROUTINE_USAGE views in the Information
+Schema.  There are similar (usage-related) views for all such other schema
+objects. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-117\BOLD))
+<X>(<BOX>(PSM-117))
+DBL:MCI-107 noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The form of rule [in DBL:MCI-107/X3H2-96-185] clearly preserves the
+(important) order of the WHEN clauses, which the existing rule [in
+<REFERENCE>(psm_case_statement\FULL)] does not. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-119\BOLD))
+<X>(<BOX>(PSM-119))
+Steve Cannan noted the following Possible Problem during discussion of
+DBL:MCI-055/X3H2-96-090. :
+
+<LIST>(SIMPLE)
+
+<LE>There is a gratuitous inconsistency in the naming of the columns of
+the DATA_TYPE_DESCRIPTOR base table between SQL/Foundation and SQL/PSM. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-122\BOLD))
+<X>(<BOX>(PSM-122))
+Discussion of DBL:MCI-191/X3H2-96-331 noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Additional privileges or additional objects for the privileges
+addressed in this paper might be required. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-069/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-136\BOLD))
+<X>(<BOX>(PSM-136))
+DBL:MAD-272/X3H2-97-082 noted the following Possible Problem, from SQL3
+CD#1 ballot, UK-B-019, SEQ# 830:
+
+<LIST>(SIMPLE)
+
+<LE>Descriptor areas do not appear to support collection types. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:HEL-074/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-139\BOLD)) The following Language Opportunity has been
+<X>(<BOX>(PSM-139))
+noted by X3H2-93-488/MUN-122:
+
+<LIST>(SIMPLE)
+
+<LB>trigger definition>, clause 11.42 used to support a "statement list"
+but recently this was replaced by "<LB>SQL procedure statement>".  The
+logic was that the statement could be a <compound statement>.  I agree
+with that but it is then a language opportunity to apply the same logic to
+<LB>case statement> (SQL/PSM:clause 13.9), <LB>if statement> (PSM:clause
+13.10 ) <LB>loop statement> (PSM clause 13.12), and <LB>for statement>
+(PSM:clause 13.13).  Whatever the eventual decision, we should be
+consistent throughout the document.
+
+<ENDLIST>
+
+<P>
+Was SQL3 Language Opportunity <BOX>(<EMPHASIS>(342\BOLD)). 
+<X>(<BOX>(342))
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:PER-146/H2-2001-???
+
+
+<P>
+<BOX>(<EMPHASIS>(PSM-120\BOLD))
+<X>(<BOX>(PSM-120))
+During discussion of DBL:MCI-056/X3H2-96-091, Steve Cannan noted the
+following Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>The <LB>for statement> might be removed from the list of
+transaction-initiating statements, since it depends on the syntactic
+expansion into other statements. 
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:PER-146/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-137\BOLD)) During discussions of CBR-060/X3H2-92-236, the
+<X>(<BOX>(PSM-137))
+following language opportunity was identified:
+
+<LIST>(SIMPLE)
+
+<LE>It might be desirable to find a way for ATOMIC <LB>compound
+statement>s to also cause the values of parameters, session state (e.g.,
+SET SCHEMA), and other "in-memory" items to come under atomicity control.
+
+<ENDLIST>
+
+<P>
+Was SQL3 Language Opportunity <BOX>(<EMPHASIS>(260\BOLD)). 
+<X>(<BOX>(260))
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-171/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-030\BOLD)) Consideration of X3H2-94-437/DBL:RIO-048
+<X>(<BOX>(PSM-030))
+raised the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The paper on configuration management (DBL:RIO-048/X3H2-94-437) added
+TIMESTAMP information to the Definition and Information Schemas to record
+"create" and "alter" timestamps for modules and routines.  If SQL3, Part 2
+(SQL/Foundation) has a Conformance Level (e.g., Entry SQL) that does not
+support the TIMESTAMP data type, then what is required of that
+implementation to support this feature.  One alternative is to add a Rule
+to the Conformance Clause saying that it is not required to support this
+feature until TIMESTAMP is supported.  Another alternative is to specify
+that the data type for this information be character string.
+
+<NOTE>
+This feature was accepted for SQL3/PSM only, so the problem may not arise
+unless it is moved "backwards" into SQL-92/PSM.
+<ENDNOTE>
+
+<P>
+This is still a problem.  <REFERENCE>(schem_time_stamp_domain\FULL), in
+SQL/Schemata, defined the TIME_STAMP domain, which is then referenced in
+<REFERENCE>(schem_method_sigs_base_table\FULL), in SQL/Schemata. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:PER-171/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-110\BOLD))
+<X>(<BOX>(PSM-110))
+DBL:MCI-057 and accompanying discussion noted the following Possible
+Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The specification (as proposed?) allows cursor declarations to include
+forward references to SQL variables not yet in scope when they were
+declared. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-171/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-126\BOLD))
+<X>(<BOX>(PSM-126))
+DBL:MAD-066/X3H2-96-??? noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In [PSM2] is is sufficient [for the purposes of <LB>routine
+invocation>] for data types to be mutually assignable and for their data
+type <EMPHASIS>(names) to be the same [because of this paper's definition
+and use of "compatible"].  However, a similar fix will not do for [PSM3
+and SQL3], because that would make, for example, LIST(INTEGER) and
+LIST(REAL) obey the "sameness" rules in question (they both have data type
+name LIST, and INTEGER and REAL are mutually assignable); the same would
+be true of ROW(I INTEGER) and ROW(R REAL).  Furthermore, in SQL3, we have
+type templates, fromwhich data types are derived by the provision of
+arguments to some template name.  
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:PER-171/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-134\BOLD))
+<X>(<BOX>(PSM-134))
+DBL:MAD-270/X3H2-97-072 noted the following Possible Problem, taken from
+SQL3 CD#1 Ballot Comments, USA-069, SEQ# 252:
+
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(adt\FULL), Syntax Rule 1) handles the cases of ADTs
+defined at the schema level (a) and at the client module level (b), but
+does not mention server modules at all.  
+
+<ENDLIST>
+
+<P>
+This must be handled in PSM whenever DDL statements are permitted in the
+bodies of SQL-server modules. 
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:PER-171/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-118\BOLD))
+<X>(<BOX>(PSM-118))
+DBL:MCI-107 noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The existing Syntax Rule 1)b) [of
+<REFERENCE>(psm_case_statement\FULL)] is redundant as it is covered by the
+rules of <LB>search condition>. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-171/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-128\BOLD))
+<X>(<BOX>(PSM-128))
+During discussion of DBL:MAD-128/X3H2-96-???, the following Possible
+Problem was noted by Hugh Darwen:
+
+<LIST>(SIMPLE)
+
+<LE>In SQL-92, SQL/PSM, etc., all (or at least many) Syntax Rules that are
+of the general form:
+
+<LIST>(SIMPLE)
+
+<LE><MONO>
+TRIM ( BOTH ' ' FROM <EMPHASIS>(some-symbol) )
+<ENDMONO>
+
+<P>
+need to be examined very closely for syntactic accuracy.  Many of them
+seem to use a value as the <EMPHASIS>(some-symbol) symbol and not a syntactic element. 
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-117/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-092\BOLD))
+<X>(<BOX>(PSM-092))
+In the course of discussing PSM DIS ballot comments,
+Hugh Darwen noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Problem with modules:
+
+<P>
+Suppose schema S1 contains a module M1 that includes a routine R1.
+Suppose also that schema S2 contains a module M2 that includes a routine
+R1. 
+
+<P>
+There seems to be no way for these two R1s to be distinguished for
+invocation purposes, as they can only be qualified by "MODULE".
+
+<ENDLIST>
+
+<P>
+However, the Editor notes that the two R1s will have unique (explicit
+or implicit) <LB>specific name>s that permit them to be distinguishes;
+<LB>specific name>s are always qualified by the <LB>schema name>, aren't
+they? 
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-117/H2-2001-???
+
+
+<P>
+<BOX>(<EMPHASIS>(PSM-096\BOLD))
+<X>(<BOX>(PSM-096))
+In the course of discussing DBL:MCI-134,
+Hugh Darwen noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Problem with <LB>routine invocation>:
+
+<P>
+Syntax Rule 10) as proposed and accepted in DBL:MCI-134 declares XAL to be
+a set of <LB>argument list>s, yet its definition clearly shows it to be 
+a set of <EMPHASIS>(data type) lists. 
+
+<P>
+The fix is not easy, as subject routine determination is affected, too.
+We should probably defined "signature" as a routine name paired with 
+a list of data types, and define sets of signatures in SR10 and subject
+routine determination. 
+
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-117/H2-2001-???
+
+
+<P>
+<BOX>(<EMPHASIS>(PSM-083\BOLD))
+<X>(<BOX>(PSM-083))
+X3H2-95-465/DBL:LHR-076 noted the following Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(psm_routine_invocation\FULL), the new General Rule 2)
+could be rewritten using PSM syntax instead of natural language. 
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-155R2/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-144\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(PSM-144))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P04-13.05, SQL/PSM === <REFERENCE>(psm_assignment\FULL)
+
+<LE>Note at: Format. 
+
+<LE>Source: WG3:YGJ-074/X3H2-99-164R1
+
+<LE>Possible Problem:
+
+<P>
+There is no ability to assign to an array element. 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by Editing Meeting action on FCD1/2000 NLD-P04-010)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-094\BOLD))
+<X>(<BOX>(PSM-094))
+In the course of discussing PSM DIS ballot comments,
+Steve Cannan noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Generally, the scoping rules need to exclude the syntax in definition
+statements, e.g., <LB>SQL schema statement>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by Editing Meeting action on FCD1/2000 NLD-P04-013)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-101\BOLD))
+<X>(<BOX>(PSM-101))
+In the course of discussing DBL:MCI-177,
+Hugh Darwen and Ed Dee noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Syntax Rule 1 of <REFERENCE>(psm_default\FULL), is badly broken:
+
+<P>
+It needs to include Syntax Rule 1) from SQL-92, as not all <LB>default
+clause>s are in variable declarations. 
+
+<P>
+Variables don't have descriptors. 
+
+<P>
+UK DIS ballot comment UK-099 is related. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by Editing Meeting action on FCD1/2000 NLD-P04-024)
+
+<P>
+<BOX>(<EMPHASIS>(PSM-135\BOLD)) Paper YOK-124/X3H2-93-214
+<X>(<BOX>(PSM-135))
+identified the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>In <REFERENCE>(dropdatatype\FULL), General Rule 5), implementations
+are required to drop all modules that references the data type being
+dropped.  However, if the <LB>drop data type statement> itself is being
+executed from a stored module, then presumably it must be dropped itself.
+The document makes no statement about when that drop becomes effective
+(<EMPHASIS>(e.g.), upon COMMIT, when the SQL-agent terminates, upon
+DISCONNECT).  Possibly an approach that better defines what is meant by
+<QUOTE>(references) would be helpful.  THe paper also points out that
+similar problems exist for revoking privileges on modules that are
+currently executing.
+
+<ENDLIST>
+
+<P>
+This was formerly SQL/Foundation Possible Problem
+<BOX>(<EMPHASIS>(293\BOLD)). 
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:PER-017/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-089\BOLD))
+<X>(<BOX>(PSM-089))
+In the course of discussing DBL:MCI-061,
+Steve Cannan noted the following Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>The wording of <REFERENCE>(psm_type_prec\FULL), Syntax Rule 8), could
+be improved with regard to the use of the terms "actual precision",
+"maximum <impDef annex="no" code="None"/> precision", etc.  Note also that Concepts
+in SQL-92 defines "precision" as being an integer. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:YYJ-032R1/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-146\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(PSM-146))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P04, SQL/PSM, <REFERENCE>(psm_handler_decl\FULL)
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:PER-062R2/H2-2001-???
+
+
+<LE>Possible Problem:
+
+<P>
+Some changes are needed to clarify the behaviour of handlers with respect
+to the diagnostics area.
+
+<P>
+Apparently, the only way a handler can resignal the exception that cause
+it to be invoked (when it finds it cannot handle the exception after all),
+is to execute a GET DIAGNOSTICS as its first statement, to save the
+exception information in local variables, and then reference those
+variables in a final SIGNAL statement (not RESIGNAL!). Is this really what
+was intended?
+
+<P>
+If the answer to that question is "yes", then what about IF X = 1 THEN
+RESIGNAL; ELSE SET X = 2 as the first statement of a handler? Given that
+the diagnostics area is empty, because the first statement is not 
+an <LB>SQL diagnostics statement> but an <LB>SQL control statement>, how does
+that RESIGNAL work? Come to that, what about BEGIN RESIGNAL; END as the
+entire <LB>handler action>? A <LB>compound statement> is not an <LB>SQL
+diagnostics statement> either!
+
+<P>
+In case it is thought that an easy solution might be available by somehow
+making the rule refer to the first innermost statement of the handler,
+consider that evaluation of the IF condition itself might cause 
+an exception to be raised, and also that the IF condition might contain 
+a <LB>routine invocation>.
+
+<P>
+GR5) of <REFERENCE>(sqlstatement\FULL), in Part 2 makes it 100% clear
+that:
+
+<LIST>(UNNUMBERED\===)
+
+<LE>Immediately before execution of every <LB>SQL procedure statement>
+that is not an <LB>SQL diagnostics statement>, the diagnostics area is
+"emptied" (strictly speaking, an undefined term). See GR5)a)i)2),
+GR5)a)iii)6) and GR5)b)iv). 
+
+<LE>Immediately before execution of every <LB>SQL procedure statement>
+that is invoked at the client and is an <LB>SQL diagnostics statement>,
+the diagnostics area is not emptied. See GR5)a)ii)2). 
+
+<ENDLIST>
+
+<P>
+The case of an <LB>SQL diagnostics statement> invoked at the server is not
+100% clear, but it is reasonably safe to assume that the diagnostics area
+is not intended to be emptied.
+
+<P>
+Anyway, the diagnostics area having been emptied (usually), the next thing
+that happens is that the <LB>SQL procedure statement> is executed, as
+specified in GR6). GR6)b)ii) covers the particular case where the
+statement is invoked at the server and results in an exception, Subrule 2)
+is suspect as it specifies that "the same exception condition is re-raised
+as determined by the General Rules in this and other Subclauses of ISO/IEC
+9075". The meaning of "as determined by the General Rules ..." is unclear.
+The term "re-raised" is undefined. 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:PER-020R2/H2-2001-???
+
+<P>
+<BOX>(<EMPHASIS>(PSM-145\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(PSM-145))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P04-No specific location
+
+<LE>Note at: None specified. 
+
+<LE>Source: WG3:HEL-079/H2-2000-___
+
+<LE>Language Opportunity:
+
+<P>
+<QUOTE>(Invokers' rights), as well as the existing <QUOTE>(definers'
+rights), should be provided for in stored SQL-invoked routines. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-074R1/H2-2002-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-147\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(PSM-147))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Editorial
+
+<LE>Reference: P04, SQL/PSM, <REFERENCE>(psm_objectid\FULL)
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:PER-164/H2-2001-???
+
+
+<LE>Possible Problem:
+
+<P>
+The text "200n" must be replaced by the correct year at the FCD Editing
+Meeting. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-117/H2-2002-481
+
+<P>
+<BOX>(<EMPHASIS>(PSM-078\BOLD))
+<X>(<BOX>(PSM-078))
+X3H2-94-103/DBL:SOU-076 noted the following Language Opportunity:
+
+<LIST>(SIMPLE)
+
+<LE>X3H2-94-103/DBL:SOU-076 only introduced a ROW_TYPE for SQL (i.e., for
+SQL variables, parameters, results, and columns).  The host language data
+types are still the scalar types specified in SQL-86, SQL-89, and SQL-92. 
+Thus, the proposal doesn't add the new SQL ROW_TYPE to the host language
+mappings for module language, embedded syntax, or external routine
+parameters. 
+
+<P>
+Support for host language ROW_TYPEs would require specifying the forms of
+host language record declarations that are recognized in embedded syntax,
+and adding such host language record types to the data type
+correspondences for embedded syntax, module language, and external
+routines. 
+
+<P>
+Such a proposal would presumably include the ability to reference such
+host language variables as targets of FETCH, SELECT, and assignment
+statements, as sources of INSERT, UPDATE, and assignment statements, and
+as arguments of IN, OUT, and INOUT parameters. 
+
+<P>
+See also Language Opportunities <BOX>(<EMPHASIS>(468\BOLD)) (in
+SQL/Foundation Editor's Notes), <BOX>(<EMPHASIS>(BIND-003\BOLD)), and
+<BOX>(<EMPHASIS>(CLI-003\BOLD)). 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-128/H2-2002-492, and moved to Foundation
+
+<P>
+<BOX>(<EMPHASIS>(PSM-127\BOLD))
+<X>(<BOX>(PSM-127))
+During discussion of DBL:MAD-066/X3H2-96-???, the following Language
+Opportunity was noted:
+
+<LIST>(SIMPLE)
+
+<LE>SQL/PSM, as currently written, prohibits the creation and invocation
+of multiple polymorphic routines whose parameters differ only by character
+set or by interval class (year-month or day-time).  This is clearly
+unacceptable for many users' needs. 
+
+<LE>This Opportunity has been "narrowed" by acceptance of WG3:FRA-120R1. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-129/H2-2002-493
+
+<P>
+<BOX>(<EMPHASIS>(PSM-138\BOLD)) In CBR-017/X3H2-92-192, the following
+<X>(<BOX>(PSM-138))
+language opportunity was identified:
+
+<LIST>(SIMPLE)
+
+<LE>X3H2-92-083/OTT-011, provided the SET keyword for the <LB>assignment
+statement> and specified "compatibility with the UPDATE statement" as one
+motivation.  Given that SET was chosen for compatibility with the UPDATE
+statement, shouldn't the statment allow multiple assignments,
+<EMPHASIS>(e.g.),
+
+<LIST>(SIMPLE)
+
+<LE>SET a = b, c = d, ..., <EMPHASIS>(etc).
+
+<ENDLIST>
+
+<P>
+as in the UPDATE statement?
+
+<ENDLIST>
+
+<P>
+Was SQL3 Language Opportunity <BOX>(<EMPHASIS>(259\BOLD)). 
+<X>(<BOX>(259))
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:ZSH-098R2 = H2-2002-079R2
+
+<P>
+<BOX>(<EMPHASIS>(PSM-148\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(PSM-148))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P04, SQL/PSM, <REFERENCE>(psm_scalars\FULL)
+
+<LE>Note at: None. 
+
+<LE>Source: CD1-2000 comments USA-P04-004
+
+
+<LE>Possible Problem:
+
+<P>
+<REFERENCE>(psm_scalars\FULL), needs a Subclause for <LB>column reference>
+in order to add an Access Rule for <LB>column reference> in control
+statements such as <LB>case statement. or <LB>if statement>, which might
+have scalar subqueries.  (See also a parallel comment on SQL/Foundation,
+<REFERENCE>(fnd_colref\FULL), which suggests an alternative way to deal
+wtih this entirely within Foundation.)
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:ZSH-142R1 = H2-2003-___
+
+<P>
+<BOX>(<EMPHASIS>(PSM-087\BOLD))
+<X>(<BOX>(PSM-087))
+In the course of discussing DBL:MCI-060,
+Steve Cannan noted the following Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>It is not clear that a CREATE statement may make valid reference to
+any {something} object created as a result of that statement including the
+top level.  Thus, in a schema, a view may reference a table in the same
+CREATE SCHEMA statement, a routine may recursively reference itself in 
+a CREATE ROUTINE, two routines in a CREATE MODULE may reference each other,
+functions in the same ADT creation may call each other, etc. This should
+be true and the rules need to be fixed. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPpsm088" number="PSM-088">
+
+<reference>
+P04, SQL/PSM, No specific location
+</reference>
+
+<source>
+Steve Cannan, during the course of discussing DBL:MCI-060
+</source>
+
+<problem>
+
+<para>
+Need some syntax to do an <kw>ALTER</kw> <kw>VIEW</kw> or similar to "rebind" subject
+routines, * column references, etc. for all objects that contain
+statically-bound references of any sort. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPpsm095" number="PSM-095">
+
+<reference>
+P04, SQL/PSM, No specific location
+</reference>
+
+<source>
+Ed Dee, while discussing DBL:MCI-132 ballot comments
+</source>
+
+<problem>
+
+<para>
+<kw>FOR</kw> statements terminate (with a closed cursor exception) if the
+statement list of the <BNF name="for statement"/> list contains a <kw>COMMIT</kw> or
+<kw>ROLLBACK</kw>.  Further, no statement contained in the <BNF name="for statement"/> can
+set any transaction attributes. 
+</para>
+
+<para>
+It is desirable that an application programmer be able to initiate or
+terminate transactions within a <BNF name="for statement"/>.  
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPpsm124" number="PSM-124">
+
+<reference>
+P04, SQL/PSM, No specific location
+</reference>
+
+<source>
+DBL:MCI-040/X3H2-96-169:UK-017
+</source>
+
+<problem>
+
+<para>
+No way of obtaining the associated sqlstate of a condition name.  We
+think the <BNF name="condition name"/> feature is a nice idea, but we suspect it will
+generate a requirement, akin to the observation in the preceding comment,
+for a built-in function to return the associated sqlstate value of a given
+condition name. 
+</para>
+
+<para>
+Furthermore, it might even be required to hold condition names in
+variables or arguments, in which case they have to become character
+strings.  We would be happy to hold this feature over for SQL3, in the
+interests of simplification and early progression of PSM2 and to give time
+for the requirements to be fully thought through and appropriately
+addressed in the language. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPpsm140" number="PSM-140">
+
+<reference>
+P04, SQL/PSM, No specific location
+</reference>
+
+<source>
+DBL:LGW-081/X3H2-97-???
+</source>
+
+<problem>
+
+<para>
+Is it possible in SQL3 to relax the specification of string data types
+such as <BNF name="character stringtype"/> and <BNF name="bit string type"/> so that the
+declared length of these types (with appropriate usage restrictions) can
+be specified at execution time rather than at compile time? Can I declare
+avariable in an outer block of a compound statement and then use that
+variable as the <BNF name="length"/> of a bit string variable declaration in 
+an inner block? 
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved by WG3:WLG-089 = H2-2006-___ and Email from Jan-Eike Michels, 2006-02-16
+</comment>
+<comment>WG3:HBA-048 = H2-2003-___</comment>
+<LO id="PPpsm157" number="PSM-157">
+
+<reference>
+<extref part="04" ref="psm_dynsql"/>
+</reference>
+
+<source>
+WG3:HBA-048 = H2-2003-___
+</source>
+
+<problem>
+
+<para>
+SQL/Foundation, <extref part="02" ref="fnd_inputusing"/>, Syntax Rule 1) is:
+</para>
+
+<nlist>
+
+<item>The <BNF name="general value specification"/> immediately contained in 
+<BNF name="using argument"/> shall be either a <BNF name="host parameter specification"/> 
+or an <BNF name="embedded variable specification"/>. 
+</item>
+
+</nlist>
+
+<para>
+and SQL/Foundation, <extref part="02" ref="fnd_outputusing"/>, Syntax Rule 1) is:
+</para>
+
+<nlist>
+
+<item>The <BNF name="target specification"/> immediately contained in 
+<BNF name="into argument"/> shall be either 
+a <BNF name="host parameter specification"/> or an <BNF name="embedded variable specification"/>. 
+</item>
+
+</nlist>
+
+<para>
+Without these being modified by SQL/PSM, it is thus not currently possible for an SQL parameter to 
+be either a <BNF name="using argument"/> or an <BNF name="into argument"/>. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<comment>WG3:HBA-042 = H2-2003-___</comment>
+<PP id="PPpsm155" number="PSM-155" severity="major" realm="technical">
+
+<reference>
+<extref part="04" ref="psm_routine_invocation"/>, General Rules re: created local temporary tables
+</reference>
+
+<source>
+WG3:HBA-042 = H2-2003-___
+</source>
+
+<problem>
+
+<para>
+SQL/Foundation, <extref part="02" ref="fnd_routine_invocation"/>, General Rule 5) d) i) is:
+</para>
+
+<rlist>
+
+<item>If R is an SQL routine, then remove from RSC the identities of all
+instances of created local temporary tables, ...
+</item>
+
+</rlist>
+
+<para>
+This doesn't look good for an SQL routine R1 contained in an SQL-server module, that
+might invoke another <BNF name="module routine"/> R2 in the same module. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+PSM must modify the cited subrule in some way. 
+</para>
+
+</solution>
+
+</PP>
+
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<comment>WG3:HBA-042 = H2-2003-___</comment>
+<PP id="PPpsm156" number="PSM-156" severity="major" realm="technical">
+
+<reference>
+<extref part="04" ref="psm_routine_invocation"/>, General Rules,
+re: both kinds of local temporary tables
+</reference>
+
+<source>
+WG3:HBA-042 = H2-2003-___
+</source>
+
+<problem>
+
+<para>
+It is not clear whether the rows of a temporary table (whether declared or created) that is
+local to an SQL-server module survive from one invocation of SQL-routines in that module. 
+</para>
+
+<para>
+Let M be a SQL-server module and TT either a declared temporary table local to it, or 
+a local created temporary table; let R be an SQL-routine in M that accesses TT.  R is invoked
+twice during a transaction from by some invoker INV. 
+</para>
+
+<para>
+It seems to be intended that, provided INV does not, between the invocations of R1, access TT, the 
+second invocation of R will find TT as the first invocation left it. 
+</para>
+
+<para>
+Furthermore, if INV is an SQL-routine in M, and INV accesses TT, then INV and R access the same
+(instance of) TT. 
+</para>
+
+<para>
+On the other hand, if INV is in an SQL-server module MI, different from M, then, whether
+TT is a declared temporary table or a local created temporary table, a reference to TT in
+INV, if valid, identifies a different table from the one accessed by R. 
+</para>
+
+<para>
+Then again, if R invokes a further SQL-routine RS, that, like INV, is in MI, then RS will see the 
+same TT as INV. 
+</para>
+
+<para>
+The foregoing is not specified in any General Rule, nor is it clearly described in Concepts. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Closed by DCOR/2004 ballot comment NLD-P04-006 (Seq#86)</comment>
+<PP id="PPpsm150" number="PSM-150" severity="major" realm="technical">
+
+<reference>
+P04, SQL/PSM, No specific location
+</reference>
+
+<source>
+WG3:HBA-040
+</source>
+
+<problem>
+
+<para>
+It was stated explicitly in DBL:LON-156 that it was the intention that the scope of extended
+names would correspond to that of temporary tables. This intention has not been achieved,
+and probably cannot be. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+Delete <BNF name="scope option"/> or at least deprecate it. 
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Closed by SIA-032</comment>
+<PP id="PPpsm151" number="PSM-151" severity="major" realm="technical">
+
+<reference>
+P04, SQL/PSM, <extref part="04" ref="psm_names"/>
+</reference>
+
+<source>
+WG3:HBA-040
+</source>
+
+<problem>
+
+<para>
+The scope of a <BNF name="statement name"/> is not adequately specified in the following cases:
+</para>
+
+<alist>
+
+<item>Where the <BNF name="prepare statement"/> is contained in 
+an <BNF name="SQL control statement"/>
+immediately contained in an <BNF name="externally-invoked procedure"/>.
+
+<para>
+The precedent of <BNF name="cursor name"/>, could be followed, by introducing 
+a <BNF name="statement declaration"/> analogous to <BNF name="cursor declaration"/>.
+But note that <BNF name="dynamic cursor declaration"/> would be a more
+appropriate precedent to follow, were it not for the fact
+that it is not at present allowed in a <BNF name="compound statement"/>.
+</para>
+
+</item>
+
+<item>Where the <BNF name="prepare statement"/> is contained in a <BNF name="schema routine"/>.
+
+</item>
+
+<item>Where the <BNF name="prepare statement"/> is contained in a <BNF name="module routine"/>
+
+<para>
+The execution of a prepared statement is controlled by the privileges of either its
+invoker or definer as appropriate, not by the statement that prepared it being been
+contained in a particular <BNF name="SQL-server module definition"/>, still less a particular
+<BNF name="SQL-schema module definition"/>.
+</para>
+
+<para>
+It would be reasonable to expect this to be treated in the same way as case a).
+</para>
+
+</item>
+
+</alist>
+
+</problem>
+
+</PP>
+
+
+<comment>WG3:HBA-042 = H2-2003-___</comment>
+<PP id="PPpsm153" number="PSM-153" severity="major" realm="technical">
+
+<reference>
+<extref part="04" ref="psm_names"/>, re: temporary tables
+</reference>
+
+<source>
+WG3:HBA-042 = H2-2003-___
+</source>
+
+<problem>
+
+<para>
+SQL/Foundation, <extref part="02" ref="fnd_names"/>, Syntax Rule 5) a) says:
+</para>
+
+<alist>
+
+<item>If LSQ [a <BNF name="local or schema qualifier"/>] is "<kw>MODULE</kw>", then TN
+[a <BNF name="table name"/>] shall be contained in an <BNF name="SQL-client module definition"/> 
+M and the <BNF name="module contents"/> of M shall contain 
+a <BNF name="temporary table declaration"/> TT
+whose <BNF name="table name"/> has a <BNF name="qualified identifier"/> equivalent to QI. 
+</item>
+
+</alist>
+
+<para>
+This does not cater for the case of a <BNF name="temporary table declaration"/>
+referenced by a <BNF name="table name"/> contained in a <BNF name="module routine"/>. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+Perhaps PSM should replace the cited Syntax Rule 5) a) with:
+</para>
+
+<alist>
+
+<item>If LSQ [a <BNF name="local or schema qualifier"/>] is
+<quote><kw>MODULE</kw></quote>, then TN [a <BNF name="table name"/>] shall be contained
+either in an <BNF name="SQL-client module definition"/>, without
+an intervening <BNF name="SQL-schema statement"/>, 
+or in a <BNF name="SQL-client module definition"/> that contains 
+a <BNF name="temporary table declaration"/> TT whose
+<BNF name="table name"/> has a <BNF name="qualified identifier"/> equivalent to QI. 
+</item>
+
+</alist>
+
+</solution>
+
+</PP>
+
+
+<comment>WG3:HBA-042 = H2-2003-___</comment>
+<PP id="PPpsm154" number="PSM-154" severity="major" realm="technical">
+
+<reference>
+<extref part="04" ref="psm_names"/>, re: created local temporary tables
+</reference>
+
+<source>
+WG3:HBA-042 = H2-2003-___
+</source>
+
+<problem>
+
+<para>
+Whatever is said, in the Syntax or General Rules of SQL/Foundation,
+<extref part="02" ref="fnd_names"/>,
+about how a <BNF name="table name"/> identifies a created local temporary table must
+be replaced by PSM to cater for <BNF name="module routine"/>s. 
+</para>
+
+<para>
+Let TT be a local created temporary table; let R1 be SQL-routine in SQL-server module M1
+and let R2 be SQL-routine in SQL-server module M2. Both R1 and R2 contain references to
+TT.  It is understood that, regardless of the pattern of invocation, each of R1 and R2 has its
+own instance of TT. 
+</para>
+
+<para>
+None of the foregoing is specified in any General Rule, and is described inadequately
+Concepts.  It needs to be properly specified. 
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>DCOR/2004 WG3-P04-001</comment>
+<PP id="PPpsm158" number="PSM-158" severity="major" realm="technical">
+
+<reference>
+<extref part="04" ref="psm_sqlstatement"/>
+</reference>
+
+<noteAt>
+<extitemref part="04" ref="psm_sqlstatement_invoke_handle_GR" type="GR"/>
+</noteAt>
+
+<source>
+DCOR/2004 WG3-P04-001
+</source>
+
+<problem>
+
+<para>
+<extitemref part="04" ref="psm_sqlstatement_invoke_handle_GR" type="GR"/> calls for the General 
+Rules of <extref part="04" ref="psm_handler_decl"/> to be applied. 
+However, it does not say for which handler the rules should be applied and there does not seem to 
+be any clear context available in either <BNF name="SQL procedure statement"/> or in 
+<BNF name="handler declaration"/> to make an implicit choice.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPpsm106" number="PSM-106">
+
+<reference>
+<extref part="04" ref="psm_routine_invocation"/>
+</reference>
+
+<source>
+DBL:MCI-161, point 2.5, item 5
+</source>
+
+<problem>
+
+<para>
+In <extref part="04" ref="psm_routine_invocation"/>, the prohibitions on
+SQL-transaction staements and SQL-connection statements in SQL-invoked
+routines might be lifted, if a way can be found to make sure that
+SQL-invoked routines end SQL-sessions and SQL-transactions that they
+start, don't end SQL-transactions and SQL-sessions that they didn't start,
+and don't switch SQL-connections without restoring the SQL-connection with
+which they started. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPpsm107" number="PSM-107">
+
+<reference>
+<extref part="04" ref="psm_routine_invocation"/>
+</reference>
+
+<source>
+Discussion of DBL:MCI-161, point 2.5, item 5
+</source>
+
+<problem>
+
+<para>
+In <extref part="04" ref="psm_routine_invocation"/>, the prohibitions on
+SQL-transaction statements and SQL-connection statements in SQL-invoked
+routines might be lifted by changing "SQL-connection statement" to
+"SQL-connection statement and the implementation does not support the
+execution of that SQL-statement in an invoked SQL-routine that is 
+a procedure" in each of the two rules that make this prohibition, and making
+an appropriate entry in <extref part="04" ref="psm_impdef"/>, saying something
+like "It is <impDef annex="no" code="None"/> whether or not an SQL-implementation
+supports the execution of SQL-transaction statements and/or SQL-connection
+statements in an invoked SQL-routine; if it does so, then the effects are
+<impDef annex="no" code="None"/>." 
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+
+</para>
+
+</solution>
+
+</LO>
+
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<PP id="PPpsm149" number="PSM-149" severity="major" realm="technical">
+
+<reference>
+P04, SQL/PSM, <extref part="04" ref="psm_revoke"/>
+</reference>
+
+<source>
+CD1-2000 comments USA-P04-005
+</source>
+
+<problem>
+
+<para>
+Because PSM expands the possibilities of <BNF name="SQL procedure statement"/>, the
+capabilities for the <BNF name="triggered action"/> of a trigger are much
+increased. Consequently the rules regarding dependencies of a trigger on 
+a privilege or schema object must be extended in PSM.  For example, in
+9075-2 (SQL/Foundation), <extref part="02" ref="fnd_revoke"/>, SR 24) subrules g)
+through j) deal with when <kw>SELECT</kw> privilege is required to define 
+a trigger.  None of these rules cover the possibility of a <BNF name="scalar
+subquery"/> in a <BNF name="case statement"/>.  
+Likewise the rules for <kw>SELECT</kw> <kw>WITH</kw>
+<kw>HIERARCHY</kw> <kw>OPTION</kw> are inadequate. 
+</para>
+
+<para>
+The commenter does not believe that the solution is to run around trying
+to find every case that is not currently covered.  Instead, the commenter
+believes that we need a general mechanism that constructs a dependency
+graph relating arbitrary schema objects and privileges, so that as
+features and parts are added, each new feature or part need only specify
+its contribution to the dependency graph algorithm.  For example,
+dependencies on privileges can be declared in the Access Rules, so that
+whenever an Access Rule is used, a dependency is automatically created.
+That way <BNF name="revoke statement"/> would not need to duplicate information
+that is already implicit in the Access Rules.  Similarly, dependencies on
+schema objects can be generated in the rules of <BNF name="table reference"/>,
+<BNF name="column reference"/>, etc. Then <BNF name="revoke statement"/> and the drop
+statements would not need to generate dependencies, they could simply
+assume that they are defined. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<comment>Converted to LO by DCOR/2004 NLD-P04-007 (Seq#87)</comment>
+<LO id="PPpsm152" number="PSM-152">
+
+<reference>
+P04, SQL/PSM, No specific location
+</reference>
+
+<source>
+WG3:HBA-040
+</source>
+
+<problem>
+
+<para>
+The scope of an extended name that contains LOCAL is not adequately specified in the
+following cases:
+</para>
+
+<alist>
+
+<item>Where the extended name is contained in an <BNF name="SQL control statement"/> immediately
+contained in an <BNF name="externally-invoked procedure"/>.
+</item>
+
+<item>Where the extended name is contained in a <BNF name="schema routine"/>.
+</item>
+
+<item>Where the extended name is contained in a <BNF name="module routine"/>
+
+<para>
+The determination of what object, if any, is identified by an extended name should not
+depend on the statement that contains it being contained in a particular
+<BNF name="SQL-server module definition"/>, still less a particular
+<BNF name="SQL-client module definition"/>. 
+</para>
+
+<para>
+For consistency, if a local scope is to be permitted in these cases, it should follow the
+precedent of <BNF name="cursor name"/>, provided <BNF name="statement name"/> also follows it.
+</para>
+
+</item>
+
+</alist>
+
+<para>
+The preferred solution, however, is to make all extended names global, by deleting
+<BNF name="scope option"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:LCY-045R1 = DM32.2-2009-00___</comment>
+<comment>FCD/2007 GBR-P04-010</comment>
+<PP id="PP160" number="PSM-160" severity="minor" realm="technical">
+<reference>
+<extref part="04" ref="psm_esql"/>
+</reference>
+<source>Ballot Comment FCD/2007 GBR-P04-010</source>
+<problem>
+<para>
+<extitemref part="04" ref="psm_esql_sql_var_decl_precedes" type="SR"/> appears to assume that 
+an <BNF name="SQL variable declaration"/> contains only a single declaration of a variable name. 
+However, the syntax of <extref part="04" ref="psm_vardecl"/> shows that it contains a list of 
+variable names (all with the same data type). The Syntax Rule or the (remote) format should be 
+modified to be consistent.
+</para>
+</problem>
+</PP>
+
+
+<comment>FCD/2007 GBR-P04-020</comment>
+<PP id="PP161" number="PSM-161" severity="minor" realm="technical">
+<reference>
+<extref part="04" ref="psm_esql"/>
+</reference>
+<source>Ballot Comment FCD/2007 GBR-P04-020</source>
+<problem>
+<para>
+<extitemref part="04" ref="psm_esql_sql_var_decl_contained" type="SR"/> is more restrictive than 
+the similar <extitemref part="02" ref="fnd_esql_SR_hostident" type="SR"/> in  
+<extref part="02" ref="fnd_esql"/>, in ISO/IEC 9075-2.
+</para>
+</problem>
+</PP>
+
+
+<comment>Resolved by WG3:W21-056R3</comment>
+<PP id="PPpsm162" number="PSM-162" severity="major" realm="technical">
+
+<reference><extref part="04" ref="psm_revoke"/>
+</reference>
+
+<source>WG3:YYZ-017, CD ballot comments, SEQ# 266
+</source>
+
+<problem>
+
+<para>This subclause extends <extref part="02" ref="fnd_revoke"/>, in <docref ref="ISO9075-2"/>,
+but fails to make any extension to GR 19) of that Subclause to take into
+account the fact that the <BNF name="triggered action" part="02"/> of a trigger
+might be an SQL-control statement that includes (for example) 
+a <BNF name="scalar subquery" part="02"/> that references some schema object. 
+Thus, the Syntax and General Rules of an SQL-procedure statement that
+would cause destruction of such a schema object do not necessarily
+take into account that some trigger might cease to be valid as a result of that destruction.
+</para>
+
+<para>Remove it from Annex G, when the problem is resolved.
+</para>
+
+</problem>
+
+<solution>
+
+</solution>
+
+</PP>
+
+
+<comment>FCD/2007 USA-P04-003</comment>
+<PP id="PP159" number="PSM-159" severity="major" realm="technical">
+<reference>
+<extref part="04" ref="psm_handler_decl"/>
+</reference>
+<source>Ballot Comment FCD/2007 USA-P04-003</source>
+<problem>
+<para>
+The rules controlling condition handler scoping and “most appropriate handler”
+determination do not seem to prevent a condition handler that fails from becoming
+the “most appropriate handler” for some otherwise unhandled error condition that
+occurs during execution of the handler itself (a recursive loop in other words). 
+<extitemref part="04" ref="psm_handler_decl_cont_unhand_resig" type="GR"/>,
+which effectively performs a RESIGNAL, as well as other rules, are the source of this concern.
+See also WG3:KOA-055 for additional discussion. 
+</para>
+</problem>
+</PP>
+
+
+<comment>WG3:MEM-055 = DM32.2-2016-000__ deleted this PP/LO</comment>
+<comment>WG3:YYZ-017, CD ballot comments, SEQ# 269</comment>
+<LO id="PPpsm163" number="PSM-163">
+
+<reference>
+No specific location
+</reference>
+
+<source>
+WG3:YYZ-017, CD ballot comments, SEQ# 269
+</source>
+
+<problem>
+
+<para>
+Whether the effects of a stored procedure that is called from within
+another stored procedure persist or not depends on whether the calling procedure
+commits its unit of work or not. 
+Sometimes, it is necessary for the called procedure to commit its work independently
+of the calling procedure (e.g., for auditing purposes). 
+The SQL standard should add support for such autonomous procedures.
+</para>
+
+</problem>
+
+<solution>
+
+</solution>
+
+</LO>
+
+
+<comment>WG3:MEM-055 = DM32.2-2016-000__ deleted this PP/LO</comment>
+<comment>WG3:YYZ-017, CD ballot comments, SEQ# 270</comment>
+<LO id="PPpsm164" number="PSM-164">
+
+<reference>
+No specific location. 
+</reference>
+
+<source>
+WG3:YYZ-017, CD ballot comments, SEQ# 270
+</source>
+
+<problem>
+
+<para>
+Currently, SQL table functions, i.e., SQL functions that return a table as the result,
+return the result table only after the entire table has been generated. 
+A more efficient option would be to introduce a new <BNF name="SQL control statement"/>
+that behaves like a RETURN statement, but lets the function return the result table one row at 
+a time, similar to the way an external table function returns the result table.
+</para>
+
+</problem>
+
+<solution>
+
+</solution>
+
+</LO>
+
+-->
+
+</EditorNotes>

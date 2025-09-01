@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA018</code>
+      <description>The support when moving character data between an SQL/OLB implementation and an SQL-server, for implicit conversions other than the implicit conversion between Java string data and UTF8, UTF16, and/or UCS2.</description>
+   </impDef>
+   <impDef>
+      <code>IA020</code>
+      <description>Which predefined iterator with keywords are supported.</description>
+   </impDef>
+   <impDef>
+      <code>IA037</code>
+      <description>The synchronization, if any, between an iterator object and the returned java.sql.ResultSet object when Feature J002, “ResultSetIterator access to JDBC ResultSet” is supported.</description>
+   </impDef>
+   <impDef>
+      <code>IA038</code>
+      <description>The effect of an update operation performed against a Scrollable iterator object.</description>
+   </impDef>
+   <impDef>
+      <code>IA041</code>
+      <description>The effect of invoking any methods other than a ResultSetIterator object’s close method against an iterator object where the isClosed method would return the value true.</description>
+   </impDef>
+   <impDef>
+      <code>IA042</code>
+      <description>The semantics of calling close on a java.sql.ResultSet object that has already been closed.</description>
+   </impDef>
+   <impDef>
+      <code>IA045</code>
+      <description>The synchronization, if any, between the RTResultSet object and the returned java.sql.ResultSet object when Feature J002, “ResultSetIterator access to JDBC ResultSet” is supported.</description>
+   </impDef>
+   <impDef>
+      <code>IA049</code>
+      <description>The details of SQLWarning or SQLException objects for completion and exception condition originating within the JDBC driver.</description>
+   </impDef>
+   <impDef>
+      <code>IA051</code>
+      <description>Whether a portion of the namespace is reserved by an implementation for the names of procedures, subroutines, program variables, branch labels, SQL-client module definitions, or externally-invoked procedures for embedded SQL host programs other than embedded SQL Java programs and if so what portion of the namespace is reserved.</description>
+   </impDef>
+   <impDef>
+      <code>IA052</code>
+      <description>Runtime support for the sqlj.runtime.ExecutionContext class methods setMaxRows, setMaxFieldSize, and setQueryTimeout setting an ExecutionContext object’s corresponding underlying values to anything other than their default values.</description>
+   </impDef>
+   <impDef>
+      <code>IA053</code>
+      <description>Support for the sqlj.runtime.ResultSetIterator interface method getResultSet.</description>
+   </impDef>
+   <impDef>
+      <code>ID023</code>
+      <description>The default connection context SQL-connection used by the default connection context when the name jdbc/defaultDataSource is not defined to JNDI.</description>
+   </impDef>
+   <impDef>
+      <code>ID024</code>
+      <description>The specification of the default connection context.</description>
+   </impDef>
+   <impDef>
+      <code>ID026</code>
+      <description>The class name of the default connection context.</description>
+   </impDef>
+   <impDef>
+      <code>ID027</code>
+      <description>The connection context user identifier if not otherwise specified. This occurs if the connection context object is not created using data source constructors or url constructors that have a user parameter and a user name is not provided as part of the info parameter, or if the connection context object is not created using the constructor that takes an existing connection context object, or if the connection context object is not created using the constructor that takes an existing java.sql.Connection object.</description>
+   </impDef>
+   <impDef>
+      <code>IV107</code>
+      <description>The result of invoking methods against the original java.sql.ResultSet object once an iterator object has been created has been on that object by an iterator conversion clause.</description>
+   </impDef>
+   <impDef>
+      <code>IV108</code>
+      <description>The result of invoking the sqlj.runtime.ExecutionContext class’s public methods : executeBatch(), getBatchLimit(), getBatchUpdateCounts(), isBatching(), setBatching(boolean), and setBatchLimit(int) when Feature J004, “Batch update” is not supported.</description>
+   </impDef>
+   <impDef>
+      <code>IV109</code>
+      <description>The value of the Lval expression if an embedded Java expression containing an Lval expression has either an implicit or explicit parameter mode of OUT or INOUT in a given SQL procedure statement, and another embedded Java expression containing an Lval expression has either an implicit or explicit parameter mode of IN or INOUT in a subsequent SQL procedure statement, and the location of the Lval expression is the same.</description>
+   </impDef>
+   <impDef>
+      <code>IV124</code>
+      <description>The opaque profile key object returned by invocation of a generated connection class’s getProfileKey method for use in a subsequent call to getProfile() or getConnectedProfile() methods.</description>
+   </impDef>
+   <impDef>
+      <code>IW010</code>
+      <description>The preparation needed, prior to execution of an SQLJ application, that is not addressed by either SQLJ translation or customization.</description>
+   </impDef>
+   <impDef>
+      <code>IW160</code>
+      <description>The mechanism used to provide an SQLJ translator with a mapping of connection context classes to exemplar schemas.</description>
+   </impDef>
+   <impDef>
+      <code>IW161</code>
+      <description>The manner in which, during customization, the user identifier for inclusion in a customized profile, to be used for runtime privilege checking, may be specified.</description>
+   </impDef>
+   <impDef>
+      <code>IW162</code>
+      <description>The manner in which the Map object provided in the typemap parameter is passed to the returned RTStatement object.</description>
+   </impDef>
+   <impDef>
+      <code>IW163</code>
+      <description>The manner in which a java.util.Map object is provided to a RTResultSet object at the time of that RTResultSet object’s creation.</description>
+   </impDef>
+   <impDef>
+      <code>IW164</code>
+      <description>The manner in which a java.util.Map object is provided to a RTStatement object at the time of that RTStatement object’s creation.</description>
+   </impDef>
+   <impDef>
+      <code>IW165</code>
+      <description>The manner in which an RTStatement object’s java.util.Map object is provided to a RTResultSet object created as the result of execution of that RTStatement object.</description>
+   </impDef>
+   <impDef>
+      <code>IW166</code>
+      <description>The manner in which an RTStatement object’s java.util.Map object is provided to a RTResultSet object.</description>
+   </impDef>
+</implementationDefined>

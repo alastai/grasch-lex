@@ -1,0 +1,1831 @@
+<EditorNotes>
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+   This is a list of all problems in the corresponding
+   document that are not yet resolved.
+
+Possible       
+Problem         Category
+Number         ==========
+=======
+
+SCHEM-000  (pseudo-PP showing Editor's Notes convention)
+SCHEM-039  **Major Technical**
+
+
+
+SCHEM-0           *Opportunity*
+SCHEM-0       **Major Technical**
+SCHEM-0        *Minor Technical*
+
+======= Largest SQL/Schemata Possible Problem number *** SCHEM-039 *** =======
+======= This is the end of the problem number list =======
+
+-->
+
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPschem" number="SCHEM-" severity="major" realm="technical">
+
+<reference><specref ref="schem_"/>. !! If no appropriate reference, then use: 
+No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPschem" number="SCHEM-" severity="minor" realm="technical">
+
+<reference><specref ref="schem_"/>. !! If no appropriate reference, then use: 
+No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPschem" number="SCHEM-" severity="major" realm="editorial">
+
+<reference><specref ref="schem_"/>. !! If no appropriate reference, then use: 
+No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPschem" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="schem_"/>. !! If no appropriate reference, then use: 
+No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPschem" number="SCHEM-">
+
+<reference><specref ref="schem_"/>. !! If no appropriate reference, then use: 
+No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPschem000" number="SCHEM-000" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editor. 
+</source>
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point
+that requires particular attention, highlighted thus: 
+</para>
+
+<ednote>Text of the problem. 
+</ednote>
+
+</problem>
+
+</PP>
+
+
+<PP id="PPschem039" number="SCHEM-039" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:GYD-024.
+</source>
+
+<problem>
+
+<para>Functionality, if any, to support the Vector type needs to be provided.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<!-- Placed closed PPs and LOs after this line
+
+<comment>RESOLVED by WG3:HBA-034R2 = H2-2003-343R4</comment>
+<LO id="PPschem" number="SCHEM-005">
+
+<reference>
+P11, SQL/Schemata
+No specific location
+</reference>
+
+
+<source>
+Email from Fred Zemke, 2000-10-24, based on HEL discussions
+</source>
+
+
+<problem>
+
+<para>
+
+It would be useful to have a matrix that records all the possible kinds of
+dependency that are possible between schema objects.  Such a matrix could
+be placed in the standing document, "Miscellaneous facts about the SQL
+standard".  The rows and columns of the matrix would be the various kinds
+of schema objects (currently I count the following that need tracking:
+assertion, attribute, character set, collation, column, domain, domain
+constraint, unique constraint, referential constraint, check constraint,
+original method, overriding method, privilege SQL-invoked routine,
+translation, trigger, transform, user-defined cast, user-defined ordering,
+user-defined type, view).  The matrix should indicate in each cell at
+intersection A,B whether an object of type A can directly depend on an object of type B, and how.
+</para>
+
+<para>
+Once the matrix has been constructed, it can be used to verify two things:
+</para>
+
+<ulist>
+
+<item>that the rules of <kw>DROP</kw> and <kw>REVOKE</kw> have identified all dependencies
+</item>
+
+<item>that the views in the Information Schema are adequate for the user to
+determine all relevant dependencies.
+</item>
+
+</ulist>
+
+</problem>
+
+</LO>
+
+<comment>RESOLVED by WG3:HBA-034R2 = H2-2003-343R4</comment>
+<LO id="PPschem" number="SCHEM-024">
+
+<reference>
+P11, SQL/Schemata
+No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+There are no usage tables to display the usage of user-defined types,
+except COLUMN_UDT_USAGE. We also need UDT_UDT_USAGE to document when one
+UDT uses another (as the type of an attribute) ROUTINE_UDT_USAGE when a routine depends on a UDT, 
+CONSTRAINT_UDT_USAGE for constraints that depend
+on a UDT, TRIGGER_UDT_USAGE for triggers that depend on a UDT. (But see
+the concurrent comment suggesting an alternative approach that would
+eliminate the usage tables.)
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>RESOLVED by WG3:HBA-034R2 = H2-2003-343R4</comment>
+<LO id="PPschem" number="SCHEM-025">
+
+<reference>
+P11, SQL/Schemata
+No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+Instead of the present usage tables, it would be more convenient to have a single 
+DIRECT_DEPENDENCIES table that documented all dependencies.  
+The table would have columns to identify the independent object and columns to
+identify the directly dependent object, and perhaps a column to indicate
+the kind of dependency.  This base table could be used to define a recursive view called 
+DEPENDENCIES to display all dependencies.
+</para>
+
+</problem>
+
+</LO>
+
+-->
+
+<!-- ======================================= 
+
+<comment>RESOLVED by WG3:SIA-046R1 / WG3:DRS-136</comment>
+<PP id="PPschem016" number="SCHEM-016" severity="major" realm="technical">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_character_sets_view"/>
+</reference>
+
+
+<source>
+CD1/2001, USA-P11-002
+</source>
+
+
+<problem>
+
+<para>
+Information schema columns that are now constant because the data is no
+longer maintained should be deprecated in SQL:200x and dropped in the
+following progression.  These include CHARACTER_SETS view, columns
+FORM_OF_USE and NUMBER_OF_CHARACTERS; COLLATIONS view, columns
+COLLATION_TYPE, COLLATION_DICTIONARY and COLLATION_DEFINITION; and
+TRANSLATIONS view, TRANSLATION_DEFINITION column. 
+</para>
+
+</problem>
+
+</PP>
+
+<comment>RESOLVED by WG3:SIA-046R1 / WG3:ZSH071</comment>
+<PP id="PPschem020" number="SCHEM-020" severity="minor" realm="technical">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_attributes_basetbl"/>
+</reference>
+
+
+<source>
+WG3:DRS-091
+</source>
+
+
+<problem>
+
+<para>
+There is an indicator missing from the <kw>ATTRIBUTES</kw> base table, which
+reflects the content of the <BNF name="reference scope check action"/> contained in
+a <BNF name="reference scope check"/> contained in an <BNF name="attribute definition"/>. 
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPschem026" number="SCHEM-026">
+
+<reference>
+P11, SQL/Schemata, <extref part="11" ref="schem_stabs"/>
+</reference>
+
+
+<source>
+DBL:LGW-152/X3H2-97-352 (also DBL:LGW-023/X3H2-97-044, SEQ#
+406, USA-102*)
+</source>
+
+
+<problem>
+
+<para>
+The ROUTINES view and base table have columns that contain the timestamp
+of when the routine was CREATED and LAST_ALTERED.  These are analogous to
+the file creation and modification timestamps typically provided by a file
+system.  These timestamps are useful for comparing the creation and
+modification timestamps of the database objects with the timestamps in an external source code 
+control and configuration management utility.  Since
+SQL3 supports extensive programmatic capabilities this configuration
+management support is extremely useful. However it does not go far enough. 
+Created and Last_altered timestamps would also be useful in the following
+base tables and their associated views:
+</para>
+
+<ulist>
+
+<item>ABSTRACT_DATA_TYPES
+</item>
+<item>DOMAINS
+</item>
+<item>TABLES
+</item>
+<item>VIEWS
+</item>
+<item>COLUMNS
+</item>
+<item>ASSERTIONS
+</item>
+<item>CHARACTER_SETS
+</item>
+<item>COLLATIONS
+</item>
+<item>TRANSLATIONS
+</item>
+<item>TRIGGERS
+</item>
+<item>SUB_TABLES
+</item>
+
+</ulist>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPschem027" number="SCHEM-027">
+
+<reference>
+P11, SQL/Schemata, <extref part="11" ref="schem_stabs"/>
+</reference>
+
+
+<source>
+DBL:LGW-152/X3H2-97-352 (also DBL:LGW-023/X3H2-97-044, SEQ#409, USA-105)
+</source>
+
+
+<problem>
+
+<para>
+Many "information discovery" products depend upon full text searches of
+document databases to feed the indexing mechanisms used in their search
+engines.  It is very difficult to extend this technique to "structured"
+relational databases especially if they have high numeric content unless
+there is some textual description of the semantics associated with data
+values and schema objects.  Sometimes "information discovery" agents will
+search the INFORMATION_SCHEMA Catalog Schema Table and Column names
+looking for relevant keyword "stems" to feed to the search engine.  It
+would be very helpful to users of such agents if there were a "standard"
+way to read and write textual descriptions of what each schema object
+represents.  Certainly Information Resource Dictionary Systems (IRDS)
+could help in this task or users could define a special schema for this
+purpose but at present there is no dependable standard mechanism to make
+such information available to outside agents.   One easy-to-implement yet
+very helpful facility would be to associate a "COMMENT"  or "DESCRIPTION"
+column with each relevant table in the INFORMATION_SCHEMA together with 
+a "<kw>SET</kw> <kw>SCHEMA</kw> COMMENT statement" (or other appropriate syntax) that would
+allow the owner of a schema object to set and/or modify the COMMENT column
+associated with it.  The normal Information Schema view definition would
+then determine which users are able to read the COMMENT column so
+information discovery agents would be able to "discover" whatever comments
+exist for <kw>PUBLIC</kw> schema objects and report back to their creators any
+interesting database content. 
+</para>
+
+<para>
+In addition to information discovery agents comment or description
+information is crucial to support the reusability of ADTs. An SQL
+programmer must know what an ADT is supposed to do in order to correctly
+utilize or subtype it.  This information can only be provided by the ADT
+creator in a text format and is much more likely to be useful if stored in
+the INFORMATION_SCHEMA than if stored in paper documentation at the bottom
+of a stack on someone else's desk. This could be accomplished by adding
+syntax to the ADT definition to support a large amount of text.  
+</para>
+
+<para>
+The SQL objects for which comment/description information would be useful
+include: DOMAINS, TABLES, VIEWS, COLUMNS, ASSERTIONS, CHARACTER_SETS,
+COLLATIONS, TRANSLATIONS, TRIGGERS, SUB_TABLES, as well as distinct types,
+abstract data types, and SQL-invoked routines. 
+</para>
+
+</problem>
+
+</LO>
+
+<comment>WG3:STX-050 Comment WG3-P11-020</comment>
+<PP id="PPschem031" number="SCHEM-031" severity="minor" realm="technical">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_schemata_base_table"/>
+</reference>
+
+
+<source>
+WG3:STX-050 Comment WG3-P11-020
+</source>
+
+
+<problem>
+
+<para>
+A foreign key between the table SCHEMATA and the table CHARACTER_SETS is missing.
+</para>
+
+<para>
+It is not clear to the author, if this Character Set has to reside in the same
+catalog. If this is the case, the following constraint would resolve the problem:
+</para>
+
+<code>
+CONSTRAINT
+SCHEMATA_FOREIGN_KEY_CHARACTER_SETS
+FOREIGN KEY (DEFAULT_CHARACTER_SET_CATALOG,
+             DEFAULT_CHARACTER_SET_SCHEMA,
+             DEFAULT_CHARACTER_SET_NAME )
+REFERENCES CHARACTER_SETS
+</code>
+
+</problem>
+
+
+<solution>
+
+<para>
+None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+<comment>WG3:STX-050 Comment WG3-P11-021</comment>
+<PP id="PPschem032" number="SCHEM-032" severity="minor" realm="technical">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_udts_base_table"/>
+</reference>
+
+
+<source>
+WG3:STX-050 Comment WG3-P11-021
+</source>
+
+
+<problem>
+
+<para>
+The value list and the select list of the last query of the constraint
+USER_DEFINED_TYPES_CHECK_SOURCE_TYPE do not match. They have
+different number of elements. It reads:
+</para>
+
+<code>
+( USER_DEFINED_TYPE_CATALOG, USER_DEFINED_TYPE_SCHEMA,
+  USER_DEFINED_TYPE_NAME, SOURCE_DTD_IDENTIFIER ) IN
+( SELECT OBJECT_CATALOG, OBJECT_SCHEMA, OBJECT_NAME,
+  OBJECT_TYPE, DTD_IDENTIFIER
+  FROM DATA_TYPE_DESCRIPTOR.....
+</code>
+
+</problem>
+
+
+<solution>
+
+<para>
+None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<PP id="PPschem029" number="SCHEM-029" severity="major" realm="technical">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_applicable_roles_view"/>
+No specific location
+</reference>
+
+
+<source>
+WG3: SIA-026r3
+</source>
+
+
+<problem>
+
+<para>
+The function and definition of the Information Schema view APPLICABLE_ROLES
+are given in <extref part="11" ref="schem_applicable_roles_view"/>:
+</para>
+
+<para>
+Function
+</para>
+
+<para>
+Identifies the applicable roles for the current user.
+</para>
+
+<para>
+Definition
+</para>
+
+<code>
+CREATE RECURSIVE VIEW APPLICABLE_ROLES ( GRANTEE, ROLE_NAME,
+IS_GRANTABLE ) AS
+( ( SELECT GRANTEE, ROLE_NAME, IS_GRANTABLE
+    FROM DEFINITION_SCHEMA.ROLE_AUTHORIZATION_DESCRIPTORS
+    WHERE ( GRANTEE IN
+            ( CURRENT_USER, 'PUBLIC' )
+        <underline>OR</underline>
+            <underline>GRANTEE IN</underline>
+            <underline>( SELECT ROLE_NAME</underline>
+              <underline>FROM ENABLED_ROLES )</underline> ) )
+  UNION
+  ( SELECT RAD.GRANTEE,RAD.ROLE_NAME,RAD.IS_GRANTABLE
+    FROM DEFINITION_SCHEMA.ROLE_AUTHORIZATION_DESCRIPTORS RAD
+    JOIN
+         APPLICABLE_ROLES R
+         ON
+           RAD.GRANTEE = R.ROLE_NAME ) );
+</code>
+
+
+<para>
+The text shown underlined is redundant. It was proposed by ICN-039 as a replacement for the 
+CURRENT_ROLE that had previously been the second element of
+the first IN list, having been proposed - erroneously, we believe - by PER-193. Before
+PER-193, that IN list was merely "( CURRENT_USER, 'PUBLIC' )", which was
+consistent with the stated Function of <extref part="11" ref="schem_applicable_roles_view"/>, 
+"Identifies the applicable roles for
+the current user". Of course the current role, if there is one, is a role that is applicable
+for the current user, if there is one. In Part 2 SQL/Foundation, 
+<extref part="02" ref="fnd_setrole"/>, GR4) 
+makes sure of that (and in fact applies, possibly erroneously, an even stronger condition).
+</para>
+
+<para>
+It appears, then, that the text shown underlined should be deleted. However,
+we hesitate to propose that because we are uncertain as to the real purpose of the
+APPLICABLE_ROLES view, considering that there isn't always a current user.
+What roles, if any, are deemed to be applicable, "for" what, when the top cell of the
+authorization stack of the current SQL-session contains a role name and no user
+identifier? Is that role name included in the answer?
+</para>
+
+</problem>
+
+<solution>
+
+<para>
+None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem018" number="SCHEM-018">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_attributes_view"/>
+</reference>
+
+
+<source>
+DCOR/2002 USA-STC-048 and WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+The function statement says that this view lists the attributes of
+structured types that the user has access to.  <quote>Access</quote> is
+ambiguous.  As the view is currently defined it appears to mean,
+<quote>has <kw>USAGE</kw> or <kw>UNDER</kw> privilege on</quote>.  This could be solved by
+changing <quote>that are accessible</quote> to <quote>that the user has <kw>USAGE</kw>
+or <kw>UNDER</kw> privilege for</quote>.  However this comment will not suggest that
+solution.  Instead, this comment will point out that there are ways to
+define access to an attribute other than <kw>USAGE</kw> or <kw>UNDER</kw> privilege on the
+attribute's type.  First, there are other ways to access the type than
+through <kw>USAGE</kw> privilege.  The type might be the parameter type of an SQL-invoked routine 
+that the user can execute, it might be the return type
+of a regular function or method that the user can execute, it might be the
+type of a column that the user can <kw>SELECT</kw>, or the type of a selectable
+nested site such as the field of a row, the element type of a collection,
+or the attribute type of a different structured type.  All of these
+constitute <quote>access</quote> to a structured type. An analogy can be drawn
+between user-defined types and domains.  Note that the DOMAINS view shows
+not just the domains that the user has <kw>USAGE</kw> privilege on; it also shows
+domains that are the types of columns that the user can access.  After
+defining accessible types, you have the question of what makes an attribute accessible.  
+Is it EXECTUE privilege on the observer?  Or
+perhaps <kw>EXECUTE</kw> on either the observer or the mutator?  Or some other
+criterion?  
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem021" number="SCHEM-021">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_udt_column_usage_view"/>
+</reference>
+
+
+<source>
+WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+DCOR comment USA-STC-049 pointed out that the join condition joining
+DEFINITION_SCHEMA.COLUMNS with DEFINITION_SCHEMA.SCHEMATA assumes that the
+former table has columns named <kw>USER_DEFINED_TYPE_CATALOG</kw> and
+<kw>USER_DEFINED_TYPE_SCHEMA</kw>, which it does not.  That comment goes on to
+suggest that perhaps the intent was to join in DATA_TYPE_DESCRIPTORS,
+which does.  However, if the suggestion in USA-STC-049 were followed, this
+would not really be sufficient to find all columns that are dependent on a user-defined type.  
+What about columns that are row types with a field
+that is a user-defined type?  Or collection types with an element type
+that is a user-defined type?  See the notion of usage-dependent added to
+Foundation by WG3:YYJ-083r1.  Note that in that paper, it is argued that
+the notion of usage-dependency does not need to recurse through attributes
+of a structured type.  While this argument is sufficient for the purpose
+of enforcing <kw>RESTRICT</kw> or <kw>CASCADE</kw> semantics, and justifiable for Access
+Rule checking, does it make sense for this view?  For example, if type T1
+has an attribute of type T2, and column C1 is of type T1, does C1 depend
+on T2 in the meaning of this view?  If the user is using the view to find
+all columns to drop before dropping type T2, then the user wants to see C1
+in this view.  The alternative is that the user must do his own recursion
+(find all UDTs that depend on T2, then find all columns that depend on any
+of them.)
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem019" number="SCHEM-019">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_udts_view"/>
+</reference>
+
+
+<source>
+DCOR/2002 USA-STC-059 and WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+The word "accessible" in the function is ambiguous.  What is meant is
+those user-defined types for which the user has <kw>USAGE</kw> or <kw>UNDER</kw> privilege. 
+However, it is questioned in a separate comment on the <kw>ATTRIBUTES</kw> view
+whether "accessible" should be limited to types with <kw>USAGE</kw> or <kw>UNDER</kw>
+privilege.  Note that DIRECT_SUPERTYPES view will reveal type T's
+existence if T is the direct supertype of a type T2 for which the user has
+<kw>USAGE</kw> or <kw>UNDER</kw> privilege, even if the user does not have <kw>USAGE</kw> or 
+<kw>UNDER</kw>
+privilege on T itself.  This seems inconsistent.  Also, COLUMNS view will
+display  the type T if there is a column whose type is T.  It is
+suspected, but not verified, that the type will also be visible in other
+views of the Information Schema, wherever the type of a site is displayed
+(for example, <kw>ATTRIBUTES</kw> view, FIELDS view, <kw>ROUTINE</kw> view, PARAMETERS
+view).  Note that DOMAINS view shows a domain if either the user has <kw>USAGE</kw>
+privilege on the domain or the user has <kw>SELECT</kw> privilege on a column whose
+type is the domain; this provides a precedent that "accessible" is not
+limited to "has a privilege on". 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<comment>WG3:SIA-018 = ANSI NCITS H2-2003-429 / email from Joern Bartels</comment>
+<LO id="PPschem030" number="SCHEM-030">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_sit_base_tables"/>
+</reference>
+
+
+<source>
+WG3:SIA-018 = ANSI NCITS H2-2003-429 / email from Joern Bartels 
+</source>
+
+<problem>
+
+<para>
+SIA-018 adds the <extref part="02" ref="fnd_viewcompprivdeterm"/> to Part 2. 
+This subclause introduces the new view privilege dependency descriptor.
+</para>
+
+<para>
+There is no corresponding base table in <extref part="11" ref="schem_sit_base_tables"/> of 
+Part 11 defined. 
+As this descriptor is created in the <extref part="02" ref="fnd_grant"/> of Part 2 and used in 
+the <extref part="02" ref="fnd_revoke"/> of Part 2, it needs to be stored somewhere.
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem002" number="SCHEM-002">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_charsets_base_table"/>
+</reference>
+
+
+<source>
+DCOR 2000, SWE-STC-030
+</source>
+
+
+<problem>
+
+<para>
+This base table contains a bare minimum of information.  It could be
+enhanced to indicate relationships among character sets, for example
+whether the character set is standard, <impDef annex="no" code="None"/>, or
+user-defined, and what characater set a user-defined charater set is based on. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<comment>WG3:STX-050 Comment WG3-P11-023</comment>
+<PP id="PPschem033" number="SCHEM-033" severity="minor" realm="technical">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_dtd_base_table"/>
+</reference>
+
+
+<source>
+WG3:STX-050 Comment WG3-P11-023
+</source>
+
+
+<problem>
+
+<para>
+There is no foreign key check for the columns SCOPE_CATALOG,
+SCOPE_SCHEMA, and SCOPE_NAME to the tables table. It is not clear to the
+Author, if this reference has to be in the same CATALOG or not
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem013" number="SCHEM-013">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_dtd_base_table"/>
+</reference>
+
+
+<source>
+WG3:PER-100R2/H2-2001-062R2
+</source>
+
+
+<problem>
+
+<para>
+Paper WG3:PER-100r2 noted the following Language Opportunity:
+</para>
+
+<para>
+The user may wish to recover the original type declaration, rather than
+the equivalent type declaration that is used by the SQL-server.  This
+concern could be met by adding columns such as ORIGINAL_DATA_TYPE and
+ORIGINAL_PRECISION to the DATA_TYPE_DESCRIPTORS base table, as well as all
+views that draw from it.  These new columns should be part of a new
+conformance feature, to make them optional, since not every implementation
+will be able to display the original type declaration. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem014" number="SCHEM-014">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_dtd_base_table"/>
+</reference>
+
+
+<source>
+WG3:PER-100R2/H2-2001-062R2
+</source>
+
+
+<problem>
+
+<para>
+Paper WG3:PER-100r2 noted the following Language Opportunity:
+</para>
+
+<para>
+Users might be interested to know the largest and smallest exponents
+accomodated by the approximate numeric types. 
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+
+</para>
+
+</solution>
+
+</LO>
+
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem015" number="SCHEM-015">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_dtd_base_table"/>
+</reference>
+
+
+<source>
+WG3:PER-100R2/H2-2001-062R2
+</source>
+
+
+<problem>
+
+<para>
+Paper WG3:PER-100r2 noted the following Language Opportunity:
+</para>
+
+<para>
+A capabililty would be a table that simply listed all the data type
+equivalences of the numeric data types. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem008" number="SCHEM-008">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_sql_implinfo_base_table"/>
+</reference>
+
+
+<source>
+WG3:PER-118/H2-2001-???
+</source>
+
+
+<problem>
+
+<para>
+<extref part="11" ref="schem_sql_implinfo_base_table"/>, is defined to contain
+information about SQL-implementation information items (identified by name
+and number) but these items are not defined in the other parts of the
+standard. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem022" number="SCHEM-022">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_sql_implinfo_base_table"/>
+</reference>
+
+
+<source>
+WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+There is no list of values for IMPLEMENTATION_INFO_ID and
+IMPLEMENTATION_INFO_NAME.  It seems that many of these were intended to be
+the codes used in CLI by GetInfo (see for example CLI GetInfo GR 10)
+subrules b), c), p) and q).)  The writer of this comment does not know if
+there are codes that are necessary for CLI or other parts of SQL.  But see
+CLI subclause 7.1 SQL_IMPLEMENTATION_INFO base table. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem009" number="SCHEM-009">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_sql_sizing_base_table"/>
+</reference>
+
+
+<source>
+WG3:PER-118/H2-2001-???
+</source>
+
+
+<problem>
+
+<para>
+<extref part="11" ref="schem_sql_sizing_base_table"/>, is defined to contain
+information about SQL sizing items (identified by name and number) but
+these items are not defined in the other parts of the standard. 
+(<extref part="11" ref="schem_sqlszprofs_base_table"/>, has the same problem.) 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem028" number="SCHEM-028">
+
+<reference>
+P11, SQL/Schemata,
+No specific location
+</reference>
+
+
+<source>
+WG3:HBA-034R2 = H2-2003-343R4
+</source>
+
+
+<problem>
+
+<para>
+We have at least the following kinds of SQL-schema objects that might be
+involved in a dependency relationship
+</para>
+
+<ulist>
+
+<item>check constraints
+</item>
+
+<item>assertions
+</item>
+
+<item>generated columns
+</item>
+
+<item>SQL-invoked routines
+</item>
+
+<item>triggers
+</item>
+
+<item>views
+</item>
+
+<item>character sets
+</item>
+
+<item>collations
+</item>
+
+<item>transliterations
+</item>
+
+<item>domains
+</item>
+
+<item>non-generated columns
+</item>
+
+<item>base tables
+</item>
+
+<item>sequences
+</item>
+
+<item>user-defined types
+</item>
+
+</ulist>
+
+<para>
+We do not have Information Schema views to report all possible dependencies
+between these kinds of SQL-schema objects, as seen in this table:
+</para>
+
+<table>
+
+<table-setup numcols="15">
+<table-coldef colnum="1" colwidth="1.5in"/>
+<table-coldef colnum="2" colwidth=".25in"/>
+<table-coldef colnum="3" colwidth=".25in"/>
+<table-coldef colnum="4" colwidth=".25in"/>
+<table-coldef colnum="5" colwidth=".25in"/>
+<table-coldef colnum="6" colwidth=".25in"/>
+<table-coldef colnum="7" colwidth=".25in"/>
+<table-coldef colnum="8" colwidth=".25in"/>
+<table-coldef colnum="9" colwidth=".25in"/>
+<table-coldef colnum="10" colwidth=".25in"/>
+<table-coldef colnum="11" colwidth=".25in"/>
+<table-coldef colnum="12" colwidth=".25in"/>
+<table-coldef colnum="13" colwidth=".25in"/>
+<table-coldef colnum="14" colwidth=".25in"/>
+<table-coldef colnum="15" colwidth=".25in"/>
+</table-setup>
+
+<table-heads>
+<table-head-row>
+<table-head></table-head>
+<table-head span="14">Independent SQL-schema object</table-head>
+</table-head-row>
+<table-head-row>
+<table-head>Dependent SQL-schema object</table-head>
+<table-head>c h e c k   c o n s t r a i n t, a s s e r t i o n</table-head>
+<table-head>r e f e r e n t i a l   a n d   u n i q u e   c o n s t r a i n t</table-head>
+<table-head>g e n e r a t e d   c o l u m n</table-head>
+<table-head>n o n g e n e r a t e d   c o l u m n</table-head>
+<table-head>r o u t i n e</table-head>
+<table-head>t r i g g e r</table-head>
+<table-head>t a b l e   (i n c l u d i n g   v i e w)</table-head>
+<table-head>c h a r a c t e r   s e t</table-head>
+<table-head>c o l l a t i o n</table-head>
+<table-head>t r a n s l i t e r a t i o n</table-head>
+<table-head>d o m a i n</table-head>
+<table-head>s e q u e n c e</table-head>
+<table-head>u s e r - d e f i n e d   t y p e</table-head>
+<table-head>r e g i s t e r e d   X M L   S c h e m a</table-head>
+</table-head-row>
+</table-heads>
+
+<table-row>
+<table-cell>check constraint, assertion</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>y</table-cell>
+<table-cell>y</table-cell>
+<table-cell>y</table-cell>
+<table-cell></table-cell>
+<table-cell>y</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+</table-row>
+
+<table-row>
+<table-cell>referential and unique constraint</table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell>y</table-cell>
+<table-cell>y</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell>y</table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+</table-row>
+
+<table-row>
+<table-cell>generated column</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>y</table-cell>
+<table-cell>N</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+</table-row>
+
+<table-row>
+<table-cell>nongenerated column</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell>y</table-cell>
+<table-cell></table-cell>
+<table-cell>y</table-cell>
+<table-cell></table-cell>
+</table-row>
+
+<table-row>
+<table-cell>routine</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>y</table-cell>
+<table-cell>y</table-cell>
+<table-cell>y</table-cell>
+<table-cell></table-cell>
+<table-cell>y</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>y</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+</table-row>
+
+<table-row>
+<table-cell>trigger</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>y</table-cell>
+<table-cell>y</table-cell>
+<table-cell>y</table-cell>
+<table-cell></table-cell>
+<table-cell>y</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>y</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+</table-row>
+
+<table-row>
+<table-cell>table (including view)</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>y</table-cell>
+<table-cell>y</table-cell>
+<table-cell>y</table-cell>
+<table-cell></table-cell>
+<table-cell>y</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+</table-row>
+
+<table-row>
+<table-cell>character set</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+</table-row>
+
+<table-row>
+<table-cell>collation</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+</table-row>
+
+<table-row>
+<table-cell>transliteration</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+</table-row>
+
+<table-row>
+<table-cell>domain</table-cell>
+<table-cell>N</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+<table-cell>N</table-cell>
+</table-row>
+
+<table-row>
+<table-cell>sequence</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+</table-row>
+
+<table-row>
+<table-cell>user-defined type</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+<table-cell></table-cell>
+</table-row>
+
+<table-row>
+<table-cell>registered XML Schema</table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell></table-cell>
+<table-cell>N</table-cell>
+</table-row>
+
+</table>
+
+<para>
+In the preceding table,
+</para>
+
+<blist>
+
+<item>A blank cell means that the dependency cannot occur. 
+</item>
+
+<item>'y' means that an Information Schema view exists to report such
+dependencies. 
+</item>
+
+<item>'N' means that such dependencies can occur, but there is no reporting
+mechanism currently. 
+</item>
+
+</blist>
+
+<para>
+Most of the possible dependencies are explained as follows:
+</para>
+
+<blist>
+
+<item>A <BNF name="value expression"/> can be a <BNF name="scalar subquery"/>, which can be 
+a grouped query, which can depend on a check constraint, assertion, or unique
+constraint in order to deduce a functional dependency.  Thus, anything
+that permits a <BNF name="value expression"/> can be dependent on a check constraint,
+assertion or unique constraint (but only if <feature code="T301">Functional dependencies</feature>
+is supported). 
+</item>
+
+<item><kw>CAST</kw> to a character string type with a user-defined character set implies
+a dependency on the character set.  Thus anything permitting 
+a <BNF name="value expression"/> might be dependent on a character set. 
+</item>
+
+<item>A collation can be used in comparison predicates, and thus most kinds of
+SQL-schema objects might depend on a collation. 
+</item>
+
+<item>A <BNF name="value expression"/> can contain a <kw>CONVERT</kw> expression, which
+depends on a transliteration, so most kinds of SQL-schema objects might
+depend on a transliteration.  Conversely, a transliteration uses an SQL-invoked
+routine, so a transliteration can be dependent on anything that a routine can be dependent on.
+</item>
+
+</blist>
+
+<para>
+Speaking in orders of magnitude, if we have n kinds of SQL-schema objects,
+and we add one more, then we have (n + 1)<super>2</super> - n<super>2</super> = 2n + 1 new kinds of
+dependency to think about.  Thus the cost of adding one kind of SQL-schema
+object is potentially 2n + 1 new kinds of dependency. 
+</para>
+
+<para>Aside from the fact that so many kinds of dependency are currently
+unsupported, [Fred Zemke thinks] that the technique of creating one Information Schema
+view for each kind of dependency has become unmanageable for our users,
+and unmaintainable for ourselves. Therefore, [Fred thinks] it is time to come up
+with a different model for dependency tracking and reporting. [Fred thinks] the
+correct approach is to define a base table to track immediate dependencies
+between all kinds of SQL-schema objects, and a recursive Information
+Schema view that shows all deducible dependencies. 
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPschem023" number="SCHEM-023">
+
+<reference>
+P11, SQL/Schemata
+No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+Implementations should not be required to expose columns about optional
+features that they don't support.  For example, in Subclause 5.22,
+"COLUMNS view", the IS_SELF_REFERENCING column is meaningful only if
+Feature S051, "Create tables of type", is implemented.  If conformance to
+that feature is not claimed, then references to the column should be
+prohibited. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:SQL-038</comment
+<comment>WG3:WLG-077</comment>
+<PP id="PPschem35" number="SCHEM-035" severity="major" realm="technical">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_char_repers_base_table"/>
+</reference>
+
+
+<source>
+WG3:WLG-077
+</source>
+
+
+<problem>
+
+<para>
+The table CHARACTER_REPERTOIRE has a foreign key defined for a default collation. As
+CHARACTER_REPERTOIRE has itself in its primary key only the name, it is not clear, which collation
+(Catalog and Schema) should here be referenced? Is there a special catalog or schema which holds
+these default collations?
+</para>
+
+<para>
+This table was added by [ICN-054R2], and there it is also not explained, which catalog should be
+used.
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:SQL-038</comment
+<comment>WG3:WLG-077</comment>
+<PP id="PPschem36" number="SCHEM-036" severity="major" realm="technical">
+
+<reference>
+P11, SQL/Schemata,
+<extref part="11" ref="schem_collations_base_table"/>
+</reference>
+
+
+<source>
+WG3:WLG-077
+</source>
+
+
+<problem>
+
+<para>
+The Collation Descriptor in [FOUND CD] Subclause 4.2.6 contains the Attribute "Name". 
+This is a schema qualified name, and contains therefore catalog and schema name.
+</para>
+
+<para>
+In the definition of the initial data it is not defined, to which catalog / schema this data 
+belongs.
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:W11-021</comment>
+<comment>WG3:WLG-077</comment>
+<PP id="PPschem34" number="SCHEM-034" severity="major" realm="technical">
+
+<reference>
+P11, SQL/Schemata,
+No specific location
+</reference>
+
+
+<source>
+WG3:WLG-077
+</source>
+
+
+<problem>
+
+<para>
+The tables CHARACTER_ENCODING_FORMS, CHARACTER_REPERTOIRES, COLLATIONS,
+AUTHORIZATIONS and COLLATION_CHARACTER_SET_APPLICABILITY have in the definitions of
+their respective descriptors in [FOUND CD], initial data assigned.
+</para>
+
+<para>
+This is not reflected in the respective table definitions in [SCHEM CD].
+</para>
+
+<para>
+The only exception, where this is done, is the definition of the CHARACTER_SETS base table. In
+Description 6) to 8). But even that does not cover all predefined character sets in [FOUND CD].
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+<PP id="PPschem037" number="SCHEM-037" severity="minor" realm="technical">
+
+<reference>P11, SQL/Schemata,
+<extref part="11" ref="schem_rtn_rtn_usage_view"/>, and
+<extref part="11" ref="schem_rtn_rtn_use_base_table"/>
+</reference>
+
+
+<source>WG3:W03-010 and WG3:W04-010
+</source>
+
+
+<problem>
+
+<para>The table and the view use the column names ROUTINE_CATALOG, ROUTINE_SCHEMA, and
+ROUTINE_NAME to refer to a specific name of a routine, but in other tables and views these
+column names refer to (non-specific) routine names. 
+That makes the column naming inconsistent and confusing,
+both within this table and this view as well as relative to other related tables and views.
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>The columns in ROUTINE_ROUTINE_USAGE ought to be renamed to a more consistent and
+clearer naming scheme. 
+Alternatively, if no renaming is desired, a note could be added to point out
+the different meaning.
+</para>
+
+</solution>
+
+</PP>
+
+
+
+<comment>RESOLVED BY WG3:W22-037R1</comment>
+<PP id="PPschem038" number="SCHEM-038" severity="minor" realm="technical">
+
+<reference>P11, SQL/Schemata, <extref part="11" ref="schem_routines_base_table"/>
+</reference>
+
+
+<source>WG3:W18-029
+</source>
+
+
+<problem>
+
+<para>The constraint added by WG3:W18-029, ROUTINES_TO_SQL_ROUTINE_FOREIGN_KEY,
+does not have a MATCH clause, while similar contraints have MATCH ALL.
+Should the new constraint have MATCH ALL?
+</para>
+
+</problem>
+
+</PP>
+
+
+
+
+
+-->
+
+</EditorNotes>

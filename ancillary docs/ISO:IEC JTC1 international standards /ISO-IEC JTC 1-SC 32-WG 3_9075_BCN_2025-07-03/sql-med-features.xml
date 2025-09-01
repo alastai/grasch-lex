@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element ("features") that 
+identifies every optional language feature defined in ("used in") a part of ISO/IEC 9075. 
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to specify the natural-language text that describes the features
+implemented in a particular SQL-implementation.  
+It may also be used by documentation writers and translators to identify those features in the 
+natural languages of users of those SQL-implementations.
+-->
+
+
+ 
+<!DOCTYPE features [
+  
+<!-- The features element defines the features of a standard (part). -->
+<!ELEMENT features ((feature)*)>
+
+<!-- A feature element defines a specific feature. -->
+<!ELEMENT feature (code, description, implies?)>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the feature. -->
+<!ELEMENT description (#PCDATA | squote)*>
+
+<!-- An implies element provides a set of implied features. -->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)*>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT impliedFeature (#PCDATA)>
+
+<!-- An atLeastOneOf element provides a set of implied features where only one is required. -->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+]>
+
+<features>
+   <feature>
+      <code>M001</code>
+      <description>Datalinks</description>
+   </feature>
+   <feature>
+      <code>M002</code>
+      <description>Datalinks via SQL/CLI</description>
+      <implies>
+         <impliedFeature>M001</impliedFeature>
+         <atLeastOneOf>
+            <impliedFeature>C001</impliedFeature>
+            <impliedFeature>C002</impliedFeature>
+            <impliedFeature>C003</impliedFeature>
+            <impliedFeature>C004</impliedFeature>
+            <impliedFeature>C005</impliedFeature>
+            <impliedFeature>C006</impliedFeature>
+            <impliedFeature>C007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M003</code>
+      <description>Datalinks via Embedded SQL</description>
+      <implies>
+         <impliedFeature>M001</impliedFeature>
+         <atLeastOneOf>
+            <impliedFeature>M011</impliedFeature>
+            <impliedFeature>M012</impliedFeature>
+            <impliedFeature>M013</impliedFeature>
+            <impliedFeature>M014</impliedFeature>
+            <impliedFeature>M015</impliedFeature>
+            <impliedFeature>M016</impliedFeature>
+            <impliedFeature>M017</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M004</code>
+      <description>Foreign data support</description>
+      <implies>
+         <impliedFeature>M031</impliedFeature>
+         <atLeastOneOf>
+            <impliedFeature>M018</impliedFeature>
+            <impliedFeature>M019</impliedFeature>
+            <impliedFeature>M020</impliedFeature>
+            <impliedFeature>M021</impliedFeature>
+            <impliedFeature>M022</impliedFeature>
+            <impliedFeature>M023</impliedFeature>
+            <impliedFeature>M024</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M005</code>
+      <description>Foreign schema support</description>
+      <implies>
+         <impliedFeature>M004</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M006</code>
+      <description>GetSQLString routine</description>
+      <implies>
+         <impliedFeature>M004</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M007</code>
+      <description>TransmitRequest</description>
+      <implies>
+         <impliedFeature>M010</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M009</code>
+      <description>GetOpts and GetStatistics routines</description>
+      <implies>
+         <impliedFeature>M010</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M010</code>
+      <description>Foreign-data wrapper support</description>
+      <implies>
+         <impliedFeature>M031</impliedFeature>
+         <atLeastOneOf>
+            <impliedFeature>M018</impliedFeature>
+            <impliedFeature>M019</impliedFeature>
+            <impliedFeature>M020</impliedFeature>
+            <impliedFeature>M021</impliedFeature>
+            <impliedFeature>M022</impliedFeature>
+            <impliedFeature>M023</impliedFeature>
+            <impliedFeature>M024</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M011</code>
+      <description>Datalinks via Ada</description>
+      <implies>
+         <impliedFeature>M003</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M012</code>
+      <description>Datalinks via C</description>
+      <implies>
+         <impliedFeature>M003</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M013</code>
+      <description>Datalinks via COBOL</description>
+      <implies>
+         <impliedFeature>M003</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M014</code>
+      <description>Datalinks via Fortran</description>
+      <implies>
+         <impliedFeature>M003</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M015</code>
+      <description>Datalinks via M</description>
+      <implies>
+         <impliedFeature>M003</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M016</code>
+      <description>Datalinks via Pascal</description>
+      <implies>
+         <impliedFeature>M003</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M017</code>
+      <description>Datalinks via PL/I</description>
+      <implies>
+         <impliedFeature>M003</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>M018</code>
+      <description>Foreign-data wrapper interface routines in Ada</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>M004</impliedFeature>
+            <impliedFeature>M010</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M019</code>
+      <description>Foreign-data wrapper interface routines in C</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>M004</impliedFeature>
+            <impliedFeature>M010</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M020</code>
+      <description>Foreign-data wrapper interface routines in COBOL</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>M004</impliedFeature>
+            <impliedFeature>M010</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M021</code>
+      <description>Foreign-data wrapper interface routines in Fortran</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>M004</impliedFeature>
+            <impliedFeature>M010</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M022</code>
+      <description>Foreign-data wrapper interface routines in MUMPS</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>M004</impliedFeature>
+            <impliedFeature>M010</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M023</code>
+      <description>Foreign-data wrapper interface routines in Pascal</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>M004</impliedFeature>
+            <impliedFeature>M010</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M024</code>
+      <description>Foreign-data wrapper interface routines in PL/I</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>M004</impliedFeature>
+            <impliedFeature>M010</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>M031</code>
+      <description>Foreign-data wrapper general routines</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>M004</impliedFeature>
+            <impliedFeature>M010</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+</features>

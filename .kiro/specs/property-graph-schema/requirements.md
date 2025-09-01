@@ -1350,7 +1350,7 @@ Analysis:
 
 ## Requirement 51
 
-**User Story:** As a developer working with diverse property graph systems, I want Grasch to support a five-language dependency graph that covers the major property graph schema capabilities, so that I can emulate the schema systems most widely used in the industry while having LEX as an intermediate language and sink node with maximum capability.
+**User Story:** As a developer working with diverse property graph systems, I want Grasch to support a six-language dependency graph that covers the major property graph schema capabilities, so that I can emulate the schema systems most widely used in the industry while having LEX as an intermediate language and sink node with maximum capability.
 
 #### Acceptance Criteria
 
@@ -1386,7 +1386,14 @@ classDiagram
         +constraints: Capability
     }
     
-    class GSQL_NEO {
+    class GSQL {
+        <<Language>>
+        +dataModel: Capability
+        +structure: Capability
+        +constraints: Capability
+    }
+    
+    class Cypher_2025 {
         <<Language>>
         +dataModel: Capability
         +structure: Capability
@@ -1396,7 +1403,8 @@ classDiagram
     GQL --|> LEX : "is subset of"
     PG_Schema --|> LEX : "is subset of"
     PGQ --|> LEX : "is subset of"  
-    GSQL_NEO --|> GQL : "is subset of"
+    Cypher_2025 --|> LEX : "is subset of"
+    GSQL --|> GQL : "is subset of"
     PGQ --|> GQL : "is structural subset of"
     
     note for LEX "LEX serves as an Intermediate Language\nfor property graph schema with\nmaximum expressiveness"
@@ -1409,11 +1417,12 @@ classDiagram
 2. WHEN I analyze subset relationships THEN the system SHALL enforce that GQL ⊂ LEX (GQL is subset of LEX)
 3. WHEN I analyze subset relationships THEN the system SHALL enforce that PG-Schema ⊂ LEX (PG-Schema is subset of LEX)
 4. WHEN I analyze subset relationships THEN the system SHALL enforce that PGQ ⊂ LEX (PGQ is subset of LEX)
-5. WHEN I analyze subset relationships THEN the system SHALL enforce that GSQL/NEO ⊂ GQL (GSQL/NEO is subset of GQL)
-6. WHEN I work with structural relationships THEN the system SHALL recognize that GQL is a structural superset of PGQ (GQL ⊃ PGQ structurally)
-7. WHEN I analyze constraint capabilities THEN the system SHALL acknowledge that PGQ has key constraints that are not present in GQL
-8. WHEN I work with the dependency graph THEN the system SHALL NOT treat this as a linear hierarchy but as a directed acyclic graph with LEX as the sink
-9. WHEN I use LEX as an intermediate language THEN the system SHALL enable translation between different property graph schema languages through LEX as a common representation
+5. WHEN I analyze subset relationships THEN the system SHALL enforce that Cypher 2025 ⊂ LEX (Cypher 2025 is subset of LEX)
+6. WHEN I analyze subset relationships THEN the system SHALL enforce that GSQL ⊂ GQL (GSQL is subset of GQL)
+7. WHEN I work with structural relationships THEN the system SHALL recognize that GQL is a structural superset of PGQ (GQL ⊃ PGQ structurally)
+8. WHEN I analyze constraint capabilities THEN the system SHALL acknowledge that PGQ has key constraints that are not present in GQL
+9. WHEN I work with the dependency graph THEN the system SHALL NOT treat this as a linear hierarchy but as a directed acyclic graph with LEX as the sink
+10. WHEN I use LEX as an intermediate language THEN the system SHALL enable translation between different property graph schema languages through LEX as a common representation
 
 **Language-Specific Capabilities:**
 
@@ -1439,21 +1448,25 @@ classDiagram
     - WHEN I work with PGQ THEN the system SHALL support key constraints not available in GQL
     - WHEN I compare PGQ to other languages THEN the system SHALL recognize PGQ's unique constraint modeling capabilities
 
-14. **GSQL/NEO (Base Capabilities)**:
-    - WHEN I use GSQL/NEO THEN the system SHALL provide basic property graph schema capabilities as found in early graph database systems
-    - WHEN I work with GSQL/NEO THEN the system SHALL emulate Neo4j-style and similar basic graph schema approaches
-    - WHEN I compare GSQL/NEO to GQL THEN the system SHALL recognize GSQL/NEO as a proper subset with foundational graph modeling features
-    - WHEN I analyze PGQ constraints THEN the system SHALL recognize capabilities that complement GQL's structural features
+14. **GSQL (TigerGraph Language)**:
+    - WHEN I use GSQL THEN the system SHALL provide TigerGraph GSQL schema capabilities as a subset of GQL
+    - WHEN I work with GSQL THEN the system SHALL support TigerGraph-style graph schema definitions
+    - WHEN I compare GSQL to GQL THEN the system SHALL recognize GSQL as a proper subset focused on TigerGraph compatibility
+
+15. **Cypher 2025 (Neo4j Language)**:
+    - WHEN I use Cypher 2025 THEN the system SHALL provide Neo4j Cypher 2025 schema capabilities as a subset of LEX
+    - WHEN I work with Cypher 2025 THEN the system SHALL support Neo4j-style graph schema definitions and constraints
+    - WHEN I compare Cypher 2025 to LEX THEN the system SHALL recognize Cypher 2025 as having specialized Neo4j-specific features
 
 
 
 **Dependency Graph Validation:**
 
-12. WHEN I configure a session with any language level THEN the system SHALL validate compatibility based on the dependency graph relationships
-13. WHEN I attempt to use features not available in the selected language THEN the system SHALL provide clear error messages referencing the dependency graph
-14. WHEN I switch between languages THEN the system SHALL validate schema compatibility according to the subset and structural relationships
-15. WHEN I work with cross-language compatibility THEN the system SHALL handle the asymmetric relationship between GQL and PGQ (structural vs constraint capabilities)
-16. WHEN I serialize schemas THEN the system SHALL preserve dependency graph positioning and validate relationships during deserialization
+16. WHEN I configure a session with any language level THEN the system SHALL validate compatibility based on the dependency graph relationships
+17. WHEN I attempt to use features not available in the selected language THEN the system SHALL provide clear error messages referencing the dependency graph
+18. WHEN I switch between languages THEN the system SHALL validate schema compatibility according to the subset and structural relationships
+19. WHEN I work with cross-language compatibility THEN the system SHALL handle the asymmetric relationship between GQL and PGQ (structural vs constraint capabilities)
+20. WHEN I serialize schemas THEN the system SHALL preserve dependency graph positioning and validate relationships during deserialization
 
 ## Requirement 52
 
@@ -1618,6 +1631,116 @@ classDiagram
 21. WHEN I handle type system evolution THEN the system SHALL support versioning of type mappings as different systems evolve their type support
 22. WHEN I optimize for performance THEN the system SHALL cache type mapping results and provide efficient type conversion operations
 
-<!-
-- Test comment added to trigger Agent Hook at $(date) --><!-- 
-Hook test - $(date) -->
+## Requirement 55
+
+**User Story:** As a developer working with LEX-extended GQL, I want to use type-aware INSERT statements that leverage DDL-defined type identifiers, so that I can insert graph elements with automatic label and property value completion based on the schema definition, and execute GQL DML operations on catalog graphs.
+
+#### Acceptance Criteria
+
+**Type-Aware INSERT Extensions:**
+
+1. WHEN I define a node type or edge type in DDL with a type identifier THEN the system SHALL allow INSERT commands to reference that type identifier for automatic schema-based completion
+2. WHEN I use a type annotation in an INSERT statement THEN the system SHALL validate that the INSERT values create an instance that conforms to the identified type
+3. WHEN I INSERT with a type identifier THEN the system SHALL automatically supply any non-key labels that are specified directly or indirectly in the type specification
+4. WHEN I INSERT with a type identifier THEN the system SHALL automatically supply default property values that are defined in the type specification or its referenced content record types
+5. WHEN I use type-aware INSERT THEN the system SHALL ensure that explicitly provided values take precedence over schema-defined defaults
+6. WHEN I validate type-aware INSERT operations THEN the system SHALL verify that all mandatory properties and labels are satisfied either through explicit values or schema defaults
+
+**GQL DML Integration:**
+
+7. WHEN I work with LEX catalog operations THEN the system SHALL support standard GQL DML statements (INSERT, UPDATE, DELETE, MERGE) for operating on catalog graphs
+8. WHEN I reference GQL DML specifications THEN the system SHALL implement data-modifying statements as described in the GQL XML specification documents
+9. WHEN I execute DML on catalog graphs THEN the system SHALL maintain referential integrity and constraint validation according to the catalog's schema definitions
+10. WHEN I use DML operations THEN the system SHALL support both standard GQL DML syntax and LEX-extended type-aware variants
+
+**Schema-Driven Value Completion:**
+
+11. WHEN I define default values in content record types THEN the system SHALL make these available for automatic completion during type-aware INSERT operations
+12. WHEN I work with nested content record structures THEN the system SHALL recursively apply default values at all levels of the content hierarchy
+13. WHEN I specify optional properties in type definitions THEN the system SHALL distinguish between properties that should receive default values vs properties that should remain unset
+14. WHEN I handle property inheritance in content type lattices THEN the system SHALL apply defaults from supertypes when not overridden in subtypes
+
+**Type Identifier Resolution:**
+
+15. WHEN I reference a type identifier in INSERT statements THEN the system SHALL resolve the identifier within the current catalog context
+16. WHEN I work with qualified type names THEN the system SHALL support schema-qualified type identifiers for disambiguation
+17. WHEN I validate type identifier references THEN the system SHALL provide clear error messages for undefined or ambiguous type identifiers
+18. WHEN I use type identifiers across different schemas THEN the system SHALL enforce proper scoping and visibility rules
+
+**DML Operation Validation:**
+
+19. WHEN I execute type-aware INSERT operations THEN the system SHALL validate the complete element instance against all applicable constraints
+20. WHEN I perform DML operations on catalog graphs THEN the system SHALL ensure that catalog integrity is maintained throughout the operation
+21. WHEN I use batch DML operations THEN the system SHALL support transactional semantics for multiple type-aware INSERT statements
+22. WHEN I handle DML errors THEN the system SHALL provide specific feedback about constraint violations, type mismatches, or missing required values
+
+**Catalog Graph DML Support:**
+
+23. WHEN I operate on catalog structures THEN the system SHALL support DML operations for creating, modifying, and deleting catalog objects (directories, schemas, types)
+24. WHEN I use DML on Information Schema Graphs THEN the system SHALL automatically update ISG structures to reflect schema changes
+25. WHEN I modify content type lattices through DML THEN the system SHALL maintain lattice properties and update dependent relationships
+26. WHEN I execute catalog DML operations THEN the system SHALL provide appropriate authorization and validation checks
+
+**DQL (Query) Operation Delegation:**
+
+27. WHEN I perform read-only query operations THEN the system SHALL delegate all DQL (Data Query Language) operations to the plugged-in property graph database library
+28. WHEN I use pattern matching queries THEN the system SHALL use the query language supported by the underlying database (e.g., Cypher for Kuzu, GQL when available)
+29. WHEN I query LEX graphs THEN the system SHALL NOT provide any DQL operations beyond those supported by the underlying property graph library
+30. WHEN I work with Kuzu as the backend THEN the system SHALL use Cypher for all read-only operations until Kuzu supports GQL natively
+31. WHEN I switch database backends THEN the system SHALL adapt to use the query language capabilities of the selected backend
+32. WHEN I document query capabilities THEN the system SHALL clearly state that DQL operations are limited to the underlying database's native query language support
+
+**Underlying Database Implementation:**
+
+33. WHEN I execute DDL statements THEN the system SHALL use the underlying database language "underneath the covers" to implement catalog structure changes
+34. WHEN I execute DML statements THEN the system SHALL translate GQL/LEX DML operations into the underlying database's native language for actual data modification
+35. WHEN I update catalog objects THEN the system SHALL use the underlying database's native operations to effect changes to Primary Catalog Objects (PCOs)
+36. WHEN I modify graph types and schemas THEN the system SHALL implement these changes using the underlying database's data manipulation capabilities
+37. WHEN I work with catalog integrity THEN the system SHALL rely on the underlying database's transaction and constraint mechanisms to maintain consistency
+38. WHEN I handle DDL/DML translation THEN the system SHALL provide a clear abstraction layer that maps GQL/LEX operations to underlying database operations
+
+**LEX Extension Compatibility:**
+
+39. WHEN I use LEX-extended DML features THEN the system SHALL clearly distinguish between standard GQL DML and LEX extensions
+40. WHEN I configure language levels THEN the system SHALL disable LEX DML extensions when operating in strict GQL mode
+41. WHEN I serialize DML operations THEN the system SHALL preserve type identifier information and schema-completion metadata
+42. WHEN I document DML extensions THEN the system SHALL provide clear examples of type-aware INSERT syntax and catalog DML operations
+43. WHEN I work with database abstraction THEN the system SHALL clearly document which operations are Grasch-provided (DDL/DML) versus database-delegated (DQL)
+
+**Database Profile Requirements and Language Compatibility:**
+
+44. WHEN I use a plugged-in graph database THEN the system SHALL require that the database supports some variant of the property graph data model as defined by GQL
+45. WHEN I work with database implementation restrictions THEN the system SHALL support profiling to declare constraints such as limits on the number of labels per node or edge
+46. WHEN I configure database profiles THEN the system SHALL allow specification of implementation-specific restrictions that may be inherent to the underlying database or imposed by the overlay language level
+
+**Language-Specific Profile Constraints:**
+
+47. **GSQL Compatibility**:
+    - WHEN I use GSQL THEN the system SHALL require that the underlying database is constrained to support exactly one label per node type
+    - WHEN I use GSQL THEN the system SHALL require that the underlying database is constrained to support exactly one label per edge type
+    - WHEN I validate GSQL compatibility THEN the system SHALL reject configurations that allow multiple labels per element type
+
+48. **Multi-Label Language Requirements (PGQ, GQL, LEX, PG-Schema)**:
+    - WHEN I use PGQ THEN the system SHALL require that the underlying database supports multiple labels for both node types and edge types
+    - WHEN I use GQL THEN the system SHALL require that the underlying database supports multiple labels for both node types and edge types
+    - WHEN I use LEX THEN the system SHALL require that the underlying database supports multiple labels for both node types and edge types
+    - WHEN I use PG-Schema THEN the system SHALL require that the underlying database supports multiple labels for both node types and edge types
+
+**Profile Constraint Sources:**
+
+49. **Database-Inherent Constraints**:
+    - WHEN I work with database-inherent restrictions THEN the system SHALL detect and respect limitations that are built into the underlying database architecture
+    - WHEN I validate database capabilities THEN the system SHALL probe the database to determine its native property graph model constraints
+    - WHEN I handle database limitations THEN the system SHALL provide clear error messages when language requirements exceed database capabilities
+
+50. **Overlay Language Constraints**:
+    - WHEN I impose overlay language restrictions THEN the system SHALL allow language levels to add constraints beyond those inherent in the database
+    - WHEN I use Cypher 2025 with limited DDL THEN the system SHALL support this configuration even when running on a more capable GQL-compatible system
+    - WHEN I configure overlay constraints THEN the system SHALL validate that the imposed restrictions are compatible with the selected language level
+
+**Cross-Language Database Support:**
+
+51. WHEN I use a GQL-compatible database THEN the system SHALL support Cypher 2025 implementations with appropriate profile restrictions
+52. WHEN I switch between language levels THEN the system SHALL validate that the current database profile supports the target language's requirements
+53. WHEN I document language-database compatibility THEN the system SHALL provide clear matrices showing which languages are compatible with which database profiles
+54. WHEN I handle profile mismatches THEN the system SHALL provide specific guidance on how to adjust either the language level or database configuration to achieve compatibility

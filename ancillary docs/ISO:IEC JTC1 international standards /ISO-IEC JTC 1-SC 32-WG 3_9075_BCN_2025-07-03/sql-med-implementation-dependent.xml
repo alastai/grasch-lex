@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" contains an XML element 
+(implementationDependent) that identifies every aspect of a part of ISO/IEC 9075 that is specified to be 
+"implementation-dependent".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-dependent codes is always U. 
+This distinguishes it from the codes used for optional features and implementation-defined 
+features.
+The second letter of implementation-dependent codes have the following meanings:
+    A Actions
+    D Defaults
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+-->
+
+
+
+<!DOCTYPE implementationDependent [
+  
+<!-- The implementationDependent element defines the implementation-dependent features of 
+a standard (part). -->
+<!ELEMENT implementationDependent (unDef*)>
+
+<!-- An unDef element defines a specific implementation-dependent feature. -->
+<!ELEMENT unDef (code, description)>
+
+<!-- A code element specifies the unique code for an implementation-dependent feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-dependent feature.
+-->
+<!ELEMENT description (#PCDATA)>
+
+]>
+
+<implementationDependent>
+   <unDef>
+      <code>UA012</code>
+      <description>Whether a foreign-data wrapper uses the information about the query context provided by the query context handle to re-use the previously evaluated value expression.</description>
+   </unDef>
+   <unDef>
+      <code>UA024</code>
+      <description>Whether certain General Rules dealing with table references are applied more than once.</description>
+   </unDef>
+   <unDef>
+      <code>UA033</code>
+      <description>The circumstances under which GetOpts() is invoked.</description>
+   </unDef>
+   <unDef>
+      <code>UA034</code>
+      <description>The circumstances under which GetStatistics() is invoked.</description>
+   </unDef>
+   <unDef>
+      <code>UA035</code>
+      <description>Whether the NextReply() routine is invoked.</description>
+   </unDef>
+   <unDef>
+      <code>UA036</code>
+      <description>The actions of invoking the SQL-server in response to the failed execution of a foreign-data wrapper interface wrapper routine.</description>
+   </unDef>
+   <unDef>
+      <code>UA037</code>
+      <description>What use the AllocWrapperEnv() routine makes of the values of the WrapperName and the WrapperLibraryName.</description>
+   </unDef>
+   <unDef>
+      <code>UA038</code>
+      <description>What use the foreign-data wrapper makes of the values of AuthorizationID, ServerName, ServerType, and ServerVersion.</description>
+   </unDef>
+   <unDef>
+      <code>UA039</code>
+      <description>Whether the indication of whether GetSQLString() is True or False.</description>
+   </unDef>
+   <unDef>
+      <code>UA072</code>
+      <description>The generation of the access token and the method of combining it with File Reference.</description>
+   </unDef>
+   <unDef>
+      <code>US025</code>
+      <description>If multiple status records are generated, then, with two exceptions, the order in which status records are placed in a diagnostics area.</description>
+   </unDef>
+   <unDef>
+      <code>UV032</code>
+      <description>The Write Token of a datalink value.</description>
+   </unDef>
+   <unDef>
+      <code>UV034</code>
+      <description>After the execution of a foreign-data wrapper interface routine, the values of all output arguments not explicitly defined by ISO/IEC 9075.</description>
+   </unDef>
+   <unDef>
+      <code>UV035</code>
+      <description>The number and specification of the ‹value expression›s, the number of foreign tables, and the number and specification of the ‹boolean value expression›s involved in the evaluation of an SQL/MED ‹table reference›.</description>
+   </unDef>
+   <unDef>
+      <code>UV036</code>
+      <description>The value of each remaining header field and the value of each field in the contained item descriptor area and subordinate item descriptor field, if any.</description>
+   </unDef>
+   <unDef>
+      <code>UV037</code>
+      <description>The foreign table descriptor resulting from a ‹foreign table definition› includes an indication of the column name.</description>
+   </unDef>
+   <unDef>
+      <code>UV038</code>
+      <description>The values to which all settable fields, except DATA and DATA_POINTER, in the item descriptor area of a server parameter descriptor when ‹using arguments› is specified.</description>
+   </unDef>
+   <unDef>
+      <code>UV039</code>
+      <description>If ‹library name specification› is not specified, then the implicit ‹library name› of a ‹library name specification›.</description>
+   </unDef>
+   <unDef>
+      <code>UV040</code>
+      <description>The name of the cursor.</description>
+   </unDef>
+   <unDef>
+      <code>UV041</code>
+      <description>The values to which fields whose values depend on a value of TYPE and fields that are not applicable for a particular value of TYPE are set.</description>
+   </unDef>
+   <unDef>
+      <code>UV042</code>
+      <description>The value to which the descriptor item NAME is set when a column or field name is implementation-dependent.</description>
+   </unDef>
+   <unDef>
+      <code>UV043</code>
+      <description>The four-octet value that represents a locator.</description>
+   </unDef>
+   <unDef>
+      <code>UV044</code>
+      <description>The values of the variables addressed by DATA_POINTER and OCTET_LENGTH_POINTER fields in the item descriptor area when the value of the bound target is NULL.</description>
+   </unDef>
+   <unDef>
+      <code>UV046</code>
+      <description>The values of the remaining octets when a string is assigned to target of greater length.</description>
+   </unDef>
+   <unDef>
+      <code>UV048</code>
+      <description>The values of all the bound targets when an exception condition is raised during the derivation of any target value.</description>
+   </unDef>
+   <unDef>
+      <code>UV049</code>
+      <description>The values of all fields of the item descriptor area, except for COUNT, for which specific values were provided in the invocation of SetDescField() when an exception condition is raised.</description>
+   </unDef>
+   <unDef>
+      <code>UV050</code>
+      <description>The values to which all fields of item descriptor area other than those prescribed are set when the FieldIdentifier indicates TYPE.</description>
+   </unDef>
+   <unDef>
+      <code>UV051</code>
+      <description>The values to which the remaining octets of DiagInfo are set when the length of the value received is not greater then the buffer length.</description>
+   </unDef>
+   <unDef>
+      <code>UW006</code>
+      <description>The manner in which the SQL-server interacts with a foreign-data wrapper to import information about a foreign schema.</description>
+   </unDef>
+   <unDef>
+      <code>UW007</code>
+      <description>The mechanism by which the datalinker enables integrity control, recovery, and access control for external files.</description>
+   </unDef>
+   <unDef>
+      <code>UW008</code>
+      <description>When the datalink value returned by DLPREVIOUSCOPY indicates to the SQL-server that the content of the file might have changed, the manner in which the original is restored.</description>
+   </unDef>
+   <unDef>
+      <code>UW009</code>
+      <description>The manner in which the external file corresponding to the datalink value at the site is under the control of the SQL-implementation when the value of DATALINK_INTEGRITY is “SELECTIVE”.</description>
+   </unDef>
+   <unDef>
+      <code>UW011</code>
+      <description>The way in which the pair of reply handle and execution handle are chosen in the execution of an AdvanceInitRequest() function.</description>
+   </unDef>
+</implementationDependent>

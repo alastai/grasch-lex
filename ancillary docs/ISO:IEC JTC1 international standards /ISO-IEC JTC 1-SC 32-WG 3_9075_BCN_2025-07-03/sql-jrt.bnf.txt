@@ -1,0 +1,154 @@
+
+************************************************************************************************
+This file is a "digital artifact" that contains the grammar specified by a part of ISO/IEC 9075.
+
+This grammar may be used by implementers of SQL-implementations when generating parsers for the 
+SQL language.
+************************************************************************************************
+
+<reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | JAR
+
+<non-reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | COMPARABLE
+  | INSTALL
+  | INTERFACE
+  | JAVA
+  | REMOVE
+  | SQLDATA
+  | VARIABLE
+
+<jar name> ::=
+    [ <schema name> <period> ] <jar id>
+
+<jar id> ::=
+    <identifier>
+
+<Java class name> ::=
+    [ <packages> <period> ] <class identifier>
+
+<jar and class name> ::=
+    <jar id> <colon> <Java class name>
+
+<qualified Java field name> ::=
+    [ <Java class name> <period> ] <Java field name>
+
+<packages> ::=
+    <package identifier> [ <period> <package identifier> ]...
+
+<package identifier> ::=
+    <Java identifier>
+
+<class identifier> ::=
+    <Java identifier>
+
+<Java field name> ::=
+    <Java identifier>
+
+<Java method name> ::=
+    <Java identifier>
+
+<Java identifier> ::=
+    !! See the Syntax Rules.
+
+<language name> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | JAVA
+
+<Java parameter declaration list> ::=
+    <left paren> [ <Java parameters> ] <right paren>
+
+<Java parameters> ::=
+    <Java data type> [ { <comma> <Java data type> }... ]
+
+<Java data type> ::=
+    !! See the Syntax Rules.
+
+<SQL Java path> ::=
+    [ <path element>... ]
+
+<path element> ::=
+    <left paren> <referenced class> <comma> <resolution jar> <right paren>
+
+<referenced class> ::=
+    [ <packages> <period> ] <asterisk>
+  | [ <packages> <period> ] <class identifier>
+
+<resolution jar> ::=
+    <jar name>
+
+<user-defined type body> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <schema-resolved user-defined type name> [ <subtype clause> ]
+         <external Java type clause>
+         [ AS <representation> ]
+         [ <user-defined type option list> ] [ <method specification list> ]
+
+<external Java type clause> ::=
+    <external Java class clause> LANGUAGE JAVA [ <interface using clause> ]
+
+<interface using clause> ::=
+    USING <interface specification>
+
+<interface specification> ::=
+    SQLDATA
+  | SERIALIZABLE
+
+<method specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <static field method spec>
+
+<method characteristic> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <external Java method clause>
+
+<static field method spec> ::=
+    STATIC METHOD <method name> <left paren> <right paren>
+         <static method returns clause> [ SPECIFIC <specific method name> ]
+         <external variable name clause>
+
+<static method returns clause> ::=
+    RETURNS <data type>
+
+<external variable name clause> ::=
+    EXTERNAL VARIABLE NAME <character string literal>
+
+<external Java class clause> ::=
+    EXTERNAL NAME <character string literal>
+
+<external Java method clause> ::=
+    EXTERNAL NAME <character string literal>
+
+<Java method and parameter declarations> ::=
+    <Java method name> [ <Java parameter declaration list> ]
+
+<attribute definition> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <attribute name> <data type>
+         [ <attribute default> ]
+         [ <collate clause> ] <external Java attribute clause>
+
+<external Java attribute clause> ::=
+    EXTERNAL NAME <character string literal>
+
+<parameter style> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | JAVA
+
+<external Java reference string> ::=
+    <jar and class name> <period> <Java method name>
+         [ <Java parameter declaration list> ]
+
+<ordering category> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <comparable category>
+
+<comparable category> ::=
+    RELATIVE WITH COMPARABLE INTERFACE
+
+<object name> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | JAR <jar name>
+

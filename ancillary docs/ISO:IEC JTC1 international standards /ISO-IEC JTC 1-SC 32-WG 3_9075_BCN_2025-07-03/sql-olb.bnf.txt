@@ -1,0 +1,230 @@
+
+************************************************************************************************
+This file is a "digital artifact" that contains the grammar specified by a part of ISO/IEC 9075.
+
+This grammar may be used by implementers of SQL-implementations when generating parsers for the 
+SQL language.
+************************************************************************************************
+
+<SQL special character> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <number sign>
+
+<number sign> ::=
+    #    !! U+0023
+
+<comment> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <Java comment>
+
+<Java comment> ::=
+    <Java comment introducer> [ <comment character>... ] <newline>
+
+<Java comment introducer> ::=
+    <solidus> <solidus>
+
+<reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+
+<non-reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+
+<fetch statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | FETCH [ [ <fetch orientation> ] FROM ]
+         <iterator host expression> INTO <fetch target list>
+
+<delete statement: positioned> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | DELETE FROM <target table> WHERE CURRENT OF <iterator host expression>
+
+<iterator host expression> ::=
+    <embedded Java expression>
+
+<update statement: positioned> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | UPDATE <target table> SET <set clause list> WHERE CURRENT OF <iterator host expression>
+
+<embedded SQL host program> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <embedded SQL Java program>
+
+<statement or declaration> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <SQLJ specific clause>
+
+<SQL prefix> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <number sign> sql           !! sql shall be lower-case
+
+<embedded variable name> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <embedded Java expression>
+
+<embedded SQL Java program> ::=
+    !! See the Syntax Rules.
+
+<modifiers> ::=
+    !! See the Syntax Rules.
+
+<java class name> ::=
+    !! See the Syntax Rules.
+
+<java id> ::=
+    !! See the Syntax Rules.
+
+<java datatype> ::=
+    !! See the Syntax Rules.
+
+<java constant expression> ::=
+    !! See the Syntax Rules.
+
+<embedded Java expression> ::=
+    <colon> [ <parameter mode> ] <expression>
+
+<expression> ::=
+    <simple variable>
+  | <left paren> <complex expression> <right paren>
+
+<simple variable> ::=
+    !! See the Syntax Rules.
+
+<complex expression> ::=
+    <Rval expression>
+  | <Lval expression>
+
+<Rval expression> ::=
+    !! See the Syntax Rules.
+
+<Lval expression> ::=
+    !! See the Syntax Rules.
+
+<implements clause> ::=
+    implements [ <interface list> ]
+
+<interface list> ::=
+    <interface element> [ { <comma> <interface element> }... ]
+
+<interface element> ::=
+    <predefined interface class>
+  | <user defined interface class>
+
+<user defined interface class> ::=
+    <java class name>
+
+<predefined interface class> ::=
+    sqlj.runtime.ForUpdate
+  | sqlj.runtime.Scrollable
+
+<declaration with clause> ::=
+    with <left paren> <declaration with list> <right paren>
+
+<declaration with list> ::=
+    <with element> [ { <comma> <with element> }... ]
+
+<with element> ::=
+    <with keyword> <equals operator> <with value>
+
+<with keyword> ::=
+    <predefined iterator with keyword> <predefined connection with keyword>
+  | <user defined with keyword>
+
+<predefined iterator with keyword> ::=
+    sensitivity
+  | holdability
+  | updateColumns
+
+<predefined connection with keyword> ::=
+    dataSource
+  | typeMap
+  | path
+  | transformGroup
+
+<user defined with keyword> ::=
+    <java id>
+
+<with value> ::=
+    <java constant expression>
+
+<SQLJ specific clause> ::=
+    <connection declaration clause>
+  | <iterator declaration clause>
+  | <executable clause>
+
+<connection declaration clause> ::=
+    [ <modifiers> ]context <java class name>
+         [ <implements clause> ] [ <declaration with clause> ]
+
+<iterator declaration clause> ::=
+    [ <modifiers> ]iterator <java class name>
+         [ <implements clause> ] [ <declaration with clause> ]
+         <left paren> <iterator spec declaration> <right paren>
+
+<iterator spec declaration> ::=
+    <positioned iterator>
+  | <named iterator>
+
+<positioned iterator> ::=
+    <java type list>
+
+<java type list> ::=
+    <java datatype> [ { <comma> <java datatype> }... ]
+
+<named iterator> ::=
+    <java pair list>
+
+<java pair list> ::=
+    <java pair> [ { <comma> <java pair> }... ]
+
+<java pair> ::=
+    <java datatype> <java id>
+
+<executable clause> ::=
+    [ <context clause> ] <executable spec clause>
+
+<executable spec clause> ::=
+    <statement clause>
+  | <assignment clause>
+
+<context clause> ::=
+    <left bracket> <context spec clause> <right bracket>
+
+<context spec clause> ::=
+    <connection context>
+  | <execution context>
+  | <connection context> <comma> <execution context>
+
+<connection context> ::=
+    <java id>
+
+<execution context> ::=
+    <java id>
+
+<statement clause> ::=
+    <left brace> <statement spec clause> <right brace>
+
+<statement spec clause> ::=
+    <SQL procedure statement>
+  | <compound statement>
+
+<assignment clause> ::=
+    <Lval expression> <equals operator>
+         <left brace> <assignment spec clause> <right brace>
+
+<assignment spec clause> ::=
+    <query clause>
+  | <function clause>
+  | <iterator conversion clause>
+
+<query clause> ::=
+    <query expression>
+
+<function clause> ::=
+    VALUES <left paren> <routine invocation> <right paren>
+
+<iterator conversion clause> ::=
+    CAST <result set expression>
+
+<result set expression> ::=
+    <embedded Java expression>
+

@@ -1,0 +1,2598 @@
+<EditorNotes>
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+   This is a list of all problems in the corresponding
+   document that are not yet resolved. 
+
+Possible       
+Problem         Category
+Number         ==========
+=======
+
+XML-000  (pseudo-PP showing Editor's Notes convention)
+XML-055  *Opportunity*
+XML-056 **Major Technical**
+
+
+XML-0           *Opportunity*
+XML-0       **Major Technical**
+XML-0        *Minor Technical*
+
+======= Largest SQL/XML Possible Problem number *** XML-056 *** =======
+======= This is the end of the problem number list =======
+
+-->
+
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPxml" number="XML-" severity="major" realm="technical">
+
+<reference><specref ref="xml_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPxml" number="XML-" severity="minor" realm="technical">
+
+<reference><specref ref="xml_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPxml" number="XML-" severity="major" realm="editorial">
+
+<reference><specref ref="xml_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPxml" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="xml_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPxml" number="XML-">
+
+<reference><specref ref="xml_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+
+
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPxml000" number="XML-000" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editor. 
+</source>
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point
+that requires particular attention, highlighted thus: 
+</para>
+
+<ednote>Text of the problem.
+</ednote>
+
+</problem>
+
+</PP>
+
+
+<LO id="PPxml055" number="XML-055">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:BNE-028r1.
+</source>
+
+<problem>
+
+<para>Currently, the JSON type is an XML unmappable data type. 
+There may exist an opportunity to make it mappable.
+Until then, the workaround is to serialize the JSON value as a character or binary string.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPxml056" number="XML-056" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:GYD-024.
+</source>
+
+<problem>
+
+<para>Functionality, if any, to support the Vector type needs to be provided.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<!-- Placed closed PPs and LOs after this line
+
+<COMMENT>- -Resolved by WG3:YYJ-021 = H2-2001-299R1
+
+<P>
+<BOX>(<EMPHASIS>(XML-006\BOLD))
+<X>(<BOX>(<EMPHASIS>(XML-006\BOLD)))
+The following Possible Problem has been noted:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P14, SQL/XML, No specific location
+
+<LE>Note at: None
+
+<LE>Source:  WG3:PER-103/H2-2001-084
+
+<LE>Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>SQL/XML must be aligned with the data type BIGINT. 
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:DRS-070R2/H2-2002-429R2
+
+<P>
+<BOX>(<EMPHASIS>(XML-007\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(XML-007))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P14, SQL/XML, <REFERENCE>(xml_maptable2doc\FULL)
+
+<LE>Note at: GRs of <REFERENCE>(xml_maptable2doc\FULL)
+
+<LE>Source: WG3:YYJ-038R1 = H2-2001-373R1
+
+
+<LE>Possible Problem:
+
+<P>
+Document <EMPHASIS>(XS) is created without declaring a namespace.  A user
+may wish to specify a namespace for this mapping that is used as the value
+of an xsd:targetNamespace attribute. 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:DRS-070R2/H2-2002-429R2
+
+<P>
+<BOX>(<EMPHASIS>(XML-008\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(XML-008))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P14, SQL/XML, <REFERENCE>(xml_maptable2type\FULL)
+
+<LE>Note at: GRs of <REFERENCE>(xml_maptable2type\FULL)
+
+<LE>Source: WG3:YYJ-038R1 = H2-2001-373R1 and WG3:YYJ-054 = H2-2001-___
+
+
+<LE>Possible Problem:
+
+<P>
+Some members feel that the row element is not necessary.  Instead of
+multiple row elements within a table element, they would create multiple
+elements with the name of the table. 
+
+<P>
+Michael Rys added: Depending on the preferred mapping, a table may be
+mapped to an XML fragment colleciton and not a document.  Thus we would
+avoid the term XML document and only use the term XML. 
+
+<P>
+Michael also added: We disagree with the proposed mapping and prefer the
+form (whitespace only added for formatting purposes):
+
+<CODE_EXAMPLE>
+<LB>EMPLOYEE>
+  <LB>EMPNO>000010<LB>/EMPNO>
+  <LB>FIRSTNAME>Christine<LB>/FIRSTNAME>
+  <LB>LASTNAME>Haas<LB>/LASTNAME>
+  <LB>BIRTHDATE>1933-08-24<LB>/BIRTHDATE>
+  <LB>SALARY>52750.00<LB>/SALARY>
+<LB>/EMPLOYEE>
+<LB>EMPLOYEE>
+  <LB>EMPNO>000020<LB>/EMPNO>
+  <LB>FIRSTNAME>Michael<LB>/FIRSTNAME>
+  <LB>LASTNAME>Thompson<LB>/LASTNAME>
+  <LB>BIRTHDATE>1948-02-02<LB>/BIRTHDATE>
+  <LB>SALARY>41250.00<LB>/SALARY>
+<LB>EMPLOYEE>
+<ENDCODE_EXAMPLE>
+
+<P>
+Michael also added: Here are some counter-arguments against the reasons
+provided in the document:
+
+<LIST>(SIMPLE)
+
+<LE>First, when we map just the EMPLOYEE table in this way, we then need
+to create a single root element that contains the sequence of
+<LB>EMPLOYEE> elements.
+
+<ENDLIST>
+
+<P>
+There is really no need to provide an element on this level.  XML query
+languages such as XPath or XQuery do not require a single root.  
+Having an implied root for the database or letting the user/tools specify a root in
+situations where a dump needs to be performed is sufficient. 
+
+<P>
+Thus, there is no need to have this additional level for a default view of
+a table.  A table does not need to correspond to an XML document. 
+
+<LIST>(SIMPLE)
+
+<LE>Our second reason is that a table with no rows in it will not appear
+at all in the mapping of an SQL schema.  A table for which the user does
+not have SELECT privilege will also not appear at all in this mapping.  We
+believe that and empty table and a table that the user is not allowed to
+see should have different representations in XML. 
+
+<ENDLIST>
+
+<P>
+This argument forgets to consider that every default XML view of
+relational data also has an associated schema with it and we could use the
+schema to disambiguate between the two cases above:
+
+<LIST>(UNNUMBERED)
+
+<LE>Table exists, but user has no access: <EMPHASIS>(no entry in the
+schema\BOLD), no data elements. 
+
+<LE>Table exists, user has access, no rows: <EMPHASIS>(entry in the
+schema\BOLD), no data elements. 
+
+<ENDLIST>
+
+<P>
+In addition, our product ships with a default XML view mechanism based on
+not including <LB>row> elements and so far we have not received any
+feedback from our users or customers that would warrant such an additional
+level of indirection. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:ZSH-077R2 = H2-2003-052R2
+
+<P>
+<BOX>(<EMPHASIS>(XML-005\BOLD))
+<X>(<BOX>(<EMPHASIS>(XML-005\BOLD)))
+The following Possible Problem has been noted:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: <REFERENCE>(xml_mapping_values\FULL)
+
+<LE>Note at: At the end of <REFERENCE>(xml_mapping_values\FULL)
+
+<LE>Source:  WG3:E3A-011
+
+<LE>Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The rules for mapping non-null SQL data values to XML do not handle
+the escaping of the reserved symbols such as <LB>less than operator>,
+which might be done using either entities (such as
+<MONO><EMPHASIS>(&lt;\BOLD)<ENDMONO>) or by escaping the entire string
+using <MONO><EMPHASIS>(CDATA\BOLD)<ENDMONO>.  
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:ZSH-077R2 = H2-2003-052R2
+
+<P>
+<BOX>(<EMPHASIS>(XML-014\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(XML-014))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P14, SQL/XML, <REFERENCE>(xml_xqelems\FULL)
+
+<LE>Note at: Format. 
+
+<LE>Source: WG3:VIE-018R1 = H2-2002-020R2
+
+
+<LE>Possible Problem:
+
+<P>
+XQuery rule names and numbers will need to be tracked against changes in
+XQuery 1.0. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:ZSH-040R2 = H2-2003-022R2
+
+<P>
+<BOX>(<EMPHASIS>(XML-001\BOLD))
+<X>(<BOX>(<EMPHASIS>(XML-001\BOLD)))
+The following Possible Problem has been noted:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P14-nn.nn, <REFERENCE>(xml_conc_namespaces\FULL)
+
+<LE>Note at: The end of <REFERENCE>(xml_conc_namespaces\FULL), and in the
+General Rules of <REFERENCE>(xml_mapping_sqltypes\FULL). 
+
+<LE>Source:  WG3:E3A-003
+
+<LE>Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The value of the <MONO><EMPHASIS>(<EMPHASIS>(sqlxml):\BOLD))<ENDMONO>
+namespace must be supplied correctly and finally.
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:ZSH-040R2 = H2-2003-022R2
+
+<P>
+<BOX>(<EMPHASIS>(XML-003\BOLD))
+<X>(<BOX>(<EMPHASIS>(XML-003\BOLD)))
+The following Possible Problem has been noted:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: <REFERENCE>(xml_sqlxml_schema\FULL)
+
+<LE>Note at: At the end of the Syntax Rules of
+<REFERENCE>(xml_sqlxml_schema\FULL)
+
+<LE>Source:  WG3:E3A-003
+
+<LE>Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>The publication date of this part must be supplied in the annotation
+in the <MONO><EMPHASIS>(<EMPHASIS>(sqlxml):\BOLD)<ENDMONO> namespace in
+two places. 
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:ZSH-040R2 = H2-2003-022R2
+
+<P>
+<BOX>(<EMPHASIS>(XML-004\BOLD))
+<X>(<BOX>(<EMPHASIS>(XML-004\BOLD)))
+The following Possible Problem has been noted:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: <REFERENCE>(xml_sqlxmlschema\FULL)
+
+<LE>Note at: At the end of <REFERENCE>(xml_sqlxmlschema\FULL)
+
+<LE>Source:  WG3:E3A-003
+
+<LE>Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Which is normative, <REFERENCE>(xml_sqlxmlschema\FULL), or the actual
+URL that defines this namespace on-line?  If it is the URL, should this
+clause be downgraded to an informative Annex?  If the clause or annex is
+modified by a TC, is the URL or its contents also changed? 
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:ZSH-144R2 = H2-2003-___
+
+<P>
+<BOX>(<EMPHASIS>(XML-009\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(XML-009))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P14, SQL/XML, No particular location
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:YYJ-054/H2-2001-___
+
+
+<LE>Possible Problem:
+
+<P>
+We believe it should be left to the implementation on whether the names
+are fully escaped or partially escaped. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:ZSH-044R1 = H2-2003-021R2
+
+<P>
+<BOX>(<EMPHASIS>(XML-013\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(XML-013))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P14, SQL/XML, <REFERENCE>(xml_mapping_ids_to_xml\FULL)
+
+<LE>Note at: None. 
+
+<LE>Source: Jim Melton
+
+
+<LE>Possible Problem:
+
+<P>
+SQL/XML currently maps characters of SQL identifiers that cannot be
+trivially mapped to XML name characters by using an escape sequence. 
+Characters that are not valid for direct use in an XML name whose Unicode
+position lies on the Basic Multilingual Plane (BMP) are represented by an underscore, a lower-case 
+"x", four hexadecimal digits, and another underscore (_xnnnn_).  
+Characters that are not valid for direct use in an XML name, but whose Unicode position lies 
+outside the BMP are represented
+by an underscore, a lower-case "x", eight hexadecimal digits, and another
+underscore.  However, the use of eight hexadecimal digits are not
+required, since The Unicode Standard guarantees that no more than 6
+hexadecimal digits will ever be required to represent the Unicode value of
+any character.
+
+<P>
+Should Subclause 5.1 be modified to use only 6 hexadecimal digits?
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:ZSH-065 = H2-2003-051
+
+<P>
+<BOX>(<EMPHASIS>(XML-010\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(XML-010))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P14, SQL/XML, No particular location
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:YYJ-054/H2-2001-___
+
+
+<LE>Possible Problem:
+
+<P>
+There are many alternatives on schema and catalog mappings.  Schemata and
+catalogs in SQL are used to scope table names.  In XML, such scoping can
+be done using either namespaces or local elements as proposed in
+WG3:YYJ-038R1 = H2-2001-373R1, or in a combination of both. 
+
+<P>
+Thus, if table names are mapped to element names, both are available.
+Namespaces have the advantage that they provide a fully unique scoping of
+the names across the different databases (assuming each database server
+has its own base URI), which provides protecction in information
+integration scenarios.  Namespaces are also the preferred way to associate
+XML Schema information with the data.  Since namespaces should be used
+anyway for associating XML Schema information with the data, we should
+consider whether schema and catalog level information is better mapped
+into the namespace URI. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:ZSH-063 = H2-2003-048
+
+<P>
+<BOX>(<EMPHASIS>(XML-012\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(XML-012))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P14, SQL/XML, No particular location
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:YYJ-054/H2-2001-___
+
+
+<LE>Possible Problem:
+
+<P>
+The preferred way to associate XML schema to instance data is by means of
+a targetNamespace for the schema and the use of the XML namespace to
+associate the data. See the examples given below. Using physical locations
+is bad practice and not scalable over large distributed applications.
+
+<P>
+<EMPHASIS>(Examples using alternate approaches: XML mappings of table
+EMPLOYEE inside ADMINISTRATOR schema and HR catalog\BOLD)
+
+<P>
+We would like to illustrate the arguments raised in this paper using the
+above example with three ways of representing schemas and catalogs: (i)
+Schema/catalog only in namespace (ii) Only as XML elements or (iii) Both.
+
+<P>
+However, the simplicity of not having a row element and explicitly named
+complex types speaks for itself in all three cases.
+
+<P>
+<EMPHASIS>(Schema and catalog only in namespace\BOLD)
+
+<P>
+The format of the targetnamespace is only an example. Other URI formats
+could be used. The base URI (http://mydatabase.com) could be either
+product specific or user specified.
+
+<CODE_EXAMPLE>
+<xsd:schema xmlns:xsd="..."
+   targetNamespace="http://mydatabase.com?catalog=HR&schema=ADMINISTRATOR">
+  <xsd:element name="EMPLOYEE">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EMPNO">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:length value="6"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="FIRSTNME">
+        ...
+        </xsd:element>
+        ...
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+<ENDCODE_EXAMPLE>
+
+<P>
+Instance data:
+
+<CODE_EXAMPLE>
+<LB>EMPLOYEE
+    xmlns="http://mydatabase.com?catalog=HR&schema=ADMINISTRATOR">
+  <LB>EMPNO>000010<LB>/EMPNO>
+  <LB>FIRSTNME>CHRISTINE<LB>/FIRSTNME>
+  <LB>LASTNAME>HAAS<LB>/LASTNAME>
+  <LB>BIRTHDATE>1933-08-24<LB>/BIRTHDATE>
+  <LB>SALARY>52750.00<LB>/SALARY>
+<LB>/EMPLOYEE>
+<LB>EMPLOYEE
+    xmlns="http://mydatabase.com?catalog=HR&schema=ADMINISTRATOR">
+  <LB>EMPNO>000020<LB>/EMPNO>
+  <LB>FIRSTNME>MICHAEL<LB>/FIRSTNME>
+  <LB>LASTNAME>THOMPSON<LB>/LASTNAME>
+  <LB>BIRTHDATE>1948-02-02<LB>/BIRTHDATE>
+  <LB>SALARY>41250.00<LB>/SALARY>
+<LB>/EMPLOYEE>
+<ENDCODE_EXAMPLE>
+
+<P>
+<EMPHASIS>(Schema and catalog only as XML elements\BOLD)
+
+<P>
+We would still need a namespace to scope against database instances. The
+problem then is that the Employee Element needs to be local to the schema
+(and the schema local to the catalog), to avoid conflicts with other
+employee tables in other catalogs or schemata.
+
+<CODE_EXAMPLE>
+<LB>xsd:schema xmlns:xsd="..." targetNamespace="http://mydatabase.com" >
+  <LB>xsd:element name="HR">
+    <LB>xsd:complexType>
+      <LB>xsd:sequence>
+        <LB>xsd:element name="ADMINISTRATOR">
+          <LB>xsd:complexType>
+            <LB>xsd:sequence>
+              <LB>xsd:element name="EMPLOYEE" minoccurs="0" maxoccurs="unbounded">
+                <LB>xsd:complexType>
+                  <LB>xsd:sequence>
+                    <LB>xsd:element name="EMPNO">
+                      <LB>xsd:simpleType>
+                        <LB>xsd:restriction base="xsd:string">
+                          <LB>xsd:length value="6"/>
+                        <LB>/xsd:restriction>
+                      <LB>/xsd:simpleType>
+                    <LB>/xsd:element>
+                    <LB>xsd:element name="FIRSTNME">
+                    ...
+                    <LB>/xsd:element>
+                  ...
+                  <LB>/xsd:sequence>
+                <LB>/xsd:complexType>
+              <LB>/xsd:element>
+            <LB>/xsd:sequence>
+          <LB>/xsd:complexType>
+        <LB>/xsd:element>
+      <LB>/xsd:sequence>
+    <LB>/xsd:complexType>
+  <LB>/xsd:element>
+<LB>/xsd:schema>
+<ENDCODE_EXAMPLE>
+
+<P>
+Instance data:
+
+<CODE_EXAMPLE>
+<LB>HR xmlns="http://mydatabase.com">
+  <LB>ADMINISTRATOR>
+    <LB>EMPLOYEE>
+      <LB>EMPNO>000010<LB>/EMPNO>
+      <LB>FIRSTNME>CHRISTINE<LB>/FIRSTNME>
+      <LB>LASTNAME>HAAS<LB>/LASTNAME>
+      <LB>BIRTHDATE>1933-08-24<LB>/BIRTHDATE>
+      <LB>SALARY>52750.00<LB>/SALARY>
+    <LB>/EMPLOYEE>
+    <LB>EMPLOYEE>
+      <LB>EMPNO>000020<LB>/EMPNO>
+      <LB>FIRSTNME>MICHAEL<LB>/FIRSTNME>
+      <LB>LASTNAME>THOMPSON<LB>/LASTNAME>
+      <LB>BIRTHDATE>1948-02-02<LB>/BIRTHDATE>
+      <LB>SALARY>41250.00<LB>/SALARY>
+    <LB>/EMPLOYEE>
+  <LB>/ADMINISTRATOR>
+<LB>/HR>
+<ENDCODE_EXAMPLE>
+
+<P>
+<EMPHASIS>(Schema and catalog as XML elements with namespaces\BOLD)
+
+<P>
+This provides the biggest flexibility at the cost of more XML schemata. It
+allows to keep the schema and table element declarations global but keeps
+the schema, catalog and element names in different namespaces. It requires
+the use of substitution groups.
+
+<CODE_EXAMPLE>
+<LB>xsd:schema xmlns:xsd="..." targetNamespace="http://mydatabase.com">
+  <LB>! - - database schema, only contains abstract catalog elements - - >
+
+  <LB>xsd:element name="catalog" abstract="true"/>
+<LB>/xsd:schema>
+
+<LB>xsd:schema xmlns:xsd="..." targetNamespace="http://mydatabase.com?catalog=HR"
+            xmlns:db="http://mydatabase.com">
+  <LB>! - - a specific catalog XML schema, only contains abstract schema elements  - - >
+
+  <LB>xsd:element name="schema" abstract="true"/>
+
+  <LB>xsd:element name="HR" substitutionGroup="db:catalog">
+    <LB>xsd:complexType>
+      <LB>xsd:sequence>
+        <LB>xsd:element ref="schema" minoccurs="0" maxoccurs="unbounded"/>
+      <LB>/xsd:sequence>
+    <LB>/xsd:complexType>
+  <LB>/xsd:element>
+<LB>/xsd:schema>
+
+<LB>xsd:schema xmlns:xsd="..."
+            targetNamespace="http://mydatabase.com?catalog=HR&schema=ADMINISTRATOR"
+  xmlns:cat="http://mydatabase.com?catalog=HR">
+  <LB>! - - a specific relational schema, only contains abstract table elements - - >
+
+  <LB>xsd:element name="table" abstract="true"/>
+
+  <LB>xsd:element name="ADMINISTRATOR" substitutionGroup="cat:schema">
+    <LB>xsd:complexType>
+      <LB>xsd:sequence>
+        <LB>xsd:element ref="table" minoccurs="0" maxoccurs="unbounded"/>
+      <LB>/xsd:sequence>
+    <LB>/xsd:complexType>
+  <LB>/xsd:element>
+
+<LB>/xsd:schema>
+
+<LB>xsd:schema xmlns:xsd="..."
+    targetNamespace="http://mydatabase.com/tables?catalog=HR&schema=ADMINISTRATOR"
+  xmlns:schema="http://mydatabase.com?catalog=HR&schema=ADMINISTRATOR" >
+  <LB>! - - contains the specific tables of a relational schema - - >
+
+  <LB>xsd:element name="EMPLOYEE" substitutionGroup="schema:schema">
+    <LB>xsd:complexType>
+      <LB>xsd:sequence>
+        <LB>xsd:element name="EMPNO">
+          <LB>xsd:simpleType>
+            <LB>xsd:restriction base="xsd:string">
+              <LB>xsd:length value="6"/>
+            <LB>/xsd:restriction>
+          <LB>/xsd:simpleType>
+        <LB>/xsd:element>
+        <LB>xsd:element name="FIRSTNME">
+        ...
+        <LB>/xsd:element>
+      ...
+      <LB>/xsd:sequence>
+    <LB>/xsd:complexType>
+  <LB>/xsd:element>
+<LB>/xsd:schema>
+<ENDCODE_EXAMPLE>
+
+<P>
+Instance data:
+
+<CODE_EXAMPLE>
+<LB>HR xmlns="http://mydatabase.com?catalog=HR">
+  <LB>ADMINISTRATOR
+      xmlns="http://mydatabase.com?catalog=HR&schema=ADMINISTRATOR">
+    <LB>EMPLOYEE
+        xmlns="http://mydatabase.com/tables?catalog=HR&schema=ADMINISTRATOR">
+      <LB>EMPNO>000010<LB>/EMPNO>
+        <LB>FIRSTNME>CHRISTINE<LB>/FIRSTNME>
+        <LB>LASTNAME>HAAS<LB>/LASTNAME>
+        <LB>BIRTHDATE>1933-08-24<LB>/BIRTHDATE>
+        <LB>SALARY>52750.00<LB>/SALARY>
+      <LB>/EMPLOYEE>
+      <LB>EMPLOYEE
+          xmlns="http://mydatabase.com/tables?catalog=HR&schema=ADMINISTRATOR">
+        <LB>EMPNO>000020<LB>/EMPNO>
+        <LB>FIRSTNME>MICHAEL<LB>/FIRSTNME>
+        <LB>LASTNAME>THOMPSON<LB>/LASTNAME>
+        <LB>BIRTHDATE>1948-02-02<LB>/BIRTHDATE>
+        <LB>SALARY>41250.00<LB>/SALARY>
+      <LB>/EMPLOYEE>
+    <LB>/ADMINISTRATOR>
+  <LB>/HR>
+<ENDCODE_EXAMPLE>
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by action taken at FCD1/2002 Editing Meetings
+
+<P>
+<BOX>(<EMPHASIS>(XML-002\BOLD))
+<X>(<BOX>(<EMPHASIS>(XML-002\BOLD)))
+The following Possible Problem has been noted:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: <REFERENCE>(xml_refer_pubspecs\FULL)
+
+<LE>Note at: The end of <REFERENCE>(xml_refer_pubspecs\FULL)
+
+<LE>Source:  WG3:E3A-003
+
+<LE>Possible Problem:
+
+<LIST>(SIMPLE)
+
+<LE>Many of the normative references have not been finalized.  It will be
+necessary to reference the correct specifications as they become
+available.  This may entail changes to other clauses of this standard to
+align with the final forms of these specifications.  
+
+<ENDLIST>
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>- - -Resolved by WG3:HBA-024 = H2-2003-266R1
+
+<para>
+<box><bold>XML-017</bold></box> The following Language Opportunity has
+been noted:
+</para>
+
+<slist>
+
+<item>Severity: Language Opportunity
+</item>
+
+<item>Reference: P14, SQL/XML, <specref ref="xml_xmlelem"/>
+</item>
+
+<item>Note at: The end of the Format
+</item>
+
+<item>Source: WG3:ZSH-144R2 = H2-2003-___
+</item>
+
+<item>Language Opportunity:
+
+<para>
+<BNF name="XML element"/> and <BNF name="XML forest"/> should have options so that the user
+can conveniently specify other kinds of null handling. The user should be
+able to specify whether to represent nulls by absence, by empty content,
+or by using the xsi:nil="true" attribute. 
+</para>
+</item>
+
+<item>Proposed Solution:
+
+<para>
+None provided with comment. 
+</para>
+</item>
+
+</slist>
+
+</COMMENT>
+
+
+<comment>Resolved by WG3:ZSH-071, reported by WG3:SIA-046R1</comment>
+<PP id="PPxml016" number="XML-016" severity="minor" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_conc_maptable2doc"/>, et seq
+</reference>
+
+
+<source>
+WG3:DRS-114
+</source>
+
+
+<problem>
+
+<para>
+The schema import together with the xmlns:sqlxml="SQLXMLNS" attribute in
+Subclauses 7.3, 7.4 and 7.5 general rule 2) h) in [SQL/XML WD] can be made
+<unDef annex="no" code="None"/> since the imported SQL/XML schema is only used by
+the <unDef annex="no" code="None"/> annotations and an implementation that does
+not use the annotations does not need to import or refer to the SQL/XML
+schema or namespace.
+</para>
+
+<para>
+Outline of possible Solution:
+</para>
+
+<nlist>
+
+<item>Change the Subclause 7.3/4/5 general rule 2) i) introduced by DRS-070R2
+to be: i) Let it be <unDef annex="no" code="None"/> whether XSDIMP is the
+zero-length string or  &lt;xsd:import    namespace="SQLXMLNS"   
+schemaLocation="SQLXMLNS.xsd" /&gt;
+</item>
+
+<item>Make the presence of the xmlns:sqlxml="SQLXMLNS" declaration in the
+xsd:schema elements in Subclause 7.3/4/5 general rule 2) j) introduced by
+DRS-070R2 <unDef annex="no" code="None"/>. 
+</item>
+
+<item>Adjust the Annex C on <unDef annex="no" code="None"/> elements
+</item>
+
+</nlist>
+
+</problem>
+
+</PP>
+
+
+<comment>RESOLVED BY: WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1</comment>
+<PP id="PPxml031" number="XML-031" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_validpred"/>
+</reference>
+
+
+<noteAt>
+After <extitemref part="14" ref="xml_validpred_GR_children" type="GR"/>
+</noteAt>
+
+
+<source>
+WG3:HBA-034R2 = H2-2003-343R4
+</source>
+
+
+<problem>
+
+<para>
+The result of <BNF name="XML valid predicate"/> on an empty forest should be reviewed
+when XQuery's position on validation of an empty forest is publically
+available. 
+</para>
+
+</problem>
+
+</PP>
+
+<comment>RESOLVED BY WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1</comment>
+<comment></comment>
+<LO id="PPxml022" number="XML-022">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-144R2 = H2-2003-___
+</source>
+
+
+<problem>
+
+<para>
+The ability to store XML Schema documents directly in the database should
+be provided. These documents may be necessary for validating XML
+documents.
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:TXL-065R1 = H2-2005-___</comment>
+<comment>DCOR1:2004/SQL:2003, JPN-P14-011 plus Email from Stephen Cannan, 2004-11-21</comment>
+<PP id="PPxml049" number="XML-049" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML,
+<extref part="14" ref="xml_conform"/>
+</reference>
+
+
+<noteAt>
+
+<extref part="14" ref="xml_conform"/>,
+<extref part="14" ref=" xml_conc_maptable2doc"/>,
+<extref part="14" ref=" xml_conc_mapping_values"/>,
+<extref part="14" ref="xml_ maptable2doc"/>,
+<extref part="14" ref=" xml_mapschema2doc"/>
+
+</noteAt>
+
+
+<source>
+DCOR1:2004/SQL:2003, JPN-P14-011 plus Email from Stephen Cannan, 2004-11-21,
+in partial resolution of JPN-P14-011 and JPN-P14-013
+</source>
+
+
+<problem>
+
+<para>
+As for null values, there is generally a choice of whether to represent
+nulls using absence or xsi:nil="true". NULLS is the choice of whether to map
+null values to absent elements (absent) or to elements that are marked with xsi:nil="true"
+(nil).However, Conformance Rules say as follows:
+</para>
+
+<para>
+CRs in Subclause 9.3,
+</para>
+
+<olist>
+
+
+<item>Without Feature X041, "Basic table mapping: nulls absent", a conforming
+application shall not invoke this Subclause of this part of this
+International Standard with NULLS set to indicate that nulls are mapped to
+elements that are marked to absent elements.
+</item>
+
+<item>Without Feature X042, "Basic table mapping: null as nil", a conforming
+application shall not invoke this Subclause of this part of this
+International Standard with NULLS set to indicate that nulls are mapped to
+elements that are marked with xsi:nil="true".
+</item>
+
+</olist>
+
+<para>
+CRs in Subclause 9.4
+</para>
+
+<olist>
+
+<item>Without Feature X051, "Advanced table mapping: nulls absent", a conforming application shall 
+not invoke this Subclause of this part of this
+International Standard with NULLS set to indicate that nulls are mapped to
+elements that are marked to absent elements.
+</item>
+
+<item>Without Feature X052, "Advanced table mapping: null as nil", a conforming
+application shall not invoke this Subclause of this part of this
+International Standard with NULLS set to indicate that nulls are mapped to
+elements that are marked with xsi:nil="true".
+</item>
+
+</olist>
+
+<para>
+If an implementation conforms to neither X041 nor X042, or neither X051 nor
+X052, there is no rule to map null value. 
+</para>
+
+<para>
+DCOR/2004 ballot comment 109 (JPN-P14-013) said:
+</para>
+
+<para>
+As for mapping a table, there is generally a choice of whether to map a table to an XML forest 
+of elements or to an XML document with a single root
+element (or to a single XML element) according to XMLFOREST optional value
+setting.
+</para>
+
+<para>
+However, Conformance Rules say as follows:
+</para>
+
+<para>
+CRs in Subclause 9.3
+</para>
+
+<olist start="3">
+
+<item>Without Feature X043, "Basic table mapping: table as forest", a conforming application shall 
+not invoke this Subclause of this part of this
+International Standard with TABLEFOREST set to True.
+</item>
+
+<item>Without Feature X044, "Basic table mapping: table as element", a conforming application shall 
+not invoke this Subclause of this part of this
+International Standard with TABLEFOREST set to False.
+</item>
+
+</olist>
+
+<para>
+CRs in Subclause 9.4
+</para>
+
+<olist start="3">
+
+<item>Without Feature X053, "Advanced table mapping: table as forest", a conforming application 
+shall not invoke this Subclause of this part of this
+International Standard with TABLEFOREST set to True.
+</item>
+
+<item>Without Feature X054, "Advanced table mapping: table as element", a conforming application 
+shall not invoke this Subclause of this part of this
+International Standard with TABLEFOREST set to False.
+</item>
+
+</olist>
+
+<para>
+If an implementation conforms to neither X043 nor X044, or neither X053 nor X054, 
+there is no rule to map a table to an XML forest of elements or to an XML document with a single 
+root element (or to a single XML element).
+</para>
+
+<para>
+Discussion during the editing meeting led to the conclusion that what was
+needed was a statement in concepts regarding the "calling" of subclauses as
+subroutines, some additional clarification in the Notes in the various
+mapping subclauses and explicit feature numbers for the mappings so that it
+could be stated in the Conformance subclause that if one of these was
+supported the none or more of the alternative subfeatures was required. For
+example: X043 and/or X044; X041 and/or X042. The first two items were
+completed during the DCOR editing process but the last requirement is
+documented in this PP.
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+Enhance the Conformance Rules and Conformance clause as outlined above.
+</para>
+
+</solution>
+
+</PP>
+
+
+<comment>Resolved by WG3:TXL-052 = H2-2005-145</comment>
+<comment>WG3:SIA-041 = H2-2004-020R1</comment>
+<PP id="PPxml043" number="XML-043" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_map_xquery_to_SQL"/>
+</reference>
+
+
+<source>
+WG3:SIA-041 = H2-2004-020R1
+</source>
+
+
+<problem>
+
+<para>
+There is considerable redundancy between the material in this
+Subclause and the rules in <extref part="14" ref="xml_xmlcast"/>. 
+This redundancy could be avoided if the material in this Subclause
+is moved to a new Subclause in <extref part="14" ref="xml_mappings"/>
+and references made to the new Subclause wherever needed. 
+In addition, uses of the undefined terms such as "regards"
+and "category of SQL built-in type" in this Subclause should be cleaned up. 
+</para>
+
+</problem>
+
+
+</PP>
+
+
+<comment>Resolved by WG3:TXL-047 = H2-2005-112</comment>
+<comment>WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1</comment>
+<PP id="PPxml036" number="XML-036" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_serialization_value"/>
+</reference>
+
+
+<noteAt>
+Following <specref ref="xml_serialization_result"/>,
+and <specref ref="xml_serialization_result2"/>. 
+</noteAt>
+
+
+<source>
+WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1
+</source>
+
+
+<problem>
+
+<para>
+When the W3C Serialization specification is stabilized, we need to review
+whether it is acceptable for use by XMLSerialize with the <kw>SEQUENCE</kw>
+option. 
+</para>
+
+</problem>
+
+
+</PP>
+
+
+<comment>Resolved by WG3:TXL-061 = H2-2005-155</comment>
+<PP id="PPxml041" number="XML-041" severity="major" realm="technical">
+
+
+<reference>
+P04, SQL/XML,
+<extref part="14" ref="xml_determ_ident"/>
+</reference>
+
+
+<source>
+Stephen Cannan out of the discussion on SIA-035.
+</source>
+
+
+<problem>
+
+<para>
+Part 14's use of "identical" is inconsistent with the definition in Part 2,
+as agreed under agenda item 19.3 of the Xi'an meeting. See the discussion in
+SIA-001 under agenda item 19.3, "Issues relating to determination of identical XML values 
+(SIA-035)"
+</para>
+
+<para>
+In Part 02, SQL/Foundation <extref part="02" ref="fnd_def_local"/>
+the definition of "identical" reads:
+</para>
+
+<definition term="identical" extra="(of a pair of comparable values)">Indistinguishable, in the
+sense that it is impossible, by any means
+specified in ISO/IEC 9075, to detect any difference between them.  For the
+full definition, see <extref part="02" ref="fnd_determ_ident"/>. </definition>
+
+<para>
+Note that in this definition the 2 values must be indistinguisable but the rules added in
+Part 14 SQL/XML <extref part="14" ref="xml_determ_ident"/>
+ignore "insignificant attributes which might be detected by means of the XMLParse function". 
+</para>
+
+<para>
+Since identical is used to support the definition of assignment (see BHX-49R3) so changing it is 
+not an action to be undertaken lightly.
+</para>
+
+<para>
+Perhaps the use of the term "identical" in XML should be reconsidered. Its usage
+seems to be closer to the Foundation term "distinct" than "identical".
+</para>
+
+<para>
+See also <PPref ref="PPxml042"/>. 
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:TXL-061 = H2-2005-155</comment>
+<PP id="PPxml042" number="XML-042" severity="major" realm="technical">
+
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+Stephen Cannan out of the discussion on SIA-035. See agenda item 19.3 "Issues 
+relating to determination of identical XML values (SIA-035)" in STX-001.
+</source>
+
+
+<problem>
+
+<para>
+During discussion of SIA-035 it was suggested that the various results of
+XMLParse for a given XML value might sometimes be distinct. The same doubts
+were raised about other XML... functions. If further investigation confirms
+these doubts then those functions must be explicitly declared to be "indeterminate"
+as as such ineligable for use in certain constructs such as constraints.
+</para>
+
+<para>
+See also the previous P.P.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:TXL-036R1 = H2-2005-076R2</comment>
+<comment>WG3:SIA-042 = H2-2004-021R1</comment>
+<PP id="PPxml038" number="XML-038" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_xmlquery"/>
+</reference>
+
+
+<noteAt>
+Following <specref ref="xml_xmlquery_GR_otherwise"/>
+</noteAt>
+
+
+<source>
+WG3:SIA-042 = H2-2004-021R1
+</source>
+
+
+<problem>
+
+<para>
+The XQuery serialization specification is still evolving. We will need to check
+whether the reference to the XQuery serialization specification in
+<specref ref="xml_xmlquery"/>, is still correct and desired. 
+</para>
+
+</problem>
+
+
+</PP>
+
+
+<comment>Resolved by WG3:TXL-092r3</comment>
+<comment>WG3:SIA-037R1 = H2-2004-015R2</comment>
+<PP id="PPxml044" number="XML-044" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_parse"/>
+</reference>
+
+
+<source>
+WG3:SIA-037R1 = H2-2004-015R2
+</source>
+
+
+<problem>
+
+<para>
+WG3:SIA-037R1 noted that it did not address the implications of the changes
+it proposed on host language bindings of the XML type and on return values
+of XML type in external routine invocations. These need to be addressed.
+</para>
+
+</problem>
+
+
+</PP>
+
+
+<comment>Resolved by WG3:TXL-039R5</comment>
+<LO id="PPxml023" number="XML-023">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-144R2 = H2-2003-___
+</source>
+
+
+<problem>
+
+<para>
+The ability to validate an XML value against XML schemata is required.
+This might take the form of a new <kw>IS</kw> VALID predicate. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>RESOLVED by WG3:E3D-007 = H2-2005-253</comment>
+<comment>WG3:SIA-042 = H2-2004-021R1</comment>
+<PP id="PPxml039" number="XML-039" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_determ_XQformaltype"/>
+</reference>
+
+
+<noteAt>
+Following <specref ref="xml_determ_XQformaltype_SR_typenotat"/>. 
+</noteAt>
+
+
+<source>
+WG3:SIA-042 = H2-2004-021R1
+</source>
+
+
+<problem>
+
+<para>
+[XQuery FS] formal type notations do not currently permit parentheses. This
+appears to be a bug, which is being reported to W3C. We will need to review
+the final version of [XQuery FS] to insure that our XQuery formal type
+notations conform to that specification. 
+</para>
+
+</problem>
+
+
+</PP>
+
+
+<comment>Resolved by FCD1/2006, GBR-P02-010</comment>
+<comment>WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1</comment>
+<PP id="PPxml034" number="XML-034" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_refer_pubspecs"/>
+</reference>
+
+
+<noteAt>
+Reference to [XQuery DM]
+</noteAt>
+
+
+<source>
+WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1
+</source>
+
+
+<problem>
+
+<para>
+All references to W3C working drafts will need to be converted
+to references to W3C Recommendations before progressing this part,
+with any necessary re-alignment of our work. 
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by editorial review</comment>
+<comment>WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1</comment>
+<PP id="PPxml035" number="XML-035" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_conc_namespaces"/>
+</reference>
+
+
+<noteAt>
+Following <specref ref="xml_namespace_vars"/>
+</noteAt>
+
+
+<source>
+WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1
+</source>
+
+
+<problem>
+
+<para>
+<specref ref="xml_namespace_vars"/>, references namespaces
+defined in W3C draft specifications.  These namespaces will need to be
+checked before progressing this part, with any necessary re-alignment of our
+work. 
+</para>
+
+</problem>
+
+
+</PP>
+
+
+<comment>Resolved by WG3:JFK-047R1</comment>
+<comment>INCITS H2 SQL/XML ad hoc meeting, 2004-10-29</comment>
+<LO id="PPxml048" number="XML-048">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_stringvalfunc"/>
+</reference>
+
+
+<source>
+INCITS H2 SQL/XML ad hoc meeting, 2004-10-29
+</source>
+
+
+<problem>
+
+<para>
+The XQuery/XPath datamodel serialization specification provides more options
+than we expose in XMLSERIALIZE. We should consider it a language opportunity
+to add more of the XML serialization options. 
+</para>
+
+</problem>
+
+
+</LO>
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<LO id="PPxml011" number="XML-011">
+
+<reference>
+P14, SQL/XML, No particular location
+</reference>
+
+
+<source>
+WG3:YYJ-054/H2-2001-___
+</source>
+
+
+<problem>
+
+<para>
+We disagree with the need of introducing artificial names for the table
+types and suggest anonymous types should be used.
+</para>
+
+<para>
+XML elements are a kind of types. Tables as specified in this paper in the
+relational world are mapped to these elements and do not have a named type
+in the relational domain. We are of the opinion that this should be
+preserved in the mapping and lead to anonymous complex types in the
+generated XML Schema.
+</para>
+
+<para>
+This will allow us to map explicitly named table types into named XML
+complex types in the future without the fear of name clashes. Also the
+arguments that are made against anonymous types can be countered as
+follows:
+</para>
+
+<slist>
+
+<item>"There is no name by which they can be referenced"
+</item>
+
+</slist>
+
+<para>
+Neither is the structure of a table named except through referring to the
+table name itself. This is analogous to mapping the structure to an anonymous complex type of 
+the named element. Also, there is no requirement
+or situation, where this type can be reused anyway.
+</para>
+
+<para>
+Typed XML query languages such as XQuery are capable of restricting a typed expression to the 
+element, so even in this context, having a named
+complex type is not needed.
+</para>
+
+<slist>
+
+<item>"and no name by which a tool or application can report information
+about them. "
+</item>
+
+</slist>
+
+<para>
+Tools and application can report information about the element and its
+complex type, so there is really no need to create a new named construct.
+</para>
+
+<para>
+As mentioned above, introducing such explicit names makes it impossible
+for the user to use unnamed table types to hide the type names and use
+explicitly named table types if the type name should be exposed.
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+
+</para>
+
+</solution>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<LO id="PPxml015" number="XML-015">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_mappings"/>
+</reference>
+
+
+<source>
+WG3:ZSH-153R1 = H2-2002-153R1
+</source>
+
+
+<problem>
+
+<para>
+Applications consuming XML parser output are allowed to drop whitespace
+only content.  Since a SQL value of only whitespace characters can be
+considered preservable information, a mapping option should be provided to
+add an xml:space="preserve" attribute on the element enclosing string
+typed values.
+</para>
+
+<para>
+An approach to a solution should:
+</para>
+
+<nlist>
+
+<item>Provide an option to specify if the xml:space="preserve" attribute
+should be added to elements that contain string values.
+</item>
+
+<item>If the option is set, the generated schema will also have to include
+the schema for the namespace associated with the prefix "xml".
+</item>
+
+</nlist>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<LO id="PPxml018" number="XML-018">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_mappings"/>
+</reference>
+
+
+<source>
+WG3:ZSH-144R2 = H2-2003-___
+</source>
+
+
+<problem>
+
+<para>
+The names of some of the subclauses in this clause are confusing. For
+example, 7.11 is "Mapping an SQL data type to a named XML schema data
+type" and 7.15 is "Mapping SQL data types to XML schema data types". 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<LO id="PPxml021" number="XML-021">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-144R2 = H2-2003-___
+</source>
+
+
+<problem>
+
+<para>
+Changes equivalent to the ones made in Subclause 10.2, Data type
+correspondences, of this part are needed for Subclause 5.15, "SQL/CLI data
+type correspondences", in Part 3, SQL/CLI FCD document. Also, Table 6,
+"Codes used for implementation data types in SQL/CLI", Table 7, "Codes
+used for application data types in SQL/CLI", and Table 37, "Codes used for
+concise data types", need to be enhanced with a code for XML type.
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<LO id="PPxml026" number="XML-026">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:YYJ-054/H2-2001-___ and WG3:ZSH-065 = H2-2003-051
+</source>
+
+
+<problem>
+
+<para>
+There are many alternatives on schema and catalog mappings.  Schemata and
+catalogs in SQL are used to scope table names.  In XML, such scoping can
+be done using either namespaces or local elements as proposed in
+WG3:YYJ-038R1 = H2-2001-373R1, or in a combination of both. 
+</para>
+
+<para>
+Thus, if table names are mapped to element names, both are available.
+Namespaces have the advantage that they provide a fully unique scoping of
+the names across the different databases (assuming each database server
+has its own base URI), which provides protecction in information
+integration scenarios.  Namespaces are also the preferred way to associate
+XML Schema information with the data.  
+</para>
+
+<para>
+Currently, the mappings provide one approach to map SQL schemata and
+catalogs using nested elements for scoping.  Since this is a fairly new
+area and different mappings may be devised that are a better fit for some
+application scenarios (such as using namespaces to identify schemata and
+catalogs).  If and when this LO is addressed, different schema and catalog
+mapping options will be available that map the schema and catalogs to
+namespaces instead of to nested XML elements. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<LO id="PPxml027" number="XML-027">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-063 = H2-2003-048
+</source>
+
+
+<problem>
+
+<para>
+Currently, the SQL/XML mappings provide an option to define a target
+namespace that covers the table, both schema and tables, or catalog,
+schemata, and tables, depending on which mapping is applied.  This gives
+the same target namespace for all three levels.  For some approaches, this
+suffices; however, some applications may want to assign different
+namespaces to the catalog, the schema, and the table levels. 
+</para>
+
+<para>
+If and when this LO is addressed, an additional option to allow the
+assignment of different schema namespace URIs to catalogs and schemata and
+tables will be needed.  It may also be desirable to provide a URI format
+as the standard format for identifying such components. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<LO id="PPxml029" number="XML-029">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-083R2 = H2-2003-064R2
+</source>
+
+
+<problem>
+
+<para>
+The necessary support for accessing values of XML type via SQL/OLB
+interface needs to be added. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<PP id="PPxml032" number="XML-032" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_stabs"/>
+</reference>
+
+
+<noteAt>
+<extref part="14" ref="xml_stabs"/>, at the beginning of the Clause. 
+</noteAt>
+
+
+<source>
+WG3:HBA-034R2 = H2-2003-343R4
+</source>
+
+
+<problem>
+
+<para>
+There are no Information Schema views that report dependencies on
+registered XML Schemas.  See also Possible Problem <box>SCHEM-028</box>
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<comment>WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1</comment>
+<PP id="PPxml037" number="XML-037" severity="major" realm="technical">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_descriptorareas"/>
+</reference>
+
+
+<noteAt>
+Following <specref ref="xml_sqldatatypes"/>. 
+</noteAt>
+
+
+<source>
+WG3:SIA-040+044+045+037R1+039 = H2-2004-019R1+027+???+015R2+017R1
+</source>
+
+
+<problem>
+
+<para>
+There is only one data type code for XML types. We need to consider whether
+this is adequate with the new type model. 
+</para>
+
+</problem>
+
+
+</PP>
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<comment>WG3:SIA-039 = H2-2004-017R1</comment>
+<LO id="PPxml046" number="XML-046">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_stringvalfunc"/>
+</reference>
+
+
+<source>
+WG3:SIA-039 = H2-2004-017R1
+</source>
+
+
+<problem>
+
+<para>
+The host language bindings for the XML type and the parameters of
+external routines could be enhanced to take advantage of the new
+features proposed in WG3:SIA-039. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved by WG3:STR-039 = H2-2008-___</comment>
+<LO id="PPxml053" number="XML-053">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:WLG-032 = H2-2006-305R1
+</source>
+
+
+<problem>
+
+<para>
+The work on the BINARY and VARBINARY data types started in
+WG3:WLG-032 (= H2-2005-305r1) needs to be completed for SQL/XML. 
+</para>
+
+</problem>
+
+
+</LO>
+
+
+<comment>WG3:SIA-041 = H2-2004-020R1</comment>
+<comment>WG3:TXL-064 = H2-2005-154</comment>
+<LO id="PPxml045" number="XML-045">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_conc_maptable2doc"/>
+</reference>
+
+
+<source>
+WG3:SIA-041 = H2-2004-020R1
+</source>
+
+
+<problem>
+
+<para>
+GR 1) of this Subclause (and similar GRs in other Subclauses in this Clause)
+lack the incantation "in an application of this Subclause" for some of the
+variables it defines. Such incantations should be added in all concerned Subclauses. 
+</para>
+
+</problem>
+
+
+</LO>
+
+
+<comment>Resolved by WG3:LCY-044R1 = DM32.2-2009-00___</comment>
+<LO id="PPxml028" number="XML-028">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-083R2 = H2-2003-064R2
+</source>
+
+
+<problem>
+
+<para>
+The necessary support for accessing values of XML type via SQL/CLI
+interface needs to be added. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:LCY-044R1 = DM32.2-2009-00___</comment>
+<LO id="PPxml030" number="XML-030">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:ZSH-083R2 = H2-2003-064R2
+</source>
+
+
+<problem>
+
+<para>
+The necessary support for parameters of XML type for SQL-invoked routines
+written in Java needs to be added. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment></comment>
+<LO id="PPxml019" number="XML-019">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_maptype2schematype"/>
+</reference>
+
+
+<noteAt>
+Note at: GR 1) ("Let <emph>D</emph> be the SQL data type or domain..."). 
+</noteAt>
+
+
+<source>
+WG3:ZSH-144R2 = H2-2003-___
+</source>
+
+
+<problem>
+
+<para>
+The following data types have no mappings: structured types, and reference
+types.  Note that both metadata and data mappings are required. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment></comment>
+<LO id="PPxml020" number="XML-020">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_dynsql"/>
+</reference>
+
+
+<source>
+WG3:ZSH-144R2 = H2-2003-___ and WG3:WLG-058 = H2-2005-300
+</source>
+
+
+<problem>
+
+<comment>WG3:WLG-058 = H2-2005-300</comment>
+<para>
+<BNF part="02" name="prepare statement"/> has been enhanced to support the following operators:
+<BNF name="XML character string serialization"/>,
+<BNF name="XML binary string serialization"/>, <BNF name="XML comment"/>,
+<BNF name="XML concatenation"/>, <BNF name="XML document"/>, <BNF name="XML PI"/>,
+<BNF name="XML text"/>, <BNF name="XML validate"/>,
+<BNF name="XML content predicate"/>, <BNF name="XML document predicate"/>, and
+<BNF name="XML valid predicate"/>. 
+<BNF name="XML cast specification"/> is supported by virtue of a syntax transformation. 
+</para>
+
+<comment>WG3:WLG-058 = H2-2005-300</comment>
+<para>
+It was also decided explicitly not to infer a type for the arguments of
+<BNF name="XML element"/>, <BNF name="XML attributes"/>,
+<BNF name="XML forest"/>, <BNF name="XML parse"/>, <BNF name="XML query"/>,
+<BNF name="XML table"/>, <BNF name="XML exists predicate"/>, and
+<BNF name="XML aggregate"/> in prepared statements. 
+</para>
+
+<para>
+If additional operators are added, we might want to consider
+whether to enhance <BNF part="02" name="prepare statement"/> to
+support the new functions and operators in Clause 6 of this part.  (Due to
+the restructuring of <BNF part="02" name="prepare statement"/> in SQL:1999 this is no longer
+strictly necessary, but if we do not intend to enhance
+<BNF part="02" name="prepare statement"/> it might be better to do so explicitly,
+say by a paper closing this comment with no action, rather than by failing to act.)
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment></comment>
+<LO id="PPxml024" number="XML-024">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_maptype2name"/>
+</reference>
+
+
+<source>
+WG3:ZSH-064 = H2-2003-049
+</source>
+
+
+<problem>
+
+<para>
+The type name generation does not account for collation information in the
+context of string types. Further discussion on how to reflect collation in
+the type mappings are in order. Note: this impacts all places where
+Subclause 7.9 is referenced, such as in Subclause 7.15, General Rule 8),
+subrules n), o), p), etc. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment></comment>
+<LO id="PPxml025" number="XML-025">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_maptype2name"/>
+</reference>
+
+
+<source>
+WG3:ZSH-064 = H2-2003-049
+</source>
+
+
+<problem>
+
+<para>
+The type name generation does add dynamic SQL type facet information such
+as the SQL type's precision or string length to the type name. This means
+that an approach where the predefined SQL types are not defined inline but
+instead at a global schema leads to a global schema that may contain a very large number of named 
+types that are hard to manage. For example, if
+both <kw>CHAR</kw> and <kw>VARCHAR</kw> allow up to 8000 characters, then that schema
+contains alone 16,000 XML Schema type definitions. There should be a single SQL/XML XML Schema and 
+associated namespace per implementation (the
+sqlxml namespace unfortunately cannot be used) to provide a minimal set of
+mapped base types without this type explosion. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment></comment>
+<LO id="PPxml033" number="XML-033">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_validpred"/>
+</reference>
+
+
+<source>
+WG3:HBA-034R2 = H2-2003-343R4
+</source>
+
+
+<problem>
+
+<para>
+We may wish to consider syntax in the <kw>IS</kw> <kw>VALID</kw> predicate to limit the scope
+of wildcard schema components, so that validation against a schema containing
+a wildcard can be made deterministic and permitted in a check constraint. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>WG3:SIA-051 = H2-2004-039R1</comment>
+<LO id="PPxml040" number="XML-040">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_tabref"/>
+</reference>
+
+
+<source>
+WG3:SIA-051 = H2-2004-039R1
+</source>
+
+
+<problem>
+
+<para>
+It would be desirable for <kw>XMLTABLE</kw> to have a <kw>LIKE</kw> clause, so that a result
+table could be modeled on an existing table. 
+</para>
+
+</problem>
+
+
+</LO>
+
+
+<comment>INCITS H2 SQL/XML ad hoc meeting, 2004-10-29</comment>
+<LO id="PPxml047" number="XML-047">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_xmlquery"/>
+</reference>
+
+
+<source>
+INCITS H2 SQL/XML ad hoc meeting, 2004-10-29
+</source>
+
+
+<problem>
+
+<para>
+In Syntax Rule 4)a)i) ("Let <symdef>XSC</symdef> be...", "For each...",
+and "The <BNF part="02" name="identifier"/>..."), there is a requirement that the variable name be
+"an XML 1.1 NCName". 
+This is too restrictive, because external variables are named with QNames, not merely NCNames. 
+The specification should be enhanced to handle QNames in this context. 
+The prefix can be potentially resolved using the namespaces in the WITH clause
+or those present in the XQuery.
+</para>
+
+</problem>
+
+
+</LO>
+
+
+<LO id="PPxml050" number="XML-050">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_parse"/>
+</reference>
+
+
+<source>
+WG3:TXL-036R1 = H2-2005-076R2
+</source>
+
+
+<problem>
+
+<para>
+Ballot comment #154 (USA-P14-111) asks for XML parsing to treat
+specially marked XML whitespace characters such as entitized or CDATA
+section guarded whitespace special.
+</para>
+
+</problem>
+
+
+<solution>
+
+<para>
+While this looks like a reasonable request given what existing parsers
+and the XQuery XML construction parsing offers, and given the additional
+flexibility it gives to users to control what whitespace should be
+preserved and what should be stripped, the author feels that this
+comment should be addressed not in the current FCD but be left as a language opportunity for the 
+next release of the standard.
+</para>
+<para>
+A proposed solution would be to add a new XMLPARSE mode to section 10.15
+called PRESERVE SPECIAL WHITESPACE that will preserve any exclusive
+maximal sequence of whitespaces that contained at least one entitized or
+CDATA section guarded whitespace character.
+</para>
+
+</solution>
+
+</LO>
+
+
+
+<LO id="PPxml051" number="XML-051">
+
+<reference>
+P14, SQL/XML, <extref part="14" ref="xml_determ_ident"/>, and
+P14, SQL/XML, <extref part="14" ref="xml_determ_equivXML"/>
+</reference>
+
+
+<source>
+Email from Stephen Cannan to Editor, 2005-04-15
+</source>
+
+
+<problem>
+
+<para>
+The second of these Subclauses begins with an SR that reads "Let <symdef>V1</symdef>
+and <symdef>V2</symdef> be...", while the first depends on an analogous SR in SQL/Foundation. 
+However, in subsequent SRs, the only mention of those two symbols are in the SR that
+begins "Whether <sym>V1</sym> and <sym>V2</sym> are...", after which there are several subrules
+that all begin with words such as "Two XQuery sequences are..." and "Two XQuery nodes are...". 
+</para>
+
+<para>
+It would be a Good Thing if these subrules were re-worded to read something like "If <sym>V1</sym>
+and <sym>V2</sym> are XQuery sequences, then the two XQuery sequences are...".  This approach would
+also seem to require elimination of the definitions and uses of the other symbols representing 
+these XML values (such as <sym>XN1</sym>, <sym>XN2</sym>, etc.). 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>WG3:TXL-092R3 = H2-2005-185R3 after SQL:2005 FDIS</comment>
+<LO id="PPxml052" number="XML-052">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:TXL-092R3 = H2-2005-185R3 after SQL:2005 FDIS
+</source>
+
+
+<problem>
+
+<para>
+WG3:TXL-092r3 (= H2-2005-185r3) left some work that involve additional
+syntax unfinished. This is indicated in the paper by “Tbd”. Most notably for
+dynamic SQL, parameters of external routines and returned values from
+external routines additional syntax is needed for the user to indicate what the
+implicit whitespace option should be, if the user wants to override the
+<impDef annex="no" code="None"/> default. 
+</para>
+
+</problem>
+
+
+</LO>
+
+
+<comment>FCD1/2007, USA-P14-005</comment>
+<LO id="PPxml054" number="XML-054">
+
+<reference>
+P14, SQL/XML, No specific location
+</reference>
+
+
+<source>
+WG3:STR-016, comment USA-P14-005
+</source>
+
+
+<problem>
+
+<para>
+The existing <BNF name="XML value function"/>s provide for the construction of
+arbitrary XML values from SQL data. 
+It is possible to generate XML documents of arbitrary complexity by
+flexibly combining invocations of different <BNF name="XML value function"/>s in an SQL query. 
+However, because these functions serve as such low-level building blocks that a user
+wishing to construct even a fairly simple XML document is forced to write a rather long and 
+verbose SQL query. 
+Hence, there is a need for higher-level user-friendly <BNF name="XML value function"/>s. 
+</para>
+
+</problem>
+
+</LO>
+
+-->
+
+</EditorNotes>

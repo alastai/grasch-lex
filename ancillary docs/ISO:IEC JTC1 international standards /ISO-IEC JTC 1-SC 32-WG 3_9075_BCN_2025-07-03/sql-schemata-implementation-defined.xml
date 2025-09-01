@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA003</code>
+      <description>The set of collations supported by an SQL-implementation. These may be defined by a standard or by the SQL-implementation itself. Each supported collation has a name, its definition, the list of character sets to which it can be applied, and whether or not padding with spaces is to be used when comparing two strings of unequal length.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA015</code>
+      <description>The set of character repertoires supported by an SQL-implementation.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA017</code>
+      <description>The set of character encoding forms supported by an SQL-implementation. These may be defined by a standard or by the SQL-implementation itself.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA027</code>
+      <description>Whether the DEFINITION_SCHEMA referenced by an INFORMATION_SCHEMA describes schemas in catalogs other than the catalog in which the INFORMATION_SCHEMA is located.</description>
+   </impDef>
+   <impDef>
+      <code>ID007</code>
+      <description>Whether the default collation for the UCS character repertoire is UCS_BASIC or UNICODE.</description>
+   </impDef>
+   <impDef>
+      <code>ID017</code>
+      <description>The values of the CONSTRAINT_CATALOG, CONSTRAINT_SCHEMA, and CONSTRAINT_NAME columns in the TABLE_CONSTRAINTS base table when a constraint name was not supplied when the constraint was created.</description>
+   </impDef>
+   <impDef>
+      <code>IE010</code>
+      <description>Any additional character sets supported by an SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IL005</code>
+      <description>The maximum length of an identifier.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IL006</code>
+      <description>The maximum length of a variable-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL011</code>
+      <description>The maximum value of INTEGER data type.</description>
+   </impDef>
+   <impDef>
+      <code>IV055</code>
+      <description>The items that are represented in the table SQL_IMPLEMENTATION_INFO.</description>
+   </impDef>
+   <impDef>
+      <code>IV101</code>
+      <description>The contents of the row in the CHARACTER_ENCODING_FORMS base table describing a character encoding form defined by an SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IV102</code>
+      <description>The contents of the row in the CHARACTER_REPERTOIRES base table describing a character repertoire defined by an SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IV103</code>
+      <description>The contents of the row in the CHARACTER_SETS base table describing a character set defined by an SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IV104</code>
+      <description>The contents of the row in the COLLATIONS base table describing a collation defined by an SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IV105</code>
+      <description>The contents of the row in the COLLATION_CHARACTER_SET_APPLICABILITY base table describing an additional applicability of a collation to a character set.</description>
+   </impDef>
+   <impDef>
+      <code>IV106</code>
+      <description>The the values of the CHARACTER_MAXIMUM_LENGTH, CHARACTER_OCTET_LENGTH, CHARACTER_SET_CATALOG, CHARACTER_SET_SCHEMA, CHARACTER_SET_NAME, COLLATION_CATALOG, COLLATION_SCHEMA, and COLLATION_NAME columns in the DATA_TYPE_DESCRIPTOR base table when the schema is INFORMATION_SCHEMA and the data type is some character string type.</description>
+   </impDef>
+</implementationDefined>

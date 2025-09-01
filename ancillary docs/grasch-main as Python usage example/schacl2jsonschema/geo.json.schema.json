@@ -1,0 +1,128 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "skos:Concept": {
+        "type": "object",
+        "properties": {
+          "skos:Concept-conceptIcon": {
+            "type": "string",
+            "format": "uri",
+            "default": "http://datashapes.org/icons/concept.svg",
+            "description": "Used to return the (default) icon for SKOS concepts."
+          },
+          "skos:Concept-definition": {
+            "type": "object",
+            "properties": {
+              "dash:HTMLOrStringOrLangString": {
+                "type": "string",
+                "oneOf": [
+                  { "type": "string" },
+                  { "type": "string", "format": "language-tag" }
+                ],
+                "description": "A statement or formal explanation of the meaning of a concept."
+              }
+            }
+          },
+          "skos:Concept-prefLabel": {
+            "type": "string",
+            "oneOf": [
+              { "type": "string" },
+              { "type": "string", "format": "language-tag" }
+            ],
+            "description": "The preferred lexical label for a resource, in a given language.",
+            "uniqueLang": true
+          }
+        }
+      },
+      "g:GeoConcept": {
+        "type": "object",
+        "properties": {
+          "g:GeoConcept-image": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of an image for the concept."
+          },
+          "g:GeoConcept-webLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The web link for the Geo concept."
+          }
+        }
+      },
+      "g:Country": {
+        "type": "object",
+        "properties": {
+          "g:Country-capital": {
+            "type": "object",
+            "properties": {
+              "ex:capital": {
+                "type": "string",
+                "description": "The capital city of a country."
+              }
+            }
+          },
+          "g:Country-flag": {
+            "type": "string",
+            "format": "uri",
+            "description": "The flag image URL for the country."
+          },
+          "g:Country-isoCountryCode2": {
+            "type": "string",
+            "maxLength": 2,
+            "description": "ISO 3166-1 alpha-2 country code."
+          },
+          "g:Country-isoCountryCode3": {
+            "type": "string",
+            "maxLength": 3,
+            "description": "ISO 3166-1 alpha-3 country code."
+          },
+          "g:Country-wikidataCountry": {
+            "type": "string",
+            "format": "uri",
+            "description": "A reference to a Wikidata entity for the country."
+          }
+        }
+      },
+      "tosh:Resource-label": {
+        "type": "string",
+        "description": "The display name(s) of this resource, possibly in multiple languages."
+      },
+      "tosh:Resource-comment": {
+        "type": "string",
+        "description": "The comments of this resource, possibly in multiple languages."
+      },
+      "g:Island": {
+        "type": "object",
+        "properties": {
+          "g:Island-islandIcon": {
+            "type": "string",
+            "format": "uri",
+            "default": "https://cdn-icons-png.flaticon.com/512/119/119576.png",
+            "description": "The icon for the island."
+          }
+        }
+      },
+      "skos:Concept-leafIcon": {
+        "type": "string",
+        "format": "uri",
+        "description": "Leaf node icon for the concept.",
+        "default": "http://some-icon-for-leaf-nodes.jpg"
+      },
+      "schema:Person-image": {
+        "type": "string",
+        "format": "uri",
+        "description": "An image of the person."
+      },
+      "schema:Person-taxID": {
+        "type": "string",
+        "description": "The Tax / Fiscal ID of the person.",
+        "maxLength": 20
+      },
+      "ex:Country-capital": {
+        "type": "string",
+        "description": "The capital city of the country."
+      }
+    }
+  }
+  

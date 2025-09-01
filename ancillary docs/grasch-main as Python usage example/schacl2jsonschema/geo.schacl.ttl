@@ -1,0 +1,230 @@
+# from https://datashapes.org/propertyroles.html
+
+skos:Concept
+	a owl:Class ;
+	a sh:NodeShape ;
+	rdfs:label "Concept"@en ;
+	rdfs:subClassOf owl:Thing ;
+	sh:property skos:Concept-conceptIcon ;
+	sh:property skos:Concept-definition ;
+	sh:property skos:Concept-prefLabel ;
+	# ... more properties not shown ...
+.			
+skos:Concept-conceptIcon
+	a sh:PropertyShape ;
+	sh:path skosshapes:conceptIcon ;
+	dash:hidden true ;
+	dash:propertyRole dash:IconRole ;
+	sh:datatype xsd:anyURI ;
+	sh:defaultValue "http://datashapes.org/icons/concept.svg"^^xsd:anyURI ;
+	sh:description "Used to return the (default) icon for SKOS concepts." ;
+	sh:group skosshapes:DisplayPropertyGroup ;
+	sh:maxCount 1 ;
+	sh:name "concept icon" ;
+	sh:order "1"^^xsd:decimal ;
+.
+skos:Concept-definition
+	a sh:PropertyShape ;
+	sh:path skos:definition ;
+	dash:propertyRole dash:DescriptionRole ;
+	dash:singleLine false ;
+	sh:description "A statement or formal explanation of the meaning of a concept."@en ;
+	sh:group skos:LabelsAndDescriptionPropertyGroup ;
+	sh:or dash:HTMLOrStringOrLangString ;
+	sh:order 5 ;
+.
+skos:Concept-prefLabel
+	a sh:PropertyShape ;
+	sh:path skos:prefLabel ;
+	dash:propertyRole dash:LabelRole ;
+	dash:singleLine true ;
+	sh:description "The preferred lexical label for a resource, in a given language."@en ;
+	sh:disjoint skos:altLabel ;
+	sh:disjoint skos:hiddenLabel ;
+	sh:group skos:LabelsAndDescriptionPropertyGroup ;
+	sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+	sh:order 0 ;
+	sh:uniqueLang true ;
+.
+
+g:GeoConcept
+	a owl:Class ;
+	a sh:NodeShape ;
+	rdfs:label "Geo concept"@en ;
+	rdfs:subClassOf geo:SpatialThing ;
+	rdfs:subClassOf skos:Concept ;
+	sh:property g:GeoConcept-image ;
+	sh:property g:GeoConcept-webLink ;
+	# ... more properties not shown ...
+.
+g:GeoConcept-image
+	a sh:PropertyShape ;
+	sh:path g:image ;
+	dash:propertyRole dash:KeyInfoRole ;
+	dash:viewer dash:ImageViewer ;
+	sh:datatype xsd:anyURI ;
+	sh:description "The URL of an image for the concept." ;
+	sh:group skos:LabelsAndDescriptionPropertyGroup ;
+	sh:maxCount 1 ;
+	sh:name "image" ;
+	sh:order "7"^^xsd:decimal ;
+.
+g:GeoConcept-webLink
+	a sh:PropertyShape ;
+	sh:path g:webLink ;
+	dash:propertyRole dash:KeyInfoRole ;
+	sh:datatype xsd:anyURI ;
+	sh:group skos:LabelsAndDescriptionPropertyGroup ;
+	sh:name "web link" ;
+	sh:order "6"^^xsd:decimal ;
+.
+g:Country
+	a owl:Class ;
+	a sh:NodeShape ;
+	rdfs:label "Country"@en ;
+	rdfs:subClassOf g:GeoConcept ;
+	sh:property g:Country-capital ;
+	sh:property g:Country-flag ;
+	sh:property g:Country-isoCountryCode2 ;
+	sh:property g:Country-isoCountryCode3 ;
+	sh:property g:Country-wikidataCountry ;
+	# ... more properties not shown ...
+.
+g:Country-capital
+	a sh:PropertyShape ;
+	sh:path g:capital ;
+	dash:propertyRole dash:KeyInfoRole ;
+	sh:class g:City ;
+	sh:group g:Geopolitical_Characteristics ;
+.
+g:Country-flag
+	a sh:PropertyShape ;
+	sh:path g:flag ;
+	dash:propertyRole dash:IconRole ;
+	rdfs:comment "The values of this property are basically copied over from the corresponding property P41 at the Wikidata entity that is linked to this country." ;
+	sh:nodeKind sh:IRI ;
+	sh:order "100"^^xsd:decimal ;
+	sh:values [   # this is comparable to the SPARQL path expression g:wikidataCountry/wdt:P41
+		sh:nodes [
+			sh:path g:wikidataCountry ;
+		] ;
+		sh:path wdt:P41 ;
+	] ;
+.
+g:Country-isoCountryCode2
+	a sh:PropertyShape ;
+	sh:path g:isoCountryCode2 ;
+	dash:propertyRole dash:IDRole ;
+	sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+.
+g:Country-isoCountryCode3
+	a sh:PropertyShape ;
+	sh:path g:isoCountryCode3 ;
+	dash:propertyRole dash:IDRole ;
+	sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+.
+g:Country-wikidataCountry
+  a sh:PropertyShape ;
+  sh:path g:wikidataCountry ;
+  dash:detailsEndpoint "https://query.wikidata.org/sparql" ;
+  sh:description "A reference to a wikidata entity for the country." ;
+  sh:group skos:MatchingRelationshipsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "wikidata country" ;
+  sh:node g:WikidataCountry ;
+  sh:nodeKind sh:IRI ;
+  sh:order "20"^^xsd:decimal ;
+.
+tosh:Resource-label
+	a sh:PropertyShape ;
+	sh:path rdfs:label ;
+	sh:name "labels" ;
+	sh:description "The display name(s) of this, possibly in multiple languages." ;
+	sh:or dash:StringOrLangString ;
+	dash:propertyRole dash:LabelRole .
+tosh:Resource-comment
+	a sh:PropertyShape ;
+	sh:path rdfs:comment ;
+	sh:name "comments" ;
+	sh:description "The comments of this, possibly in multiple languages." ;
+	sh:or dash:StringOrLangStringOrHTML ;
+	dash:propertyRole dash:DescriptionRole .
+g:Island
+  sh:property g:Island-islandIcon .
+ 
+g:Island-islandIcon
+  a sh:PropertyShape ;
+  sh:path g:islandIcon ;
+  dash:hidden true ;
+  dash:propertyRole dash:IconRole ;
+  sh:datatype xsd:anyURI ;
+  sh:defaultValue "https://cdn-icons-png.flaticon.com/512/119/119576.png"^^xsd:anyURI ;
+  sh:maxCount 1 ;
+  sh:name "island icon" ;
+.
+skos:Concept
+  sh:property skos:Concept-leafIcon .
+  
+skos:Concept-conceptIcon   # Needed because TopBraid EDG already defines
+  sh:deactivated true .    # a default icon and that may conflict
+
+skos:Concept-leafIcon
+  a sh:PropertyShape ;
+  sh:path g:leafIcon ;
+  dash:hidden true ;
+  dash:propertyRole dash:IconRole ;
+  sh:datatype xsd:anyURI ;
+  sh:maxCount 1 ;
+  sh:name "leaf icon" ;
+  sh:values [
+      dash:js """
+          focusNode.narrower.length == 0 ?
+              'http://some-icon-for-leaf-nodes.jpg' :
+              null; // Fall back to default icon
+      """ ;
+  ] .
+
+g:Country
+  sh:property g:Country-flag .
+  
+g:Country-flag
+  a sh:PropertyShape ;
+  sh:path g:flag ;
+  dash:propertyRole dash:IconRole ;
+  rdfs:comment "The values of this property are basically copied over from Wikidata." ;
+  sh:nodeKind sh:IRI ;
+  sh:order "100"^^xsd:decimal ;
+  sh:values [
+      sh:path wdt:P41 ;
+      sh:nodes [
+          sh:path g:wikidataCountry ;
+        ] ;
+    ] ;
+.
+schema:Person-image
+	a sh:PropertyShape ;
+	sh:path schema:image ;
+  	sh:nodeKind sh:IRI ;
+	sh:description "An image of the item." ;
+	sh:name "image" ;
+	dash:propertyRole dash:DepictionRole .
+
+schema:Person-taxID
+	a sh:PropertyShape ;
+	sh:path schema:taxID ;
+  	sh:datatype xsd:string ;
+	sh:description "The Tax / Fiscal ID of the person, e.g. the TIN in the US." ;
+	sh:maxCount 1 ;
+	sh:name "tax ID" ;
+	dash:singleLine true ;
+	dash:propertyRole dash:IDRole .
+
+ex:Country-capital
+	a sh:PropertyShape ;
+	sh:path ex:capital ;
+  	sh:class ex:City ;
+	sh:description "The capital city of a country." ;
+	sh:name "capital" ;
+	dash:propertyRole dash:KeyInfoRole .

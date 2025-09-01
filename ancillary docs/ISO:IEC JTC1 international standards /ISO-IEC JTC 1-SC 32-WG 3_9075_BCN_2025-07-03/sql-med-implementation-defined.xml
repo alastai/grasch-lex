@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA087</code>
+      <description>Whether or not an exception condition is raised when the target TYPE in an iterate call indicates CHARACTER or CHARACTER LARGE OBJECT and the source value is a zero-length character string.</description>
+   </impDef>
+   <impDef>
+      <code>IA097</code>
+      <description>Whether the invocation of a foreign-data wrapper interface function is supported or the invocation of a foreign-data wrapper interface procedure.</description>
+   </impDef>
+   <impDef>
+      <code>IA099</code>
+      <description>Whether the foreign-data wrapper interface routines of a given SQL-implementation are either all functions or all procedures.</description>
+   </impDef>
+   <impDef>
+      <code>IA114</code>
+      <description>The effect when the value of any input argument provided by the caller of a foreign-data wrapper interface routine falls outside the set of allowed values of the data type of the parameter, or when the value of any output argument resulting from the execution of the foreign-data wrapper interface routine falls outside the set of values supported by the caller of a foreign-data wrapper interface routine for that parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IA133</code>
+      <description>The implementation-defined rules that cause exception conditions to be raised when a foreign-data wrapper interface routine does not execute successfully.</description>
+   </impDef>
+   <impDef>
+      <code>IA135</code>
+      <description>The affect on a foreign table descriptor, apart from its generic options descriptor when alter generic options is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IA137</code>
+      <description>Whether implementation-defined foreign-data wrapper descriptor fields are retrievable.</description>
+   </impDef>
+   <impDef>
+      <code>IA138</code>
+      <description>Whether implementation-defined foreign-data wrapper descriptor fields are settable.</description>
+   </impDef>
+   <impDef>
+      <code>IA171</code>
+      <description>The reasons why the resources to manage a query context cannot be allocated.</description>
+   </impDef>
+   <impDef>
+      <code>IA172</code>
+      <description>The reasons why the resources to manage a foreign-data wrapper environment cannot be allocated.</description>
+   </impDef>
+   <impDef>
+      <code>IA173</code>
+      <description>The reasons why the resources to manage a foreign-server connection cannot be allocated.</description>
+   </impDef>
+   <impDef>
+      <code>IA174</code>
+      <description>The way in which the foreign-data wrapper knows the URI to specify in the XML document.</description>
+   </impDef>
+   <impDef>
+      <code>IA175</code>
+      <description>The reasons why the resources to manage a foreign-data wrapper reply cannot be allocated.</description>
+   </impDef>
+   <impDef>
+      <code>IA176</code>
+      <description>The reasons why the resources to manage a foreign-data wrapper execution cannot be allocated.</description>
+   </impDef>
+   <impDef>
+      <code>IA177</code>
+      <description>The reasons why the resources to manage a foreign-data descriptor area cannot be allocated.</description>
+   </impDef>
+   <impDef>
+      <code>IC001</code>
+      <description>The subclass code which is generated when the routine’s return code indicates No data found, and no status record is generated corresponding to SQLSTATE value '02000' but there may be status records generated corresponding to SQLSTATE value '02nnn', where 'nnn' is the subclass code.</description>
+   </impDef>
+   <impDef>
+      <code>IC002</code>
+      <description>The exception condition raised when the resources to manage a query context cannot be allocated for reasons not specified by ISO/IEC 9075.</description>
+   </impDef>
+   <impDef>
+      <code>IC003</code>
+      <description>The exception condition raised when the resources to manage a foreign-data wrapper environment cannot be allocated for reasons not specified by ISO/IEC 9075.</description>
+   </impDef>
+   <impDef>
+      <code>IC004</code>
+      <description>The exception condition raised when the resources to manage a foreign-server connection cannot be allocated for reasons not specified by ISO/IEC 9075.</description>
+   </impDef>
+   <impDef>
+      <code>IC005</code>
+      <description>The exception condition raised when the resources to manage a foreign-data wrapper reply cannot be allocated for reasons not specified by ISO/IEC 9075.</description>
+   </impDef>
+   <impDef>
+      <code>IC006</code>
+      <description>The exception condition raised when the resources to manage a foreign-data wrapper execution cannot be allocated for reasons not specified by ISO/IEC 9075.</description>
+   </impDef>
+   <impDef>
+      <code>IC007</code>
+      <description>The exception condition is raised when the resources to manage a foreign-data descriptor area cannot be allocated for reasons not specified by ISO/IEC 9075.</description>
+   </impDef>
+   <impDef>
+      <code>ID001</code>
+      <description>The nullability characteristic and the default option of each column specified by a basic column definition when a basic column definition list of a foreign table definition is specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID002</code>
+      <description>The column descriptors included in a foreign table descriptor when a basic column definition list of a foreign table definition is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID003</code>
+      <description>The nullability characteristic and default option included in the column descriptor specified by a basic column definition.</description>
+   </impDef>
+   <impDef>
+      <code>ID015</code>
+      <description>The default value for the precision of the NUMERIC data type.</description>
+   </impDef>
+   <impDef>
+      <code>ID016</code>
+      <description>The default value for the precision of the DECIMAL data type.</description>
+   </impDef>
+   <impDef>
+      <code>IE002</code>
+      <description>Any implementation-defined data types.</description>
+   </impDef>
+   <impDef>
+      <code>IE014</code>
+      <description>Any additional requirements for the result of evaluating a data location in a datalink value constructor.</description>
+   </impDef>
+   <impDef>
+      <code>IE023</code>
+      <description>Any additional privileges necessary to execute a foreign table definition.</description>
+   </impDef>
+   <impDef>
+      <code>IE024</code>
+      <description>Any additional privileges necessary to execute a user mapping definition.</description>
+   </impDef>
+   <impDef>
+      <code>IE025</code>
+      <description>Any additional requirements for the validity of the Write Token for an Update via a datalink.</description>
+   </impDef>
+   <impDef>
+      <code>IE026</code>
+      <description>Any additional privileges necessary to execute a foreign server definition.</description>
+   </impDef>
+   <impDef>
+      <code>IE027</code>
+      <description>Any additional privileges necessary to execute a routine mapping definition.</description>
+   </impDef>
+   <impDef>
+      <code>IL005</code>
+      <description>The maximum length of an identifier.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IL006</code>
+      <description>The maximum length of a variable-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL018</code>
+      <description>The maximum datalink length determined by the amount of space, in octets, that is allocated for, a host variable of data type DATALINK, an argument of declared type DATALINK to an invocation of an external routine, the value returned by an invocation of an external function whose result type is DATALINK. The maximum datalink length constrains the values of expressions whose declared type is DATALINK such that every such value can be assigned to a host variable, substituted for a parameter to an external routine, or returned by an invocation of an external function.</description>
+   </impDef>
+   <impDef>
+      <code>IL019</code>
+      <description>The maximum lengths of foreign-data wrapper diagnostics area fields whose data types are CHARACTER VARYING.</description>
+   </impDef>
+   <impDef>
+      <code>IL020</code>
+      <description>The maximum length of the variable-length character string of the result of a url complete expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL021</code>
+      <description>The maximum length of the variable-length character string of the result of a url path expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL022</code>
+      <description>The maximum length of the variable-length character string of the result of a url path only expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL023</code>
+      <description>The maximum length of the variable-length character string of the result of a url scheme expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL024</code>
+      <description>The maximum length of the variable-length character string of the result of a url server expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL025</code>
+      <description>The maximum length of the variable-length character string of the result of a url complete for write expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL026</code>
+      <description>The maximum length of the variable-length character string of the result of a url complete only expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL027</code>
+      <description>The maximum length of the variable-length character string of the result of a url path for write expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL028</code>
+      <description>The maximum lengths of foreign-data wrapper item descriptor fields whose data type is CHARACTER VARYING.</description>
+   </impDef>
+   <impDef>
+      <code>IL029</code>
+      <description>The maximum length of datalink attributes whose data type is CHARACTER VARYING.</description>
+   </impDef>
+   <impDef>
+      <code>IL030</code>
+      <description>The maximum number of foreign-data wrapper environments.</description>
+   </impDef>
+   <impDef>
+      <code>IL031</code>
+      <description>The maximum number of foreign-server connections.</description>
+   </impDef>
+   <impDef>
+      <code>IL032</code>
+      <description>The maximum number of foreign-data wrapper replies.</description>
+   </impDef>
+   <impDef>
+      <code>IL033</code>
+      <description>The maximum number of foreign-data wrapper executions.</description>
+   </impDef>
+   <impDef>
+      <code>IL034</code>
+      <description>The maximum number of foreign-data descriptor areas.</description>
+   </impDef>
+   <impDef>
+      <code>IL065</code>
+      <description>The maximum number of query contexts that can be allocated at one time.</description>
+   </impDef>
+   <impDef>
+      <code>IV001</code>
+      <description>The number of octets contained in a character of the host language ADA.</description>
+   </impDef>
+   <impDef>
+      <code>IV002</code>
+      <description>The number of octets contained in a character of the host language C.</description>
+   </impDef>
+   <impDef>
+      <code>IV003</code>
+      <description>The number of octets contained in a character of the host language Cobol.</description>
+   </impDef>
+   <impDef>
+      <code>IV004</code>
+      <description>The number of octets contained in a character of the host language Fortran.</description>
+   </impDef>
+   <impDef>
+      <code>IV005</code>
+      <description>The number of octets contained in a character of the host language Pascal.</description>
+   </impDef>
+   <impDef>
+      <code>IV006</code>
+      <description>The number of octets contained in a character of the host language PL/I.</description>
+   </impDef>
+   <impDef>
+      <code>IV007</code>
+      <description>The length of the Ada character type corresponding with SQL data type DATALINK.</description>
+   </impDef>
+   <impDef>
+      <code>IV008</code>
+      <description>The length of the C character type corresponding with SQL data type DATALINK.</description>
+   </impDef>
+   <impDef>
+      <code>IV009</code>
+      <description>The length of the Cobol character type corresponding with SQL data type DATALINK.</description>
+   </impDef>
+   <impDef>
+      <code>IV010</code>
+      <description>The length of the Fortran character type corresponding with SQL data type DATALINK.</description>
+   </impDef>
+   <impDef>
+      <code>IV011</code>
+      <description>The length of the Pascal character type corresponding with SQL data type DATALINK.</description>
+   </impDef>
+   <impDef>
+      <code>IV012</code>
+      <description>The length of the PL/I character type corresponding with SQL data type DATALINK.</description>
+   </impDef>
+   <impDef>
+      <code>IV013</code>
+      <description>The time at which a valid access token for a datalink ceases to be valid.</description>
+   </impDef>
+   <impDef>
+      <code>IV014</code>
+      <description>Header and status fields in foreign-data wrapper diagnostics areas.</description>
+   </impDef>
+   <impDef>
+      <code>IV015</code>
+      <description>Header fields and item fields in foreign-data wrapper descriptor areas.</description>
+   </impDef>
+   <impDef>
+      <code>IV016</code>
+      <description>The SQL-statement codes assigned to SQL-statements that are defined by a foreign-data wrapper.</description>
+   </impDef>
+   <impDef>
+      <code>IV017</code>
+      <description>The names, values, data types and codes for implementation-defined datalink attributes.</description>
+   </impDef>
+   <impDef>
+      <code>IV018</code>
+      <description>The permissible Format and values for server type and server version of a foreign server definition.</description>
+   </impDef>
+   <impDef>
+      <code>IV019</code>
+      <description>The codes used for the implementation-defined format of the character string transmitted by GetSQLString().</description>
+   </impDef>
+   <impDef>
+      <code>IV020</code>
+      <description>The CDATA values of the SQLMEDOptionName attribute and the PCDATA text of the SQLMEDGenericOption tag.</description>
+   </impDef>
+   <impDef>
+      <code>IV021</code>
+      <description>Statistics associated with a foreign server request.</description>
+   </impDef>
+   <impDef>
+      <code>IV022</code>
+      <description>The CDATA values of the SQLMEDStatisticName attribute and the PCDATA text of the SQLMEDStatistics tag.</description>
+   </impDef>
+   <impDef>
+      <code>IV023</code>
+      <description>The native error code corresponding to the status condition retrieved by GetDiagnostics when TYPE is 'STATUS' and the DiagIdentifier indicates NATIVE_CODE.</description>
+   </impDef>
+   <impDef>
+      <code>IV024</code>
+      <description>The value retrieved by GetDiagnostics when TYPE is 'STATUS' and the DiagIdentifier indicates MESSAGE_TEXT.</description>
+   </impDef>
+   <impDef>
+      <code>IV025</code>
+      <description>The value retrieved by GetDiagnostics or GetDiagField when TYPE is 'STATUS' and the DiagIdentifier indicates CLASS_ORIGIN.</description>
+   </impDef>
+   <impDef>
+      <code>IV026</code>
+      <description>The value retrieved by GetDiagnostics or GetDiagField when TYPE is 'STATUS' and the DiagIdentifier indicates SUBCLASS_ORIGIN.</description>
+   </impDef>
+   <impDef>
+      <code>IV027</code>
+      <description>The header information retrieved by GetDescriptor when TYPE is 'HEADER' and the FieldIdentifier indicates an implementation-defined descriptor header field.</description>
+   </impDef>
+   <impDef>
+      <code>IV028</code>
+      <description>The item information retrieved by GetDescriptor when TYPE is 'ITEM' and the FieldIdentifier indicates an implementation-defined descriptor item field.</description>
+   </impDef>
+   <impDef>
+      <code>IV029</code>
+      <description>GetSQLString may have an implementation-defined Stringformat with an implementation-defined representation.</description>
+   </impDef>
+   <impDef>
+      <code>IV126</code>
+      <description>The possible values of foreign server type and foreign server version, and their meanings.</description>
+   </impDef>
+   <impDef>
+      <code>IV127</code>
+      <description>The character set of the File Reference, referred to as the datalink character set.</description>
+   </impDef>
+   <impDef>
+      <code>IV128</code>
+      <description>The precision field values of an item-descriptor area of a foreign-data wrapper descriptor area for numeric data types and implementation-defined data types.</description>
+   </impDef>
+   <impDef>
+      <code>IW014</code>
+      <description>The manner in which an external DTD is made available to the SQL-server.</description>
+   </impDef>
+   <impDef>
+      <code>IW023</code>
+      <description>The privileges necessary to execute alter user mapping statement.</description>
+   </impDef>
+   <impDef>
+      <code>IW024</code>
+      <description>The privileges necessary to execute drop user mapping statement.</description>
+   </impDef>
+   <impDef>
+      <code>IW027</code>
+      <description>The privileges necessary to execute a foreign-data wrapper definition.</description>
+   </impDef>
+   <impDef>
+      <code>IW029</code>
+      <description>The privileges necessary to execute an alter routine mapping statement.</description>
+   </impDef>
+   <impDef>
+      <code>IW030</code>
+      <description>The privileges necessary to execute a drop routine mapping statement.</description>
+   </impDef>
+</implementationDefined>

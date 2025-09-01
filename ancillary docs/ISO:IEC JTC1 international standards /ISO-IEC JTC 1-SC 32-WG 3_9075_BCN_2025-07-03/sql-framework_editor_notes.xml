@@ -1,0 +1,457 @@
+<EditorNotes>
+<!-- ======================================= 
+     Current PPs and LOs, not yet resolved   
+     ======================================= 
+
+   This is a list of all problems in the corresponding
+   document that are not yet resolved. 
+
+Possible       
+Problem         Category
+Number         ==========
+=======
+
+FRM-000  (pseudo-PP showing Editor's Notes convention)
+
+
+FRM-0           *Opportunity*
+FRM-0       **Major Technical**
+FRM-0        *Minor Technical*
+FRM-010     **Major Technical**
+
+======= Largest SQL/XML Possible Problem number *** FRM-010 *** =======
+======= This is the end of the problem number list ========
+
+-->
+
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPfrm" number="FRM-" severity="major" realm="technical">
+
+<reference><specref ref="frm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPfrm" number="FRM-" severity="minor" realm="technical">
+
+<reference><specref ref="frm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPfrm" number="FRM-" severity="major" realm="editorial">
+
+<reference><specref ref="frm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPfrm" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="frm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPfrm" number="FRM-">
+
+<reference><specref ref="frm_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPfrm000" number="FRM-000" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editor. 
+</source>
+
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point
+that requires particular attention, highlighted thus: 
+</para>
+
+<ednote>Text of the problem.
+</ednote>
+
+</problem>
+
+</PP>
+
+
+<comment></comment>
+<PP id="PPfrm010" number="FRM-010" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+
+<source>WG3:GYD-024
+</source>
+
+
+<problem>
+
+<para>Text supporting the Vector type needs to be provided.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+
+<!-- Placed closed PPs and LOs after this line
+
+
+<comment>Resolved by WG3:DRS-047R1 and WG3:ZSH-123, reported by WG3:SIA-046R1</comment>
+<PP id="PPfrm007" number="FRM-007" severity="minor" realm="editorial">
+
+<reference>
+P01, SQL/Framework, <extref part="01" ref="frm_objectid"/>
+</reference>
+
+
+<source>
+WG3:PER-164/H2-2001-???
+</source>
+
+
+<problem>
+
+<para>
+The text "200n" must be replaced by the correct year at the FCD Editing Meeting. 
+
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:ZSH-123, reported by WG3:SIA-046R1</comment>
+<PP id="PPfrm008" number="FRM-008" severity="minor" realm="editorial">
+
+<reference>
+P01, SQL/Framework, <extref part="01" ref="frm_parts_overview"/>
+</reference>
+
+
+<source>
+WG3:DRS-061/H2-2002-___
+</source>
+
+
+<problem>
+
+<para>
+In <extref part="01" ref="frm_parts"/>, <extref part="01" ref="frm_parts_overview"/>,
+the third paragraph reads:
+</para>
+
+<slist>
+
+<item>Every part of ISO/IEC 9075 other than parts 1 and 2 is specified as 
+an amendment to ISO/IEC 9075-2.  However, the functionality of these parts is
+somewhat different in nature. 
+</item>
+
+</slist>
+
+<para>
+This is inconsistent with the text of
+<extref part="01" ref="frm_relationships"/>, which explicitly contradicts it. 
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:ZSH-124, reported by WG3:SIA-046R1</comment>
+<PP id="PPfrm009" number="FRM-009" severity="minor" realm="editorial">
+
+<reference>
+P01, SQL/Framework, <extref part="01" ref="frm_relationships_clauses"/>
+</reference>
+
+
+<source>
+WG3:DRS-061/H2-2002-___
+</source>
+
+
+<problem>
+
+<para>
+<extref part="01" ref="frm_relationships_clauses"/>,
+first paragraph is:
+</para>
+
+<slist>
+
+<item>Where a Clause (other than Clause 1, "Scope",
+and Clause 2, "Normative references"), Subclause, or Annex in any
+incremental part of ISO/IEC 9075 has a name identical to a Clause,
+Subclause, or Annex in ISO/IEC 9075-1, ISO/IEC 9075-2, ISO/IEC 9075-3,
+ISO/IEC 9075-10, or ISO/IEC 9075-11, unless the incremental part is itself
+ISO/IEC 9075-3, ISO/IEC 9075-10, or ISO/IEC 9075-11, it supplements the
+Clause, Subclause, or Annex, respectively, in ISO/IEC 9075-1, ISO/IEC
+9075-2, ISO/IEC 9075-3, ISO/IEC 9075-10, or ISO/IEC 9075-11, regardless of
+whether or not the number or letter of the Clause, Subclause, or Annex
+corresponds. It typically does so by adding or replacing paragraphs,
+Format items, or Rules.
+</item>
+
+</slist>
+
+<para>
+Since Framework already contains statements about other parts of ISO/IEC
+9075, there is no reason to exclude further additions. This point can be
+demonstrated by referring to [FrameWD],
+<extref part="01" ref="frm_notterminated"/>, which is:
+</para>
+
+<slist>
+
+<item>This Subclause is modified by <extref part="04" ref="psm_notterminated"/>, 
+in ISO/IEC 9075-4. 
+
+<para>
+The General Rules of the following Subclauses are not terminated where 
+an exception condition is raised:
+</para>
+
+<ulist>
+
+<item>Subclause 10.4, "<BNF name="routine invocation"/>", in ISO/IEC 9075-2. 
+</item>
+
+<item>Subclause 13.5, "<BNF name="SQL procedure statement"/>", in ISO/IEC 9075-2. 
+</item>
+
+<item>Subclause 21.1, "<BNF name="direct SQL statement"/>", in ISO/IEC 9075-2. 
+</item>
+
+</ulist>
+
+</item>
+
+</slist>
+
+<para>
+If there is any reason to include here references to subclauses of Part 2,
+then it is hard to imagine why references to subclauses of Part 4 should
+not also be here.  If there is a reason, then surely it applies with equal
+force to the existing references to subclauses of Part 2. 
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPfrm002" number="FRM-002">
+
+<reference>
+P01-04.04, SQL data types
+(<extref part="01" ref="frm_conc_datatypes"/>)
+</reference>
+
+
+<source>
+DBL:BBN-167/X3H2-98-386
+</source>
+
+
+<problem>
+
+<para>
+Section needs a better organization
+</para>
+
+<para>
+There should be a section called SQL Data Types.  Then a short definition
+of what is meant by an SQL data type.  Then the list of the five types of
+data types (predefined, row type, user-defined type, collection type, and
+reference type).  Then there should be a definition for each. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>WG3:HER-027 = DM32.2-2010-00232</comment>
+<PP id="PPfrm010" number="FRM-010" severity="major" realm="technical">
+
+<reference>
+<extref part="01" ref="frm_notterminated"/>
+</reference>
+
+
+<noteAt>
+end of Subclause
+</noteAt>
+
+
+<source>
+WG3:HER-027 = DM32.2-2010-00232
+</source>
+
+
+<problem>
+
+<para>
+It is not clear that the General Rules of the listed subclauses actually behave
+correctly if they do not stop execution on an exception.
+</para>
+
+</problem>
+
+
+</PP>
+
+-->
+
+</EditorNotes>

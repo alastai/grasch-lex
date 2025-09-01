@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+                                                                                                   1
+         1         2         3         4         5         6         7         8         9         0
+1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+-->
+
+<!--
+     Copyright © 2021 Editors of ISO/IEC JTC 1/SC 32/WG 3:
+                 Jim Melton, Stephen Cannan, Jörn Bartels, Stefan Plantikow
+-->
+
+<!-- ===============================================================================================
+     ...............................................................................................
+                   Features.DTD
+     ...............................................................................................
+     ===============================================================================================
+-->
+
+<!--
+PURPOSE:
+  This XML DTD is the DTD for features.xml
+-->
+
+<!-- The features element defines the features of a set of standards.
+-->
+<!ELEMENT features (feature*)>
+
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature (name, comment*, usedIn+)>
+<!-- The attributes of feature are:
+      * code is the unique code for the feature.
+-->
+<!ATTLIST feature
+    code CDATA #REQUIRED
+>
+
+
+<!-- A name element specifies the unique natural language name of a feature.
+-->
+<!ELEMENT name (#PCDATA | squote)*>
+
+
+<!-- The comment element contains commentary text without markup.
+-->
+<!ELEMENT comment (#PCDATA)>
+
+
+<!-- A usedIn element specifies that class or subclass is or was used in a standard and gives the
+     current status.
+-->
+<!ELEMENT usedIn (implies?)>
+<!-- The attributes of usedIn are:
+      * standard a standard to which this feature can apply.
+      * mand indicates whether the feature is a mandatory feature or not.
+             "no" is implicit and is not usually specified.
+      * status indicates its status:
+          "N" - the class or subclass has been introduced in the development of the next edition.
+          "P" - the class or subclass has been published in a DIS or an IS.
+          "O" - the class or subclass, which it was previously published, is no longer in use.
+-->
+<!ATTLIST usedIn
+    standard ( 9075 | 29075 | 39075 | 99999 ) #REQUIRED
+    mand ( yes | no ) "no"
+    status   ( N | P | O ) "N"
+>
+
+<!-- An implies element specifies that support for the feature requires support for another 
+     feature.
+-->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)+>
+
+<!-- An impliedFeature specifies that support for the feature is required.
+-->
+<!ELEMENT impliedFeature EMPTY>
+<!ATTLIST impliedFeature
+    code CDATA #REQUIRED
+>
+
+<!-- An atLeastOneOf element specifies that support for the feature requires the support for 
+     at least one of a set of features.
+-->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+<!-- An squote element sets text in single "curly" quotes.                                 
+-->
+<!ELEMENT squote (#PCDATA)>

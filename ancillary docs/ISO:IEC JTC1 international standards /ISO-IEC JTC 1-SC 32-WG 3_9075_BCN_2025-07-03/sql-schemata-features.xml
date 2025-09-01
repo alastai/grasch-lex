@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element ("features") that 
+identifies every optional language feature defined in ("used in") a part of ISO/IEC 9075. 
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to specify the natural-language text that describes the features
+implemented in a particular SQL-implementation.  
+It may also be used by documentation writers and translators to identify those features in the 
+natural languages of users of those SQL-implementations.
+-->
+
+
+ 
+<!DOCTYPE features [
+  
+<!-- The features element defines the features of a standard (part). -->
+<!ELEMENT features ((feature)*)>
+
+<!-- A feature element defines a specific feature. -->
+<!ELEMENT feature (code, description, implies?)>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the feature. -->
+<!ELEMENT description (#PCDATA | squote)*>
+
+<!-- An implies element provides a set of implied features. -->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)*>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT impliedFeature (#PCDATA)>
+
+<!-- An atLeastOneOf element provides a set of implied features where only one is required. -->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+]>
+
+<features>
+   <feature>
+      <code>B200</code>
+      <description>Polymorphic table functions</description>
+   </feature>
+   <feature>
+      <code>F231</code>
+      <description>Privilege tables</description>
+   </feature>
+   <feature>
+      <code>F251</code>
+      <description>Domain support</description>
+   </feature>
+   <feature>
+      <code>F292</code>
+      <description>UNIQUE null treatment</description>
+   </feature>
+   <feature>
+      <code>F341</code>
+      <description>Usage tables</description>
+   </feature>
+   <feature>
+      <code>F411</code>
+      <description>Time zone specification</description>
+   </feature>
+   <feature>
+      <code>F502</code>
+      <description>Enhanced documentation tables</description>
+   </feature>
+   <feature>
+      <code>F521</code>
+      <description>Assertions</description>
+      <implies>
+         <impliedFeature>F491</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F555</code>
+      <description>Enhanced seconds precision</description>
+   </feature>
+   <feature>
+      <code>F651</code>
+      <description>Catalog name qualifiers</description>
+   </feature>
+   <feature>
+      <code>F690</code>
+      <description>Collation support</description>
+   </feature>
+   <feature>
+      <code>F695</code>
+      <description>Translation support</description>
+   </feature>
+   <feature>
+      <code>F696</code>
+      <description>Additional translation documentation</description>
+   </feature>
+   <feature>
+      <code>S023</code>
+      <description>Basic structured types</description>
+   </feature>
+   <feature>
+      <code>S024</code>
+      <description>Enhanced structured types</description>
+      <implies>
+         <impliedFeature>S023</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S041</code>
+      <description>Basic reference types</description>
+      <implies>
+         <impliedFeature>S051</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S081</code>
+      <description>Subtables</description>
+      <implies>
+         <impliedFeature>S051</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S091</code>
+      <description>Basic array support</description>
+      <implies>
+         <impliedFeature>S093</impliedFeature>
+         <impliedFeature>S099</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S241</code>
+      <description>Transform functions</description>
+   </feature>
+   <feature>
+      <code>S271</code>
+      <description>Basic multiset support</description>
+   </feature>
+   <feature>
+      <code>S401</code>
+      <description>Distinct types based on array types</description>
+   </feature>
+   <feature>
+      <code>T011</code>
+      <description>Timestamp in Information Schema</description>
+   </feature>
+   <feature>
+      <code>T051</code>
+      <description>Row types</description>
+   </feature>
+   <feature>
+      <code>T111</code>
+      <description>Updatable joins, unions, and columns</description>
+   </feature>
+   <feature>
+      <code>T175</code>
+      <description>Generated columns</description>
+   </feature>
+   <feature>
+      <code>T176</code>
+      <description>Sequence generator support</description>
+   </feature>
+   <feature>
+      <code>T180</code>
+      <description>System-versioned tables</description>
+   </feature>
+   <feature>
+      <code>T181</code>
+      <description>Application-time period tables</description>
+   </feature>
+   <feature>
+      <code>T211</code>
+      <description>Basic trigger capability</description>
+      <implies>
+         <impliedFeature>T214</impliedFeature>
+         <impliedFeature>T215</impliedFeature>
+         <impliedFeature>T216</impliedFeature>
+         <impliedFeature>T217</impliedFeature>
+         <impliedFeature>T218</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T213</code>
+      <description>INSTEAD OF triggers</description>
+      <implies>
+         <impliedFeature>T212</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T272</code>
+      <description>Enhanced savepoint management</description>
+      <implies>
+         <impliedFeature>T271</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T322</code>
+      <description>Declared data type attributes</description>
+   </feature>
+   <feature>
+      <code>T331</code>
+      <description>Basic roles</description>
+   </feature>
+   <feature>
+      <code>T522</code>
+      <description>Default values for IN parameters of SQL-invoked procedures</description>
+   </feature>
+   <feature>
+      <code>T523</code>
+      <description>Default values for INOUT parameters of SQL-invoked procedures</description>
+   </feature>
+   <feature>
+      <code>T525</code>
+      <description>Default values for parameters of SQL-invoked functions</description>
+   </feature>
+</features>

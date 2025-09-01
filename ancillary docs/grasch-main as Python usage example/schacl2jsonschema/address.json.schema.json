@@ -1,0 +1,59 @@
+{
+    "PersonShape": {
+        "type": "object",
+        "title": "Person",
+        "properties": {
+            "givenName": {
+                "type": "string",
+                "title": "given name"
+            },
+            "birthDate": {
+                "type": "string",
+                "format": "date"
+            },
+            "gender": {
+                "type": "string",
+                "enum": ["female", "male"]
+            },
+            "address": {
+                "$ref": "#/definitions/AddressShape"
+            }
+        },
+        "required": ["givenName"],
+        "dependencies": {
+            "birthDate": {
+                "not": {
+                    "properties": {
+                        "deathDate": {}
+                    }
+                }
+            }
+        },
+        "additionalProperties": false
+    },
+    "definitions": {
+        "AddressShape": {
+            "type": "object",
+            "title": "Address",
+            "properties": {
+                "streetAddress": {
+                    "type": "string"
+                },
+                "postalCode": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer",
+                            "minimum": 10000,
+                            "maximum": 99999
+                        }
+                    ]
+                }
+            },
+            "required": ["streetAddress"],
+            "additionalProperties": false
+        }
+    }
+}

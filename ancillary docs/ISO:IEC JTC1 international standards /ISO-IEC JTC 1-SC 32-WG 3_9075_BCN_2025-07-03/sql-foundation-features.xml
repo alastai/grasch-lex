@@ -1,0 +1,2236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element ("features") that 
+identifies every optional language feature defined in ("used in") a part of ISO/IEC 9075. 
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to specify the natural-language text that describes the features
+implemented in a particular SQL-implementation.  
+It may also be used by documentation writers and translators to identify those features in the 
+natural languages of users of those SQL-implementations.
+-->
+
+
+ 
+<!DOCTYPE features [
+  
+<!-- The features element defines the features of a standard (part). -->
+<!ELEMENT features ((feature)*)>
+
+<!-- A feature element defines a specific feature. -->
+<!ELEMENT feature (code, description, implies?)>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the feature. -->
+<!ELEMENT description (#PCDATA | squote)*>
+
+<!-- An implies element provides a set of implied features. -->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)*>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT impliedFeature (#PCDATA)>
+
+<!-- An atLeastOneOf element provides a set of implied features where only one is required. -->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+]>
+
+<features>
+   <feature>
+      <code>B011</code>
+      <description>Embedded Ada</description>
+   </feature>
+   <feature>
+      <code>B012</code>
+      <description>Embedded C</description>
+   </feature>
+   <feature>
+      <code>B013</code>
+      <description>Embedded COBOL</description>
+   </feature>
+   <feature>
+      <code>B014</code>
+      <description>Embedded Fortran</description>
+   </feature>
+   <feature>
+      <code>B015</code>
+      <description>Embedded MUMPS</description>
+   </feature>
+   <feature>
+      <code>B016</code>
+      <description>Embedded Pascal</description>
+   </feature>
+   <feature>
+      <code>B017</code>
+      <description>Embedded PL/I</description>
+   </feature>
+   <feature>
+      <code>B021</code>
+      <description>Direct SQL</description>
+   </feature>
+   <feature>
+      <code>B030</code>
+      <description>Enhanced dynamic SQL</description>
+   </feature>
+   <feature>
+      <code>B031</code>
+      <description>Basic dynamic SQL</description>
+   </feature>
+   <feature>
+      <code>B033</code>
+      <description>Untyped SQL-invoked function arguments</description>
+   </feature>
+   <feature>
+      <code>B034</code>
+      <description>Dynamic specification of cursor attributes</description>
+      <implies>
+         <impliedFeature>B031</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B035</code>
+      <description>Non-extended descriptor names</description>
+      <implies>
+         <impliedFeature>B031</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B036</code>
+      <description>Describe input statement</description>
+      <implies>
+         <impliedFeature>B030</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B041</code>
+      <description>Extensions to embedded SQL exception declarations</description>
+   </feature>
+   <feature>
+      <code>B051</code>
+      <description>Enhanced execution rights</description>
+   </feature>
+   <feature>
+      <code>B111</code>
+      <description>Module language Ada</description>
+      <implies>
+         <impliedFeature>E182</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B112</code>
+      <description>Module language C</description>
+      <implies>
+         <impliedFeature>E182</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B113</code>
+      <description>Module language COBOL</description>
+      <implies>
+         <impliedFeature>E182</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B114</code>
+      <description>Module language Fortran</description>
+      <implies>
+         <impliedFeature>E182</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B115</code>
+      <description>Module language MUMPS</description>
+      <implies>
+         <impliedFeature>E182</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B116</code>
+      <description>Module language Pascal</description>
+      <implies>
+         <impliedFeature>E182</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B117</code>
+      <description>Module language PL/I</description>
+      <implies>
+         <impliedFeature>E182</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B121</code>
+      <description>Routine language Ada</description>
+   </feature>
+   <feature>
+      <code>B122</code>
+      <description>Routine language C</description>
+   </feature>
+   <feature>
+      <code>B123</code>
+      <description>Routine language COBOL</description>
+   </feature>
+   <feature>
+      <code>B124</code>
+      <description>Routine language Fortran</description>
+   </feature>
+   <feature>
+      <code>B125</code>
+      <description>Routine language MUMPS</description>
+   </feature>
+   <feature>
+      <code>B126</code>
+      <description>Routine language Pascal</description>
+   </feature>
+   <feature>
+      <code>B127</code>
+      <description>Routine language PL/I</description>
+   </feature>
+   <feature>
+      <code>B128</code>
+      <description>Routine language SQL</description>
+   </feature>
+   <feature>
+      <code>B200</code>
+      <description>Polymorphic table functions</description>
+   </feature>
+   <feature>
+      <code>B201</code>
+      <description>More than one PTF generic table parameter</description>
+      <implies>
+         <impliedFeature>B200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B202</code>
+      <description>PTF copartitioning</description>
+      <implies>
+         <impliedFeature>B201</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B203</code>
+      <description>More than one copartition specification</description>
+      <implies>
+         <impliedFeature>B202</impliedFeature>
+         <impliedFeature>B207</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B204</code>
+      <description>PRUNE WHEN EMPTY</description>
+      <implies>
+         <impliedFeature>B200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B205</code>
+      <description>Pass-through columns</description>
+      <implies>
+         <impliedFeature>B200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B206</code>
+      <description>PTF descriptor parameters</description>
+      <implies>
+         <impliedFeature>B200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B207</code>
+      <description>Cross products of partitionings</description>
+      <implies>
+         <impliedFeature>B201</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B208</code>
+      <description>PTF component procedure interface</description>
+      <implies>
+         <impliedFeature>B209</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B209</code>
+      <description>PTF extended names</description>
+      <implies>
+         <impliedFeature>B200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B211</code>
+      <description>Module language Ada: VARCHAR and NUMERIC support</description>
+      <implies>
+         <impliedFeature>B111</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>B221</code>
+      <description>Routine language Ada: VARCHAR and NUMERIC support</description>
+      <implies>
+         <impliedFeature>B112</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D001</code>
+      <description>CAST error behavior</description>
+   </feature>
+   <feature>
+      <code>D002</code>
+      <description>Castable predicate</description>
+   </feature>
+   <feature>
+      <code>D003</code>
+      <description>General value expression in ON CONVERSION ERROR clause</description>
+      <implies>
+         <impliedFeature>D001</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D004</code>
+      <description>Vector data type</description>
+   </feature>
+   <feature>
+      <code>D005</code>
+      <description>Vectors in equality operations</description>
+      <implies>
+         <impliedFeature>D004</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D006</code>
+      <description>FETCH FIRST clause: APPROXIMATE option</description>
+      <implies>
+         <impliedFeature>D004</impliedFeature>
+         <impliedFeature>F857</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D007</code>
+      <description>Distinct types based on vector types</description>
+      <implies>
+         <impliedFeature>D004</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D008</code>
+      <description>Attributes of type vector</description>
+      <implies>
+         <impliedFeature>D004</impliedFeature>
+         <impliedFeature>S023</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D009</code>
+      <description>Vector parameters and return type</description>
+      <implies>
+         <impliedFeature>D004</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D010</code>
+      <description>Explicit ALL in FETCH FIRST</description>
+      <implies>
+         <impliedFeature>F857</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D011</code>
+      <description>FETCH FIRST clause: row count range</description>
+      <implies>
+         <impliedFeature>D006</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D012</code>
+      <description>FETCH FIRST clause: partitioning</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>F856</impliedFeature>
+            <impliedFeature>F857</impliedFeature>
+            <impliedFeature>F858</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>D013</code>
+      <description>FETCH FIRST clause: partitions and rows with ties</description>
+      <implies>
+         <impliedFeature>D012</impliedFeature>
+         <impliedFeature>F867</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D014</code>
+      <description>FETCH FIRST clause: partitions and row percentage</description>
+      <implies>
+         <impliedFeature>D012</impliedFeature>
+         <impliedFeature>F866</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D015</code>
+      <description>FETCH FIRST clause: partition count range</description>
+      <implies>
+         <impliedFeature>D012</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>D016</code>
+      <description>Partitioned FETCH FIRST and OFFSET clause</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>F856</impliedFeature>
+            <impliedFeature>F857</impliedFeature>
+            <impliedFeature>F858</impliedFeature>
+         </atLeastOneOf>
+         <atLeastOneOf>
+            <impliedFeature>F861</impliedFeature>
+            <impliedFeature>F862</impliedFeature>
+            <impliedFeature>F863</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>D017</code>
+      <description>JSON_TRANSFORM</description>
+      <implies>
+         <impliedFeature>T802</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>E182</code>
+      <description>Module language</description>
+   </feature>
+   <feature>
+      <code>F032</code>
+      <description>CASCADE drop behavior</description>
+   </feature>
+   <feature>
+      <code>F033</code>
+      <description>ALTER TABLE statement: DROP COLUMN clause</description>
+   </feature>
+   <feature>
+      <code>F035</code>
+      <description>REVOKE with CASCADE</description>
+   </feature>
+   <feature>
+      <code>F036</code>
+      <description>REVOKE statement performed by non-owner</description>
+   </feature>
+   <feature>
+      <code>F037</code>
+      <description>REVOKE statement: GRANT OPTION FOR clause</description>
+   </feature>
+   <feature>
+      <code>F038</code>
+      <description>REVOKE of a WITH GRANT OPTION privilege</description>
+   </feature>
+   <feature>
+      <code>F052</code>
+      <description>Intervals and datetime arithmetic</description>
+   </feature>
+   <feature>
+      <code>F053</code>
+      <description>OVERLAPS predicate</description>
+      <implies>
+         <impliedFeature>F052</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F054</code>
+      <description>TIMESTAMP in DATE type precedence list</description>
+   </feature>
+   <feature>
+      <code>F111</code>
+      <description>Isolation levels other than SERIALIZABLE</description>
+      <implies>
+         <impliedFeature>F112</impliedFeature>
+         <impliedFeature>F113</impliedFeature>
+         <impliedFeature>F114</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F112</code>
+      <description>Isolation level READ UNCOMMITTED</description>
+   </feature>
+   <feature>
+      <code>F113</code>
+      <description>Isolation level READ COMMITTED</description>
+   </feature>
+   <feature>
+      <code>F114</code>
+      <description>Isolation level REPEATABLE READ</description>
+   </feature>
+   <feature>
+      <code>F120</code>
+      <description>Get diagnostics statement</description>
+   </feature>
+   <feature>
+      <code>F122</code>
+      <description>Enhanced diagnostics management</description>
+   </feature>
+   <feature>
+      <code>F123</code>
+      <description>All diagnostics</description>
+   </feature>
+   <feature>
+      <code>F124</code>
+      <description>SET TRANSACTION statement: DIAGNOSTICS SIZE clause</description>
+      <implies>
+         <impliedFeature>F120</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F171</code>
+      <description>Multiple schemas per user</description>
+   </feature>
+   <feature>
+      <code>F191</code>
+      <description>Referential delete actions</description>
+   </feature>
+   <feature>
+      <code>F200</code>
+      <description>TRUNCATE TABLE statement</description>
+   </feature>
+   <feature>
+      <code>F202</code>
+      <description>TRUNCATE TABLE: identity column restart option</description>
+      <implies>
+         <impliedFeature>F200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F222</code>
+      <description>INSERT statement: DEFAULT VALUES clause</description>
+   </feature>
+   <feature>
+      <code>F251</code>
+      <description>Domain support</description>
+   </feature>
+   <feature>
+      <code>F262</code>
+      <description>Extended CASE expression</description>
+   </feature>
+   <feature>
+      <code>F263</code>
+      <description>Comma-separated predicates in simple CASE expression</description>
+   </feature>
+   <feature>
+      <code>F271</code>
+      <description>Compound character literals</description>
+   </feature>
+   <feature>
+      <code>F281</code>
+      <description>LIKE enhancements</description>
+   </feature>
+   <feature>
+      <code>F291</code>
+      <description>UNIQUE predicate</description>
+   </feature>
+   <feature>
+      <code>F292</code>
+      <description>UNIQUE null treatment</description>
+   </feature>
+   <feature>
+      <code>F301</code>
+      <description>CORRESPONDING in query expressions</description>
+   </feature>
+   <feature>
+      <code>F303</code>
+      <description>INTERSECT DISTINCT table operator</description>
+   </feature>
+   <feature>
+      <code>F304</code>
+      <description>EXCEPT ALL table operator</description>
+   </feature>
+   <feature>
+      <code>F305</code>
+      <description>INTERSECT ALL table operator</description>
+      <implies>
+         <impliedFeature>F303</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F312</code>
+      <description>MERGE statement</description>
+   </feature>
+   <feature>
+      <code>F313</code>
+      <description>Enhanced MERGE statement</description>
+      <implies>
+         <impliedFeature>F312</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F314</code>
+      <description>MERGE statement with DELETE branch</description>
+      <implies>
+         <impliedFeature>F312</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F321</code>
+      <description>User authorization</description>
+   </feature>
+   <feature>
+      <code>F361</code>
+      <description>Subprogram support</description>
+   </feature>
+   <feature>
+      <code>F381</code>
+      <description>Extended schema manipulation</description>
+      <implies>
+         <impliedFeature>F387</impliedFeature>
+         <impliedFeature>F388</impliedFeature>
+         <impliedFeature>F491</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F382</code>
+      <description>Alter column data type</description>
+      <implies>
+         <impliedFeature>F381</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F383</code>
+      <description>Set column not null clause</description>
+      <implies>
+         <impliedFeature>F381</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F384</code>
+      <description>Drop identity property clause</description>
+      <implies>
+         <impliedFeature>F381</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F385</code>
+      <description>Drop column generation expression clause</description>
+      <implies>
+         <impliedFeature>F381</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F386</code>
+      <description>Set identity column generation clause</description>
+      <implies>
+         <impliedFeature>F381</impliedFeature>
+         <impliedFeature>T174</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F387</code>
+      <description>ALTER TABLE statement: ALTER COLUMN clause</description>
+   </feature>
+   <feature>
+      <code>F388</code>
+      <description>ALTER TABLE statement: ADD/DROP CONSTRAINT clause</description>
+   </feature>
+   <feature>
+      <code>F392</code>
+      <description>Unicode escapes in identifiers</description>
+   </feature>
+   <feature>
+      <code>F393</code>
+      <description>Unicode escapes in literals</description>
+   </feature>
+   <feature>
+      <code>F394</code>
+      <description>Optional normal form specification</description>
+   </feature>
+   <feature>
+      <code>F402</code>
+      <description>Named column joins for LOBs, arrays, and multisets</description>
+   </feature>
+   <feature>
+      <code>F403</code>
+      <description>Partitioned join tables</description>
+   </feature>
+   <feature>
+      <code>F404</code>
+      <description>Range variable for common column names</description>
+   </feature>
+   <feature>
+      <code>F405</code>
+      <description>NATURAL JOIN</description>
+   </feature>
+   <feature>
+      <code>F406</code>
+      <description>FULL OUTER JOIN</description>
+   </feature>
+   <feature>
+      <code>F407</code>
+      <description>CROSS JOIN</description>
+   </feature>
+   <feature>
+      <code>F411</code>
+      <description>Time zone specification</description>
+   </feature>
+   <feature>
+      <code>F421</code>
+      <description>National character</description>
+   </feature>
+   <feature>
+      <code>F432</code>
+      <description>FETCH with explicit NEXT</description>
+      <implies>
+         <impliedFeature>F438</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F433</code>
+      <description>FETCH FIRST</description>
+      <implies>
+         <impliedFeature>F438</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F434</code>
+      <description>FETCH LAST</description>
+      <implies>
+         <impliedFeature>F438</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F435</code>
+      <description>FETCH PRIOR</description>
+      <implies>
+         <impliedFeature>F438</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F436</code>
+      <description>FETCH ABSOLUTE</description>
+      <implies>
+         <impliedFeature>F438</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F437</code>
+      <description>FETCH RELATIVE</description>
+      <implies>
+         <impliedFeature>F438</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F438</code>
+      <description>Scrollable cursors</description>
+   </feature>
+   <feature>
+      <code>F441</code>
+      <description>Extended set function support</description>
+   </feature>
+   <feature>
+      <code>F442</code>
+      <description>Mixed column references in set functions</description>
+   </feature>
+   <feature>
+      <code>F451</code>
+      <description>Character set definition</description>
+      <implies>
+         <impliedFeature>F461</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F461</code>
+      <description>Named character sets</description>
+   </feature>
+   <feature>
+      <code>F491</code>
+      <description>Constraint management</description>
+   </feature>
+   <feature>
+      <code>F492</code>
+      <description>Optional table constraint enforcement</description>
+      <implies>
+         <impliedFeature>F491</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F521</code>
+      <description>Assertions</description>
+      <implies>
+         <impliedFeature>F491</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F522</code>
+      <description>Assertions on views</description>
+      <implies>
+         <impliedFeature>F521</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F523</code>
+      <description>Assertions: advanced features</description>
+      <implies>
+         <impliedFeature>F521</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F531</code>
+      <description>Temporary tables</description>
+   </feature>
+   <feature>
+      <code>F555</code>
+      <description>Enhanced seconds precision</description>
+   </feature>
+   <feature>
+      <code>F561</code>
+      <description>Full value expressions</description>
+   </feature>
+   <feature>
+      <code>F571</code>
+      <description>Truth value tests</description>
+   </feature>
+   <feature>
+      <code>F591</code>
+      <description>Derived tables</description>
+   </feature>
+   <feature>
+      <code>F611</code>
+      <description>Indicator data types</description>
+   </feature>
+   <feature>
+      <code>F641</code>
+      <description>Row and table constructors</description>
+   </feature>
+   <feature>
+      <code>F651</code>
+      <description>Catalog name qualifiers</description>
+   </feature>
+   <feature>
+      <code>F661</code>
+      <description>Simple tables</description>
+   </feature>
+   <feature>
+      <code>F671</code>
+      <description>Subqueries in CHECK constraints</description>
+   </feature>
+   <feature>
+      <code>F672</code>
+      <description>Retrospective CHECK constraints</description>
+   </feature>
+   <feature>
+      <code>F673</code>
+      <description>Reads SQL-data routine invocations in CHECK constraints</description>
+   </feature>
+   <feature>
+      <code>F690</code>
+      <description>Collation support</description>
+   </feature>
+   <feature>
+      <code>F692</code>
+      <description>Extended collation support</description>
+   </feature>
+   <feature>
+      <code>F693</code>
+      <description>SQL-session and client module collations</description>
+      <implies>
+         <impliedFeature>F690</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F695</code>
+      <description>Translation support</description>
+   </feature>
+   <feature>
+      <code>F701</code>
+      <description>Referential update actions</description>
+   </feature>
+   <feature>
+      <code>F711</code>
+      <description>ALTER domain</description>
+      <implies>
+         <impliedFeature>F251</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F721</code>
+      <description>Deferrable constraints</description>
+      <implies>
+         <impliedFeature>F491</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F731</code>
+      <description>INSERT column privileges</description>
+   </feature>
+   <feature>
+      <code>F741</code>
+      <description>Referential MATCH types</description>
+   </feature>
+   <feature>
+      <code>F751</code>
+      <description>View CHECK enhancements</description>
+   </feature>
+   <feature>
+      <code>F761</code>
+      <description>Session management</description>
+   </feature>
+   <feature>
+      <code>F762</code>
+      <description>CURRENT_CATALOG</description>
+      <implies>
+         <impliedFeature>F651</impliedFeature>
+         <impliedFeature>F763</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F763</code>
+      <description>CURRENT_SCHEMA</description>
+   </feature>
+   <feature>
+      <code>F771</code>
+      <description>Connection management</description>
+   </feature>
+   <feature>
+      <code>F781</code>
+      <description>Self-referencing operations</description>
+   </feature>
+   <feature>
+      <code>F791</code>
+      <description>Insensitive cursors</description>
+   </feature>
+   <feature>
+      <code>F801</code>
+      <description>Full set function</description>
+      <implies>
+         <impliedFeature>F441</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F821</code>
+      <description>Local table references</description>
+   </feature>
+   <feature>
+      <code>F832</code>
+      <description>Updatable scrollable cursors</description>
+      <implies>
+         <impliedFeature>F438</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F833</code>
+      <description>Updatable ordered cursors</description>
+   </feature>
+   <feature>
+      <code>F841</code>
+      <description>LIKE_REGEX predicate</description>
+   </feature>
+   <feature>
+      <code>F842</code>
+      <description>OCCURRENCES_REGEX function</description>
+   </feature>
+   <feature>
+      <code>F843</code>
+      <description>POSITION_REGEX function</description>
+   </feature>
+   <feature>
+      <code>F844</code>
+      <description>SUBSTRING_REGEX function</description>
+   </feature>
+   <feature>
+      <code>F845</code>
+      <description>TRANSLATE_REGEX function</description>
+   </feature>
+   <feature>
+      <code>F846</code>
+      <description>Octet support in regular expression operators</description>
+      <implies>
+         <impliedFeature>T062</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F847</code>
+      <description>Non-constant regular expressions</description>
+   </feature>
+   <feature>
+      <code>F850</code>
+      <description>Top-level ORDER BY in query expressions</description>
+   </feature>
+   <feature>
+      <code>F851</code>
+      <description>ORDER BY in subqueries</description>
+      <implies>
+         <impliedFeature>F850</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F852</code>
+      <description>Top-level ORDER BY in views</description>
+   </feature>
+   <feature>
+      <code>F855</code>
+      <description>Nested ORDER BY in query expressions</description>
+      <implies>
+         <impliedFeature>F850</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F856</code>
+      <description>Nested FETCH FIRST in query expressions</description>
+      <implies>
+         <impliedFeature>F857</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F857</code>
+      <description>Top-level FETCH FIRST in query expressions</description>
+   </feature>
+   <feature>
+      <code>F858</code>
+      <description>FETCH FIRST in subqueries</description>
+      <implies>
+         <impliedFeature>F857</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F859</code>
+      <description>Top-level FETCH FIRST in views</description>
+   </feature>
+   <feature>
+      <code>F860</code>
+      <description>Dynamic FETCH FIRST row count</description>
+   </feature>
+   <feature>
+      <code>F861</code>
+      <description>Top-level OFFSET in query expressions</description>
+   </feature>
+   <feature>
+      <code>F862</code>
+      <description>OFFSET in subqueries</description>
+      <implies>
+         <impliedFeature>F861</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F863</code>
+      <description>Nested OFFSET in query expressions</description>
+      <implies>
+         <impliedFeature>F861</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F864</code>
+      <description>Top-level OFFSET in views</description>
+   </feature>
+   <feature>
+      <code>F865</code>
+      <description>Dynamic offset row count in OFFSET</description>
+   </feature>
+   <feature>
+      <code>F866</code>
+      <description>FETCH FIRST clause: PERCENT option</description>
+      <implies>
+         <impliedFeature>F857</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F867</code>
+      <description>FETCH FIRST clause: WITH TIES option</description>
+      <implies>
+         <impliedFeature>F850</impliedFeature>
+         <impliedFeature>F857</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>F868</code>
+      <description>ORDER BY in grouped tables</description>
+      <implies>
+         <impliedFeature>T301</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>GF08</code>
+      <description>Single-character trim function: whitespace</description>
+   </feature>
+   <feature>
+      <code>GF09</code>
+      <description>Multi-character trim function: whitespace</description>
+   </feature>
+   <feature>
+      <code>R010</code>
+      <description>Row pattern recognition: FROM clause</description>
+   </feature>
+   <feature>
+      <code>R020</code>
+      <description>Row pattern recognition: WINDOW clause</description>
+   </feature>
+   <feature>
+      <code>R030</code>
+      <description>Row pattern recognition: full aggregate support</description>
+      <implies>
+         <impliedFeature>R010</impliedFeature>
+         <impliedFeature>R020</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S023</code>
+      <description>Basic structured types</description>
+   </feature>
+   <feature>
+      <code>S024</code>
+      <description>Enhanced structured types</description>
+      <implies>
+         <impliedFeature>S023</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S025</code>
+      <description>Final structured types</description>
+   </feature>
+   <feature>
+      <code>S026</code>
+      <description>Self-referencing structured types</description>
+   </feature>
+   <feature>
+      <code>S027</code>
+      <description>Create method by specific method name</description>
+   </feature>
+   <feature>
+      <code>S028</code>
+      <description>Permutable UDT options list</description>
+   </feature>
+   <feature>
+      <code>S041</code>
+      <description>Basic reference types</description>
+      <implies>
+         <impliedFeature>S051</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S043</code>
+      <description>Enhanced reference types</description>
+      <implies>
+         <impliedFeature>S041</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S051</code>
+      <description>Create table of type</description>
+      <implies>
+         <impliedFeature>S023</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S071</code>
+      <description>SQL paths in function and type name resolution</description>
+   </feature>
+   <feature>
+      <code>S081</code>
+      <description>Subtables</description>
+      <implies>
+         <impliedFeature>S051</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S090</code>
+      <description>Minimal array support</description>
+   </feature>
+   <feature>
+      <code>S092</code>
+      <description>Arrays of user-defined types</description>
+      <implies>
+         <impliedFeature>S091</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S093</code>
+      <description>Arrays of distinct types</description>
+      <implies>
+         <impliedFeature>S090</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S094</code>
+      <description>Arrays of reference types</description>
+      <implies>
+         <impliedFeature>S041</impliedFeature>
+         <impliedFeature>S091</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S095</code>
+      <description>Array constructors by query</description>
+      <implies>
+         <impliedFeature>S091</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S096</code>
+      <description>Optional array bounds</description>
+      <implies>
+         <impliedFeature>S091</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S097</code>
+      <description>Array element assignment</description>
+      <implies>
+         <impliedFeature>S091</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S098</code>
+      <description>ARRAY_AGG</description>
+      <implies>
+         <impliedFeature>S091</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S099</code>
+      <description>Array expressions</description>
+      <implies>
+         <impliedFeature>S090</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S111</code>
+      <description>ONLY in query expressions</description>
+      <implies>
+         <impliedFeature>S051</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S151</code>
+      <description>Type predicate</description>
+   </feature>
+   <feature>
+      <code>S161</code>
+      <description>Subtype treatment</description>
+   </feature>
+   <feature>
+      <code>S162</code>
+      <description>Subtype treatment for references</description>
+   </feature>
+   <feature>
+      <code>S202</code>
+      <description>SQL-invoked routines on multisets</description>
+      <implies>
+         <impliedFeature>S271</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S203</code>
+      <description>Array parameters</description>
+   </feature>
+   <feature>
+      <code>S204</code>
+      <description>Array as result type of functions</description>
+   </feature>
+   <feature>
+      <code>S211</code>
+      <description>User-defined cast functions</description>
+   </feature>
+   <feature>
+      <code>S231</code>
+      <description>Structured type locators</description>
+      <implies>
+         <impliedFeature>S023</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S232</code>
+      <description>Array locators</description>
+      <implies>
+         <impliedFeature>S091</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S233</code>
+      <description>Multiset locators</description>
+      <implies>
+         <impliedFeature>S271</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S241</code>
+      <description>Transform functions</description>
+   </feature>
+   <feature>
+      <code>S242</code>
+      <description>Alter transform statement</description>
+      <implies>
+         <impliedFeature>S241</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S251</code>
+      <description>User-defined orderings</description>
+   </feature>
+   <feature>
+      <code>S261</code>
+      <description>Specific type method</description>
+   </feature>
+   <feature>
+      <code>S271</code>
+      <description>Basic multiset support</description>
+   </feature>
+   <feature>
+      <code>S272</code>
+      <description>Multisets of user-defined types</description>
+      <implies>
+         <impliedFeature>S271</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S274</code>
+      <description>Multisets of reference types</description>
+      <implies>
+         <impliedFeature>S041</impliedFeature>
+         <impliedFeature>S271</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S275</code>
+      <description>Advanced multiset support</description>
+      <implies>
+         <impliedFeature>S271</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>S281</code>
+      <description>Nested collection types</description>
+   </feature>
+   <feature>
+      <code>S291</code>
+      <description>Unique constraint on entire row</description>
+   </feature>
+   <feature>
+      <code>S301</code>
+      <description>Enhanced UNNEST</description>
+   </feature>
+   <feature>
+      <code>S401</code>
+      <description>Distinct types based on array types</description>
+   </feature>
+   <feature>
+      <code>S402</code>
+      <description>Distinct types based on multiset types</description>
+   </feature>
+   <feature>
+      <code>S403</code>
+      <description>ARRAY_MAX_CARDINALITY</description>
+   </feature>
+   <feature>
+      <code>S404</code>
+      <description>TRIM_ARRAY</description>
+   </feature>
+   <feature>
+      <code>T021</code>
+      <description>BINARY and VARBINARY data types</description>
+   </feature>
+   <feature>
+      <code>T022</code>
+      <description>Advanced support for BINARY and VARBINARY data types</description>
+      <implies>
+         <impliedFeature>T021</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T023</code>
+      <description>Compound binary literals</description>
+   </feature>
+   <feature>
+      <code>T024</code>
+      <description>Spaces in binary literals</description>
+   </feature>
+   <feature>
+      <code>T031</code>
+      <description>BOOLEAN data type</description>
+   </feature>
+   <feature>
+      <code>T039</code>
+      <description>CLOB locator: non-holdable</description>
+      <implies>
+         <impliedFeature>T046</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T040</code>
+      <description>Concatenation of CLOBs</description>
+      <implies>
+         <impliedFeature>T046</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T042</code>
+      <description>Extended LOB data type support</description>
+      <implies>
+         <impliedFeature>T041</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T043</code>
+      <description>Multiplier T</description>
+      <implies>
+         <impliedFeature>T041</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T044</code>
+      <description>Multiplier P</description>
+      <implies>
+         <impliedFeature>T043</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T045</code>
+      <description>BLOB data type</description>
+   </feature>
+   <feature>
+      <code>T046</code>
+      <description>CLOB data type</description>
+   </feature>
+   <feature>
+      <code>T047</code>
+      <description>POSITION, OCTET_LENGTH, TRIM, and SUBSTRING for BLOBs</description>
+      <implies>
+         <impliedFeature>T045</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T048</code>
+      <description>Concatenation of BLOBs</description>
+      <implies>
+         <impliedFeature>T045</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T049</code>
+      <description>BLOB locator: non-holdable</description>
+      <implies>
+         <impliedFeature>T045</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T050</code>
+      <description>POSITION, CHAR_LENGTH, OCTET_LENGTH, LOWER, TRIM, UPPER, and SUBSTRING for CLOBs</description>
+      <implies>
+         <impliedFeature>T046</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T051</code>
+      <description>Row types</description>
+   </feature>
+   <feature>
+      <code>T053</code>
+      <description>Explicit aliases for all-fields reference</description>
+   </feature>
+   <feature>
+      <code>T054</code>
+      <description>GREATEST and LEAST</description>
+   </feature>
+   <feature>
+      <code>T055</code>
+      <description>String padding functions</description>
+   </feature>
+   <feature>
+      <code>T056</code>
+      <description>Multi-character trim functions</description>
+   </feature>
+   <feature>
+      <code>T061</code>
+      <description>UCS support</description>
+      <implies>
+         <impliedFeature>F690</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T062</code>
+      <description>Character length units</description>
+      <implies>
+         <impliedFeature>T061</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T071</code>
+      <description>BIGINT data type</description>
+   </feature>
+   <feature>
+      <code>T076</code>
+      <description>DECFLOAT data type</description>
+   </feature>
+   <feature>
+      <code>T081</code>
+      <description>Optional string types maximum length</description>
+   </feature>
+   <feature>
+      <code>T101</code>
+      <description>Enhanced nullability determination</description>
+   </feature>
+   <feature>
+      <code>T111</code>
+      <description>Updatable joins, unions, and columns</description>
+   </feature>
+   <feature>
+      <code>T121</code>
+      <description>WITH (excluding RECURSIVE) in query expressions</description>
+   </feature>
+   <feature>
+      <code>T122</code>
+      <description>WITH (excluding RECURSIVE) in subqueries</description>
+      <implies>
+         <impliedFeature>T121</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T131</code>
+      <description>Recursive query</description>
+      <implies>
+         <impliedFeature>T121</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T132</code>
+      <description>Recursive query in subquery</description>
+      <implies>
+         <impliedFeature>T122</impliedFeature>
+         <impliedFeature>T131</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T133</code>
+      <description>Enhanced cycle mark values</description>
+      <implies>
+         <impliedFeature>T031</impliedFeature>
+         <impliedFeature>T131</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T141</code>
+      <description>SIMILAR predicate</description>
+   </feature>
+   <feature>
+      <code>T151</code>
+      <description>DISTINCT predicate</description>
+   </feature>
+   <feature>
+      <code>T152</code>
+      <description>DISTINCT predicate with negation</description>
+      <implies>
+         <impliedFeature>T151</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T171</code>
+      <description>LIKE clause in table definition</description>
+   </feature>
+   <feature>
+      <code>T172</code>
+      <description>AS subquery clause in table definition</description>
+   </feature>
+   <feature>
+      <code>T173</code>
+      <description>Extended LIKE clause in table definition</description>
+      <implies>
+         <impliedFeature>T171</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T174</code>
+      <description>Identity columns</description>
+   </feature>
+   <feature>
+      <code>T175</code>
+      <description>Generated columns</description>
+   </feature>
+   <feature>
+      <code>T176</code>
+      <description>Sequence generator support</description>
+   </feature>
+   <feature>
+      <code>T177</code>
+      <description>Sequence generator support: simple restart option</description>
+      <implies>
+         <impliedFeature>T176</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T178</code>
+      <description>Identity columns: simple restart option</description>
+      <implies>
+         <impliedFeature>T174</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T180</code>
+      <description>System-versioned tables</description>
+   </feature>
+   <feature>
+      <code>T181</code>
+      <description>Application-time period tables</description>
+   </feature>
+   <feature>
+      <code>T191</code>
+      <description>Referential action RESTRICT</description>
+   </feature>
+   <feature>
+      <code>T200</code>
+      <description>Trigger DDL</description>
+   </feature>
+   <feature>
+      <code>T201</code>
+      <description>Comparable data types for referential constraints</description>
+   </feature>
+   <feature>
+      <code>T212</code>
+      <description>Enhanced trigger capability</description>
+      <implies>
+         <impliedFeature>T211</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T213</code>
+      <description>INSTEAD OF triggers</description>
+      <implies>
+         <impliedFeature>T212</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T214</code>
+      <description>BEFORE triggers</description>
+      <implies>
+         <impliedFeature>T200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T215</code>
+      <description>AFTER triggers</description>
+      <implies>
+         <impliedFeature>T200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T216</code>
+      <description>Ability to require true search condition before trigger is invoked</description>
+      <implies>
+         <impliedFeature>T200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T217</code>
+      <description>TRIGGER privilege</description>
+      <implies>
+         <impliedFeature>T200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T218</code>
+      <description>Multiple triggers for the same event executed in the order created</description>
+      <implies>
+         <impliedFeature>T200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T231</code>
+      <description>Sensitive cursors</description>
+   </feature>
+   <feature>
+      <code>T241</code>
+      <description>START TRANSACTION statement</description>
+   </feature>
+   <feature>
+      <code>T251</code>
+      <description>SET TRANSACTION statement: LOCAL option</description>
+      <implies>
+         <impliedFeature>T262</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T261</code>
+      <description>Chained transactions</description>
+   </feature>
+   <feature>
+      <code>T262</code>
+      <description>Multiple server transactions</description>
+   </feature>
+   <feature>
+      <code>T271</code>
+      <description>Savepoints</description>
+   </feature>
+   <feature>
+      <code>T272</code>
+      <description>Enhanced savepoint management</description>
+      <implies>
+         <impliedFeature>T271</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T281</code>
+      <description>SELECT privilege with column granularity</description>
+   </feature>
+   <feature>
+      <code>T285</code>
+      <description>Enhanced derived column names</description>
+   </feature>
+   <feature>
+      <code>T301</code>
+      <description>Functional dependencies</description>
+   </feature>
+   <feature>
+      <code>T312</code>
+      <description>OVERLAY function</description>
+   </feature>
+   <feature>
+      <code>T323</code>
+      <description>Explicit security for external routines</description>
+   </feature>
+   <feature>
+      <code>T324</code>
+      <description>Explicit security for SQL routines</description>
+   </feature>
+   <feature>
+      <code>T325</code>
+      <description>Qualified SQL parameter references</description>
+   </feature>
+   <feature>
+      <code>T326</code>
+      <description>Table functions</description>
+   </feature>
+   <feature>
+      <code>T331</code>
+      <description>Basic roles</description>
+   </feature>
+   <feature>
+      <code>T332</code>
+      <description>Extended roles</description>
+      <implies>
+         <impliedFeature>T331</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T341</code>
+      <description>Overloading of SQL-invoked functions and SQL-invoked procedures</description>
+   </feature>
+   <feature>
+      <code>T351</code>
+      <description>Bracketed comments</description>
+   </feature>
+   <feature>
+      <code>T431</code>
+      <description>Extended grouping capabilities</description>
+   </feature>
+   <feature>
+      <code>T432</code>
+      <description>Nested and concatenated GROUPING SETS</description>
+      <implies>
+         <impliedFeature>T431</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T433</code>
+      <description>Multi-argument GROUPING function</description>
+      <implies>
+         <impliedFeature>T431</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T434</code>
+      <description>GROUP BY DISTINCT</description>
+   </feature>
+   <feature>
+      <code>T441</code>
+      <description>ABS and MOD functions</description>
+   </feature>
+   <feature>
+      <code>T461</code>
+      <description>Symmetric BETWEEN predicate</description>
+   </feature>
+   <feature>
+      <code>T471</code>
+      <description>Result sets return value</description>
+   </feature>
+   <feature>
+      <code>T472</code>
+      <description>DESCRIBE CURSOR</description>
+      <implies>
+         <impliedFeature>T471</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T491</code>
+      <description>LATERAL derived table</description>
+   </feature>
+   <feature>
+      <code>T495</code>
+      <description>Combined data change and retrieval</description>
+   </feature>
+   <feature>
+      <code>T501</code>
+      <description>Enhanced EXISTS predicate</description>
+   </feature>
+   <feature>
+      <code>T502</code>
+      <description>Period predicates</description>
+   </feature>
+   <feature>
+      <code>T511</code>
+      <description>Transaction counts</description>
+      <implies>
+         <impliedFeature>F121</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T521</code>
+      <description>Named arguments in CALL statement</description>
+   </feature>
+   <feature>
+      <code>T522</code>
+      <description>Default values for IN parameters of SQL-invoked procedures</description>
+   </feature>
+   <feature>
+      <code>T523</code>
+      <description>Default values for INOUT parameters of SQL-invoked procedures</description>
+   </feature>
+   <feature>
+      <code>T524</code>
+      <description>Named arguments in routine invocations other than a CALL statement</description>
+   </feature>
+   <feature>
+      <code>T525</code>
+      <description>Default values for parameters of SQL-invoked functions</description>
+   </feature>
+   <feature>
+      <code>T551</code>
+      <description>Optional keywords for default syntax</description>
+   </feature>
+   <feature>
+      <code>T561</code>
+      <description>Holdable locators</description>
+   </feature>
+   <feature>
+      <code>T571</code>
+      <description>Array-returning external SQL-invoked functions</description>
+      <implies>
+         <impliedFeature>S201</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T572</code>
+      <description>Multiset-returning external SQL-invoked functions</description>
+      <implies>
+         <impliedFeature>S202</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T581</code>
+      <description>Regular expression substring function</description>
+   </feature>
+   <feature>
+      <code>T591</code>
+      <description>UNIQUE constraints of possibly null columns</description>
+   </feature>
+   <feature>
+      <code>T601</code>
+      <description>Local cursor references</description>
+   </feature>
+   <feature>
+      <code>T611</code>
+      <description>Elementary OLAP operations</description>
+   </feature>
+   <feature>
+      <code>T612</code>
+      <description>Advanced OLAP operations</description>
+      <implies>
+         <impliedFeature>T611</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T613</code>
+      <description>Sampling</description>
+   </feature>
+   <feature>
+      <code>T614</code>
+      <description>NTILE function</description>
+      <implies>
+         <impliedFeature>T611</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T615</code>
+      <description>LEAD and LAG functions</description>
+      <implies>
+         <impliedFeature>T611</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T616</code>
+      <description>Null treatment option for LEAD and LAG functions</description>
+      <implies>
+         <impliedFeature>T615</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T617</code>
+      <description>FIRST_VALUE and LAST_VALUE functions</description>
+      <implies>
+         <impliedFeature>T611</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T618</code>
+      <description>NTH_VALUE function</description>
+      <implies>
+         <impliedFeature>T611</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T619</code>
+      <description>Nested window functions</description>
+      <implies>
+         <impliedFeature>T611</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T620</code>
+      <description>WINDOW clause: GROUPS option</description>
+      <implies>
+         <impliedFeature>T611</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T621</code>
+      <description>Enhanced numeric functions</description>
+   </feature>
+   <feature>
+      <code>T622</code>
+      <description>Trigonometric functions</description>
+   </feature>
+   <feature>
+      <code>T623</code>
+      <description>General logarithm functions</description>
+   </feature>
+   <feature>
+      <code>T624</code>
+      <description>Common logarithm functions</description>
+   </feature>
+   <feature>
+      <code>T625</code>
+      <description>LISTAGG</description>
+   </feature>
+   <feature>
+      <code>T626</code>
+      <description>ANY_VALUE</description>
+   </feature>
+   <feature>
+      <code>T627</code>
+      <description>Window framed COUNT DISTINCT</description>
+   </feature>
+   <feature>
+      <code>T641</code>
+      <description>Multiple column assignment</description>
+   </feature>
+   <feature>
+      <code>T651</code>
+      <description>SQL-schema statements in SQL routines</description>
+   </feature>
+   <feature>
+      <code>T652</code>
+      <description>SQL-dynamic statements in SQL routines</description>
+      <implies>
+         <impliedFeature>B031</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T653</code>
+      <description>SQL-schema statements in external routines</description>
+   </feature>
+   <feature>
+      <code>T654</code>
+      <description>SQL-dynamic statements in external routines</description>
+      <implies>
+         <impliedFeature>B031</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T655</code>
+      <description>Cyclically dependent routines</description>
+   </feature>
+   <feature>
+      <code>T661</code>
+      <description>Non-decimal integer literals</description>
+   </feature>
+   <feature>
+      <code>T662</code>
+      <description>Underscores in numeric literals</description>
+   </feature>
+   <feature>
+      <code>T670</code>
+      <description>Schema and data statement mixing</description>
+   </feature>
+   <feature>
+      <code>T801</code>
+      <description>JSON data type</description>
+   </feature>
+   <feature>
+      <code>T802</code>
+      <description>Enhanced JSON data type</description>
+      <implies>
+         <impliedFeature>T801</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T803</code>
+      <description>String-based JSON</description>
+   </feature>
+   <feature>
+      <code>T811</code>
+      <description>Basic SQL/JSON constructor functions</description>
+   </feature>
+   <feature>
+      <code>T812</code>
+      <description>SQL/JSON: JSON_OBJECTAGG</description>
+      <implies>
+         <impliedFeature>T811</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T813</code>
+      <description>SQL/JSON: JSON_ARRAYAGG with ORDER BY</description>
+      <implies>
+         <impliedFeature>T811</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T814</code>
+      <description>Colon in JSON_OBJECT or JSON_OBJECTAGG</description>
+   </feature>
+   <feature>
+      <code>T821</code>
+      <description>Basic SQL/JSON query operators</description>
+   </feature>
+   <feature>
+      <code>T822</code>
+      <description>SQL/JSON: IS JSON WITH UNIQUE KEYS predicate</description>
+      <implies>
+         <impliedFeature>T821</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T823</code>
+      <description>SQL/JSON: PASSING clause</description>
+      <implies>
+         <impliedFeature>T821</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T824</code>
+      <description>JSON_TABLE: specific PLAN clause</description>
+      <implies>
+         <impliedFeature>T821</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T825</code>
+      <description>SQL/JSON: ON EMPTY and ON ERROR clauses</description>
+      <implies>
+         <impliedFeature>T821</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T826</code>
+      <description>General value expression in ON ERROR or ON EMPTY clauses</description>
+      <implies>
+         <impliedFeature>T825</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T827</code>
+      <description>JSON_TABLE: sibling NESTED COLUMNS clauses</description>
+      <implies>
+         <impliedFeature>T821</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T828</code>
+      <description>JSON_QUERY</description>
+   </feature>
+   <feature>
+      <code>T829</code>
+      <description>JSON_QUERY: array wrapper options</description>
+   </feature>
+   <feature>
+      <code>T830</code>
+      <description>Enforcing unique keys in SQL/JSON constructor functions</description>
+      <implies>
+         <impliedFeature>T811</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T831</code>
+      <description>SQL/JSON path language: strict mode</description>
+   </feature>
+   <feature>
+      <code>T832</code>
+      <description>SQL/JSON path language: item method</description>
+   </feature>
+   <feature>
+      <code>T833</code>
+      <description>SQL/JSON path language: multiple subscripts</description>
+   </feature>
+   <feature>
+      <code>T834</code>
+      <description>SQL/JSON path language: wildcard member accessor</description>
+   </feature>
+   <feature>
+      <code>T835</code>
+      <description>SQL/JSON path language: filter expressions</description>
+   </feature>
+   <feature>
+      <code>T836</code>
+      <description>SQL/JSON path language: starts with predicate</description>
+      <implies>
+         <impliedFeature>T835</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T837</code>
+      <description>SQL/JSON path language: regex_like predicate</description>
+      <implies>
+         <impliedFeature>T835</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T838</code>
+      <description>JSON_TABLE: PLAN DEFAULT clause</description>
+      <implies>
+         <impliedFeature>T821</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T839</code>
+      <description>Formatted cast of datetimes to/from character strings</description>
+   </feature>
+   <feature>
+      <code>T840</code>
+      <description>Hex integer literals in SQL/JSON path language</description>
+   </feature>
+   <feature>
+      <code>T851</code>
+      <description>SQL/JSON: optional keywords for default syntax</description>
+   </feature>
+   <feature>
+      <code>T860</code>
+      <description>SQL/JSON simplified accessor: column reference only</description>
+      <implies>
+         <impliedFeature>T801</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T861</code>
+      <description>SQL/JSON simplified accessor: case-sensitive JSON member accessor</description>
+      <implies>
+         <impliedFeature>T860</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T862</code>
+      <description>SQL/JSON simplified accessor: wildcard member accessor</description>
+      <implies>
+         <impliedFeature>T860</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T863</code>
+      <description>SQL/JSON simplified accessor: single-quoted string literal as member accessor</description>
+      <implies>
+         <impliedFeature>T860</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T864</code>
+      <description>SQL/JSON simplified accessor</description>
+      <implies>
+         <impliedFeature>T860</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T865</code>
+      <description>SQL/JSON item method: bigint()</description>
+   </feature>
+   <feature>
+      <code>T866</code>
+      <description>SQL/JSON item method: boolean()</description>
+   </feature>
+   <feature>
+      <code>T867</code>
+      <description>SQL/JSON item method: date()</description>
+   </feature>
+   <feature>
+      <code>T868</code>
+      <description>SQL/JSON item method: decimal()</description>
+   </feature>
+   <feature>
+      <code>T869</code>
+      <description>SQL/JSON item method: decimal() with precision and scale</description>
+      <implies>
+         <impliedFeature>T868</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>T870</code>
+      <description>SQL/JSON item method: integer()</description>
+   </feature>
+   <feature>
+      <code>T871</code>
+      <description>SQL/JSON item method: number()</description>
+   </feature>
+   <feature>
+      <code>T872</code>
+      <description>SQL/JSON item method: string()</description>
+   </feature>
+   <feature>
+      <code>T873</code>
+      <description>SQL/JSON item method: time()</description>
+   </feature>
+   <feature>
+      <code>T874</code>
+      <description>SQL/JSON item method: time_tz()</description>
+   </feature>
+   <feature>
+      <code>T875</code>
+      <description>SQL/JSON item method: time precision</description>
+   </feature>
+   <feature>
+      <code>T876</code>
+      <description>SQL/JSON item method: timestamp()</description>
+   </feature>
+   <feature>
+      <code>T877</code>
+      <description>SQL/JSON item method: timestamp_tz()</description>
+   </feature>
+   <feature>
+      <code>T878</code>
+      <description>SQL/JSON item method: timestamp precision</description>
+   </feature>
+   <feature>
+      <code>T879</code>
+      <description>JSON in equality operations</description>
+   </feature>
+   <feature>
+      <code>T880</code>
+      <description>JSON in grouping operations</description>
+   </feature>
+   <feature>
+      <code>T881</code>
+      <description>JSON in ordering operations</description>
+   </feature>
+   <feature>
+      <code>T882</code>
+      <description>JSON in multiset element grouping operations</description>
+   </feature>
+   <feature>
+      <code>T890</code>
+      <description>ALL predicate</description>
+   </feature>
+</features>

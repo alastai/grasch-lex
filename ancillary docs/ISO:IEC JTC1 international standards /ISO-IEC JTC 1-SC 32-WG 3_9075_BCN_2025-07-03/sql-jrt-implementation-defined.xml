@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA132</code>
+      <description>Whether the Java interface java.io.Serializable or the Java interface java.sql.SQLData will be used for object state conversion in those cases where the user-defined type definition does not specify an interface specification.</description>
+   </impDef>
+   <impDef>
+      <code>IA134</code>
+      <description>Whether a Java method called by an SQL name executes with “definer’s rights” or “invoker’s rights” — that is, whether it executes with the user-name of the user who performed the SQL-invoked routine or the user-name of the current user.</description>
+   </impDef>
+   <impDef>
+      <code>IA136</code>
+      <description>Whether the validation of the Java parameter declaration list is to be performed by routine invocation, or not.</description>
+   </impDef>
+   <impDef>
+      <code>IA141</code>
+      <description>The effect of invoking an external Java routine when the JDBC connection object that created any element of the result set parameters is closed.</description>
+   </impDef>
+   <impDef>
+      <code>IA142</code>
+      <description>The effect of invoking an external Java routine when any element of the result set parameters is not an object returned by a connection to the current SQL system and SQL session.</description>
+   </impDef>
+   <impDef>
+      <code>IA143</code>
+      <description>Whether an external Java routine returns update counts as defined in JDBC.</description>
+   </impDef>
+   <impDef>
+      <code>IA144</code>
+      <description>Whether validation of the explicit or implicit Java parameter declaration list of an external Java data type is performed by user-defined type definition or when the corresponding SQL-invoked method is invoked.</description>
+   </impDef>
+   <impDef>
+      <code>IA145</code>
+      <description>The rules to which an SQLJ.INSTALL_JAR procedure is subject for executing SQL-schema statements within SQL-transactions.</description>
+   </impDef>
+   <impDef>
+      <code>IA146</code>
+      <description>The effect on the install actions when an invocation of SQLJ.INSTALL_JAR raises an exception condition.</description>
+   </impDef>
+   <impDef>
+      <code>IA147</code>
+      <description>The rules used to determine if the values and format of a url parameter are valid for SQLJ.INSTALL_JAR.</description>
+   </impDef>
+   <impDef>
+      <code>IA148</code>
+      <description>The rules to which an SQLJ.REPLACE_JAR procedure is subject for executing SQL-schema statements within SQL-transactions.</description>
+   </impDef>
+   <impDef>
+      <code>IA149</code>
+      <description>The rules used to determine if the values and format of a url parameter are valid for SQLJ.REPLACE_JAR.</description>
+   </impDef>
+   <impDef>
+      <code>IA150</code>
+      <description>The rules to which an SQLJ.REMOVE_JAR procedure is subject for executing SQL-schema statements within SQL-transactions.</description>
+   </impDef>
+   <impDef>
+      <code>IA151</code>
+      <description>The effect on the remove actions when an invocation of SQLJ.REMOVE_JAR raises an exception condition.</description>
+   </impDef>
+   <impDef>
+      <code>IA152</code>
+      <description>The rules to which an SQLJ.ALTER_JAVA_PATH procedure is subject for executing SQL-schema statements within SQL-transactions.</description>
+   </impDef>
+   <impDef>
+      <code>IA153</code>
+      <description>The effect on the remove actions when an invocation of SQLJ.ALTER_JAVA_PATH raises an exception condition.</description>
+   </impDef>
+   <impDef>
+      <code>IA154</code>
+      <description>The data source URLs that are supported by java.sql in addition to the default connection.</description>
+   </impDef>
+   <impDef>
+      <code>IA155</code>
+      <description>Whether an implementer block with a given implementer name is interpreted as an install action or remove action, i.e., an SQL/JRT implementation may (but is not required to) perform install or remove actions specified by some other SQL/JRT implementation.</description>
+   </impDef>
+   <impDef>
+      <code>ID230</code>
+      <description>The interface using clause of an external Java type when not explicitly specified.</description>
+   </impDef>
+   <impDef>
+      <code>IE004</code>
+      <description>The Java packages, other than java.sql, supplied by SQL systems that implement ISO/IEC 9075-13.</description>
+   </impDef>
+   <impDef>
+      <code>IL015</code>
+      <description>The maximum length of a url, jar or path.</description>
+   </impDef>
+   <impDef>
+      <code>IL069</code>
+      <description>The maximum lengths of the package identifier, class identifier, Java field name, and Java method name.</description>
+   </impDef>
+   <impDef>
+      <code>IL204</code>
+      <description>The maximum number of returned result sets that may be returned by an SQL-invoked routine.</description>
+   </impDef>
+   <impDef>
+      <code>IV112</code>
+      <description>The specification of the implementer block, if any, provided in a deployment descriptor file to allow specification of custom install and remove actions.</description>
+   </impDef>
+   <impDef>
+      <code>IV195</code>
+      <description>The length for an SQL parameter declaration whose data type is character string.</description>
+   </impDef>
+   <impDef>
+      <code>IV196</code>
+      <description>The length of a java.lang.StringBuffer used as a save area data item.</description>
+   </impDef>
+   <impDef>
+      <code>IV208</code>
+      <description>The implementer names, which are SQL identifier, that are specified in an implementer block.</description>
+   </impDef>
+   <impDef>
+      <code>IV224</code>
+      <description>The character set supported for ‹package identifier›, ‹class identifier›, ‹Java field name›, and ‹Java method name›.</description>
+   </impDef>
+   <impDef>
+      <code>IV245</code>
+      <description>The result value of an output parameter with the data type of the declared data type of the parameter when the subject routine is an external Java routine.</description>
+   </impDef>
+   <impDef>
+      <code>IW012</code>
+      <description>The privileges required to invoke the SQLJ.INSTALL_JAR, SQLJ.REPLACE_JAR, and SQLJ.REMOVE_JAR procedures.</description>
+   </impDef>
+   <impDef>
+      <code>IW170</code>
+      <description>The method of execution of a subject Java class’s implementation of writeObject() to convert a Java value to an SQL value.</description>
+   </impDef>
+   <impDef>
+      <code>IW171</code>
+      <description>The method of execution of a subject Java class’s implementation of writeSQL() to convert a Java value to an SQL value.</description>
+   </impDef>
+   <impDef>
+      <code>IW172</code>
+      <description>The method of execution of a subject Java class’s implementation of readObject() to convert an SQL value to a Java object.</description>
+   </impDef>
+   <impDef>
+      <code>IW173</code>
+      <description>The method of execution of a subject Java class’s implementation of readSQL() to convert an SQL value to a Java object.</description>
+   </impDef>
+   <impDef>
+      <code>IW202</code>
+      <description>The mechanism used to invoke a constructor of an external Java data type when Feature J571, “NEW operator”, is not supported.</description>
+   </impDef>
+   <impDef>
+      <code>IW203</code>
+      <description>The privileges required to invoke the SQLJ.INSTALL_JAR procedure.</description>
+   </impDef>
+   <impDef>
+      <code>IW204</code>
+      <description>The privileges required to invoke the SQLJ.REPLACE_JAR procedure.</description>
+   </impDef>
+   <impDef>
+      <code>IW205</code>
+      <description>The privileges required to invoke the SQLJ.REMOVE_JAR procedure.</description>
+   </impDef>
+   <impDef>
+      <code>IW206</code>
+      <description>The privileges required to invoke the SQLJ.ALTER_JAVA_PATH procedure.</description>
+   </impDef>
+</implementationDefined>

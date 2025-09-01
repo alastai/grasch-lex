@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element ("features") that 
+identifies every optional language feature defined in ("used in") a part of ISO/IEC 9075. 
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to specify the natural-language text that describes the features
+implemented in a particular SQL-implementation.  
+It may also be used by documentation writers and translators to identify those features in the 
+natural languages of users of those SQL-implementations.
+-->
+
+
+ 
+<!DOCTYPE features [
+  
+<!-- The features element defines the features of a standard (part). -->
+<!ELEMENT features ((feature)*)>
+
+<!-- A feature element defines a specific feature. -->
+<!ELEMENT feature (code, description, implies?)>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the feature. -->
+<!ELEMENT description (#PCDATA | squote)*>
+
+<!-- An implies element provides a set of implied features. -->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)*>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT impliedFeature (#PCDATA)>
+
+<!-- An atLeastOneOf element provides a set of implied features where only one is required. -->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+]>
+
+<features>
+   <feature>
+      <code>F231</code>
+      <description>Privilege tables</description>
+   </feature>
+   <feature>
+      <code>F341</code>
+      <description>Usage tables</description>
+   </feature>
+   <feature>
+      <code>P001</code>
+      <description>Stored modules</description>
+   </feature>
+   <feature>
+      <code>P003</code>
+      <description>Information Schema views</description>
+      <implies>
+         <impliedFeature>P001</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>P004</code>
+      <description>Extended CASE statement</description>
+   </feature>
+   <feature>
+      <code>P005</code>
+      <description>Qualified SQL variable references</description>
+   </feature>
+   <feature>
+      <code>P006</code>
+      <description>Multiple assignment</description>
+   </feature>
+   <feature>
+      <code>P007</code>
+      <description>Enhanced diagnostics management</description>
+   </feature>
+   <feature>
+      <code>P008</code>
+      <description>Comma-separated predicates in simple CASE statement</description>
+   </feature>
+   <feature>
+      <code>T011</code>
+      <description>Timestamp in Information Schema</description>
+   </feature>
+   <feature>
+      <code>T051</code>
+      <description>Row types</description>
+   </feature>
+   <feature>
+      <code>T332</code>
+      <description>Extended roles</description>
+      <implies>
+         <impliedFeature>T331</impliedFeature>
+      </implies>
+   </feature>
+</features>

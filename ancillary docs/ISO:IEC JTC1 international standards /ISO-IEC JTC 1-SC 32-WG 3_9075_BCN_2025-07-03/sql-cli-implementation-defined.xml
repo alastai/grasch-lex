@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA083</code>
+      <description>Whether or not an exception condition is raised when the number of item descriptor areas with LEVEL 0 in the current implementation parameter descriptor is greater than the number of dynamic parameter specifications in the source text of the SQL-statement.</description>
+   </impDef>
+   <impDef>
+      <code>IA084</code>
+      <description>Whether or not an exception condition is raised when the value of a bound target is a zero-length character string.</description>
+   </impDef>
+   <impDef>
+      <code>IA085</code>
+      <description>Whether or not an exception condition is raised when the result of a GetSubString function is a zero-length character string.</description>
+   </impDef>
+   <impDef>
+      <code>IA086</code>
+      <description>Whether or not an exception condition is raised when the target value of a GetParamData function is a zero-length character string.</description>
+   </impDef>
+   <impDef>
+      <code>IA088</code>
+      <description>Whether the table returned by a call to GetTypeInfo contains a single row or a row for each supported name for all supported data types for which more than one name is supported.</description>
+   </impDef>
+   <impDef>
+      <code>IA098</code>
+      <description>The capability to support a call to MoreResults even when there is no CLI cursor associated with the allocated SQL-statement.</description>
+   </impDef>
+   <impDef>
+      <code>IA139</code>
+      <description>The validity of a handle in a compilation unit other than the one in which the identified resource was allocated.</description>
+   </impDef>
+   <impDef>
+      <code>IA140</code>
+      <description>Whether a CLI cursor is returnable.</description>
+   </impDef>
+   <impDef>
+      <code>IA161</code>
+      <description>The value of the CURRENT OF POSITION attribute indicating the current row within the rowset whenever Fetch of FetchScroll is successfully executed, the CLI cursor is not scrollable and the ARRAY_SIZE is greater than 1 (one).</description>
+   </impDef>
+   <impDef>
+      <code>IA168</code>
+      <description>The status of any open cursors in the current SQL-transaction that were opened by that SQL-transaction before the establishment of a savepoint to which a rollback is executed.</description>
+   </impDef>
+   <impDef>
+      <code>IA178</code>
+      <description>Whether the invocation of a CLI function is supported or invocation of a CLI procedure.</description>
+   </impDef>
+   <impDef>
+      <code>IA179</code>
+      <description>The effect of a CLI Routine invocation when the value of any input argument provided by the host program falls outside the set of allowed values of the data type of the parameter, or if the value of any output argument resulting from the execution of the CLI routine falls outside the set of values supported by the host program for that parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IA180</code>
+      <description>The rules which determine the exception conditions that may be raised when a CLI routine did not execute successfully.</description>
+   </impDef>
+   <impDef>
+      <code>IA181</code>
+      <description>The validity of a prepared statement in an SQL-transaction different from the one in which the statement was prepared.</description>
+   </impDef>
+   <impDef>
+      <code>IA182</code>
+      <description>The effect on the fetched row, if any, associated with the allocated SQL-statement under which that current row was established when the execution of a preparable dynamic delete statement: positioned deleted the current row of the cursor reference.</description>
+   </impDef>
+   <impDef>
+      <code>IA183</code>
+      <description>The effect on the fetched row, if any, associated with the allocated SQL-statement under which that current row was established when the execution of a preparable dynamic update statement: positioned updated the current row of the cursor reference.</description>
+   </impDef>
+   <impDef>
+      <code>IA184</code>
+      <description>The implementation-defined conversions from one data type to another.</description>
+   </impDef>
+   <impDef>
+      <code>IA185</code>
+      <description>The restrictions on the value of an user identifier.</description>
+   </impDef>
+   <impDef>
+      <code>IA186</code>
+      <description>Whether columns before the highest bound column can be accessed by GetData.</description>
+   </impDef>
+   <impDef>
+      <code>IA187</code>
+      <description>Whether GetData can only access columns in ascending column number order.</description>
+   </impDef>
+   <impDef>
+      <code>IA188</code>
+      <description>Whether the exception condition “dynamic SQL error — data type transform function violation (0700B)” is raised when separate retrievals for the same target specification in a call to GetData or separate fetches for the same bound target are inconsistent in whether a locator is used or not.</description>
+   </impDef>
+   <impDef>
+      <code>IA189</code>
+      <description>Whether the exception condition “data exception — zero-length character string (2200F)” is raised when a zero-length character string is fetched in a call to GetData.</description>
+   </impDef>
+   <impDef>
+      <code>IA190</code>
+      <description>Whether parameters before the highest bound parameter can be accessed by GetParamData.</description>
+   </impDef>
+   <impDef>
+      <code>IA191</code>
+      <description>Whether GetParamData can only access parameters in ascending parameter number order.</description>
+   </impDef>
+   <impDef>
+      <code>IC001</code>
+      <description>The subclass code which is generated when the routine’s return code indicates No data found, and no status record is generated corresponding to SQLSTATE value '02000' but there may be status records generated corresponding to SQLSTATE value '02nnn', where 'nnn' is the subclass code.</description>
+   </impDef>
+   <impDef>
+      <code>IC008</code>
+      <description>The subclass value of an exception condition: “transaction rollback (40000)” when an error, except for a constraint violation or a trigger failure, prevents commitment of an SQL-transaction.</description>
+   </impDef>
+   <impDef>
+      <code>IC009</code>
+      <description>The exception condition raised when the resources to manage an SQL-connection, an SQL-statement, or a CLI descriptor area, respectively, cannot be allocated for reasons not specified by ISO/IEC 9075 when the HandleType indicates CONNECTION HANDLE, STATEMENT HANDLE, or DESCRIPTOR HANDLE.</description>
+   </impDef>
+   <impDef>
+      <code>IC010</code>
+      <description>The exception condition raised when the resources to manage an SQL-environment, cannot be allocated for reasons not specified by ISO/IEC 9075 when the HandleType indicates ENVIRONMENT HANDLE.</description>
+   </impDef>
+   <impDef>
+      <code>ID015</code>
+      <description>The default value for the precision of the NUMERIC data type.</description>
+   </impDef>
+   <impDef>
+      <code>ID016</code>
+      <description>The default value for the precision of the DECIMAL data type.</description>
+   </impDef>
+   <impDef>
+      <code>ID039</code>
+      <description>The user identifier when the length of the value of Authentication is zero.</description>
+   </impDef>
+   <impDef>
+      <code>ID040</code>
+      <description>The authentication string when the length of the value of Authentication is zero.</description>
+   </impDef>
+   <impDef>
+      <code>ID062</code>
+      <description>The implicit precision when a precision is omitted.</description>
+   </impDef>
+   <impDef>
+      <code>IE001</code>
+      <description>Any extensions to the table of “Column types and scopes used with SpecialColumns”.</description>
+   </impDef>
+   <impDef>
+      <code>IE002</code>
+      <description>Any implementation-defined data types.</description>
+   </impDef>
+   <impDef>
+      <code>IE008</code>
+      <description>Any additional restrictions on the differences allowed between implementation and application parameter descriptors.</description>
+   </impDef>
+   <impDef>
+      <code>IE009</code>
+      <description>Any additional restrictions on the differences allowed between implementation and application row descriptors.</description>
+   </impDef>
+   <impDef>
+      <code>IE017</code>
+      <description>The additional CLI diagnostics area header fields and their associated data types.</description>
+   </impDef>
+   <impDef>
+      <code>IE018</code>
+      <description>Any additional CLI diagnostics area status fields and their associated data types.</description>
+   </impDef>
+   <impDef>
+      <code>IE019</code>
+      <description>Any additional header fields and item fields in SQL/CLI row and parameter descriptor areas and their associated data types.</description>
+   </impDef>
+   <impDef>
+      <code>IE020</code>
+      <description>Any additional diagnostic header fields, diagnostic status fields, and handle types in SQL/CLI.</description>
+   </impDef>
+   <impDef>
+      <code>IE021</code>
+      <description>Any additional SQL/CLI information types, implementation information, and sizing information, together with their associated codes and data types.</description>
+   </impDef>
+   <impDef>
+      <code>IE022</code>
+      <description>Any additional table types.</description>
+   </impDef>
+   <impDef>
+      <code>IL001</code>
+      <description>The maximum length of a fixed-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL002</code>
+      <description>The maximum length of a large object character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL003</code>
+      <description>The maximum length of a fixed-length binary string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL004</code>
+      <description>The maximum length of a large object binary string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL006</code>
+      <description>The maximum length of a variable-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL007</code>
+      <description>The maximum length of a variable-length binary string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL016</code>
+      <description>The maximum length of the corresponding general value specification.</description>
+   </impDef>
+   <impDef>
+      <code>IL035</code>
+      <description>The maximum lengths of CLI diagnostics area fields whose data type is CHARACTER VARYING.</description>
+   </impDef>
+   <impDef>
+      <code>IL036</code>
+      <description>The maximum lengths of CLI item descriptor fields whose data type is CHARACTER VARYING.</description>
+   </impDef>
+   <impDef>
+      <code>IL037</code>
+      <description>The maximum length of the Authentication parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IV025</code>
+      <description>The value retrieved by GetDiagnostics or GetDiagField when TYPE is 'STATUS' and the DiagIdentifier indicates CLASS_ORIGIN.</description>
+   </impDef>
+   <impDef>
+      <code>IV026</code>
+      <description>The value retrieved by GetDiagnostics or GetDiagField when TYPE is 'STATUS' and the DiagIdentifier indicates SUBCLASS_ORIGIN.</description>
+   </impDef>
+   <impDef>
+      <code>IV030</code>
+      <description>The null character that terminates a C character string.</description>
+   </impDef>
+   <impDef>
+      <code>IV031</code>
+      <description>The operational returnability property of a cursor.</description>
+   </impDef>
+   <impDef>
+      <code>IV034</code>
+      <description>The CLI generic name and abbreviation for an implementation-defined CLI function or an implementation-defined CLI procedure.</description>
+   </impDef>
+   <impDef>
+      <code>IV035</code>
+      <description>The number of '9's in a PICTURE clause describing CHARACTER LARGE OBJECT LOCATOR, BINARY LARGE OBJECT LOCATOR, SMALLINT, INTEGER, BIGINT, USER-DEFINED TYPE LOCATOR, ARRAY LOCATOR, and MULTISET LOCATOR data types in the COBOL host language.</description>
+   </impDef>
+   <impDef>
+      <code>IV036</code>
+      <description>The number of '9's in a FIXED BINARY clause describing CHARACTER LARGE OBJECT LOCATOR, BINARY LARGE OBJECT LOCATOR, SMALLINT, INTEGER, BIGINT, USER-DEFINED TYPE LOCATOR, ARRAY LOCATOR, and MULTISET LOCATOR data types in the PL/I host language.</description>
+   </impDef>
+   <impDef>
+      <code>IV039</code>
+      <description>Fields, Names and codes used for transaction termination, environment attributes, connection attributes, statement attributes, FreeStmt options and descriptor fields with their associated settability and retrievability attributes and default values.</description>
+   </impDef>
+   <impDef>
+      <code>IV040</code>
+      <description>The settability of SQL/CLI descriptor fields.</description>
+   </impDef>
+   <impDef>
+      <code>IV041</code>
+      <description>Header and item fields in SQL/CLI descriptors.</description>
+   </impDef>
+   <impDef>
+      <code>IV042</code>
+      <description>The retrievability of SQL/CLI descriptor fields.</description>
+   </impDef>
+   <impDef>
+      <code>IV044</code>
+      <description>The value of REMARKS in the TABLES_QUERY description of the table.</description>
+   </impDef>
+   <impDef>
+      <code>IV046</code>
+      <description>The value of COLUMN_SIZE in SPECIAL_COLUMNS_QUERY when the value of DATA_TYPE in the COLUMNS view is 'SMALLINT', 'INTEGER', 'BIGINT', 'FLOAT', 'DECFLOAT', 'REAL', or 'DOUBLE PRECISION'.</description>
+   </impDef>
+   <impDef>
+      <code>IV047</code>
+      <description>The value of BUFFER_LENGTH in SPECIAL_COLUMNS_QUERY.</description>
+   </impDef>
+   <impDef>
+      <code>IV050</code>
+      <description>The value of TYPE_NAME in SPECIAL_COLUMNS_QUERY is a value that is the character string by which the data type is known at the data source.</description>
+   </impDef>
+   <impDef>
+      <code>IV051</code>
+      <description>Attributes of an SQL-statement.</description>
+   </impDef>
+   <impDef>
+      <code>IV052</code>
+      <description>Attributes of an SQL-environment.</description>
+   </impDef>
+   <impDef>
+      <code>IV053</code>
+      <description>Attributes of an SQL-connection.</description>
+   </impDef>
+   <impDef>
+      <code>IV054</code>
+      <description>CLI routines with implementation-defined codes.</description>
+   </impDef>
+   <impDef>
+      <code>IV056</code>
+      <description>The localized representation of the names of data types.</description>
+   </impDef>
+   <impDef>
+      <code>IV057</code>
+      <description>The value of REMARKS in COLUMNS_QUERY.</description>
+   </impDef>
+   <impDef>
+      <code>IV058</code>
+      <description>The result of the routine ForeignKeys when the parameters PKTableName and FKTableName both are not the empty string.</description>
+   </impDef>
+   <impDef>
+      <code>IV059</code>
+      <description>A native error code corresponding to the status condition on a call to GetDiagField with a TYPE of 'STATUS' and the DiagIdentifier indicates NATIVE_CODE.</description>
+   </impDef>
+   <impDef>
+      <code>IV060</code>
+      <description>A character string is the value retrieved on a call to GetDiagField with a TYPE of 'STATUS', and the DiagIdentifier indicates MESSAGE_TEXT, and the value of SQLSTATE does not correspond to “external routine invocation exception (39000)”, “external routine exception (38000)”, or “warning (01000)”.</description>
+   </impDef>
+   <impDef>
+      <code>IV061</code>
+      <description>The connection name associated with an SQL-server reference that is retrieved on a call to GetDiagField with a TYPE of 'STATUS', when the DiagIdentifier indicates CONNECTION_NAME and the most recently executed CLI routine is Connect or Disconnect.</description>
+   </impDef>
+   <impDef>
+      <code>IV062</code>
+      <description>The connection name associated with a dormant SQL-connection that is retrieved on a call to GetDiagField with a TYPE of 'STATUS', when the DiagIdentifier indicates CONNECTION_NAME and the status condition was caused by an implicit set connection.</description>
+   </impDef>
+   <impDef>
+      <code>IV063</code>
+      <description>The connection name associated with a SQL-server reference that is retrieved on a call to GetDiagField with a TYPE of 'STATUS', when the DiagIdentifier indicates CONNECTION_NAME and the status condition was raised in an SQL-session.</description>
+   </impDef>
+   <impDef>
+      <code>IV064</code>
+      <description>The native error code corresponding to the status condition when NativeError is not a null pointer.</description>
+   </impDef>
+   <impDef>
+      <code>IV065</code>
+      <description>A character string is the value retrieved on a call to GetDiagRec when MessageText is not a null pointer and either null termination is True for the current SQL-environment or the BufferLength is not zero.</description>
+   </impDef>
+   <impDef>
+      <code>IV066</code>
+      <description>The value of BUFFER_LENGTH in COLUMNS_QUERY.</description>
+   </impDef>
+   <impDef>
+      <code>IV067</code>
+      <description>The value of COLUMN_SIZE in COLUMNS_QUERY when the value of DATA_TYPE in the COLUMNS view is 'SMALLINT', 'INTEGER', 'BIGINT', 'FLOAT', 'DECFLOAT', 'REAL', or 'DOUBLE PRECISION'.</description>
+   </impDef>
+   <impDef>
+      <code>IV068</code>
+      <description>The value of TYPE_NAME in COLUMNS_QUERY is the character string by which the data type is known at the data source.</description>
+   </impDef>
+   <impDef>
+      <code>IV129</code>
+      <description>The precision of a data type defined as REAL.</description>
+   </impDef>
+   <impDef>
+      <code>IV130</code>
+      <description>The precision of a data type defined as DOUBLE PRECISION.</description>
+   </impDef>
+   <impDef>
+      <code>IV131</code>
+      <description>The choice of binary versus decimal precision for SMALLINT, INTEGER, and BIGINT, as are the specific precisions for each of those types, but all three types shall use the same radix.</description>
+   </impDef>
+   <impDef>
+      <code>IV202</code>
+      <description>The content of the TYPE_INFO column in the table returned by a call to GetTypeInfo when multiple names are supported for this data type and TYPE_INFO contains only a single row for this data type.</description>
+   </impDef>
+   <impDef>
+      <code>IV203</code>
+      <description>The content of the COLUMN_SIZE column in the table returned by a call to GetTypeInfo for an implementation-defined data type that has a length or a precision.</description>
+   </impDef>
+   <impDef>
+      <code>IV209</code>
+      <description>The content of the CREATE_PARAMS column in the table returned by a call to GetTypeInfo when the data type is an implementation-defined data type.</description>
+   </impDef>
+   <impDef>
+      <code>IV210</code>
+      <description>The implicit character set of a character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IV211</code>
+      <description>The CURRENT OF POSITION attribute of the allocated statement when ROWS_DERIVED is greater than 0 (zero), ROWS_ASSIGNED is greater than 0 (zero), the CLI cursor is not scrollable, and the ARRAY_SIZE is greater than 1 (one).</description>
+   </impDef>
+   <impDef>
+      <code>IV222</code>
+      <description>The transaction isolation level that is actually set for each specified transaction isolation level.</description>
+   </impDef>
+   <impDef>
+      <code>IW004</code>
+      <description>The authorization criteria for containment of rows in the Information Schema COLUMN_PRIVILEGES view of the SQL Server when the feature Feature C041, “Information Schema metadata constrained by privileges in CLI” is not supported.</description>
+   </impDef>
+   <impDef>
+      <code>IW056</code>
+      <description>The authorization criteria for containment of rows in the Information Schema TABLES view of the SQL Server when the feature Feature C041, “Information Schema metadata constrained by privileges in CLI” is not supported.</description>
+   </impDef>
+   <impDef>
+      <code>IW057</code>
+      <description>The authorization criteria for containment of rows in the Information Schema TABLE_PRIVILEGES view of the SQL Server when the feature Feature C041, “Information Schema metadata constrained by privileges in CLI” is not supported.</description>
+   </impDef>
+   <impDef>
+      <code>IW058</code>
+      <description>The authorization criteria for containment of rows in the Information Schema SPECIAL_COLUMNS_QUERY view of the SQL Server when the feature Feature C041, “Information Schema metadata constrained by privileges in CLI” is not supported.</description>
+   </impDef>
+   <impDef>
+      <code>IW059</code>
+      <description>The default of implementation-defined CLI descriptor fields.</description>
+   </impDef>
+   <impDef>
+      <code>IW060</code>
+      <description>The set of fields of the item descriptor area of an allocated CLI descriptor area in a call to SetDescField that are set to implementation-defined default values.</description>
+   </impDef>
+   <impDef>
+      <code>IW063</code>
+      <description>The authorization criteria for containment of rows in the Information Schema TABLE_CONSTRAINT view of the SQL Server when the feature Feature C041, “Information Schema metadata constrained by privileges in CLI” is not supported.</description>
+   </impDef>
+   <impDef>
+      <code>IW069</code>
+      <description>The method by which a default SQL-server is determined.</description>
+   </impDef>
+   <impDef>
+      <code>IW070</code>
+      <description>The method by which the value of ServerName is used to determine the appropriate SQL-server is determined.</description>
+   </impDef>
+   <impDef>
+      <code>IW072</code>
+      <description>The mechanism used to establish the set of names of SQL-servers to which the SQL/CLI application might be eligible to connect.</description>
+   </impDef>
+   <impDef>
+      <code>IW073</code>
+      <description>The mechanism used to establish the strings describing the set SQL-servers to which the SQL/CLI application might be eligible to connect.</description>
+   </impDef>
+   <impDef>
+      <code>IW075</code>
+      <description>The authorization criteria for containment of rows in the Information Schema TABLE_CONSTRAINT view of the SQL Server when the feature Feature C041, “Information Schema metadata constrained by privileges in CLI” is not supported.</description>
+   </impDef>
+   <impDef>
+      <code>IW076</code>
+      <description>The mechanisms for setting the value of DEFERABILITY in the FOREIGN_KEYS_QUERY.</description>
+   </impDef>
+   <impDef>
+      <code>IW089</code>
+      <description>The authorization criteria for containment of rows in the Information Schema COLUMNS view of the SQL Server when the feature Feature C041, “Information Schema metadata constrained by privileges in CLI” is not supported.</description>
+   </impDef>
+</implementationDefined>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA033</code>
+      <description>The Access Rules for the ELEMENT_ID function.</description>
+      <feature code="G100"/>
+   </impDef>
+   <impDef>
+      <code>IA036</code>
+      <description>Whether the General Rules of Evaluation of a selective path pattern are terminated when an exception condition is raised.</description>
+      <feature code="G016"/>
+      <feature code="G017"/>
+      <feature code="G018"/>
+      <feature code="G019"/>
+      <feature code="G020"/>
+   </impDef>
+   <impDef>
+      <code>ID022</code>
+      <description>The default match mode.</description>
+      <feature code="G000"/>
+   </impDef>
+   <impDef>
+      <code>IE011</code>
+      <description>Any additional rules that the SQL-implementation may use to determine the nullability characteristic of a column.</description>
+      <feature code="T101"/>
+   </impDef>
+   <impDef>
+      <code>IE012</code>
+      <description>Any additional rules that the SQL-implementation may use to infer that a set of labels of graph elements bind to an element variable.</description>
+      <feature code="G000"/>
+   </impDef>
+   <impDef>
+      <code>IL005</code>
+      <description>The maximum length of an identifier.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IL012</code>
+      <description>The maximum value of the upper bound of a general qualifier.</description>
+      <feature code="G060"/>
+   </impDef>
+   <impDef>
+      <code>IV120</code>
+      <description>The declared type of an ELEMENT_ID function.</description>
+      <feature code="G100"/>
+   </impDef>
+   <impDef>
+      <code>IV121</code>
+      <description>The choice of the exact numeric declared type with scale 0 (zero) for the graphical match number function.</description>
+      <feature code="G803"/>
+   </impDef>
+   <impDef>
+      <code>IV122</code>
+      <description>The choice of the exact numeric declared type with scale 0 (zero) for the element number function.</description>
+      <feature code="G801"/>
+   </impDef>
+   <impDef>
+      <code>IV123</code>
+      <description>The choice of the exact numeric declared type with scale 0 (zero) for the graphical path length function.</description>
+      <feature code="G802"/>
+   </impDef>
+</implementationDefined>

@@ -1,0 +1,636 @@
+
+************************************************************************************************
+This file is a "digital artifact" that contains the grammar specified by a part of ISO/IEC 9075.
+
+This grammar may be used by implementers of SQL-implementations when generating parsers for the 
+SQL language.
+************************************************************************************************
+
+<reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | MDAGGREGATE
+  | MDALL
+  | MDANY
+  | MDARRAY
+  | MDAVG
+  | MDAXIS_HIGH
+  | MDAXIS_INDEX
+  | MDAXIS_LOW
+   
+  | MDAXIS_NAME
+  | MDAXIS_NAMES
+  | MDCONCAT
+  | MDCOUNT
+  | MDCOUNT_FALSE
+   
+  | MDCOUNT_TRUE
+  | MDCOUNT_UNKNOWN
+  | MDDECODE
+  | MDDIMENSION
+  | MDENCODE
+  | MDEXTENT
+   
+  | MDJOIN
+  | MDMAX
+  | MDMAX_EXTENT
+  | MDMIN
+  | MDRESHAPE
+  | MDSCALE
+  | MDSHIFT
+  | MDSUM
+
+<non-reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | ELEMENTS
+
+<md-axis variable> ::=
+    <identifier>
+
+<collection type> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <md-array type>
+
+<md-array type> ::=
+    <data type> MDARRAY <maximum md-extent>
+
+<maximum md-extent> ::=
+    <left bracket or trigraph> <maximum md-axis list> <right bracket or trigraph>
+  | <left bracket or trigraph> <maximum md-axis list anonymous> <right bracket or trigraph>
+
+<maximum md-axis list> ::=
+    <maximum md-axis> [ { <comma> <maximum md-axis> }... ]
+
+<maximum md-axis list anonymous> ::=
+    <maximum md-axis anonymous> [ { <comma> <maximum md-axis anonymous> }... ]
+
+<maximum md-axis> ::=
+    <md-axis name> [ <left paren>
+         <maximum md-axis lower limit> <colon> <maximum md-axis upper limit>
+         <right paren> ]
+
+<maximum md-axis anonymous> ::=
+    <maximum md-axis lower limit> <colon> <maximum md-axis upper limit>
+
+<maximum md-axis lower limit> ::=
+    <md-axis limit>
+
+<maximum md-axis upper limit> ::=
+    <md-axis limit>
+
+<md-axis limit> ::=
+    <md-axis limit fixed>
+  | <asterisk>
+
+<md-axis limit fixed> ::=
+    <signed numeric literal>
+
+<md-axis name> ::=
+    <identifier>
+
+<non-parenthesized value expression primary> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <md-array aggregation expression>
+  | <md-axis variable>
+  | <md-array element reference>
+
+<collection value constructor> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <md-array value constructor>
+
+<md-array subset> ::=
+    <md-array value expression>
+         <left bracket or trigraph> <md-axis subset list> <right bracket or trigraph>
+
+<md-axis subset list> ::=
+    <md-axis subset list named>
+  | <md-axis subset list positional>
+  | <md-array subset extent>
+
+<md-axis subset list named> ::=
+    <md-axis subset named> [ { <comma> <md-axis subset named> }... ]
+
+<md-axis subset list positional> ::=
+    <md-axis subset positional> [ { <comma> <md-axis subset positional> }... ]
+
+<md-axis subset named> ::=
+    <md-axis limits named>
+  | <md-axis slice named>
+
+<md-axis subset positional> ::=
+    <md-axis limits positional>
+  | <md-axis slice positional>
+
+<md-axis limits named> ::=
+    <md-axis name> <left paren> <md-interval expression> <right paren>
+
+<md-axis limits positional> ::=
+    <md-interval expression>
+
+<md-interval expression> ::=
+    <md-axis lower limit expression> <colon> <md-axis upper limit expression>
+
+<md-axis lower limit expression> ::=
+    <md-axis limit expression>
+
+<md-axis upper limit expression> ::=
+    <md-axis limit expression>
+
+<md-axis limit expression> ::=
+    <numeric value expression>
+  | <asterisk>
+
+<md-axis slice named> ::=
+    <md-axis name> <left paren> <md-axis slice positional> <right paren>
+
+<md-axis slice positional> ::=
+    <numeric value expression>
+
+<md-array subset extent> ::=
+    MDEXTENT <left paren> <md-array value expression> <right paren>
+
+<md-array aggregation expression> ::=
+    MDAGGREGATE <md-array aggregation operator>
+         OVER <md-extent alternative>
+         USING <value expression primary>
+         [ WHERE <search condition> ]
+
+<md-array aggregation operator> ::=
+    <plus sign>
+  | AND
+  | OR
+  | MAX
+  | MIN
+
+<searched when clause> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | WHEN <md-array boolean expression> THEN <result>
+
+<cast target> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <md-array cast>
+  | <md-array base type cast>
+  | <md-array maximum md-extent cast>
+
+<md-array cast> ::=
+    <data type> MDARRAY <md-array axis names>
+
+<md-array base type cast> ::=
+    <data type> MDARRAY
+
+<md-array maximum md-extent cast> ::=
+    MDARRAY <maximum md-extent cast alternative>
+
+<maximum md-extent cast alternative> ::=
+    <maximum md-extent>
+  | <md-array axis names>
+
+<md-axis explicit name list> ::=
+    <left bracket or trigraph> <md-axis name>
+         [ { <comma> <md-axis name> }... ] <right bracket or trigraph>
+
+<md-array axis names> ::=
+    MDAXIS_NAMES <left paren> <md-array value expression> <right paren>
+
+<collection value expression> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <md-array value expression>
+
+<numeric value function> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <md-array dimension>
+  | <md-array axis index function>
+  | <md-array lower axis limit>
+  | <md-array upper axis limit>
+  | <md-array aggregation function>
+
+<md-array dimension> ::=
+    MDDIMENSION <left paren> <md-array value expression> <right paren>
+
+<md-array axis index function> ::=
+    MDAXIS_INDEX <left paren>
+         <md-array value expression> <comma> <md-axis name>
+         <right paren>
+
+<md-array lower axis limit> ::=
+    MDAXIS_LOW <left paren> <md-array md-axis> <right paren>
+
+<md-array upper axis limit> ::=
+    MDAXIS_HIGH <left paren> <md-array md-axis> <right paren>
+
+<md-array aggregation function> ::=
+    <md-array aggregation function name>
+         <left paren> <md-array value expression> <right paren>
+
+<md-array aggregation function name> ::=
+    MDALL
+  | MDANY
+  | MDAVG
+  | MDCOUNT
+  | MDCOUNT_FALSE
+  | MDCOUNT_TRUE
+  | MDCOUNT_UNKNOWN
+  | MDMAX
+  | MDMIN
+  | MDSUM
+
+<string value function> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <md-array encode function>
+
+<character value function> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <md-array axis name function>
+
+<md-array axis name function> ::=
+    MDAXIS_NAME <left paren>
+         <md-array value expression> <comma> <numeric value expression>
+         <right paren>
+
+<md-array encode function> ::=
+    MDENCODE <left paren>
+         <md-array value expression> <comma> <format identifier>
+         [ <md-array encode returning clause> ]
+    <right paren>
+
+<format identifier> ::=
+    <character string literal>
+
+<md-array encode returning clause> ::=
+    RETURNING <data type>
+
+<md-array value expression> ::=
+    <md-array boolean expression>
+  | <md-array numeric expression>
+  | <md-array primary>
+
+<md-array boolean expression> ::=
+    <md-array boolean term>
+  | <md-array boolean expression left>
+  | <md-array boolean expression right>
+  | <md-array boolean expression both>
+
+<md-array boolean expression left> ::=
+    <md-array boolean expression> OR <boolean term>
+
+<md-array boolean expression right> ::=
+    <boolean value expression> OR <md-array boolean term>
+
+<md-array boolean expression both> ::=
+    <md-array boolean expression> OR <md-array boolean term>
+
+<md-array boolean term> ::=
+    <md-array boolean factor>
+  | <md-array boolean term left>
+  | <md-array boolean term right>
+  | <md-array boolean term both>
+
+<md-array boolean term left> ::=
+    <md-array boolean term> AND <boolean factor>
+
+<md-array boolean term right> ::=
+    <boolean term> AND <md-array boolean factor>
+
+<md-array boolean term both> ::=
+    <md-array boolean term> AND <md-array boolean factor>
+
+<md-array boolean factor> ::=
+    [ NOT ] <md-array boolean test>
+
+<md-array boolean test> ::=
+    <md-array comparison expression> [ IS [ NOT ] <truth value> ]
+
+<md-array comparison expression> ::=
+    <md-array boolean primary>
+  | <md-array comparison expression left>
+  | <md-array comparison expression right>
+  | <md-array comparison expression both>
+
+<md-array comparison expression left> ::=
+    <md-array numeric expression> <comp op> <numeric value expression>
+
+<md-array comparison expression right> ::=
+    <numeric value expression> <comp op> <md-array numeric expression>
+
+<md-array comparison expression both> ::=
+    <md-array numeric expression> <comp op> <md-array numeric expression>
+
+<md-array boolean primary> ::=
+    <md-array primary>
+  | <parenthesized md-array boolean expression>
+
+<parenthesized md-array boolean expression> ::=
+    <left paren> <md-array boolean expression> <right paren>
+
+<md-array numeric expression> ::=
+    <md-array numeric term>
+  | <md-array numeric expression left>
+  | <md-array numeric expression right>
+  | <md-array numeric expression both>
+
+<md-array numeric expression left> ::=
+    <md-array numeric expression> <plus sign> <term>
+  | <md-array numeric expression> <minus sign> <term>
+
+<md-array numeric expression right> ::=
+    <numeric value expression> <plus sign> <md-array numeric term>
+  | <numeric value expression> <minus sign> <md-array numeric term>
+
+<md-array numeric expression both> ::=
+    <md-array numeric expression> <plus sign> <md-array numeric term>
+  | <md-array numeric expression> <minus sign> <md-array numeric term>
+
+<md-array numeric term> ::=
+    <md-array numeric factor>
+  | <md-array numeric term left>
+  | <md-array numeric term right>
+  | <md-array numeric term both>
+
+<md-array numeric term left> ::=
+    <md-array numeric term> <asterisk> <factor>
+  | <md-array numeric term> <solidus> <factor>
+
+<md-array numeric term right> ::=
+    <term> <asterisk> <md-array numeric factor>
+  | <term> <solidus> <md-array numeric factor>
+
+<md-array numeric term both> ::=
+    <md-array numeric term> <asterisk> <md-array numeric factor>
+  | <md-array numeric term> <solidus> <md-array numeric factor>
+
+<md-array numeric factor> ::=
+    [ <sign> ] <md-array numeric primary>
+
+<md-array numeric primary> ::=
+    <md-array primary>
+
+<md-array field reference> ::=
+    <md-array primary> <period> <field name>
+
+<md-array primary> ::=
+    <value expression primary>
+  | <md-array subset>
+  | <md-array value function>
+  | <md-array field reference>
+
+<md-array value function> ::=
+    <md-array shift function>
+  | <md-array reshape function>
+  | <md-array scale function>
+  | <md-array absolute value expression>
+  | <md-array natural logarithm>
+  | <md-array common logarithm>
+  | <md-array exponential function>
+  | <md-array square root>
+  | <md-array floor function>
+  | <md-array ceiling function>
+  | <md-array trigonometric function>
+  | <md-array power function>
+  | <md-array modulus expression>
+  | <md-array concatenation>
+
+<md-array reshape function> ::=
+    MDRESHAPE <left paren>
+         <md-array value expression> <comma> <md-axis limits list>
+         <right paren>
+
+<md-array shift function> ::=
+    MDSHIFT <left paren>
+         <md-array value expression> <comma>
+         <left bracket or trigraph> <md-axis slice list> <right bracket or trigraph>
+    <right paren>
+
+<md-array scale function> ::=
+    MDSCALE <left paren>
+         <md-array value expression> <comma> <md-axis limits list>
+         <right paren>
+
+<md-axis limits list> ::=
+    <left bracket or trigraph> <md-axis limits list positional> <right bracket or trigraph>
+  | <left bracket or trigraph> <md-axis limits list named> <right bracket or trigraph>
+  | <md-array extent>
+
+<md-axis limits list positional> ::=
+    <left bracket or trigraph>
+         <md-axis limits positional> [ { <comma> <md-axis limits positional> }... ]
+    <right bracket or trigraph>
+
+<md-axis limits list named> ::=
+    <left bracket or trigraph>
+         <md-axis limits named> [ { <comma> <md-axis limits named> }... ]
+    <right bracket or trigraph>
+
+<md-array power function> ::=
+    <md-array power function left>
+  | <md-array power function right>
+  | <md-array power function both>
+
+<md-array power function left> ::=
+    POWER <left paren> <md-array numeric expression> <comma>
+         <numeric value expression> <right paren>
+
+<md-array power function right> ::=
+    POWER <left paren> <numeric value expression> <comma>
+         <md-array numeric expression> <right paren>
+
+<md-array power function both> ::=
+    POWER <left paren> <md-array numeric expression> <comma>
+         <md-array numeric expression> <right paren>
+
+<md-array modulus expression> ::=
+    <md-array modulus function left>
+  | <md-array modulus function right>
+  | <md-array modulus function both>
+
+<md-array modulus function left> ::=
+    MOD <left paren> <md-array numeric expression> <comma>
+         <numeric value expression> <right paren>
+
+<md-array modulus function right> ::=
+    MOD <left paren> <numeric value expression> <comma>
+         <md-array numeric expression> <right paren>
+
+<md-array modulus function both> ::=
+    MOD <left paren> <md-array numeric expression> <comma>
+         <md-array numeric expression> <right paren>
+
+<md-array absolute value expression> ::=
+    ABS <left paren> <md-array numeric expression> <right paren>
+
+<md-array natural logarithm> ::=
+    LN <left paren> <md-array numeric expression> <right paren>
+
+<md-array common logarithm> ::=
+    LOG10 <left paren> <md-array numeric expression> <right paren>
+
+<md-array exponential function> ::=
+    EXP <left paren> <md-array numeric expression> <right paren>
+
+<md-array square root> ::=
+    SQRT <left paren> <md-array numeric expression> <right paren>
+
+<md-array floor function> ::=
+    FLOOR <left paren> <md-array numeric expression> <right paren>
+
+<md-array ceiling function> ::=
+    { CEIL
+  | CEILING } <left paren> <md-array numeric expression> <right paren>
+
+<md-array trigonometric function> ::=
+    <trigonometric function name> <left paren> <md-array numeric expression> <right paren>
+
+<md-array concatenation> ::=
+    MDCONCAT <left paren> <md-array value expression> <comma> <md-array md-axis> <right paren>
+
+<md-array value constructor> ::=
+    <md-array value constructor by enumeration>
+  | <md-array value constructor by query>
+  | <md-array value constructor by iteration>
+  | <md-array value constructor by decoding>
+  | <md-array value constructor by join>
+
+<md-array value constructor by enumeration> ::=
+    MDARRAY <md-extent alternative> <md-array element list>
+
+<md-array element list> ::=
+    <left bracket or trigraph> <md-array element list inner> <right bracket or trigraph>
+
+<md-array element list inner> ::=
+    <md-array element> [ { <comma> <md-array element> }... ]
+
+<md-array element> ::=
+    <value expression>
+
+<md-array value constructor by query> ::=
+    MDARRAY <md-extent alternative> <table subquery>
+
+<md-array value constructor by iteration> ::=
+    MDARRAY <md-extent alternative>
+         ELEMENTS <md-array element>
+
+<md-array value constructor by decoding> ::=
+    MDDECODE <left paren> <string value expression>
+         <comma> <format identifier> <md-array returning clause> <right paren>
+
+<md-array returning clause> ::=
+    RETURNING <md-array type>
+
+<md-array value constructor by join> ::=
+    MDJOIN <left paren>
+         <md-array value expression as field> <comma> <md-array value expression as field>
+         [ { <comma> <md-array value expression as field> }... ] <right paren>
+
+<md-array value expression as field> ::=
+    <md-array value expression> [ AS <field name> ]
+
+<md-array element reference> ::=
+    <md-array value expression> <left bracket or trigraph> <md-axis slice list> <right bracket or trigraph>
+
+<md-axis slice list> ::=
+    <md-axis slice list named>
+  | <md-axis slice list positional>
+
+<md-axis slice list named> ::=
+    <md-axis slice named> [ { <comma> <md-axis slice named> }... ]
+
+<md-axis slice list positional> ::=
+    <md-axis slice positional> [ { <comma> <md-axis slice positional> }... ]
+
+<table primary> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <md-array extent function> <correlation or recognition>
+
+<md-array extent function> ::=
+    <md-array extent>
+  | <md-array max extent>
+
+<md-array extent> ::=
+    MDEXTENT <left paren> <md-array value expression> <right paren>
+
+<md-array max extent> ::=
+    MDMAX_EXTENT <left paren> <md-array value expression> <right paren>
+
+<md-extent alternative> ::=
+    <md-extent>
+  | <md-array subset extent>
+
+<md-extent> ::=
+    <left bracket or trigraph> <md-axis list> <right bracket or trigraph>
+
+<md-axis list> ::=
+    <md-axis> [ { <comma> <md-axis> }... ]
+
+<md-axis> ::=
+    <md-axis name>
+         <left paren> <md-axis lower limit> <colon> <md-axis upper limit> <right paren>
+
+<md-axis lower limit> ::=
+    <numeric value expression>
+
+<md-axis upper limit> ::=
+    <numeric value expression>
+
+<md-array md-axis> ::=
+    <md-array value expression> <comma> <md-axis identifier>
+
+<md-axis identifier> ::=
+    <unsigned integer>
+  | <md-axis name>
+
+<update target> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <object column>
+         <left bracket or trigraph> <md-axis slice list> <right bracket or trigraph>
+  | <object column>
+         <left bracket or trigraph> <md-axis subset list> <right bracket or trigraph>
+
+<descriptor item name> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | MDDIMENSION
+  | MDAXIS_LOW
+  | MDAXIS_HIGH
+
+<Ada derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <Ada md-array locator variable>
+
+<Ada md-array locator variable> ::=
+    SQL TYPE IS <md-array type> AS LOCATOR
+
+<C derived variable> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <C md-array locator variable>
+
+<C md-array locator variable> ::=
+    SQL TYPE IS <md-array type> AS LOCATOR
+         <C host identifier> [ <C initial value> ]
+         [ { <comma> <C host identifier> [ 
+         <C initial value> ] }... ]
+
+<COBOL derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <COBOL md-array locator variable>
+
+<COBOL md-array locator variable> ::=
+    [ USAGE [ IS ] ] SQL TYPE IS <md-array type> AS LOCATOR
+
+<Fortran derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <Fortran md-array locator variable>
+
+<Fortran md-array locator variable> ::=
+    SQL TYPE IS <md-array type> AS LOCATOR
+
+<MUMPS derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <MUMPS md-array locator variable>
+
+<MUMPS md-array locator variable> ::=
+    SQL TYPE IS <md-array type> AS LOCATOR
+
+<PL/I derived type specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <PL/I md-array locator variable>
+
+<PL/I md-array locator variable> ::=
+    SQL TYPE IS <md-array type> AS LOCATOR
+

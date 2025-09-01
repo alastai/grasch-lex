@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA001</code>
+      <description>The equivalence of SQL and host language identifiers.</description>
+   </impDef>
+   <impDef>
+      <code>IC016</code>
+      <description>The additional classes of conditions defined by the SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IC017</code>
+      <description>The additional subclasses of conditions defined by the SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IC019</code>
+      <description>The character set associated with the class code and subclass code of the SQLSTATE parameter.</description>
+   </impDef>
+   <impDef>
+      <code>ID005</code>
+      <description>The default SQL-server module path specification.</description>
+   </impDef>
+   <impDef>
+      <code>IL001</code>
+      <description>The maximum length of a fixed-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IV115</code>
+      <description>The data type of a creation timestamp.</description>
+   </impDef>
+   <impDef>
+      <code>IW001</code>
+      <description>The method and time of binding of a procedure.</description>
+   </impDef>
+</implementationDefined>

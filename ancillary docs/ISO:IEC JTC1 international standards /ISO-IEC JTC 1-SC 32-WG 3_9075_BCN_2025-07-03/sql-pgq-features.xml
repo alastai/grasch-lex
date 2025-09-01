@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element ("features") that 
+identifies every optional language feature defined in ("used in") a part of ISO/IEC 9075. 
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to specify the natural-language text that describes the features
+implemented in a particular SQL-implementation.  
+It may also be used by documentation writers and translators to identify those features in the 
+natural languages of users of those SQL-implementations.
+-->
+
+
+ 
+<!DOCTYPE features [
+  
+<!-- The features element defines the features of a standard (part). -->
+<!ELEMENT features ((feature)*)>
+
+<!-- A feature element defines a specific feature. -->
+<!ELEMENT feature (code, description, implies?)>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the feature. -->
+<!ELEMENT description (#PCDATA | squote)*>
+
+<!-- An implies element provides a set of implied features. -->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)*>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT impliedFeature (#PCDATA)>
+
+<!-- An atLeastOneOf element provides a set of implied features where only one is required. -->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+]>
+
+<features>
+   <feature>
+      <code>F231</code>
+      <description>Privilege tables</description>
+   </feature>
+   <feature>
+      <code>G002</code>
+      <description>Different-edges match mode</description>
+   </feature>
+   <feature>
+      <code>G003</code>
+      <description>Explicit REPEATABLE ELEMENTS keyword</description>
+   </feature>
+   <feature>
+      <code>G004</code>
+      <description>Path variables</description>
+   </feature>
+   <feature>
+      <code>G005</code>
+      <description>Path search prefix in a path pattern</description>
+   </feature>
+   <feature>
+      <code>G006</code>
+      <description>Graph pattern KEEP clause: path mode prefix</description>
+   </feature>
+   <feature>
+      <code>G007</code>
+      <description>Graph pattern KEEP clause: path search prefix</description>
+   </feature>
+   <feature>
+      <code>G010</code>
+      <description>Explicit WALK keyword</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G006</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G011</code>
+      <description>Advanced path modes: TRAIL</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G006</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G012</code>
+      <description>Advanced path modes: SIMPLE</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G006</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G013</code>
+      <description>Advanced path modes: ACYCLIC</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G006</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G014</code>
+      <description>Explicit PATH/PATHS keywords</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G006</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G015</code>
+      <description>All path search: explicit ALL keyword</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G016</code>
+      <description>Any path search</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G017</code>
+      <description>All shortest path search</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G018</code>
+      <description>Any shortest path search</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G019</code>
+      <description>Counted shortest path search</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G020</code>
+      <description>Counted shortest group search</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G005</impliedFeature>
+            <impliedFeature>G007</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G030</code>
+      <description>Path multiset alternation</description>
+   </feature>
+   <feature>
+      <code>G031</code>
+      <description>Path multiset alternation: variable length path operands</description>
+      <implies>
+         <impliedFeature>G030</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G032</code>
+      <description>Path pattern union</description>
+   </feature>
+   <feature>
+      <code>G033</code>
+      <description>Path pattern union: variable length path operands</description>
+      <implies>
+         <impliedFeature>G032</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G035</code>
+      <description>Quantified paths</description>
+   </feature>
+   <feature>
+      <code>G036</code>
+      <description>Quantified edges</description>
+   </feature>
+   <feature>
+      <code>G037</code>
+      <description>Questioned paths</description>
+   </feature>
+   <feature>
+      <code>G038</code>
+      <description>Parenthesized path pattern expression</description>
+   </feature>
+   <feature>
+      <code>G039</code>
+      <description>Simplified path pattern expression: full defaulting</description>
+      <implies>
+         <impliedFeature>G080</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G041</code>
+      <description>Non-local element pattern predicates</description>
+      <implies>
+         <impliedFeature>G051</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G043</code>
+      <description>Complete full edge patterns</description>
+   </feature>
+   <feature>
+      <code>G044</code>
+      <description>Basic abbreviated edge patterns</description>
+   </feature>
+   <feature>
+      <code>G045</code>
+      <description>Complete abbreviated edge patterns</description>
+      <implies>
+         <impliedFeature>G044</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G046</code>
+      <description>Relaxed topological consistency: adjacent vertex patterns</description>
+   </feature>
+   <feature>
+      <code>G047</code>
+      <description>Relaxed topological consistency: concise edge patterns</description>
+   </feature>
+   <feature>
+      <code>G048</code>
+      <description>Parenthesized path pattern: subpath variable declaration</description>
+      <implies>
+         <impliedFeature>G038</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G049</code>
+      <description>Parenthesized path pattern: path mode prefix</description>
+      <implies>
+         <impliedFeature>G038</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G050</code>
+      <description>Parenthesized path pattern: WHERE clause</description>
+      <implies>
+         <impliedFeature>G038</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G051</code>
+      <description>Parenthesized path pattern: non-local predicates</description>
+      <implies>
+         <impliedFeature>G050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G060</code>
+      <description>Bounded graph pattern quantifiers</description>
+   </feature>
+   <feature>
+      <code>G061</code>
+      <description>Unbounded graph pattern quantifiers</description>
+      <implies>
+         <impliedFeature>G060</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G071</code>
+      <description>Label expression: label conjunction</description>
+   </feature>
+   <feature>
+      <code>G072</code>
+      <description>Label expression: label negation</description>
+   </feature>
+   <feature>
+      <code>G074</code>
+      <description>Label expression: wildcard label</description>
+   </feature>
+   <feature>
+      <code>G075</code>
+      <description>Parenthesized label expression</description>
+   </feature>
+   <feature>
+      <code>G080</code>
+      <description>Simplified path pattern expression: basic defaulting</description>
+   </feature>
+   <feature>
+      <code>G081</code>
+      <description>Simplified path pattern expression: full overrides</description>
+      <implies>
+         <impliedFeature>G082</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G082</code>
+      <description>Simplified path pattern expression: basic overrides</description>
+      <implies>
+         <impliedFeature>G080</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G100</code>
+      <description>ELEMENT_ID function</description>
+   </feature>
+   <feature>
+      <code>G110</code>
+      <description>IS DIRECTED predicate</description>
+   </feature>
+   <feature>
+      <code>G111</code>
+      <description>IS LABELED predicate</description>
+   </feature>
+   <feature>
+      <code>G112</code>
+      <description>IS SOURCE and IS DESTINATION predicate</description>
+   </feature>
+   <feature>
+      <code>G113</code>
+      <description>ALL_DIFFERENT predicate</description>
+   </feature>
+   <feature>
+      <code>G114</code>
+      <description>SAME predicate</description>
+   </feature>
+   <feature>
+      <code>G115</code>
+      <description>PROPERTY_EXISTS predicate</description>
+   </feature>
+   <feature>
+      <code>G120</code>
+      <description>Within-match aggregates</description>
+   </feature>
+   <feature>
+      <code>G800</code>
+      <description>PATH_NAME function</description>
+   </feature>
+   <feature>
+      <code>G801</code>
+      <description>ELEMENT_NUMBER function</description>
+   </feature>
+   <feature>
+      <code>G802</code>
+      <description>PATH_LENGTH function</description>
+   </feature>
+   <feature>
+      <code>G803</code>
+      <description>MATCHNUM function</description>
+   </feature>
+   <feature>
+      <code>G810</code>
+      <description>IS BOUND predicate</description>
+   </feature>
+   <feature>
+      <code>G811</code>
+      <description>IS BOUND predicate: AS option</description>
+   </feature>
+   <feature>
+      <code>G820</code>
+      <description>BINDING_COUNT</description>
+   </feature>
+   <feature>
+      <code>G830</code>
+      <description>Colon in ‘is label’ expression</description>
+   </feature>
+   <feature>
+      <code>G840</code>
+      <description>Path-ordered aggregates</description>
+      <implies>
+         <impliedFeature>G120</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G850</code>
+      <description>SQL/PGQ Information Schema views</description>
+   </feature>
+   <feature>
+      <code>G860</code>
+      <description>GET DIAGNOSTICS enhancements for SQL-property graphs</description>
+      <implies>
+         <impliedFeature>F120</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G901</code>
+      <description>GRAPH_TABLE: ONE ROW PER VERTEX</description>
+   </feature>
+   <feature>
+      <code>G902</code>
+      <description>GRAPH_TABLE: ONE ROW PER STEP</description>
+   </feature>
+   <feature>
+      <code>G903</code>
+      <description>GRAPH_TABLE: explicit ONE ROW PER MATCH keywords</description>
+   </feature>
+   <feature>
+      <code>G904</code>
+      <description>All properties reference</description>
+   </feature>
+   <feature>
+      <code>G905</code>
+      <description>GRAPH_TABLE: optional COLUMNS clause</description>
+   </feature>
+   <feature>
+      <code>G906</code>
+      <description>GRAPH_TABLE: explicit EXPORT ALL</description>
+      <implies>
+         <impliedFeature>G905</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G907</code>
+      <description>GRAPH_TABLE: EXPORT ALL EXCEPT</description>
+      <implies>
+         <impliedFeature>G906</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G908</code>
+      <description>GRAPH_TABLE: EXPORT SINGLETONS list</description>
+      <implies>
+         <impliedFeature>G905</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G909</code>
+      <description>GRAPH_TABLE: explicit EXPORT NO SINGLETONS</description>
+      <implies>
+         <impliedFeature>G905</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G910</code>
+      <description>GRAPH_TABLE: ‘in paths clause’</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>G901</impliedFeature>
+            <impliedFeature>G902</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>G921</code>
+      <description>Empty SQL-property graph</description>
+   </feature>
+   <feature>
+      <code>G922</code>
+      <description>Views as element tables</description>
+   </feature>
+   <feature>
+      <code>G923</code>
+      <description>In-line views as element tables</description>
+   </feature>
+   <feature>
+      <code>G926</code>
+      <description>More than one label for vertex tables</description>
+   </feature>
+   <feature>
+      <code>G927</code>
+      <description>More than one label for edge tables</description>
+   </feature>
+   <feature>
+      <code>G928</code>
+      <description>Value expressions as properties and renaming of properties</description>
+   </feature>
+   <feature>
+      <code>G929</code>
+      <description>Labels and properties: EXCEPT list</description>
+   </feature>
+   <feature>
+      <code>G940</code>
+      <description>Multi-sourced/destined edges</description>
+   </feature>
+   <feature>
+      <code>G941</code>
+      <description>Implicit removal of incomplete edges</description>
+   </feature>
+   <feature>
+      <code>G950</code>
+      <description>Alter property graph statement: ADD/DROP element table</description>
+   </feature>
+   <feature>
+      <code>G960</code>
+      <description>Alter element table definition: ADD/DROP LABEL</description>
+      <implies>
+         <impliedFeature>G950</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G970</code>
+      <description>Alter element table definition: ALTER LABEL</description>
+      <implies>
+         <impliedFeature>G950</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>G980</code>
+      <description>DROP PROPERTY GRAPH: CASCADE drop behavior</description>
+   </feature>
+   <feature>
+      <code>T101</code>
+      <description>Enhanced nullability determination</description>
+   </feature>
+   <feature>
+      <code>T322</code>
+      <description>Declared data type attributes</description>
+   </feature>
+</features>

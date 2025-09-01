@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element ("features") that 
+identifies every optional language feature defined in ("used in") a part of ISO/IEC 9075. 
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to specify the natural-language text that describes the features
+implemented in a particular SQL-implementation.  
+It may also be used by documentation writers and translators to identify those features in the 
+natural languages of users of those SQL-implementations.
+-->
+
+
+ 
+<!DOCTYPE features [
+  
+<!-- The features element defines the features of a standard (part). -->
+<!ELEMENT features ((feature)*)>
+
+<!-- A feature element defines a specific feature. -->
+<!ELEMENT feature (code, description, implies?)>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the feature. -->
+<!ELEMENT description (#PCDATA | squote)*>
+
+<!-- An implies element provides a set of implied features. -->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)*>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT impliedFeature (#PCDATA)>
+
+<!-- An atLeastOneOf element provides a set of implied features where only one is required. -->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+]>
+
+<features>
+   <feature>
+      <code>F251</code>
+      <description>Domain support</description>
+   </feature>
+   <feature>
+      <code>F761</code>
+      <description>Session management</description>
+   </feature>
+   <feature>
+      <code>T101</code>
+      <description>Enhanced nullability determination</description>
+   </feature>
+   <feature>
+      <code>X011</code>
+      <description>Arrays of XML type</description>
+      <implies>
+         <impliedFeature>S091</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X012</code>
+      <description>Multisets of XML type</description>
+      <implies>
+         <impliedFeature>S271</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X013</code>
+      <description>Distinct types of XML type</description>
+   </feature>
+   <feature>
+      <code>X014</code>
+      <description>Attributes of XML type</description>
+      <implies>
+         <impliedFeature>S023</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X015</code>
+      <description>Fields of XML type</description>
+      <implies>
+         <impliedFeature>T051</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X020</code>
+      <description>XMLConcat</description>
+   </feature>
+   <feature>
+      <code>X025</code>
+      <description>XMLCast</description>
+   </feature>
+   <feature>
+      <code>X030</code>
+      <description>XMLDocument</description>
+   </feature>
+   <feature>
+      <code>X038</code>
+      <description>XMLText</description>
+   </feature>
+   <feature>
+      <code>X040</code>
+      <description>Basic table mapping</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>X041</impliedFeature>
+            <impliedFeature>X042</impliedFeature>
+         </atLeastOneOf>
+         <atLeastOneOf>
+            <impliedFeature>X043</impliedFeature>
+            <impliedFeature>X044</impliedFeature>
+         </atLeastOneOf>
+         <atLeastOneOf>
+            <impliedFeature>X046</impliedFeature>
+            <impliedFeature>X047</impliedFeature>
+         </atLeastOneOf>
+         <atLeastOneOf>
+            <impliedFeature>X048</impliedFeature>
+            <impliedFeature>X049</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>X041</code>
+      <description>Basic table mapping: null absent</description>
+      <implies>
+         <impliedFeature>X040</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X042</code>
+      <description>Basic table mapping: null as nil</description>
+      <implies>
+         <impliedFeature>X040</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X043</code>
+      <description>Basic table mapping: table as forest</description>
+      <implies>
+         <impliedFeature>X040</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X044</code>
+      <description>Basic table mapping: table as element</description>
+      <implies>
+         <impliedFeature>X040</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X045</code>
+      <description>Basic table mapping: with target namespace</description>
+      <implies>
+         <impliedFeature>X040</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X046</code>
+      <description>Basic table mapping: data mapping</description>
+      <implies>
+         <impliedFeature>X040</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X047</code>
+      <description>Basic table mapping: metadata mapping</description>
+      <implies>
+         <impliedFeature>X040</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X048</code>
+      <description>Basic table mapping: base64 encoding of binary strings</description>
+      <implies>
+         <impliedFeature>X040</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X049</code>
+      <description>Basic table mapping: hex encoding of binary strings</description>
+      <implies>
+         <impliedFeature>X040</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X050</code>
+      <description>Advanced table mapping</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>X051</impliedFeature>
+            <impliedFeature>X052</impliedFeature>
+         </atLeastOneOf>
+         <atLeastOneOf>
+            <impliedFeature>X053</impliedFeature>
+            <impliedFeature>X054</impliedFeature>
+         </atLeastOneOf>
+         <atLeastOneOf>
+            <impliedFeature>X056</impliedFeature>
+            <impliedFeature>X057</impliedFeature>
+         </atLeastOneOf>
+         <atLeastOneOf>
+            <impliedFeature>X058</impliedFeature>
+            <impliedFeature>X059</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>X051</code>
+      <description>Advanced table mapping: null absent</description>
+      <implies>
+         <impliedFeature>X041</impliedFeature>
+         <impliedFeature>X050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X052</code>
+      <description>Advanced table mapping: null as nil</description>
+      <implies>
+         <impliedFeature>X042</impliedFeature>
+         <impliedFeature>X050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X053</code>
+      <description>Advanced table mapping: table as forest</description>
+      <implies>
+         <impliedFeature>X043</impliedFeature>
+         <impliedFeature>X050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X054</code>
+      <description>Advanced table mapping: table as element</description>
+      <implies>
+         <impliedFeature>X044</impliedFeature>
+         <impliedFeature>X050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X055</code>
+      <description>Advanced table mapping: with target namespace</description>
+      <implies>
+         <impliedFeature>X045</impliedFeature>
+         <impliedFeature>X050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X056</code>
+      <description>Advanced table mapping: data mapping</description>
+      <implies>
+         <impliedFeature>X046</impliedFeature>
+         <impliedFeature>X050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X057</code>
+      <description>Advanced table mapping: metadata mapping</description>
+      <implies>
+         <impliedFeature>X047</impliedFeature>
+         <impliedFeature>X050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X058</code>
+      <description>Advanced table mapping: base64 encoding of binary strings</description>
+      <implies>
+         <impliedFeature>X050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X059</code>
+      <description>Advanced table mapping: hex encoding of binary strings</description>
+      <implies>
+         <impliedFeature>X050</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X060</code>
+      <description>XMLParse: character string input and CONTENT option</description>
+   </feature>
+   <feature>
+      <code>X061</code>
+      <description>XMLParse: character string input and DOCUMENT option</description>
+   </feature>
+   <feature>
+      <code>X065</code>
+      <description>XMLParse: binary string input and CONTENT option</description>
+   </feature>
+   <feature>
+      <code>X066</code>
+      <description>XMLParse: binary string input and DOCUMENT option</description>
+   </feature>
+   <feature>
+      <code>X068</code>
+      <description>XMLSerialize: BOM</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>X072</impliedFeature>
+            <impliedFeature>X075</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>X069</code>
+      <description>XMLSerialize: INDENT</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>X072</impliedFeature>
+            <impliedFeature>X075</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>X070</code>
+      <description>XMLSerialize: character string serialization and CONTENT option</description>
+      <implies>
+         <impliedFeature>X072</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X071</code>
+      <description>XMLSerialize: character string serialization and DOCUMENT option</description>
+      <implies>
+         <impliedFeature>X072</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X072</code>
+      <description>XMLSerialize: character string serialization</description>
+   </feature>
+   <feature>
+      <code>X073</code>
+      <description>XMLSerialize: binary string serialization and CONTENT option</description>
+      <implies>
+         <impliedFeature>X075</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X074</code>
+      <description>XMLSerialize: binary string serialization and DOCUMENT option</description>
+      <implies>
+         <impliedFeature>X075</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X075</code>
+      <description>XMLSerialize: binary string serialization</description>
+   </feature>
+   <feature>
+      <code>X076</code>
+      <description>XMLSerialize: VERSION</description>
+      <implies>
+         <impliedFeature>X075</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X077</code>
+      <description>XMLSerialize: explicit ENCODING option</description>
+   </feature>
+   <feature>
+      <code>X078</code>
+      <description>XMLSerialize: explicit XML declaration</description>
+      <implies>
+         <impliedFeature>X075</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X080</code>
+      <description>Namespaces in XML publishing</description>
+   </feature>
+   <feature>
+      <code>X081</code>
+      <description>Query-level XML namespace declarations</description>
+   </feature>
+   <feature>
+      <code>X082</code>
+      <description>XML namespace declarations in DML</description>
+   </feature>
+   <feature>
+      <code>X083</code>
+      <description>XML namespace declarations in DDL</description>
+   </feature>
+   <feature>
+      <code>X084</code>
+      <description>XML namespace declarations in compound statements</description>
+   </feature>
+   <feature>
+      <code>X085</code>
+      <description>Predefined namespace prefixes</description>
+      <implies>
+         <impliedFeature>X080</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X086</code>
+      <description>XML namespace declarations in XMLTable</description>
+      <implies>
+         <impliedFeature>X300</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X090</code>
+      <description>XML document predicate</description>
+   </feature>
+   <feature>
+      <code>X091</code>
+      <description>XML content predicate</description>
+   </feature>
+   <feature>
+      <code>X096</code>
+      <description>XMLExists</description>
+   </feature>
+   <feature>
+      <code>X100</code>
+      <description>Host language support for XML: CONTENT option</description>
+   </feature>
+   <feature>
+      <code>X101</code>
+      <description>Host language support for XML: DOCUMENT option</description>
+   </feature>
+   <feature>
+      <code>X110</code>
+      <description>Host language support for XML: VARCHAR mapping</description>
+   </feature>
+   <feature>
+      <code>X111</code>
+      <description>Host language support for XML: CLOB mapping</description>
+      <implies>
+         <impliedFeature>T041</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X112</code>
+      <description>Host language support for XML: BLOB mapping</description>
+      <implies>
+         <impliedFeature>T041</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X113</code>
+      <description>Host language support for XML: STRIP WHITESPACE option</description>
+   </feature>
+   <feature>
+      <code>X114</code>
+      <description>Host language support for XML: PRESERVE WHITESPACE option</description>
+   </feature>
+   <feature>
+      <code>X120</code>
+      <description>XML parameters in SQL routines</description>
+   </feature>
+   <feature>
+      <code>X121</code>
+      <description>XML parameters in external routines</description>
+   </feature>
+   <feature>
+      <code>X131</code>
+      <description>Query-level XMLBINARY clause</description>
+   </feature>
+   <feature>
+      <code>X132</code>
+      <description>XMLBINARY clause in DML</description>
+   </feature>
+   <feature>
+      <code>X133</code>
+      <description>XMLBINARY clause in DDL</description>
+   </feature>
+   <feature>
+      <code>X134</code>
+      <description>XMLBINARY clause in compound statements</description>
+   </feature>
+   <feature>
+      <code>X135</code>
+      <description>XMLBINARY clause in subqueries</description>
+      <implies>
+         <impliedFeature>X131</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X141</code>
+      <description>IS VALID predicate: data-driven case</description>
+      <implies>
+         <impliedFeature>X145</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X142</code>
+      <description>IS VALID predicate: ACCORDING TO clause</description>
+   </feature>
+   <feature>
+      <code>X143</code>
+      <description>IS VALID predicate: ELEMENT clause</description>
+      <implies>
+         <impliedFeature>X142</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X144</code>
+      <description>IS VALID predicate: schema location</description>
+      <implies>
+         <impliedFeature>X142</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X145</code>
+      <description>IS VALID predicate outside check constraints</description>
+   </feature>
+   <feature>
+      <code>X151</code>
+      <description>IS VALID predicate: with DOCUMENT option</description>
+   </feature>
+   <feature>
+      <code>X152</code>
+      <description>IS VALID predicate: with CONTENT option</description>
+   </feature>
+   <feature>
+      <code>X153</code>
+      <description>IS VALID predicate: with SEQUENCE option</description>
+   </feature>
+   <feature>
+      <code>X155</code>
+      <description>IS VALID predicate: NAMESPACE without ELEMENT clause</description>
+      <implies>
+         <impliedFeature>X143</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X157</code>
+      <description>IS VALID predicate: NO NAMESPACE with ELEMENT clause</description>
+      <implies>
+         <impliedFeature>X143</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X160</code>
+      <description>Basic Information Schema for registered XML schemas</description>
+   </feature>
+   <feature>
+      <code>X161</code>
+      <description>Advanced Information Schema for registered XML schemas</description>
+      <implies>
+         <impliedFeature>X160</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X170</code>
+      <description>XML null handling options</description>
+   </feature>
+   <feature>
+      <code>X171</code>
+      <description>NIL ON NO CONTENT option</description>
+      <implies>
+         <impliedFeature>X170</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X181</code>
+      <description>XML(DOCUMENT(UNTYPED)) type</description>
+   </feature>
+   <feature>
+      <code>X182</code>
+      <description>XML(DOCUMENT(ANY)) type</description>
+   </feature>
+   <feature>
+      <code>X190</code>
+      <description>XML(SEQUENCE) type</description>
+   </feature>
+   <feature>
+      <code>X191</code>
+      <description>XML(DOCUMENT(XMLSCHEMA)) type</description>
+   </feature>
+   <feature>
+      <code>X192</code>
+      <description>XML(CONTENT(XMLSCHEMA)) type</description>
+   </feature>
+   <feature>
+      <code>X200</code>
+      <description>XMLQuery</description>
+   </feature>
+   <feature>
+      <code>X201</code>
+      <description>XMLQuery: RETURNING CONTENT</description>
+      <implies>
+         <impliedFeature>X200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X202</code>
+      <description>XMLQuery: RETURNING SEQUENCE</description>
+      <implies>
+         <impliedFeature>X200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X203</code>
+      <description>XMLQuery: passing a context item</description>
+      <implies>
+         <impliedFeature>X200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X204</code>
+      <description>XMLQuery: initializing an XQuery variable</description>
+      <implies>
+         <impliedFeature>X200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X205</code>
+      <description>XMLQuery: EMPTY ON EMPTY option</description>
+      <implies>
+         <impliedFeature>X200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X206</code>
+      <description>XMLQuery: NULL ON EMPTY option</description>
+      <implies>
+         <impliedFeature>X200</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X211</code>
+      <description>XML 1.1 support</description>
+   </feature>
+   <feature>
+      <code>X221</code>
+      <description>XML passing mechanism BY VALUE</description>
+   </feature>
+   <feature>
+      <code>X222</code>
+      <description>XML passing mechanism BY REF</description>
+   </feature>
+   <feature>
+      <code>X231</code>
+      <description>XML(CONTENT(UNTYPED)) type</description>
+   </feature>
+   <feature>
+      <code>X232</code>
+      <description>XML(CONTENT(ANY)) type</description>
+   </feature>
+   <feature>
+      <code>X241</code>
+      <description>RETURNING CONTENT in XML publishing</description>
+   </feature>
+   <feature>
+      <code>X242</code>
+      <description>RETURNING SEQUENCE in XML publishing</description>
+   </feature>
+   <feature>
+      <code>X251</code>
+      <description>Persistent XML values of XML(DOCUMENT(UNTYPED)) type</description>
+      <implies>
+         <impliedFeature>X181</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X252</code>
+      <description>Persistent XML values of XML(DOCUMENT(ANY)) type</description>
+      <implies>
+         <impliedFeature>X182</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X253</code>
+      <description>Persistent XML values of XML(CONTENT(UNTYPED)) type</description>
+      <implies>
+         <impliedFeature>X231</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X254</code>
+      <description>Persistent XML values of XML(CONTENT(ANY)) type</description>
+      <implies>
+         <impliedFeature>X232</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X255</code>
+      <description>Persistent XML values of XML(SEQUENCE) type</description>
+      <implies>
+         <impliedFeature>X190</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X256</code>
+      <description>Persistent XML values of XML(DOCUMENT(XMLSCHEMA)) type</description>
+   </feature>
+   <feature>
+      <code>X257</code>
+      <description>Persistent XML values of XML(CONTENT(XMLSCHEMA)) type</description>
+      <implies>
+         <impliedFeature>X192</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X260</code>
+      <description>XML type: ELEMENT clause</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>X191</impliedFeature>
+            <impliedFeature>X192</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>X261</code>
+      <description>XML type: NAMESPACE without ELEMENT clause</description>
+      <implies>
+         <impliedFeature>X260</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X263</code>
+      <description>XML type: NO NAMESPACE with ELEMENT clause</description>
+      <implies>
+         <impliedFeature>X260</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X264</code>
+      <description>XML type: schema location</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>X191</impliedFeature>
+            <impliedFeature>X192</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>X271</code>
+      <description>XMLValidate: data-driven case</description>
+      <implies>
+         <impliedFeature>X272</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X272</code>
+      <description>XMLValidate: ACCORDING TO clause</description>
+   </feature>
+   <feature>
+      <code>X273</code>
+      <description>XMLValidate: ELEMENT clause</description>
+      <implies>
+         <impliedFeature>X272</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X274</code>
+      <description>XMLValidate: schema location</description>
+   </feature>
+   <feature>
+      <code>X281</code>
+      <description>XMLValidate with DOCUMENT option</description>
+   </feature>
+   <feature>
+      <code>X282</code>
+      <description>XMLValidate with CONTENT option</description>
+   </feature>
+   <feature>
+      <code>X283</code>
+      <description>XMLValidate with SEQUENCE option</description>
+   </feature>
+   <feature>
+      <code>X284</code>
+      <description>XMLValidate: NAMESPACE without ELEMENT clause</description>
+      <implies>
+         <impliedFeature>X273</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X286</code>
+      <description>XMLValidate: NO NAMESPACE with ELEMENT clause</description>
+      <implies>
+         <impliedFeature>X273</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X300</code>
+      <description>XMLTable</description>
+   </feature>
+   <feature>
+      <code>X301</code>
+      <description>XMLTable: derived column list option</description>
+      <implies>
+         <impliedFeature>X300</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X302</code>
+      <description>XMLTable: ordinality column option</description>
+      <implies>
+         <impliedFeature>X300</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X303</code>
+      <description>XMLTable: column default option</description>
+      <implies>
+         <impliedFeature>X300</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X304</code>
+      <description>XMLTable: passing a context item</description>
+      <implies>
+         <impliedFeature>X300</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X305</code>
+      <description>XMLTable: initializing an XQuery variable</description>
+      <implies>
+         <impliedFeature>X300</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>X400</code>
+      <description>Name and identifier mapping</description>
+   </feature>
+   <feature>
+      <code>X410</code>
+      <description>Alter column data type: XML type</description>
+   </feature>
+</features>

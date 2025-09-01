@@ -1,0 +1,365 @@
+
+************************************************************************************************
+This file is a "digital artifact" that contains the grammar specified by a part of ISO/IEC 9075.
+
+This grammar may be used by implementers of SQL-implementations when generating parsers for the 
+SQL language.
+************************************************************************************************
+
+<reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | DO
+  | ELSEIF
+  | HANDLER
+  | IF
+  | ITERATE
+  | LEAVE
+  | LOOP
+  | REPEAT
+  | RESIGNAL
+  | SIGNAL
+  | UNTIL
+  | WHILE
+
+<non-reserved word> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | CONDITION_IDENTIFIER
+  | EXIT
+  | STACKED
+  | UNDO
+
+<SQL-server module name> ::=
+    <schema qualified name>
+
+<SQL variable name> ::=
+    <identifier>
+
+<condition name> ::=
+    <identifier>
+
+<general value specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <SQL variable reference>
+
+<simple value specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <SQL variable reference>
+
+<target specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <SQL variable reference>
+
+<simple target specification> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <SQL variable reference>
+
+<target array reference> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <SQL variable reference>
+
+<SQL variable reference> ::=
+    <basic identifier chain>
+
+<sqlstate value> ::=
+    SQLSTATE [ VALUE ] <character string literal>
+
+<schema element> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <SQL-server module definition>
+
+<SQL-server module definition> ::=
+    CREATE MODULE <SQL-server module name>
+         [ <SQL-server module character set specification> ]
+         [ <SQL-server module schema clause> ]
+         [ <SQL-server module path specification> ]
+         [ <temporary table declaration>... ]
+         <SQL-server module contents>...
+         END MODULE
+
+<SQL-server module character set specification> ::=
+    NAMES ARE <character set specification>
+
+<SQL-server module schema clause> ::=
+    SCHEMA <default schema name>
+
+<default schema name> ::=
+    <schema name>
+
+<SQL-server module path specification> ::=
+    <path specification>
+
+<SQL-server module contents> ::=
+    <SQL-invoked routine> <semicolon>
+
+<drop module statement> ::=
+    DROP MODULE <SQL-server module name> <drop behavior>
+
+<SQL-invoked routine> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <module routine>
+
+<module routine> ::=
+    <module procedure>
+  | <module function>
+
+<module procedure> ::=
+    [ DECLARE ] <SQL-invoked procedure>
+
+<module function> ::=
+    [ DECLARE ] <SQL-invoked function>
+
+<object name> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | MODULE <SQL-server module name>
+
+<SQL schema definition statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <SQL-server module definition>
+
+<SQL schema manipulation statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <drop module statement>
+
+<SQL control statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <assignment statement>
+  | <compound statement>
+  | <case statement>
+  | <if statement>
+  | <iterate statement>
+  | <leave statement>
+  | <loop statement>
+  | <while statement>
+  | <repeat statement>
+  | <for statement>
+
+<SQL diagnostics statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | <signal statement>
+  | <resignal statement>
+
+<compound statement> ::=
+    [ <beginning label> <colon> ] BEGIN [ [ NOT ] ATOMIC ]
+         [ <local declaration list> ] [ <local cursor declaration list> ]
+         [ <local handler declaration list> ]
+         [ <SQL statement list> ]
+         END [ <ending label> ]
+
+<beginning label> ::=
+    <statement label>
+
+<ending label> ::=
+    <statement label>
+
+<statement label> ::=
+    <identifier>
+
+<local declaration list> ::=
+    <terminated local declaration>...
+
+<terminated local declaration> ::=
+    <local declaration> <semicolon>
+
+<local declaration> ::=
+    <SQL variable declaration>
+  | <condition declaration>
+
+<local cursor declaration list> ::=
+    <terminated local cursor declaration>...
+
+<terminated local cursor declaration> ::=
+    <declare cursor> <semicolon>
+
+<local handler declaration list> ::=
+    <terminated local handler declaration>...
+
+<terminated local handler declaration> ::=
+    <handler declaration> <semicolon>
+
+<SQL statement list> ::=
+    <terminated SQL statement>...
+
+<terminated SQL statement> ::=
+    <SQL procedure statement> <semicolon>
+
+<handler declaration> ::=
+    DECLARE <handler type> HANDLER FOR <condition value list> <handler action>
+
+<handler type> ::=
+    CONTINUE
+  | EXIT
+  | UNDO
+
+<handler action> ::=
+    <SQL procedure statement>
+
+<condition value list> ::=
+    <condition value> [ { <comma> <condition value> }... ]
+
+<condition value> ::=
+    <sqlstate value>
+  | <condition name>
+  | SQLEXCEPTION
+  | SQLWARNING
+  | NOT FOUND
+
+<condition declaration> ::=
+    DECLARE <condition name> CONDITION [ FOR <sqlstate value> ]
+
+<SQL variable declaration> ::=
+    DECLARE <SQL variable name list> <data type> [ <default clause> ]
+
+<SQL variable name list> ::=
+    <SQL variable name> [ { <comma> <SQL variable name> }... ]
+
+<assignment statement> ::=
+    <singleton variable assignment>
+  | <multiple variable assignment>
+
+<multiple variable assignment> ::=
+    SET <assignment target list> <equals operator> <assigned row>
+
+<assignment target list> ::=
+    <left paren> <assignment target> [ { <comma> <assignment target> }... ] <right paren>
+
+<singleton variable assignment> ::=
+    SET <assignment target> <equals operator> <assignment source>
+
+<assignment target> ::=
+    <target specification>
+  | <modified field reference>
+  | <mutator reference>
+
+<assignment source> ::=
+    <value expression>
+  | <contextually typed source>
+
+<contextually typed source> ::=
+    <implicitly typed value specification>
+  | <contextually typed row value expression>
+
+<modified field reference> ::=
+    <modified field target> <period> <field name>
+
+<modified field target> ::=
+    <target specification>
+  | <left paren> <target specification> <right paren>
+  | <modified field reference>
+
+<mutator reference> ::=
+    <mutated target specification> <period> <method name>
+
+<mutated target specification> ::=
+    <target specification>
+  | <left paren> <target specification> <right paren>
+  | <mutator reference>
+
+<case statement> ::=
+    <simple case statement>
+  | <searched case statement>
+
+<simple case statement> ::=
+    CASE <case operand>
+         <simple case statement when clause>...
+         [ <case statement else clause> ]
+         END CASE
+
+<searched case statement> ::=
+    CASE <searched case statement when clause>...
+         [ <case statement else clause> ]
+         END CASE
+
+<simple case statement when clause> ::=
+    WHEN <when operand list>
+         THEN <SQL statement list>
+
+<searched case statement when clause> ::=
+    WHEN <search condition>
+         THEN <SQL statement list>
+
+<case statement else clause> ::=
+    ELSE <SQL statement list>
+
+<if statement> ::=
+    IF <search condition>
+         <if statement then clause>
+         [ <if statement elseif clause>... ]
+         [ <if statement else clause> ]
+         END IF
+
+<if statement then clause> ::=
+    THEN <SQL statement list>
+
+<if statement elseif clause> ::=
+    ELSEIF <search condition> THEN <SQL statement list>
+
+<if statement else clause> ::=
+    ELSE <SQL statement list>
+
+<iterate statement> ::=
+    ITERATE <statement label>
+
+<leave statement> ::=
+    LEAVE <statement label>
+
+<loop statement> ::=
+    [ <beginning label> <colon> ]
+         LOOP
+         <SQL statement list>
+         END LOOP [ <ending label> ]
+
+<while statement> ::=
+    [ <beginning label> <colon> ]
+         WHILE <search condition> DO
+         <SQL statement list>
+         END WHILE [ <ending label> ]
+
+<repeat statement> ::=
+    [ <beginning label> <colon> ]
+         REPEAT
+         <SQL statement list>
+         UNTIL <search condition>
+         END REPEAT [ <ending label> ]
+
+<for statement> ::=
+    [ <beginning label> <colon> ]
+         FOR [ <for loop variable name> AS ]
+         [ <cursor name> [ <cursor sensitivity> ] CURSOR FOR ]
+         <cursor specification>
+         DO <SQL statement list>
+         END FOR [ <ending label> ]
+
+<for loop variable name> ::=
+    <identifier>
+
+<get diagnostics statement> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | GET [ <which area> ] DIAGNOSTICS <SQL diagnostics information>
+
+<which area> ::=
+    CURRENT
+  | STACKED
+
+<condition information item name> ::=
+    !! All alternatives from ISO/IEC 9075-02.
+  | CONDITION_IDENTIFIER
+
+<signal statement> ::=
+    SIGNAL <signal value> [ <set signal information> ]
+
+<signal value> ::=
+    <condition name>
+  | <sqlstate value>
+
+<set signal information> ::=
+    SET <signal information item list>
+
+<signal information item list> ::=
+    <signal information item> [ { <comma> <signal information item> }... ]
+
+<signal information item> ::=
+    <condition information item name> <equals operator> <simple value specification>
+
+<resignal statement> ::=
+    RESIGNAL [ <signal value> ] [ <set signal information> ]
+

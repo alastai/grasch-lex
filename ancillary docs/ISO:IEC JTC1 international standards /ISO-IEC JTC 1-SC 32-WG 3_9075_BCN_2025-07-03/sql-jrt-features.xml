@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element ("features") that 
+identifies every optional language feature defined in ("used in") a part of ISO/IEC 9075. 
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to specify the natural-language text that describes the features
+implemented in a particular SQL-implementation.  
+It may also be used by documentation writers and translators to identify those features in the 
+natural languages of users of those SQL-implementations.
+-->
+
+
+ 
+<!DOCTYPE features [
+  
+<!-- The features element defines the features of a standard (part). -->
+<!ELEMENT features ((feature)*)>
+
+<!-- A feature element defines a specific feature. -->
+<!ELEMENT feature (code, description, implies?)>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the feature. -->
+<!ELEMENT description (#PCDATA | squote)*>
+
+<!-- An implies element provides a set of implied features. -->
+<!ELEMENT implies (impliedFeature | atLeastOneOf)*>
+
+<!-- A code element specifies the unique code for a feature. -->
+<!ELEMENT impliedFeature (#PCDATA)>
+
+<!-- An atLeastOneOf element provides a set of implied features where only one is required. -->
+<!ELEMENT atLeastOneOf (impliedFeature, (impliedFeature)+)>
+
+]>
+
+<features>
+   <feature>
+      <code>J511</code>
+      <description>Commands</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>J541</impliedFeature>
+            <impliedFeature>J551</impliedFeature>
+            <impliedFeature>J621</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>J521</code>
+      <description>JDBC data types</description>
+   </feature>
+   <feature>
+      <code>J531</code>
+      <description>Deployment</description>
+      <implies>
+         <atLeastOneOf>
+            <impliedFeature>J541</impliedFeature>
+            <impliedFeature>J551</impliedFeature>
+            <impliedFeature>J621</impliedFeature>
+         </atLeastOneOf>
+      </implies>
+   </feature>
+   <feature>
+      <code>J541</code>
+      <description>SERIALIZABLE</description>
+      <implies>
+         <impliedFeature>J622</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>J551</code>
+      <description>SQLDATA</description>
+      <implies>
+         <impliedFeature>J622</impliedFeature>
+      </implies>
+   </feature>
+   <feature>
+      <code>J561</code>
+      <description>JAR privileges</description>
+   </feature>
+   <feature>
+      <code>J571</code>
+      <description>NEW operator</description>
+   </feature>
+   <feature>
+      <code>J581</code>
+      <description>Output parameters</description>
+   </feature>
+   <feature>
+      <code>J591</code>
+      <description>Overloading</description>
+   </feature>
+   <feature>
+      <code>J601</code>
+      <description>SQL-Java paths</description>
+   </feature>
+   <feature>
+      <code>J611</code>
+      <description>References</description>
+   </feature>
+   <feature>
+      <code>J621</code>
+      <description>External Java routines</description>
+   </feature>
+   <feature>
+      <code>J622</code>
+      <description>External Java types</description>
+   </feature>
+   <feature>
+      <code>J631</code>
+      <description>Java signatures</description>
+   </feature>
+   <feature>
+      <code>J641</code>
+      <description>Static fields</description>
+   </feature>
+   <feature>
+      <code>J651</code>
+      <description>SQL/JRT Information Schema</description>
+   </feature>
+   <feature>
+      <code>J652</code>
+      <description>SQL/JRT Usage tables</description>
+   </feature>
+   <feature>
+      <code>S201</code>
+      <description>SQL-invoked routines on arrays</description>
+      <implies>
+         <impliedFeature>S091</impliedFeature>
+         <impliedFeature>S203</impliedFeature>
+         <impliedFeature>S204</impliedFeature>
+      </implies>
+   </feature>
+</features>

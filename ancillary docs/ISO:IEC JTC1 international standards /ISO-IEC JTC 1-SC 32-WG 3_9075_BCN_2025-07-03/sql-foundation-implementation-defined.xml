@@ -1,0 +1,1566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The following XML document is a "digital artifact" containing an XML element (implementationDefined)
+that identifies every aspect of a part of ISO/IEC 9075 that is specified to be "implementation-defined".  
+An XML DTD is provided that may be used to validate the XML document itself. 
+
+It may be used by implementers to ensure that the definition of every such implementation-defined
+item is known.  
+It may be used by potential users of SQL-implementations to specify 
+required values or ranges of such implementation-defined items.
+
+The code consists of 2 characters followed by a three digit number.
+The first letter of implementation-defined codes is always I.
+This distinguishes it from the codes used for optional features and implementation-dependent 
+features.
+  The second letter of implementation-defined codes have the following meanings:
+    A Actions
+    C Condition codes
+    D Defaults
+    E Extensions
+    L Limits
+    S Sequencing
+    V Values/Constants
+    W Ways and means
+
+The description is the standard provided description of the implementation-defined item.
+-->
+ 
+<!DOCTYPE implementationDefined [
+  
+<!-- The implementationDefined element defines the implementation-defined features of 
+     a standard (part). -->
+<!ELEMENT implementationDefined (impDef*)>
+
+<!-- An impDef element defines a specific implementation-defined feature. -->
+<!ELEMENT impDef (code, description, feature*)>
+
+<!-- A code element specifies the unique code for an implementation-defined feature. -->
+<!ELEMENT code (#PCDATA)>
+
+<!-- A description element provides a textual specification of the implementation-defined feature. 
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!-- A feature element defines a specific feature.
+-->
+<!ELEMENT feature EMPTY>
+<!-- The attributes of feature are:
+     * code is the identification of the feature.
+-->
+<!ATTLIST feature
+  code     CDATA #REQUIRED
+>
+
+]>
+
+<implementationDefined>
+   <impDef>
+      <code>IA002</code>
+      <description>Whether a result that cannot be represented exactly in the result type is rounded or truncated.</description>
+      <feature code="NONE"/>
+      <feature code="T839"/>
+   </impDef>
+   <impDef>
+      <code>IA003</code>
+      <description>The set of collations supported by an SQL-implementation. These may be defined by a standard or by the SQL-implementation itself. Each supported collation has a name, its definition, the list of character sets to which it can be applied, and whether or not padding with spaces is to be used when comparing two strings of unequal length.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA010</code>
+      <description>The numeric types supported as a coordinate type of a vector.</description>
+   </impDef>
+   <impDef>
+      <code>IA011</code>
+      <description>The set and syntax of vector-only numeric coordinate types of a vector.</description>
+   </impDef>
+   <impDef>
+      <code>IA013</code>
+      <description>The collation which is sensitive to case, that used to determine the equivalence of a regular identifier (in case-normal form) and a delimited identifier, of two delimited identifiers, of two Unicode delimited identifiers, of a Unicode delimited identifier and a delimited identifier, or of a regular identifier (in case-normal form) and a Unicode delimited identifier.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA014</code>
+      <description>The circumstances in which conversion of non-UCS character string expressions from one character set to another is automatic.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA015</code>
+      <description>The set of character repertoires supported by an SQL-implementation.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA016</code>
+      <description>The subset of the UCS character repertoire that the SQL-implementation supports as the repertoire SQL-TEXT.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA017</code>
+      <description>The set of character encoding forms supported by an SQL-implementation. These may be defined by a standard or by the SQL-implementation itself.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA021</code>
+      <description>The valid values of precision for a data type defined as DECFLOAT.</description>
+      <feature code="T076"/>
+   </impDef>
+   <impDef>
+      <code>IA022</code>
+      <description>When comparing binary string values other than binary large object string values, whether trailing X'00's are considered significant when comparing two binary string values that are otherwise equivalent.</description>
+      <feature code="T022"/>
+   </impDef>
+   <impDef>
+      <code>IA026</code>
+      <description>Which of two possible non-zero results of the difference of two values of type TIME (with or without time zone) are selected.</description>
+      <feature code="F052"/>
+   </impDef>
+   <impDef>
+      <code>IA029</code>
+      <description>The set of characters consisting of the SQL language characters and all other characters that the SQL-implementation supports as the repertoire SQL_IDENTIFIER.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA030</code>
+      <description>The rules for determining whether an authorization identifier is valid.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA031</code>
+      <description>The rules for determining whether a catalog name is valid.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA032</code>
+      <description>The set of valid transcoding names.</description>
+      <feature code="NONE"/>
+   </impDef>
+   <impDef>
+      <code>IA039</code>
+      <description>Support for any feature relevant to the lexical rules not defined in the relevant standard but defined in a later edition.</description>
+   </impDef>
+   <impDef>
+      <code>IA040</code>
+      <description>The standard character set names and implementation-defined character set names that are supported.</description>
+   </impDef>
+   <impDef>
+      <code>IA043</code>
+      <description>Whether the declared type of the result of a hypothetical set function except RANK or DENSE_RANK is approximate numeric with implementation-defined precision or decimal floating-point with implementation-defined precision.</description>
+   </impDef>
+   <impDef>
+      <code>IA044</code>
+      <description>Whether the declared type of the result of a listagg set function is a variable-length character string with implementation-defined maximum length or a character large object type with implementation-defined maximum length.</description>
+   </impDef>
+   <impDef>
+      <code>IA046</code>
+      <description>Whether an SQL-implementation checks via Syntax Rules that a triggered SQL statement to broadly contains an SQL transaction statement, an SQL connection statement, an SQL schema statement, an SQL dynamic statement, or an SQL session statement.</description>
+   </impDef>
+   <impDef>
+      <code>IA047</code>
+      <description>Whether the triggered BEFORE action may contain an SQL-statement that possibly modifies SQL-data.</description>
+   </impDef>
+   <impDef>
+      <code>IA048</code>
+      <description>The impact on an SQL-client module when CASCADE is specified and loss of the USAGE privilege on a character set causes an SQL-client module to be determined to be a lost module.</description>
+   </impDef>
+   <impDef>
+      <code>IA050</code>
+      <description>Whether a JSON context item that is not of the JSON data type is parsed.</description>
+   </impDef>
+   <impDef>
+      <code>IA054</code>
+      <description>Whether a JSON parameter is parsed.</description>
+   </impDef>
+   <impDef>
+      <code>IA056</code>
+      <description>Whether tertiary effects of a data change operation that has inserted or replaced rows in a target leaf generally underlying table of a view are checked for conformity to the CHECK OPTION of that view.</description>
+   </impDef>
+   <impDef>
+      <code>IA057</code>
+      <description>The support of SQL-transactions that affect more than one SQL-server.</description>
+   </impDef>
+   <impDef>
+      <code>IA058</code>
+      <description>The effect when the SQL-client module definition that contains the externally-invoked procedure is associated with an SQL-agent that is associated with another SQL-client module definition that contains an externally-invoked procedure with equivalent procedure names.</description>
+   </impDef>
+   <impDef>
+      <code>IA059</code>
+      <description>Whether the syntactic transformations to define all comparison predicates in terms of = and ‹ are applied in the case of user-defined types whose comparison category is RELATIVE.</description>
+   </impDef>
+   <impDef>
+      <code>IA060</code>
+      <description>Which collations can be used as collations for the like predicate.</description>
+   </impDef>
+   <impDef>
+      <code>IA061</code>
+      <description>Which collations can be used as collations for the similar predicate.</description>
+   </impDef>
+   <impDef>
+      <code>IA062</code>
+      <description>Whether a value expression can be evaluated during compilation of an invocation of a polymorphic table function.</description>
+   </impDef>
+   <impDef>
+      <code>IA063</code>
+      <description>Whether the following values are copied from current SQL-session context into the routine SQL-session context. The identities of all instances of created local temporary tables that are referenced in the SQL-client module definition of the program. The identities of all declared local temporary tables that are defined by temporary table declarations that are contained in the SQL-client module definition of the program. The cursor instance descriptors of all open cursors that are not global extended dynamic cursors and whose SQL-client module is the SQL-client module definition of the program. Prepared statements that do not have global extended names. SQL descriptor areas that do not have global extended names. Every currently available result set sequence, along with the specific name of an SQL-invoked procedure and the name of the invoker of for the invocation causing the result set sequence to be brought into existence.</description>
+   </impDef>
+   <impDef>
+      <code>IA064</code>
+      <description>The restrictions to which a connection user name has to conform.</description>
+   </impDef>
+   <impDef>
+      <code>IA065</code>
+      <description>The rules for determining the actual value of an approximate numeric literal.</description>
+   </impDef>
+   <impDef>
+      <code>IA066</code>
+      <description>Whether local temporary tables associated with the routine SQL-session context are destroyed and whether prepared statements prepared by the program are deallocated after the completion of the program.</description>
+   </impDef>
+   <impDef>
+      <code>IA067</code>
+      <description>Whether declared or local extended dynamic cursors opened during the execution of an external routine are closed and destroyed on completion of the routine.</description>
+   </impDef>
+   <impDef>
+      <code>IA068</code>
+      <description>The conversion to UCS of an XQuery regular expression or XQuery option flag, when the character repertoire of the XQuery regular expression or XQuery option flag is not UCS.</description>
+   </impDef>
+   <impDef>
+      <code>IA069</code>
+      <description>The conversion to UCS of an XQuery regular expression replacement string, when the character repertoire of the XQuery regular expression replacement string is not UCS.</description>
+   </impDef>
+   <impDef>
+      <code>IA070</code>
+      <description>The rules to parse a JSON text if the format is not JSON.</description>
+   </impDef>
+   <impDef>
+      <code>IA071</code>
+      <description>Whether an exception is raised if the input contains a JSON member with duplicate keys when parsing a context item or named variable whose format is JSON.</description>
+   </impDef>
+   <impDef>
+      <code>IA072</code>
+      <description>Whether an exception is raised if the input contains a JSON member with duplicate keys by a JSON member accessor, a JSON wildcard member accessor, or a keyvalue JSON item method.</description>
+   </impDef>
+   <impDef>
+      <code>IA073</code>
+      <description>Whether to use truncation or rounding to an exact numeric value of scale 0 (zero) for JSON subscripts.</description>
+   </impDef>
+   <impDef>
+      <code>IA074</code>
+      <description>Whether to round or truncate when formatting a seconds value.</description>
+   </impDef>
+   <impDef>
+      <code>IA075</code>
+      <description>Whether an SQL routine body shall not contain an SQL-statement that possibly modifies SQL-data when READS SQL DATA is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IA076</code>
+      <description>Whether an SQL routine body shall not contain an SQL-statement that possibly reads SQL-data or possibly modifies SQL-data when CONTAINS SQL is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IA077</code>
+      <description>Whether an SQL routine body shall not contain a potential source of non-determinism when DETERMINISTIC is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IA078</code>
+      <description>Whether an SQL routine body shall not contain an SQL connection statement, an SQL schema statement, an SQL dynamic statement, or an SQL transaction statement other than a savepoint statement, release savepoint statement, or a rollback statement that specifies a savepoint clause.</description>
+   </impDef>
+   <impDef>
+      <code>IA079</code>
+      <description>Whether any other condition areas except the first one becomes occupied for any other statement than an SQL diagnostics statement.</description>
+   </impDef>
+   <impDef>
+      <code>IA080</code>
+      <description>The rules for matching the data type specified by a valid item descriptor area to the declared type of a ‹simple value specification› or a ‹simple target specification›.</description>
+   </impDef>
+   <impDef>
+      <code>IA081</code>
+      <description>Which of the corresponding SQLSTATE values is returned in the SQLSTATE status parameter when multiple completion conditions: warning (01000) or multiple exception conditions, including implementation-defined exception conditions, are raised.</description>
+   </impDef>
+   <impDef>
+      <code>IA082</code>
+      <description>The effect when the value of any input host parameter provided by the SQL-agent falls outside the set of allowed values of the declared type of the host parameter, or if the value of any output host parameter resulting from the execution of the externally-invoked procedure falls outside the set of values supported by the SQL-agent for that host parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IA090</code>
+      <description>Whether the declared numeric type of an approximate numeric literal is an approximate numeric type or a decimal floating-point type with implementation-defined precision.</description>
+   </impDef>
+   <impDef>
+      <code>IA156</code>
+      <description>Whether the identifier and code from the table for SQL-statement codes, for dynamic select statement or dynamic single row select statement is used to describe a dynamic select statement or dynamic single row select statement that has been prepared but has not yet been executed dynamically when setting DYNAMIC_FUNCTION and DYNAMIC_FUNCTION_CODE.</description>
+   </impDef>
+   <impDef>
+      <code>IA157</code>
+      <description>Whether a direct implementation-defined statement initiates an SQL-transaction.</description>
+   </impDef>
+   <impDef>
+      <code>IA158</code>
+      <description>Whether a direct implementation-defined statement may be associated with an active SQL-transaction.</description>
+   </impDef>
+   <impDef>
+      <code>IA162</code>
+      <description>Whether or not an exception condition is raised when the most specific type of a target specification or into argument of the most recently executed dynamic fetch statement and the declared type of the target specification or into argument do not satisfy the conditions specified by ISO/IEC 9075.</description>
+   </impDef>
+   <impDef>
+      <code>IA163</code>
+      <description>Whether the identifier and code for dynamic select statement or dynamic single row select statement from the SQL-statement codes table is used to describe a dynamic select statement or dynamic single row select statement that has been prepared but has not yet been executed dynamically when the DYNAMIC_FUNCTION and DYNAMIC_FUNCTION_CODE fields of a descriptor area are set.</description>
+   </impDef>
+   <impDef>
+      <code>IA164</code>
+      <description>The Format and Syntax Rules for a preparable implementation-defined statement.</description>
+   </impDef>
+   <impDef>
+      <code>IA165</code>
+      <description>The restrictions on the user identifiers to which the SQL-session user identifier can be set.</description>
+   </impDef>
+   <impDef>
+      <code>IA166</code>
+      <description>The restrictions on the values of a connection name including whether or not for an SQL-client module that contains an externally-invoked procedure that contains a connect statement the connection user name must be identical to the module authorization identifier.</description>
+   </impDef>
+   <impDef>
+      <code>IA167</code>
+      <description>Whether or not any prepared statement is deallocated on a rollback.</description>
+   </impDef>
+   <impDef>
+      <code>IA168</code>
+      <description>The status of any open cursors in the current SQL-transaction that were opened by that SQL-transaction before the establishment of a savepoint to which a rollback is executed.</description>
+   </impDef>
+   <impDef>
+      <code>IA169</code>
+      <description>Whether a prepared statement, other than the prepared statement of a held cursor, is deallocated on a commit.</description>
+   </impDef>
+   <impDef>
+      <code>IA170</code>
+      <description>Whether the current row is removed from the sequence of rows of the result set descriptor of the cursor on a positioned delete.</description>
+   </impDef>
+   <impDef>
+      <code>IA192</code>
+      <description>The approximation chosen when an approximation is obtained by truncation or rounding and there are more than one approximation.</description>
+   </impDef>
+   <impDef>
+      <code>IA193</code>
+      <description>Which numeric values have approximations obtained by rounding or truncation for a given approximate numeric type.</description>
+   </impDef>
+   <impDef>
+      <code>IA194</code>
+      <description>The boundaries within which the normal rules of arithmetic apply.</description>
+   </impDef>
+   <impDef>
+      <code>IA195</code>
+      <description>Whether approximation by rounding or truncation is chosen when converting between numeric data types and least significant digits are lost.</description>
+   </impDef>
+   <impDef>
+      <code>IA196</code>
+      <description>Whether numeric values outside the smallest and the largest value, inclusive, in a given exact numeric type may have an approximation obtained by rounding or truncation for that type.</description>
+   </impDef>
+   <impDef>
+      <code>IA197</code>
+      <description>The approximation taken, while rounding a datetime type or interval type, when there is more than one candidate value.</description>
+   </impDef>
+   <impDef>
+      <code>IA198</code>
+      <description>Whether an SQL-implementation supports leap seconds or discontinuities in calendars, and the consequences of such support for date and interval arithmetic.</description>
+   </impDef>
+   <impDef>
+      <code>IA200</code>
+      <description>The conditions, which allow repeated executions of a table reference which contain a sample clause, and the sample clause contains a repeatable clause, to return a result table with identical rows for a given repeat argument.</description>
+   </impDef>
+   <impDef>
+      <code>IA201</code>
+      <description>Whether two rows whose column values are all the null value are considered unique with nulls distinct, or unique with nulls not distinct.</description>
+   </impDef>
+   <impDef>
+      <code>IA203</code>
+      <description>The rules which determine exceptions to the rule that no set of columns of the result of a table value constructor is a BPK-set or a BUC-set.</description>
+   </impDef>
+   <impDef>
+      <code>IA204</code>
+      <description>The BPK-sets, BUC-sets, and non-axiomatic known functional dependencies, when RECURSIVE is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IA205</code>
+      <description>Whether a compilation unit may invoke or transfer control to other compilation units, written in the same or a different programming language.</description>
+   </impDef>
+   <impDef>
+      <code>IA206</code>
+      <description>Whether an SQL-implementation reserves portions of the namespaces in the embedded SQL host program, and the details of those reservations.</description>
+   </impDef>
+   <impDef>
+      <code>IA207</code>
+      <description>The mapping of authorization identifiers to operating system users.</description>
+   </impDef>
+   <impDef>
+      <code>IA208</code>
+      <description>The extent to which other conditions that may be raised cause further condition areas to become occupied when information about a completion condition or an exception condition reported by SQLSTATE is placed into a vacant condition area in this diagnostics area.</description>
+   </impDef>
+   <impDef>
+      <code>IA209</code>
+      <description>The visibility of any significant changes made to SQL-data through a sensitive or asensitive holdable cursor by the current SQL-transaction or any subsequent SQL-transaction in which the cursor is held open.</description>
+   </impDef>
+   <impDef>
+      <code>IA210</code>
+      <description>The effect on any open cursor, prepared dynamic statement, or deferred constraint when the execution of either SQL-data and SQL-schema statements or SQL dynamic data statements and dynamic SQL-schema statements happens.</description>
+   </impDef>
+   <impDef>
+      <code>IA211</code>
+      <description>The effects a rollback statement that references a savepoint specifier has on diagnostics area contents, the contents of SQL descriptor areas, and the status of prepared statements.</description>
+   </impDef>
+   <impDef>
+      <code>IA212</code>
+      <description>The conversion of an approximate numeric literal to a numeric value using rounding or truncation.</description>
+   </impDef>
+   <impDef>
+      <code>IA213</code>
+      <description>Whether an exception condition is raised on the assignment of a value that is the zero-length character string or the zero-length binary string to a target specification or simple target specification.</description>
+   </impDef>
+   <impDef>
+      <code>IA214</code>
+      <description>Whether an exception condition is raised when the result of a string value expression is the zero-length character string or the zero-length binary string.</description>
+   </impDef>
+   <impDef>
+      <code>IA215</code>
+      <description>Whether an exception condition is raised when the result of a string value function is the zero-length character string or the zero-length binary string.</description>
+   </impDef>
+   <impDef>
+      <code>IA219</code>
+      <description>Whether X is equal to Y or whether X is less than Y when X and Y are two binary string values, neither of which is a binary large object string value, and the only difference between X and Y are trailing X'00's in Y.</description>
+   </impDef>
+   <impDef>
+      <code>IA220</code>
+      <description>Whether an authorization identifier has UPDATE privilege on a view, when it has UPDATE privilege on every column of the view.</description>
+   </impDef>
+   <impDef>
+      <code>IA221</code>
+      <description>Whether an authorization identifier has INSERT privilege on a view, when it has INSERT privilege on every column of the view.</description>
+   </impDef>
+   <impDef>
+      <code>IA222</code>
+      <description>The rules for parsing that JSON text when JSON text is contained in a string and the format of which is an implementation-defined format.</description>
+   </impDef>
+   <impDef>
+      <code>IA223</code>
+      <description>Whether syntactic analysis (in the Syntax Rules) may be used to detect errors that would necessarily occur in General Rules.</description>
+   </impDef>
+   <impDef>
+      <code>IA224</code>
+      <description>Whether an SQL/JSON scalar that is a number, a character string, a Boolean, a datetime, TIME or TIME WITH TIME ZONE compares less than an SQL/JSON scalar that is not the corresponding data type.</description>
+   </impDef>
+   <impDef>
+      <code>IA225</code>
+      <description>Whether an SQL/JSON object compares less than another SQL/JSON object that is not equivalent.</description>
+   </impDef>
+   <impDef>
+      <code>IA226</code>
+      <description>The rules which determine which functional dependencies are known functional dependencies except non-axiomatic functional dependency in the left and right operand tables is a known functional dependency in the result.</description>
+   </impDef>
+   <impDef>
+      <code>IA227</code>
+      <description>The conversion of the value of length of a character string to characters, when char length units other than CHARACTERS are specified.</description>
+   </impDef>
+   <impDef>
+      <code>IA228</code>
+      <description>Whether X ‹ Y is True when X is an SQL/JSON scalar that is a number, character string, Boolean, datetime or time and Y is an SQL/JSON scalar that is not a number, character string, Boolean, datetime, or time, respectively.</description>
+   </impDef>
+   <impDef>
+      <code>IA229</code>
+      <description>Whether X ‹ Y is True when X and Y are both SQL/JSON objects that are not equivalent.</description>
+   </impDef>
+   <impDef>
+      <code>IA230</code>
+      <description>Whether tertiary effects of a data change operation that has inserted or replaced rows in a target leaf generally underlying table of a view in the set of views to be checked are checked for conformity to the CHECK OPTION of the view.</description>
+   </impDef>
+   <impDef>
+      <code>IA231</code>
+      <description>Whether or not an SQL-session authorization identifier can invoke externally-invoked procedures in an SQL-client module definition with a different explicit module authorization identifier as are any restrictions pertaining to such invocation.</description>
+   </impDef>
+   <impDef>
+      <code>IA232</code>
+      <description>The precise statement of the restriction on a parameter on an externally-invoked procedure when the data type is a variable-length string using fixed length encodings and the definition of CHAR in the appropriate VARYING package is not based on the typeAda.Strings.Unbounded.Unbounded_String.</description>
+   </impDef>
+   <impDef>
+      <code>IA233</code>
+      <description>Whether or not changes resulting from the successful execution of a DML statement are made visible to any sensitive cursor CR that is open in the SQL-transaction in which this statement is being executed and the cursor has been held into a subsequent SQL-transaction.</description>
+   </impDef>
+   <impDef>
+      <code>IA234</code>
+      <description>The extent to which an SQL-implementation may disallow independent changes that are not significant.</description>
+   </impDef>
+   <impDef>
+      <code>IA235</code>
+      <description>The restrictions on changing TYPE, LENGTH, PRECISION, SCALE, DATETIME_INTERVAL_CODE, DATETIME_INTERVAL_PRECISION, CHARACTER_SET_CATALOG, CHARACTER_SET_SCHEMA, CHARACTER_SET_NAME, USER_DEFINED_TYPE_CATALOG, USER_DEFINED_TYPE_SCHEMA, USER_DEFINED_TYPE_NAME, SCOPE_CATALOG, SCOPE_SCHEMA, and SCOPE_NAME values resulting from the execution of a describe statement before execution of an execute statement, dynamic open statement, or dynamic fetch statement are implementation-defined.</description>
+   </impDef>
+   <impDef>
+      <code>IA236</code>
+      <description>Whether an SQL-implementation is able to disallow significant changes that would not be visible through a currently open cursor.</description>
+   </impDef>
+   <impDef>
+      <code>IA237</code>
+      <description>Rules to convert to vector type.</description>
+   </impDef>
+   <impDef>
+      <code>IA238</code>
+      <description>Format and Syntax Rules for a literal of a vector-only numeric coordinate type.</description>
+   </impDef>
+   <impDef>
+      <code>IA239</code>
+      <description>Whether the coordinate types of two vectors in a cast operation need to be the same in the case one of the types is a vector-only numeric coordinate type.</description>
+   </impDef>
+   <impDef>
+      <code>IA240</code>
+      <description>Additional restrictions on the coordinate types of two vectors in a cast operation in the case one of the types is a vector-only numeric coordinate type.</description>
+   </impDef>
+   <impDef>
+      <code>IC011</code>
+      <description>The conditions, in addition to those specified by ISO/IEC 9075, for which the completion condition “warning (01000)” is raised.</description>
+   </impDef>
+   <impDef>
+      <code>IC012</code>
+      <description>The subclasses providing information of a non-cautionary nature when the completion condition is “successful completion (00000)”.</description>
+   </impDef>
+   <impDef>
+      <code>IC013</code>
+      <description>The conditions under which an exception condition or a completion condition “warning (01000)” with an implementation-defined subclass code is raised when restrictions on the execution of either SQL-data and SQL-schema statements or SQL dynamic data statements and dynamic SQL-schema statements are violated.</description>
+   </impDef>
+   <impDef>
+      <code>IC014</code>
+      <description>The exception condition raised on unrecoverable errors, or the loss of the current SQL-connection with an implicit initiation of the execution of a rollback statement.</description>
+   </impDef>
+   <impDef>
+      <code>IC015</code>
+      <description>The exception condition raised when an error occurs during parsing of JSON text contained in a string and format is not JSON.</description>
+   </impDef>
+   <impDef>
+      <code>IC018</code>
+      <description>The codes and meanings for classes and subclasses that begin with one of the digits: 5, 6, 7, 8, or 9, or one of the simple Latin upper-case letters: I, J, K, L, M, N, O, P,Q, R, S, T, U, V, W, X, Y, or Z.</description>
+   </impDef>
+   <impDef>
+      <code>IC019</code>
+      <description>The character set associated with the class code and subclass code of the SQLSTATE parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IC020</code>
+      <description>The character string value, which may not be 'ISO 9075', set for CLASS_ORIGIN and SUBCLASS_ORIGIN for an implementation-defined class code or subclass code.</description>
+   </impDef>
+   <impDef>
+      <code>IC021</code>
+      <description>The subclass value of the exception condition raised when an error other than an integrity constraint violation prevents commitment of an SQL-transaction.</description>
+   </impDef>
+   <impDef>
+      <code>ID007</code>
+      <description>Whether the default collation for the UCS character repertoire is UCS_BASIC or UNICODE.</description>
+   </impDef>
+   <impDef>
+      <code>ID011</code>
+      <description>Whether the default collation for the UTF32 character set is UCS_BASIC or UNICODE.</description>
+   </impDef>
+   <impDef>
+      <code>ID012</code>
+      <description>Whether the default collation for the UTF16 character set is UCS_BASIC or UNICODE.</description>
+   </impDef>
+   <impDef>
+      <code>ID013</code>
+      <description>Whether the default collation for the UTF8 character set is UCS_BASIC or UNICODE.</description>
+   </impDef>
+   <impDef>
+      <code>ID014</code>
+      <description>The implicit character set of a C character variable, a C VARCHAR variable, or a C CLOB variable.</description>
+   </impDef>
+   <impDef>
+      <code>ID041</code>
+      <description>The external routine SQL-path when an SQL-client module definition does not specify a module path specification contained in the external program identified by the routine body of an external routine.</description>
+   </impDef>
+   <impDef>
+      <code>ID042</code>
+      <description>The parameter lists and argument lists of the PTF component procedures when the SQL-implementation does not support Feature B208, “PTF component procedure interface”.</description>
+   </impDef>
+   <impDef>
+      <code>ID043</code>
+      <description>The default SQL-server which is the target of an SQL-connection when an SQL-connection is initiated other than through the use of an explicit connect statement.</description>
+   </impDef>
+   <impDef>
+      <code>ID044</code>
+      <description>The default time zone used when an SQL-session is initiated, as the original time zone displacement and the current default time zone displacement of the SQL-session.</description>
+   </impDef>
+   <impDef>
+      <code>ID045</code>
+      <description>The default catalog whose name is used, on initiation of an SQL-session, to effectively qualify all unqualified schema names that are contained in preparable statements when those statements are prepared in the current SQL-session by either an execute immediate statement or a prepare statement or are contained in a direct SQL statement when those statements are invoked directly.</description>
+   </impDef>
+   <impDef>
+      <code>ID046</code>
+      <description>The default schema whose name is used, on initiation of an SQL-session, to effectively qualify all unqualified schema qualified names that are contained in preparable statements when those statements are prepared in the current SQL-session by either an execute immediate statement or a prepare statement or are contained in direct SQL statements when those statements are executed directly.</description>
+   </impDef>
+   <impDef>
+      <code>ID047</code>
+      <description>The value of the current SQL-path before a successful execution of set path statement.</description>
+   </impDef>
+   <impDef>
+      <code>ID048</code>
+      <description>The default transform group name for a given user-defined type name for an SQL-session.</description>
+   </impDef>
+   <impDef>
+      <code>ID049</code>
+      <description>The default character set for an SQL-session.</description>
+   </impDef>
+   <impDef>
+      <code>ID050</code>
+      <description>The value of SESSION_USER in the first SQL-session context for an SQL-session not begun with an explicit connect statement, or begun with a connect statement not specifying the user identifier.</description>
+   </impDef>
+   <impDef>
+      <code>ID056</code>
+      <description>The catalog name which is implicit when a schema name contained in a schema name clause but not contained in an SQL-client module does not contain a catalog name.</description>
+   </impDef>
+   <impDef>
+      <code>ID057</code>
+      <description>The catalog name which is implicit when a schema name contained in a module authorization clause does not contain a catalog name.</description>
+   </impDef>
+   <impDef>
+      <code>ID062</code>
+      <description>The implicit precision when a precision is omitted.</description>
+   </impDef>
+   <impDef>
+      <code>ID063</code>
+      <description>The actual decimal precision of a data type defined as DECIMAL for each value specified by precision.</description>
+   </impDef>
+   <impDef>
+      <code>ID068</code>
+      <description>The implicit large object length when large object length is omitted.</description>
+   </impDef>
+   <impDef>
+      <code>ID069</code>
+      <description>The implicit character maximum length when character maximum length is omitted.</description>
+   </impDef>
+   <impDef>
+      <code>ID070</code>
+      <description>The implicit character set when CHARACTER SET is not specified for character string type.</description>
+   </impDef>
+   <impDef>
+      <code>ID072</code>
+      <description>The implicit maximum cardinality of an array type when it is omitted.</description>
+   </impDef>
+   <impDef>
+      <code>ID074</code>
+      <description>The implicit character string return type when a JSON returning clause is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID097</code>
+      <description>The implicit normalize function result length when the normalize function result length is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID098</code>
+      <description>The implicit string type of a JSON output clause when a JSON output clause is not specified and none of the declared types of any value expression simply contained in JSON input expression simply contained in the JSON value constructor is a JSON type.</description>
+   </impDef>
+   <impDef>
+      <code>ID100</code>
+      <description>The string type used to cast the output of JSON text when the explicit or implicit data type specified for the output of JSON text is not a JSON type, a character string type, a numeric type, or a Boolean type.</description>
+   </impDef>
+   <impDef>
+      <code>ID101</code>
+      <description>The string type used to cast the output of a JSON query when none of the declared types of any value expression simply contained in JSON input expression simply contained in the JSON query is a JSON type.</description>
+   </impDef>
+   <impDef>
+      <code>ID102</code>
+      <description>The string type used to cast the output of a JSON serialize when the JSON output clause is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID106</code>
+      <description>The unique null treatment when no explicit unique null treatment is specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID111</code>
+      <description>The result value of an output parameter of an SQL-invoked procedure with the data type of the parameter when the PARAMETER STYLE is SQL and the corresponding indicator argument is not negative and a value was not assigned.</description>
+   </impDef>
+   <impDef>
+      <code>ID112</code>
+      <description>The implicit sequence generator max-value with implicit declared data type.</description>
+   </impDef>
+   <impDef>
+      <code>ID113</code>
+      <description>The implicit sequence generator min-value with implicit declared data type.</description>
+   </impDef>
+   <impDef>
+      <code>ID133</code>
+      <description>The implicit null ordering when null ordering is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID134</code>
+      <description>The implicit result string type of a JSON aggregate function when a JSON output clause is not specified and none of the declared types of any value expression simply contained in JSON input expression simply contained in the JSON aggregate function is a JSON type.</description>
+   </impDef>
+   <impDef>
+      <code>ID138</code>
+      <description>Whether the encoding UTF8, UTF16, or UTF32 is implicit when the target data type is a binary string type and ENCODING is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID139</code>
+      <description>The implicit character set specification contained in the schema character set specification when a schema character set specification is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID140</code>
+      <description>The implicit schema name list contained in a schema path specification, when a schema path specification is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID155</code>
+      <description>The implicit group name in a group specification when a single group specification was not specified for any SQL parameter declaration with a parameter type identifying a user-defined type with no locator indication, and no equivalent of the type already exists in the multiple group specification in an external routine.</description>
+   </impDef>
+   <impDef>
+      <code>ID156</code>
+      <description>The external routine SQL-path when SQL-data access indication is none of READS SQL DATA, MODIFIES SQL DATA, or CONTAINS SQL.</description>
+   </impDef>
+   <impDef>
+      <code>ID157</code>
+      <description>The implicit exact numeric type with scale 0 (zero) when the sequence generator data type option is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID159</code>
+      <description>The implicit catalog name when the explicit or implicit schema name does not specify a catalog name.</description>
+   </impDef>
+   <impDef>
+      <code>ID160</code>
+      <description>The implicit schema name list contained in a module path specification when a module path specification is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID177</code>
+      <description>The group name for an implicit group specification.</description>
+   </impDef>
+   <impDef>
+      <code>ID178</code>
+      <description>The module character set specification that specifies the implementation-defined character set that contains at least every character that is in SQL language character when a module character set specification is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID231</code>
+      <description>The value of MESSAGE_TEXT unless explicitly specified by ISO/IEC 9075.</description>
+   </impDef>
+   <impDef>
+      <code>ID232</code>
+      <description>The default character set of a host variable definition and the maximum number of octets per character for that character set.</description>
+   </impDef>
+   <impDef>
+      <code>ID233</code>
+      <description>The implicit module path specification when an embedded SQL host program does not contain an embedded path specification.</description>
+   </impDef>
+   <impDef>
+      <code>ID234</code>
+      <description>The schema name in the implicit module authorization clause when an embedded SQL host program does not contain an embedded authorization declaration.</description>
+   </impDef>
+   <impDef>
+      <code>ID235</code>
+      <description>The character set containing at least every character that is in SQL language character that is used in the implicit embedded character set declaration when an embedded character set declaration is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID236</code>
+      <description>The character sets for which the SQL-session collation is set when no character set specification list is specified in a set session collation statement.</description>
+   </impDef>
+   <impDef>
+      <code>ID237</code>
+      <description>The default maximum number of occurrences in an allocate descriptor statement when occurrences is not specified.</description>
+   </impDef>
+   <impDef>
+      <code>ID238</code>
+      <description>The implicit connection user name when a connection user name is not specified for an SQL-connection.</description>
+   </impDef>
+   <impDef>
+      <code>ID239</code>
+      <description>Whether EXACT or an approximation synonym is implicit.</description>
+   </impDef>
+   <impDef>
+      <code>IE002</code>
+      <description>Any implementation-defined data types.</description>
+   </impDef>
+   <impDef>
+      <code>IE003</code>
+      <description>Any implementation-defined statements, with their Format, Syntax Rules, Access Rules, and classification.</description>
+   </impDef>
+   <impDef>
+      <code>IE005</code>
+      <description>Any additional statements provided by an SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IE010</code>
+      <description>Any additional character sets supported by an SQL-implementation.</description>
+   </impDef>
+   <impDef>
+      <code>IE011</code>
+      <description>Any additional rules that the SQL-implementation may use to determine the nullability characteristic of a column.</description>
+      <feature code="T101"/>
+   </impDef>
+   <impDef>
+      <code>IE015</code>
+      <description>Any additional known functional dependencies.</description>
+   </impDef>
+   <impDef>
+      <code>IL001</code>
+      <description>The maximum length of a fixed-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL002</code>
+      <description>The maximum length of a large object character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL003</code>
+      <description>The maximum length of a fixed-length binary string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL004</code>
+      <description>The maximum length of a large object binary string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL006</code>
+      <description>The maximum length of a variable-length character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL007</code>
+      <description>The maximum length of a variable-length binary string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL008</code>
+      <description>The maximum cardinality of an array type.</description>
+   </impDef>
+   <impDef>
+      <code>IL009</code>
+      <description>The maximum value for the precision of the NUMERIC data type.</description>
+   </impDef>
+   <impDef>
+      <code>IL038</code>
+      <description>The precision of the SQL-session context statement timestamp is the implementation-defined maximum timestamp precision.</description>
+   </impDef>
+   <impDef>
+      <code>IL039</code>
+      <description>The maximum number of SQL/JSON members in an SQL/JSON object or SQL/JSON array.</description>
+   </impDef>
+   <impDef>
+      <code>IL040</code>
+      <description>The maximum length of the key in an SQL/JSON member.</description>
+   </impDef>
+   <impDef>
+      <code>IL041</code>
+      <description>The maximum length of an SQL/JSON element or the maximum length of the key of an SQL/JSON member when it is a string type.</description>
+   </impDef>
+   <impDef>
+      <code>IL042</code>
+      <description>The maximum lengths for character string types and binary string types.</description>
+   </impDef>
+   <impDef>
+      <code>IL043</code>
+      <description>The maximum values of precision and of scale for the exact numeric types DECIMAL and NUMERIC.</description>
+   </impDef>
+   <impDef>
+      <code>IL044</code>
+      <description>The maximum values of precision for the approximate numeric type FLOAT.</description>
+   </impDef>
+   <impDef>
+      <code>IL045</code>
+      <description>The maximum value of time and timestamp fractional seconds precision for a datetime type.</description>
+   </impDef>
+   <impDef>
+      <code>IL046</code>
+      <description>The maximum length of character transliteration, pad function, transcoding, normalize function without normalize function result length specified, or specific type method.</description>
+   </impDef>
+   <impDef>
+      <code>IL047</code>
+      <description>The maximum length of the declared type of regex transliteration when no XQuery replacement string is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IL048</code>
+      <description>The maximum length of the result of the classifier function.</description>
+   </impDef>
+   <impDef>
+      <code>IL050</code>
+      <description>The maximum length of a string value expression contained in a JSON input expression.</description>
+   </impDef>
+   <impDef>
+      <code>IL051</code>
+      <description>The maximum number of members in a JSON object.</description>
+   </impDef>
+   <impDef>
+      <code>IL052</code>
+      <description>The maximum number of elements in a JSON array.</description>
+   </impDef>
+   <impDef>
+      <code>IL053</code>
+      <description>The maximum precision of a data type defined as FLOAT.</description>
+   </impDef>
+   <impDef>
+      <code>IL054</code>
+      <description>The maximum and minimum values of the exponent in the FLOAT, REAL, DOUBLE PRECISION, and decimal floating-point types.</description>
+   </impDef>
+   <impDef>
+      <code>IL055</code>
+      <description>The maximum value of timestamp precision.</description>
+   </impDef>
+   <impDef>
+      <code>IL056</code>
+      <description>The maximum number of SQL item descriptors of the initial result row type descriptor area.</description>
+   </impDef>
+   <impDef>
+      <code>IL057</code>
+      <description>The maximum number of SQL item descriptors of the intermediate result row type descriptor area.</description>
+   </impDef>
+   <impDef>
+      <code>IL058</code>
+      <description>The maximum length of a PTF extended name for a PTF cursor or PTF descriptor area.</description>
+   </impDef>
+   <impDef>
+      <code>IL059</code>
+      <description>The maximum value of interval leading field precision.</description>
+   </impDef>
+   <impDef>
+      <code>IL060</code>
+      <description>The maximum value of interval fractional seconds precision.</description>
+   </impDef>
+   <impDef>
+      <code>IL061</code>
+      <description>The minimum permitted negative time zone displacement.</description>
+   </impDef>
+   <impDef>
+      <code>IL062</code>
+      <description>The maximum permitted positive time zone displacement.</description>
+   </impDef>
+   <impDef>
+      <code>IL063</code>
+      <description>The maximum number of digits immediately contained in an unsigned integer.</description>
+   </impDef>
+   <impDef>
+      <code>IL064</code>
+      <description>the maximum length of the returned variable-length character string when a JSON simplified accessor op specifies number or size.</description>
+   </impDef>
+   <impDef>
+      <code>IL066</code>
+      <description>The maximum number and maximum numeric precision of type Scale_s declarations in an Interfaces.SQL.Numeric library unit package when the caller language of the externally-invoked procedure is Ada.</description>
+   </impDef>
+   <impDef>
+      <code>IL070</code>
+      <description>The maximum length of an identifier in terms of identifier parts, delimited identifier parts, and Unicode identifier parts.</description>
+   </impDef>
+   <impDef>
+      <code>IL071</code>
+      <description>The maximum depth of nesting of subqueries in an assertion definition.</description>
+   </impDef>
+   <impDef>
+      <code>IL072</code>
+      <description>The maximum value for dimension of a vector.</description>
+   </impDef>
+   <impDef>
+      <code>IL073</code>
+      <description>The maximum length of the variable-length character string of the result of a vector serialize function.</description>
+   </impDef>
+   <impDef>
+      <code>IL074</code>
+      <description>The maximum length of the character large object of the result of a vector serialize function.</description>
+   </impDef>
+   <impDef>
+      <code>IL205</code>
+      <description>The maximum length of each variable-length character item in the diagnostics area.</description>
+   </impDef>
+   <impDef>
+      <code>IL206</code>
+      <description>The maximum number of SQL descriptor areas.</description>
+   </impDef>
+   <impDef>
+      <code>IL207</code>
+      <description>The maximum number of item descriptor areas for a single SQL descriptor area.</description>
+   </impDef>
+   <impDef>
+      <code>IL208</code>
+      <description>The maximum number of savepoints per SQL-transaction.</description>
+   </impDef>
+   <impDef>
+      <code>IS001</code>
+      <description>The ordering of the lists of referencing column names and referenced column names in a referential constraint descriptor.</description>
+   </impDef>
+   <impDef>
+      <code>IS002</code>
+      <description>The order of execution of a set of triggers when SQL-implementation does not support Feature T218, “Multiple triggers for the same event executed in the order created”.</description>
+   </impDef>
+   <impDef>
+      <code>IS003</code>
+      <description>The order of execution of a set of triggers, which have the same timestamp value when SQL-implementation does support Feature T218, “Multiple triggers for the same event executed in the order created”.</description>
+   </impDef>
+   <impDef>
+      <code>IV030</code>
+      <description>The null character that terminates a C character string.</description>
+   </impDef>
+   <impDef>
+      <code>IV031</code>
+      <description>The operational returnability property of a cursor.</description>
+   </impDef>
+   <impDef>
+      <code>IV032</code>
+      <description>The choice of binary versus decimal precision for SMALLINT, INTEGER, and BIGINT, as are the specific precisions for each of those types, but all three types shall use the same radix.</description>
+   </impDef>
+   <impDef>
+      <code>IV048</code>
+      <description>The declared type of an exact numeric literal.</description>
+   </impDef>
+   <impDef>
+      <code>IV049</code>
+      <description>The length of the character string type of the parameters routine name text item, specific name text item, and message text item of an external routine with PARAMETER STYLE SQL.</description>
+   </impDef>
+   <impDef>
+      <code>IV071</code>
+      <description>The length of an octet value when a REF value is materialized in a host variable.</description>
+   </impDef>
+   <impDef>
+      <code>IV072</code>
+      <description>The data type of the transaction timestamp of an SQL-transaction.</description>
+   </impDef>
+   <impDef>
+      <code>IV073</code>
+      <description>The schemas that contain the instances of any global temporary tables, created local temporary tables, or declared local temporary tables within the SQL-session are effectively defined by the use of an SQL-session identifier.</description>
+   </impDef>
+   <impDef>
+      <code>IV074</code>
+      <description>The set of characters included in truncating whitespace.</description>
+   </impDef>
+   <impDef>
+      <code>IV075</code>
+      <description>The end-of-line indicator (newline).</description>
+   </impDef>
+   <impDef>
+      <code>IV076</code>
+      <description>The character used as the default Unicode escape character when the source language character set does not contain reverse solidus.</description>
+   </impDef>
+   <impDef>
+      <code>IV077</code>
+      <description>The character set name of the character set used to represent national characters.</description>
+   </impDef>
+   <impDef>
+      <code>IV078</code>
+      <description>The approximate numeric type, known as the normal form, which is defined for every approximate numeric type (which may be the type itself).</description>
+   </impDef>
+   <impDef>
+      <code>IV079</code>
+      <description>The value specified by SYSTEM_USER that represents the operating system user who executed the SQL-client module that contains the SQL-statement whose execution caused the SYSTEM_USER general value specification to be evaluated.</description>
+   </impDef>
+   <impDef>
+      <code>IV080</code>
+      <description>The declared types of indicator parameters and indicator variables, without Feature F611, “Indicator data types”.</description>
+   </impDef>
+   <impDef>
+      <code>IV081</code>
+      <description>The precision of the result of a grouping operation.</description>
+   </impDef>
+   <impDef>
+      <code>IV082</code>
+      <description>The precision of the approximate numeric result type of the PERCENT_RANK function.</description>
+   </impDef>
+   <impDef>
+      <code>IV083</code>
+      <description>The precision of the approximate numeric result type of the CUME_DIST function.</description>
+   </impDef>
+   <impDef>
+      <code>IV084</code>
+      <description>The exact numeric result type with scale 0 (zero) of the NTILE function.</description>
+   </impDef>
+   <impDef>
+      <code>IV085</code>
+      <description>The exact numeric result type with scale 0 (zero) of the ROW_NUMBER function.</description>
+   </impDef>
+   <impDef>
+      <code>IV086</code>
+      <description>The result of an arithmetic operation when the most specific type of the result is the decimal floating point type.</description>
+   </impDef>
+   <impDef>
+      <code>IV087</code>
+      <description>The result of a concatenation when the character repertoire of character factor is UCS and either of the operands is not normalized.</description>
+   </impDef>
+   <impDef>
+      <code>IV088</code>
+      <description>The values of the current default catalog name, current default unqualified schema name, the current default character set name, the SQL-path of the current SQL-session, the text defining the SQL-path, the current default time zone displacement of the current SQL-session, the contents of all SQL dynamic descriptor areas, and the text defining the default transform group name, the text defining the user-defined type name—transform group name pair for each user-defined type explicitly set by the user when a new SQL-session context is created for the invocation of an SQL-invoked routine.</description>
+   </impDef>
+   <impDef>
+      <code>IV089</code>
+      <description>The user identifier and role name in the top cell of the authorization stack of the new SQL-session context when the external security characteristic of an external SQL-invoked routine is IMPLEMENTATION DEFINED.</description>
+   </impDef>
+   <impDef>
+      <code>IV090</code>
+      <description>The value of the save area data item of a collection-returning external function with parameter style SQL.</description>
+   </impDef>
+   <impDef>
+      <code>IV091</code>
+      <description>The parameter lists of the PTF component procedures when the SQL-implementation does not support Feature B208, “PTF component procedure interface”.</description>
+   </impDef>
+   <impDef>
+      <code>IV092</code>
+      <description>The argument lists of the PTF component procedures when the SQL-implementation does not support Feature B208, “PTF component procedure interface”.</description>
+   </impDef>
+   <impDef>
+      <code>IV093</code>
+      <description>The definition of an XQuery regular expression match when the character repertoire of the subject string is not UCS.</description>
+   </impDef>
+   <impDef>
+      <code>IV094</code>
+      <description>The XQuery regular expression replacement when the character repertoire of any of the subject string, the pattern, the match or the replacement string is not UCS.</description>
+   </impDef>
+   <impDef>
+      <code>IV095</code>
+      <description>The value of a serialization result when there is no format option specifying JSON. It must be parseable as JSON text into a value equivalent to the original unserialized value, according to an implementation-defined definition of equivalence.</description>
+   </impDef>
+   <impDef>
+      <code>IV096</code>
+      <description>The base year to use with the datetime template rounded year.</description>
+   </impDef>
+   <impDef>
+      <code>IV099</code>
+      <description>The specific character set associated with the subtype of character string represented by the keywords NATIONAL CHARACTER.</description>
+   </impDef>
+   <impDef>
+      <code>IV100</code>
+      <description>The result of any operation, other than the normalize function or the normalize predicate, on an unnormalized UCS string.</description>
+   </impDef>
+   <impDef>
+      <code>IV110</code>
+      <description>The result of the cast operation when casting from a decimal floating-point value to a character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IV113</code>
+      <description>The PL/I data description clauses, in addition to the PL/I type specification and the INITIAL clause, that may appear in a PL/I variable definition.</description>
+   </impDef>
+   <impDef>
+      <code>IV114</code>
+      <description>The COBOL data description clauses, in addition to the PICTURE, SIGN, USAGE and VALUE clauses, that may appear in a COBOL variable definition.</description>
+   </impDef>
+   <impDef>
+      <code>IV116</code>
+      <description>The character encoding form chosen for the SQL_CHARACTER character repertoire.</description>
+   </impDef>
+   <impDef>
+      <code>IV117</code>
+      <description>The character encoding form chosen for the SQL_TEXT character repertoire.</description>
+   </impDef>
+   <impDef>
+      <code>IV118</code>
+      <description>The character encoding form chosen for the SQL_IDENTIFIER character repertoire.</description>
+   </impDef>
+   <impDef>
+      <code>IV119</code>
+      <description>Whether the data type of an approximate numeric literal is approximate numeric or decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV129</code>
+      <description>The precision of a data type defined as REAL.</description>
+   </impDef>
+   <impDef>
+      <code>IV130</code>
+      <description>The precision of a data type defined as DOUBLE PRECISION.</description>
+   </impDef>
+   <impDef>
+      <code>IV132</code>
+      <description>The normal form for each exact numeric type.</description>
+   </impDef>
+   <impDef>
+      <code>IV133</code>
+      <description>The declared type and lengths of CURRENT_USER, CURRENT_ROLE, SESSION_USER, SYSTEM_USER, CURRENT_CATALOG, CURRENT_SCHEMA, CURRENT_PATH, current collation specification, CURRENT_DEFAULT_TRANSFORM_GROUP, and CURRENT_TRANSFORM_GROUP_FOR_TYPE path-resolved user-defined type name is character string.</description>
+   </impDef>
+   <impDef>
+      <code>IV134</code>
+      <description>The precision of the decimal floating-point return type of a dyadic arithmetic operator when either operand is approximate numeric.</description>
+   </impDef>
+   <impDef>
+      <code>IV135</code>
+      <description>The approximate numeric return type of a dyadic arithmetic operator when either operand is approximate numeric.</description>
+   </impDef>
+   <impDef>
+      <code>IV136</code>
+      <description>The exact numeric return type of a dyadic arithmetic operator when the declared type of both operands is exact numeric. For addition, subtraction, and multiplication, the precision of the result is implementation-defined. For division, both precision and scale of the result are implementation-defined.</description>
+   </impDef>
+   <impDef>
+      <code>IV137</code>
+      <description>The exact numeric return type with scale 0 (zero) of a position expression, a regex occurrences function, or a regex position expression.</description>
+   </impDef>
+   <impDef>
+      <code>IV138</code>
+      <description>The exact numeric return type of an extract expression.</description>
+   </impDef>
+   <impDef>
+      <code>IV139</code>
+      <description>The exact numeric return type of a length expression.</description>
+   </impDef>
+   <impDef>
+      <code>IV140</code>
+      <description>The precision of the decimal floating-point return type of a modulus expression when the declared type of either operand of the modulus expression is decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV141</code>
+      <description>The precision of the decimal floating-point return type of a general logarithm function when the declared type of either operand of the function is decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV142</code>
+      <description>The approximate numeric return type of a general logarithm function, when the declared type of neither operand of the function is decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV143</code>
+      <description>The precision of the decimal floating-point return type of a trigonometric function when the declared type of the operand of the function is decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV144</code>
+      <description>The approximate numeric return type of a trigonometric function, when the declared type of the operand of the function is not decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV145</code>
+      <description>The precision of the decimal floating-point return type of a natural logarithm function when the declared type of the operand of the function is decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV146</code>
+      <description>The approximate numeric return type of a natural logarithm function, when the declared type of the operand of the function is not decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV147</code>
+      <description>The precision of the decimal floating-point return type of an exponential function when the declared type of the operand of the function is decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV148</code>
+      <description>The approximate numeric return type of an exponential function, when the declared type of the operand of the function is not decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV149</code>
+      <description>The precision of the decimal floating-point return type of a power function when the declared type of either operand of the function is decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV150</code>
+      <description>The approximate numeric return type of a power function, when the declared type of neither operand of the function is decimal floating-point.</description>
+   </impDef>
+   <impDef>
+      <code>IV151</code>
+      <description>The precision of the return type of a floor function and of a ceiling function.</description>
+   </impDef>
+   <impDef>
+      <code>IV152</code>
+      <description>The exact numeric return type with scale 0 (zero) of a cardinality expression.</description>
+   </impDef>
+   <impDef>
+      <code>IV153</code>
+      <description>The exact numeric return type with scale 0 (zero) of a max cardinality expression.</description>
+   </impDef>
+   <impDef>
+      <code>IV154</code>
+      <description>The precision of the exact numeric return type of a match number function.</description>
+   </impDef>
+   <impDef>
+      <code>IV155</code>
+      <description>The character set of the result of a transcoding.</description>
+   </impDef>
+   <impDef>
+      <code>IV156</code>
+      <description>The JSON key uniqueness constraint when serializing JSON text and a JSON array constructor is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IV157</code>
+      <description>The interval leading field precision of the result of an interval value expression.</description>
+   </impDef>
+   <impDef>
+      <code>IV158</code>
+      <description>The declared exact numeric type of an ORDINALITY column with scale 0 (zero).</description>
+   </impDef>
+   <impDef>
+      <code>IV159</code>
+      <description>The precision of the exact numeric result type of a combination of data types in a set of data types when all of the data types in the set are exact numeric.</description>
+   </impDef>
+   <impDef>
+      <code>IV160</code>
+      <description>The precision of the approximate numeric result type of a combination of data types in a set of data types when some of the data types in the set are approximate numeric and the rest are exact numeric.</description>
+   </impDef>
+   <impDef>
+      <code>IV161</code>
+      <description>The result value of an output parameter with the data type of the most specific data type of the parameter when the subject routine is not an SQL routine or an external Java routine.</description>
+   </impDef>
+   <impDef>
+      <code>IV162</code>
+      <description>The result value of an output parameter with the data type of the from-sql function when the subject routine is an external routine, the parameter is not a locator parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IV163</code>
+      <description>The target data types appropriate to the specified format when serializing JSON items to JSON text and the target data type is not a string type.</description>
+   </impDef>
+   <impDef>
+      <code>IV164</code>
+      <description>The JSON key uniqueness constraint, which is used to reparse a JSON text, when there is no format option specifying JSON.</description>
+   </impDef>
+   <impDef>
+      <code>IV165</code>
+      <description>The character type of character set Unicode that is use when a value expression is cast to, and it is simply contained in a JSON argument without implicit or explicit JSON input clause.</description>
+   </impDef>
+   <impDef>
+      <code>IV166</code>
+      <description>The declared exact numeric type with scale of 0 (zero) of the result of the COUNT function.</description>
+   </impDef>
+   <impDef>
+      <code>IV167</code>
+      <description>The declared exact numeric type with the argument scale, of the result of the SUM function with an exact numeric parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IV168</code>
+      <description>The declared exact numeric type with a precision not less than the argument precision, of the result of the AVG function with an exact numeric parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IV169</code>
+      <description>The declared approximate numeric type with a precision not less than the argument precision, of the result of the AVG or SUM function with an approximate numeric parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IV170</code>
+      <description>The declared decimal floating-point type with a precision not less than the argument precision, of the result of the AVG or SUM function with a decimal floating-point parameter.</description>
+   </impDef>
+   <impDef>
+      <code>IV171</code>
+      <description>The declared interval type with with the same fields as the argument and interval leading field precision not less than that of the argument, of the result of the AVG or SUM function with an interval argument.</description>
+   </impDef>
+   <impDef>
+      <code>IV172</code>
+      <description>The declared decimal floating-point type with a precision not less than the argument precision, of the result of the VAR_POP or VAR_SAMP function with a parameter, which has the decimal floating-point data type.</description>
+   </impDef>
+   <impDef>
+      <code>IV173</code>
+      <description>The declared type of the result of the VAR_POP or VAR_SAMP function with a parameter, which has not the decimal floating-point data type.</description>
+   </impDef>
+   <impDef>
+      <code>IV174</code>
+      <description>The precision of the declared exact numeric type with scale of 0 (zero) of the results of the REGR_COUNT, RANK or DENSE_RANK functions.</description>
+   </impDef>
+   <impDef>
+      <code>IV175</code>
+      <description>The declared decimal floating-point type with a precision not less than the argument precision, of the result of a function of the binary set function type except REGR_COUNT with a parameter, which has the decimal floating-point data type.</description>
+   </impDef>
+   <impDef>
+      <code>IV176</code>
+      <description>The declared approximate numeric type with a precision not less than the argument precision, of the result of a function of the binary set function type except REGR_COUNT with all parameters, which have not the decimal floating-point data type.</description>
+   </impDef>
+   <impDef>
+      <code>IV177</code>
+      <description>The precision of the result data type of an inverse distribution function that specifies PERCENTILE_CONT when the declared type of the value expression simply contained in the sort specification of the function is numeric.</description>
+   </impDef>
+   <impDef>
+      <code>IV178</code>
+      <description>The JSON key uniqueness constraint, which is used when serializing JSON text and a JSON array aggregate constructor is specified.</description>
+   </impDef>
+   <impDef>
+      <code>IV179</code>
+      <description>The implicit result string type of a JSON aggregate function, the generated JSON text is cast to when the explicit or implicit data type specified for the output of JSON text is not a character string type, a numeric type, or a Boolean type.</description>
+   </impDef>
+   <impDef>
+      <code>IV180</code>
+      <description>The data format specified by ‹implementation-defined JSON representation option›.</description>
+   </impDef>
+   <impDef>
+      <code>IV181</code>
+      <description>The value assigned to the system-period start column of existing rows.</description>
+   </impDef>
+   <impDef>
+      <code>IV182</code>
+      <description>The values of characteristics of an SQL-session context when a new SQL-session context is created that are not otherwise specified.</description>
+   </impDef>
+   <impDef>
+      <code>IV183</code>
+      <description>The declared exact numeric type with scale 0 (zero) of a grouping operation.</description>
+   </impDef>
+   <impDef>
+      <code>IV184</code>
+      <description>The number of octets implied by the null character which terminate a C character string.</description>
+   </impDef>
+   <impDef>
+      <code>IV185</code>
+      <description>The value of JSON key uniqueness constraint, while parsing a JSON context item, that is not of the JSON data type.</description>
+   </impDef>
+   <impDef>
+      <code>IV186</code>
+      <description>The result numeric data type of a JSON method when it specifies number.</description>
+   </impDef>
+   <impDef>
+      <code>IV187</code>
+      <description>The character repertoire, the default collation, and whether the collation has the NO PAD characteristic or the PAD SPACE characteristic, for each implementation-defined character set.</description>
+   </impDef>
+   <impDef>
+      <code>IV188</code>
+      <description>The size of an Ada data type that corresponds to an SQL structured type reference.</description>
+   </impDef>
+   <impDef>
+      <code>IV189</code>
+      <description>The size of a PL/I fixed binary data type that corresponds to an SQL numeric data type.</description>
+   </impDef>
+   <impDef>
+      <code>IV190</code>
+      <description>The identifiers and codes for implementation-defined statements in a ‹get diagnostics statement›.</description>
+   </impDef>
+   <impDef>
+      <code>IV191</code>
+      <description>The declared binary string type of a binary string literal.</description>
+   </impDef>
+   <impDef>
+      <code>IV192</code>
+      <description>The character set of the declared type of a ‹simple value specification› of ‹extended statement name›, ‹extended cursor name›, ‹extended descriptor name›, ‹PTF descriptor name›, or ‹PTF cursor name›.</description>
+   </impDef>
+   <impDef>
+      <code>IV193</code>
+      <description>The character set of the declared type of an ‹SQL-server name›, a ‹connection name›, and a ‹connection user name›.</description>
+   </impDef>
+   <impDef>
+      <code>IV194</code>
+      <description>The character set name associated with NATIONAL CHARACTER.</description>
+   </impDef>
+   <impDef>
+      <code>IV197</code>
+      <description>The values of precision for numeric types other than DECIMAL, NUMERIC, and FLOAT.</description>
+   </impDef>
+   <impDef>
+      <code>IV198</code>
+      <description>The length of the character string type of the parameter save data area item of a collection-returning external function with PARAMETER STYLE SQL.</description>
+   </impDef>
+   <impDef>
+      <code>IV199</code>
+      <description>The exact numeric type with scale 0 (zero) of the SQL indicator arguments corresponding to the result data items of an external routine with PARAMETER STYLE SQL.</description>
+   </impDef>
+   <impDef>
+      <code>IV212</code>
+      <description>The negative values of COMMAND_FUNCTION_CODE that indicate implementation-defined SQL-statements.</description>
+   </impDef>
+   <impDef>
+      <code>IV214</code>
+      <description>Whether the host parameter data type of a variable declared with PL/I type fixed binary is SMALLINT, INTEGER, or BIGINT.</description>
+   </impDef>
+   <impDef>
+      <code>IV215</code>
+      <description>Whether the host parameter data type of a Fortran variable declared with CHARACTER KIND is CHARACTER or NATIONAL CHARACTER and the valid values of the associated unsigned integer that determines the characteristics of the Fortran variable.</description>
+   </impDef>
+   <impDef>
+      <code>IV216</code>
+      <description>Whether the host parameter data type of a variable declared using COBOL integer type is SMALLINT, INTEGER, or BIGINT.</description>
+   </impDef>
+   <impDef>
+      <code>IV218</code>
+      <description>The host parameter data type corresponding to Interfaces.SQL.INDICATOR_TYPE.</description>
+   </impDef>
+   <impDef>
+      <code>IV219</code>
+      <description>The character set of the CHARACTER VARYING declared type of a dynamic parameter marker when the dynamic parameter marker is a string value expression either simply contained in a char length expression or an octet length expression; simply contained in a character like predicate, octet like predicate, or similar predicate, and all of the arguments to the predicate are dynamic parameter markers; or immediately contained in a catalog name characteristic, schema name characteristic, character set name characteristic, SQL-path characteristic, transform group characteristic, role specification, or set session user identifier statement.</description>
+   </impDef>
+   <impDef>
+      <code>IV220</code>
+      <description>The implementation-defined data types and their associated data type codes.</description>
+   </impDef>
+   <impDef>
+      <code>IV222</code>
+      <description>The transaction isolation level that is actually set for each specified transaction isolation level.</description>
+   </impDef>
+   <impDef>
+      <code>IV223</code>
+      <description>The exact numeric types and approximate numeric types used when creating the cast functions for user-defined distinct types whose data type is exact numeric or approximate numeric and whose precision and, where appropriate, scale are equal to those specified by the user-defined distinct type.</description>
+   </impDef>
+   <impDef>
+      <code>IV225</code>
+      <description>The names of the various Ada library unit packages to be generated or supplied that is not a valid Ada identifier when the caller language of the externally-invoked procedure is Ada.</description>
+   </impDef>
+   <impDef>
+      <code>IV226</code>
+      <description>The ranges and digits values for the various numeric types declared in the Interfaces.SQL package when the caller language of the externally-invoked procedure is Ada.</description>
+   </impDef>
+   <impDef>
+      <code>IV227</code>
+      <description>The INDICATOR_TYPE subtype declared in the Interfaces.SQL package is INT or SMALLINT, corresponding to an exact numeric type of indicator parameters when the caller language of the externally-invoked procedure is Ada.</description>
+   </impDef>
+   <impDef>
+      <code>IV228</code>
+      <description>The type or subtype declarations named CHAR and NCHAR in the Interfaces.SQL.VARYING library unit package when the caller language of the externally-invoked procedure is Ada.</description>
+   </impDef>
+   <impDef>
+      <code>IV229</code>
+      <description>The Interfaces.SQL.CHAR and Interfaces.SQL.NCHAR library unit packages, but shall support CHARACTER and NATIONAL CHARACTER respectively when the caller language of the externally-invoked procedure is Ada.</description>
+   </impDef>
+   <impDef>
+      <code>IV230</code>
+      <description>The C data type that corresponds to an SQL character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IV231</code>
+      <description>The COBOL native character set (which is mapped to PIC X).</description>
+   </impDef>
+   <impDef>
+      <code>IV232</code>
+      <description>The KIND attribute of the Fortran type CHARACTER that corresponds to an SQL character string type.</description>
+   </impDef>
+   <impDef>
+      <code>IV246</code>
+      <description>The timestamp type of the timestamp defined as part of a descriptor or context when the type is not otherwise specified.</description>
+   </impDef>
+   <impDef>
+      <code>IV247</code>
+      <description>The contents of the type descriptor of a vector-only numeric coordinate type.</description>
+   </impDef>
+   <impDef>
+      <code>IV249</code>
+      <description>The declared type (variable-length character string or character large object) of the result of a vector serialize function.</description>
+   </impDef>
+   <impDef>
+      <code>IV250</code>
+      <description>The declared approximate numeric types of the results of a vector distance function or a vector norm function.</description>
+   </impDef>
+   <impDef>
+      <code>IV251</code>
+      <description>The declared exact numeric type of the result of a vector dimension count function.</description>
+   </impDef>
+   <impDef>
+      <code>IV252</code>
+      <description>The character string representation of a coordinate of a vector value.</description>
+   </impDef>
+   <impDef>
+      <code>IW061</code>
+      <description>The manner in which an SQL-session user identifier is determined when an SQL-session is initiated, unless the session is initiated using a connect statement.</description>
+   </impDef>
+   <impDef>
+      <code>IW109</code>
+      <description>The mechanisms by which SQL-client modules are created or destroyed.</description>
+   </impDef>
+   <impDef>
+      <code>IW110</code>
+      <description>The manner in which an association between SQL-client modules and compilation units is specified, including the possible requirement for execution of some implementation-defined statements.</description>
+   </impDef>
+   <impDef>
+      <code>IW113</code>
+      <description>The method of invoking direct SQL statements, the method of raising conditions as a result of direct SQL statements, the method of accessing diagnostic information, and the method of returning the results.</description>
+   </impDef>
+   <impDef>
+      <code>IW114</code>
+      <description>The manner in which after the execution of the program identified by the routine body of an external routine, if the parameter passing style of that routine is GENERAL, then the values for output parameters (if any), the value (if any) returned from the program, the value of the SQLSTATE, and the value of the message text (if any) are obtained.</description>
+   </impDef>
+   <impDef>
+      <code>IW123</code>
+      <description>How an SQL-implementation uses an SQL-server name to determine the location, identity, and communication protocol required to access the SQL-server and initiate an SQL-session.</description>
+   </impDef>
+   <impDef>
+      <code>IW124</code>
+      <description>The mechanism and rules by which an SQL-implementation determines whether a call to an externally-invoked procedure is the last call within the last active SQL-client module and the mechanism and rules by which an SQL-implementation determines whether a direct invocation of SQL is the last execution of a direct SQL statement.</description>
+   </impDef>
+   <impDef>
+      <code>IW127</code>
+      <description>The manner how an active SQL-agent is bound to a single SQL-client.</description>
+   </impDef>
+   <impDef>
+      <code>IW140</code>
+      <description>The privileges necessary to execute the schema definition.</description>
+   </impDef>
+   <impDef>
+      <code>IW141</code>
+      <description>The privileges necessary to execute the role definition.</description>
+   </impDef>
+   <impDef>
+      <code>IW149</code>
+      <description>The algorithm to define equivalence of JSON objects.</description>
+   </impDef>
+   <impDef>
+      <code>IW154</code>
+      <description>The method by which SQL-server name or the keyword DEFAULT is used to determine the appropriate SQL-server.</description>
+   </impDef>
+   <impDef>
+      <code>IW167</code>
+      <description>The method and time of binding of a parameter to the schema that includes an external routine.</description>
+   </impDef>
+   <impDef>
+      <code>IW208</code>
+      <description>The mechanism by which at least one of the character sets UTF8, UTF16, and UTF32 is provided when the SQL-implementation claims conformance to Feature T061, “UCS support”, but does not claim conformance to Feature F461, “Named character sets”.</description>
+   </impDef>
+   <impDef>
+      <code>IW209</code>
+      <description>The method of returning of returning the result of a direct select statement: multiple rows.</description>
+   </impDef>
+   <impDef>
+      <code>IW210</code>
+      <description>The mechanism used to produce an SQL-client module from an embedded SQL host program.</description>
+   </impDef>
+   <impDef>
+      <code>IW213</code>
+      <description>How the result of a cast operation is derived in the case one of the types of the vectors is a vector-only numeric coordinate type.</description>
+   </impDef>
+</implementationDefined>

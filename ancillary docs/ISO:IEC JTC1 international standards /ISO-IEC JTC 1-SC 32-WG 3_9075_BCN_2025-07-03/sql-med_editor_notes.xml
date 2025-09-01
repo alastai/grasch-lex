@@ -1,0 +1,3458 @@
+<EditorNotes>
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+
+   This is a list of all problems in this document that are not yet resolved.
+
+Possible       
+Problem         Category
+Number         ==========
+=======
+
+MED-000  (pseudo-PP showing Editor's Notes convention)
+MED-076         *Opportunity*
+MED-077        **Major Technical**
+
+
+MED-0           *Opportunity*
+MED-0       **Major Technical**
+MED-0        *Minor Technical*
+
+
+======= Largest SQL/MED Possible Problem number so far *** MED-077 *** =======
+======= This is the end of the problem number list =======
+
+-->
+
+
+<!-- This is a template for Major Technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPmed" number="MED-" severity="major" realm="technical">
+
+<reference><specref ref="med_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor technical Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPmed" number="MED-" severity="minor" realm="technical">
+
+<reference><specref ref="med_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Major Editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPmed" number="MED-" severity="major" realm="editorial">
+
+<reference><specref ref="med_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for minor editorial Possible Problems -->
+<!-- ======================================= -->
+<!--
+<PP id="PPmed" number="FND-" severity="minor" realm="editorial">
+
+<reference><specref ref="med_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for Language Opportunities -->
+<!-- ======================================= -->
+<!--
+<LO id="PPmed" number="MED-">
+
+<reference><specref ref="med_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPmed000" number="MED-000" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editor. 
+</source>
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point
+that requires particular attention, highlighted thus: 
+</para>
+
+<ednote>Text of the problem.
+</ednote>
+
+</problem>
+
+</PP>
+
+
+<LO id="PPmed076" number="MED-076">
+
+<reference>No specific location
+</reference>
+
+<source>Email from Stefan Plantikow, 2020-07-29.
+</source>
+
+<problem>
+
+<para>The definition of URLs used by SQL/MED needs to be reviewed and modernized. 
+In particular, the following areas would benefit from being reviewed:
+</para>
+
+<ulist>
+
+<item>Support for HTTPS.
+</item>
+
+<item>Support for IPv6 in host numbers. 
+Drafted grammar for this may be found in GQL EWD V5.1.
+</item>
+
+<item>Considering support for RFC 3987 or a general switch to the
+newer <quote>URL Living Standard</quote> produced by WHATWG.
+</item>
+
+</ulist>
+
+</problem>
+
+</LO>
+
+
+<PP id="PPmed077" number="MED-077" severity="major" realm="technical">
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:GYD-024.
+</source>
+
+<problem>
+
+<para>Functionality, if any, to support the Vector type needs to be provided.
+
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<!-- Placed closed PPs and LOs after this line
+
+<comment>Resolved by WG3:DRS-146, reported by WG3:SIA-046R1</comment>
+<PP id="PPmed067" number="MED-067" severity="major" realm="technical">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+WG3:DRS-119
+</source>
+
+
+<problem>
+
+<para>
+Foreign tables can currently be referenced in <kw>CHECK</kw> constraints or in
+assertions, but this is a bug, as they should not be referenceable from
+such constraints. 
+</para>
+
+</problem>
+
+</PP>
+
+
+<COMMENT>===Resolved by WG3:RTM-057R1 and Email from Paul Cotton, 22 Dec 1999
+
+<BOX>(<EMPHASIS>(MED-001\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-001))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, <REFERENCE>(med_return_codes\FULL)
+           
+<LE>Note at: None.
+           
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+          
+<LE>Possible Problem:
+          
+<P>
+This CLI subclause defines the value of the return value of CLI functions.
+The equivalent subclause in YGJ-067 is in proposal item 2.2.8.3. The
+specification in YGJ-067 does not describe:
+           
+<LIST>(UNNUMBERED\===)
+          
+<LE>How diagnostics are returned. 
+          
+<LE>What handle contains the diagnostics information if more than one is
+input to the routine. 
+           
+<ENDLIST>  
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:RTM-057R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-002\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-002))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, No particular location. 
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+This CLI subclause defines the structure of the CLI diagnostics area and
+the rules for its populations depending on the return code from a routine.
+In addition rules for processing of the diagnostics area are also defined.
+
+WG3:YGJ-067 does not propose any diagnostics area and therefore there is no
+defined way for exceptions which occur in a wrapper to be returned to the
+SQL-server.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:RTM-057R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-004\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-004))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, No particular location. 
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+The CLI subclause named <QUOTE>(<LB>CLI routine> invocation) defines the
+rules for the invocation of CLI routines. The equivalent subclause in
+WG3:YGJ-067 is in proposal item 2.12.2. Completeness of the proposal item
+2.12.2 needs to be checked with the CLI rules.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:RTM-057R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-005\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-005))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+CLI Subclause 5.8, "FETCH USING clause", describes how SQL-data is fetched
+by the CLI.  WG3:YGJ-067 is very incomplete in this area and many of the
+rules implied directly and indirectly by this CLI subclause must be
+considered.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:RTM-057R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-006\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-006))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+CLI Subclause 5.10, "Binary large object retrieval", describes a subroutine that is used to 
+retrieve binary large object values using the CLI paradigm of three parameters: a buffer, a buffer 
+length  and a resultant length.  WG3:YGJ-067 has no equivalent subclause.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:RTM-057R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-007\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-007))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+CLI Subclause 5.15, "Data type correspondences", defines the mapping of
+SQL data types for the languages that can be used to implement CLI.  There
+is no equivalent material in WG3:YGJ-067 since the proposal does not
+consider the problem of how to map to different language implementations.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:RTM-057R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-008\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-008))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_conform\FULL). 
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+WG3:YGJ-067 does not propose a conformance specification.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:RTM-057R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-010\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-010))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_generic_options\FULL). 
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+In proposal part 2.7.1, proposed <REFERENCE>(med_generic_options\FULL),
+there should be Syntax Rules to state that the valid identifiers and
+charater string literals are <impDef annex="no" code="None"/>. 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:RTM-057R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-011\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-011))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+The rules that make the presence or absence of generic options descriptors
+<impDef annex="no" code="None"/> should be deleted.  There are multiple occurrences
+of this throughout the proposal [of WG3:YGJ-067R1]. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:RTM-066 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-014\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-014))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P09-09.02, SQL/MED, <REFERENCE>(med_coldef\FULL)
+
+<LE>Note at: None.
+
+<LE>Source: Matsue meetings, 1999-05
+
+
+<LE>Possible Problem:
+
+<P>
+The BNF for <datalink control definition> allows for at least 32 different
+combinations of keyword options.  The syntax rules proposed in WG3:YGJ-083
+and accepted during the CD editing meeting in Matsue, May 1999, reduce
+this number to somewhere between 17 and 31.  Yet these SRs are followed by
+an informative note explaining that the valid combinations are given in
+<REFERENCE>(med_valid_datalink_file_opts\FULL), which has just 8 entries. 
+Either the informative note should be converted to normative text, or SRs
+should be added to restrict the combinations to precisely those given in
+<REFERENCE>(med_valid_datalink_file_opts\FULL).  This assumes, of course,
+that <REFERENCE>(med_valid_datalink_file_opts\FULL), correctly reflects
+the original intent.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:RTM-065 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-015\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-015))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P09-09, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: Peter Pistor, Matsue meetings, 1999-05
+
+
+<LE>Possible Problem:
+
+<P>
+During the discussion of WG3:YGJ-082, the question was raised whether the
+proposal in section 2.5 resulted in a GR that covered the case of updating
+a null DATALINK value by a non-null value.
+
+<P>
+A follow-on question was raised: Is a null value allowed in a DATALINK
+column? 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:RTM-099R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-032\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-032))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:RTM-017R3/X3H2-99-255R2, Comment WG3-P09-006
+
+
+<LE>Language Opportunity:
+
+<P>
+The foreign-data wrapper needs to specify when and how the implicitly
+allocated handles come into existence and when and how they go away. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:RTM-099R1 and Email from Paul Cotton, 22 Dec 1999
+
+<P>
+<BOX>(<EMPHASIS>(MED-041\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-041))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source:  WG3:RTM-058R2/X3H2-99-314R1, amended by WG3:RTM-099R1/X3H2-99-398R1
+
+
+<LE>Language Opportunity:
+
+<P>
+TransmitForeignRequest() does not return information to allow the
+SQL-server to distinguish between several categories of statements; it is
+not even certain that this information should be returned.  An affirmative
+decision must be made about this requirement; if the information is
+needed, then changes to TransmitForeignRequest will be required. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BHX-095/H2-2000-259R1
+
+<P>
+<BOX>(<EMPHASIS>(MED-020\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-020))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_foreign_table_def\FULL)
+
+<LE>Note at: Access Rules. 
+
+<LE>Source: WG3:RTM-115/X3H2-99-???
+
+
+<LE>Possible Problem:
+
+<P>
+Don't we want a rule allowing <impDef annex="no" code="None"/> access rules for
+creating a foreign table?  Also, we may want to require a USAGE privilege
+for foreign servers, since creating a foreign table implies a dependency
+on a foreign server (which in turn depends on a foreign-data wrapper). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:BHX-095/H2-2000-259R1
+
+<P>
+<BOX>(<EMPHASIS>(MED-022\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-022))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_tables\FULL)
+
+<LE>Note at: First paragraph
+
+<LE>Source: WG3:RTM-115/X3H2-99-???
+
+
+<LE>Possible Problem:
+
+<P>
+We need to decide if a foreign table is a new variety of table, a new
+subvariety of base table, or perhaps something else (Steve Cannan has
+suggested that it is a kind of derived table).  Note that currently
+<REFERENCE>(med_def_not_conv\FULL), and <REFERENCE>(med_conc\FULL),
+disagree on this point.  This will require a thorough trawl for 'base
+table' and related terms to insure completeness.  Some issues identified
+by a preliminary scan were:
+
+<LIST>(UNNUMBERED\===)
+
+<LE>Access Rules for tables (<LB>table reference>) and columns (<LB>column
+reference>)
+
+<LE>Notions of updatable table and column, and read-only table
+
+<LE>The subclauses "Effect of deleting/inserting replacing rows in a base
+table/derived table"
+
+<LE>Nullability rules
+
+<LE>Functional dependency rules
+
+<LE>Generally underlying tables
+
+<LE>Table hierarchies
+
+<LE>Constraints and triggers
+
+<ENDLIST>
+
+<P>
+See WG3:RTM-119r2 for a fuller discussion. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BHX-101/H2-2000-258
+
+<P>
+<BOX>(<EMPHASIS>(MED-019\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-019))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_foreign_server_def\FULL)
+
+<LE>Note at: AR1)
+
+<LE>Source: WG3:RTM-115/X3H2-99-???
+
+
+<LE>Possible Problem:
+
+<P>
+The access rules for <LB>foreign server definition> are completely 
+<impDef annex="no" code="None"/>.  
+Yet creating a foreign server imposes a dependency on a foreign-data wrapper.  
+Normally we require a USAGE privilege (or the like) when creation of one object creates a dependency
+on another object. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BHX-101/H2-2000-258
+
+<P>
+<BOX>(<EMPHASIS>(MED-017\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-017))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_alter_foreign_wrapper\FULL)
+
+<LE>Note at: AR1)
+
+<LE>Source: WG3:RTM-115/X3H2-99-???
+
+
+<LE>Possible Problem:
+
+<P>
+The Access Rules for <LB>alter foreign-data wrapper statement> and
+<LB>drop foreign-data wrapper statement> presume that a foreign-data
+wrapper has an owner, a notion not supported by the descriptor of a foreign-data wrapper, by the 
+<LB>foreign-data wrapper definition> statement, or the Information and Definition Schemas. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BHX-101/H2-2000-258
+
+<P>
+<BOX>(<EMPHASIS>(MED-018\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-018))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_alter_foreign_server\FULL)
+
+<LE>Note at: AR1)
+
+<LE>Source: WG3:RTM-115/X3H2-99-???
+
+
+<LE>Possible Problem:
+
+<P>
+The Access Rules for <LB>alter foreign server statement> and <LB>drop
+foreign server statement> presume that a foreign server has an owner.  Is
+this the same as the <LB>authorization identifier> in <LB>foreign server
+definition>?  This does not appear to be suitable, because the
+<LB>authorization identifier> is currently optional, and the Description
+in Definition Schema says that it is the authorization identifier used
+when connecting to the foreign server, which is a separate notion. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BHX-148R1/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(MED-029\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-029))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment WG3-P09-007
+
+
+<LE>Possible Problem:
+
+<P>
+It is not clear whether passing pointers via the ANY data type, as used in
+SQL/CLI, is appropriate, since it does not work for Java. 
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-003\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BHX-148R1/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(MED-039\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-039))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-058R2/X3H2-99-314R1, amended by WG3:RTM-099R1/X3H2-99-398R1
+
+
+<LE>Possible Problem:
+
+<P>
+Throughout the SQL/MED specification, there are many references to phrases
+such as "of the prepared statement", "...allocated SQL-statement, ", "NEST
+DESCRIPTOR", "POPULATE WPD", etc.  This was caused by adapting Rules from
+other parts of ISO/IEC 9075 (e.g., 9075-3).  Unfortunately, this incorrect
+terminology cannot yet be corrected because the required infrastructure is
+not yet in place.  Whenever sufficient infrastructure is in place to
+permit definition of appropriate terminology, these Rules must be
+revisited and corrected. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BHX-148R1/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(MED-042\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-042))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-099R1/X3H2-99-398R1
+
+
+<LE>Possible Problem:
+
+<P>
+The wrapper row descriptor and server row descriptor are added to deal
+with the result column values that flow from a foreign-data wrapper to the
+SQL-server after the foreign-data wrapper has successfully executed a request from the SQL-server. 
+The current specification needs to be checked to see that these descriptors are used correctly 
+during query processing. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BHX-148R1/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(MED-043\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-043))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-099R1/X3H2-99-398R1
+
+
+<LE>Possible Problem:
+
+<P>
+The wrapper parameter descriptor and server parameter descriptor are added
+to deal with dynamic parameters in SQL statements that flow from the
+SQL-sewrver to a foreign-data wrapper.  The current specification needs to
+be checked to see that these descriptors are used correctly during query
+processing. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:BHX-148R1/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(MED-037\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-037))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P09, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:RTM-056R2/X3H2-99-291R2, amended by WG3:RTM-099R1/X3H2-99-398R1
+
+
+<LE>Possible Problem:
+
+<P>
+The SQL/MED document should be examined to ensure that when one routine
+invokes another routine in some General Rule, every input argument is
+specified correctly for that invocation. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:BHX-109R1/H2-2000-309R1
+
+<P>
+<BOX>(<EMPHASIS>(MED-021\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-021))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_user_mapping_def\FULL)
+
+<LE>Note at: Access Rules
+
+<LE>Source: WG3:RTM-115/X3H2-99-???
+
+
+<LE>Possible Problem:
+
+<P>
+Don't we want a rule allowing <impDef annex="no" code="None"/> access rules for
+creating a user mapping? 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+
+<COMMENT>===Resolved by WG3:BHX-134/H2-2000-___
+
+<P>
+<BOX>(<EMPHASIS>(MED-040\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-040))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-058R2/X3H2-99-314R1, amended by WG3:RTM-099R1/X3H2-99-398R1
+
+
+<LE>Possible Problem:
+
+<P>
+WG3:RTM-058R2/X3H2-99-314R4, proposal part 2.18 proposes the GetOptions
+routine.  There is a requirement to retrieve capabilities and other
+information about tables, columns, and possibly other schema objects.
+There are several possible solutions to this requirement, one of which is
+to use the table reference handle, and another of which may be to use the
+InputHandle parameter to identify a foreign server, then use the
+OptionsObject parameter to provide the (fully-qualified?) name of some
+schema object about which information is desired.  It is not yet certain
+what the best solution is. 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by Editing Meeting MED FDC1 2000, NLD-P09-016
+
+<P>
+<BOX>(<EMPHASIS>(MED-025\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-025))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Possible Problem
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment USA-P09-039
+
+
+<LE>Possible Problem:
+
+<P>
+Abstract tables as defined in this Subclause contain no provisions for
+requesting subsets of the data provided by the access routines. There are
+no provisions for projection capability to limit the columns being
+returned. There are no provisions for selection capability to limit the
+rows being returned. What is required is a mechanism by which the access
+routines can specify what actions should be performed on the data, the
+shape any input data to the routine (e.g. for the insert or update
+routine), and the shape of any output data of the routine (e.g. for the
+iterate routine).
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by Editing Meeting MED FDC1 2000, NLD-P09-017
+
+<P>
+<BOX>(<EMPHASIS>(MED-026\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-026))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment USA-P09-040
+
+
+<LE>Possible Problem:
+
+<P>
+Abstract tables as defined in this Subclause do not contain any grouping
+capability. As a result, even if accessor routines can be intelligent
+enough to perform complex manipulations, such as joins or unions, there is
+no mechanism for this type of operation to be passed to the accessor
+function. What is required is a mechanism to allow abstract tables to be
+grouped together and to allow complex operations involving multiple
+abstract tables to be optionally passed to and evaluated by the accessor
+functions.
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by Editing Meeting MED FDC1 2000, NLD-P09-018
+
+<P>
+<BOX>(<EMPHASIS>(MED-027\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-027))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment USA-P09-042
+
+
+<LE>Possible Problem:
+
+<P>
+<LB>abstract table definition>: There is no way to specify a restriction
+or a projection on the data to be selected from the abstract table. This
+interface requires that all data always be returned.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by Editing Meeting MED FDC1 2000, NLD-P09-021
+
+<P>
+<BOX>(<EMPHASIS>(MED-030\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-030))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment WG3-P09-010
+
+
+<LE>Possible Problem:
+
+<P>
+The foreign-data wrapper interface should be extended to provide the
+capability for updating of foreign tables and managing transactions
+involving foreign tables. 
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-031\BOLD)) and <BOX>(<EMPHASIS>(MED-016\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by Editing Meeting MED FDC1 2000, NLD-P09-022
+
+<P>
+<BOX>(<EMPHASIS>(MED-031\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-031))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment WG3-P09-015 and DEU-P09-027
+
+
+<LE>Possible Problem:
+
+<P>
+It was noted that the foreign table mechanism (as specified by
+WG3:YGJ-067R1) is a read-only mechanism.  It is highly desirable to extend
+this mechanism to allow for update, insert, and delete operations
+affecting foreign tables. 
+
+<P>
+No semantics are given for DML operations on abstract tables.  Subclauses
+are needed along the lines of those in Foundation, headed "Effect of
+inserting/replacing/deleting...", plus extensions to existing DML
+Subclauses in Foundation that will cause these new Subclauses to be
+invoked when appropriate. 
+
+<P>
+If and when this LO is addressed, committing changes in different foreign
+tables (possibly residing on different foreign servers) needs obviously to
+be addressed. 
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-030\BOLD)) and <BOX>(<EMPHASIS>(MED-016\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+<COMMENT>===Resolved by WG3:HEL-066R1/H2-2000-529
+
+<P>
+<BOX>(<EMPHASIS>(MED-003\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-003))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_cli_routine\FULL). 
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+This CLI subclause defines the CLI routines and how their parameters and
+implementation language is defined. The equivalent subclause in
+WG3:YGJ-067 is in proposal item 2.11.1. There are several items in the CLI
+subclause not covered by proposal item 2.11.1:
+
+<LIST>(UNNUMBERED\===)
+
+<LE>The specification of By-value and By-reference variants of the
+routines. 
+
+<LE>The need for the ANY data type in the parameter list. 
+
+<ENDLIST>
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-044\BOLD)) and
+<BOX>(<EMPHASIS>(MED-009\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+<COMMENT>===Resolved by WG3:HEL-066R1/H2-2000-529
+
+<P>
+<BOX>(<EMPHASIS>(MED-009\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-009))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:YGJ-067R1 = X3H2-99-153R2, as amended
+
+
+<LE>Possible Problem:
+
+<P>
+CLI uses a generic AllocHandle routine which allocates one handle in the
+context of another handle.  This model was preferred to having an "Alloc"
+routine for each handle type since it permits a lighter-weight API. The
+interface proposed in WG3:YGJ-067 might also consider this approach of
+achieving an API with [fewer] routines in it.
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-003\BOLD)) and
+<BOX>(<EMPHASIS>(MED-044\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+<COMMENT>===Resolved by WG3:HEL-066R1/H2-2000-529
+
+<P>
+<BOX>(<EMPHASIS>(MED-038\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-038))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-058R2/X3H2-99-314R1, amended by WG3:RTM-099R1/X3H2-99-398R1
+
+
+<LE>Possible Problem:
+
+<P>
+The specific details of an XML document, or XML document fragment, used to
+communicate certain information between the SQL-server and the
+foreign-data wrapper have not yet been determined. 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+<COMMENT>===Resolved by WG3:HEL-066R1/H2-2000-529
+
+<P>
+<BOX>(<EMPHASIS>(MED-024\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-024))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P09-09, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:RTM-123/X3H2-99-???
+
+
+<LE>Possible Problem:
+
+<P>
+Check Subclauses <REFERENCE>(med_add_basic_coldef\FULL),
+<REFERENCE>(med_drop_basic_coldef\FULL), and
+<REFERENCE>(med_drop_foreign_table\FULL). 
+
+<P>
+Check WG3:RTM-119R2 Possible Problems. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+<COMMENT>===Resolved by WG3:HEL-066R1/H2-2000-529
+
+<P>
+<BOX>(<EMPHASIS>(MED-036\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-036))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P09, <REFERENCE>(med_actions\FULL)
+
+<LE>Note at: <REFERENCE>(med_actions\FULL)
+
+<LE>Source: WG3:RTM-056R2/X3H2-99-291R2, amended by WG3:RTM-099R1/X3H2-99-398R1
+
+
+<LE>Possible Problem:
+
+<P>
+The SQL/MED document should be examined to ensure that the rules correctly
+reflect the execution flow depicted in <REFERENCE>(med_actions\FULL) (and
+vice versa).  In particular, every routine listed in the table must be
+referred to by some rule in the document.  Conversely, every routine
+listed in <LB>foreign-data wrapper routine> must appear at least once in
+<REFERENCE>(med_actions\FULL). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+<COMMENT>===Resolved by WG3:HEL-066R1/H2-2000-529
+
+<P>
+<BOX>(<EMPHASIS>(MED-044\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-044))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source:  First CD ballot, 1999, comment WG3-P09-004
+
+
+<LE>Language Opportunity:
+
+<P>
+The <LB>CLI routine> subclause of SQL/MED defines the CLI routines and how
+their parameters and implementation language is defined.  There are
+several items from the SQL/CLI-original Subclause not covered in the
+SQL/MED Subcluase, including the specification of By-value and
+By-reference variants of the routines.
+
+<P>
+In addition, SQL/CLI uses a generic AllocHandle routine that allocates one
+handle in the context of another handle.  This model was preferred to
+having an "Alloc" routine for each handle type, since it permits a lighter-weight API.  
+The interface proposed in WG3:YGJ-067 might also
+consider this approach of achieving an API with fewer routines in it. 
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-003\BOLD)) and
+<BOX>(<EMPHASIS>(MED-009\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+<COMMENT>===Resolved by WG3:HEL-066R1/H2-2000-529
+
+<P>
+<BOX>(<EMPHASIS>(MED-023\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-023))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P09-09, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: Paul Cotton, in response to WG3:RTM-093/X3H2-99-???
+
+
+<LE>Possible Problem:
+
+<P>
+WG3:RTM-066 proposed changes to SQL/MED to replace the Syntax Rule that
+describes what <LB>datalink file control option>s can be used when the
+<LB>datalink control definition> FILE LINK CONTROL is specified.  These
+constraints should be reflected in
+<REFERENCE>(med_columns_base_table\FULL). 
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:E3C-039 = H2-2002-352
+
+<P>
+<BOX>(<EMPHASIS>(MED-048\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-048))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source:  WG3:BHX-171
+
+
+<LE>Language Opportunity:
+
+<P>
+Support must be added to ISO/IEC 9075-10, Object Language Bindings, for
+the DATALINK data type.  See also <BOX>(<EMPHASIS>(OLB-020\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:E3C-030 = H2-2002-347
+
+<P>
+<BOX>(<EMPHASIS>(MED-050\BOLD)) The following Language Opportunity has
+been noted (was formerly Possible Problem <BOX>(<EMPHASIS>(MED-025\BOLD))):
+<X>(<BOX>(MED-050))
+<X>(<BOX>(MED-025))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment USA-P09-039
+
+
+<LE>Possible Problem:
+
+<P>
+Abstract tables as defined in this Subclause contain no provisions for
+requesting subsets of the data provided by the access routines. There are
+no provisions for projection capability to limit the columns being
+returned. There are no provisions for selection capability to limit the
+rows being returned. What is required is a mechanism by which the access
+routines can specify what actions should be performed on the data, the
+shape any input data to the routine (e.g. for the insert or update
+routine), and the shape of any output data of the routine (e.g. for the
+iterate routine).
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:E3C-030 = H2-2002-347
+
+<P>
+<BOX>(<EMPHASIS>(MED-051\BOLD)) The following Language Opportunity has
+been noted (was formerly Possible Problem <BOX>(<EMPHASIS>(MED-026\BOLD))):
+<X>(<BOX>(MED-051))
+<X>(<BOX>(MED-026))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment USA-P09-040
+
+
+<LE>Possible Problem:
+
+<P>
+Abstract tables as defined in this Subclause do not contain any grouping
+capability. As a result, even if accessor routines can be intelligent
+enough to perform complex manipulations, such as joins or unions, there is
+no mechanism for this type of operation to be passed to the accessor
+function. What is required is a mechanism to allow abstract tables to be
+grouped together and to allow complex operations involving multiple
+abstract tables to be optionally passed to and evaluated by the accessor
+functions.
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:E3C-030 = H2-2002-347
+
+<P>
+<BOX>(<EMPHASIS>(MED-052\BOLD)) The following Language Opportunity has
+been noted (was formerly Possible Problem <BOX>(<EMPHASIS>(MED-027\BOLD))):
+<X>(<BOX>(MED-052))
+<X>(<BOX>(MED-027))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment USA-P09-042
+
+
+<LE>Possible Problem:
+
+<P>
+<LB>abstract table definition>: There is no way to specify a restriction
+or a projection on the data to be selected from the abstract table. This
+interface requires that all data always be returned.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-074R1/H2-2002-___
+
+<P>
+<BOX>(<EMPHASIS>(MED-057\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-057))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Editorial
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_objectid\FULL)
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:PER-164/H2-2001-???
+
+
+<LE>Possible Problem:
+
+<P>
+The text "200n" must be replaced by the correct year at the FCD Editing
+Meeting. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-040R3/H2-2002-___
+
+<P>
+<BOX>(<EMPHASIS>(MED-049\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-049))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source:  MED FDC1 2000, GBR-P09-
+
+
+<LE>Language Opportunity:
+
+<P>
+SQL-awareness is not well defined; leaving the problem to
+<impDef annex="no" code="None"/> options does not assista standardization. 
+
+<P>
+A suggested approach to a solution: Extend the DDL to allow specification
+of server capabilities (e.g., read, insert, delete, update where key=xxx,
+filter).  [The UK proposes] that "filter" may mean to return a superset of
+target rows, so the SQL server should filter rows, too. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-137/H2-2002-500
+
+<P>
+<BOX>(<EMPHASIS>(MED-062\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-062))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_func\FULL)
+
+<LE>Note at: SR 1)
+
+<LE>Source: Email from Fred Zemke, 2001-11-05, from MED:2000 FCD1 ballot
+comment CAN-P09-017
+
+
+<LE>Possible Problem:
+
+<P>
+<REFERENCE>(med_func\FULL), SR 1) amends/replaces a rule that started off
+in <LB>set function specification> and has been replaced in the TC.  The
+TC changes uses some excellent phrases (e.g., LOB-ordered, array-ordered,
+etc.), but there does not seem to be a corresponding phrase for
+"DATALINK-ordered" to use here.  Help?  
+
+<P>
+The editor discovered this problem when applying MED FDC12000,
+CAN-P09-017.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-137/H2-2002-500
+
+<P>
+<BOX>(<EMPHASIS>(MED-063\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-063))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_func\FULL)
+
+<LE>Note at: SR 2)
+
+<LE>Source: Email from Fred Zemke, 2001-11-05, from the Editor's mind
+
+
+<LE>Possible Problem:
+
+<P>
+<REFERENCE>(med_func\FULL), SR 2) references a Rule that
+used to be in <REFERENCE>(func\FULL), of
+Foundation but that (because of the changes made by SQL/OLAP, both as an amendment to 
+Foundation:1999 and by means of the merger with
+Foundation:200n in WG3:RTM-054R2/X3H2-99-310R3) has now moved to a new
+Subclause: <REFERENCE>(fnd_aggregate_func\FULL), in Foundation, where
+it is now SR7)g)i)).  Thus, we see yet again the effects of the law of
+unintended consequences - SQL/MED will have to be restructured to take
+into account the SQL/OLAP restructuring of SQL/Foundation. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-119/H2-2002-483
+
+<P>
+<BOX>(<EMPHASIS>(MED-012\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-012))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: First CD ballot (1999), DEU-P09-025
+
+
+<LE>Language Opportunity:
+
+<P>
+We are not sure that it is advisable to permit triggers to be defined on
+abstract tables.  Since the value of an abstract table might be subject to
+change via operations external to the SQL-server, it might happen, for
+example, that an abstract table changes from being non-empty to being
+empty without any execution of the ON DELETE trigger defined for that
+table.  If it is decided to permit such triggers, then we think it would
+be better to say so explicitly, perhaps in <REFERENCE>(med_tables\FULL),
+rather than let the reader wonder whether this question has been
+considered by the developers of the standard. 
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-035\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-119/H2-2002-483
+
+<P>
+<BOX>(<EMPHASIS>(MED-013\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-013))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: First CD ballot (1999), DEU-P09-026
+
+
+<LE>Language Opportunity:
+
+<P>
+Table constraints are not permitted on abstract tables and yet assertions,
+and table constraints on base tables, are apparently permitted to
+reference abstract tables.  This is inconsistent. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-119/H2-2002-483
+
+<P>
+<BOX>(<EMPHASIS>(MED-016\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-016))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: Peter Pistor, Matsue meetings, 1999-05
+
+
+<LE>Language Opportunity:
+
+<P>
+It was noted that the foreign table mechanism (as specified by
+WG3:YGJ-067R1) is a read-only mechanism.  It is highly desirable to extend
+this mechanism to allow for update, insert, and delete operations
+affecting foreign tables. 
+
+<P>
+If and when this LO is addressed, committing changes in different foreign
+tables (possibly residing on different foreign servers) needs obviously to
+be addressed. 
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-030\BOLD)) and <BOX>(<EMPHASIS>(MED-031\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-119/H2-2002-483
+
+<P>
+<BOX>(<EMPHASIS>(MED-034\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-034))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:RTM-017R3/X3H2-99-255R2, Comment WG3-P09-012
+
+
+<LE>Language Opportunity:
+
+<P>
+It is desirable to be able to specify constraints on foreign tables.
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-119/H2-2002-483
+
+<P>
+<BOX>(<EMPHASIS>(MED-035\BOLD)) The following Language Opportunity has
+been noted:
+<X>(<BOX>(MED-035))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None.
+
+<LE>Source: WG3:RTM-017R3/X3H2-99-255R2, Comment WG3-P09-013
+
+
+<LE>Language Opportunity:
+
+<P>
+It is desirable to be able to specify triggers in foreign tables.
+
+<P>
+See also. <BOX>(<EMPHASIS>(MED-012\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-119/H2-2002-483
+
+<P>
+<BOX>(<EMPHASIS>(MED-053\BOLD)) The following Language Opportunity has
+been noted (was formerly Possible Problem <BOX>(<EMPHASIS>(MED-030\BOLD))):
+<X>(<BOX>(MED-053))
+<X>(<BOX>(MED-030))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment WG3-P09-010
+
+
+<LE>Possible Problem:
+
+<P>
+The foreign-data wrapper interface should be extended to provide the
+capability for updating of foreign tables and managing transactions
+involving foreign tables. 
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-031\BOLD)) and <BOX>(<EMPHASIS>(MED-016\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-119/H2-2002-483
+
+<P>
+<BOX>(<EMPHASIS>(MED-054\BOLD)) The following Language Opportunity has
+been noted (was formerly Possible Problem <BOX>(<EMPHASIS>(MED-031\BOLD))):
+<X>(<BOX>(MED-054))
+<X>(<BOX>(MED-031))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Major Technical
+
+<LE>Reference: P09, SQL/MED
+
+<LE>Note at: None
+
+<LE>Source: WG3:RTM-017R3, Comment WG3-P09-015 and DEU-P09-027
+
+
+<LE>Possible Problem:
+
+<P>
+It was noted that the foreign table mechanism (as specified by
+WG3:YGJ-067R1) is a read-only mechanism.  It is highly desirable to extend
+this mechanism to allow for update, insert, and delete operations
+affecting foreign tables. 
+
+<P>
+No semantics are given for DML operations on abstract tables.  Subclauses
+are needed along the lines of those in Foundation, headed "Effect of
+inserting/replacing/deleting...", plus extensions to existing DML
+Subclauses in Foundation that will cause these new Subclauses to be
+invoked when appropriate. 
+
+<P>
+If and when this LO is addressed, committing changes in different foreign
+tables (possibly residing on different foreign servers) needs obviously to
+be addressed. 
+
+<P>
+See also <BOX>(<EMPHASIS>(MED-030\BOLD)) and <BOX>(<EMPHASIS>(MED-016\BOLD)). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:DRS-119/H2-2002-483
+
+<P>
+<BOX>(<EMPHASIS>(MED-060\BOLD)) The following Language Opportunity has been noted:
+<X>(<BOX>(MED-060))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Minor Technical
+
+<LE>Reference: P09, SQL/MED, No particular location
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:YYJ-016 (USA-P09-017)
+
+
+<LE>Language Opportunity:
+
+<P>
+MED currently provides read-only access to foreign-data servers. 
+Applications often require the ability to update data at those servers
+(including the ability to create new data and delete existing data). 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:ZSH-152 = H2-2003-152
+
+<P>
+<BOX>(<EMPHASIS>(MED-059\BOLD)) The following Possible Problem has been noted:
+<X>(<BOX>(MED-059))
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, No specific location
+
+<LE>Note at: None. 
+
+<LE>Source: CD1/2001, WG4-P09-001
+
+
+<LE>Language Opportunity:
+
+<P>
+The SQL/MM Still Image WD makes use of the DATALINK type, as specified in
+SQL/MED, for an attribute of a user-defined type.  According to SQL/MED,
+any implementation of SQL/MM Still Image must choose a set of
+<impDef annex="no" code="None"/> values for the link control options on that
+attribute of the user-defined type, which cannot then be varied by any
+user of the implementation. 
+
+<P>
+Creating a table from the user-defined type is not an appropriate solution
+in this situation.  WG3 urges WG4 to consider how this restriction on the
+use of the DATALINK type for an attribute may be removed from SQL/MED. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:ZSH-152 = H2-2003-152
+
+<P>
+<BOX>(<EMPHASIS>(MED-068\BOLD)) The following Language Opportunity has
+<X>(<BOX>(MED-068))
+been noted:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_checkdef\FULL)
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:DRS-146
+
+
+<LE>Language Opportunity:
+
+<P>
+SR1) (as proposed by WG3:DRS-145) attempts to prohibit a constraint from
+referencing a foreign table.  It fails to cater for the case of a constraint that includes 
+an invocation of an SQL-invoked routine that uses
+EXECUTE to execute a prepared statement that references a foreign table. 
+
+<P>
+Presumably it would also be necessary to prohibit invocations of functions
+defined in SQL/CLI and SQL/OLB, where such invocations involve references
+to foreign tables. 
+
+<P>
+A similar problem exists with <REFERENCE>(med_assert\FULL). 
+
+<P>
+It appears that a run-time exception would be needed to implement the
+required restriction. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<COMMENT>===Resolved by WG3:ZSH-152 = H2-2003-152
+
+<P>
+<BOX>(<EMPHASIS>(MED-069\BOLD)) The following Language Opportunity has
+<X>(<BOX>(MED-069))
+been noted:
+
+<LIST>(SIMPLE)
+
+<LE>Severity: Language Opportunity
+
+<LE>Reference: P09, SQL/MED, <REFERENCE>(med_checkdef\FULL)
+
+<LE>Note at: None. 
+
+<LE>Source: WG3:DRS-146
+
+
+<LE>Language Opportunity:
+
+<P>
+SR1) (as proposed by WG3:DRS-145) attempts to prohibit a constraint from referencing 
+a foreign table.  
+It fails to cater for the case of a constraint that includes an invocation of an external routine 
+whose body references an <LB>embedded SQL host program> whose source code includes 
+an <LB>embedded SQL statement> that references a foreign table. 
+
+<P>
+It has been suggested that a change to the definition of general
+containment could address this, but that idea has been rejected in the
+past, which explains those GRs of
+<REFERENCE>(fnd_routine_invocation\FULL), in Part 2 that specify the
+raising of exceptions on attempts to execute prohibited statements.  It is
+not clear that an implementation has access to the source code of external
+routines that are invoked in, for example, constraint definitions.  Nor is
+it clear how an implementation might be able to spot the error if it
+arises in a change to the source program after any constraint definitions
+referencing it have been processed. 
+
+<P>
+A similar problem exists with <REFERENCE>(med_assert\FULL). 
+
+<P>
+It appears that a run-time exception would be needed to implement the
+required restriction. 
+
+
+<LE>Proposed Solution:
+
+<P>
+None provided with comment. 
+
+<ENDLIST>
+
+<ENDCOMMENT>
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPmed028" number="MED-028">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+WG3:RTM-017R3/X3H2-99-255R2, Comment WG3-P09-005
+</source>
+
+
+<problem>
+
+<para>
+Acceptance of WG3:YGJ-082 made it prohibited to link a single external
+file more than once.  This has been identified as an undesirable
+restriction in at least some situations. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPmed033" number="MED-033">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+WG3:RTM-017R3/X3H2-99-255R2, Comment WG3-P09-011
+</source>
+
+
+<problem>
+
+<para>
+It is desirable to provide the capability to deal with character sets and
+collations for character string columns of foreign tables. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPmed045" number="MED-045">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+WG3:BHX-148/H2-2000-___
+</source>
+
+
+<problem>
+
+<para>
+WG3:BHX-148R1 proposed
+the use of only UTF-16 to communicate character strings between the
+SQL-server and the foreign-data wrapper.  This limitation could profitably
+be relaxed to permit UTF-8 and/or others, including <impDef annex="no" code="None"/>
+character sets. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPmed046" number="MED-046">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+WG3:BHX-108R1/H2-2000-___ and FCD1 2000, GBR-P09-041
+</source>
+
+
+<problem>
+
+<para>
+Generic options &mdash; some requirements are obvious and should be
+standardized &mdash; for example the name by which the <emph>FT</emph> is known
+at the <emph>FS</emph> may be different from that in the SQL Environment.
+If the server is SQL-aware, then the foreign table could be defined by 
+a <BNF name="query specification"/>.  There is a need for discussion of the
+costs/benefits/opportunities/mechanisms for further standardization. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPmed047" number="MED-047">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+FCD1 2000, GBR-P09-043, FCD1 2000, GBR-P09-001, and FCD1 2000, GBR-P09-002
+</source>
+
+
+<problem>
+
+<para>
+There is a need to acknowledge current implementations: Make <kw>FOREIGN</kw> <kw>DATA</kw>
+<kw>WRAPPER</kw> optional and add options USE <kw>INTERFACE</kw> <BNF name="name"/> and 
+USE PROTOCOL <BNF name="name"/>
+</para>
+
+<para>
+Use of Standard Interfaces.
+</para>
+
+<para>
+Where standard interfaces already exist for accessing foreign data, it
+should be possible to reference the interfaces without requiring Wrappers.
+</para>
+
+<para>
+Example:
+</para>
+
+<para>
+Let A and B be RDBMS Vendors; Let X and Y be video specialists. If AX is
+an implementation of Video using SQL MED and a wrapper WX designed by X
+and <kw>BY</kw> is an implementation of Video using SQL MED and a wrapper WY
+designed by Y then SQL MED does not guarantee that the WY wrapper will
+work with A or that WX will work with B or that a user of AX can easily
+port their application to <kw>BY</kw>.
+</para>
+
+<para>
+Suppose both X and Y support a standard interface VAPI, then it would be
+possible to write wrappers that map to VAPI. This might achieve some
+ability to change video suppliers, but only if the wrapper writers use the
+VAPI interface with portability in mind. Actual interchangeability is most
+likely if the wrappers are written by the vendors A and B and supported by
+them. But in this case the SQL-MED interface becomes an internal one of no
+interest to users.
+</para>
+
+<para>
+Use of Protocols.
+</para>
+
+<para>
+Where foreign data is remote and protocols exist for accessing the remote
+servers, it should be possible to reference the protocols without
+requiring wrappers.
+</para>
+
+<para>
+Example:
+</para>
+
+<para>
+Let A and B be RDBMS vendors; Let AP and BP be protocols used for
+accessing remote servers by A and B.
+</para>
+
+<para>
+Most vendors have a proprietary protocol and many have also implemented
+their competitors' protocols too. Hence there is already a well defined
+means of accessing remote data.
+</para>
+
+<para>
+If these protocols are implemented through wrappers then
+interchangeability of components could be achieved at three levels:
+</para>
+
+<ulist>
+
+<item>SQL-MED
+</item>
+
+<item>A protocol API
+</item>
+
+<item>The protocol itself
+</item>
+
+</ulist>
+
+<para>
+Of these, the SQL-MED interface is the most complex, the latest to appear
+and the most incomplete. It seems to add no value.
+</para>
+
+<para>
+We think it would be more appropriate to let the foreign server supporting
+the foreign tables be directly associated with the Protocol
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPmed055" number="MED-055">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+FCD1 2000, AUS-P09-007
+</source>
+
+
+<problem>
+
+<para>
+There are a number of places in the 'Sequence of actions during foreign
+server request executions' where the same routine may be called multiple
+times to return information about options etc. In addition there are some
+places where Multiple routines are called each returning one item of
+information at a time from about the particular object.
+</para>
+
+<para>
+Each of these calls requires a 'context' switch in most operating systems
+which may in some circumstances end up incurring a substantial operating
+system overhead in terms of CPU etc.
+</para>
+
+<para>
+Thus it would be preferable if there were additional alternative methods
+by which this information could be passed between the SQL Server and the
+foreign wrapper routines.
+</para>
+
+<para>
+One mechanism may be to use a structure for various components that may be
+passed directly to the wrapper routine. Alternatively more than one item
+of information may be returned by a single call
+</para>
+
+<para>
+Thus for example, in addition to the following routines
+</para>
+
+<ulist>
+
+<item>GetServerName
+</item>
+
+<item>GetServerType
+</item>
+
+<item>GetServerVersion
+</item>
+
+</ulist>
+
+<para>
+a single routine GetServerInfo may return all the information. 
+</para>
+
+<para>
+Or in the case where multiple calls would be made to a single routine (for example 
+GetWrapperOption) to return multiple options either an array
+or a formatted XML document may be used so that a single call may return
+multiple options. 
+</para>
+
+<para>
+We would like to see some discussion on the possibility of adding optimal
+multi-return-value procedures to reduce the possible overhead of
+excessive multiple procedural calls. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment>Resolved by WG3:WLG-091R1</comment>
+<LO id="PPmed056" number="MED-056">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+FCD1 2000, AUS-P09-007
+</source>
+
+
+<problem>
+
+<para>
+The <kw>SQLSTATE</kw> corresponding to <raise class="HV" subclass="00M"/> is not sufficiently 
+precise or informative.
+More specific diagnostic information is required. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<PP id="PPmed072" number="MED-072" severity="minor" realm="technical">
+
+<reference>
+P09, SQL/MED, <extref part="09" ref="med_rtn_mappings_bstbl"/>
+</reference>
+
+
+<source>
+DCOR/2004, WG3-P09-009
+</source>
+
+
+<problem>
+
+<para>
+The Constraint ROUTINE_MAPPINGS_PRIMARY_KEY requires that the 
+value of the column ROUTINE_MAPPING_NAME is unique across all
+catalogs in a given DEFINITION_SCHEMA. This seems not be 
+reasonable.
+</para>
+
+</problem>
+
+</PP>
+
+
+
+<comment>Resolved by WG3:ZSH-079, reported by WG3:SIA-046R1</comment>
+<LO id="PPmed058" number="MED-058">
+
+<reference>
+P09, SQL/MED, <extref part="09" ref="med_model"/>
+</reference>
+
+
+<source>
+CD1/2001, GBR-P09-110 and GBR-P09-100
+</source>
+
+
+<problem>
+
+<para>
+<extref part="09" ref="med_model"/>, is about components and interfaces.  The only 
+definition of 'interfaces' is in Part 2 and is for a structured type, but
+the term is used in Part 2 mainly to refer to descriptor areas. Let us
+accept a general definition for interface as the means by which two
+components (which are  processes) can interact.  
+</para>
+
+<para>
+Figure 1 is supposed to be about interfaces, but it only shows components
+and lines that indicate an information flow between the components and
+hence the need for an interface.  I assume that the MED box is a component part of an SQL server 
+that supports MED capabilities. 
+</para>
+
+<para>
+Note that the FT boxes are not components in the same sense as the other
+boxes (i.e. they are data rather than a process), so 'The foreign server
+interfaces with foreign tables ...' is not appropriate (apart from the use
+of the verb!).  Further, these boxes should not be labeled foreign tables
+because in general they are not tables &mdash; they can be any kind of data
+and only become tables when materialised within an SQL server. 
+</para>
+
+<para>
+Table 42 is described in the previous sentence as documenting the
+components shown in Figure 1, and the left hand column lists the
+components, so the title, Legend for SQL/MED interfaces, is misleading.
+There are also serious errors in the Description entries, and it is not
+clear whether there is meant to be a difference in the use of interface
+'with' or 'to'.  (Why not be consistent and say 'provide an interface for'
+on the part of the component providing a service?) 
+</para>
+
+<slist>
+
+<item>An SQL client, as defined and used in Parts 1 and 2, does not have an interface with a user.  
+</item>
+
+<item>An SQL server, as shown on Figure 1, does not have an interface to
+foreign-data-wrappers (that is provided by MED) but does have an interface to an SQL client. 
+</item>
+
+<item>An MED component does have an interface to foreign-data-wrappers. 
+</item>
+
+<item>Foreign-data-wrappers have an interface to MED and are a client of
+foreign servers, but do not interface with external data. 
+</item>
+
+<item>Foreign servers do not 'interface' with external data, but they do
+with foreign data wrappers. 
+</item>
+
+</slist>
+
+<para>
+In considering Figure 2, note the definition f) from Clause 3.1: 
+</para>
+
+<para>
+f) foreign server: A named server, external to the SQL environment, .....
+</para>
+
+<para>
+According to this definition, the foreign server should not be included in
+the SQL environment. 
+</para>
+
+<para>
+In addition, all parts of the Information Schema should only be available
+to the SQL Server, since it is managing the data, i.e. flows F8 and F9
+should be removed.  A foreign data wrapper obtains this information via
+calls to MED.  The foreign server may have a quite separate Information
+Schema (and not necessarily an SQL one) for managing its own (external)
+data, and provides metadata from it as necessary for a foreign data
+wrapper and hence to the SQL server.  It has no interest in getting it
+back! 
+</para>
+
+<para>
+Figure 2 is inconsistent with Figure 1 in that F6 should be associated
+with the MED component since it is MED data. 
+</para>
+
+<para>
+We have not examined Table 43 in detail so there could be further problems
+with it. 
+</para>
+
+<para>
+Figure 2 &mdash; why is the Foreign Server drawn inside the SQL Environment.
+If the server is inside why is the foreign data outside? 
+</para>
+
+<para>
+And why is S-fs (also, what is S-fs?) inside the Information Schema? 
+</para>
+
+<para>
+What is the relationship between the illustrated components and the
+DataLinker? 
+</para>
+
+<para>
+DataLinker is a significant new SQL entity and should appear in some
+SQLMED model. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPmed061" number="MED-061">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+WG3:YYJ-016 (USA-P09-018)
+</source>
+
+
+<problem>
+
+<para>
+MED's facility for communicating between the "local" SQL-server and the
+foreign-data wrapper can be significantly enhanced by providing the
+ability to pass pre-parsed SQL statements or fragments of them from the
+SQL-server to the foreign-data wrapper.  The most obvious choice for
+representing this information is in an XML format of some sort, preferably
+a parse tree or analog. 
+</para>
+
+</problem>
+
+</LO>
+
+
+<comment>Resolved with no action by WG3:URC-074R1</comment>
+<LO id="PPmed066" number="MED-066">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+
+<source>
+WG3:DRS-119
+</source>
+
+
+<problem>
+
+<para>
+SQL/MED currently only provides read-only access for foreign tables.
+However, there are applications which require the ability to update data
+stored in those tables, this includes the ability to create new data and
+to delete existing data (UID - update, insert, delete).
+</para>
+
+<para>
+If and when this LO is addressed, changes applied to different foreign
+tables (possibly residing on different foreign servers) need to be handled
+according to ACID principles (atomicity, consistency, isolation,
+durability).
+</para>
+
+<para>
+Additionally, Subclauses are needed along the lines of those in
+Foundation, headed "Effect of inserting/ replacing/ deleting...", plus
+extensions to existing DML Subclauses in Foundation that will cause these
+new Subclauses to be invoked when appropriate, to handle UID operations
+correctly.
+</para>
+
+<para>
+Furthermore, the underlying foreign-data wrapper interface needs to be
+enhanced to enable UID.
+</para>
+
+<para>
+It might also be desirable to be able to specify constraints as well as
+triggers on foreign tables. 
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<comment></comment>
+<PP id="PPmed067" number="MED-067" severity="minor" realm="technical">
+
+<reference>
+P09, SQL/MED, <extref part="09" ref="med_rtn_mapping_options_view"/>
+</reference>
+
+
+<source>
+DCOR/2004, WG3-P09-003
+</source>
+
+
+<problem>
+
+<para>
+The View ROUTINE_MAPPING_OPTIONS has no privilege check and no 
+restriction to the actual catalog.
+</para>
+
+</problem>
+
+</PP>
+
+
+
+<comment></comment>
+<PP id="PPmed068" number="MED-068" severity="minor" realm="technical">
+
+<reference>
+P09, SQL/MED, <extref part="09" ref="med_rtn_mappings_view"/>
+</reference>
+
+
+<source>
+DCOR/2004, WG3-P09-004
+</source>
+
+
+<problem>
+
+<para>
+The View ROUTINE_MAPPINGS has no privilege check and no 
+restriction to the actual catalog.
+</para>
+
+</problem>
+
+</PP>
+
+
+
+<comment></comment>
+<PP id="PPmed069" number="MED-069" severity="minor" realm="technical">
+
+<reference>
+P09, SQL/MED, <extref part="09" ref="med_user_map_options_view"/>
+</reference>
+
+
+<source>
+DCOR/2004, WG3-P09-005
+</source>
+
+
+<problem>
+
+<para>
+The View USER_MAPPING_OPTIONS has no privilege check and no 
+restriction to the actual catalog.
+</para>
+
+</problem>
+
+</PP>
+
+
+
+<comment></comment>
+<PP id="PPmed070" number="MED-070" severity="minor" realm="technical">
+
+<reference>
+P09, SQL/MED, <extref part="09" ref="med_user_mappings_view"/>
+</reference>
+
+
+<source>
+DCOR/2004, WG3-P09-006
+</source>
+
+
+<problem>
+
+<para>
+The View USER_MAPPINGS has no privilege check and no 
+restriction to the actual catalog.
+</para>
+
+</problem>
+
+</PP>
+
+<comment>Resolved by paper wlg085; Joern Bartels</comment>
+<PP id="PPmed071" number="MED-071" severity="minor" realm="technical">
+
+<reference>P09, SQL/MED, <extref part="09" ref="med_dtd_base_table"/>
+</reference>
+
+
+<source>DCOR/2004, WG3-P09-008
+</source>
+
+
+<problem>
+
+<para>The Constraint DATA_TYPE_DESCRIPTOR_DATA_TYPE_CHECK_COMBINATIONS 
+of the table DATA_TYPE_DESCRIPTOR is out of synch with its definition 
+in Part 11 (Schemata).
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment></comment>
+<PP id="PPmed065" number="MED-065" severity="major" realm="editorial">
+
+<reference>
+P09, SQL/MED, <extref part="09" ref="med_cast"/>
+</reference>
+
+
+<noteAt>
+<extref part="09" ref="med_cast"/>, SR 2)
+</noteAt>
+
+
+<source>
+FCD1/2002, USA-P09-041
+</source>
+
+
+<problem>
+
+<para>
+The table in SR 2) is an inappropriate way to add new data types to the
+casting table in ISO/IEC 9075-2.  A different approach would be preferable
+to avoid problems caused by adding data types in multiple incremental
+parts (e.g., <kw>DATALINK</kw> in SQL/MED and <kw>XML</kw> in SQL/XML).  
+</para>
+
+<para>
+A better approach would be to use a new SR 2) that says something like
+"Add a new rightmost column to the table following SR 6) in ISO/IEC
+9075-2", followed by a table that looks something like this:
+</para>
+
+<code>
+<BNF name="data type" part="02"/>
+<emph>SD</emph> of             <BNF name="data type" part="02"/> of <emph>TD</emph>
+<BNF name="value
+expression" part="02"/>   DL
+    EN        N
+    AN        N
+...
+    RW        M
+</code>
+
+<para>
+Then another new SR would be specified, something like this: "Add a new
+row at the end of the table following SR 6) in ISO/IEC 9075-2"
+</para>
+
+<code>
+<BNF name="data type" part="02"/>
+<emph>SD</emph> of                <BNF name="data type" part="02"/> of <emph>TD</emph>
+<BNF name="value expression" part="02"/>
+             EN  AN  VC  FC  D   T   TS  YM  DT  BO UDT  CL  BL  RT  CT  RW  DL
+      DL     N   N   N   N   N   N   N   N   N   N   N   N   N   N   N   N   Y
+</code>
+
+<para>
+This approach has the advantage of correctly inserting a column and a row,
+rather than replacing the entire table. 
+</para>
+
+<para>
+However, it leaves the disadvantage that insertion of a column and a row
+by SQL/MED and another by SQL/XML causes two cells of the table to be
+unspecified...the cell concerning casting of the data type added by
+SQL/MED to and from the data type added by SQL/XML. 
+</para>
+
+<para>
+That disadvantage might be resolved by adding (e.g., in Foundation) a statement that such 
+"unspecified cells" are implicitly filled with "N", so
+that no such casting is supported. 
+
+</para>
+
+</problem>
+
+</PP>
+
+
+
+<PP id="PPmed074" number="MED-074" severity="major" realm="technical">
+
+<reference>
+P09, SQL/MED, <extref part="09" ref="med_implicit_cursor"/>
+</reference>
+
+
+<noteAt>
+<itemref type="General Rule" ref="med_implicit_cursor_GR_datevalfunc"/>
+(<specref ref="med_implicit_cursor_PPmed_074"/>)
+</noteAt>
+
+
+<source>
+WG3:LCY-025 = DM32.2-2009-00093R3
+</source>
+
+
+<problem>
+
+<para>
+WG3:LCY-025 took no action on the instance of general containment in
+<extref part="09" ref="med_implicit_cursor"/>,
+<itemref type="General Rule" ref="med_implicit_cursor_GR_datevalfunc"/>.
+This rule is related to SQL/Foundation
+<extref part="02" ref="fnd_datevalfunc"/>, 
+<extitemref part="02" type="General Rule" ref="fnd_datevalfunc_GR_evalsimul"/>,
+and <extref part="02" ref="fnd_effopencurs"/>, 
+<extitemref part="02" type="General Rule" ref="fnd_effopencurs_GR_sameinstant2"/>,
+which also contain unaddressed instances of general containment. 
+When those rules are addressed, this one should be as well. 
+</para>
+
+</problem>
+
+</PP>
+
+
+
+<comment></comment>
+<PP id="PPmed064" number="MED-064" severity="major" realm="editorial">
+
+<reference>
+P09, SQL/MED, No specific location
+</reference>
+
+<source>
+FCD1/2002, DEU-P09-980
+</source>
+
+
+<problem>
+
+<para>
+A look at <extref part="09" ref="med_conc"/>, and associated Subclauses seems to
+suggest that many columns defined in <extref part="09" ref="med_sit_base_tables"/>,
+that are presently optional (meaning that a value of null is permitted)
+should be mandatory.  Thus, a careful examination of all column
+definitions is required, and some of them may require <kw>NOT</kw> <kw>NULL</kw> constraints
+to be added. 
+</para>
+
+</problem>
+
+</PP>
+
+
+<PP id="PPmed073" number="MED-073" severity="major" realm="technical">
+
+<reference>
+P09, SQL/MED, <extref part="09" ref="med_tabref"/>
+</reference>
+
+
+<noteAt>
+<itemref type="General Rule" ref="med_tabref_GR_notonly"/>
+(<specref ref="med_tabref_PPmed073"/>)
+</noteAt>
+
+
+<source>
+WG3:LCY-025 = DM32.2-2009-00093R3
+</source>
+
+
+<problem>
+
+<para>
+The General Rules of <extref part="09" ref="med_tabref"/>, have not been adapted to the
+advent of system-versioned tables in Foundation. It would be helpful if there was
+some way to immunize these rules against changes in the modified rules in
+Foundation.
+</para>
+
+</problem>
+
+</PP>
+
+
+<comment> Resolved by WG3:MEM-034R1</comment>
+<comment>WG3:KOA-030 = DM32.2-2011-00098</comment>
+<PP id="PPmed075" number="MED-075" severity="major" realm="technical">
+
+<reference>
+P09, SQL/MED,
+<extref part="09" ref="med_esyn"/>
+</reference>
+
+
+<source>
+WG3:KOA-030 = DM32.2-2011-00098
+</source>
+
+
+<problem>
+
+<para>
+The semantics of data link variables in the embedded languages
+(<BNF name="Ada datalink variable"/>, <emph>etc</emph>.) is not specified. 
+The <BNF name="host parameter data type" part="02"/> of these variables is not clear
+(is it <BNF name="datalink type"/>? is it <kw>VARCHAR</kw>?) 
+If these function like <kw>SQL</kw> <kw>TYPE</kw> <kw>IS</kw> <sym>UDT</sym> <kw>AS</kw> 
+<sym>PT</sym>,
+where <symdef>UDT</symdef> is a <BNF name="path-resolved user-defined type name" part="02"/> and
+<symdef>PT </symdef> is a <BNF name="predefined type" part="02"/>, then the answer would be
+<kw>VARCHAR</kw>. 
+But in that case, there are no rules specifying how the contents
+of the character string in the host program relates to a data link.
+</para>
+
+</problem>
+
+</PP>
+
+-->
+
+</EditorNotes>
