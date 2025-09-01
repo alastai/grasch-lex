@@ -1,0 +1,134 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://iso.org/wg3/gql-defs",
+    "$comment": "tag:iso.org,2023:JTC1.SC32.WG3:JSONSchemaDatabaseDialect:databaseTypes",
+    "gql.date": {
+        "databaseType": "gql.date",
+        "type": "string",
+        "pattern": "^(0[1-9]|[12][0-9]|3[01])[- /.]"
+    },
+    "gql.string": {
+        "databaseType": "gql.string",
+        "type": "string"
+    },
+    "gql.uint8": {
+        "databaseType": "gql.uint8",
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+    },
+    "gql.uint16": {
+        "databaseType": "gql.uint16",
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 65535
+    },
+    "gql.uint32": {
+        "databaseType": "gql.uint32",
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+    },
+    "gql.uint64": {
+        "databaseType": "gql.uint64",
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+    },
+    "gql.uint128": {
+        "databaseType": "gql.uint128",
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 340282366920938463463374607431768211455
+    },
+    "gql.uint256": {
+        "databaseType": "gql.uint256",
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 115792089237316195423570985008687907853269984665640564039457584007913129639935
+    },
+    "gql.int8": {
+        "databaseType": "gql.int8",
+        "type": "integer",
+        "minimum": -128,
+        "maximum": 127
+    },
+    "gql.int16": {
+        "databaseType": "gql.int16",
+        "type": "integer",
+        "minimum": -32768,
+        "maximum": 32767
+    },
+    "gql.int32": {
+        "databaseType": "gql.int32",
+        "type": "integer",
+        "minimum": -2147483648,
+        "maximum": 2147483647
+    },
+    "gql.int64": {
+        "databaseType": "gql.int64",
+        "type": "integer",
+        "minimum": -9223372036854775808,
+        "maximum": 9223372036854775807
+    },
+    "gql.int128": {
+        "databaseType": "gql.int128",
+        "type": "integer",
+        "minimum": -170141183460469231731687303715884105728,
+        "maximum": 170141183460469231731687303715884105727
+    },
+    "gql.int256": {
+        "databaseType": "gql.int256",
+        "type": "integer",
+        "minimum": -57896044618658097711785492504343953926634992332820282019728792003956564819968,
+        "maximum": 57896044618658097711785492504343953926634992332820282019728792003956564819967
+    },
+    "gql.bool": {
+        "databaseType": "gql.bool",
+        "anyOf": [
+            {
+                "enum": [
+                    null,
+                    "true",
+                    "false"
+                ]
+            },
+            {
+                "type": "boolean"
+            }
+        ]
+    },
+    "gql.number": {
+        "databaseType": "gql.number",
+        "anyOf": [
+            {
+                "enum": [
+                    "+inf",
+                    "-inf",
+                    "NaN"
+                ]
+            },
+            {
+                "type": "number"
+            }
+        ]
+    },
+    "gql.float16": {
+        "databaseType": "gql.float16",
+        "type": "number",
+        "minimum": -99999.99999,
+        "maximum": 99999.99999
+    },
+    "gql.float32": {
+        "databaseType": "gql.float32",
+        "type": "number",
+        "minimum": -99999999.99999999,
+        "maximum": 99999999.99999999
+    },
+    "gql.float64": {
+        "databaseType": "gql.float64",
+        "type": "number",
+        "minimum": -99999999999.99999999999,
+        "maximum": 99999999999.99999999999
+    }
+}

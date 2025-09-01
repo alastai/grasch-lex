@@ -1,0 +1,14 @@
+{
+    "id": "434324",
+    "first_name": "A N",
+    "last_name": "Onymous",
+    "shipping_address": {
+        "street_address": "10 Drowning St", 
+        "city": "London",
+        "state": "sad"
+    },
+    "date_of_birth": "31-12-2000",
+    "promotion": 15,
+    "discount": 10,
+    "vip": "false"
+}

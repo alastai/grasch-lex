@@ -1,0 +1,23 @@
+{
+  "$comment": "WG3 needs to ask ISO for a bit of its namespace",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iso.org/wg3/gql-meta-schema",
+  "$vocabulary": {
+    "https://json-schema.org/draft/2020-12/vocab/core": true,
+    "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+    "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
+    "https://json-schema.org/draft/2020-12/vocab/validation": true,
+    "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+    "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
+    "https://json-schema.org/draft/2020-12/vocab/content": true,
+    "tag:iso.org,2023:JTC1.SC32.WG3:JSONSchemaDatabaseDialect": true
+  },
+  "allOf": [
+    {
+      "properties": {
+        "labels": "array"
+      },
+      "$ref": "https://json-schema.org/draft/2020-12/schema#"
+    }
+  ]
+}

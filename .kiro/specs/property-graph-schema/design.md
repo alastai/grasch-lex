@@ -670,4 +670,234 @@ class SchemaProcessingError(GraschError):
 - **Serialization roundtrips**: Preserve semantics across formats
 - **Path resolution**: Catalog path operations maintain consistency
 
+## GQL Data Type System Analysis
+
+### Corrected GQL Terminology
+
+**IMPORTANT TERMINOLOGY CORRECTION**: Prior to this analysis, "datatype" was incorrectly used as a synonym for "property value type". This fundamental error must be corrected:
+
+#### **Datatype (GQL Umbrella Term)**
+- **Definition**: The type of any kind of data that can be stored in a graph
+- **Scope**: ALL types in GQL that describe sets of values
+- **Includes**: 
+  - Property Value Types (STRING, INTEGER, BOOLEAN, etc.)
+  - Record Types (structured collections of fields)
+  - Node Types (define node structure and properties)  
+  - Edge Types (define edge structure and properties)
+  - Graph Types (define complete graph schemas)
+  - Label Types
+  - And other GQL type categories
+
+#### **Property Value Type (Specific GQL Term)**
+- **Definition**: The specific type that can be assigned to a property's value
+- **GQL Spec Term**: "value type" (we use the longer, more specific term for clarity)
+- **Scope**: Only the primitive and constructed types for property values
+- **Examples**: STRING, INTEGER, BOOLEAN, DECIMAL, DATE, TIME, LIST, RECORD, etc.
+
+#### **Corrected Type Hierarchy**
+```
+Datatype (GQL umbrella term for all types)
+├── Property Value Types (for property values)
+│   ├── Primitive Types (STRING, INTEGER, BOOLEAN, etc.)
+│   └── Constructed Types (LIST, RECORD, etc.)
+├── Record Types (structured field collections)
+├── Element Types
+│   ├── Node Types (define node structure)
+│   └── Edge Types (define edge structure)
+├── Graph Types (complete graph schemas)
+├── Label Types
+└── Other GQL datatypes...
+```
+
+#### **Grasch-Specific Terms (Not in GQL Spec)**
+- **Content Record Type**: Set of attribute types (labels + property types) in union
+- **Property Record Type**: Set of property types only
+- **Property Type**: Pair of (name, property value type)
+- **Property**: Triple of (name, property value type, value)
+
+### JSON Schema Playground Pattern Analysis
+
+Based on analysis of the `json-schema-playground-main` directory, I've identified two distinct approaches for integrating GQL types with JSON Schema:
+
+#### Pattern 1: Reference-Based Approach (Main Files)
+The primary approach uses JSON Schema `$ref` to reference GQL type definitions stored in a separate definitions file:
+
+**Structure**:
+- **gql-defs**: Central type definition file with `databaseType` property
+- **gql-meta-schema**: Meta-schema for validating GQL type usage
+- **customer-schema**: Example usage referencing types via `$ref`
+
+**Type Definition Pattern**:
+```json
+{
+  "gql.string": {
+    "databaseType": "gql.string",
+    "type": "string"
+  },
+  "gql.int32": {
+    "databaseType": "gql.int32", 
+    "type": "integer",
+    "minimum": -2147483648,
+    "maximum": 2147483647
+  }
+}
+```
+
+**Usage Pattern**:
+```json
+{
+  "first_name": {
+    "type": "string"
+  },
+  "date_of_birth": {
+    "$ref": "https://iso.org/wg3/gql-defs#/gql.date"
+  },
+  "discount": {
+    "$ref": "https://iso.org/wg3/gql-defs#/gql.int8",
+    "minimum": 0,
+    "exclusiveMaximum": 100
+  }
+}
+```
+
+#### Pattern 2: Experimental Implementations (Ruins Directory)
+The ruins directory contains experimental/deprecated implementations that were abandoned during development:
+
+**Experimental Content**:
+- Alternative type definition approaches that didn't work
+- Extended integer types that may be part of complete GQL specification
+- **Special value handling**: `gql.boolSpecial` (unknown/true/false), `gql.floatingPointSpecial` (+inf/-inf/NaN)
+
+**Note**: The "ruins" directory represents abandoned experiments and should not be considered authoritative for GQL type definitions.
+
+### Complete GQL Property Value Types Catalog
+
+Based on analysis of the GQL specification (sections 4.13 and 4.17), here is the **complete catalog of GQL property value types** as defined in the official standard:
+
+#### **Atomic Property Value Types**
+
+| **Base Type Category** | **GQL Property Value Type Keywords** | **JSON Schema Pattern** | **Description** |
+|------------------------|--------------------------------------|-------------------------|-----------------|
+| **Boolean Types** | `BOOL`, `BOOLEAN` | `{"databaseType": "gql.boolean", "type": "boolean"}` | Truth values (true, false, null) |
+| **Character String Types** | `STRING`, `CHAR`, `VARCHAR` | `{"databaseType": "gql.string", "type": "string"}` | Unicode character sequences |
+| **Byte String Types** | `BYTES`, `BINARY`, `VARBINARY` | `{"databaseType": "gql.bytes", "type": "string"}` | Byte sequences |
+| **Signed Exact Numeric Types** | `DECIMAL`, `DEC`, `SMALLINT`, `SMALL INTEGER`, `SIGNED SMALL INTEGER`, `INT`, `INTEGER`, `SIGNED INTEGER`, `INT16`, `INTEGER16`, `SIGNED INTEGER16`, `INT32`, `INTEGER32`, `SIGNED INTEGER32`, `INT64`, `INTEGER64`, `SIGNED INTEGER64`, `INT128`, `INTEGER128`, `SIGNED INTEGER128`, `INT256`, `INTEGER256`, `SIGNED INTEGER256`, `BIGINT`, `BIG INTEGER`, `SIGNED BIG INTEGER` | `{"databaseType": "gql.int32", "type": "integer"}` | Signed exact numbers with various precisions |
+| **Unsigned Exact Numeric Types** | `USMALLINT`, `UNSIGNED SMALL INTEGER`, `UINT`, `UNSIGNED INTEGER`, `UINT16`, `UNSIGNED INTEGER16`, `UINT32`, `UNSIGNED INTEGER32`, `UINT64`, `UNSIGNED INTEGER64`, `UINT128`, `UNSIGNED INTEGER128`, `UINT256`, `UNSIGNED INTEGER256`, `UBIGINT`, `UNSIGNED BIG INTEGER` | `{"databaseType": "gql.uint32", "type": "integer"}` | Unsigned exact numbers with various precisions |
+| **Approximate Numeric Types** | `FLOAT`, `FLOAT16`, `FLOAT32`, `FLOAT64`, `FLOAT128`, `FLOAT256`, `REAL`, `DOUBLE`, `DOUBLE PRECISION` | `{"databaseType": "gql.float64", "type": "number"}` | Floating point numbers with various precisions |
+| **Temporal Instant Types** | `ZONED DATETIME`, `LOCAL DATETIME`, `DATE`, `ZONED TIME`, `LOCAL TIME` | `{"databaseType": "gql.date", "type": "string"}` | Date and time values |
+| **Temporal Duration Types** | `DURATION(YEAR TO MONTH)`, `DURATION(DAY TO SECOND)` | `{"databaseType": "gql.duration", "type": "string"}` | Time intervals |
+| **Vector Types** | `VECTOR` | `{"databaseType": "gql.vector", "type": "array"}` | Vector data (new in GQL) |
+| **Immaterial Types** | `NULL`, `NULL NOT NULL`, `NOTHING` | `{"databaseType": "gql.null", "type": "null"}` | Null and empty types |
+
+#### **Reference Property Value Types**
+
+| **Reference Type Category** | **GQL Keywords** | **Description** |
+|------------------------------|------------------|-----------------|
+| **Binding Table Reference** | `BINDING TABLE`, `TABLE` | References to binding tables |
+| **Graph Reference** | `ANY PROPERTY GRAPH`, `PROPERTY GRAPH`, `ANY GRAPH`, `GRAPH` | References to property graphs |
+| **Node Reference** | `ANY NODE`, `NODE`, `ANY VERTEX`, `VERTEX` | References to graph nodes |
+| **Edge Reference** | `ANY EDGE`, `EDGE`, `ANY RELATIONSHIP`, `RELATIONSHIP` | References to graph edges |
+
+#### **Constructed Property Value Types**
+
+| **Constructed Type** | **Description** | **JSON Schema Pattern** |
+|---------------------|-----------------|-------------------------|
+| **Record Types** | Structured types with named fields | `{"databaseType": "gql.record", "type": "object", "properties": {...}}` |
+| **List Types** | Ordered collections of values | `{"databaseType": "gql.list", "type": "array", "items": {...}}` |
+
+#### **Key Findings from GQL Specification**
+
+1. **INT128, INT256, UINT128, UINT256 are OFFICIAL GQL types** - not LEX extensions
+2. **FLOAT16, FLOAT128, FLOAT256 are also official GQL types**
+3. **Complete temporal type system** with both instant and duration types
+4. **Vector types** are newly added to GQL (mentioned in the specification)
+5. **Reference types** for graphs, nodes, edges, and tables
+6. **Constructed types** include both RECORD and LIST types
+
+### JSON Schema Integration Mapping
+
+The JSON Schema playground demonstrates how to map GQL property value types to JSON Schema patterns:
+
+| **GQL Property Value Type** | **JSON Schema Pattern** | **Value Range/Constraints** |
+|----------------------------|-------------------------|----------------------------|
+| `BOOLEAN` | `{"databaseType": "gql.boolean", "type": "boolean"}` | true, false, null |
+| `STRING` | `{"databaseType": "gql.string", "type": "string"}` | Unicode character sequence |
+| `INT32` | `{"databaseType": "gql.int32", "type": "integer", "minimum": -2147483648, "maximum": 2147483647}` | -2³¹ to 2³¹-1 |
+| `INT64` | `{"databaseType": "gql.int64", "type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807}` | -2⁶³ to 2⁶³-1 |
+| `INT128` | `{"databaseType": "gql.int128", "type": "integer", "minimum": -170141183460469231731687303715884105728, "maximum": 170141183460469231731687303715884105727}` | -2¹²⁷ to 2¹²⁷-1 |
+| `UINT32` | `{"databaseType": "gql.uint32", "type": "integer", "minimum": 0, "maximum": 4294967295}` | 0 to 2³²-1 |
+| `UINT64` | `{"databaseType": "gql.uint64", "type": "integer", "minimum": 0, "maximum": 18446744073709551615}` | 0 to 2⁶⁴-1 |
+| `FLOAT32` | `{"databaseType": "gql.float32", "type": "number"}` | 32-bit IEEE 754 |
+| `FLOAT64` | `{"databaseType": "gql.float64", "type": "number"}` | 64-bit IEEE 754 |
+| `DATE` | `{"databaseType": "gql.date", "type": "string", "pattern": "^(0[1-9]|[12][0-9]|3[01])[- /.]"}` | Calendar date |
+| `RECORD` | `{"databaseType": "gql.record", "type": "object", "properties": {...}}` | Structured type with named fields |
+| `LIST` | `{"databaseType": "gql.list", "type": "array", "items": {...}}` | Ordered collection |
+
+**Note**: The playground correctly implements the official GQL property value types, confirming that INT128, INT256, UINT128, UINT256, and FLOAT16 are part of the standard GQL specification, not extensions.
+
+### Special Value Handling
+
+The playground demonstrates sophisticated handling of special values:
+
+**Boolean Special Values**:
+```json
+{
+  "gql.boolSpecial": {
+    "enum": ["unknown", "true", "false"],
+    "format": "gql.boolSpecial"
+  }
+}
+```
+
+**Floating Point Special Values**:
+```json
+{
+  "gql.floatingPointSpecial": {
+    "enum": ["+inf", "-inf", "NaN"],
+    "format": "gql.floatingPointSpecial"
+  }
+}
+```
+
+### Integration Pattern for Grasch
+
+Based on this analysis, Grasch should implement the following integration pattern:
+
+1. **Property Value Type Identification**: Use `databaseType` property to identify GQL property value types
+2. **JSON Schema Compatibility**: Support both direct type definitions and `$ref` patterns
+3. **Parameter Specification**: Handle type parameters as additional JSON Schema properties
+4. **Complete GQL Support**: Support all GQL property value types as defined in the official specification
+5. **Special Value Support**: Handle null, infinity, and NaN values appropriately
+6. **Validation Integration**: Use JSON Schema validation for property value type checking
+
+**Example Implementation Pattern**:
+```python
+class GQLPropertyValueTypeDefinition:
+    """Represents a GQL property value type with JSON Schema integration"""
+    property_value_type_name: str
+    database_type: str  # e.g., "gql.string", "gql.int32"
+    json_schema_base: Dict[str, Any]
+    parameters: Dict[str, Any]  # Type constraints like maxLength, precision, scale
+
+class GQLPropertyValueTypeRegistry:
+    """Registry of all supported GQL property value types"""
+    def get_property_value_type_definition(self, gql_type: str) -> GQLPropertyValueTypeDefinition
+    def validate_json_schema_compatibility(self, schema: Dict[str, Any]) -> ValidationResult
+    def convert_to_json_schema(self, property_value_type: str, parameters: Dict[str, Any]) -> Dict[str, Any]
+    def apply_type_constraints(self, base_property_value_type: str, constraints: Dict[str, Any]) -> Dict[str, Any]
+
+class PropertyType:
+    """Grasch-specific: Pair of (name, property value type)"""
+    name: str
+    property_value_type: GQLPropertyValueTypeDefinition
+
+class Property:
+    """Grasch-specific: Triple of (name, property value type, value)"""
+    name: str
+    property_value_type: GQLPropertyValueTypeDefinition
+    value: Any  # Must be member of property_value_type (viewing type as set)
+```
+
+This analysis provides the foundation for implementing GQL property value type compatibility in Grasch through the proven JSON Schema integration pattern, using correct GQL terminology where **datatype** is the umbrella term and **property value type** is the specific category for property values.
+
 This design provides a solid foundation for implementing the comprehensive requirements while maintaining flexibility for future extensions and ensuring robust operation in production environments.

@@ -1,0 +1,176 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/type-definitions",
+    "gql.boolSpecial": {
+        "$id": "gql.boolSpecial",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "enum": [
+            "unknown",
+            "true",
+            "false"
+        ],
+        "format": "gql.boolSpecial"
+    },
+    "gql.bool": {
+        "$id": "gql.bool",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "anyOf": [
+            {
+                "$ref": "gql.boolSpecial"
+            },
+            {
+                "type": "boolean"
+            }
+        ],
+        "format": "gql.bool"
+    },
+    "gql.date": {
+        "$id": "gql.date",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "string",
+        "format": "gql.date",
+        "pattern": "^(0[1-9]|[12][0-9]|3[01])[- /.]"
+    },
+    "gql.uint8": {
+        "$id": "gql.uint8",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.uint8",
+        "minimum": 0,
+        "maximum": 255
+    },
+    "gql.uint16": {
+        "$id": "gql.uint16",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.uint16",
+        "minimum": 0,
+        "maximum": 65535
+    },
+    "gql.uint32": {
+        "$id": "gql.uint32",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.uint32",
+        "minimum": 0,
+        "maximum": 4294967295
+    },
+    "gql.uint64": {
+        "$id": "gql.uint64",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.uint64",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+    },
+    "gql.uint128": {
+        "$id": "gql.uint128",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.uint128",
+        "minimum": 0,
+        "maximum": 340282366920938463463374607431768211455
+    },
+    "gql.uint256": {
+        "$id": "gql.uint256",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.uint256",
+        "minimum": 0,
+        "maximum": 115792089237316195423570985008687907853269984665640564039457584007913129639935
+    },
+    "gql.int8": {
+        "$id": "gql.int8",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.int8",
+        "minimum": -128,
+        "maximum": 127
+    },
+    "gql.int16": {
+        "$id": "gql.int16",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.int16",
+        "minimum": -32768,
+        "maximum": 32767
+    },
+    "gql.int32": {
+        "$id": "gql.int32",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.int32",
+        "minimum": -2147483648,
+        "maximum": 2147483647
+    },
+    "gql.int64": {
+        "$id": "gql.int64",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.int64",
+        "minimum": -9223372036854775808,
+        "maximum": 9223372036854775807
+    },
+    "gql.int128": {
+        "$id": "gql.int128",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "format": "gql.int128",
+        "minimum": -170141183460469231731687303715884105728,
+        "maximum": 170141183460469231731687303715884105727
+    },
+    "gql.int256": {
+        "$id": "gql.int256",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "integer",
+        "minimum": -57896044618658097711785492504343953926634992332820282019728792003956564819968,
+        "maximum": 57896044618658097711785492504343953926634992332820282019728792003956564819967
+    },
+    "gql.floatingPointSpecial": {
+        "$id": "gql.floatingPointSpecial",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "enum": [
+            "+inf",
+            "-inf",
+            "NaN"
+        ],
+        "format": "gql.floatingPointSpecial"
+    },
+    "gql.number": {
+        "$id": "gql.number",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "anyOf": [
+            {
+                "$ref": "gql.floatingPointSpecial"
+            },
+            {
+                "type": "number"
+            }
+        ],
+        "format": "gql.number"
+    },
+    "gql.float16": {
+        "$id": "gql.float16",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "number",
+        "format": "gql.float16",
+        "minimum": -99999.99999,
+        "maximum": 99999.99999
+    },
+    "gql.float32": {
+        "$id": "gql.float32",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "number",
+        "format": "gql.float32",
+        "minimum": -99999999.99999999,
+        "maximum": 99999999.99999999
+    },
+    "gql.float64": {
+        "$id": "gql.float64",
+        "$schema": "https://json-schema.org/draft/2020-12/schema#",
+        "type": "number",
+        "format": "gql.float64",
+        "minimum": -99999999999.99999999999,
+        "maximum": 99999999999.99999999999
+    }
+}

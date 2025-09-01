@@ -80,3 +80,12 @@
   - Generate LEX schema output with proper subtyping relationships
   - Create validation and testing framework for transformation accuracy
   - _Requirements: 52.8, 52.9, 52.10, 52.11, 52.19, 52.20, 52.21_
+
+- [ ] 13. Refactor codebase to match grasch-main coding style
+  - Convert all method names from snake_case to camelCase throughout src/grasch/
+  - Add comprehensive type hints to all parameters, return values, and properties
+  - Update class structure to match grasch-main patterns (nested result classes, property access)
+  - Refactor test files to use camelCase method names and strong typing
+  - Update import organization to match style guide
+  - Ensure all magic methods follow grasch-main patterns
+  - _Requirements: Python style consistency with reference implementation_

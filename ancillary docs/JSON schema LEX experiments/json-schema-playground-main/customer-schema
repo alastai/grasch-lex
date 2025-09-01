@@ -1,0 +1,62 @@
+{
+  "$schema": "https://iso.org/wg3/gql-meta-schema",
+  "$id": "https://iso.org/wg3/customer-schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "maxLength": 6
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "shipping_address": {
+      "$ref": "#/$defs/address"
+    },
+    "billing_address": {
+      "$ref": "#/$defs/address"
+    },
+    "date_of_birth": {
+      "$comment": "tag:iso.org,2023:JTC1.SC32.WG3:JSONSchemaDatabaseDialect:databaseTypes",
+      "$ref": "https://iso.org/wg3/gql-defs#/gql.date"
+    },
+    "promotion": {
+      "$ref": "https://iso.org/wg3/gql-defs#/gql.number"
+    },
+    "discount": {
+      "$ref": "https://iso.org/wg3/gql-defs#/gql.int8",
+      "minimum": 0,
+      "exclusiveMaximum": 100
+    },
+    "vip": {
+      "$ref": "https://iso.org/wg3/gql-defs#gql.bool"
+    }
+  },
+  "required": [
+    "first_name",
+    "last_name",
+    "shipping_address",
+    "vip"
+  ],
+  "$defs": {
+    "address": {
+      "$id": "address",
+      "type": "object",
+      "properties": {
+        "street_address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "labels": ["CUSTOMER","CLIENT","PUNTER"]
+}
