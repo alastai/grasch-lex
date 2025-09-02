@@ -900,4 +900,284 @@ class Property:
 
 This analysis provides the foundation for implementing GQL property value type compatibility in Grasch through the proven JSON Schema integration pattern, using correct GQL terminology where **datatype** is the umbrella term and **property value type** is the specific category for property values.
 
+### Intermediate Language Value Types (ILVT) System
+
+**Purpose**: A universal type mapping hub that enables interoperability between GQL, SQL Foundation, JSON Schema extensions, and future type systems through a centralized intermediate representation.
+
+#### **Architecture Overview**
+
+The ILVT system creates a union of all supported value types from different systems and provides bidirectional mappings:
+
+```
+┌─────────────┐    ┌─────────────────────┐    ┌─────────────────┐
+│ GQL Property│◄──►│ Intermediate        │◄──►│ SQL Foundation  │
+│ Value Types │    │ Language Value      │    │ Data Types      │
+└─────────────┘    │ Types (ILVT)        │    └─────────────────┘
+                   │                     │
+┌─────────────┐    │                     │    ┌─────────────────┐
+│ JSON Schema │◄──►│                     │◄──►│ Future Type     │
+│ Extensions  │    │                     │    │ Systems         │
+└─────────────┘    └─────────────────────┘    └─────────────────┘
+```
+
+#### **Core ILVT Type Registry**
+
+| **ILVT Type** | **Category** | **Description** | **Parameters** |
+|---------------|--------------|-----------------|----------------|
+| **Boolean Types** | | | |
+| `boolean` | Logical | Boolean true/false values | - |
+| **Integer Types** | | | |
+| `int8` | Signed Integer | 8-bit signed integer (-128 to 127) | - |
+| `int16` | Signed Integer | 16-bit signed integer | - |
+| `int32` | Signed Integer | 32-bit signed integer | - |
+| `int64` | Signed Integer | 64-bit signed integer | - |
+| `int128` | Extended Integer | 128-bit signed integer | - |
+| `int256` | Extended Integer | 256-bit signed integer | - |
+| `uint8` | Unsigned Integer | 8-bit unsigned integer (0 to 255) | - |
+| `uint16` | Unsigned Integer | 16-bit unsigned integer | - |
+| `uint32` | Unsigned Integer | 32-bit unsigned integer | - |
+| `uint64` | Unsigned Integer | 64-bit unsigned integer | - |
+| `uint128` | Extended Integer | 128-bit unsigned integer | - |
+| `uint256` | Extended Integer | 256-bit unsigned integer | - |
+| **Decimal Types** | | | |
+| `decimal` | Exact Numeric | Arbitrary precision decimal | `precision`, `scale` |
+| `numeric` | Exact Numeric | Alias for decimal | `precision`, `scale` |
+| **Floating Point Types** | | | |
+| `float16` | Binary Float | 16-bit IEEE 754 floating point | - |
+| `float32` | Binary Float | 32-bit IEEE 754 floating point | - |
+| `float64` | Binary Float | 64-bit IEEE 754 floating point | - |
+| `float128` | Extended Float | 128-bit IEEE 754 floating point | - |
+| `float256` | Extended Float | 256-bit IEEE 754 floating point | - |
+| `decfloat32` | Decimal Float | 32-bit decimal floating point | - |
+| `decfloat64` | Decimal Float | 64-bit decimal floating point | - |
+| `decfloat128` | Decimal Float | 128-bit decimal floating point | - |
+| **String Types** | | | |
+| `string` | Character String | Variable-length Unicode string | `max_length` |
+| `char` | Character String | Fixed-length Unicode string | `length` |
+| **Binary Types** | | | |
+| `bytes` | Binary String | Variable-length binary data | `max_length` |
+| `binary` | Binary String | Fixed-length binary data | `length` |
+| **Temporal Types** | | | |
+| `date` | Date/Time | Calendar date (year, month, day) | - |
+| `time` | Date/Time | Time of day without timezone | `precision` |
+| `time_tz` | Date/Time | Time of day with timezone | `precision` |
+| `datetime` | Date/Time | Date and time without timezone | `precision` |
+| `datetime_tz` | Date/Time | Date and time with timezone | `precision` |
+| `duration` | Date/Time | Time interval/duration | `fields` |
+| **Structured Types** | | | |
+| `record` | Structured | Named field collection | `fields` |
+| `array` | Collection | Ordered collection of same type | `element_type`, `max_cardinality` |
+| `multiset` | Collection | Unordered collection with duplicates | `element_type` |
+| **Special Types** | | | |
+| `json` | Semi-Structured | JSON document | - |
+| `vector` | Numeric Array | Fixed-size numeric vector | `dimension`, `element_type` |
+| `null` | Special | Null/missing value | - |
+
+#### **4-Way Type Mapping Tables**
+
+##### **Boolean Types**
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|---------------------------|
+| `boolean` | `BOOLEAN`, `BOOL` | `BOOLEAN` | `data.boolean` |
+
+##### **Integer Types**
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|---------------------------|
+| `int8` | *No GQL equivalent* | *No SQL equivalent* | `data.int8` |
+| `int16` | `SMALLINT`, `INT16` | `SMALLINT` | `data.int16` |
+| `int32` | `INTEGER`, `INT`, `INT32` | `INTEGER`, `INT` | `data.int32` |
+| `int64` | `BIGINT`, `INT64` | `BIGINT` | `data.int64` |
+| `int128` | `INT128` | *No SQL equivalent* | `data.int128` |
+| `int256` | `INT256` | *No SQL equivalent* | `data.int256` |
+| `uint8` | *No GQL equivalent* | *No SQL equivalent* | `data.uint8` |
+| `uint16` | `UINT16` | *No SQL equivalent* | `data.uint16` |
+| `uint32` | `UINT32` | *No SQL equivalent* | `data.uint32` |
+| `uint64` | `UINT64` | *No SQL equivalent* | `data.uint64` |
+| `uint128` | `UINT128` | *No SQL equivalent* | `data.uint128` |
+| `uint256` | `UINT256` | *No SQL equivalent* | `data.uint256` |
+
+##### **Decimal and Floating Point Types**
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|---------------------------|
+| `decimal` | `DECIMAL`, `DEC` | `DECIMAL`, `NUMERIC`, `DEC` | `data.decimal` |
+| `numeric` | `NUMERIC` | `NUMERIC` | `data.numeric` |
+| `float16` | `FLOAT16` | *No SQL equivalent* | `data.float16` |
+| `float32` | `FLOAT`, `REAL`, `FLOAT32` | `REAL` | `data.float32` |
+| `float64` | `DOUBLE`, `DOUBLE PRECISION`, `FLOAT64` | `DOUBLE PRECISION` | `data.float64` |
+| `float128` | `FLOAT128` | *No SQL equivalent* | `data.float128` |
+| `float256` | `FLOAT256` | *No SQL equivalent* | `data.float256` |
+| `decfloat32` | *No GQL equivalent* | `DECFLOAT(7)` | `data.decfloat32` |
+| `decfloat64` | *No GQL equivalent* | `DECFLOAT(16)` | `data.decfloat64` |
+| `decfloat128` | *No GQL equivalent* | `DECFLOAT(34)` | `data.decfloat128` |
+
+##### **String and Binary Types**
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|---------------------------|
+| `string` | `STRING` | `VARCHAR`, `CHARACTER VARYING` | `data.string` |
+| `char` | `CHAR` | `CHAR`, `CHARACTER` | `data.char` |
+| `bytes` | `BYTES` | `BLOB`, `BINARY LARGE OBJECT` | `data.bytes` |
+| `binary` | `BINARY` | `BINARY` | `data.binary` |
+
+##### **Temporal Types**
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|---------------------------|
+| `date` | `DATE` | `DATE` | `data.date` |
+| `time` | `LOCAL TIME` | `TIME` | `data.time` |
+| `time_tz` | `ZONED TIME` | `TIME WITH TIME ZONE` | `data.timeWithTimezone` |
+| `datetime` | `LOCAL DATETIME` | `TIMESTAMP` | `data.datetime` |
+| `datetime_tz` | `ZONED DATETIME` | `TIMESTAMP WITH TIME ZONE` | `data.datetimeWithTimezone` |
+| `duration` | `DURATION` | `INTERVAL` | `data.duration` |
+
+##### **Structured and Special Types**
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|---------------------------|
+| `record` | `RECORD` | `ROW` | `data.record` |
+| `array` | `LIST` | `ARRAY` | `data.array` |
+| `multiset` | *No GQL equivalent* | `MULTISET` | `data.multiset` |
+| `json` | `JSON` | `JSON` | `data.json` |
+| `vector` | `VECTOR` | *No SQL equivalent* | `data.vector` |
+| `null` | `NULL` | `NULL` | `data.null` |
+
+#### **Implementation Framework**
+
+```python
+from enum import Enum
+from dataclasses import dataclass
+from typing import Dict, Optional, Any, Set
+
+class ILVTCategory(Enum):
+    BOOLEAN = "boolean"
+    SIGNED_INTEGER = "signed_integer"
+    UNSIGNED_INTEGER = "unsigned_integer"
+    DECIMAL = "decimal"
+    BINARY_FLOAT = "binary_float"
+    DECIMAL_FLOAT = "decimal_float"
+    STRING = "string"
+    BINARY = "binary"
+    TEMPORAL = "temporal"
+    STRUCTURED = "structured"
+    COLLECTION = "collection"
+    SPECIAL = "special"
+
+@dataclass
+class ILVTTypeDefinition:
+    """Definition of an Intermediate Language Value Type"""
+    ilvt_name: str
+    category: ILVTCategory
+    description: str
+    parameters: Set[str]
+    gql_equivalents: Set[str]
+    sql_equivalents: Set[str]
+    json_schema_extension: str
+    
+class ILVTRegistry:
+    """Central registry for all ILVT type mappings"""
+    
+    def __init__(self):
+        self._types: Dict[str, ILVTTypeDefinition] = {}
+        self._gql_to_ilvt: Dict[str, str] = {}
+        self._sql_to_ilvt: Dict[str, str] = {}
+        self._json_to_ilvt: Dict[str, str] = {}
+        self._initialize_core_types()
+    
+    def register_type(self, type_def: ILVTTypeDefinition) -> None:
+        """Register a new ILVT type with all its mappings"""
+        self._types[type_def.ilvt_name] = type_def
+        
+        # Build reverse mappings
+        for gql_type in type_def.gql_equivalents:
+            self._gql_to_ilvt[gql_type] = type_def.ilvt_name
+        
+        for sql_type in type_def.sql_equivalents:
+            self._sql_to_ilvt[sql_type] = type_def.ilvt_name
+        
+        self._json_to_ilvt[type_def.json_schema_extension] = type_def.ilvt_name
+    
+    def gql_to_ilvt(self, gql_type: str) -> Optional[str]:
+        """Convert GQL property value type to ILVT"""
+        return self._gql_to_ilvt.get(gql_type)
+    
+    def ilvt_to_sql(self, ilvt_type: str) -> Optional[Set[str]]:
+        """Convert ILVT to SQL Foundation types"""
+        type_def = self._types.get(ilvt_type)
+        return type_def.sql_equivalents if type_def else None
+    
+    def ilvt_to_json_schema(self, ilvt_type: str, parameters: Dict[str, Any] = None) -> Optional[Dict[str, Any]]:
+        """Convert ILVT to JSON Schema extension format"""
+        type_def = self._types.get(ilvt_type)
+        if not type_def:
+            return None
+        
+        schema = {
+            "databaseType": type_def.json_schema_extension,
+            "type": self._get_json_base_type(type_def.category)
+        }
+        
+        if parameters:
+            schema.update(parameters)
+        
+        return schema
+    
+    def _get_json_base_type(self, category: ILVTCategory) -> str:
+        """Map ILVT category to JSON Schema base type"""
+        mapping = {
+            ILVTCategory.BOOLEAN: "boolean",
+            ILVTCategory.SIGNED_INTEGER: "integer",
+            ILVTCategory.UNSIGNED_INTEGER: "integer",
+            ILVTCategory.DECIMAL: "number",
+            ILVTCategory.BINARY_FLOAT: "number",
+            ILVTCategory.DECIMAL_FLOAT: "number",
+            ILVTCategory.STRING: "string",
+            ILVTCategory.BINARY: "string",
+            ILVTCategory.TEMPORAL: "string",
+            ILVTCategory.STRUCTURED: "object",
+            ILVTCategory.COLLECTION: "array",
+            ILVTCategory.SPECIAL: None
+        }
+        return mapping.get(category, "string")
+
+class UniversalTypeMapper:
+    """Universal type mapper using ILVT as intermediate representation"""
+    
+    def __init__(self):
+        self.registry = ILVTRegistry()
+    
+    def convert_gql_to_sql(self, gql_type: str, parameters: Dict[str, Any] = None) -> Optional[str]:
+        """Convert GQL type to SQL Foundation type via ILVT"""
+        ilvt_type = self.registry.gql_to_ilvt(gql_type)
+        if not ilvt_type:
+            return None
+        
+        sql_types = self.registry.ilvt_to_sql(ilvt_type)
+        if not sql_types:
+            return None
+        
+        # Return the primary SQL type (first in set)
+        primary_sql_type = next(iter(sql_types))
+        
+        # Apply parameters if needed
+        if parameters and self._requires_parameters(primary_sql_type):
+            return self._apply_sql_parameters(primary_sql_type, parameters)
+        
+        return primary_sql_type
+    
+    def convert_gql_to_json_schema(self, gql_type: str, parameters: Dict[str, Any] = None) -> Optional[Dict[str, Any]]:
+        """Convert GQL type to JSON Schema extension via ILVT"""
+        ilvt_type = self.registry.gql_to_ilvt(gql_type)
+        if not ilvt_type:
+            return None
+        
+        return self.registry.ilvt_to_json_schema(ilvt_type, parameters)
+```
+
+#### **Benefits of ILVT System**
+
+1. **Scalability**: Easy to add new type systems without modifying existing mappings
+2. **Consistency**: Single source of truth for type definitions and relationships
+3. **Extensibility**: Support for future type systems through ILVT hub
+4. **Maintainability**: Centralized type registry with clear separation of concerns
+5. **Interoperability**: Seamless conversion between any supported type systems
+
+**Note**: This ILVT system is based on verified analysis of GQL property value types and SQL Foundation (ISO/IEC 9075-2) specifications, providing accurate type correspondence for multi-system interoperability.
+
 This design provides a solid foundation for implementing the comprehensive requirements while maintaining flexibility for future extensions and ensuring robust operation in production environments.
