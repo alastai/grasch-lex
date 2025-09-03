@@ -4,49 +4,63 @@
   - Create CatalogRootConfiguration class with IRI validation and path resolution
   - Implement support for file: IRI scheme with current directory default ("file:.")
   - Add validation for supported IRI schemes
-  - _Requirements: 5.20, 5.21, 5.22, 5.26, 5.27_
+  - _Requirements: 6.20, 6.21, 6.22, 6.26, 6.27_
 
 - [ ] 2. Update SessionConfiguration to include catalog_root
   - Add catalog_root field to SessionConfiguration class
   - Set default value to "file:." for current directory
   - Integrate with existing default_catalog_path configuration
-  - _Requirements: 5.20, 5.22_
+  - _Requirements: 6.20, 6.22_
 
 - [ ] 3. Implement CatalogRootResolver component
   - Create ICatalogRootResolver interface for path resolution operations
   - Implement concrete CatalogRootResolver class
   - Add methods for combining catalog_root IRI with relative paths
-  - _Requirements: 5.23, 5.24, 5.25_
+  - _Requirements: 6.23, 6.24, 6.25_
 
 - [ ] 4. Update Catalog component to use catalog_root configuration
   - Modify Catalog class to accept CatalogRootConfiguration
   - Update path resolution logic to use catalog_root IRI
   - Ensure backward compatibility with existing path handling
-  - _Requirements: 5.24, 5.25_
+  - _Requirements: 6.24, 6.25_
 
 - [ ] 5. Add IRI scheme validation and extensibility
   - Implement IRI scheme validation in CatalogRootConfiguration
   - Create extensible framework for supporting additional IRI schemes
   - Add clear error messages for unsupported schemes
-  - _Requirements: 5.26, 5.27_
+  - _Requirements: 6.26, 6.27_
 
 - [ ] 6. Update test configuration to use file: IRI scheme
   - Modify test_functional.py to use catalog_root="file:." instead of default_catalog_path="/"
   - Ensure tests validate IRI-based path resolution
   - Add test cases for different IRI schemes and path combinations
-  - _Requirements: 5.22, 5.23, 5.24_
+  - _Requirements: 6.22, 6.23, 6.24_
 
 - [ ] 7. Update nested record schema processor configuration
   - Replace single json_schema_processor field with nested_record_schema_processor_type and nested_record_schema_processor fields
   - Update SessionConfiguration class to use the new two-field approach
   - Modify all test files to use the new configuration format
-  - _Requirements: 5.6, 5.7, 8.8, 8.9, 8.10_
+  - _Requirements: 6.6, 6.7, 8.8, 8.9, 8.10_
 
-- [ ] 8. Add comprehensive testing for catalog root functionality
+- [ ] 8. Implement ILVT (Intermediate Language Value Types) system
+  - Create ILVT type registry with all supported types from value_types.md specification
+  - Implement type mapping functions between GQL, SQL Foundation, and JSON Schema
+  - Add support for implementation-defined parameters (precision, scale, length, etc.)
+  - Create validation functions for ILVT type constraints and ranges
+  - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 5.10, 5.11_
+
+- [ ] 9. Integrate ILVT with existing type system
+  - Update PropertyType class to use ILVT type definitions
+  - Modify ContentRecordType to validate against ILVT constraints
+  - Add ILVT type compatibility checking for type hierarchies
+  - Update builders to accept ILVT type specifications
+  - _Requirements: 1.1, 1.2, 1.3, 2.1, 2.2, 5.1, 5.2, 5.3_
+
+- [ ] 10. Add comprehensive testing for catalog root functionality
   - Create unit tests for CatalogRootConfiguration path resolution
   - Test IRI validation with valid and invalid schemes
   - Test path combination logic with various relative paths
-  - _Requirements: 5.20, 5.21, 5.22, 5.23, 5.24, 5.25, 5.26, 5.27_
+  - _Requirements: 6.20, 6.21, 6.22, 6.23, 6.24, 6.25, 6.26, 6.27_
 
 - [ ] 9. Research and evaluate EERM/FCA design tools
   - Research open-source tools that support Extended Entity-Relationship Modeling (EERM) with subtyping/subclassing

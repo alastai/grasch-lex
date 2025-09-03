@@ -4,6 +4,8 @@
 
 This feature involves creating a Python library called Grasch that acts as a LEX-extended GQL Catalog according to the GQL (Graph Query Language) specification with LEX (Language Extensions) capabilities. LEX is an extension of GQL, and Grasch implements both the GQL core and LEX extensions with configurable compliance modes. The library will provide a structured way to define and manage named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions) within a hierarchical filesystem-like structure. The Catalog has a root directory ("/"), directories forming a tree structure with unique names among siblings, and GQL-schemas (leaf nodes) containing named primary catalog objects with fully-qualified names. Directories can only contain other directories or GQL-schemas, while GQL-schemas can only contain named primary catalog objects.
 
+**Value Type System**: Grasch implements the Intermediate Language Value Types (ILVT) specification as defined in [value_types.md](.kiro/specs/property-graph-schema/value_types.md). The ILVT provides universal type mapping between GQL Property Value Types, SQL Foundation Data Types, and JSON Schema Extensions, enabling seamless interoperability across different type systems. All property types, attribute types, and content record types in Grasch are based on ILVT type definitions with their associated parameters, constraints, and implementation-defined behaviors.
+
 **LEX Architecture Principle**: Grasch follows the pattern of GQL core + LEX extensions at all levels of detail, with both GQL and LEX supporting profile mechanisms. Profiles and GQL vs LEX are orthogonal in principle but form a matrix of permissible combinations in practice. The system can be configured with a profile (defining feature subsets and implementation choices) and a language level (GQL or LEX), with this pattern applying to builders, APIs, scripting mechanisms, and all other components.
 
 **Terminology Note**: In Grasch, "schema" refers to a description of a set of instances (following standard computer science usage). We distinguish between:
@@ -86,6 +88,24 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 
 ### Requirement 5
 
+**User Story:** As a developer working with multiple type systems, I want Grasch to use the Intermediate Language Value Types (ILVT) specification for all type definitions, so that I can seamlessly map between GQL, SQL Foundation, and JSON Schema type systems with consistent semantics.
+
+#### Acceptance Criteria
+
+1. WHEN I define property types THEN the system SHALL use ILVT type definitions as the canonical representation
+2. WHEN I specify a GQL property value type THEN the system SHALL map it to the corresponding ILVT type with proper parameters and constraints
+3. WHEN I specify a SQL Foundation data type THEN the system SHALL map it to the corresponding ILVT type with proper parameters and constraints  
+4. WHEN I specify a JSON Schema type THEN the system SHALL map it to the corresponding ILVT type using the data.* namespace
+5. WHEN I work with integer types THEN the system SHALL handle implementation-defined precision for SQL INTEGER types (SMALLINT, INTEGER, BIGINT) where all precisions can be equal
+6. WHEN I work with implementation-defined features THEN the system SHALL provide configuration options for precision, scale, length, and other type-specific parameters
+7. WHEN I convert between type systems THEN the system SHALL preserve semantic meaning and apply appropriate constraints
+8. WHEN I use types not supported in a target system THEN the system SHALL provide clear error messages indicating the unsupported mapping
+9. WHEN I define JSON Schema extensions THEN the system SHALL support the three-field format: data.<name>, gql.<name>, sql.<name> where undefined fields are marked as "undefined"
+10. WHEN I query type compatibility THEN the system SHALL use ILVT type relationships to determine compatibility across different type systems
+11. WHEN I validate data against types THEN the system SHALL apply ILVT-defined constraints including ranges, precision, scale, and format requirements
+
+### Requirement 6
+
 **User Story:** As a developer, I want to configure Grasch with GQL/LEX compliance modes and customizable defaults, so that I can control whether LEX extensions are allowed and customize behavior while having sensible fallbacks for unspecified settings.
 
 #### Acceptance Criteria
@@ -98,6 +118,8 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 6. WHEN I initialize my user session THEN the system SHALL provide a set of "default defaults" for all configurable settings including a default nested record schema processor type and implementation, a default profile, and a default language level
 7. WHEN I configure my session THEN the system SHALL allow me to specify the nested record schema processor type (e.g., "JSON Schema") and swap out the nested record schema processor implementation for a different one
 8. WHEN I set user defaults in my session THEN the system SHALL use my defaults instead of the default defaults for my session only
+9. WHEN I configure ILVT type mappings THEN the system SHALL allow me to specify implementation-defined parameters such as integer precision, decimal scale, string length limits, and temporal precision
+10. WHEN I work with implementation-defined features THEN the system SHALL use the ILVT specification to determine which features are implementation-defined and provide appropriate configuration options
 9. WHEN I don't specify a default for a setting THEN the system SHALL use the corresponding default default
 10. WHEN I work with path names in my session THEN the system SHALL allow me to set one default Catalog path at any time (if catalog support is included in the active GQL profile)
 11. WHEN no default path prefix is set in my session THEN the system SHALL use "/" (solidus) as the default default path prefix (if catalog support is available)

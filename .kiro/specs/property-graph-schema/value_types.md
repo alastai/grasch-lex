@@ -96,6 +96,16 @@ The ILVT system creates a union of all supported value types from different syst
 | `uint128` | `UINT128` | *No SQL equivalent* | `data.uint128` |
 | `uint256` | `UINT256` | *No SQL equivalent* | `data.uint256` |
 
+#### Implementation-Defined Features for Integer Types
+
+**SQL Foundation INTEGER Precision (Implementation-Defined)**:
+- The precision of `SMALLINT`, `INTEGER`, `INT`, and `BIGINT` types is implementation-defined
+- All SQL integer types can have equal precision in a given implementation
+- An implementation could support `INT8` as an extension with implementation-defined precision
+- The actual bit width and value ranges are determined by the SQL implementation
+
+**Affected Types**: `int8`, `int16`, `int32`, `int64` - SQL precision and ranges are implementation-defined
+
 ### Decimal and Floating Point Types
 | **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|---------------------------|
@@ -171,35 +181,471 @@ The ILVT system is designed to accommodate additional type systems:
 - **Protocol Buffers**: Message types
 - **Database-Specific**: Vendor extensions
 
-## JSON Schema Extension Format
+## Complete JSON Schema Type Definitions
 
-All ILVT types map to JSON Schema extensions using the `data.` prefix:
+All ILVT types map to JSON Schema extensions with three naming fields:
+- `data.<name>`: Universal intermediate representation
+- `gql.<name>`: GQL-specific type name (undefined for SQL-only types)  
+- `sql.<name>`: SQL Foundation type name (undefined for GQL-only types)
 
+### Boolean Types
 ```json
 {
-  "type": "integer",
-  "databaseType": "data.int32",
-  "minimum": -2147483648,
-  "maximum": 2147483647
+  "$defs": {
+    "boolean": {
+      "data.boolean": {
+        "type": "boolean"
+      },
+      "gql.boolean": "BOOLEAN",
+      "sql.boolean": "BOOLEAN"
+    }
+  }
 }
 ```
 
+### Integer Types
 ```json
 {
-  "type": "string", 
-  "databaseType": "data.string",
-  "maxLength": 255
+  "$defs": {
+    "int8": {
+      "data.int8": {
+        "type": "integer",
+        "minimum": -128,
+        "maximum": 127
+      },
+      "gql.int8": "INT8",
+      "sql.int8": "undefined"
+    },
+    "int16": {
+      "data.int16": {
+        "type": "integer", 
+        "minimum": -32768,
+        "maximum": 32767
+      },
+      "gql.int16": "SMALLINT",
+      "sql.int16": "SMALLINT"
+    },
+    "int32": {
+      "data.int32": {
+        "type": "integer",
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      },
+      "gql.int32": "INTEGER",
+      "sql.int32": "INTEGER"
+    },
+    "int64": {
+      "data.int64": {
+        "type": "integer",
+        "minimum": -9223372036854775808,
+        "maximum": 9223372036854775807
+      },
+      "gql.int64": "BIGINT", 
+      "sql.int64": "BIGINT"
+    },
+    "int128": {
+      "data.int128": {
+        "type": "integer",
+        "minimum": -170141183460469231731687303715884105728,
+        "maximum": 170141183460469231731687303715884105727
+      },
+      "gql.int128": "INT128",
+      "sql.int128": "undefined"
+    },
+    "int256": {
+      "data.int256": {
+        "type": "integer",
+        "minimum": -57896044618658097711785492504343953926634992332820282019728792003956564819968,
+        "maximum": 57896044618658097711785492504343953926634992332820282019728792003956564819967
+      },
+      "gql.int256": "INT256",
+      "sql.int256": "undefined"
+    },
+    "uint8": {
+      "data.uint8": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "gql.uint8": "UINT8",
+      "sql.uint8": "undefined"
+    },
+    "uint16": {
+      "data.uint16": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 65535
+      },
+      "gql.uint16": "UINT16",
+      "sql.uint16": "undefined"
+    },
+    "uint32": {
+      "data.uint32": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "gql.uint32": "UINT32",
+      "sql.uint32": "undefined"
+    },
+    "uint64": {
+      "data.uint64": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      },
+      "gql.uint64": "UINT64",
+      "sql.uint64": "undefined"
+    },
+    "uint128": {
+      "data.uint128": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 340282366920938463463374607431768211455
+      },
+      "gql.uint128": "UINT128",
+      "sql.uint128": "undefined"
+    },
+    "uint256": {
+      "data.uint256": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 115792089237316195423570985008687907853269984665640564039457584007913129639935
+      },
+      "gql.uint256": "UINT256",
+      "sql.uint256": "undefined"
+    }
+  }
 }
 ```
 
+### Decimal and Floating Point Types
 ```json
 {
-  "type": "number",
-  "databaseType": "data.decimal",
-  "precision": 10,
-  "scale": 2
+  "$defs": {
+    "decimal": {
+      "data.decimal": {
+        "type": "number",
+        "precision": {"type": "integer", "minimum": 1},
+        "scale": {"type": "integer", "minimum": 0}
+      },
+      "gql.decimal": "DECIMAL",
+      "sql.decimal": "DECIMAL"
+    },
+    "numeric": {
+      "data.numeric": {
+        "type": "number",
+        "precision": {"type": "integer", "minimum": 1},
+        "scale": {"type": "integer", "minimum": 0}
+      },
+      "gql.numeric": "NUMERIC",
+      "sql.numeric": "NUMERIC"
+    },
+    "float16": {
+      "data.float16": {
+        "type": "number",
+        "minimum": -65504,
+        "maximum": 65504
+      },
+      "gql.float16": "FLOAT16",
+      "sql.float16": "undefined"
+    },
+    "float32": {
+      "data.float32": {
+        "type": "number"
+      },
+      "gql.float32": "FLOAT",
+      "sql.float32": "REAL"
+    },
+    "float64": {
+      "data.float64": {
+        "type": "number"
+      },
+      "gql.float64": "DOUBLE",
+      "sql.float64": "DOUBLE PRECISION"
+    },
+    "float128": {
+      "data.float128": {
+        "type": "number"
+      },
+      "gql.float128": "FLOAT128",
+      "sql.float128": "undefined"
+    },
+    "float256": {
+      "data.float256": {
+        "type": "number"
+      },
+      "gql.float256": "FLOAT256",
+      "sql.float256": "undefined"
+    },
+    "decfloat32": {
+      "data.decfloat32": {
+        "type": "number"
+      },
+      "gql.decfloat32": "undefined",
+      "sql.decfloat32": "DECFLOAT(7)"
+    },
+    "decfloat64": {
+      "data.decfloat64": {
+        "type": "number"
+      },
+      "gql.decfloat64": "undefined",
+      "sql.decfloat64": "DECFLOAT(16)"
+    },
+    "decfloat128": {
+      "data.decfloat128": {
+        "type": "number"
+      },
+      "gql.decfloat128": "undefined",
+      "sql.decfloat128": "DECFLOAT(34)"
+    }
+  }
 }
 ```
+
+### String and Binary Types
+```json
+{
+  "$defs": {
+    "string": {
+      "data.string": {
+        "type": "string",
+        "maxLength": {"type": "integer", "minimum": 0}
+      },
+      "gql.string": "STRING",
+      "sql.string": "VARCHAR"
+    },
+    "char": {
+      "data.char": {
+        "type": "string",
+        "length": {"type": "integer", "minimum": 1}
+      },
+      "gql.char": "CHAR",
+      "sql.char": "CHAR"
+    },
+    "bytes": {
+      "data.bytes": {
+        "type": "string",
+        "contentEncoding": "base64",
+        "maxLength": {"type": "integer", "minimum": 0}
+      },
+      "gql.bytes": "BYTES",
+      "sql.bytes": "BLOB"
+    },
+    "binary": {
+      "data.binary": {
+        "type": "string",
+        "contentEncoding": "base64",
+        "length": {"type": "integer", "minimum": 1}
+      },
+      "gql.binary": "BINARY",
+      "sql.binary": "BINARY"
+    }
+  }
+}
+```
+
+### Temporal Types
+```json
+{
+  "$defs": {
+    "date": {
+      "data.date": {
+        "type": "string",
+        "format": "date"
+      },
+      "gql.date": "DATE",
+      "sql.date": "DATE"
+    },
+    "time": {
+      "data.time": {
+        "type": "string",
+        "format": "time",
+        "precision": {"type": "integer", "minimum": 0, "maximum": 9}
+      },
+      "gql.time": "LOCAL TIME",
+      "sql.time": "TIME"
+    },
+    "time_tz": {
+      "data.timeWithTimezone": {
+        "type": "string",
+        "format": "time",
+        "precision": {"type": "integer", "minimum": 0, "maximum": 9}
+      },
+      "gql.timeWithTimezone": "ZONED TIME",
+      "sql.timeWithTimezone": "TIME WITH TIME ZONE"
+    },
+    "datetime": {
+      "data.datetime": {
+        "type": "string",
+        "format": "date-time",
+        "precision": {"type": "integer", "minimum": 0, "maximum": 9}
+      },
+      "gql.datetime": "LOCAL DATETIME",
+      "sql.datetime": "TIMESTAMP"
+    },
+    "datetime_tz": {
+      "data.datetimeWithTimezone": {
+        "type": "string",
+        "format": "date-time",
+        "precision": {"type": "integer", "minimum": 0, "maximum": 9}
+      },
+      "gql.datetimeWithTimezone": "ZONED DATETIME",
+      "sql.datetimeWithTimezone": "TIMESTAMP WITH TIME ZONE"
+    },
+    "duration": {
+      "data.duration": {
+        "type": "string",
+        "format": "duration",
+        "fields": {"type": "string", "enum": ["YEAR", "MONTH", "DAY", "HOUR", "MINUTE", "SECOND"]}
+      },
+      "gql.duration": "DURATION",
+      "sql.duration": "INTERVAL"
+    }
+  }
+}
+```
+
+### Structured and Special Types
+```json
+{
+  "$defs": {
+    "record": {
+      "data.record": {
+        "type": "object",
+        "fields": {"type": "object"}
+      },
+      "gql.record": "RECORD",
+      "sql.record": "ROW"
+    },
+    "array": {
+      "data.array": {
+        "type": "array",
+        "elementType": {"type": "string"},
+        "maxCardinality": {"type": "integer", "minimum": 0}
+      },
+      "gql.array": "LIST",
+      "sql.array": "ARRAY"
+    },
+    "multiset": {
+      "data.multiset": {
+        "type": "array",
+        "uniqueItems": false,
+        "elementType": {"type": "string"}
+      },
+      "gql.multiset": "undefined",
+      "sql.multiset": "MULTISET"
+    },
+    "json": {
+      "data.json": {
+        "type": ["object", "array", "string", "number", "boolean", "null"]
+      },
+      "gql.json": "undefined",
+      "sql.json": "JSON"
+    },
+    "vector": {
+      "data.vector": {
+        "type": "array",
+        "items": {"type": "number"},
+        "dimension": {"type": "integer", "minimum": 1},
+        "elementType": {"type": "string", "enum": ["float32", "float64", "int32", "int64"]}
+      },
+      "gql.vector": "VECTOR",
+      "sql.vector": "VECTOR"
+    },
+    "null": {
+      "data.null": {
+        "type": "null"
+      },
+      "gql.null": "NULL",
+      "sql.null": "NULL"
+    }
+  }
+}
+```
+
+## Implementation-Defined Features by Language
+
+### GQL Implementation-Defined Features (Type-Related)
+
+**Numeric Types**:
+- `INT8`, `INT16`, `INT32`, `INT64`, `INT128`, `INT256`: Actual precision and value ranges
+- `UINT8`, `UINT16`, `UINT32`, `UINT64`, `UINT128`, `UINT256`: Actual precision and value ranges  
+- `FLOAT16`, `FLOAT32`, `FLOAT64`, `FLOAT128`, `FLOAT256`: Precision, exponent range, and special value handling
+- `DECIMAL`, `NUMERIC`: Maximum precision and scale values supported
+- Overflow and underflow behavior for all numeric types
+
+**String Types**:
+- `STRING`: Maximum length supported
+- `CHAR`: Maximum length supported
+- Character set and collation support
+
+**Temporal Types**:
+- `DATE`: Supported date range (minimum and maximum years)
+- `LOCAL TIME`, `ZONED TIME`: Fractional seconds precision (0-9 digits)
+- `LOCAL DATETIME`, `ZONED DATETIME`: Fractional seconds precision and supported date range
+- `DURATION`: Supported interval fields and precision
+- Time zone database and leap second handling
+
+**Structured Types**:
+- `VECTOR`: Maximum dimension supported, supported coordinate types
+- `LIST`: Maximum cardinality supported
+- `RECORD`: Maximum nesting depth, maximum number of fields
+
+### SQL Foundation Implementation-Defined Features (Type-Related)
+
+**Numeric Types**:
+- `SMALLINT`, `INTEGER`, `INT`, `BIGINT`: Actual precision (can be equal across types)
+- `DECIMAL`, `NUMERIC`: Maximum precision and scale values
+- `REAL`, `DOUBLE PRECISION`: Precision and exponent range
+- `DECFLOAT`: Supported precision values beyond standard (7, 16, 34)
+- Rounding behavior for exact numeric operations
+
+**String Types**:
+- `CHARACTER`, `CHAR`: Maximum length supported
+- `VARCHAR`, `CHARACTER VARYING`: Maximum length supported
+- `CLOB`: Maximum size supported
+- Character repertoire and form-of-use conversion
+
+**Binary Types**:
+- `BINARY`: Maximum length supported
+- `VARBINARY`, `BINARY VARYING`: Maximum length supported  
+- `BLOB`: Maximum size supported
+
+**Temporal Types**:
+- `DATE`: Supported date range
+- `TIME`, `TIME WITH TIME ZONE`: Fractional seconds precision
+- `TIMESTAMP`, `TIMESTAMP WITH TIME ZONE`: Fractional seconds precision and supported date range
+- `INTERVAL`: Supported interval precision and leading field precision
+
+**Structured Types**:
+- `ARRAY`: Maximum cardinality supported, maximum nesting depth
+- `MULTISET`: Maximum cardinality supported
+- `ROW`: Maximum number of fields, maximum nesting depth
+- `VECTOR`: Maximum dimension supported, supported coordinate types
+
+**Special Types**:
+- `JSON`: Maximum document size, supported JSON features
+
+### Cross-Language Implementation Considerations
+
+**Type Precision Alignment**:
+- When mapping between GQL and SQL integer types, implementations may choose to align precisions
+- SQL `SMALLINT` may have the same precision as `INTEGER` and `BIGINT` in some implementations
+- GQL `INT8` could be supported as a SQL extension with implementation-defined precision
+
+**Temporal Precision**:
+- Fractional seconds precision may vary between GQL and SQL implementations
+- Time zone handling and leap second support varies by implementation
+
+**String Length Limits**:
+- Maximum string lengths may differ significantly between implementations
+- Character encoding support (UTF-8, UTF-16, etc.) is implementation-defined
+
+**Vector Support**:
+- Coordinate type support varies (some implementations may only support float32/float64)
+- Maximum vector dimensions vary significantly by implementation
+- Distance function support is implementation-defined
 
 ## Implementation Notes
 
