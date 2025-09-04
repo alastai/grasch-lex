@@ -23,6 +23,9 @@ from grasch import (
     LabelType,
     PropertyType,
     NodeTypeBuilder,
+    ArcTypeBuilder,
+    EdgeTypeBuilder,
+    GraphTypeBuilder,
     EdgeType,
     GraphType,
     Graph,
@@ -56,27 +59,27 @@ class TestGraschFunctional:
         """Define content record types for the graph"""
         # Person content type
         personContent = ContentRecordTypeBuilder() \
-            .addLabel("Person") \
-            .addPropertyType(PropertyType("name", "STRING", nullable=False)) \
+            .add_label("Person") \
+            .addPropertyType(PropertyType("name", "STRING", not_null=True)) \
             .addPropertyType(PropertyType("age", "INTEGER")) \
             .addPropertyType(PropertyType("email", "STRING")) \
-            .addTypeName("Person") \
+            .add_type_name("Person") \
             .create()
         
         # Company content type
         companyContent = ContentRecordTypeBuilder() \
-            .addLabel("Company") \
-            .addPropertyType(PropertyType("name", "STRING", nullable=False)) \
+            .add_label("Company") \
+            .addPropertyType(PropertyType("name", "STRING", not_null=True)) \
             .addPropertyType(PropertyType("industry", "STRING")) \
-            .addTypeName("Company") \
+            .add_type_name("Company") \
             .create()
         
         # Employment relationship content type
         employmentContent = ContentRecordTypeBuilder() \
-            .addLabel("WORKS_FOR") \
+            .add_label("WORKS_FOR") \
             .addPropertyType(PropertyType("position", "STRING")) \
             .addPropertyType(PropertyType("startDate", "DATE")) \
-            .addTypeName("WORKS_FOR") \
+            .add_type_name("WORKS_FOR") \
             .create()
         
         return {
@@ -91,23 +94,29 @@ class TestGraschFunctional:
         personNodeType = NodeTypeBuilder(contentTypes["person"]).create()
         companyNodeType = NodeTypeBuilder(contentTypes["company"]).create()
         
-        worksForEdgeType = EdgeType(
-            "WORKS_FOR",
-            personNodeType,
-            companyNodeType,
-            contentTypes["employment"]
-        )
+        # Create arc type for employment edge
+        employmentArcType = ArcTypeBuilder(contentTypes["employment"]).create()
         
-        # Create graph type with ALL ELEMENT TYPES KEYED constraint
-        graphType = GraphType("EmployeeGraph", allElementTypesKeyed=True)
-        graphType.addNodeType(personNodeType)
-        graphType.addNodeType(companyNodeType)
-        graphType.addEdgeType(worksForEdgeType)
+        # Create edge type using new builder
+        worksForEdgeType = (EdgeTypeBuilder("WORKS_FOR")
+                           .addFirstNodeType(personNodeType)
+                           .addSecondNodeType(companyNodeType)
+                           .addArcType(employmentArcType)
+                           .setDirected("first", "second")  # Person -> Company
+                           .create())
+        
+        # Create graph type using new builder
+        graphType = (GraphTypeBuilder("EmployeeGraph")
+                    .addNodeType(personNodeType)
+                    .addNodeType(companyNodeType)
+                    .addEdgeType(worksForEdgeType)
+                    .setAllElementTypesKeyed(True)
+                    .create())
         
         # Add key constraints (required by ALL ELEMENT TYPES KEYED)
-        graphType.addConstraint(KeyConstraint("Person", ["Person"]))
-        graphType.addConstraint(KeyConstraint("Company", ["Company"]))
-        graphType.addConstraint(KeyConstraint("WORKS_FOR", ["WORKS_FOR"]))
+        graphType.add_constraint(KeyConstraint("Person", ["Person"]))
+        graphType.add_constraint(KeyConstraint("Company", ["Company"]))
+        graphType.add_constraint(KeyConstraint("WORKS_FOR", ["WORKS_FOR"]))
         
         return graphType
     
@@ -336,7 +345,7 @@ def run_functional_test():
         
         # Step 2: Define content types
         print("\n2. Defining content record types...")
-        content_types = test_instance.create_content_types()
+        content_types = test_instance.createContentTypes()
         
         # Verify content types
         assert len(content_types) == 3
@@ -350,7 +359,7 @@ def run_functional_test():
         
         # Step 3: Create graph schema with constraints
         print("\n3. Creating graph type with LEX constraints...")
-        graph_type = test_instance.create_graph_schema(content_types)
+        graph_type = test_instance.createGraphSchema(content_types)
         
         # Verify graph type
         assert graph_type.all_element_types_keyed is True
