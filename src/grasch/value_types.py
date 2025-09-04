@@ -17,8 +17,8 @@ import json
 from datetime import datetime, date, time
 import math
 
-# Import language level from core module
-from .core import LanguageLevel
+# Import language types from core module
+from .core import LanguageLevel, LanguageTypes
 
 
 class ValidationError(Exception):
@@ -138,10 +138,12 @@ class LanguageTypeMapper:
     """
     Maps between ILVT types and language-specific type names.
     
-    Language Level Hierarchy: Cypher ⊆ GSQL ⊆ GQL ⊆ LEX
+    Language Type Systems (orthogonal to LanguageLevel):
     - Cypher: Limited type system (INTEGER=64bit, FLOAT=64bit, STRING, BOOLEAN, etc.)
     - GQL: Full precision type system (INT8, UINT8, FLOAT32, etc.)
-    - LEX: GQL + extensions (JSON type)
+    - SQL: SQL Foundation data types
+    - JSON: JSON Schema type system
+    - DatabaseJSON: Database-specific JSON extensions
     """
     
     # Cypher Data Type mappings (most restrictive)
@@ -160,45 +162,77 @@ class LanguageTypeMapper:
     
     # GQL Property Value Type mappings (full precision)
     GQL_MAPPINGS = {
-        ILVTType.BOOLEAN: ["BOOLEAN", "BOOL"],
-        ILVTType.INT8: ["INT8"],
-        ILVTType.INT16: ["SMALLINT", "INT16"],
-        ILVTType.INT32: ["INTEGER", "INT", "INT32"],
-        ILVTType.INT64: ["BIGINT", "INT64"],
-        ILVTType.INT128: ["INT128"],
-        ILVTType.INT256: ["INT256"],
-        ILVTType.UINT8: ["UINT8"],
-        ILVTType.UINT16: ["UINT16"],
-        ILVTType.UINT32: ["UINT32"],
-        ILVTType.UINT64: ["UINT64"],
-        ILVTType.UINT128: ["UINT128"],
-        ILVTType.UINT256: ["UINT256"],
-        ILVTType.DECIMAL: ["DECIMAL", "DEC"],
-        ILVTType.NUMERIC: ["NUMERIC"],
-        ILVTType.FLOAT16: ["FLOAT16"],
-        ILVTType.FLOAT32: ["FLOAT", "REAL", "FLOAT32"],
-        ILVTType.FLOAT64: ["DOUBLE", "DOUBLE PRECISION", "FLOAT64"],
-        ILVTType.FLOAT128: ["FLOAT128"],
-        ILVTType.FLOAT256: ["FLOAT256"],
-        ILVTType.STRING: ["STRING"],
-        ILVTType.CHAR: ["CHAR"],
-        ILVTType.BYTES: ["BYTES"],
-        ILVTType.BINARY: ["BINARY"],
-        ILVTType.DATE: ["DATE"],
-        ILVTType.TIME: ["LOCAL TIME"],
-        ILVTType.TIME_TZ: ["ZONED TIME"],
-        ILVTType.DATETIME: ["LOCAL DATETIME"],
-        ILVTType.DATETIME_TZ: ["ZONED DATETIME"],
-        ILVTType.DURATION: ["DURATION"],
-        ILVTType.RECORD: ["RECORD"],
-        ILVTType.ARRAY: ["LIST"],
-        ILVTType.VECTOR: ["VECTOR"],
-        ILVTType.NULL: ["NULL"],
+        ILVTType.BOOLEAN: ["boolean", "bool"],
+        ILVTType.INT8: ["int8"],
+        ILVTType.INT16: ["smallint", "int16"],
+        ILVTType.INT32: ["integer", "int", "int32"],
+        ILVTType.INT64: ["bigint", "int64"],
+        ILVTType.INT128: ["int128"],
+        ILVTType.INT256: ["int256"],
+        ILVTType.UINT8: ["uint8"],
+        ILVTType.UINT16: ["uint16"],
+        ILVTType.UINT32: ["uint32"],
+        ILVTType.UINT64: ["uint64"],
+        ILVTType.UINT128: ["uint128"],
+        ILVTType.UINT256: ["uint256"],
+        ILVTType.DECIMAL: ["decimal", "dec"],
+        ILVTType.NUMERIC: ["numeric"],
+        ILVTType.FLOAT16: ["float16"],
+        ILVTType.FLOAT32: ["float", "real", "float32"],
+        ILVTType.FLOAT64: ["double", "double precision", "float64"],
+        ILVTType.FLOAT128: ["float128"],
+        ILVTType.FLOAT256: ["float256"],
+        ILVTType.STRING: ["string"],
+        ILVTType.CHAR: ["char"],
+        ILVTType.BYTES: ["bytes"],
+        ILVTType.BINARY: ["binary"],
+        ILVTType.DATE: ["date"],
+        ILVTType.TIME: ["local time"],
+        ILVTType.TIME_TZ: ["zoned time"],
+        ILVTType.DATETIME: ["local datetime"],
+        ILVTType.DATETIME_TZ: ["zoned datetime"],
+        ILVTType.DURATION: ["duration"],
+        ILVTType.RECORD: ["record"],
+        ILVTType.ARRAY: ["list"],
+        ILVTType.VECTOR: ["vector"],
+        ILVTType.NULL: ["null"],
+    }
+    
+    # Basic JSON Schema type mappings (limited precision)
+    JSON_SCHEMA_MAPPINGS = {
+        # All integers map to "number" (with 64-bit signed limit)
+        ILVTType.INT8: ["number"],
+        ILVTType.INT16: ["number"], 
+        ILVTType.INT32: ["number"],
+        ILVTType.INT64: ["number"],
+        ILVTType.UINT8: ["number"],
+        ILVTType.UINT16: ["number"],
+        ILVTType.UINT32: ["number"],
+        ILVTType.UINT64: ["number"],    # Note: May lose precision for values > 2^53
+        ILVTType.INT128: ["number"],    # Note: Will lose precision
+        ILVTType.INT256: ["number"],    # Note: Will lose precision
+        # All floats map to "number" (with 54-bit precision limit)
+        ILVTType.FLOAT16: ["number"],
+        ILVTType.FLOAT32: ["number"],
+        ILVTType.FLOAT64: ["number"],
+        ILVTType.DECIMAL: ["number"],   # Note: May lose precision
+        # Basic types
+        ILVTType.STRING: ["string"],
+        ILVTType.BOOLEAN: ["boolean"],
+        ILVTType.ARRAY: ["array"],
+        ILVTType.RECORD: ["object"],
+        ILVTType.NULL: ["null"],
+        # Complex types that don't have direct JSON equivalents map to string or object
+        ILVTType.DATE: ["string"],      # ISO date string
+        ILVTType.TIME: ["string"],      # ISO time string  
+        ILVTType.DATETIME: ["string"],  # ISO datetime string
+        ILVTType.DURATION: ["string"],  # ISO duration string
+        ILVTType.BYTES: ["string"],     # Base64 encoded string
     }
     
     # LEX extensions (GQL + additional types)
     LEX_EXTENSIONS = {
-        ILVTType.JSON: ["JSON"],  # JSON type is LEX-specific extension
+        ILVTType.JSON: ["json"],  # JSON type is LEX-specific extension
     }
     
     # SQL Foundation mappings (for reference)
@@ -233,44 +267,63 @@ class LanguageTypeMapper:
     }
     
     @classmethod
-    def getAvailableTypesForLanguageLevel(cls, languageLevel: LanguageLevel) -> Dict[ILVTType, List[str]]:
-        """Get all available types for a given language level"""
-        if languageLevel == LanguageLevel.LEX:
-            # LEX = GQL + extensions
-            return {**cls.GQL_MAPPINGS, **cls.LEX_EXTENSIONS}
-        elif languageLevel == LanguageLevel.GQL:
-            # GQL has full type system
+    def getAvailableTypesForLanguageType(cls, languageType: LanguageTypes) -> Dict[ILVTType, List[str]]:
+        """Get all available types for a given language type system"""
+        if languageType == LanguageTypes.GQL:
             return cls.GQL_MAPPINGS.copy()
-        else:
-            # Cypher has limited type system
+        elif languageType == LanguageTypes.CYPHER:
             return cls.CYPHER_MAPPINGS.copy()
+        elif languageType == LanguageTypes.SQL:
+            return cls.SQL_MAPPINGS.copy()
+        elif languageType == LanguageTypes.JSON:
+            # Basic JSON Schema types (limited precision)
+            return cls.JSON_SCHEMA_MAPPINGS.copy()
+        elif languageType == LanguageTypes.DATABASE_JSON:
+            # Database JSON - 1:1 mapping with GQL types + JSON type
+            # Each GQL type maps to structured JSON: {"type": "basic_json_type", "value": ...}
+            # The "type" field references LanguageTypes.JSON basic types
+            return {**cls.GQL_MAPPINGS, **cls.LEX_EXTENSIONS}
+        else:
+            # Default to GQL
+            return cls.GQL_MAPPINGS.copy()
     
     @classmethod
-    def getILVTFromLanguageType(cls, languageType: str, languageLevel: LanguageLevel) -> Optional[ILVTType]:
+    def getILVTFromLanguageType(cls, typeName: str, languageType: LanguageTypes) -> Optional[ILVTType]:
         """Convert a language-specific type name to ILVT type"""
-        languageType = languageType.upper()
-        available_types = cls.getAvailableTypesForLanguageLevel(languageLevel)
+        available_types = cls.getAvailableTypesForLanguageType(languageType)
         
-        for ilvt_type, type_names in available_types.items():
-            if languageType in type_names:
-                return ilvt_type
+        # Handle case sensitivity based on language type conventions:
+        # - JSON, GQL, LEX: case-sensitive (lowercase)
+        # - Cypher, SQL: case-insensitive (uppercase)
+        if languageType in [LanguageTypes.JSON, LanguageTypes.GQL, LanguageTypes.DATABASE_JSON]:
+            # Case-sensitive matching for lowercase type systems
+            search_name = typeName.lower()
+            for ilvt_type, type_names in available_types.items():
+                if search_name in [name.lower() for name in type_names]:
+                    return ilvt_type
+        else:
+            # Case-insensitive matching for uppercase type systems (Cypher, SQL)
+            search_name = typeName.upper()
+            for ilvt_type, type_names in available_types.items():
+                if search_name in [name.upper() for name in type_names]:
+                    return ilvt_type
         
         return None
     
     @classmethod
-    def getLanguageTypeFromILVT(cls, ilvtType: ILVTType, languageLevel: LanguageLevel) -> Optional[str]:
+    def getLanguageTypeFromILVT(cls, ilvtType: ILVTType, languageType: LanguageTypes) -> Optional[str]:
         """Convert ILVT type to language-specific type name"""
-        available_types = cls.getAvailableTypesForLanguageLevel(languageLevel)
+        available_types = cls.getAvailableTypesForLanguageType(languageType)
         type_names = available_types.get(ilvtType)
         return type_names[0] if type_names else None
     
     @classmethod
-    def inferMostPreciseType(cls, value: Any, languageLevel: LanguageLevel) -> Optional[ILVTType]:
+    def inferMostPreciseType(cls, value: Any, languageType: LanguageTypes) -> Optional[ILVTType]:
         """
-        Infer the most precise ILVT type for a value based on language level.
+        Infer the most precise ILVT type for a value based on language type system.
         
-        Higher language levels (GQL, LEX) can infer more precise types.
-        Lower language levels (Cypher) infer broader types.
+        More precise type systems (GQL) can infer more specific types.
+        Less precise type systems (Cypher) infer broader types.
         """
         if value is None:
             return ILVTType.NULL
@@ -278,8 +331,8 @@ class LanguageTypeMapper:
         if isinstance(value, bool):
             return ILVTType.BOOLEAN
         elif isinstance(value, int):
-            if languageLevel == LanguageLevel.LEX or languageLevel == LanguageLevel.GQL:
-                # GQL/LEX can infer precise integer types based on value range
+            if languageType in [LanguageTypes.GQL, LanguageTypes.DATABASE_JSON]:
+                # GQL and DATABASE_JSON can infer precise integer types based on value range
                 if 0 <= value <= 255:
                     return ILVTType.UINT8
                 elif -128 <= value <= 127:
@@ -296,45 +349,73 @@ class LanguageTypeMapper:
                     return ILVTType.UINT64
                 else:
                     return ILVTType.INT64
-            else:
+            elif languageType == LanguageTypes.JSON:
+                # JSON has limited precision - safe integers are -2^53 to 2^53
+                # All integers map to FLOAT64 (JSON "number" type)
+                if -9007199254740991 <= value <= 9007199254740991:  # -2^53 to 2^53
+                    return ILVTType.FLOAT64  # JSON "number" type
+                else:
+                    # Outside safe integer range - would need string representation
+                    return ILVTType.STRING
+            elif languageType == LanguageTypes.CYPHER:
                 # Cypher only has 64-bit integers
                 return ILVTType.INT64
+            elif languageType == LanguageTypes.SQL:
+                # SQL has limited integer types, default to appropriate size
+                if -2147483648 <= value <= 2147483647:
+                    return ILVTType.INT32
+                else:
+                    return ILVTType.INT64
+            else:
+                # Default to INT64 for other type systems
+                return ILVTType.INT64
         elif isinstance(value, float):
-            if languageLevel == LanguageLevel.LEX or languageLevel == LanguageLevel.GQL:
+            if languageType in [LanguageTypes.GQL, LanguageTypes.DATABASE_JSON]:
                 # Could infer FLOAT32 vs FLOAT64 based on precision, but default to FLOAT64
                 return ILVTType.FLOAT64
-            else:
+            elif languageType == LanguageTypes.JSON:
+                # JSON only has "number" type (IEEE 754 double precision)
+                return ILVTType.FLOAT64
+            elif languageType == LanguageTypes.CYPHER:
                 # Cypher only has 64-bit floats
+                return ILVTType.FLOAT64
+            elif languageType == LanguageTypes.SQL:
+                # SQL defaults to DOUBLE PRECISION
+                return ILVTType.FLOAT64
+            else:
                 return ILVTType.FLOAT64
         elif isinstance(value, str):
             return ILVTType.STRING
         elif isinstance(value, (list, tuple)):
             return ILVTType.ARRAY
         elif isinstance(value, dict):
-            if languageLevel == LanguageLevel.LEX:
-                # LEX supports JSON type
+            if languageType == LanguageTypes.JSON:
+                # Basic JSON Schema - dict maps to "object" type
+                return ILVTType.RECORD
+            elif languageType == LanguageTypes.DATABASE_JSON:
+                # Extended database JSON - dict can be JSON type
                 return ILVTType.JSON
             else:
-                # Fall back to RECORD for other levels
+                # Fall back to RECORD for other type systems
                 return ILVTType.RECORD
         
         return None
     
     @classmethod
-    def getEquivalentTypes(cls, sourceType: str, sourceLanguage: LanguageLevel, 
-                          targetLanguage: LanguageLevel) -> List[str]:
+    def getEquivalentTypes(cls, sourceType: str, sourceLanguageType: LanguageTypes, 
+                          targetLanguageType: LanguageTypes) -> List[str]:
         """
-        Get all equivalent types when translating between language levels.
+        Get all equivalent types when translating between language type systems.
         
         For example: Cypher.INTEGER -> GQL returns [INT64, BIGINT] and supertypes
         """
         # First convert source type to ILVT
-        source_ilvt = cls.getILVTFromLanguageType(sourceType, sourceLanguage)
+        source_ilvt = cls.getILVTFromLanguageType(sourceType, sourceLanguageType)
         if source_ilvt is None:
             return []
         
-        # Get available types in target language
-        target_types = cls.getAvailableTypesForLanguageLevel(targetLanguage)
+        # Get available types in target language type system
+        target_types = cls.getAvailableTypesForLanguageType(targetLanguageType)
         
         # Find direct equivalent
         direct_equivalent = target_types.get(source_ilvt, [])
@@ -366,11 +447,26 @@ class LanguageTypeMapper:
         return list(dict.fromkeys(direct_equivalent))
     
     @classmethod
-    def isTypeCompatible(cls, sourceType: str, sourceLanguage: LanguageLevel,
-                        targetType: str, targetLanguage: LanguageLevel) -> bool:
+    def isTypeCompatible(cls, sourceType: str, sourceLanguageType: LanguageTypes,
+                        targetType: str, targetLanguageType: LanguageTypes) -> bool:
         """Check if source type is compatible with target type"""
-        equivalent_types = cls.getEquivalentTypes(sourceType, sourceLanguage, targetLanguage)
+        equivalent_types = cls.getEquivalentTypes(sourceType, sourceLanguageType, targetLanguageType)
         return targetType.upper() in [t.upper() for t in equivalent_types]
+    
+    @classmethod
+    def getCypherCompatibleILVT(cls, ilvtType: ILVTType) -> ILVTType:
+        """Get the Cypher-compatible ILVT type for a given ILVT type"""
+        # Cypher has a limited type system - map all integer types to INT64
+        if ilvtType in [ILVTType.INT8, ILVTType.INT16, ILVTType.INT32, ILVTType.UINT8, 
+                       ILVTType.UINT16, ILVTType.UINT32, ILVTType.UINT64, ILVTType.INT128, ILVTType.INT256]:
+            return ILVTType.INT64
+        
+        # Map all float types to FLOAT64
+        if ilvtType in [ILVTType.FLOAT16, ILVTType.FLOAT32, ILVTType.DECIMAL]:
+            return ILVTType.FLOAT64
+        
+        # Other types remain the same
+        return ilvtType
 
 
 class ValueType(Enum):
@@ -397,8 +493,8 @@ class ValueType(Enum):
     ARRAY = "ARRAY"
     MAP = "MAP"
     
-    def getILVTType(self, languageLevel: LanguageLevel = LanguageLevel.GQL) -> ILVTType:
-        """Get the corresponding ILVT type for this ValueType based on language level"""
+    def getILVTType(self, languageType: LanguageTypes = LanguageTypes.GQL) -> ILVTType:
+        """Get the corresponding ILVT type for this ValueType based on language type system"""
         # Base mapping - these are the "default" ILVT types for each ValueType
         base_mapping = {
             ValueType.STRING: ILVTType.STRING,
@@ -416,27 +512,27 @@ class ValueType(Enum):
         
         ilvt_type = base_mapping.get(self)
         
-        # Adjust based on language level capabilities
-        if ilvt_type == ILVTType.JSON and languageLevel != LanguageLevel.LEX:
-            # JSON is only available in LEX level
+        # Adjust based on language type system capabilities
+        if ilvt_type == ILVTType.JSON and languageType not in [LanguageTypes.JSON, LanguageTypes.DATABASE_JSON]:
+            # JSON type is only available in JSON-based type systems
             return None
         
         return ilvt_type
     
-    def validate(self, value: Any, languageLevel: LanguageLevel = LanguageLevel.GQL) -> ValidationResult:
-        """Validate a value against this type with language-level awareness"""
+    def validate(self, value: Any, languageType: LanguageTypes = LanguageTypes.GQL) -> ValidationResult:
+        """Validate a value against this type with language type system awareness"""
         if value is None:
             return ValidationResult.failure(f"Value cannot be null for type {self.value}")
         
         # Get the ILVT type for validation
-        ilvt_type = self.getILVTType(languageLevel)
+        ilvt_type = self.getILVTType(languageType)
         if ilvt_type is None:
-            return ValidationResult.failure(f"No ILVT mapping for type {self.value}")
+            return ValidationResult.failure(f"No ILVT mapping for type {self.value} in {languageType.value}")
         
         # Dispatch to ILVT validation
-        return self._validateILVTType(value, ilvt_type, languageLevel)
+        return self._validateILVTType(value, ilvt_type, languageType)
     
-    def _validateILVTType(self, value: Any, ilvtType: ILVTType, languageLevel: LanguageLevel) -> ValidationResult:
+    def _validateILVTType(self, value: Any, ilvtType: ILVTType, languageType: LanguageTypes) -> ValidationResult:
         """Validate a value against an ILVT type"""
         validator_map = {
             ILVTType.BOOLEAN: self._validateBoolean,
@@ -450,23 +546,22 @@ class ValueType(Enum):
         if validator is None:
             return ValidationResult.failure(f"Validation not yet implemented for ILVT type {ilvtType.value}")
         
-        return validator(value, languageLevel)
+        return validator(value, languageType)
     
-    def _validateString(self, value: Any, languageLevel: LanguageLevel) -> ValidationResult:
+    def _validateString(self, value: Any, languageType: LanguageTypes) -> ValidationResult:
         """Validate STRING type (ILVT string)"""
         if isinstance(value, str):
             return ValidationResult.success()
         
-        # Language-level specific behavior
-        if languageLevel == LanguageLevel.LEX:
-            # LEX level (Cypher compatibility) is more permissive
+        # Language type system specific behavior
+        if languageType == LanguageTypes.CYPHER:
             if isinstance(value, (int, float, bool)):
                 return ValidationResult.failure(
                     f"Expected STRING, got {type(value).__name__} {repr(value)}. "
                     f"Cypher requires explicit string conversion."
                 )
         else:
-            # GQL level is strict
+            # Other type systems are strict
             if isinstance(value, (int, float, bool)):
                 return ValidationResult.failure(
                     f"Expected STRING, got {type(value).__name__}. "
@@ -477,7 +572,7 @@ class ValueType(Enum):
             f"Expected STRING, got {type(value).__name__}: {repr(value)}"
         )
     
-    def _validateInteger64(self, value: Any, languageLevel: LanguageLevel) -> ValidationResult:
+    def _validateInteger64(self, value: Any, languageType: LanguageTypes) -> ValidationResult:
         """Validate 64-bit INTEGER type (ILVT int64)"""
         if isinstance(value, int) and not isinstance(value, bool):
             # Check for 64-bit signed integer range
@@ -485,26 +580,20 @@ class ValueType(Enum):
                 return ValidationResult.success()
             else:
                 return ValidationResult.failure(
-                    f"Integer value {value} is outside the 64-bit signed range "
+                    f"Integer value {value} is outside the valid range "
                     f"[-9223372036854775808, 9223372036854775807]"
                 )
         
-        # Handle float-to-integer conversion based on language level
+        # Handle float-to-integer conversion based on language type system
         if isinstance(value, float):
             if value.is_integer() and not (math.isinf(value) or math.isnan(value)):
                 int_value = int(value)
                 if -9223372036854775808 <= int_value <= 9223372036854775807:
-                    if languageLevel == LanguageLevel.LEX:
-                        # LEX level might be more permissive with conversions
-                        return ValidationResult.failure(
-                            f"Expected INTEGER, got FLOAT {value}. "
-                            f"Cypher requires explicit integer conversion."
-                        )
-                    else:
-                        return ValidationResult.failure(
-                            f"Expected INTEGER, got FLOAT {value}. "
-                            f"Use explicit integer conversion if intended."
-                        )
+                    lang_name = languageType.value.title()
+                    return ValidationResult.failure(
+                        f"Expected INTEGER, got FLOAT {value}. "
+                        f"{lang_name} requires explicit integer conversion."
+                    )
             return ValidationResult.failure(
                 f"Cannot convert FLOAT {value} to INTEGER: not a whole number"
             )
@@ -513,38 +602,32 @@ class ValueType(Enum):
             f"Expected INTEGER, got {type(value).__name__}: {repr(value)}"
         )
     
-    def _validateFloat64(self, value: Any, languageLevel: LanguageLevel) -> ValidationResult:
+    def _validateFloat64(self, value: Any, languageType: LanguageTypes) -> ValidationResult:
         """Validate 64-bit FLOAT type (ILVT float64)"""
         if isinstance(value, float):
             # Check for valid float values (including NaN and Infinity)
             return ValidationResult.success()
         
-        # Handle integer-to-float conversion based on language level
+        # Handle integer-to-float conversion based on language type system
         if isinstance(value, int) and not isinstance(value, bool):
-            if languageLevel == LanguageLevel.LEX:
-                # LEX level (Cypher) might be more permissive
-                return ValidationResult.failure(
-                    f"Expected FLOAT, got INTEGER {value}. "
-                    f"Cypher requires explicit float conversion."
-                )
-            else:
-                return ValidationResult.failure(
-                    f"Expected FLOAT, got INTEGER {value}. "
-                    f"Use explicit float conversion if intended."
-                )
+            lang_name = languageType.value.title()
+            return ValidationResult.failure(
+                f"Expected FLOAT, got INTEGER {value}. "
+                f"{lang_name} requires explicit float conversion."
+            )
         
         return ValidationResult.failure(
             f"Expected FLOAT, got {type(value).__name__}: {repr(value)}"
         )
     
-    def _validateBoolean(self, value: Any, languageLevel: LanguageLevel) -> ValidationResult:
+    def _validateBoolean(self, value: Any, languageType: LanguageTypes) -> ValidationResult:
         """Validate BOOLEAN type (ILVT boolean)"""
         if isinstance(value, bool):
             return ValidationResult.success()
         
-        # Both GQL and LEX levels are strict about boolean validation
+        # All type systems are strict about boolean validation
         if isinstance(value, (int, str)):
-            lang_name = "Cypher" if languageLevel == LanguageLevel.LEX else "GQL"
+            lang_name = languageType.value.upper()
             return ValidationResult.failure(
                 f"Expected BOOLEAN, got {type(value).__name__} {repr(value)}. "
                 f"{lang_name} requires explicit boolean conversion."
@@ -606,21 +689,21 @@ class ValueType(Enum):
             )
 
 
-# Utility functions for type validation with language level support
-def validateValue(value: Any, valueType: ValueType, languageLevel: LanguageLevel = LanguageLevel.GQL) -> ValidationResult:
-    """Convenience function to validate a value against a type with language level"""
-    return valueType.validate(value, languageLevel)
+# Utility functions for type validation with language type system support
+def validateValue(value: Any, valueType: ValueType, languageType: LanguageTypes = LanguageTypes.GQL) -> ValidationResult:
+    """Convenience function to validate a value against a type with language type system"""
+    return valueType.validate(value, languageType)
 
 
-def isValidValue(value: Any, valueType: ValueType, languageLevel: LanguageLevel = LanguageLevel.GQL) -> bool:
-    """Convenience function to check if a value is valid for a type with language level"""
-    return valueType.validate(value, languageLevel).isValid
+def isValidValue(value: Any, valueType: ValueType, languageType: LanguageTypes = LanguageTypes.GQL) -> bool:
+    """Convenience function to check if a value is valid for a type with language type system"""
+    return valueType.validate(value, languageType).isValid
 
 
-def getTypeForValue(value: Any, languageLevel: LanguageLevel = LanguageLevel.GQL) -> Optional[ValueType]:
-    """Infer the most appropriate ValueType for a given value based on language level"""
+def getTypeForValue(value: Any, languageType: LanguageTypes = LanguageTypes.GQL) -> Optional[ValueType]:
+    """Infer the most appropriate ValueType for a given value based on language type system"""
     # Use the precise ILVT inference, then map back to ValueType
-    ilvt_type = LanguageTypeMapper.inferMostPreciseType(value, languageLevel)
+    ilvt_type = LanguageTypeMapper.inferMostPreciseType(value, languageType)
     
     if ilvt_type is None:
         return None
@@ -653,7 +736,7 @@ def getTypeForValue(value: Any, languageLevel: LanguageLevel = LanguageLevel.GQL
     return ilvt_to_valuetype.get(ilvt_type)
 
 
-def convertLegacyDatatype(datatype: str, languageLevel: LanguageLevel = LanguageLevel.GQL) -> Optional[ValueType]:
+def convertLegacyDatatype(datatype: str, languageType: LanguageTypes = LanguageTypes.GQL) -> Optional[ValueType]:
     """
     Convert legacy string datatypes to ValueType enum.
     
@@ -661,7 +744,7 @@ def convertLegacyDatatype(datatype: str, languageLevel: LanguageLevel = Language
     that uses string datatypes like "STRING", "INTEGER", etc.
     """
     # First try to get ILVT type from the language-specific type name
-    ilvt_type = LanguageTypeMapper.getILVTFromLanguageType(datatype, languageLevel)
+    ilvt_type = LanguageTypeMapper.getILVTFromLanguageType(datatype, languageType)
     
     if ilvt_type is None:
         return None
@@ -707,43 +790,43 @@ def convertLegacyDatatype(datatype: str, languageLevel: LanguageLevel = Language
     return ilvt_to_valuetype.get(ilvt_type)
 
 
-def getLanguageTypeName(valueType: ValueType, languageLevel: LanguageLevel = LanguageLevel.GQL) -> Optional[str]:
+def getLanguageTypeName(valueType: ValueType, languageType: LanguageTypes = LanguageTypes.GQL) -> Optional[str]:
     """Get the language-specific type name for a ValueType"""
-    ilvt_type = valueType.getILVTType(languageLevel)
+    ilvt_type = valueType.getILVTType(languageType)
     if ilvt_type is None:
         return None
     
-    return LanguageTypeMapper.getLanguageTypeFromILVT(ilvt_type, languageLevel)
+    return LanguageTypeMapper.getLanguageTypeFromILVT(ilvt_type, languageType)
 
 
-def translateType(sourceType: str, sourceLanguage: LanguageLevel, 
-                 targetLanguage: LanguageLevel) -> List[str]:
+def translateType(sourceType: str, sourceLanguageType: LanguageTypes, 
+                 targetLanguageType: LanguageTypes) -> List[str]:
     """
-    Translate a type from one language level to another.
+    Translate a type from one language type system to another.
     
-    Returns all equivalent types in the target language.
-    For example: translateType("INTEGER", LanguageLevel.LEX, LanguageLevel.GQL) 
+    Returns all equivalent types in the target language type system.
+    For example: translateType("INTEGER", LanguageTypes.CYPHER, LanguageTypes.GQL) 
     might return ["INT64", "BIGINT"] and supertypes.
     """
-    return LanguageTypeMapper.getEquivalentTypes(sourceType, sourceLanguage, targetLanguage)
+    return LanguageTypeMapper.getEquivalentTypes(sourceType, sourceLanguageType, targetLanguageType)
 
 
-def isTypeCompatible(sourceType: str, sourceLanguage: LanguageLevel,
-                    targetType: str, targetLanguage: LanguageLevel) -> bool:
-    """Check if a source type is compatible with a target type across language levels"""
-    return LanguageTypeMapper.isTypeCompatible(sourceType, sourceLanguage, targetType, targetLanguage)
+def isTypeCompatible(sourceType: str, sourceLanguageType: LanguageTypes,
+                    targetType: str, targetLanguageType: LanguageTypes) -> bool:
+    """Check if a source type is compatible with a target type across language type systems"""
+    return LanguageTypeMapper.isTypeCompatible(sourceType, sourceLanguageType, targetType, targetLanguageType)
 
 
-def inferPreciseType(value: Any, languageLevel: LanguageLevel = LanguageLevel.GQL) -> Optional[str]:
+def inferPreciseType(value: Any, languageType: LanguageTypes = LanguageTypes.GQL) -> Optional[str]:
     """
-    Infer the most precise type name for a value at a given language level.
+    Infer the most precise type name for a value at a given language type system.
     
     Examples:
-    - inferPreciseType(128, LanguageLevel.LEX) -> "UINT8" (most precise)
-    - inferPreciseType(128, LanguageLevel.CYPHER) -> "INTEGER" (Cypher only has INTEGER)
+    - inferPreciseType(128, LanguageTypes.GQL) -> "UINT8" (most precise)
+    - inferPreciseType(128, LanguageTypes.CYPHER) -> "INTEGER" (Cypher only has INTEGER)
     """
-    ilvt_type = LanguageTypeMapper.inferMostPreciseType(value, languageLevel)
+    ilvt_type = LanguageTypeMapper.inferMostPreciseType(value, languageType)
     if ilvt_type is None:
         return None
     
-    return LanguageTypeMapper.getLanguageTypeFromILVT(ilvt_type, languageLevel)
+    return LanguageTypeMapper.getLanguageTypeFromILVT(ilvt_type, languageType)
