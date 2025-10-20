@@ -26,177 +26,177 @@ def test_comprehensive_builder_pattern():
     # 1. Build content record types using build methods
     print("1. Building ContentRecordType using buildX() methods:")
     
-    person_content_builder = ContentRecordTypeBuilder()
+    personContentBuilder = ContentRecordTypeBuilder()
     
     # Use build methods to get builders, then create and add
-    person_label_builder = person_content_builder.buildLabelType("Person")
-    person_label = person_label_builder.create()
-    person_content_builder.addLabelType(person_label)
+    personLabelBuilder = personContentBuilder.buildLabelType("Person")
+    personLabel = personLabelBuilder.create()
+    personContentBuilder.addLabelType(personLabel)
     
-    name_prop_builder = person_content_builder.buildPropertyType("name", "STRING")
-    name_prop = name_prop_builder.setNotNull(True).create()
-    person_content_builder.addPropertyType(name_prop)
+    namePropBuilder = personContentBuilder.buildPropertyType("name", "STRING")
+    nameProp = namePropBuilder.setNotNull(True).create()
+    personContentBuilder.addPropertyType(nameProp)
     
-    age_prop_builder = person_content_builder.buildPropertyType("age", "INTEGER")
-    age_prop = age_prop_builder.create()
-    person_content_builder.addPropertyType(age_prop)
+    agePropBuilder = personContentBuilder.buildPropertyType("age", "INTEGER")
+    ageProp = agePropBuilder.create()
+    personContentBuilder.addPropertyType(ageProp)
     
-    person_content = person_content_builder.addTypeIdentifier(["Person"]).create()
+    personContent = personContentBuilder.addTypeIdentifier(["Person"]).create()
     
-    print(f"   Created PersonContent: {person_content.name}")
-    print(f"   Labels: {[label.name for label in person_content.label_types]}")
-    print(f"   Properties: {[(prop.name, prop.datatype) for prop in person_content.property_types]}")
+    print(f"   Created PersonContent: {personContent.name}")
+    print(f"   Labels: {[label.name for label in personContent.labelTypes]}")
+    print(f"   Properties: {[(prop.name, prop.datatype) for prop in personContent.propertyTypes]}")
     
     # 2. Build company content using add methods with pre-built objects
     print("\n2. Building ContentRecordType using addX() methods:")
     
-    company_label = LabelType("Company")
-    company_name_prop = PropertyType("name", "STRING", not_null=True)
-    industry_prop = PropertyType("industry", "STRING")
+    companyLabel = LabelType("Company")
+    companyNameProp = PropertyType("name", "STRING", not_null=True)
+    industryProp = PropertyType("industry", "STRING")
     
-    company_content = (ContentRecordTypeBuilder()
-                      .addLabelType(company_label)
-                      .addPropertyType(company_name_prop)
-                      .addPropertyType(industry_prop)
+    companyContent = (ContentRecordTypeBuilder()
+                      .addLabelType(companyLabel)
+                      .addPropertyType(companyNameProp)
+                      .addPropertyType(industryProp)
                       .addTypeIdentifier(["Company"])
                       .create())
     
-    print(f"   Created CompanyContent: {company_content.name}")
-    print(f"   Labels: {[label.name for label in company_content.label_types]}")
-    print(f"   Properties: {[(prop.name, prop.datatype) for prop in company_content.property_types]}")
+    print(f"   Created CompanyContent: {companyContent.name}")
+    print(f"   Labels: {[label.name for label in companyContent.labelTypes]}")
+    print(f"   Properties: {[(prop.name, prop.datatype) for prop in companyContent.propertyTypes]}")
     
     # 3. Build node types using both patterns
     print("\n3. Building NodeTypes:")
     
     # Using build method from graph type builder
-    graph_builder = GraphTypeBuilder("EmploymentGraph")
-    person_node_builder = graph_builder.buildNodeType(person_content)
-    person_node = person_node_builder.create()
+    graphBuilder = GraphTypeBuilder("EmploymentGraph")
+    personNodeBuilder = graphBuilder.buildNodeType(personContent)
+    personNode = personNodeBuilder.create()
     
     # Using pre-built content type
-    company_node = NodeTypeBuilder(company_content).create()
+    companyNode = NodeTypeBuilder(companyContent).create()
     
-    print(f"   Created PersonNode: {person_node.name}")
-    print(f"   Created CompanyNode: {company_node.name}")
+    print(f"   Created PersonNode: {personNode.name}")
+    print(f"   Created CompanyNode: {companyNode.name}")
     
     # 4. Build arc type for employment relationship
     print("\n4. Building ArcType:")
     
-    employment_content = (ContentRecordTypeBuilder()
-                         .add_label("WORKS_FOR")
+    employmentContent = (ContentRecordTypeBuilder()
+                         .addLabel("WORKS_FOR")
                          .addPropertyType(PropertyType("position", "STRING"))
-                         .addPropertyType(PropertyType("start_date", "DATE"))
+                         .addPropertyType(PropertyType("startDate", "DATE"))
                          .addTypeIdentifier(["WORKS_FOR"])
                          .create())
     
-    employment_arc = ArcTypeBuilder(employment_content).create()
-    print(f"   Created EmploymentArc: {employment_arc.name}")
+    employmentArc = ArcTypeBuilder(employmentContent).create()
+    print(f"   Created EmploymentArc: {employmentArc.name}")
     
     # 5. Build edge type using comprehensive builder
     print("\n5. Building EdgeType using comprehensive builder:")
     
-    edge_builder = EdgeTypeBuilder("PersonWorksForCompany")
+    edgeBuilder = EdgeTypeBuilder("PersonWorksForCompany")
     
     # Method 1: Using build methods (would create new node types)
-    # first_node_builder = edge_builder.buildFirstNodeType(person_content)
-    # second_node_builder = edge_builder.buildSecondNodeType(company_content)
-    # arc_builder = edge_builder.buildArcType(employment_content)
+    # firstNodeBuilder = edgeBuilder.buildFirstNodeType(personContent)
+    # secondNodeBuilder = edgeBuilder.buildSecondNodeType(companyContent)
+    # arcBuilder = edgeBuilder.buildArcType(employmentContent)
     
     # Method 2: Using add methods with pre-built objects
-    employment_edge = (edge_builder
-                      .addFirstNodeType(person_node)
-                      .addSecondNodeType(company_node)
-                      .addArcType(employment_arc)
+    employmentEdge = (edgeBuilder
+                      .addFirstNodeType(personNode)
+                      .addSecondNodeType(companyNode)
+                      .addArcType(employmentArc)
                       .setDirected("first", "second")  # Person -> Company
                       .create())
     
-    print(f"   Created EdgeType: {employment_edge.name}")
-    print(f"   First node: {employment_edge.first_node_type.name}")
-    print(f"   Second node: {employment_edge.second_node_type.name}")
-    print(f"   Arc type: {employment_edge.arc_type.name}")
-    print(f"   Directed: {employment_edge.is_directed}")
-    print(f"   Tail -> Head: {employment_edge.tail_node_type.name} -> {employment_edge.head_node_type.name}")
+    print(f"   Created EdgeType: {employmentEdge.name}")
+    print(f"   First node: {employmentEdge.firstNodeType.name}")
+    print(f"   Second node: {employmentEdge.secondNodeType.name}")
+    print(f"   Arc type: {employmentEdge.arcType.name}")
+    print(f"   Directed: {employmentEdge.isDirected}")
+    print(f"   Tail -> Head: {employmentEdge.tailNodeType.name} -> {employmentEdge.headNodeType.name}")
     
     # 6. Build complete graph type
     print("\n6. Building GraphType using comprehensive builder:")
     
     # Method 1: Using build methods
-    graph_builder = GraphTypeBuilder("EmploymentGraph")
+    graphBuilder = GraphTypeBuilder("EmploymentGraph")
     
     # Build content types from scratch
-    person_content_builder2 = graph_builder.buildContentRecordType()
-    person_content2 = (person_content_builder2
-                      .add_label("Person")
+    personContentBuilder2 = graphBuilder.buildContentRecordType()
+    personContent2 = (personContentBuilder2
+                      .addLabel("Person")
                       .addPropertyType(PropertyType("name", "STRING", not_null=True))
                       .addTypeIdentifier(["Person"])
                       .create())
     
     # Build node type from content type
-    person_node_builder2 = graph_builder.buildNodeType(person_content2)
-    person_node2 = person_node_builder2.create()
+    personNodeBuilder2 = graphBuilder.buildNodeType(personContent2)
+    personNode2 = personNodeBuilder2.create()
     
     # Method 2: Using add methods with pre-built objects
-    employment_graph = (graph_builder
-                       .addNodeType(person_node)
-                       .addNodeType(company_node)
-                       .addNodeType(person_node2)  # Show we can add multiple
-                       .addEdgeType(employment_edge)
+    employmentGraph = (graphBuilder
+                       .addNodeType(personNode)
+                       .addNodeType(companyNode)
+                       .addNodeType(personNode2)  # Show we can add multiple
+                       .addEdgeType(employmentEdge)
                        .setAllElementTypesKeyed(True)
                        .create())
     
-    print(f"   Created GraphType: {employment_graph.name}")
-    print(f"   Node types: {[nt.name for nt in employment_graph.node_types]}")
-    print(f"   Edge types: {[et.name for et in employment_graph.edge_types]}")
-    print(f"   All element types keyed: {employment_graph.all_element_types_keyed}")
+    print(f"   Created GraphType: {employmentGraph.name}")
+    print(f"   Node types: {[nt.name for nt in employmentGraph.nodeTypes]}")
+    print(f"   Edge types: {[et.name for et in employmentGraph.edgeTypes]}")
+    print(f"   All element types keyed: {employmentGraph.allElementTypesKeyed}")
     
     # 7. Demonstrate recursive building from top level
     print("\n7. Demonstrating recursive building from GraphType level:")
     
     # Start with graph type builder and build everything recursively
-    complete_graph_builder = GraphTypeBuilder("CompleteGraph")
+    completeGraphBuilder = GraphTypeBuilder("CompleteGraph")
     
     # Build a complete edge type from scratch using nested builders
-    edge_builder2 = complete_graph_builder.buildEdgeType("PersonKnowsPerson")
+    edgeBuilder2 = completeGraphBuilder.buildEdgeType("PersonKnowsPerson")
     
     # Build first node type
-    person_content_builder3 = ContentRecordTypeBuilder()
-    person_content3 = (person_content_builder3
-                      .add_label("Person")
+    personContentBuilder3 = ContentRecordTypeBuilder()
+    personContent3 = (personContentBuilder3
+                      .addLabel("Person")
                       .addPropertyType(PropertyType("name", "STRING"))
                       .create())
     
-    first_node_builder = edge_builder2.buildFirstNodeType(person_content3)
-    first_node = first_node_builder.create()
+    firstNodeBuilder = edgeBuilder2.buildFirstNodeType(personContent3)
+    firstNode = firstNodeBuilder.create()
     
     # Build second node type (same type)
-    second_node_builder = edge_builder2.buildSecondNodeType(person_content3)
-    second_node = second_node_builder.create()
+    secondNodeBuilder = edgeBuilder2.buildSecondNodeType(personContent3)
+    secondNode = secondNodeBuilder.create()
     
     # Build arc type
-    knows_content = (ContentRecordTypeBuilder()
-                    .add_label("KNOWS")
+    knowsContent = (ContentRecordTypeBuilder()
+                    .addLabel("KNOWS")
                     .addPropertyType(PropertyType("since", "DATE"))
                     .create())
     
-    arc_builder = edge_builder2.buildArcType(knows_content)
-    arc = arc_builder.create()
+    arcBuilder = edgeBuilder2.buildArcType(knowsContent)
+    arc = arcBuilder.create()
     
     # Complete the edge type
-    knows_edge = (edge_builder2
-                 .addFirstNodeType(first_node)
-                 .addSecondNodeType(second_node)
+    knowsEdge = (edgeBuilder2
+                 .addFirstNodeType(firstNode)
+                 .addSecondNodeType(secondNode)
                  .addArcType(arc)
                  .setUndirected()  # Undirected friendship
                  .create())
     
     # Add to graph
-    complete_graph = (complete_graph_builder
-                     .addNodeType(first_node)
-                     .addEdgeType(knows_edge)
+    completeGraph = (completeGraphBuilder
+                     .addNodeType(firstNode)
+                     .addEdgeType(knowsEdge)
                      .create())
     
-    print(f"   Created complete graph: {complete_graph.name}")
-    print(f"   With edge: {knows_edge.name} (undirected: {knows_edge.is_undirected})")
+    print(f"   Created complete graph: {completeGraph.name}")
+    print(f"   With edge: {knowsEdge.name} (undirected: {knowsEdge.isUndirected})")
     
     print("\n=== Builder Pattern Test Complete ===")
     

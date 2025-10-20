@@ -49,27 +49,27 @@ def create_content_types():
     """Define content record types for the graph"""
     # Person content type
     person_content = ContentRecordTypeBuilder() \
-        .add_label("Person") \
-        .add_property_type(PropertyType("name", "STRING", not_null=True)) \
-        .add_property_type(PropertyType("age", "INTEGER")) \
-        .add_property_type(PropertyType("email", "STRING")) \
-        .add_type_name("Person") \
+        .addLabel("Person") \
+        .addPropertyType(PropertyType("name", "STRING", not_null=True)) \
+        .addPropertyType(PropertyType("age", "INTEGER")) \
+        .addPropertyType(PropertyType("email", "STRING")) \
+        .addTypeName("Person") \
         .create()
     
     # Company content type
     company_content = ContentRecordTypeBuilder() \
-        .add_label("Company") \
-        .add_property_type(PropertyType("name", "STRING", not_null=True)) \
-        .add_property_type(PropertyType("industry", "STRING")) \
-        .add_type_name("Company") \
+        .addLabel("Company") \
+        .addPropertyType(PropertyType("name", "STRING", not_null=True)) \
+        .addPropertyType(PropertyType("industry", "STRING")) \
+        .addTypeName("Company") \
         .create()
     
     # Employment relationship content type
     employment_content = ContentRecordTypeBuilder() \
-        .add_label("WORKS_FOR") \
-        .add_property_type(PropertyType("position", "STRING")) \
-        .add_property_type(PropertyType("start_date", "DATE")) \
-        .add_type_name("WORKS_FOR") \
+        .addLabel("WORKS_FOR") \
+        .addPropertyType(PropertyType("position", "STRING")) \
+        .addPropertyType(PropertyType("start_date", "DATE")) \
+        .addTypeName("WORKS_FOR") \
         .create()
     
     return {
@@ -94,14 +94,14 @@ def create_graph_schema(content_types) -> GraphType:
     
     # Create graph type with ALL ELEMENT TYPES KEYED constraint
     graph_type = GraphType("EmployeeGraph", all_element_types_keyed=True)
-    graph_type.add_node_type(person_node_type)
-    graph_type.add_node_type(company_node_type)
-    graph_type.add_edge_type(works_for_edge_type)
+    graph_type.addNodeType(person_node_type)
+    graph_type.addNodeType(company_node_type)
+    graph_type.addEdgeType(works_for_edge_type)
     
     # Add key constraints (required by ALL ELEMENT TYPES KEYED)
-    graph_type.add_constraint(KeyConstraint("Person", ["Person"]))
-    graph_type.add_constraint(KeyConstraint("Company", ["Company"]))
-    graph_type.add_constraint(KeyConstraint("WORKS_FOR", ["WORKS_FOR"]))
+    graph_type.addConstraint(KeyConstraint("Person", ["Person"]))
+    graph_type.addConstraint(KeyConstraint("Company", ["Company"]))
+    graph_type.addConstraint(KeyConstraint("WORKS_FOR", ["WORKS_FOR"]))
     
     return graph_type
 
@@ -215,8 +215,8 @@ def run_functional_test():
         # Step 5: Store in catalog
         print("\n5. Storing objects in catalog...")
         schema = grasch_session.catalog.create_gql_schema("/production/customer_data", "employee_schema")
-        schema.add_graph_type(graph_type)
-        schema.add_graph(graph)
+        schema.addGraphType(graph_type)
+        schema.addGraph(graph)
         
         # Verify catalog storage
         assert "employee_schema" in grasch_session.catalog.root.children["production"].children["customer_data"].schemas

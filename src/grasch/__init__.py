@@ -15,6 +15,7 @@ from .core import (
     SessionConfiguration,
     ProfileConfiguration,
     LanguageLevel,
+    LanguageTypes,
     LEXCompatibility,
     CatalogRootConfiguration,
 )
@@ -48,6 +49,22 @@ from .types import (
 
 from .constraints import (
     KeyConstraint,
+)
+
+from .value_types import (
+    ValueType,
+    ValidationResult,
+    ValidationError,
+    ILVTType,
+    LanguageTypeMapper,
+    validateValue,
+    isValidValue,
+    getTypeForValue,
+    convertLegacyDatatype,
+    getLanguageTypeName,
+    translateType,
+    isTypeCompatible,
+    inferPreciseType,
 )
 
 __all__ = [
@@ -86,4 +103,19 @@ __all__ = [
     
     # Constraints
     "KeyConstraint",
+    
+    # Value types and validation
+    "ValueType",
+    "ValidationResult",
+    "ValidationError",
+    "ILVTType",
+    "LanguageTypeMapper",
+    "validateValue",
+    "isValidValue",
+    "getTypeForValue",
+    "convertLegacyDatatype",
+    "getLanguageTypeName",
+    "translateType",
+    "isTypeCompatible",
+    "inferPreciseType",
 ]

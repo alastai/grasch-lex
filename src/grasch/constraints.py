@@ -14,12 +14,12 @@ from .types import AttributeType, ElementType
 class ConstraintSpecification(ABC):
     """Base class for constraint specifications that can be associated with graph types"""
     
-    def __init__(self, constraint_type: str, target_elements: List[str]):
-        self.constraint_type = constraint_type
-        self.target_elements = target_elements
+    def __init__(self, constraintType: str, targetElements: List[str]):
+        self.constraintType = constraintType
+        self.targetElements = targetElements
     
     @abstractmethod
-    def create_constraint(self, graph_context: Any) -> 'Constraint':
+    def createConstraint(self, graphContext: Any) -> 'Constraint':
         """Create a runtime constraint instance for a specific graph"""
         pass
 
@@ -27,17 +27,17 @@ class ConstraintSpecification(ABC):
 class Constraint(ABC):
     """Base class for runtime constraints that validate graph values"""
     
-    def __init__(self, specification: ConstraintSpecification, graph_context: Any):
+    def __init__(self, specification: ConstraintSpecification, graphContext: Any):
         self.specification = specification
-        self.graph_context = graph_context
+        self.graphContext = graphContext
     
     @abstractmethod
-    def validate(self, element_data: Dict[str, Any]) -> bool:
+    def validate(self, elementData: Dict[str, Any]) -> bool:
         """Validate element data against this constraint"""
         pass
     
     @abstractmethod
-    def get_error_message(self, element_data: Dict[str, Any]) -> str:
+    def getErrorMessage(self, elementData: Dict[str, Any]) -> str:
         """Get error message for constraint violation"""
         pass
 
@@ -45,72 +45,82 @@ class Constraint(ABC):
 class KeyConstraintSpecification(ConstraintSpecification):
     """Specification for LEX key constraints on element types"""
     
-    def __init__(self, element_type: str, key_attributes: List[str]):
-        super().__init__("KEY_CONSTRAINT", [element_type])
-        self.element_type = element_type
-        self.key_attributes = key_attributes
+    def __init__(self, elementType: str, keyAttributes: List[str]):
+        super().__init__("KEY_CONSTRAINT", [elementType])
+        self.elementType = elementType
+        self.keyAttributes = keyAttributes
     
-    def create_constraint(self, graph_context: Any) -> 'KeyConstraint':
+    def createConstraint(self, graphContext: Any) -> 'KeyConstraint':
         """Create a runtime key constraint for a specific graph"""
-        return KeyConstraint(self, graph_context)
+        return KeyConstraint(self, graphContext)
 
 
 class KeyConstraint(Constraint):
     """Runtime key constraint that validates element data"""
     
-    def validate(self, element_data: Dict[str, Any]) -> bool:
+    def __init__(self, elementType: str, keyAttributes: List[str]):
+        """Simple constructor for direct KeyConstraint creation"""
+        specification = KeyConstraintSpecification(elementType, keyAttributes)
+        super().__init__(specification, None)
+    
+    @property
+    def elementType(self) -> str:
+        """Get the element type this constraint applies to"""
+        return self.specification.elementType
+    
+    def validate(self, elementData: Dict[str, Any]) -> bool:
         """Validate that all key attributes are present and not null"""
-        labels = element_data.get('labels', [])
-        properties = element_data.get('properties', {})
+        labels = elementData.get('labels', [])
+        properties = elementData.get('properties', {})
         
         # Check that all key attributes are present
-        for key_attr in self.specification.key_attributes:
+        for keyAttr in self.specification.keyAttributes:
             # Key attributes can be labels or properties
-            if key_attr in labels:
+            if keyAttr in labels:
                 continue
-            elif key_attr in properties and properties[key_attr] is not None:
+            elif keyAttr in properties and properties[keyAttr] is not None:
                 continue
             else:
                 return False
         
         return True
     
-    def get_error_message(self, element_data: Dict[str, Any]) -> str:
+    def getErrorMessage(self, elementData: Dict[str, Any]) -> str:
         """Get error message for key constraint violation"""
-        missing_attrs = []
-        labels = element_data.get('labels', [])
-        properties = element_data.get('properties', {})
+        missingAttrs = []
+        labels = elementData.get('labels', [])
+        properties = elementData.get('properties', {})
         
-        for key_attr in self.specification.key_attributes:
-            if key_attr not in labels and (key_attr not in properties or properties[key_attr] is None):
-                missing_attrs.append(key_attr)
+        for keyAttr in self.specification.keyAttributes:
+            if keyAttr not in labels and (keyAttr not in properties or properties[keyAttr] is None):
+                missingAttrs.append(keyAttr)
         
-        return f"Key constraint violation on {self.specification.element_type}: missing key attributes {missing_attrs}"
+        return f"Key constraint violation on {self.specification.elementType}: missing key attributes {missingAttrs}"
 
 
 class CardinalityConstraintSpecification(ConstraintSpecification):
     """Specification for LEX cardinality constraints on relationships"""
     
-    def __init__(self, relationship_type: str, min_cardinality: int, max_cardinality: Optional[int] = None):
-        super().__init__("CARDINALITY_CONSTRAINT", [relationship_type])
-        self.relationship_type = relationship_type
-        self.min_cardinality = min_cardinality
-        self.max_cardinality = max_cardinality
+    def __init__(self, relationshipType: str, minCardinality: int, maxCardinality: Optional[int] = None):
+        super().__init__("CARDINALITY_CONSTRAINT", [relationshipType])
+        self.relationshipType = relationshipType
+        self.minCardinality = minCardinality
+        self.maxCardinality = maxCardinality
     
-    def create_constraint(self, graph_context: Any) -> 'CardinalityConstraint':
+    def createConstraint(self, graphContext: Any) -> 'CardinalityConstraint':
         """Create a runtime cardinality constraint for a specific graph"""
-        return CardinalityConstraint(self, graph_context)
+        return CardinalityConstraint(self, graphContext)
 
 
 class CardinalityConstraint(Constraint):
     """Runtime cardinality constraint that validates relationship counts"""
     
-    def validate(self, element_data: Dict[str, Any]) -> bool:
+    def validate(self, elementData: Dict[str, Any]) -> bool:
         """Validate cardinality constraints (implementation depends on graph context)"""
         # This would need graph-wide context to validate properly
         # For now, return True as placeholder
         return True
     
-    def get_error_message(self, element_data: Dict[str, Any]) -> str:
+    def getErrorMessage(self, elementData: Dict[str, Any]) -> str:
         """Get error message for cardinality constraint violation"""
-        return f"Cardinality constraint violation on {self.specification.relationship_type}"
+        return f"Cardinality constraint violation on {self.specification.relationshipType}"

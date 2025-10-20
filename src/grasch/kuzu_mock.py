@@ -7,8 +7,8 @@ from typing import List, Dict, Any
 
 class MockKuzuConnection:
     """Mock Kuzu database connection for demonstration"""
-    def __init__(self, database_path: str):
-        self.database_path = database_path
+    def __init__(self, databasePath: str):
+        self.databasePath = databasePath
         self.nodes = []
         self.edges = []
     

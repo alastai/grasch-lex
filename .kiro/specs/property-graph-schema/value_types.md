@@ -15,9 +15,14 @@ The ILVT system creates a union of all supported value types from different syst
 └─────────────┘    │ Types (ILVT)        │    └─────────────────┘
                    │                     │
 ┌─────────────┐    │                     │    ┌─────────────────┐
-│ JSON Schema │◄──►│                     │◄──►│ Future Type     │
-│ Extensions  │    │                     │    │ Systems         │
+│ Cypher      │◄──►│                     │◄──►│ JSON Schema     │
+│ Data Types  │    │                     │    │ Extensions      │
 └─────────────┘    └─────────────────────┘    └─────────────────┘
+                   │                     │
+                   │                     │    ┌─────────────────┐
+                   │                     │◄──►│ Future Type     │
+                   │                     │    │ Systems         │
+                   └─────────────────────┘    └─────────────────┘
 ```
 
 ## Core ILVT Type Registry
@@ -73,26 +78,26 @@ The ILVT system creates a union of all supported value types from different syst
 | `vector` | Numeric Array | Fixed-size numeric vector | `dimension`, `element_type` |
 | `null` | Special | Null/missing value | - |
 
-## 4-Way Type Mapping Tables
+## 5-Way Type Mapping Tables
 
 ### Boolean Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
-|---------------|----------------------------|-------------------------|---------------------------|
-| `boolean` | `BOOLEAN`, `BOOL` | `BOOLEAN` | `data.boolean` |
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|----------------------|---------------------------|
+| `boolean` | `BOOLEAN`, `BOOL` | `BOOLEAN` | `BOOLEAN` | `data.boolean` |
 
 ### Integer Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
-|---------------|----------------------------|-------------------------|---------------------------|
-| `int8` | `INT8` | *No SQL equivalent* | `data.int8` |
-| `int16` | `SMALLINT`, `INT16` | `SMALLINT` | `data.int16` |
-| `int32` | `INTEGER`, `INT`, `INT32` | `INTEGER`, `INT` | `data.int32` |
-| `int64` | `BIGINT`, `INT64` | `BIGINT` | `data.int64` |
-| `int128` | `INT128` | *No SQL equivalent* | `data.int128` |
-| `int256` | `INT256` | *No SQL equivalent* | `data.int256` |
-| `uint8` | `UINT8` | *No SQL equivalent* | `data.uint8` |
-| `uint16` | `UINT16` | *No SQL equivalent* | `data.uint16` |
-| `uint32` | `UINT32` | *No SQL equivalent* | `data.uint32` |
-| `uint64` | `UINT64` | *No SQL equivalent* | `data.uint64` |
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|----------------------|---------------------------|
+| `int8` | `INT8` | *No SQL equivalent* | *No Cypher equivalent* | `data.int8` |
+| `int16` | `SMALLINT`, `INT16` | `SMALLINT` | *No Cypher equivalent* | `data.int16` |
+| `int32` | `INTEGER`, `INT`, `INT32` | `INTEGER`, `INT` | *No Cypher equivalent* | `data.int32` |
+| `int64` | `BIGINT`, `INT64` | `BIGINT` | `INTEGER` | `data.int64` |
+| `int128` | `INT128` | *No SQL equivalent* | *No Cypher equivalent* | `data.int128` |
+| `int256` | `INT256` | *No SQL equivalent* | *No Cypher equivalent* | `data.int256` |
+| `uint8` | `UINT8` | *No SQL equivalent* | *No Cypher equivalent* | `data.uint8` |
+| `uint16` | `UINT16` | *No SQL equivalent* | *No Cypher equivalent* | `data.uint16` |
+| `uint32` | `UINT32` | *No SQL equivalent* | *No Cypher equivalent* | `data.uint32` |
+| `uint64` | `UINT64` | *No SQL equivalent* | *No Cypher equivalent* | `data.uint64` |
 | `uint128` | `UINT128` | *No SQL equivalent* | `data.uint128` |
 | `uint256` | `UINT256` | *No SQL equivalent* | `data.uint256` |
 
@@ -107,46 +112,90 @@ The ILVT system creates a union of all supported value types from different syst
 **Affected Types**: `int8`, `int16`, `int32`, `int64` - SQL precision and ranges are implementation-defined
 
 ### Decimal and Floating Point Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
-|---------------|----------------------------|-------------------------|---------------------------|
-| `decimal` | `DECIMAL`, `DEC` | `DECIMAL`, `NUMERIC`, `DEC` | `data.decimal` |
-| `numeric` | `NUMERIC` | `NUMERIC` | `data.numeric` |
-| `float16` | `FLOAT16` | *No SQL equivalent* | `data.float16` |
-| `float32` | `FLOAT`, `REAL`, `FLOAT32` | `REAL` | `data.float32` |
-| `float64` | `DOUBLE`, `DOUBLE PRECISION`, `FLOAT64` | `DOUBLE PRECISION` | `data.float64` |
-| `float128` | `FLOAT128` | *No SQL equivalent* | `data.float128` |
-| `float256` | `FLOAT256` | *No SQL equivalent* | `data.float256` |
-| `decfloat32` | *No GQL equivalent* | `DECFLOAT(7)` | `data.decfloat32` |
-| `decfloat64` | *No GQL equivalent* | `DECFLOAT(16)` | `data.decfloat64` |
-| `decfloat128` | *No GQL equivalent* | `DECFLOAT(34)` | `data.decfloat128` |
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|----------------------|---------------------------|
+| `decimal` | `DECIMAL`, `DEC` | `DECIMAL`, `NUMERIC`, `DEC` | *No Cypher equivalent* | `data.decimal` |
+| `numeric` | `NUMERIC` | `NUMERIC` | *No Cypher equivalent* | `data.numeric` |
+| `float16` | `FLOAT16` | *No SQL equivalent* | *No Cypher equivalent* | `data.float16` |
+| `float32` | `FLOAT`, `REAL`, `FLOAT32` | `REAL` | *No Cypher equivalent* | `data.float32` |
+| `float64` | `DOUBLE`, `DOUBLE PRECISION`, `FLOAT64` | `DOUBLE PRECISION` | `FLOAT` | `data.float64` |
+| `float128` | `FLOAT128` | *No SQL equivalent* | *No Cypher equivalent* | `data.float128` |
+| `float256` | `FLOAT256` | *No SQL equivalent* | *No Cypher equivalent* | `data.float256` |
+| `decfloat32` | *No GQL equivalent* | `DECFLOAT(7)` | *No Cypher equivalent* | `data.decfloat32` |
+| `decfloat64` | *No GQL equivalent* | `DECFLOAT(16)` | *No Cypher equivalent* | `data.decfloat64` |
+| `decfloat128` | *No GQL equivalent* | `DECFLOAT(34)` | *No Cypher equivalent* | `data.decfloat128` |
 
 ### String and Binary Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
-|---------------|----------------------------|-------------------------|---------------------------|
-| `string` | `STRING` | `VARCHAR`, `CHARACTER VARYING` | `data.string` |
-| `char` | `CHAR` | `CHAR`, `CHARACTER` | `data.char` |
-| `bytes` | `BYTES` | `BLOB`, `BINARY LARGE OBJECT` | `data.bytes` |
-| `binary` | `BINARY` | `BINARY` | `data.binary` |
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|----------------------|---------------------------|
+| `string` | `STRING` | `VARCHAR`, `CHARACTER VARYING` | `STRING` | `data.string` |
+| `char` | `CHAR` | `CHAR`, `CHARACTER` | *No Cypher equivalent* | `data.char` |
+| `bytes` | `BYTES` | `BLOB`, `BINARY LARGE OBJECT` | *No Cypher equivalent* | `data.bytes` |
+| `binary` | `BINARY` | `BINARY` | *No Cypher equivalent* | `data.binary` |
 
 ### Temporal Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
-|---------------|----------------------------|-------------------------|---------------------------|
-| `date` | `DATE` | `DATE` | `data.date` |
-| `time` | `LOCAL TIME` | `TIME` | `data.time` |
-| `time_tz` | `ZONED TIME` | `TIME WITH TIME ZONE` | `data.timeWithTimezone` |
-| `datetime` | `LOCAL DATETIME` | `TIMESTAMP` | `data.datetime` |
-| `datetime_tz` | `ZONED DATETIME` | `TIMESTAMP WITH TIME ZONE` | `data.datetimeWithTimezone` |
-| `duration` | `DURATION` | `INTERVAL` | `data.duration` |
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|----------------------|---------------------------|
+| `date` | `DATE` | `DATE` | `DATE` | `data.date` |
+| `time` | `LOCAL TIME` | `TIME` | `TIME` | `data.time` |
+| `time_tz` | `ZONED TIME` | `TIME WITH TIME ZONE` | *No Cypher equivalent* | `data.timeWithTimezone` |
+| `datetime` | `LOCAL DATETIME` | `TIMESTAMP` | `DATETIME` | `data.datetime` |
+| `datetime_tz` | `ZONED DATETIME` | `TIMESTAMP WITH TIME ZONE` | *No Cypher equivalent* | `data.datetimeWithTimezone` |
+| `duration` | `DURATION` | `INTERVAL` | `DURATION` | `data.duration` |
 
 ### Structured and Special Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
-|---------------|----------------------------|-------------------------|---------------------------|
-| `record` | `RECORD` | `ROW` | `data.record` |
-| `array` | `LIST` | `ARRAY` | `data.array` |
-| `multiset` | *No GQL equivalent* | `MULTISET` | `data.multiset` |
-| `json` | *No GQL equivalent* | `JSON` | `data.json` |
-| `vector` | `VECTOR` | `VECTOR` | `data.vector` |
-| `null` | `NULL` | `NULL` | `data.null` |
+| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+|---------------|----------------------------|-------------------------|----------------------|---------------------------|
+| `record` | `RECORD` | `ROW` | *No Cypher equivalent* | `data.record` |
+| `array` | `LIST` | `ARRAY` | `LIST` | `data.array` |
+| `multiset` | *No GQL equivalent* | `MULTISET` | *No Cypher equivalent* | `data.multiset` |
+| `json` | *No GQL equivalent* | `JSON` | *No Cypher equivalent* | `data.json` |
+| `vector` | `VECTOR` | `VECTOR` | *No Cypher equivalent* | `data.vector` |
+| `null` | `NULL` | `NULL` | `NULL` | `data.null` |
+
+## Cypher Data Type System Integration
+
+### Core Cypher Types
+Cypher supports a limited but practical set of data types that map to ILVT as follows:
+
+| **Cypher Type** | **ILVT Mapping** | **Description** | **Value Range/Format** |
+|-----------------|------------------|-----------------|------------------------|
+| `BOOLEAN` | `boolean` | Boolean true/false values | `true`, `false` |
+| `INTEGER` | `int64` | 64-bit signed integer | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
+| `FLOAT` | `float64` | IEEE 754 double-precision floating point | ±1.7976931348623157E+308 |
+| `STRING` | `string` | Unicode text string | Variable length, UTF-8 encoded |
+| `DATE` | `date` | Calendar date | ISO 8601 date format (YYYY-MM-DD) |
+| `TIME` | `time` | Time of day | ISO 8601 time format (HH:MM:SS[.fff]) |
+| `DATETIME` | `datetime` | Date and time | ISO 8601 datetime format |
+| `DURATION` | `duration` | Time interval | ISO 8601 duration format |
+| `LIST` | `array` | Ordered collection | Heterogeneous elements allowed |
+| `NULL` | `null` | Null/missing value | Single null value |
+
+### Cypher Collection Types
+- **LIST**: Cypher lists are heterogeneous (can contain mixed types), unlike strongly-typed arrays in GQL/SQL
+- **MAP**: Cypher supports map/dictionary types (key-value pairs) but these map to `record` in ILVT
+
+### Cypher Type Characteristics
+- **Dynamic Typing**: Cypher is dynamically typed, allowing mixed-type collections
+- **Null Handling**: Cypher has comprehensive null propagation semantics
+- **Type Coercion**: Limited automatic type conversion (mainly string-to-number)
+- **No Unsigned Types**: Cypher only supports signed integers
+- **No Decimal Types**: Cypher uses floating-point for all non-integer numbers
+
+### Language Level Mapping Strategy
+When translating between ILVT and Cypher types based on language level:
+
+**GQL Language Level**:
+- Use full ILVT type system with precise type mappings
+- Support all GQL-specific types (INT8, UINT*, extended precision)
+- Strict type validation and constraint enforcement
+
+**LEX Language Level** (Cypher compatibility):
+- Map to Cypher-compatible subset of ILVT
+- `int64` for all integer types (with range validation)
+- `float64` for all floating-point types
+- `string` for all text types
+- Allow heterogeneous collections (relaxed type constraints)
 
 ## Type System Coverage Analysis
 

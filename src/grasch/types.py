@@ -23,41 +23,41 @@ class LabelType(AttributeType):
 
 class PropertyType(AttributeType):
     """Property type with GQL datatypes"""
-    def __init__(self, name: str, datatype: str, not_null: bool = False):
+    def __init__(self, name: str, datatype: str, notNull: bool = False):
         super().__init__(name, datatype)
-        self.not_null = not_null
+        self.notNull = notNull
 
 
 class ContentRecordType:
     """Hierarchical record structure with label types and property structure"""
-    def __init__(self, label_types: List[LabelType], property_types: List[PropertyType], type_identifier: Optional[List[str]] = None):
-        self.label_types = tuple(label_types)  # Make immutable tuple
-        self.property_types = tuple(property_types)  # Make immutable tuple
-        self._type_identifier = tuple(type_identifier) if type_identifier else tuple()
+    def __init__(self, labelTypes: List[LabelType], propertyTypes: List[PropertyType], typeIdentifier: Optional[List[str]] = None):
+        self.labelTypes = tuple(labelTypes)  # Make immutable tuple
+        self.propertyTypes = tuple(propertyTypes)  # Make immutable tuple
+        self._typeIdentifier = tuple(typeIdentifier) if typeIdentifier else tuple()
     
     @property
     def name(self) -> Optional[str]:
         """Return the pseudo-name if type identifier is a singleton set, None otherwise"""
-        if len(self._type_identifier) == 1:
-            return self._type_identifier[0]
+        if len(self._typeIdentifier) == 1:
+            return self._typeIdentifier[0]
         return None
     
     @property
     def identifier(self) -> List[str]:
         """Return the type identifier as a list of label identifiers"""
-        return list(self._type_identifier)
+        return list(self._typeIdentifier)
     
     @property
-    def type_key(self) -> Optional[List[LabelType]]:
-        """Backward compatibility: return LabelType objects for the type identifier"""
-        if self._type_identifier:
-            return [LabelType(label_id) for label_id in self._type_identifier]
+    def typeKey(self) -> Optional[List[LabelType]]:
+        """Return LabelType objects for the type identifier"""
+        if self._typeIdentifier:
+            return [LabelType(labelId) for labelId in self._typeIdentifier]
         return None
     
     @property
     def labels(self) -> List[str]:
         """Return the label names as strings"""
-        return [label.name for label in self.label_types]
+        return [label.name for label in self.labelTypes]
 
 
 class LabelTypeBuilder:
@@ -77,9 +77,9 @@ class PropertyTypeBuilder:
         self.datatype = datatype
         self._not_null: bool = False
     
-    def setNotNull(self, not_null: bool = True) -> 'PropertyTypeBuilder':
+    def setNotNull(self, notNull: bool = True) -> 'PropertyTypeBuilder':
         """Set the not null constraint"""
-        self._not_null = not_null
+        self._notNull = notNull
         return self
     
     def create(self) -> PropertyType:
@@ -90,9 +90,9 @@ class PropertyTypeBuilder:
 class ContentRecordTypeBuilder:
     """Builder for ContentRecordType instances with comprehensive build/add pattern"""
     def __init__(self):
-        self._label_types: List[LabelType] = []
-        self._property_types: List[PropertyType] = []
-        self._type_identifier: Optional[List[str]] = None
+        self._labelTypes: List[LabelType] = []
+        self._propertyTypes: List[PropertyType] = []
+        self._typeIdentifier: Optional[List[str]] = None
     
     # Build methods - return builders for contained objects
     def buildLabelType(self, name: str) -> LabelTypeBuilder:
@@ -104,78 +104,62 @@ class ContentRecordTypeBuilder:
         return PropertyTypeBuilder(name, datatype)
     
     # Add methods - accept pre-built objects
-    def addLabelType(self, label_type: LabelType) -> 'ContentRecordTypeBuilder':
+    def addLabelType(self, labelType: LabelType) -> 'ContentRecordTypeBuilder':
         """Add a pre-built label type"""
-        self._label_types.append(label_type)
+        self._labelTypes.append(labelType)
         return self
     
-    def addLabelTypes(self, label_types: List[LabelType]) -> 'ContentRecordTypeBuilder':
+    def addLabelTypes(self, labelTypes: List[LabelType]) -> 'ContentRecordTypeBuilder':
         """Add multiple pre-built label types"""
-        self._label_types.extend(label_types)
+        self._labelTypes.extend(labelTypes)
         return self
     
-    def addPropertyType(self, property_type: PropertyType) -> 'ContentRecordTypeBuilder':
+    def addPropertyType(self, propertyType: PropertyType) -> 'ContentRecordTypeBuilder':
         """Add a pre-built property type"""
-        self._property_types.append(property_type)
+        self._propertyTypes.append(propertyType)
         return self
     
-    def addPropertyTypes(self, property_types: List[PropertyType]) -> 'ContentRecordTypeBuilder':
+    def addPropertyTypes(self, propertyTypes: List[PropertyType]) -> 'ContentRecordTypeBuilder':
         """Add multiple pre-built property types"""
-        self._property_types.extend(property_types)
+        self._propertyTypes.extend(propertyTypes)
         return self
     
-    # Convenience methods for backward compatibility
-    def add_label_type(self, label_type: LabelType) -> 'ContentRecordTypeBuilder':
-        """Backward compatibility: add a label type"""
-        return self.addLabelType(label_type)
-    
-    def add_label_types(self, label_types: List[LabelType]) -> 'ContentRecordTypeBuilder':
-        """Backward compatibility: add multiple label types"""
-        return self.addLabelTypes(label_types)
-    
-    def add_label(self, label: str) -> 'ContentRecordTypeBuilder':
+    # Convenience methods
+    def addLabel(self, label: str) -> 'ContentRecordTypeBuilder':
         """Convenience method that creates and adds LabelType"""
         return self.addLabelType(LabelType(label))
     
-    def add_labels(self, labels: List[str]) -> 'ContentRecordTypeBuilder':
+    def addLabels(self, labels: List[str]) -> 'ContentRecordTypeBuilder':
         """Convenience method that creates and adds multiple LabelTypes"""
         for label in labels:
             self.addLabelType(LabelType(label))
         return self
     
-    def add_property_type(self, property_type: PropertyType) -> 'ContentRecordTypeBuilder':
-        """Backward compatibility: add a property type"""
-        return self.addPropertyType(property_type)
-    
-    def add_type_name(self, type_name: str) -> 'ContentRecordTypeBuilder':
+    def addTypeName(self, typeName: str) -> 'ContentRecordTypeBuilder':
         """Add a single type name (convenience method for singleton type identifier)"""
-        return self.addTypeIdentifier([type_name])
+        return self.addTypeIdentifier([typeName])
     
-    def addTypeIdentifier(self, type_identifier: List[str]) -> 'ContentRecordTypeBuilder':
+    def addTypeIdentifier(self, typeIdentifier: List[str]) -> 'ContentRecordTypeBuilder':
         """Set the type identifier (key label set as strings)"""
-        self._type_identifier = type_identifier
+        self._typeIdentifier = typeIdentifier
         return self
     
-    def add_type_identifier(self, type_identifier: List[str]) -> 'ContentRecordTypeBuilder':
-        """Backward compatibility: set type identifier"""
-        return self.addTypeIdentifier(type_identifier)
+    def addTypeKey(self, typeIdentifier: List[str]) -> 'ContentRecordTypeBuilder':
+        """Synonym for addTypeIdentifier"""
+        return self.addTypeIdentifier(typeIdentifier)
     
-    def add_type_key(self, type_identifier: List[str]) -> 'ContentRecordTypeBuilder':
-        """Synonym for add_type_identifier"""
-        return self.addTypeIdentifier(type_identifier)
+    def addTypeKeyLabelSet(self, typeIdentifier: List[str]) -> 'ContentRecordTypeBuilder':
+        """Synonym for addTypeIdentifier"""
+        return self.addTypeIdentifier(typeIdentifier)
     
-    def add_type_key_label_set(self, type_identifier: List[str]) -> 'ContentRecordTypeBuilder':
-        """Synonym for add_type_identifier"""
-        return self.addTypeIdentifier(type_identifier)
-    
-    def set_type_key(self, key_labels: List[LabelType]) -> 'ContentRecordTypeBuilder':
-        """Backward compatibility: convert LabelType objects to string identifiers"""
-        type_identifier = [label.name for label in key_labels]
-        return self.addTypeIdentifier(type_identifier)
+    def setTypeKey(self, keyLabels: List[LabelType]) -> 'ContentRecordTypeBuilder':
+        """Convert LabelType objects to string identifiers"""
+        typeIdentifier = [label.name for label in keyLabels]
+        return self.addTypeIdentifier(typeIdentifier)
     
     def create(self) -> ContentRecordType:
         """Create and return the ContentRecordType instance"""
-        return ContentRecordType(self._label_types, self._property_types, self._type_identifier)
+        return ContentRecordType(self._labelTypes, self._propertyTypes, self._typeIdentifier)
 
 
 # Alias for clarity in ElementType context
@@ -184,90 +168,90 @@ RecordContentType = ContentRecordType
 
 class ElementType(ABC):
     """Abstract base class for all element types (nodes and edges)"""
-    def __init__(self, name: str, identifying_content_type: ContentRecordType):
-        self.element_id = str(uuid.uuid4())  # System-generated UUID
+    def __init__(self, name: str, identifyingContentType: ContentRecordType):
+        self.elementId = str(uuid.uuid4())  # System-generated UUID
         self.name = name
-        self.identifying_content_type = identifying_content_type
+        self.identifyingContentType = identifyingContentType
     
     @abstractmethod
-    def get_element_kind(self) -> str:
+    def getElementKind(self) -> str:
         """Return the kind of element (node or edge)"""
         pass
 
 
 class NodeType(ElementType):
     """Node type based on content record type"""
-    def __init__(self, content_type: ContentRecordType):
+    def __init__(self, contentType: ContentRecordType):
         # NodeType name is derived from content type pseudo-name, or first identifier if available
-        node_name = content_type.name or (content_type.identifier[0] if content_type.identifier else "UnnamedNode")
-        super().__init__(node_name, content_type)
-        self.content_type = content_type  # Keep for backward compatibility
+        nodeName = contentType.name or (contentType.identifier[0] if contentType.identifier else "UnnamedNode")
+        super().__init__(nodeName, contentType)
+        self.contentType = contentType  # Keep for backward compatibility
     
-    def get_element_kind(self) -> str:
+    def getElementKind(self) -> str:
         return "node"
 
 
 class NodeTypeBuilder:
     """Builder for NodeType instances"""
-    def __init__(self, content_type: ContentRecordType):
-        self.content_type = content_type
+    def __init__(self, contentType: ContentRecordType):
+        self.contentType = contentType
     
     def create(self) -> NodeType:
         """Create and return the NodeType instance"""
-        return NodeType(self.content_type)
+        return NodeType(self.contentType)
 
 
 class EdgeDirection:
     """Direction specification as an ordered pair (tail_reference, head_reference)"""
-    def __init__(self, tail_reference: str, head_reference: str):
+    def __init__(self, tailReference: str, headReference: str):
         """
         Create a direction specification.
         
         Args:
-            tail_reference: Either "first" or "second" - which endpoint is the tail
-            head_reference: Either "first" or "second" - which endpoint is the head
+            tailReference: Either "first" or "second" - which endpoint is the tail
+            headReference: Either "first" or "second" - which endpoint is the head
         """
-        if tail_reference not in ("first", "second"):
-            raise ValueError("tail_reference must be 'first' or 'second'")
-        if head_reference not in ("first", "second"):
-            raise ValueError("head_reference must be 'first' or 'second'")
+        if tailReference not in ("first", "second"):
+            raise ValueError("tailReference must be 'first' or 'second'")
+        if headReference not in ("first", "second"):
+            raise ValueError("headReference must be 'first' or 'second'")
         
-        self.tail_reference = tail_reference
-        self.head_reference = head_reference
+        self.tailReference = tailReference
+        self.headReference = headReference
     
     def __repr__(self):
-        return f"EdgeDirection(tail={self.tail_reference}, head={self.head_reference})"
+        return f"EdgeDirection(tail={self.tailReference}, head={self.headReference})"
     
     @classmethod
-    def first_to_second(cls):
+    def firstToSecond(cls):
         """Convenience method: direction from first node to second node"""
         return cls("first", "second")
     
     @classmethod
-    def second_to_first(cls):
+    def secondToFirst(cls):
         """Convenience method: direction from second node to first node"""
         return cls("second", "first")
 
 
 class ArcType:
     """Arc type - the content type portion of an edge type"""
-    def __init__(self, content_type: ContentRecordType):
-        self.content_type = content_type
+    def __init__(self, contentType: ContentRecordType):
+        self.contentType = contentType
         # Arc name is derived from content type pseudo-name, or first identifier if available
-        self.name = content_type.name or (content_type.identifier[0] if content_type.identifier else "UnnamedArc")
+        self.name = contentType.name or (contentType.identifier[0] if contentType.identifier else "UnnamedArc")
     
     def __repr__(self):
-        return f"ArcType(name={self.name}, content_type={self.content_type})"
+        return f"ArcType(name={self.name}, contentType={self.contentType})"
 
 
 class ArcTypeBuilder:
     """Builder for ArcType instances"""
-    def __init__(self, content_type: ContentRecordType):
-        self.content_type = content_type
+    def __init__(self, contentType: ContentRecordType):
+        self.contentType = contentType
     
     def create(self) -> ArcType:
         """Create and return the ArcType instance"""
-        return ArcType(self.content_type)
+        return ArcType(self.contentType)
 
 
 class EdgeType(ElementType):
@@ -283,23 +267,23 @@ class EdgeType(ElementType):
         # Backward compatibility
         self.arc_content_type = arc_type.content_type
     
-    def get_element_kind(self) -> str:
+    def getElementKind(self) -> str:
         return "edge"
     
     @property
-    def is_directed(self) -> bool:
+    def isDirected(self) -> bool:
         """Check if the edge type has a direction specified"""
         return self.direction is not None
     
     @property
-    def is_undirected(self) -> bool:
+    def isUndirected(self) -> bool:
         """Check if the edge type has no direction specified"""
         return self.direction is None
     
     @property
-    def tail_node_type(self) -> Optional[NodeType]:
+    def tailNodeType(self) -> Optional[NodeType]:
         """Get the tail (source) node type for directed edges, None for undirected"""
-        if not self.is_directed:
+        if not self.isDirected:
             return None
         
         if self.direction.tail_reference == "first":
@@ -308,9 +292,9 @@ class EdgeType(ElementType):
             return self.second_node_type
     
     @property
-    def head_node_type(self) -> Optional[NodeType]:
+    def headNodeType(self) -> Optional[NodeType]:
         """Get the head (target) node type for directed edges, None for undirected"""
-        if not self.is_directed:
+        if not self.isDirected:
             return None
         
         if self.direction.head_reference == "first":
@@ -319,17 +303,17 @@ class EdgeType(ElementType):
             return self.second_node_type
     
     @property
-    def source_type(self) -> NodeType:
+    def sourceType(self) -> NodeType:
         """Backward compatibility property - maps to tail for directed edges, first for undirected"""
-        if self.is_directed:
-            return self.tail_node_type
+        if self.isDirected:
+            return self.tailNodeType
         return self.first_node_type
     
     @property
-    def target_type(self) -> NodeType:
+    def targetType(self) -> NodeType:
         """Backward compatibility property - maps to head for directed edges, second for undirected"""
-        if self.is_directed:
-            return self.head_node_type
+        if self.isDirected:
+            return self.headNodeType
         return self.second_node_type
 
 
@@ -406,20 +390,20 @@ class EdgeTypeBuilder:
 
 class GraphType:
     """GQL graph type with LEX constraint extensions"""
-    def __init__(self, name: str, all_element_types_keyed: bool = False):
+    def __init__(self, name: str, allElementTypesKeyed: bool = False):
         self.name = name
-        self.node_types: List[NodeType] = []
-        self.edge_types: List[EdgeType] = []
+        self.nodeTypes: List[NodeType] = []
+        self.edgeTypes: List[EdgeType] = []
         self.constraints: List['KeyConstraint'] = []
-        self.all_element_types_keyed = all_element_types_keyed
+        self.allElementTypesKeyed = allElementTypesKeyed
     
-    def add_node_type(self, node_type: NodeType):
-        self.node_types.append(node_type)
+    def addNodeType(self, nodeType: NodeType) -> None:
+        self.nodeTypes.append(nodeType)
     
-    def add_edge_type(self, edge_type: EdgeType):
-        self.edge_types.append(edge_type)
+    def addEdgeType(self, edgeType: EdgeType) -> None:
+        self.edgeTypes.append(edgeType)
     
-    def add_constraint(self, constraint: 'KeyConstraint'):
+    def addConstraint(self, constraint: 'KeyConstraint') -> None:
         self.constraints.append(constraint)
 
 
@@ -427,10 +411,10 @@ class GraphTypeBuilder:
     """Builder for GraphType instances with comprehensive build/add pattern"""
     def __init__(self, name: str):
         self.name = name
-        self._node_types: List[NodeType] = []
-        self._edge_types: List[EdgeType] = []
+        self._nodeTypes: List[NodeType] = []
+        self._edgeTypes: List[EdgeType] = []
         self._constraints: List['KeyConstraint'] = []
-        self._all_element_types_keyed: bool = False
+        self._allElementTypesKeyed: bool = False
     
     # Build methods - return builders for contained objects
     def buildNodeType(self, content_type: ContentRecordType) -> NodeTypeBuilder:
@@ -446,24 +430,24 @@ class GraphTypeBuilder:
         return ContentRecordTypeBuilder()
     
     # Add methods - accept pre-built objects
-    def addNodeType(self, node_type: NodeType) -> 'GraphTypeBuilder':
+    def addNodeType(self, nodeType: NodeType) -> 'GraphTypeBuilder':
         """Add a pre-built node type"""
-        self._node_types.append(node_type)
+        self._nodeTypes.append(nodeType)
         return self
     
-    def addNodeTypes(self, node_types: List[NodeType]) -> 'GraphTypeBuilder':
+    def addNodeTypes(self, nodeTypes: List[NodeType]) -> 'GraphTypeBuilder':
         """Add multiple pre-built node types"""
-        self._node_types.extend(node_types)
+        self._nodeTypes.extend(nodeTypes)
         return self
     
-    def addEdgeType(self, edge_type: EdgeType) -> 'GraphTypeBuilder':
+    def addEdgeType(self, edgeType: EdgeType) -> 'GraphTypeBuilder':
         """Add a pre-built edge type"""
-        self._edge_types.append(edge_type)
+        self._edgeTypes.append(edgeType)
         return self
     
-    def addEdgeTypes(self, edge_types: List[EdgeType]) -> 'GraphTypeBuilder':
+    def addEdgeTypes(self, edgeTypes: List[EdgeType]) -> 'GraphTypeBuilder':
         """Add multiple pre-built edge types"""
-        self._edge_types.extend(edge_types)
+        self._edgeTypes.extend(edgeTypes)
         return self
     
     def addConstraint(self, constraint: 'KeyConstraint') -> 'GraphTypeBuilder':
@@ -473,25 +457,25 @@ class GraphTypeBuilder:
     
     def setAllElementTypesKeyed(self, keyed: bool = True) -> 'GraphTypeBuilder':
         """Set the all element types keyed flag"""
-        self._all_element_types_keyed = keyed
+        self._allElementTypesKeyed = keyed
         return self
     
     def create(self) -> GraphType:
         """Create and return the GraphType instance"""
         graph_type = GraphType(
             name=self.name,
-            all_element_types_keyed=self._all_element_types_keyed
+            allElementTypesKeyed=self._allElementTypesKeyed
         )
         
         # Add all collected components
-        for node_type in self._node_types:
-            graph_type.add_node_type(node_type)
+        for nodeType in self._nodeTypes:
+            graph_type.addNodeType(nodeType)
         
-        for edge_type in self._edge_types:
-            graph_type.add_edge_type(edge_type)
+        for edgeType in self._edgeTypes:
+            graph_type.addEdgeType(edgeType)
         
         for constraint in self._constraints:
-            graph_type.add_constraint(constraint)
+            graph_type.addConstraint(constraint)
         
         return graph_type
 
@@ -504,7 +488,7 @@ class Graph:
         self.nodes: List[Dict[str, Any]] = []
         self.edges: List[Dict[str, Any]] = []
     
-    def insert_node(self, labels: List[str], properties: Dict[str, Any]):
+    def insertNode(self, labels: List[str], properties: Dict[str, Any]) -> int:
         """Insert a node with labels and properties"""
         node = {
             'labels': labels,
@@ -514,11 +498,11 @@ class Graph:
         self.nodes.append(node)
         return node['id']
     
-    def insert_edge(self, source_id: int, target_id: int, labels: List[str], properties: Dict[str, Any]):
+    def insertEdge(self, sourceId: int, targetId: int, labels: List[str], properties: Dict[str, Any]) -> int:
         """Insert an edge between nodes"""
         edge = {
-            'source_id': source_id,
-            'target_id': target_id,
+            'source_id': sourceId,
+            'target_id': targetId,
             'labels': labels,
             'properties': properties,
             'id': len(self.edges)

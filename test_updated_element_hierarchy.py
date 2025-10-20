@@ -12,102 +12,102 @@ def test_updated_element_type_hierarchy():
     """Test the updated ElementType hierarchy implementation"""
     
     # Create content record types
-    person_content = ContentRecordType("PersonContent")
-    person_content.add_label_type(LabelType("Person"))
-    person_content.add_property_type(PropertyType("name", "STRING", not_null=True))
+    personContent = ContentRecordType("PersonContent")
+    personContent.addLabelType(LabelType("Person"))
+    personContent.addPropertyType(PropertyType("name", "STRING", not_null=True))
     
-    company_content = ContentRecordType("CompanyContent")
-    company_content.add_label_type(LabelType("Company"))
-    company_content.add_property_type(PropertyType("name", "STRING", not_null=True))
+    companyContent = ContentRecordType("CompanyContent")
+    companyContent.addLabelType(LabelType("Company"))
+    companyContent.addPropertyType(PropertyType("name", "STRING", not_null=True))
     
-    works_for_content = ContentRecordType("WorksForContent")
-    works_for_content.add_label_type(LabelType("WORKS_FOR"))
-    works_for_content.add_property_type(PropertyType("position", "STRING"))
+    worksForContent = ContentRecordType("WorksForContent")
+    worksForContent.addLabelType(LabelType("WORKS_FOR"))
+    worksForContent.addPropertyType(PropertyType("position", "STRING"))
     
     # Create node types
-    person_type = NodeType("Person", person_content)
-    company_type = NodeType("Company", company_content)
+    personType = NodeType("Person", personContent)
+    companyType = NodeType("Company", companyContent)
     
     print("✓ Created NodeType instances")
     
     # Test NodeType inheritance from ElementType
-    assert isinstance(person_type, ElementType)
-    assert person_type.get_element_kind() == "node"
-    assert person_type.identifying_content_type == person_content
-    assert person_type.name == "Person"
+    assert isinstance(personType, ElementType)
+    assert personType.getElementKind() == "node"
+    assert personType.identifyingContentType == personContent
+    assert personType.name == "Person"
     
     print("✓ NodeType correctly inherits from ElementType")
     
     # Create undirected edge (no direction specified)
-    undirected_edge = EdgeType("KNOWS", person_type, person_type, works_for_content)
+    undirectedEdge = EdgeType("KNOWS", personType, personType, worksForContent)
     
     # Create directed edges with explicit directions
-    first_to_second_edge = EdgeType("WORKS_FOR", person_type, company_type, works_for_content, 
-                                   EdgeDirection.first_to_second())
-    second_to_first_edge = EdgeType("MANAGES", company_type, person_type, works_for_content,
-                                   EdgeDirection.second_to_first())
+    firstToSecondEdge = EdgeType("WORKS_FOR", personType, companyType, worksForContent, 
+                                   EdgeDirection.firstToSecond())
+    secondToFirstEdge = EdgeType("MANAGES", companyType, personType, worksForContent,
+                                   EdgeDirection.secondToFirst())
     
     print("✓ Created EdgeType instances with different directions")
     
     # Test EdgeType inheritance from ElementType
-    assert isinstance(first_to_second_edge, ElementType)
-    assert first_to_second_edge.get_element_kind() == "edge"
-    assert first_to_second_edge.identifying_content_type == works_for_content
+    assert isinstance(firstToSecondEdge, ElementType)
+    assert firstToSecondEdge.getElementKind() == "edge"
+    assert firstToSecondEdge.identifyingContentType == worksForContent
     
     print("✓ EdgeType correctly inherits from ElementType")
     
     # Test undirected edge properties
-    assert undirected_edge.is_undirected
-    assert not undirected_edge.is_directed
-    assert undirected_edge.tail_node_type is None
-    assert undirected_edge.head_node_type is None
+    assert undirectedEdge.isUndirected
+    assert not undirectedEdge.isDirected
+    assert undirectedEdge.tailNodeType is None
+    assert undirectedEdge.headNodeType is None
     
     print("✓ Undirected edge properties work correctly")
     
     # Test first-to-second directed edge
-    assert first_to_second_edge.is_directed
-    assert not first_to_second_edge.is_undirected
-    assert first_to_second_edge.tail_node_type == person_type  # first
-    assert first_to_second_edge.head_node_type == company_type  # second
+    assert firstToSecondEdge.isDirected
+    assert not firstToSecondEdge.isUndirected
+    assert firstToSecondEdge.tailNodeType == personType  # first
+    assert firstToSecondEdge.headNodeType == companyType  # second
     
     print("✓ First-to-second direction works correctly")
     
     # Test second-to-first directed edge
-    assert second_to_first_edge.is_directed
-    assert not second_to_first_edge.is_undirected
-    assert second_to_first_edge.tail_node_type == person_type  # second
-    assert second_to_first_edge.head_node_type == company_type  # first
+    assert secondToFirstEdge.isDirected
+    assert not secondToFirstEdge.isUndirected
+    assert secondToFirstEdge.tailNodeType == personType  # second
+    assert secondToFirstEdge.headNodeType == companyType  # first
     
     print("✓ Second-to-first direction works correctly")
     
     # Test backward compatibility properties
     # For undirected edges
-    assert undirected_edge.source_type == person_type  # first
-    assert undirected_edge.target_type == person_type  # second (same in this case)
+    assert undirectedEdge.sourceType == personType  # first
+    assert undirectedEdge.targetType == personType  # second (same in this case)
     
     # For directed edges
-    assert first_to_second_edge.source_type == first_to_second_edge.tail_node_type
-    assert first_to_second_edge.target_type == first_to_second_edge.head_node_type
+    assert firstToSecondEdge.sourceType == firstToSecondEdge.tailNodeType
+    assert firstToSecondEdge.targetType == firstToSecondEdge.headNodeType
     
     print("✓ Backward compatibility properties work")
     
     # Test same node type with different directions
-    self_first_to_second = EdgeType("MENTORS", person_type, person_type, works_for_content,
-                                   EdgeDirection.first_to_second())
-    self_second_to_first = EdgeType("REPORTS_TO", person_type, person_type, works_for_content,
-                                   EdgeDirection.second_to_first())
+    selfFirstToSecond = EdgeType("MENTORS", personType, personType, worksForContent,
+                                   EdgeDirection.firstToSecond())
+    selfSecondToFirst = EdgeType("REPORTS_TO", personType, personType, worksForContent,
+                                   EdgeDirection.secondToFirst())
     
     # Both should have same node types but different tail/head assignments
-    assert self_first_to_second.tail_node_type == person_type
-    assert self_first_to_second.head_node_type == person_type
-    assert self_second_to_first.tail_node_type == person_type
-    assert self_second_to_first.head_node_type == person_type
+    assert selfFirstToSecond.tailNodeType == personType
+    assert selfFirstToSecond.headNodeType == personType
+    assert selfSecondToFirst.tailNodeType == personType
+    assert selfSecondToFirst.headNodeType == personType
     
     # But the direction objects should be different
-    assert self_first_to_second.direction.tail_reference == "first"
-    assert self_first_to_second.direction.head_reference == "second"
-    assert self_second_to_first.direction.tail_reference == "second"
-    assert self_second_to_first.direction.head_reference == "first"
+    assert selfFirstToSecond.direction.tailReference == "first"
+    assert selfFirstToSecond.direction.headReference == "second"
+    assert selfSecondToFirst.direction.tailReference == "second"
+    assert selfSecondToFirst.direction.headReference == "first"
     
     print("✓ Same node type with different directions works correctly")
     

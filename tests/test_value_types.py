@@ -456,24 +456,24 @@ class TestILVTIntegration:
     
     def test_languageLevelMapping(self):
         """Test language-specific type name mapping"""
-        # Test GQL mappings
-        assert LanguageTypeMapper.getILVTFromLanguageType("INTEGER", LanguageTypes.GQL) == ILVTType.INT32
-        assert LanguageTypeMapper.getILVTFromLanguageType("BIGINT", LanguageTypes.GQL) == ILVTType.INT64
-        assert LanguageTypeMapper.getILVTFromLanguageType("STRING", LanguageTypes.GQL) == ILVTType.STRING
+        # Test GQL mappings (lowercase)
+        assert LanguageTypeMapper.getILVTFromLanguageType("integer", LanguageTypes.GQL) == ILVTType.INT32
+        assert LanguageTypeMapper.getILVTFromLanguageType("bigint", LanguageTypes.GQL) == ILVTType.INT64
+        assert LanguageTypeMapper.getILVTFromLanguageType("string", LanguageTypes.GQL) == ILVTType.STRING
         
-        # Test Cypher type system (limited type system)
+        # Test Cypher type system (uppercase)
         assert LanguageTypeMapper.getILVTFromLanguageType("INTEGER", LanguageTypes.CYPHER) == ILVTType.INT64
         assert LanguageTypeMapper.getILVTFromLanguageType("FLOAT", LanguageTypes.CYPHER) == ILVTType.FLOAT64
         
-        # Test JSON type system (basic JSON types only)
-        assert LanguageTypeMapper.getILVTFromLanguageType("NUMBER", LanguageTypes.JSON) == ILVTType.INT8  # First integer type in mapping
-        assert LanguageTypeMapper.getILVTFromLanguageType("STRING", LanguageTypes.JSON) == ILVTType.STRING
-        assert LanguageTypeMapper.getILVTFromLanguageType("BOOLEAN", LanguageTypes.JSON) == ILVTType.BOOLEAN
-        assert LanguageTypeMapper.getILVTFromLanguageType("JSON", LanguageTypes.JSON) is None  # JSON type not available in basic JSON
-        # Test DATABASE_JSON type system (1:1 with GQL)
-        assert LanguageTypeMapper.getILVTFromLanguageType("BIGINT", LanguageTypes.DATABASE_JSON) == ILVTType.INT64
-        assert LanguageTypeMapper.getILVTFromLanguageType("JSON", LanguageTypes.DATABASE_JSON) == ILVTType.JSON  # JSON type available in DATABASE_JSON
-        assert LanguageTypeMapper.getILVTFromLanguageType("JSON", LanguageTypes.GQL) is None  # Not available in GQL
+        # Test JSON type system (lowercase)
+        assert LanguageTypeMapper.getILVTFromLanguageType("number", LanguageTypes.JSON) == ILVTType.INT8  # First integer type in mapping
+        assert LanguageTypeMapper.getILVTFromLanguageType("string", LanguageTypes.JSON) == ILVTType.STRING
+        assert LanguageTypeMapper.getILVTFromLanguageType("boolean", LanguageTypes.JSON) == ILVTType.BOOLEAN
+        assert LanguageTypeMapper.getILVTFromLanguageType("json", LanguageTypes.JSON) is None  # JSON type not available in basic JSON
+        # Test DATABASE_JSON type system (lowercase, 1:1 with GQL)
+        assert LanguageTypeMapper.getILVTFromLanguageType("bigint", LanguageTypes.DATABASE_JSON) == ILVTType.INT64
+        assert LanguageTypeMapper.getILVTFromLanguageType("json", LanguageTypes.DATABASE_JSON) == ILVTType.JSON  # JSON type available in DATABASE_JSON
+        assert LanguageTypeMapper.getILVTFromLanguageType("json", LanguageTypes.GQL) is None  # Not available in GQL
     
     def test_cypherCompatibility(self):
         """Test Cypher compatibility mapping"""
@@ -504,9 +504,9 @@ class TestILVTIntegration:
     
     def test_languageTypeNames(self):
         """Test getting language-specific type names"""
-        # Test GQL type names
-        assert getLanguageTypeName(ValueType.INTEGER, LanguageTypes.GQL) == "BIGINT"  # INT64 -> BIGINT in GQL
-        assert getLanguageTypeName(ValueType.FLOAT, LanguageTypes.GQL) == "DOUBLE"
+        # Test GQL type names (lowercase)
+        assert getLanguageTypeName(ValueType.INTEGER, LanguageTypes.GQL) == "bigint"  # INT64 -> bigint in GQL
+        assert getLanguageTypeName(ValueType.FLOAT, LanguageTypes.GQL) == "double"
         
         # Test Cypher type names
         assert getLanguageTypeName(ValueType.INTEGER, LanguageTypes.CYPHER) == "INTEGER"
@@ -518,35 +518,35 @@ class TestILVTIntegration:
         # In GQL/LEX: should infer UINT8 (most precise)
         # In Cypher: should infer INTEGER (only integer type available)
         
-        assert inferPreciseType(128, LanguageTypes.GQL) == "UINT8"
-        assert inferPreciseType(128, LanguageTypes.JSON) == "NUMBER"  # JSON basic type  
+        assert inferPreciseType(128, LanguageTypes.GQL) == "uint8"
+        assert inferPreciseType(128, LanguageTypes.JSON) == "number"  # JSON basic type  
         assert inferPreciseType(128, LanguageTypes.CYPHER) == "INTEGER"
         
         # Test larger integer value 70000
-        assert inferPreciseType(70000, LanguageTypes.GQL) == "UINT32"  # Fits in UINT32 (70000 > 65535)
+        assert inferPreciseType(70000, LanguageTypes.GQL) == "uint32"  # Fits in UINT32 (70000 > 65535)
         assert inferPreciseType(70000, LanguageTypes.CYPHER) == "INTEGER"
         
         # Test negative integer -100
-        assert inferPreciseType(-100, LanguageTypes.GQL) == "INT8"  # Fits in INT8
+        assert inferPreciseType(-100, LanguageTypes.GQL) == "int8"  # Fits in INT8
         assert inferPreciseType(-100, LanguageTypes.CYPHER) == "INTEGER"
     
     def test_typeTranslation(self):
         """Test type translation between language type systems"""
-        # Translate Cypher INTEGER to GQL - should return all compatible integer types
+        # Translate Cypher INTEGER to GQL - should return all compatible integer types (lowercase)
         gql_equivalents = translateType("INTEGER", LanguageTypes.CYPHER, LanguageTypes.GQL)
-        assert "INT64" in gql_equivalents or "BIGINT" in gql_equivalents
+        assert "int64" in gql_equivalents or "bigint" in gql_equivalents
         
-        # Translate GQL UINT8 to Cypher - should return INTEGER
-        cypher_equivalents = translateType("UINT8", LanguageTypes.GQL, LanguageTypes.CYPHER)
+        # Translate GQL uint8 to Cypher - should return INTEGER (uppercase)
+        cypher_equivalents = translateType("uint8", LanguageTypes.GQL, LanguageTypes.CYPHER)
         assert "INTEGER" in cypher_equivalents
     
     def test_typeCompatibility(self):
         """Test type compatibility checking"""
-        # Cypher INTEGER should be compatible with GQL BIGINT
-        assert isTypeCompatible("INTEGER", LanguageTypes.CYPHER, "BIGINT", LanguageTypes.GQL)
+        # Cypher INTEGER should be compatible with GQL bigint (lowercase)
+        assert isTypeCompatible("INTEGER", LanguageTypes.CYPHER, "bigint", LanguageTypes.GQL)
         
-        # GQL UINT8 should be compatible with Cypher INTEGER
-        assert isTypeCompatible("UINT8", LanguageTypes.GQL, "INTEGER", LanguageTypes.CYPHER)
+        # GQL uint8 should be compatible with Cypher INTEGER
+        assert isTypeCompatible("uint8", LanguageTypes.GQL, "INTEGER", LanguageTypes.CYPHER)
 
 
 class TestLanguageLevelValidation:

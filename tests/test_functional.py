@@ -59,27 +59,27 @@ class TestGraschFunctional:
         """Define content record types for the graph"""
         # Person content type
         personContent = ContentRecordTypeBuilder() \
-            .add_label("Person") \
+            .addLabel("Person") \
             .addPropertyType(PropertyType("name", "STRING", not_null=True)) \
             .addPropertyType(PropertyType("age", "INTEGER")) \
             .addPropertyType(PropertyType("email", "STRING")) \
-            .add_type_name("Person") \
+            .addTypeName("Person") \
             .create()
         
         # Company content type
         companyContent = ContentRecordTypeBuilder() \
-            .add_label("Company") \
+            .addLabel("Company") \
             .addPropertyType(PropertyType("name", "STRING", not_null=True)) \
             .addPropertyType(PropertyType("industry", "STRING")) \
-            .add_type_name("Company") \
+            .addTypeName("Company") \
             .create()
         
         # Employment relationship content type
         employmentContent = ContentRecordTypeBuilder() \
-            .add_label("WORKS_FOR") \
+            .addLabel("WORKS_FOR") \
             .addPropertyType(PropertyType("position", "STRING")) \
             .addPropertyType(PropertyType("startDate", "DATE")) \
-            .add_type_name("WORKS_FOR") \
+            .addTypeName("WORKS_FOR") \
             .create()
         
         return {
@@ -114,57 +114,57 @@ class TestGraschFunctional:
                     .create())
         
         # Add key constraints (required by ALL ELEMENT TYPES KEYED)
-        graphType.add_constraint(KeyConstraint("Person", ["Person"]))
-        graphType.add_constraint(KeyConstraint("Company", ["Company"]))
-        graphType.add_constraint(KeyConstraint("WORKS_FOR", ["WORKS_FOR"]))
+        graphType.addConstraint(KeyConstraint("Person", ["Person"]))
+        graphType.addConstraint(KeyConstraint("Company", ["Company"]))
+        graphType.addConstraint(KeyConstraint("WORKS_FOR", ["WORKS_FOR"]))
         
         return graphType
     
-    def create_and_populate_graph(self, graph_type: GraphType) -> Graph:
+    def createAndPopulateGraph(self, graphType: GraphType) -> Graph:
         """Create a graph instance and populate it with data"""
         # Create graph instance
-        graph = Graph("employee_data", graph_type)
+        graph = Graph("employee_data", graphType)
         
         # Insert Person nodes
-        alice_id = graph.insert_node(
+        alice_id = graph.insertNode(
             labels=["Person"],
             properties={"name": "Alice Johnson", "age": 30, "email": "alice@example.com"}
         )
         
-        bob_id = graph.insert_node(
+        bob_id = graph.insertNode(
             labels=["Person"],
             properties={"name": "Bob Smith", "age": 25, "email": "bob@example.com"}
         )
         
         # Insert Company nodes
-        techcorp_id = graph.insert_node(
+        techcorp_id = graph.insertNode(
             labels=["Company"],
             properties={"name": "TechCorp", "industry": "Technology"}
         )
         
-        datasystems_id = graph.insert_node(
+        datasystems_id = graph.insertNode(
             labels=["Company"],
             properties={"name": "DataSystems", "industry": "Software"}
         )
         
         # Insert WORKS_FOR edges
-        graph.insert_edge(
-            source_id=alice_id,
-            target_id=techcorp_id,
+        graph.insertEdge(
+            sourceId=alice_id,
+            targetId=techcorp_id,
             labels=["WORKS_FOR"],
             properties={"position": "Engineer", "start_date": "2020-01-15"}
         )
         
-        graph.insert_edge(
-            source_id=bob_id,
-            target_id=datasystems_id,
+        graph.insertEdge(
+            sourceId=bob_id,
+            targetId=datasystems_id,
             labels=["WORKS_FOR"],
             properties={"position": "Analyst", "start_date": "2021-03-01"}
         )
         
         return graph
     
-    def test_complete_workflow(self):
+    def test_complete_workflow(self, session_config):
         """Test the complete Grasch workflow from catalog to queries"""
         print("\n" + "=" * 60)
         print("GRASCH LIBRARY FUNCTIONAL TEST")
@@ -173,7 +173,6 @@ class TestGraschFunctional:
         # Create session for standalone mode
         with tempfile.TemporaryDirectory() as temp_dir:
             database_path = os.path.join(temp_dir, "grasch_test.db")
-            session_config = self.session_config()
             grasch_session = GraschSession(session_config, database_path)
             
             # Step 1: Create catalog structure
@@ -187,29 +186,29 @@ class TestGraschFunctional:
             
             # Step 2: Define content types
             print("\n2. Defining content record types...")
-            content_types = self.create_content_types()
+            content_types = self.createContentTypes()
             
             # Verify content types
             assert len(content_types) == 3
-            assert content_types["person"].type_key is not None
-            assert content_types["company"].type_key is not None
-            assert content_types["employment"].type_key is not None
+            assert content_types["person"].typeKey is not None
+            assert content_types["company"].typeKey is not None
+            assert content_types["employment"].typeKey is not None
             print("   ✓ Content record types with type keys defined")
             
             # Step 3: Create graph schema with constraints
             print("\n3. Creating graph type with LEX constraints...")
-            graph_type = self.create_graph_schema(content_types)
+            graph_type = self.createGraphSchema(content_types)
             
             # Verify graph type
-            assert graph_type.all_element_types_keyed is True
-            assert len(graph_type.node_types) == 2
-            assert len(graph_type.edge_types) == 1
+            assert graph_type.allElementTypesKeyed is True
+            assert len(graph_type.nodeTypes) == 2
+            assert len(graph_type.edgeTypes) == 1
             assert len(graph_type.constraints) == 3
             print("   ✓ Graph type with ALL ELEMENT TYPES KEYED constraint created")
             
             # Step 4: Create and populate graph
             print("\n4. Creating and populating graph instance...")
-            graph = self.create_and_populate_graph(graph_type)
+            graph = self.createAndPopulateGraph(graph_type)
             
             # Verify graph population
             assert len(graph.nodes) == 4
@@ -220,8 +219,8 @@ class TestGraschFunctional:
             # Step 5: Store in catalog
             print("\n5. Storing objects in catalog...")
             schema = grasch_session.catalog.create_gql_schema("/production/customer_data", "employee_schema")
-            schema.add_graph_type(graph_type)
-            schema.add_graph(graph)
+            schema.addGraphType(graph_type)
+            schema.addGraph(graph)
             
             # Verify catalog storage
             assert "employee_schema" in grasch_session.catalog.root.children["production"].children["customer_data"].schemas
@@ -251,13 +250,13 @@ class TestGraschFunctional:
         print("CONTENT TYPE SYSTEM TEST")
         print("=" * 40)
         
-        content_types = self.create_content_types()
+        content_types = self.createContentTypes()
         
         # Test attribute type inheritance
         person_content = content_types["person"]
-        assert len(person_content.label_types) == 1
-        assert len(person_content.property_types) == 3
-        assert person_content.label_types[0].datatype == "LABEL_DATATYPE"
+        assert len(person_content.labelTypes) == 1
+        assert len(person_content.propertyTypes) == 3
+        assert person_content.labelTypes[0].datatype == "LABEL_DATATYPE"
         assert person_content.labels == ["Person"]
         
         # Test type identifier relationships
@@ -275,17 +274,17 @@ class TestGraschFunctional:
         print("LEX CONSTRAINTS TEST")
         print("=" * 40)
         
-        content_types = self.create_content_types()
-        graph_type = self.create_graph_schema(content_types)
+        content_types = self.createContentTypes()
+        graph_type = self.createGraphSchema(content_types)
         
         # Test ALL ELEMENT TYPES KEYED constraint
-        assert graph_type.all_element_types_keyed is True
+        assert graph_type.allElementTypesKeyed is True
         
         # Test key constraints
         key_constraints = graph_type.constraints
         assert len(key_constraints) == 3
         
-        constraint_types = {c.element_type for c in key_constraints}
+        constraint_types = {c.elementType for c in key_constraints}
         assert "Person" in constraint_types
         assert "Company" in constraint_types
         assert "WORKS_FOR" in constraint_types
@@ -362,9 +361,9 @@ def run_functional_test():
         graph_type = test_instance.createGraphSchema(content_types)
         
         # Verify graph type
-        assert graph_type.all_element_types_keyed is True
-        assert len(graph_type.node_types) == 2
-        assert len(graph_type.edge_types) == 1
+        assert graph_type.allElementTypesKeyed is True
+        assert len(graph_type.nodeTypes) == 2
+        assert len(graph_type.edgeTypes) == 1
         assert len(graph_type.constraints) == 3
         print("   ✓ Graph type with ALL ELEMENT TYPES KEYED constraint created")
         
@@ -381,8 +380,8 @@ def run_functional_test():
         # Step 5: Store in catalog
         print("\n5. Storing objects in catalog...")
         schema = grasch_session.catalog.create_gql_schema("/production/customer_data", "employee_schema")
-        schema.add_graph_type(graph_type)
-        schema.add_graph(graph)
+        schema.addGraphType(graph_type)
+        schema.addGraph(graph)
         
         # Verify catalog storage
         assert "employee_schema" in grasch_session.catalog.root.children["production"].children["customer_data"].schemas

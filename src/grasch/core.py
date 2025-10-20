@@ -17,6 +17,20 @@ class LanguageLevel(Enum):
     LEX = "lex"
 
 
+class LanguageTypes(Enum):
+    """
+    Value type system enumeration - orthogonal to LanguageLevel.
+    
+    Controls which type system is used for value validation and inference.
+    Can be mixed with any LanguageLevel (e.g., GQL with Cypher types).
+    """
+    GQL = "gql"           # GQL property value types (full precision)
+    SQL = "sql"           # SQL Foundation data types  
+    JSON = "json"         # Basic JSON Schema types (number, string, boolean, object, array, null)
+    DATABASE_JSON = "database_json"  # Extended database JSON types (1-to-1 with GQL)
+    CYPHER = "cypher"     # Cypher data types (limited precision)
+
+
 class LEXCompatibility(Enum):
     FULL = "full"
     LIMITED = "limited"
@@ -26,83 +40,83 @@ class LEXCompatibility(Enum):
 @dataclass
 class CatalogRootConfiguration:
     """Configuration for catalog root IRI and path resolution"""
-    catalog_root: str = "file:."
-    supported_schemes: set[str] = None
+    catalogRoot: str = "file:."
+    supportedSchemes: set[str] = None
     
     def __post_init__(self):
-        if self.supported_schemes is None:
-            self.supported_schemes = {"file"}
+        if self.supportedSchemes is None:
+            self.supportedSchemes = {"file"}
     
-    def resolve_path(self, relative_path: str) -> str:
-        """Combine catalog_root IRI with relative path"""
-        if self.catalog_root.startswith("file:"):
+    def resolvePath(self, relativePath: str) -> str:
+        """Combine catalogRoot IRI with relative path"""
+        if self.catalogRoot.startswith("file:"):
             # Handle file: scheme resolution
-            base_path = self.catalog_root[5:]  # Remove "file:" prefix
-            if base_path == ".":
-                return relative_path
-            return f"{base_path}/{relative_path.lstrip('/')}"
+            basePath = self.catalogRoot[5:]  # Remove "file:" prefix
+            if basePath == ".":
+                return relativePath
+            return f"{basePath}/{relativePath.lstrip('/')}"
         else:
             # Handle other IRI schemes
-            return f"{self.catalog_root.rstrip('/')}/{relative_path.lstrip('/')}"
+            return f"{self.catalogRoot.rstrip('/')}/{relativePath.lstrip('/')}"
     
-    def validate_iri(self, iri: str) -> bool:
+    def validateIri(self, iri: str) -> bool:
         """Validate that IRI uses supported scheme"""
         scheme = iri.split(":", 1)[0] if ":" in iri else ""
-        return scheme in self.supported_schemes
+        return scheme in self.supportedSchemes
 
 
 @dataclass
 class ProfileConfiguration:
     """Defines a specific GQL/LEX profile"""
     name: str
-    optional_features: set[str]
-    implementation_defined: Dict[str, Any]
-    lex_compatibility: LEXCompatibility
+    optionalFeatures: set[str]
+    implementationDefined: Dict[str, Any]
+    lexCompatibility: LEXCompatibility
 
 
 @dataclass
 class SessionConfiguration:
     """Session-level configuration"""
     profile: ProfileConfiguration
-    language_level: LanguageLevel
-    catalog_root: str = "file:."  # IRI for catalog base location
-    default_catalog_path: Optional[str] = "/"  # Path relative to catalog_root
-    nested_record_schema_processor_type: str = "JSON Schema"
-    nested_record_schema_processor: Optional[str] = "default"
+    languageLevel: LanguageLevel
+    catalogRoot: str = "file:."  # IRI for catalog base location
+    defaultCatalogPath: Optional[str] = "/"  # Path relative to catalogRoot
+    nestedRecordSchemaProcessorType: str = "JSON Schema"
+    nestedRecordSchemaProcessor: Optional[str] = "default"
 
 
 class GraschSession:
     """Main Grasch session with profile and language level configuration"""
     
-    def __init__(self, config: SessionConfiguration, database_path: str):
+    def __init__(self, config: SessionConfiguration, databasePath: str):
         self.config = config
-        self.database_path = database_path
+        self.databasePath = databasePath
         
         # Initialize catalog root configuration
-        self.catalog_root_config = CatalogRootConfiguration(
-            catalog_root=config.catalog_root
+        self.catalogRootConfig = CatalogRootConfiguration(
+            catalogRoot=config.catalogRoot
         )
         
         # Validate catalog root IRI
-        if not self.catalog_root_config.validate_iri(config.catalog_root):
-            raise ValueError(f"Unsupported IRI scheme in catalog_root: {config.catalog_root}")
+        if not self.catalogRootConfig.validateIri(config.catalogRoot):
+            raise ValueError(f"Unsupported IRI scheme in catalogRoot: {config.catalogRoot}")
         
-        self.catalog = Catalog(database_path, self.catalog_root_config)
-        self.kuzu_connection = MockKuzuConnection(database_path)
+        self.catalog = Catalog(databasePath, self.catalogRootConfig)
+        self.kuzuConnection = MockKuzuConnection(databasePath)
     
-    def create_catalog_structure(self):
+    def createCatalogStructure(self):
         """Create hierarchical catalog structure"""
         print("Creating catalog structure...")
         
         # Create directories
-        self.catalog.create_directory("/production")
-        self.catalog.create_directory("/production/customer_data")
-        self.catalog.create_directory("/development")
-        self.catalog.create_directory("/development/test_schemas")
+        self.catalog.createDirectory("/production")
+        self.catalog.createDirectory("/production/customer_data")
+        self.catalog.createDirectory("/development")
+        self.catalog.createDirectory("/development/test_schemas")
         
         print("✓ Created catalog directories")
     
-    def demonstrate_cypher_queries(self):
+    def demonstrateCypherQueries(self):
         """Demonstrate querying the graph using Cypher commands"""
         print("\nDemonstrating Cypher queries...")
         print("=" * 50)
@@ -139,7 +153,7 @@ class GraschSession:
         for result in results4:
             print(f"   {result}")
     
-    def demonstrate_spectral_typing(self):
+    def demonstrateSpectralTyping(self):
         """Demonstrate spectral typing and multi-conformance concepts"""
         print("\nDemonstrating spectral typing concepts...")
         print("=" * 50)
