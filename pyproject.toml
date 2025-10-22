@@ -49,6 +49,11 @@ test = [
     "pytest-cov>=4.0.0",
 ]
 
+validation = [
+    "jsonschema>=4.0.0",
+    "pyyaml>=6.0.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/grasch-dev/grasch"
 Repository = "https://github.com/grasch-dev/grasch"

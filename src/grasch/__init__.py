@@ -67,6 +67,17 @@ from .value_types import (
     inferPreciseType,
 )
 
+from .schemas import (
+    load_gql_descriptors_schema,
+    get_schema_path,
+)
+
+from .validation import (
+    SchemaValidator,
+    ValidationError as SchemaValidationError,
+    validate_graph_schema,
+)
+
 __all__ = [
     # Core classes
     "GraschSession",
@@ -118,4 +129,11 @@ __all__ = [
     "translateType",
     "isTypeCompatible",
     "inferPreciseType",
+    
+    # Schema validation
+    "load_gql_descriptors_schema",
+    "get_schema_path",
+    "SchemaValidator",
+    "SchemaValidationError", 
+    "validate_graph_schema",
 ]
