@@ -2,18 +2,29 @@
 
 ## Overview
 
-This design document outlines the architecture for implementing a comprehensive value type system that extends the current property graph schema with robust type validation, constraints, and runtime validation capabilities. The design maintains backward compatibility while adding powerful new features for data integrity and validation.
+This design document outlines the architecture for implementing the Intermediate Language Value Types (ILVT) system as defined in the property-graph-schema specification. The system provides universal type mapping and validation capabilities for interoperability between GQL, SQL Foundation, JSON Schema extensions, and future type systems. The design maintains backward compatibility while implementing the complete ILVT type registry and cross-language mapping capabilities.
 
 ## Architecture
 
 ### Core Components
 
 ```
-Enhanced Value Types System
-├── ValueType (Enum)
-│   ├── Primitive Types (STRING, INTEGER, FLOAT, BOOLEAN)
-│   ├── Temporal Types (DATE, TIME, DATETIME, DURATION)
-│   └── Complex Types (JSON, ARRAY, MAP)
+ILVT-Based Value Types System
+├── ILVTType (Enum)
+│   ├── Boolean Types (boolean)
+│   ├── Integer Types (int8, int16, int32, int64, int128, int256, uint8, uint16, uint32, uint64, uint128, uint256)
+│   ├── Decimal Types (decimal, numeric)
+│   ├── Floating Point Types (float16, float32, float64, float128, float256, decfloat32, decfloat64, decfloat128)
+│   ├── String Types (string, char)
+│   ├── Binary Types (bytes, binary)
+│   ├── Temporal Types (date, time, time_tz, datetime, datetime_tz, duration)
+│   ├── Structured Types (record, array, multiset)
+│   └── Special Types (json, vector, null)
+├── LanguageTypeMapper
+│   ├── GQLTypeMapper
+│   ├── SQLTypeMapper
+│   ├── CypherTypeMapper
+│   └── JSONSchemaMapper
 ├── PropertyConstraint (Abstract Base)
 │   ├── NotNullConstraint
 │   ├── DefaultValueConstraint
@@ -24,6 +35,7 @@ Enhanced Value Types System
 │   ├── GraphValidator
 │   └── ValidationResult
 └── TypeCoercion
+    ├── LanguageLevelAdapter
     ├── CoercionRules
     ├── CoercionResult
     └── CoercionConfig
@@ -31,68 +43,225 @@ Enhanced Value Types System
 
 ## Components and Interfaces
 
-### 1. ValueType Enumeration
+### 1. ILVT Type Registry
 
 ```python
 from enum import Enum
-from typing import Any, Union, Optional
+from typing import Any, Union, Optional, Dict, List
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
-class ValueType(Enum):
-    # Primitive Types
-    STRING = "STRING"
-    INTEGER = "INTEGER" 
-    FLOAT = "FLOAT"
-    BOOLEAN = "BOOLEAN"
+class ILVTType(Enum):
+    # Boolean Types
+    BOOLEAN = "boolean"
+    
+    # Integer Types
+    INT8 = "int8"
+    INT16 = "int16"
+    INT32 = "int32"
+    INT64 = "int64"
+    INT128 = "int128"
+    INT256 = "int256"
+    UINT8 = "uint8"
+    UINT16 = "uint16"
+    UINT32 = "uint32"
+    UINT64 = "uint64"
+    UINT128 = "uint128"
+    UINT256 = "uint256"
+    
+    # Decimal Types
+    DECIMAL = "decimal"
+    NUMERIC = "numeric"
+    
+    # Floating Point Types
+    FLOAT16 = "float16"
+    FLOAT32 = "float32"
+    FLOAT64 = "float64"
+    FLOAT128 = "float128"
+    FLOAT256 = "float256"
+    DECFLOAT32 = "decfloat32"
+    DECFLOAT64 = "decfloat64"
+    DECFLOAT128 = "decfloat128"
+    
+    # String Types
+    STRING = "string"
+    CHAR = "char"
+    
+    # Binary Types
+    BYTES = "bytes"
+    BINARY = "binary"
     
     # Temporal Types
-    DATE = "DATE"
-    TIME = "TIME"
-    DATETIME = "DATETIME"
-    DURATION = "DURATION"
+    DATE = "date"
+    TIME = "time"
+    TIME_TZ = "time_tz"
+    DATETIME = "datetime"
+    DATETIME_TZ = "datetime_tz"
+    DURATION = "duration"
     
-    # Complex Types
-    JSON = "JSON"
-    ARRAY = "ARRAY"
-    MAP = "MAP"
+    # Structured Types
+    RECORD = "record"
+    ARRAY = "array"
+    MULTISET = "multiset"
     
-    @abstractmethod
-    def validate(self, value: Any) -> ValidationResult:
-        """Validate a value against this type"""
-        pass
+    # Special Types
+    JSON = "json"
+    VECTOR = "vector"
+    NULL = "null"
     
-    @abstractmethod
-    def coerce(self, value: Any, config: CoercionConfig) -> CoercionResult:
-        """Attempt to coerce a value to this type"""
-        pass
+    def getValueRange(self) -> Optional[tuple]:
+        """Get the valid value range for this type"""
+        ranges = {
+            ILVTType.INT8: (-128, 127),
+            ILVTType.INT16: (-32768, 32767),
+            ILVTType.INT32: (-2147483648, 2147483647),
+            ILVTType.INT64: (-9223372036854775808, 9223372036854775807),
+            ILVTType.UINT8: (0, 255),
+            ILVTType.UINT16: (0, 65535),
+            ILVTType.UINT32: (0, 4294967295),
+            ILVTType.UINT64: (0, 18446744073709551615),
+            ILVTType.FLOAT16: (-65504, 65504),
+        }
+        return ranges.get(self)
+    
+    def getCategory(self) -> str:
+        """Get the category this type belongs to"""
+        categories = {
+            ILVTType.BOOLEAN: "Logical",
+            ILVTType.INT8: "Signed Integer", ILVTType.INT16: "Signed Integer", 
+            ILVTType.INT32: "Signed Integer", ILVTType.INT64: "Signed Integer",
+            ILVTType.INT128: "Extended Integer", ILVTType.INT256: "Extended Integer",
+            ILVTType.UINT8: "Unsigned Integer", ILVTType.UINT16: "Unsigned Integer",
+            ILVTType.UINT32: "Unsigned Integer", ILVTType.UINT64: "Unsigned Integer",
+            ILVTType.UINT128: "Extended Integer", ILVTType.UINT256: "Extended Integer",
+            ILVTType.DECIMAL: "Exact Numeric", ILVTType.NUMERIC: "Exact Numeric",
+            ILVTType.FLOAT32: "Binary Float", ILVTType.FLOAT64: "Binary Float",
+            ILVTType.STRING: "Character String", ILVTType.CHAR: "Character String",
+            ILVTType.DATE: "Date/Time", ILVTType.TIME: "Date/Time",
+            ILVTType.ARRAY: "Collection", ILVTType.RECORD: "Structured",
+            ILVTType.JSON: "Semi-Structured", ILVTType.VECTOR: "Numeric Array"
+        }
+        return categories.get(self, "Unknown")
 ```
 
-### 2. Enhanced PropertyType
+### 2. Language Type Mapper
 
 ```python
-from typing import List, Optional, Any, FrozenSet
+from typing import List, Optional, Any, Dict, Set
 from dataclasses import dataclass
+from enum import Enum
+
+class LanguageTypes(Enum):
+    GQL = "GQL"
+    SQL_FOUNDATION = "SQL_FOUNDATION"
+    CYPHER = "CYPHER"
+    JSON = "JSON"
+    DATABASE_JSON = "DATABASE_JSON"
+
+@dataclass
+class TypeMapping:
+    ilvtType: ILVTType
+    gqlType: Optional[str]
+    sqlType: Optional[str]
+    cypherType: Optional[str]
+    jsonSchemaType: Dict[str, Any]
+
+class LanguageTypeMapper:
+    """Handles bidirectional type mappings between different type systems"""
+    
+    def __init__(self):
+        self._mappings = self._initializeMappings()
+    
+    def _initializeMappings(self) -> Dict[ILVTType, TypeMapping]:
+        """Initialize the complete ILVT mapping table"""
+        return {
+            ILVTType.BOOLEAN: TypeMapping(
+                ilvtType=ILVTType.BOOLEAN,
+                gqlType="BOOLEAN",
+                sqlType="BOOLEAN", 
+                cypherType="BOOLEAN",
+                jsonSchemaType={
+                    "data.boolean": {"type": "boolean"},
+                    "gql.boolean": "BOOLEAN",
+                    "sql.boolean": "BOOLEAN"
+                }
+            ),
+            ILVTType.INT8: TypeMapping(
+                ilvtType=ILVTType.INT8,
+                gqlType="INT8",
+                sqlType=None,  # No SQL equivalent
+                cypherType=None,  # No Cypher equivalent
+                jsonSchemaType={
+                    "data.int8": {"type": "integer", "minimum": -128, "maximum": 127},
+                    "gql.int8": "INT8",
+                    "sql.int8": "undefined"
+                }
+            ),
+            ILVTType.VECTOR: TypeMapping(
+                ilvtType=ILVTType.VECTOR,
+                gqlType="VECTOR",
+                sqlType="VECTOR",
+                cypherType=None,  # No Cypher equivalent
+                jsonSchemaType={
+                    "data.vector": {
+                        "type": "array",
+                        "items": {"type": "number"},
+                        "dimension": {"type": "integer", "minimum": 1},
+                        "elementType": {"type": "string", "enum": ["float32", "float64", "int32", "int64"]}
+                    },
+                    "gql.vector": "VECTOR",
+                    "sql.vector": "VECTOR"
+                }
+            )
+            # ... complete mapping table for all ILVT types
+        }
+    
+    def getEquivalentTypes(self, sourceType: str, sourceLanguage: LanguageTypes, 
+                          targetLanguage: LanguageTypes) -> List[str]:
+        """Get equivalent types in target language"""
+        pass
+    
+    def getILVTType(self, languageType: str, language: LanguageTypes) -> Optional[ILVTType]:
+        """Convert language-specific type to ILVT type"""
+        pass
+    
+    def getLanguageType(self, ilvtType: ILVTType, targetLanguage: LanguageTypes) -> Optional[str]:
+        """Convert ILVT type to language-specific type"""
+        pass
+    
+    def generateJSONSchema(self, ilvtType: ILVTType) -> Dict[str, Any]:
+        """Generate JSON Schema definition for an ILVT type"""
+        pass
+
+### 3. Enhanced PropertyType with ILVT Integration
 
 @dataclass(frozen=True)
 class EnhancedPropertyType:
     name: str
-    valueType: ValueType
+    ilvtType: ILVTType
     constraints: FrozenSet[PropertyConstraint] = frozenset()
+    parameters: Dict[str, Any] = None  # For parameterized types (precision, scale, length, dimension)
     elementType: Optional['EnhancedPropertyType'] = None  # For ARRAY types
-    keyType: Optional['EnhancedPropertyType'] = None      # For MAP types
-    valueTypeForMap: Optional['EnhancedPropertyType'] = None  # For MAP types
+    keyType: Optional['EnhancedPropertyType'] = None      # For RECORD key types
+    valueTypeForRecord: Optional['EnhancedPropertyType'] = None  # For RECORD value types
+    
+    def __post_init__(self):
+        if self.parameters is None:
+            object.__setattr__(self, 'parameters', {})
     
     def validate(self, value: Any, context: ValidationContext) -> ValidationResult:
         """Validate a value against this property type and all constraints"""
         pass
     
-    def hasConstraint(self, constraintType: type) -> bool:
-        """Check if this property has a specific constraint type"""
-        pass
+    def getLanguageType(self, language: LanguageTypes) -> Optional[str]:
+        """Get the equivalent type in a specific language"""
+        mapper = LanguageTypeMapper()
+        return mapper.getLanguageType(self.ilvtType, language)
     
-    def getConstraint(self, constraintType: type) -> Optional[PropertyConstraint]:
-        """Get a specific constraint if it exists"""
-        pass
+    def generateJSONSchema(self) -> Dict[str, Any]:
+        """Generate JSON Schema definition for this property type"""
+        mapper = LanguageTypeMapper()
+        return mapper.generateJSONSchema(self.ilvtType)
 ```
 
 ### 3. Property Constraints
@@ -215,12 +384,16 @@ class GraphValidator:
         pass
 ```
 
-### 5. Type Coercion System
+### 5. Language Level Adaptation and Type Coercion
 
 ```python
 from enum import Enum
-from typing import Any, Optional, Union
+from typing import Any, Optional, Union, Dict, List
 from dataclasses import dataclass
+
+class LanguageLevel(Enum):
+    GQL = "GQL"           # Full ILVT type system with precise mappings
+    LEX = "LEX"           # Cypher-compatible subset with relaxed constraints
 
 class CoercionMode(Enum):
     STRICT = "STRICT"      # No coercion allowed
@@ -230,48 +403,96 @@ class CoercionMode(Enum):
 @dataclass
 class CoercionConfig:
     mode: CoercionMode = CoercionMode.SAFE
+    languageLevel: LanguageLevel = LanguageLevel.GQL
     dateFormats: List[str] = None
     numberFormats: List[str] = None
     booleanValues: Dict[str, bool] = None
     
     def __post_init__(self):
         if self.dateFormats is None:
-            self.dateFormats = ["%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y"]
+            self.dateFormats = ["%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y", "%Y-%m-%dT%H:%M:%S"]
         if self.booleanValues is None:
             self.booleanValues = {
                 "true": True, "false": False, "yes": True, "no": False,
                 "1": True, "0": False, "on": True, "off": False
             }
 
-@dataclass
-class CoercionResult:
-    success: bool
-    value: Any = None
-    warnings: List[str] = None
-    originalValue: Any = None
+class LanguageLevelAdapter:
+    """Adapts types based on language level capabilities"""
     
-    @classmethod
-    def success(cls, value: Any, originalValue: Any = None, 
-                warnings: List[str] = None) -> 'CoercionResult':
-        return cls(success=True, value=value, originalValue=originalValue, 
-                  warnings=warnings or [])
+    def adaptType(self, ilvtType: ILVTType, targetLevel: LanguageLevel) -> ILVTType:
+        """Adapt an ILVT type to the target language level"""
+        if targetLevel == LanguageLevel.LEX:
+            # Map to Cypher-compatible subset
+            integer_types = {ILVTType.INT8, ILVTType.INT16, ILVTType.INT32, 
+                           ILVTType.INT64, ILVTType.INT128, ILVTType.INT256,
+                           ILVTType.UINT8, ILVTType.UINT16, ILVTType.UINT32, 
+                           ILVTType.UINT64, ILVTType.UINT128, ILVTType.UINT256}
+            float_types = {ILVTType.FLOAT16, ILVTType.FLOAT32, ILVTType.FLOAT64,
+                          ILVTType.FLOAT128, ILVTType.FLOAT256, ILVTType.DECFLOAT32,
+                          ILVTType.DECFLOAT64, ILVTType.DECFLOAT128, ILVTType.DECIMAL, ILVTType.NUMERIC}
+            
+            if ilvtType in integer_types:
+                return ILVTType.INT64  # Cypher INTEGER
+            elif ilvtType in float_types:
+                return ILVTType.FLOAT64  # Cypher FLOAT
+            elif ilvtType in {ILVTType.CHAR}:
+                return ILVTType.STRING  # Cypher STRING
+            elif ilvtType == ILVTType.MULTISET:
+                return ILVTType.ARRAY  # Cypher LIST
+        
+        return ilvtType  # No adaptation needed for GQL level
     
-    @classmethod
-    def failure(cls, originalValue: Any, reason: str) -> 'CoercionResult':
-        return cls(success=False, originalValue=originalValue, 
-                  warnings=[reason])
+    def supportsHeterogeneousCollections(self, level: LanguageLevel) -> bool:
+        """Check if language level supports heterogeneous collections"""
+        return level == LanguageLevel.LEX  # Cypher allows mixed-type lists
 
 class TypeCoercion:
-    """Handles type coercion between different value types"""
+    """Handles type coercion between different ILVT types"""
     
-    def coerceValue(self, value: Any, targetType: ValueType, 
+    def __init__(self):
+        self.adapter = LanguageLevelAdapter()
+        self.mapper = LanguageTypeMapper()
+    
+    def coerceValue(self, value: Any, targetType: ILVTType, 
                    config: CoercionConfig) -> CoercionResult:
-        """Attempt to coerce a value to the target type"""
-        pass
+        """Attempt to coerce a value to the target ILVT type"""
+        # Apply language level adaptation first
+        adaptedType = self.adapter.adaptType(targetType, config.languageLevel)
+        
+        # Perform type-specific coercion
+        if adaptedType == ILVTType.BOOLEAN:
+            return self._coerceToBoolean(value, config)
+        elif adaptedType in {ILVTType.INT8, ILVTType.INT16, ILVTType.INT32, ILVTType.INT64}:
+            return self._coerceToInteger(value, adaptedType, config)
+        elif adaptedType in {ILVTType.FLOAT32, ILVTType.FLOAT64}:
+            return self._coerceToFloat(value, adaptedType, config)
+        elif adaptedType == ILVTType.STRING:
+            return self._coerceToString(value, config)
+        elif adaptedType == ILVTType.DATE:
+            return self._coerceToDate(value, config)
+        # ... additional type-specific coercion methods
+        
+        return CoercionResult.failure(value, f"No coercion available for {adaptedType}")
     
-    def canCoerce(self, fromType: ValueType, toType: ValueType, 
+    def _coerceToBoolean(self, value: Any, config: CoercionConfig) -> CoercionResult:
+        """Coerce value to boolean using configured boolean values"""
+        if isinstance(value, bool):
+            return CoercionResult.success(value, value)
+        elif isinstance(value, str):
+            lower_val = value.lower()
+            if lower_val in config.booleanValues:
+                return CoercionResult.success(config.booleanValues[lower_val], value)
+        elif isinstance(value, (int, float)):
+            if config.mode != CoercionMode.STRICT:
+                return CoercionResult.success(bool(value), value, 
+                                            ["Numeric to boolean coercion"])
+        
+        return CoercionResult.failure(value, f"Cannot coerce {type(value)} to boolean")
+    
+    def canCoerce(self, fromType: ILVTType, toType: ILVTType, 
                  config: CoercionConfig) -> bool:
-        """Check if coercion is possible between two types"""
+        """Check if coercion is possible between two ILVT types"""
         pass
 ```
 
@@ -311,37 +532,123 @@ class PropertyType:
         return self._constraints
 ```
 
-### Builder Pattern Integration
+### Builder Pattern Integration with ILVT
 
 ```python
 class PropertyTypeBuilder:
     def __init__(self):
         self._name: Optional[str] = None
-        self._valueType: Optional[ValueType] = None
+        self._ilvtType: Optional[ILVTType] = None
         self._constraints: List[PropertyConstraint] = []
-        self._elementType: Optional[PropertyType] = None
-        self._keyType: Optional[PropertyType] = None
-        self._valueTypeForMap: Optional[PropertyType] = None
+        self._parameters: Dict[str, Any] = {}
+        self._elementType: Optional[EnhancedPropertyType] = None
+        self._keyType: Optional[EnhancedPropertyType] = None
+        self._valueTypeForRecord: Optional[EnhancedPropertyType] = None
     
     def withName(self, name: str) -> 'PropertyTypeBuilder':
         return self._copy(name=name)
     
-    def withValueType(self, valueType: ValueType) -> 'PropertyTypeBuilder':
-        return self._copy(valueType=valueType)
+    def withILVTType(self, ilvtType: ILVTType) -> 'PropertyTypeBuilder':
+        return self._copy(ilvtType=ilvtType)
     
-    def withStringType(self) -> 'PropertyTypeBuilder':
-        return self.withValueType(ValueType.STRING)
+    # Boolean Types
+    def withBooleanType(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.BOOLEAN)
     
-    def withIntegerType(self) -> 'PropertyTypeBuilder':
-        return self.withValueType(ValueType.INTEGER)
+    # Integer Types
+    def withInt8Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.INT8)
     
-    def withArrayType(self, elementType: PropertyType) -> 'PropertyTypeBuilder':
-        return self._copy(valueType=ValueType.ARRAY, elementType=elementType)
+    def withInt16Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.INT16)
     
-    def withMapType(self, keyType: PropertyType, valueType: PropertyType) -> 'PropertyTypeBuilder':
-        return self._copy(valueType=ValueType.MAP, keyType=keyType, 
-                         valueTypeForMap=valueType)
+    def withInt32Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.INT32)
     
+    def withInt64Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.INT64)
+    
+    def withUInt8Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.UINT8)
+    
+    def withUInt16Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.UINT16)
+    
+    def withUInt32Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.UINT32)
+    
+    def withUInt64Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.UINT64)
+    
+    # Floating Point Types
+    def withFloat32Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.FLOAT32)
+    
+    def withFloat64Type(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.FLOAT64)
+    
+    def withDecimalType(self, precision: int = None, scale: int = None) -> 'PropertyTypeBuilder':
+        parameters = {}
+        if precision is not None:
+            parameters['precision'] = precision
+        if scale is not None:
+            parameters['scale'] = scale
+        return self._copy(ilvtType=ILVTType.DECIMAL, parameters=parameters)
+    
+    # String Types
+    def withStringType(self, maxLength: int = None) -> 'PropertyTypeBuilder':
+        parameters = {}
+        if maxLength is not None:
+            parameters['max_length'] = maxLength
+        return self._copy(ilvtType=ILVTType.STRING, parameters=parameters)
+    
+    def withCharType(self, length: int) -> 'PropertyTypeBuilder':
+        return self._copy(ilvtType=ILVTType.CHAR, parameters={'length': length})
+    
+    # Temporal Types
+    def withDateType(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.DATE)
+    
+    def withTimeType(self, precision: int = None) -> 'PropertyTypeBuilder':
+        parameters = {}
+        if precision is not None:
+            parameters['precision'] = precision
+        return self._copy(ilvtType=ILVTType.TIME, parameters=parameters)
+    
+    def withDateTimeType(self, precision: int = None) -> 'PropertyTypeBuilder':
+        parameters = {}
+        if precision is not None:
+            parameters['precision'] = precision
+        return self._copy(ilvtType=ILVTType.DATETIME, parameters=parameters)
+    
+    def withDurationType(self, fields: List[str] = None) -> 'PropertyTypeBuilder':
+        parameters = {}
+        if fields is not None:
+            parameters['fields'] = fields
+        return self._copy(ilvtType=ILVTType.DURATION, parameters=parameters)
+    
+    # Structured Types
+    def withArrayType(self, elementType: EnhancedPropertyType, maxCardinality: int = None) -> 'PropertyTypeBuilder':
+        parameters = {}
+        if maxCardinality is not None:
+            parameters['max_cardinality'] = maxCardinality
+        return self._copy(ilvtType=ILVTType.ARRAY, elementType=elementType, parameters=parameters)
+    
+    def withRecordType(self, fields: Dict[str, EnhancedPropertyType]) -> 'PropertyTypeBuilder':
+        return self._copy(ilvtType=ILVTType.RECORD, parameters={'fields': fields})
+    
+    def withVectorType(self, dimension: int, elementType: ILVTType = ILVTType.FLOAT32) -> 'PropertyTypeBuilder':
+        parameters = {'dimension': dimension, 'element_type': elementType.value}
+        return self._copy(ilvtType=ILVTType.VECTOR, parameters=parameters)
+    
+    # Special Types
+    def withJSONType(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.JSON)
+    
+    def withNullType(self) -> 'PropertyTypeBuilder':
+        return self.withILVTType(ILVTType.NULL)
+    
+    # Constraints
     def addNotNullConstraint(self) -> 'PropertyTypeBuilder':
         return self._copy(constraints=self._constraints + [NotNullConstraint()])
     
@@ -351,19 +658,43 @@ class PropertyTypeBuilder:
     def addUniqueConstraint(self, scope: UniqueScope = UniqueScope.GLOBAL) -> 'PropertyTypeBuilder':
         return self._copy(constraints=self._constraints + [UniqueConstraint(scope)])
     
-    def buildPropertyType(self) -> PropertyType:
+    # Backward Compatibility Methods
+    def withValueType(self, valueType: Union[str, ILVTType]) -> 'PropertyTypeBuilder':
+        """Backward compatibility method for legacy string-based types"""
+        if isinstance(valueType, str):
+            # Convert legacy string types to ILVT types
+            legacy_mapping = {
+                "STRING": ILVTType.STRING,
+                "INTEGER": ILVTType.INT32,
+                "FLOAT": ILVTType.FLOAT64,
+                "BOOLEAN": ILVTType.BOOLEAN,
+                "DATE": ILVTType.DATE,
+                "TIME": ILVTType.TIME,
+                "DATETIME": ILVTType.DATETIME,
+                "JSON": ILVTType.JSON,
+                "ARRAY": ILVTType.ARRAY
+            }
+            ilvtType = legacy_mapping.get(valueType.upper())
+            if ilvtType is None:
+                raise ValueError(f"Unknown legacy type: {valueType}")
+            return self.withILVTType(ilvtType)
+        else:
+            return self.withILVTType(valueType)
+    
+    def buildPropertyType(self) -> EnhancedPropertyType:
         if self._name is None:
             raise ValueError("Property name is required")
-        if self._valueType is None:
-            raise ValueError("Value type is required")
+        if self._ilvtType is None:
+            raise ValueError("ILVT type is required")
         
-        return PropertyType(
+        return EnhancedPropertyType(
             name=self._name,
-            valueType=self._valueType,
-            constraints=self._constraints,
+            ilvtType=self._ilvtType,
+            constraints=frozenset(self._constraints),
+            parameters=self._parameters,
             elementType=self._elementType,
             keyType=self._keyType,
-            valueTypeForMap=self._valueTypeForMap
+            valueTypeForRecord=self._valueTypeForRecord
         )
 ```
 

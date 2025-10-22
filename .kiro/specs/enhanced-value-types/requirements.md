@@ -2,45 +2,54 @@
 
 ## Introduction
 
-This specification defines the requirements for implementing a comprehensive value type system that extends the current property graph schema with robust type validation, constraints, and runtime validation capabilities. This builds on the successful foundation of the existing type system and builder pattern.
+This specification defines the requirements for implementing a comprehensive value type system based on the Intermediate Language Value Types (ILVT) specification. The system provides universal type mapping and validation capabilities for interoperability between GQL, SQL Foundation, JSON Schema extensions, and future type systems. This builds on the successful foundation of the existing type system and builder pattern.
+
+## Glossary
+
+- **ILVT**: Intermediate Language Value Types - Universal type mapping system for cross-language interoperability
+- **Value_Type_System**: The enhanced type validation and constraint system being implemented
+- **Language_Type_Mapper**: Component that handles bidirectional type mappings between different type systems
+- **Property_Constraint**: Validation rule applied to property values (NOT NULL, DEFAULT, UNIQUE)
+- **Validation_Engine**: Runtime system that validates graph data against schemas
+- **Type_Coercion**: Process of converting values between compatible types
 
 ## Requirements
 
-### Requirement 1: GQL Primitive Type Support
+### Requirement 1: ILVT Type Registry Support
 
-**User Story:** As a schema designer, I want to define properties with specific GQL primitive types so that data integrity is enforced at the schema level.
-
-#### Acceptance Criteria
-
-1. WHEN a PropertyType is created with a STRING value type THEN the system SHALL validate string values according to GQL string rules
-2. WHEN a PropertyType is created with an INTEGER value type THEN the system SHALL validate integer values within the appropriate range
-3. WHEN a PropertyType is created with a FLOAT value type THEN the system SHALL validate floating-point values including special values (NaN, Infinity)
-4. WHEN a PropertyType is created with a BOOLEAN value type THEN the system SHALL validate boolean values (true/false)
-5. IF an invalid value is provided for any primitive type THEN the system SHALL raise a descriptive ValidationError
-
-### Requirement 2: Temporal Type Support
-
-**User Story:** As a data engineer, I want to use temporal types (dates, times, durations) so that I can model time-based data accurately.
+**User Story:** As a schema designer, I want to define properties using the complete ILVT type registry so that I can leverage the full range of standardized value types.
 
 #### Acceptance Criteria
 
-1. WHEN a PropertyType is created with a DATE value type THEN the system SHALL validate ISO 8601 date formats (YYYY-MM-DD)
-2. WHEN a PropertyType is created with a TIME value type THEN the system SHALL validate ISO 8601 time formats (HH:MM:SS[.fff])
-3. WHEN a PropertyType is created with a DATETIME value type THEN the system SHALL validate ISO 8601 datetime formats with optional timezone
-4. WHEN a PropertyType is created with a DURATION value type THEN the system SHALL validate ISO 8601 duration formats (P[n]Y[n]M[n]DT[n]H[n]M[n]S)
-5. IF timezone information is provided THEN the system SHALL preserve and validate timezone data
+1. WHEN the Value_Type_System is initialized THEN the system SHALL support all ILVT types including boolean, int8, int16, int32, int64, int128, int256, uint8, uint16, uint32, uint64, uint128, uint256, decimal, numeric, float16, float32, float64, float128, float256, decfloat32, decfloat64, decfloat128, string, char, bytes, binary, date, time, time_tz, datetime, datetime_tz, duration, record, array, multiset, json, vector, and null
+2. WHEN a PropertyType is created with any ILVT type THEN the system SHALL validate values according to the type's specification and parameter constraints
+3. WHEN extended precision types are used THEN the system SHALL validate values within the appropriate ranges (e.g., int128 range: -170141183460469231731687303715884105728 to 170141183460469231731687303715884105727)
+4. WHEN parameterized types are used THEN the system SHALL validate type parameters (precision, scale, length, dimension)
+5. IF an invalid value is provided for any ILVT type THEN the system SHALL raise a descriptive ValidationError with type-specific information
 
-### Requirement 3: Complex Type Support
+### Requirement 2: Cross-Language Type Mapping
 
-**User Story:** As a developer, I want to use complex types (JSON, arrays, maps) so that I can model structured data within properties.
+**User Story:** As a data integrator, I want to map types between GQL, SQL Foundation, Cypher, and JSON Schema so that I can work with data from multiple systems.
 
 #### Acceptance Criteria
 
-1. WHEN a PropertyType is created with a JSON value type THEN the system SHALL validate JSON structure and syntax
-2. WHEN a PropertyType is created with an ARRAY value type THEN the system SHALL validate array elements against the specified element type
-3. WHEN a PropertyType is created with a MAP value type THEN the system SHALL validate map keys and values against their specified types
-4. WHEN nested complex types are used THEN the system SHALL recursively validate all nested structures
-5. IF type coercion is enabled THEN the system SHALL attempt safe type conversions with clear success/failure reporting
+1. WHEN the Language_Type_Mapper is used THEN the system SHALL provide bidirectional mappings between ILVT types and GQL Property Value Types, SQL Foundation Types, Cypher Data Types, and JSON Schema Extensions
+2. WHEN mapping from GQL types THEN the system SHALL correctly map GQL types like INT8, UINT8, BIGINT, DECIMAL, STRING, VECTOR to their ILVT equivalents
+3. WHEN mapping from SQL Foundation types THEN the system SHALL correctly map SQL types like SMALLINT, INTEGER, BIGINT, DECIMAL, VARCHAR, JSON, VECTOR to their ILVT equivalents
+4. WHEN mapping from Cypher types THEN the system SHALL correctly map Cypher types like INTEGER, FLOAT, STRING, BOOLEAN, DATE, TIME, DATETIME, DURATION, LIST to their ILVT equivalents
+5. IF a type has no equivalent in a target language THEN the system SHALL indicate "undefined" and provide fallback mapping strategies
+
+### Requirement 3: JSON Schema Integration
+
+**User Story:** As a schema architect, I want to use JSON Schema extensions with the triple naming convention so that types are consistently represented across all systems.
+
+#### Acceptance Criteria
+
+1. WHEN JSON Schema definitions are generated THEN the system SHALL use the triple naming convention with data.xxx, gql.xxx, and sql.xxx fields for each ILVT type
+2. WHEN complex types are defined THEN the system SHALL generate appropriate JSON Schema with type constraints (e.g., integer minimum/maximum values, string maxLength, array elementType)
+3. WHEN structured types like record and array are used THEN the system SHALL generate nested JSON Schema definitions with proper field and element type specifications
+4. WHEN temporal types are used THEN the system SHALL generate JSON Schema with appropriate format constraints (date, time, date-time, duration)
+5. IF a type is undefined in a specific language THEN the system SHALL set the corresponding language field to "undefined" in the JSON Schema
 
 ### Requirement 4: Property Constraints
 
@@ -66,17 +75,17 @@ This specification defines the requirements for implementing a comprehensive val
 4. WHEN validation is performed THEN the system SHALL complete in less than 1ms per property on average
 5. IF partial validation is requested THEN the system SHALL support validation of specific graph subsets
 
-### Requirement 6: Type Coercion and Conversion
+### Requirement 6: Language Level Adaptation
 
-**User Story:** As a data integrator, I want configurable type coercion so that I can handle data from various sources with different type representations.
+**User Story:** As a system integrator, I want language-level adaptation so that I can work with different levels of type system complexity based on the target language.
 
 #### Acceptance Criteria
 
-1. WHEN type coercion is enabled THEN the system SHALL attempt safe conversions between compatible types
-2. WHEN string-to-number conversion is requested THEN the system SHALL parse numeric strings according to locale rules
-3. WHEN date string conversion is requested THEN the system SHALL support multiple common date formats
-4. WHEN coercion fails THEN the system SHALL provide clear error messages explaining why conversion failed
-5. IF strict mode is enabled THEN the system SHALL reject all type coercions and require exact type matches
+1. WHEN GQL language level is used THEN the system SHALL support the full ILVT type system with precise type mappings and strict type validation
+2. WHEN LEX language level is used THEN the system SHALL map to Cypher-compatible subset with int64 for all integer types, float64 for all floating-point types, and allow heterogeneous collections
+3. WHEN cross-language conversion is performed THEN the system SHALL apply appropriate type coercion rules based on the source and target language capabilities
+4. WHEN implementation-defined features are encountered THEN the system SHALL handle precision, scale, and range variations appropriately
+5. IF a type is not supported in the target language THEN the system SHALL provide best-fit mapping with appropriate warnings
 
 ### Requirement 7: Performance and Scalability
 
