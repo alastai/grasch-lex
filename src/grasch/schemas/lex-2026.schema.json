@@ -1,0 +1,377 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.grasch.org/lex-2026.schema.json",
+  "title": "LEX:2026 GQL Extended Schema Specification",
+  "description": "JSON Schema for LEX:2026 graph schemas as defined in LEX-100 specification",
+  "type": "object",
+  "required": [
+    "identifier",
+    "valueTypeSystemName",
+    "graphType"
+  ],
+  "properties": {
+    "identifier": {
+      "type": "object",
+      "description": "Graph schema identifier with optional root IRI and directory structure",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "root": {
+          "type": "string",
+          "format": "iri",
+          "description": "Optional root IRI for the schema"
+        },
+        "directory": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Directory path components"
+        },
+        "typesGraphsDirectory": {
+          "type": "string",
+          "description": "Optional types-graphs directory name"
+        },
+        "name": {
+          "type": "string",
+          "description": "Schema name"
+        }
+      },
+      "additionalProperties": false
+    },
+    "principal": {
+      "type": "string",
+      "description": "Optional owner/principal for authorization"
+    },
+    "valueTypeSystemName": {
+      "type": "string",
+      "enum": [
+        "CYPHER",
+        "GQL",
+        "SQL"
+      ],
+      "description": "Name of the value type system used in this schema"
+    },
+    "graphType": {
+      "$ref": "#/$defs/GraphType"
+    },
+    "constraints": {
+      "type": "object",
+      "description": "Map of constraint names to constraint definitions",
+      "patternProperties": {
+        "^[a-zA-Z_][a-zA-Z0-9_]*$": {
+          "$ref": "#/$defs/Constraint"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "GraphType": {
+      "type": "object",
+      "description": "Graph type descriptor defining structure of conformant data graphs",
+      "required": [
+        "graphPreferredName",
+        "nodePreferredName",
+        "edgePreferredName",
+        "nodeTypeMinimumLabels",
+        "nodeTypeMaximumLabels",
+        "nodeTypeMinimumPropertyTypes",
+        "nodeTypeMaximumPropertyTypes",
+        "edgeTypeMinimumLabels",
+        "edgeTypeMaximumLabels",
+        "edgeTypeMinimumPropertyTypes",
+        "edgeTypeMaximumPropertyTypes",
+        "nodeTypes",
+        "edgeTypes"
+      ],
+      "properties": {
+        "graphPreferredName": {
+          "type": "string",
+          "enum": [
+            "GRAPH",
+            "PROPERTY GRAPH"
+          ],
+          "description": "Implementation-defined preferred name for graph"
+        },
+        "nodePreferredName": {
+          "type": "string",
+          "enum": [
+            "NODE",
+            "VERTEX"
+          ],
+          "description": "Implementation-defined preferred name for nodes"
+        },
+        "edgePreferredName": {
+          "type": "string",
+          "enum": [
+            "EDGE",
+            "RELATIONSHIP"
+          ],
+          "description": "Implementation-defined preferred name for edges"
+        },
+        "nodeTypeMinimumLabels": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of labels per node type"
+        },
+        "nodeTypeMaximumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of labels per node type"
+        },
+        "nodeTypeMinimumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of property types per node type"
+        },
+        "nodeTypeMaximumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of property types per node type"
+        },
+        "edgeTypeMinimumLabels": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of labels per edge type"
+        },
+        "edgeTypeMaximumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of labels per edge type"
+        },
+        "edgeTypeMinimumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of property types per edge type"
+        },
+        "edgeTypeMaximumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of property types per edge type"
+        },
+        "nodeTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NodeType"
+          },
+          "description": "Set of node type definitions"
+        },
+        "edgeTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EdgeType"
+          },
+          "description": "Set of edge type definitions"
+        },
+        "nodeTypeKeyLabelSetDictionary": {
+          "type": "object",
+          "description": "Map of key label sets to node types",
+          "patternProperties": {
+            ".*": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of node type"
+            }
+          },
+          "additionalProperties": false
+        },
+        "edgeTypeKeyLabelSetDictionary": {
+          "type": "object",
+          "description": "Map of key label sets to edge types",
+          "patternProperties": {
+            ".*": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of edge type"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "NodeType": {
+      "type": "object",
+      "description": "Node type descriptor",
+      "required": [
+        "index",
+        "labels",
+        "propertyTypes"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Unique integer index for this node type"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Set of labels for this node type"
+        },
+        "propertyTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          },
+          "description": "Set of property type definitions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EdgeType": {
+      "type": "object",
+      "description": "Edge type descriptor",
+      "required": [
+        "index",
+        "labels",
+        "propertyTypes",
+        "direction",
+        "firstEndpointNodeType",
+        "secondEndpointNodeType"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Unique integer index for this edge type"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Set of labels for this edge type"
+        },
+        "propertyTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          },
+          "description": "Set of property type definitions"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "DIRECTED",
+            "UNDIRECTED"
+          ],
+          "description": "Edge direction"
+        },
+        "firstEndpointNodeType": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Index of first endpoint node type"
+        },
+        "secondEndpointNodeType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "SAME"
+            },
+            {
+              "type": "integer",
+              "minimum": 0
+            }
+          ],
+          "description": "Index of second endpoint node type, or SAME for loops"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PropertyType": {
+      "type": "object",
+      "description": "Property type descriptor",
+      "required": [
+        "name",
+        "valueType"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Property name"
+        },
+        "valueType": {
+          "$ref": "#/$defs/ValueType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ValueType": {
+      "type": "object",
+      "description": "Value type descriptor with name and optional parameters",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Value type name from the value type system"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Map of parameter names to values",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "Constraint": {
+      "type": "object",
+      "description": "Constraint descriptor",
+      "required": [
+        "name",
+        "rule"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Constraint name"
+        },
+        "rule": {
+          "$ref": "#/$defs/ConstraintRule"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ConstraintRule": {
+      "type": "object",
+      "description": "Constraint rule definition",
+      "required": [
+        "subject",
+        "constraintPattern",
+        "uniqueKeyComponentPropertyNames"
+      ],
+      "properties": {
+        "subject": {
+          "type": "string",
+          "enum": [
+            "KEY",
+            "UNIQUE"
+          ],
+          "description": "Type of constraint"
+        },
+        "constraintPattern": {
+          "type": "string",
+          "description": "Pattern defining the constraint scope"
+        },
+        "uniqueKeyComponentPropertyNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Set of property names that form the unique key"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

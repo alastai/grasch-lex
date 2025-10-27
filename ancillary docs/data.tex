@@ -1,0 +1,862 @@
+\chapter{Data sets and data generation}
+\label{sec:data}
+
+This chapter introduces the data used by \ldbcsnb. This includes the different
+data types, the data schema, how it is generated and the different scale
+factors.
+
+\textbf{Warning.} This chapter describes the latest variant of the data set.
+If you are looking for information on the Interactive workload, please also check 
+\autoref{sec:legacy-data-sets}.
+
+\section{Data Types}
+\autoref{table:types} describes the different data types used in the benchmark.
+
+\input{tables/table-types}
+
+\section{Data Schema}
+
+\autoref{fig:schema} shows the data schema in UML. The schema defines the
+structure of the data used in the benchmark in terms of entities and their
+relations. Data represents a snapshot of the activity of a social network
+during a period of time. Data includes entities such as Persons, Organisations,
+and Places. The schema also models the way persons interact, by means of the
+friendship relations established with other persons, and the sharing of content
+such as Messages (both textual and images), replies to Messages and likes to
+Messages.  People form groups to talk about specific topics, which are
+represented as Tags\footnote{Tags are similar to \emph{hashtags}
+on contemporary social media sites (see \url{https://en.wikipedia.org/wiki/Hashtag}). In this document, we occasionally use the term
+\emph{topic} to refer to tags.}.
+An example graph conforming the SNB schema is shown in \autoref{sec:example-graph}.
+
+\ldbcsnb has been designed to be flexible and to target systems of different
+nature and characteristics. As such, it does not force any particular internal
+representation of the schema. The \datagen component
+% described in \autoref{sec:data_generation}
+supports multiple output data formats to
+fit the needs of different types of systems, including RDF, relational DBMS and
+graph DBMS.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/schema-comfortable}
+    \caption{UML class diagram-style depiction of the \ldbcsnb graph schema. Note that the \textsf{knows} edges should be treated as undirected (but are serialized only in a single direction). The cardinality of the \textsf{hasModerator} edge has changed between version~1 (where it was exactly 1) and version~2 (where it is 0..1).}
+    \label{fig:schema}
+\end{figure}
+
+The schema specifies different entities, their attributes and their relations.
+All of them are described in the following sections.
+
+\subsubsection*{Textual Restrictions and Notes}
+\begin{itemize}
+    \item Messages always have a non-empty \texttt{content} attribute.
+    \item Posts have either a \texttt{content} or an \texttt{imageFile} attribute (\ie they always have exactly one of them.) The one they do not have is represented with an empty string or with \texttt{NULL}.
+    \item Posts in a forum can be created by a non-member person if and only if that person is the moderator of the Forum.
+\end{itemize}
+
+\subsection{Entities (Nodes)}
+
+{\flushleft \textbf{City:}} a sub-class of a Place, and represents a
+city of the real world. City entities are used to specify where persons live,
+as well as where universities operate.
+
+{\flushleft \textbf{Comment:}} a sub-class of a Message, and represents a
+comment made by a person to an existing message (either a Post or a Comment).
+
+{\flushleft \textbf{Company:}} a sub-class of an Organisation, and represents a company where persons work.
+
+{\flushleft \textbf{Continent:}} a sub-class of a Place, and represents a continent of the real world.
+
+{\flushleft \textbf{Country:}} a sub-class of a Place, and represents a country of the real world.
+Countries are selected as the place of operation for Companies as well as the location of Messages.
+
+{\flushleft \textbf{Forum:}} a meeting point where people
+post messages. Forums are characterized by the topics (represented as tags)
+people in the forum are talking about. Although from the schema's perspective
+it is not evident, there exist three different types of
+forums.  They are distinguished by their titles:
+
+\begin{itemize}
+    \item personal walls: ``Wall of \ldots''
+    \item image albums: ``Album $k$ of \ldots''
+    \item groups: ``Group for \ldots''
+\end{itemize}
+
+\autoref{table:forum} shows the attributes of the Forum entity.
+
+\input{tables/table-forum}
+
+{\flushleft \textbf{Message:}} an abstract entity that represents a message
+created by a person. \autoref{table:message} shows the attributes of the Message
+abstract entity.
+
+\input{tables/table-message}
+
+{\flushleft \textbf{Organisation:}} an institution of the real
+world. \autoref{table:organisation} shows the attributes of the Organisation
+entity.
+
+\input{tables/table-organisation}
+
+{\flushleft \textbf{Person:}} the avatar a real world person creates
+when he/she joins the network, and contains various information about the
+person as well as network related information. \autoref{table:person} shows
+the attributes of the Person entity.
+
+\input{tables/table-person}
+
+{\flushleft \textbf{Place:}} a place in the world.
+\autoref{table:place} shows the attributes of the Place entity. Note, each Place has additional parameters: longitude and latitude, which are not exposed. These are used internally for sorting places.
+
+\input{tables/table-place}
+
+{\flushleft \textbf{Post:}} a sub-class of Message, that is posted in a
+forum. Posts are created by persons into the forums where they belong.
+Posts contain either content or imageFile, always one of them but never both.
+The one they do not have is an empty string.
+\autoref{table:post} shows the attributes of the Post entity.
+
+\input{tables/table-post}
+
+{\flushleft \textbf{Tag:}} a topic or a concept. Tags are used to
+specify the topics of forums and posts, as well as the topics a person is
+interested in. \autoref{table:tag} shows the atltributes of the Tag entity.
+
+\input{tables/table-tag}
+
+{\flushleft \textbf{TagClass:}} a class used to build a hierarchy of tags. \autoref{table:tagclass} shows the attributes of the TagClass entity.
+
+\input{tables/table-tagclass}
+
+{\flushleft \textbf{University:}} a sub-class of Organisation,
+and represents an institution where persons study.
+
+\subsection{Relations (Edges)}
+
+Relations (edges) connect entities of different types. The endpoint entities are defined by their ``id'' attribute.
+Edge instances starting from or ending in a given node are treated as a set, \ie no ordering is defined on the edges.
+Multiple edges (\ie edges of the same type between two entity instances) are not allowed in SNB graphs.
+
+\input{tables/table-relations}
+
+\subsection{Domain Concepts}
+
+A \emph{thread} consists of Messages, starting with a single Post and the Comments that -- either directly or transitively -- reply to that Post.
+
+\section{Data Generation}
+\label{sec:data_generation}
+
+\ldbcsnb provides \datagen (Data Generator), which produces synthetic
+datasets following the schema described above. Data
+produced mimics a social network's activity during a period of time. Three
+parameters determine the generated data: the number of persons, the number of
+years simulated, and the starting year of simulation. \datagen is defined by the
+following characteristics:
+
+\begin{itemize}
+    \item \textbf{Realism.} Data generated by \datagen mimics the
+        characteristics of those found in a real social network. In \datagen,
+        output attributes, cardinalities, correlations and distributions have
+        been finely tuned to reproduce a real social network in each of its
+        aspects. On the one hand, it is aware of the  data and link distributions
+        found in a real social network such as Facebook. On the other hand, it
+        uses real data from DBpedia, such as property dictionaries, which are
+        used to ensure that attribute values are realistic and correlated.
+    \item \textbf{Scalability.} Since \ldbcsnb targets systems of different
+        scales and budgets, \datagen is capable of generating datasets of
+        different sizes, from a few Gigabytes to Terabytes. \datagen is
+        implemented following the MapReduce parallel paradigm, allowing the
+        generation of small datasets in single node machines, as well as large
+        datasets on commodity clusters.
+    \item \textbf{Determinism.} \datagen is deterministic regardless of the number
+        of cores/machines used to produce the data. This important feature
+        guarantees that all Test Sponsors will face the same dataset,
+        thus, making the comparisons between different systems fair and the
+        benchmarks' results reproducible.
+    \item \textbf{Usability.} \ldbcsnb is designed to have an affordable entry
+        point. As such, \datagen's design is  severely influenced by this
+        philosophy, and therefore it is designed to be as easy to use as
+        possible.
+\end{itemize}
+
+
+\subsection{Resource Files}
+
+\datagen uses a set of resource files with data
+extracted from DBpedia. Conceptually, \datagen generates attribute's
+values following a property dictionary model that is defined by
+
+\begin{itemize}
+    \item a dictionary $D$
+    \item a ranking function $R$
+    \item a probability function $F$
+\end{itemize}
+
+Dictionary $D$ is a fixed set of values. The ranking function $R$ is a bijection
+that assigns to each value in a dictionary a unique rank between 1 and $|D|$.
+The probability density function $F$ specifies how the data generator chooses
+values from dictionary $D$ using the rank for each term in the dictionary. The
+idea to have a separate ranking and probability function is motivated by the
+need of generating correlated values: in particular, the ranking function is
+typically parameterized by some parameters: different parameter values result
+in different rankings. For example, in the case of a dictionary of property
+firstName, the popularity of first names might depend on the gender, country
+and birthday properties. Thus, the fact that the popularity of first names in
+different countries and times is different, is reflected by the different ranks
+produced by function $R$ over the full dictionary of names.  \datagen uses a
+dictionary for each literal property, as well as ranking functions for all
+literal properties. These are materialized in a set of resource files, which
+are described in \autoref{table:property_dictionaries}.
+
+\input{tables/table-property-dictionaries}
+
+\subsection{Graph Generation}
+
+\autoref{fig:generation_process} conceptually depicts the full data
+generation process. The first step loads all the dictionaries and resource
+files, and initializes the \datagen parameters.  Second, it generates all the
+Persons in the graph, and the minimum necessary information to operate. Part of
+this information are the interests of the persons, and the number of knows
+relationships of every person, which is guided by a degree distribution
+function similar to that found in Facebook~\cite{facebook_anatomy}.
+
+The next three steps are devoted to the creation of knows relationships.  An
+important aspect of real social networks, is the fact that similar persons
+(with similar interests and behaviors) tend to be connected. This is known as
+the Homophily principle~\cite{mcpherson2001birds,DBLP:journals/socnet/BaroneC18}, and implies the presence of
+a larger amount of triangles than that expected in a random network. In order
+to reproduce this characteristic, \datagen generates the edges by means of
+correlation dimensions.  Given a person, the probability to be connected to
+another person is typically skewed with respect to some similarity between the
+persons. That is, for a person $p$ and for a small set of persons that are
+somehow similar to it, there is a high connectivity probability, whereas for
+most other persons, this probability is quite low. This knowledge is
+exploited by \datagen to reproduce correlations.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=\yedscale]{figures/datagen-workflow}
+    \caption{The \datagen generation process.}
+    \label{fig:generation_process}
+\end{figure}
+
+Given a similarity function $M(p) : p \rightarrow [0, \infty)$ that gives a score to a person,
+with the characteristic that two similar persons will have similar scores, we
+can sort all the persons by function $M$ and compare a person $p$ against only the
+$K$ neighbouring persons in the sorted array. The consequence of this approach is
+that similar persons are grouped together, and the larger the
+distance between two persons indicates a monotonic increase in their similarity
+difference. In order to choose the persons to connect, \datagen uses a geometric
+probability distribution that provides a probability for picking persons to
+connect, that are between 1 and $K$ positions apart in the similarity
+ranking.
+
+Similarity functions and probability distribution functions over ranked
+distance drive what kind of persons will be connected with an edge, not how
+many. As stated above, the number of friends of a person is determined by a
+Facebook-like distribution. The edges that will be connected to a person $p$,
+are selected by randomly picking the required number of edges according to the
+correlated probability distributions as discussed before. In the case that
+multiple correlations exist, another probability function is used to divide the
+intended number of edges between the various correlation dimensions. In \datagen,
+three correlated dimensions are chosen: the first one depends on where the
+person studied and when, and the second correlation dimension depends on the
+interests of the person, and the third one is random (to reproduce the random
+noise present in real data). Thus, \datagen has a Facebook-like distributed node
+degree, and a predictable (but not fixed) average split between the reasons for
+creating edges.
+
+In the next step, a person's activity, in the form of forums, posts and comments
+is created. \datagen reproduces the fact that people with a larger number of
+friends have a higher activity, and hence post more photos and comments to a
+larger number of posts. Another important characteristic of real persons'
+activity in social network, are time correlations.  Usually, person' posts
+creation in a social network is driven by real world events.  For
+instance, one may think about an important event such as the elections in a
+country, or a natural disaster. Around the time these events occur, network
+activity about these events' topics sees an increase in volume. \datagen
+reproduces these characteristics with the simulation of what we name as
+flashmob events.  Several events are generated randomly at the beginning of the
+generation process, which are assigned a random tag, and are given a time and
+an intensity which represents the repercussion of the event in the real world.
+When persons' posts are created, some of them are classified as flashmob posts,
+and their topics and dates are assigned based on the generated flashmob events.
+The volume of activity around this events is modeled following a model similar
+to that described in~\cite{DBLP:conf/kdd/LeskovecBKT08}. Furthermore, in order to reproduce the
+more uniform every day person activity, \datagen also generates posts uniformly
+distributed along all the simulated time.
+
+Finally, in the last step the data is serialized into the output files.
+
+\subsection{Distributions, Parameters, and Quirks}
+\label{sec:distr-param}
+
+Interesting quirks:
+\begin{itemize}
+\item A Person is not a member of their Wall but they are its moderator, they do not have a hasMember edge.
+\item Each Album generated for Person will have approximately 70\% of their friends as members.
+\item A given Person has a 5\% chance of being a moderator of a set of groups.
+\item Group membership is composed of 30\% from the moderator's friends and the remainder is chosen randomly (from the block the person is in).
+\item Comments are only made in Walls and Groups.
+\item Messages can only receive likes during a 7-day window after their creation.
+\item Comments always occur within one day of Message they are replying to. The creation date is generated following the power-law distribution in Figure \ref{fig:comments_dist}. The mean delay between Comments and their parent Message is 6.85 hours.
+\item Flashmob events span a 72-hour time window with a specific event time in the middle of the window; there are 36 hours each side of the specific event time. Following the distribution in Figure \ref{fig:flashmob_dist} posts are generated either side of flashmob event time, posts are clustered around the specific event time.
+\end{itemize}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=\yedscale]{figures/comments_power_law}
+  \caption{The power-law used to generate comments.}
+  \label{fig:comments_dist}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=\yedscale]{figures/flashmob_dist}
+  \caption{The distribution used to generate posts during flashmob events.}
+  \label{fig:flashmob_dist}
+\end{figure}
+
+\subsection{Implementation Details}
+
+\datagen is implemented using the MapReduce parallel paradigm. In MapReduce, a
+Map function runs on different parts of the input data, in parallel and on many
+node clusters. This function processes the input data and produces for each
+result a key. Reduce functions then obtain this data and Reducers run in
+parallel on many cluster nodes. The produced key simply determines the Reducer
+to which the results are sent. The use of the MapReduce paradigm allows the
+generator to scale considerably, allowing the generation of huge datasets by
+using clusters of machines.
+
+In the case of \datagen, the overall process is divided into three MapReduce jobs.
+In the first job, each mapper generates a subset of the persons of the graph. A
+key is assigned to each person using one of the similarity functions described
+above. Then, reducers receive the key-value pairs sorted by the key,
+generate the knows relations following the described windowing process, and
+assign to each person a new key based on another similarity function, for the
+next MapReduce pass.  This process can be successively repeated for additional
+correlation dimension.  Finally, the last reducer generates the remaining
+information such as forums, posts and comments.
+
+\section{Output Data}
+
+For each scale factor, \datagen produces three different artefacts:
+\begin{itemize}
+  \item \textbf{Dataset:} The dataset to be bulk loaded by the SUT. In the Interactive workload, it corresponds to roughly the 90\% of the total generated network.
+  \item \textbf{Update Streams:} A set of update streams containing update
+    queries, which are used by the driver to generate the update queries of the
+    workloads. This update
+    streams correspond to the remaining 10\% of the generated dataset.
+  \item \textbf{Substitution Parameters:} A set of files containing the
+    different parameter bindings that will be used by the driver to generate the
+    read queries of the workloads.
+\end{itemize}
+
+\subsection{Scale Factors}
+\label{sec:scale-factors}
+
+\ldbcsnb defines a set of scale factors (SFs), targeting systems of different sizes and budgets.
+SFs are computed based on the ASCII size \emph{in Gibibytes} of the generated output files using the \textsf{csv-singular-merged-fk} serializer (see \autoref{sec:serializers}).\footnote{This way of characterizing the size of the data set is identical to the scaling of TPC-H and TPC-DS.}
+For both workloads, the SF1 data set is 1~GiB, SF100 is 100~GiB, and SF\numprint{10000} is \numprint{10000} GiB (not 10 TiB).
+
+However, \textbf{note that the two SNB workloads have different data sets} due with different folder structures.
+
+The data sets sizes are established as follows:
+For both workloads, we use the default settings for the splitting the data into an intial (bulk-loaded) data set and the later update operations (``streams'').
+For Interactive, both the 90\% initial data and the 10\% update streams count towards the total size and the \textsf{csv-singular-merged-fk} serializer is used.
+For BI, the sum of the initial snapshot (97\%) and the update operations (daily inserts and deletes) are measured and the default CSV serializers (\textsf{composite-merged-fk}) is used.
+
+It is important to note that for a given workload and scale factor, data sets generated using different serializers contain exactly the same data, the only difference is in how they are represented.%
+%\footnote{Naturally, there are slight differences in the disk usage of the data sets created with different serializers. For example, for a given scale factor, the disk usage of the data set serialized with the \textsf{csv-singular-projected-fk} serializer is expected to be higher, while with the \textsf{csv-composite-merged-fk}, it is expected to be lower.}
+
+The currently available SFs are the following: 1, 3, 10, 30, 100, 300, \numprint{1000}, \numprint{3000}, \numprint{10000}, \numprint{30000}.
+Additionally, three small SFs, 0.003, 0.1, and 0.3 are provided to help initial testing and validation efforts.
+
+The Test Sponsor may select the SF that better fits their needs, by properly configuring the \datagen, as described in \autoref{sec:data_generation}.
+The size of the resulting dataset is mainly affected by the following configuration parameters: the number of persons and the number of years simulated.
+By default, all SFs are defined over a period of three years, starting from 2010, and SFs are computed by scaling the number of Persons in the network.
+\autoref{tab:number-of-entities-bi-raw} shows the number of entities for SFs 1, \ldots, \numprint{30000} data sets.
+
+\input{tables/table-number-of-entities-bi-raw}
+
+%In \autoref{appendix:scale_factors}, we show the statistics of each of the
+%proposed SFs in detail, including distributions for some of the relations.
+
+\input{tables/table-csv-serializers}
+
+\autoref{tab:csv-serializers} shows how each CSV serializer handles attributes/edges of different cardinalities, demonstrating why \textsf{csv-singular-projected-fk} has the most files and \textsf{csv-composite-merged-fk} has the least number of files.
+
+\input{tables/table-csv-composite-projected-fk}
+
+\input{tables/table-csv-composite-merged-fk}
+
+\input{tables/table-csv-raw}
+
+\subsection{Serializers}
+\label{sec:serializers}
+
+The datasets are generated in the \texttt{social\_network/} directory, split into static and dynamic parts (\autoref{fig:schema}).
+The filenames (without the extension) end in \texttt{\_i\_j} where \texttt{i} is the block id and \texttt{j} is the partition id (set by \texttt{numThreads}).
+The SUT has to take care only of the generated Dataset to be bulk loaded. Using \texttt{NULL} values for storing optional values is allowed.
+
+\datagen currently only supports CSV-based serializers.
+These produce CSV-like text files which use the pipe character ``\texttt{|}'' as the primary field separator and the semicolon character ``\texttt{;}'' as a separator for multi-valued attributes (for the composite serializers).
+The CSV files are stored in two subdirectories: \texttt{static/} and \texttt{dynamic/}.
+Depending on the number of threads used for generating the dataset, the number of files varies, since there is a file generated per thread. We indicate this with ``\texttt{part-*}'' in the specification.
+
+The following CSV variants are supported:
+    \begin{itemize}
+      \item \textsf{csv-composite-projected-fk:}
+      Each relation with a cardinality larger than one are output in a separate file.
+      Generated files and their schemas as shown in \autoref{table:csv-composite-projected-fk}.
+
+      \item \textsf{csv-composite-merged-fk:}
+      This serializer is similar to \textsf{csv-composite-projected-fk}, but relations that have a cardinality of 1-to-N are merged in the entity files as a foreign keys.
+      There are 13~such relations in total:
+      \begin{itemize}
+        \item Comment\_hasCreator\_Person, Comment\_isLocatedIn\_Country, Comment\_replyOf\_Comment, Comment\_replyOf\_Post (merged to Comment);
+        \item Forum\_hasModerator\_Person (merged to Forum);
+        \item Organisation\_isLocatedIn\_Place (merged to Organisation);
+        \item Person\_isLocatedIn\_City (merged to Person);
+        \item Place\_isPartOf\_Place (merged to Place);
+        \item Post\_hasCreator\_Person, Post\_isLocatedIn\_Country, Forum\_containerOf\_Post (merged to Post);
+        \item Tag\_hasType\_TagClass (merged to Tag);
+        \item TagClass\_isSubclassOf\_TagClass (merged to TagClass)
+      \end{itemize}
+      Generated files and their schemas as shown in \autoref{table:csv-composite-merged-fk}.
+    
+      \item \textsf{csv-singular-merged-fk}:
+      Similar to the \textsf{csv-composite-merged-fk} but multi-valued attributes (\texttt{Person.email} and \texttt{Person.speaks}) are stored as separate directories (\texttt{Person\_email\_EmailAddress} and \texttt{Person\_speaks\_Language}, resp.).
+    
+      \item \textsf{csv-singular-projected-fk}:
+      Similar to the \textsf{csv-composite-projected-fk} but multi-valued attributes (\texttt{Person.email} and \texttt{Person.speaks}) are stored as separate directories (\texttt{Person\_email\_EmailAddress} and \texttt{Person\_speaks\_Language}, resp.).
+
+      \item \texttt{raw} mode:
+      The file names are the same as in \texttt{composite-merged-fk} but there are two important differences:
+      (1)~additional attributes, \eg \texttt{deletionDate}, \texttt{explicitlyDeleted}, and \texttt{weight} (used for weighted graphs in Graphalytics~\cite{DBLP:journals/corr/abs-2011-15028}), are included,
+      (2)~all data is included, \ie if a Forum is created and deleted before sampling the initial data set, it is included in this data set.
+      Generated files and their schemas as shown in \autoref{table:csv-raw}.
+    \end{itemize}
+
+\paragraph{Inheritance}
+    
+The inheritance hierarchies in the schema have two important characteristics
+(1)~all subclasses use the same id space, \eg there cannot be a Comment and a Post with id 1 at the same time,
+(2)~they are serialized to CSVs using either the \emph{map hierarchy to single table} or \emph{map each concrete class to its own table} strategies\footnote{\url{http://www.agiledata.org/essays/mappingObjects.html}}:
+
+\begin{description}
+    \item[Message = Comment | Post]
+    \emph{Map each concrete class to its own table} is used \ie separate CSV files are used for the Comment and the Post classes.
+
+    \item[Place = City | Country | Continent]
+    \emph{Map hierarchy to single table} is used, \ie all Place node are serialized in a single file. A discriminator attribute ``type'' is used with the value denoting the concrete class, \eg ``Country''.
+
+    \item[Organisation = Company | University]
+    \emph{Map hierarchy to single table} is used, \ie all Organisation nodes are serialized in a single fiel. A discriminator attribute ``type'' is used with the value denoting the concrete class, \eg ``Company''.
+\end{description}
+
+\subsection{Interactive Update Streams (Inserts)}
+
+The generic schema for the Interactive update streams is given in \autoref{table:update_stream_generic_schema}, while the concrete schemas of each insert operations is given in \autoref{table:update_stream_schemas}.
+The update stream files are generated in the \texttt{social\_network/} directory and are grouped as follows:
+
+\begin{itemize}
+    \item \texttt{updateStream\_*\_person.csv} files contain update operation 1: \queryRefCard{insert-01}{INS}{1}
+    \item \texttt{updateStream\_*\_forum.csv} files contain update operations 2--8: %
+    \queryRefCard{insert-02}{INS}{2}
+    \queryRefCard{insert-03}{INS}{3}
+    \queryRefCard{insert-04}{INS}{4}
+    \queryRefCard{insert-05}{INS}{5}
+    \queryRefCard{insert-06}{INS}{6}
+    \queryRefCard{insert-07}{INS}{7}
+    \queryRefCard{insert-08}{INS}{8}
+\end{itemize}
+
+Remark: update streams in version 1 only contain inserts, while in version 2, they contain both inserts and deletes.
+
+\subsection{Substitution Parameters}
+
+The substitution parameters are generated in the \texttt{substitution\_parameters/} directory.
+Each parameter file is named \texttt{\{interactive|bi\}\_<id>\_param.txt}, corresponding to an operation of
+Interactive complex reads (\queryRefCard{interactive-complex-read-01}{IC}{1}--\queryRefCard{interactive-complex-read-14-v2}{IC}{14v2}) and
+BI reads (\queryRefCard{bi-read-01}{BI}{1}--\queryRefCard{bi-read-20}{BI}{20}).
+The schemas of these files are defined by the operator, \eg the schema of \queryRefCard{interactive-complex-read-01}{IC}{1} is ``\texttt{personId|firstName}''.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introducing Delete Operations}
+
+\paragraph{Challenge for systems}
+To support deletion operations graph processing systems need to solve numerous technical challenges:
+%
+\begin{enumerate}
+\item Users should be able to \emph{express deletion operations} using the database API, preferably using a high-level declarative query language with clear semantics~\cite{Green2019}.
+\item Deletion operations \emph{limit the algorithms and data structures} that can be used by a system. Certain dynamic graph algorithms are significantly more expensive to recompute in the presence of deletes~\cite{DBLP:conf/soda/Roditty13} or only support either insert or deletions but not both~\cite{DBLP:conf/esa/RodittyZ04}. A number of updatable matrix storage formats only support efficient insertions but not deletions~\cite{DBLP:conf/hpec/BusatoGBB18}. Meanwhile some graph databases might be able to exploit indices to speed up deletions~\cite[Sec.~4.4.2]{Besta2019}
+\item \emph{Distributed graph databases} need to employ specialized protocols to enforce consistency of deletions~\cite{Waudby2020}.
+\end{enumerate}
+
+\paragraph{Challenge for benchmarks}
+Due to their importance and challenging nature, we found it necessary to incorporate delete operations into LDBC benchmarks.
+However, doing so is a non-trivial task as it impacts on each component in the benchmark workflow:
+workload specifications, data generation, parameter curation, and the workload driver.
+This section focuses primarily on data generation.
+
+The initial step in generating delete operations is to define the semantics of the desired operations.
+To understand common behaviour of deletes we informally surveyed several social networks, the findings of which motivated the design
+of 8~delete operations described in~\autoref{sec:bi-delete-operations}.
+
+The next step was to generate \emph{delete events} within LDBC's synthetic data generator and ensure that they follow a logic order in
+the social network.
+For example, a delete \tKnows edge event can only occur after both \tPersons join the network and become friends,
+but before either \tPerson leaves the network.
+To achieve this Datagen was extended to support \emph{dynamic entities}.
+Dynamic entities have a \emph{creation date} and a \emph{deletion date}, which together comprise an entity's \emph{lifespan}.
+Once generated this allows for the extraction of deletion operations, which can be utilized by LDBC workloads.
+Deriving valid lifespans for dynamic entities was the subject of a short paper published at the GRADES-NDA~2020
+workshop~\cite{DBLP:conf/sigmod/WaudbySPS20} and is presented in~\autoref{sec:lifespan-management}.
+
+Next it was important to distinguish between \emph{implicit} and \emph{explicit} delete events.
+Continuing with the \tKnows edge example, once created the connection exists until either \tPerson leaves the network,
+at which point the connection is implicitly deleted, as per the semantics of delete \tPerson~(\autoref{sec:delete-01}).
+Alternatively, at any time up until this event, the friendship can be explicitly deleted,
+\ie two people have a disagreement and ``unfriend'' each other, but both continue using the social network.
+Distinguishing between these types of events is important as only explicit delete events should become delete operations
+in the workload.
+
+To achieve this each dynamic entity is assigned a probability of being explicitly deleted, if selected the entity is marked as such;
+this is used to ensure the correct serialization of delete events into delete operations.
+For entities selected for explicit deletion the next step is to determine a realistic time at which the event occurs.
+For example, a post has a higher probability of being deleted soon after it was posted compared to after 5 days.
+To achieve this each dynamic entity is assigned a realistic distribution to select delete event timestamps from,
+which respects the bounds imposed by the valid lifespans.
+The probability distributions used to determine if a dynamic entities is explicitly deleted and then when that event occurs is discussed
+in~\autoref{sec:ensuring-realism}.
+
+Once generated dynamic entities must be correctly serialized.
+Depending on its creation date, deletion date, and if the entity is explicitly deleted it can,
+(i) spawn an insert and delete operation,
+(ii) be included in the bulk load component and spawn a delete operation,
+(iii) just be included in the bulk load component,
+(iv) spawn only an insert operation, and
+(v) not be serialized at all!
+The approach for doing this is presented in~\autoref{sec:conv-delete-events}.
+
+We summarize the numerous challenges supporting the generation of dynamic entities and thus delete operations poses below:
+\begin{enumerate}
+\item \textbf{Validity.} The generator should produce \emph{valid lifespans},
+where each generated dynamic entity guarantees that
+(a)~events in the graph follow a logical order: \eg in a social network, two people can become friends only after both persons joined the network and before either person leaves the network,
+(b)~the graph never violates the cardinality constraints prescribed by its schema, and
+(c)~the graph continuously satisfies the semantic constraints required by the application domain (\eg no isolated comments in a social network).
+\item \textbf{Realism.} The generator should create a graph with a realistic correlations and distribution of entities over time.
+For example, in a social network the distribution of activity is non-uniform over time, real-world events such as elections or controversial posts %by celebrities
+can drive spikes of posts and unfollowings respectively~\cite{DBLP:conf/www/MyersL14}.
+In addition, deletions can be correlated with certain attributes: \eg the likelihood a person leaves the network may be correlated with their number of friends~\cite{Lorincz2019}.
+Also, there are often temporal correlations between entity creation and deletion: \eg posts have an increased chance of deletion immediately following creation compared to after a 3~month period.
+\item \textbf{Serialization.} Care must be taken to distinguish between implicit and explicit delete events when creating the bulk load component, insert operations, and delete operations.
+\item \textbf{Scalability.} A graph with dynamic entities should be generated at scale (up to billions of edges).
+\end{enumerate}
+
+%%% [JACK: commented out]
+% \subsection{Challenge}
+
+% \paragraph{Deletions in graph generators}
+
+% Supporting deletions within graph generators poses numerous challenges.
+% First, they should produce \emph{valid deletions},
+% where each generated deletion operation guarantees that
+% (a)~the entity targeted for deletion exists at the time of the execution of the operation (even when multiple deletion operations are executed concurrently),
+% (b)~the graph never violates the cardinality constraints prescribed by its schema, and
+% (c)~the graph continuously satisfies the semantic constraints required by the application domain (\eg no isolated comments in a social network).
+% Second, deletions should be generated at scale (up to billions of edges).
+% % our solution: building on top of LDBC Datagen -- this uses a Hadoop implementation, which 'scales'
+% Third, they should create a graph with a realistic distribution of entities over time.
+% For example, in a social network it is reasonable to assume that events do not follow a uniform distribution but there are a number of bursty events.
+
+
+% Moreover, the probability of a given entity in the
+% We intend to specify deletion probabilities for each entity in the graph.
+% That is, the probability a given entity is explicitly deleted in simulation period.
+% This probability may be a function of several attributes.
+% For example, the probability a person leaves the network is a function of their number of connections -- the more friends, more social capital and less likely to leave.
+% A second dimension we intend to consider is the distribution within the intervals.
+% For example, if a post is selected for deletion, the interval we sample from may not be uniformly distributed.
+% Posts may have a higher chance of deletion straight after they have been posted rather than 3 months after they have been posted or if other posts have already been deleted.
+% Thirdly, it would be interesting to model flashmob-like unfollowings/deletions, a famous person posts a racist tweet for example
+
+% [Gabor] the "VaSCo properties" -- valid, scalable, correlated
+% valid
+% scalable (future work = Datagen migration)
+% correlations, flash delete (future work)
+
+\section{Lifespan Management}
+\label{sec:lifespan-management}
+
+This section is based on the short paper published at the GRADES-NDA~2020 workshop~\cite{DBLP:conf/sigmod/WaudbySPS20} authored by the task force members.
+
+%Such are generated from the intervals below, which capture the dependencies between entities. For example, a \tPost cannot be created until the \tPerson that creates that message, joins the network, the forum is created and the \tPerson joins the \tForum.
+
+In this section, we define the constraints for generating dynamic entities in a social network. Each dynamic entity gets a \emph{lifespan}, represented by two \emph{lifespan attributes}, a \emph{creation date} and a \emph{deletion date}.
+% Entities exist in the network within this lifespan.
+We first briefly review the data generator, introduce our notation and define the parameters of the generation process. Then, we define the semantic constraints which regulate the participation in certain relationships along with the constraints for selecting intervals. We illustrate an application of these with two examples, shown in \autoref{fig:example-graph} and \autoref{fig:example-graph-complex}.
+
+\paragraph{Graph schema}
+
+The LDBC Datagen component~\cite{Pham2012,Datagen} is responsible for generating the graph used in the benchmarks. It produces a synthetic dataset modelling a social network's activity. Its graph schema has 11~concrete node types connected by 20~edge types, and its entities (nodes/edges) are classified as either dynamic or static (\autoref{fig:schema}).
+The dynamic part of the graph comprises of a fully connected \tPerson graph and a number of \tMessage trees under \tForums.
+
+\paragraph{Notation}
+To describe lifespans and related constraints, we use the following notation.
+Constants are uppercase bold, \eg $\constant{NC}$.
+Entity types are monospaced, \eg \tPerson, \tHasMember.
+Variables are lowercase italic, \eg $\variable{pers}, \variable{hm}$.
+Entities are sans-serif, \eg $\instance{P_1}, \instance{HM}$.
+For an entity $x$, $\varc{x}{}$ denotes its creation date, while $\vard{x}{}$ denotes its deletion date.
+In most cases, both the creation and the deletion date are selected from an interval, \eg $\varc{x}{} \in \interval{d_1}{d_2}$ means that entity $\variable{x}$ should be created between dates $d_1$ (inclusive) and $d_2$ (exclusive).
+The selected creation and deletion dates together form an interval that represents the lifespan of its entity.
+If any of the intervals for selecting the lifespan attributes of an entity are empty, \ie $d_2 \leq d_1$, the entity should be discarded.
+As illustrated later, this interval is often used to determine the intervals where the creation and deletion dates of dependant entities are selected.
+
+\paragraph{Parameters} % maybe comes later?
+We parameterize the generator as follows.
+The network is created in 2010 and exists for 10~years at which point the network collapses ($\xNC = 2020$).
+Data is simulated for a 3-year period, between the simulation start, $\xSS = 2010$ and the simulation end, $\xSE = 2013$.
+In order to allow \emph{windowed execution} by the LDBC SNB driver (used for multi-threaded and distributed operation), we define a sufficiently large amount of time that needs to pass between consecutive operations on an entity as $\Delta = 10\text{s}$.
+
+%\paragraph{Examples}
+%\autoref{fig:example-graph} shows an example illustrating the lifespans of two $\type{\tPerson}$ nodes and a $\type{knows}$ edge.
+%A complex example that includes $\type{Forum}$, $\type{Post}$ and $\type{Comment}$ nodes is shown in  \autoref{fig:example-graph-2}.
+
+\subsection{General Rules}
+
+In this section, we define general rules that must be satisfied by all entities in the graph. In subsequent sections, we refine these with domain-specific constraints.
+For a node $\varn{1}$, we always require that:
+\begin{itemize}
+    \item $\varcn{1} \in \interval{\xSS}{\xSE}$, the node must be created between the simulation start and the simulation end.
+    \item $\vardn{1} \in \interval{\varcn{1} + \Delta}{\xNC}$, the node must exist for at least $\Delta$ time and must be deleted before the network collapse.
+\end{itemize}
+
+
+To enforce referential integrity constraints (\ie prevent dangling edges), the lifespan of edge $\variable{e}$ between nodes $\varn{1}$ and $\varn{2}$ must always satisfy the following criteria:
+
+\begin{itemize}
+    \item $ \varc{e} \in \interval
+        {\max(\varcn{1}, \varcn{2})}
+        {\min(\vardn{1}, \vardn{2}, \xSE)} $,
+        in other terms,
+        the edge must be created no sooner than both of its endpoints
+        but before
+        any of its endpoints are deleted.
+        %creation date of and edge must be larger than or equal to those of its endpoints.
+    \item $ \vard{e} \in \interval
+        {\varc{e} + \Delta}
+        {\min(\vardn{1}, \vardn{2})} $,
+        \ie the edge must exist for at least $\Delta$ time and
+        deleted no later than
+        any of its endpoints.
+\end{itemize}
+
+To further refine the constraints for edges, we distinguish between two main cases.
+
+(1)~The endpoints of edge $\variable{e}$ are existing node $\varn{1}$ and node $\varn{2}$ which is inserted at the same time as the edge:
+\begin{itemize}
+    \item $ \varc{e} = \varcn{2} $ % \quad (we know that $\varcn{1} \geq \varcn{2} + \Delta$)
+    \item $ \vard{e} = \min(\vardn{1}, \vardn{2}) $.
+    In case of edges with \emph{containment semantics} (node $\varn{1}$ contains $\varn{2}$ through edge $e$),
+    node $\varn{2}$ must always be deleted at the same time as edge $\variable{e}$,
+    therefore
+    $\vard{e} = \vardn{2}$ and $\vardn{2} \leq \vardn{1}$.
+    %
+%\footnote{We require each entity to exist for at least $\Delta$ time, so $\vardn{1} \geq \varcn{1} + \Delta $. Therefore, given $\varc{e} = \varcn{1}$, assigning $\vard{e} = \vardn{1}$ confirms $ \vard{e} \in \interval{\varc{e} + \Delta}{\min(\vardn{1}, \vardn{2})}$.}
+\end{itemize}
+
+(2)~In other cases, the edge must be created when both of its endpoints already exist and must be deleted no later than them:
+
+\begin{itemize}
+    \item $ \varc{e} \in \interval
+        {\max(\varcn{1}, \varcn{2}) + \Delta}
+        {\min(\vardn{1}, \vardn{2}, \xSE)} $
+    \item $ \vard{e} \in \interval
+        {\varc{e} + \Delta}
+        {\min(\vardn{1}, \vardn{2})} $
+\end{itemize}
+
+These constraints capture the ``minimum'' (\ie most relaxed) set of constraints that must be enforced in all domains.
+Next, we introduce additional constraints specific to our social network schema.
+
+\subsection{Person}
+
+A \tPerson $\ePerson$ is the avatar a real-world person creates when they join the network. A \tPerson joins the network, $\varc{\ePerson}$, during the simulation period and they leave the network, $\vard{\ePerson}$, during the network lifetime:
+%provided the following conditions hold:
+
+\begin{itemize}
+    \item $\varc{\ePerson} \in \interval{\xSS}{\xSE}$
+    \item $\vard{\ePerson} \in \interval{\varc{\ePerson} + \Delta}{\xNC}$
+\end{itemize}
+%When most users leave a network they do so without deleting their profiles; around 22\% explicitly delete their profiles~\cite{Lorincz2019}. Also, the probability of a given \tPerson leaving the network varies depending on the amount of \emph{social capital} they stand to lose~\cite{Lorincz2019}. Social capital is the utility an individual gains from human interaction, this is captured at a coarse-grain by the number of connections an individual has in the network -- \tPersons with higher \tKnows  degrees are less willing leave the network as they have more social capital to lose. These two phenomenon are captured when $\vard{\ePerson}$ is selected from the above interval.
+
+For the edges of \tPerson nodes pointing to a static node
+($\type{isLocatedIn}$,
+$\type{studyAt}$,
+$\type{workAt}$, and
+$\type{hasInterest}$),
+we assign the creation and deletion date from $\varc{\ePerson}$ and $\vard{\ePerson}$, resp.
+
+% \begin{itemize}
+% \item maybe make creation date non-uniform across simulation period? Or we assume the network is in the middle of its life?
+% \item when probability of deletion based on connection distribution has been defined should we include it?
+% \end{itemize}
+
+%\input{figures/graph-person-knows}
+\input{figures/fig-person-knows}
+
+\subsubsection{Knows}
+
+The \tKnows edge connects two \tPersons $p_i$ and $p_j$ that know each other in the network.
+%When assigning \tKnows a creation date and deletion date the lifespans of the \tPersons being connected must be carefully considered, as both \tPersons must exist in the network at some point in time for them to connect.
+The intervals where the creation and deletion dates can be generated in are illustrated in \autoref{fig:person-knows} and defined below:
+\begin{itemize}
+    \item $\varc{\eKnows_{i,j}} \in \interval{\max(\varc{\ePerson}_{i},\varc{\ePerson}_{j}) + \Delta}{\min(\vard{\ePerson}_{i},\vard{\ePerson}_{j}, \xSE)}$
+    \item $\vard{\eKnows_{i,j}} \in \interval{\varc{\eKnows_{i,j}} + \Delta}{\min (\vard{\ePerson}_{i}, \vard{\ePerson}_{j})}$
+\end{itemize}
+
+
+\subsection{Forum and Message}
+
+The rules for \tForum and \tMessage nodes along with their edges are given in \autoref{sec:forum} and \autoref{sec:message}, respectively, and illustrated in \autoref{fig:example-graph-complex}.
+
+
+% \begin{figure*}[ht]
+%   \centering
+%   \includegraphics[width=\textwidth]{figures/degree-average-through-time-white}
+%   \caption{Average $\type{know}$ degree for $\type{Person}$s in the network, measured once per day throughout the simulation period. For each scale factor, measurements were taken on four graphs built from the generated updates varying the deletions included. Experiment repeated across Scale Factors 1, 10, and 30.}
+%   \label{fig:degrees}
+% \end{figure*}
+
+\input{albums-walls}
+\subsection{Complex Example}
+\label{sec:complex-example}
+
+In \autoref{fig:example-graph-complex}, a complex example graph is shown with the corresponding intervals.
+Both \emph{the intervals for selecting the creation and deletion date} attributes and the selected \emph{lifespan intervals} are shown.
+
+\input{figures/fig-comments}
+
+%As of version 0.4.0 Datagen produced a graph that was monotonically increasing in size over the simulation period, once a \tPerson joined the network they never left, they never deleted a post nor unliked a picture. In reality this far from the case, people regularly remove friends, delete comments and unlike pictures. Analysis of the now defunct social network iWiW~\cite{Lorincz2019} discovered across the network's lifetime 22\% of users deleted their accounts. Moreover, recent analysis of Facebook data found an average user has removed around 5\% of their cumulative friends [CITATION].
+
+\section{Ensuring Realism}
+\label{sec:ensuring-realism}
+
+Capturing realistic deletion behaviour was broken down into two dimensions.
+Firstly, each dynamic entity is assigned a probability of being explicitly deleted.
+Second, if selected for explicit deletion, a deletion event date is selected using a distribution bound by the valid lifespan of that entity.
+To make informed choices of deletion probabilities and deletion date distributions, where possible, real-world data was used.
+
+\paragraph{Delete Person}
+
+Lorincz \etal~\cite{Lorincz2019} have analyzed iWiW, a now-defunct Hungarian social network, observing that people with more connections are less likely to leave a social network.
+When a \tPerson is generated they are assigned a \emph{maxKnows} value which indicates the amount of \tKnows connections they
+will make across the lifetime of the network.
+This information is then utilized to determine the probability a person is explicitly deleted using the distribution provided
+in~\cite{Lorincz2019}, reproduced in~\autoref{fig:if-person}.
+A deletion event date is then selected uniformly from the person's valid lifespan.
+On average 3.5\% of \tPersons are deleted across the simulation period.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=\yedscale]{figures/fig-if-person}
+  \caption{Distribution for determining the probability a \tPerson is deleted given their number of connections.}
+  \label{fig:if-person}
+\end{figure}
+
+\paragraph{Delete Knows}
+
+Myers and Leskovec~\cite{DBLP:conf/www/MyersL14} analysed 1.2 billion tweets from 13.1 million Twitter users.
+These users made 112.3 million new connections, and deleted 39.2 million connections; a 3:1 follow:unfollow ratio.
+As Datagen models a generic social media platform we have chosen a different ratio of 20:1
+(on average 5\% of \tKnows edges are deleted), rather than overcapture behavior that may be unique to a single site.
+\cite{DBLP:conf/www/MyersL14} also finds a constant background flux of follows and unfollows interleaved with bursts in such activity.
+Currently, Datagen has no follow bursts, thus, we have decided not to incorporate unfollow bursts.
+They also find less similar friends have a high probability of being unfollowed; modelling this relationship is work in progress.
+If a \tKnows edge is selected for explicit deletion then a deletion date is then selected uniformly from the edge's valid lifespan.
+
+\paragraph{Delete Post/Comment and Delete Post/Comment Like}
+
+Posts in groups and walls are produced via a uniform generator and a flashmob generator, capturing background events and bursts in
+events respectively.
+A comment generator is then used to produce a tree of comments on each post.
+Posts in albums are referred to as photos, they are produced by a different generator and do not have flashmob events nor do they have comment trees.
+Additionally, all posts and comments have a number of likes generated for it.
+
+Almuhimedi \etal~\cite{DBLP:conf/cscw/AlmuhimediWLSA13} tracked 292K Twitter users for 1 week.
+They found 2.4\% of 67.2M tweets were deleted across 4 categories: status posts, retweets, replies, and mentions of other users that
+were not replies.
+In order to apply these findings to Datagen and obtain the average percentage of \tMessages and \tLikes deleted across the simulation
+period, tweet categories were mapped to Datagen \tMessage types.
+\autoref{table:almuhimedi-mapping} gives the mapping and the percentage deleted across the simulation period within each category.
+
+\input{tables/table-almuhimedi-mapping}
+
+Additionally, \cite{DBLP:conf/cscw/AlmuhimediWLSA13} identified not all users delete messages, with around 50\% of users doing so.
+Thus, each \tPerson in the network has a 50\% chance of being marked a \emph{messageDeleter}, who subsequently, may or may not, delete post, comments, or likes.
+\cite{DBLP:conf/cscw/AlmuhimediWLSA13} also identify a relationship between the depth of replies to a tweet and the chance the tweet
+is deleted -- a tweet with less replies is more likely to be deleted.
+We apply this relationship to the number of  \tComments in a \tPosts thread using the distribution in \autoref{fig:if-post}.
+Note, this distribution has an average of 2.7\% aligning with \autoref{table:almuhimedi-mapping}.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=\yedscale]{figures/fig-if-post}
+  \caption{Probability a post is deleted given the number of comments in its thread.}
+  \label{fig:if-post}
+\end{figure}
+
+Almuhimedi \etal also observe a temporal relationship for when a tweet is deleted -- a tweet has a higher chance of being deleted soon
+after it was created.
+They found 50\% of all deleted tweets where removed within 8~minutes of creation.
+We have recreated the temporal distribution in~\cite{DBLP:conf/cscw/AlmuhimediWLSA13} and use it to generate deletion dates from
+the valid lifespan intervals for posts, comments, and likes that are selected for explicit deletion~\autoref{fig:when-activity}.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=\yedscale]{figures/fig-when-activity}
+  \caption{Cumulative probability density function of when a post, comment, or like is deleted after it is created (x = 0).}
+  \label{fig:when-activity}
+\end{figure}
+
+
+\paragraph{Delete Forum and Delete Forum Membership}
+
+We currently do not have empirical evidence to motivate realistic behaviour of \tForum deletion.
+Forums have 3 types: walls, groups, and albums.
+Groups and albums can be explicitly deleted, walls cannot.
+The target proportion of groups and albums that are deleted across the simulation period is 1\%.
+
+Additionally, we currently do not have empirical evidence to motivate realistic behaviour of \tHasMember edge deletion.
+Only membership of groups can be explicitly deleted.
+The target proportion of group memberships that are deleted across the simulation period is 5\%.
+
+\section{Converting Delete Events into Delete Operations}
+\label{sec:conv-delete-events}
+Datagen supports 3 modes, each having different output:
+\begin{itemize}
+\item \textbf{Interactive}. Produces the data necessary for the Interactive workload. Includes a set of bulk load csv files and a number of update streams, which contain only insert operations.
+\item \textbf{BI}. Produces the data necessary for the Business Intelligence workload. Includes a set of bulk load csv files and a number of update batches, which contain insert and delete operations.
+\item \textbf{Raw}. Produces a fully dynamic graph without insert or delete operations. Includes a set of bulk load csv files (covering whole simulation period), with each dynamic entity having creation and deletion date attributes serialized. This mode is not intended for use with any LDBC workload.
+\end{itemize}
+
+When run in Interactive mode Datagen produces a graph that monotonically increases in size over the simulation period with insert-only operations, \eg once \tPerson joins the network they never leave, not delete a post nor unlike a picture.
+This is mode is supported for backward compatibility with the Interactive workload.
+
+The modes BI and raw use the dynamic graph containing creation events and deletion events.
+Raw mode effectively serializes the graph to a bulk component and has a slightly different schema, with each entity having creation date and deletion date fields.
+This mode was developed for testing, yet may be useful to users that require a dynamic graph data set for purposes other than benchmarking.
+
+For the BI mode the generated data must be converted into a bulk load component and a series of update batches (containing insert and delete operations).
+\autoref{fig:serialization-conds} displays the possible creation and deletion dates a dynamic entity can have with respect to the bulk load cut off, simulation end, and network collapse, which determines the target file the entity should be serialized to.
+For example, if a \tPost is created after the bulk load and deleted before the simulation end this should result in a insert and a delete operation in the update batch data set.
+If an entity is marked for explicit deletion then, if the conditions in \autoref{fig:serialization-conds} are satisfied then a deletion operation is serialized into the update batches.
+
+\input{figures/fig-serialization-conds}

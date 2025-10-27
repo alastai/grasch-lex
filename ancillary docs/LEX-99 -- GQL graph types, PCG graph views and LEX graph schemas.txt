@@ -1,0 +1,65 @@
+﻿LEX-99 
+GQL graph types, PGQ graph views and LEX graph schemas
+Alastair Green 27 October 2025
+
+
+This document describes how I think LEX should relate to the evolving GQL and SQL/PGQ standards.
+
+
+Existing graph data standards
+SQL:2023 Part 16: Property Graph Query (SQL/PGQ or SQL:2023/PGQ)
+SQL is JTC1 International Standard 9075. It has gone through many iterations over the past forty years or so. 
+GQL:2024
+GQL is JTC1 International Standard 39075. Informally GQL stands for Graph Query Language. Its first version was approved in April 2024. 
+SQL:2023/PGQ and GQL:2024 both contain a common core sub-language, informally called Graph Pattern Matching Language (GPML), which is described in the paper “Graph Pattern Matching in GQL and SQL/PGQ”, given at SIGMOD 2022.
+The SQL/PGQ property graph data model is identical to the GQL one, with one proviso and two restrictions. See Appendix A for details. 
+
+
+Planned graph data standards
+GQL:2027 is the next planned version of GQL. 2027 is the projected date of publication as an IS. 
+This version will contain new features like support for vector types, parallel CALL, list indexing syntax, and a framework for constraints as part of graph types. By agreement at the September 2025 BCN meeting of WG3, the first constraints supported for graphs are keys and uniqueness. 
+
+
+Relationship of PGQ and GQL:2027 graph schemas
+The graph schema defined by a PGQ TPG is a subset of a GQL:2027 graph type. This statement is only true because GQL:2027 now defines keys. 
+In fact, it is not quite true, because PGQ uses foreign keys between graph view nide and edge tables  (by another name) to represent edges. The mapping between GQL edge types and these PGQ graph FKs must be defined, to ensure the inclusion of PGQ schemas within the class of GQL schemas. 
+To be even more precise: we are looking to ensure that the information content of a PGQ graph schema is a subset of the information content of a GQL:2027 schema. 
+This brings us to LEX, and why Text2GraphQuery needs LEX. 
+
+
+LEX:2026 and the T2GQ project
+
+
+LEX (LDBC Extended GQL Schema) sets out to expand on GQL graph types, while maintaining backward compatibility. The idea was to propose changes into WG3 for GQL schema, in three main areas: a( make subtyping explicit and easier to define; b) add constraints to the type structure, and c) define a standard system graph (Information Schema) to reveal a graph’s metadata. 
+LEX has been rolled into the wider Text2GraphQuery project, with the goal of defining a LEX extended schema language in 2026 which is a strict superset of GQL:2027. This extended language will be called LEX:2026.
+LEX YAML illustrates the connection between the LEX and T2GQ projects. Late last year there was discussion following feedback from Max and Akon about having a YAML representation of a graph schema, as part of LEX. In the new Text2GraphQuery project graph schema is used to describe datasets and as a basis for LLM generation of queries against those datasets. 
+We can use YAML to provide graph schemas which are easy to use in multiple general-purpose programming languages, and without adopting the DDL of one data language or another. YAML is independent of Python or Java or Rust, and it’s independent of SQL or GQL or Cypher. 
+The best way to define YAML usage is to create a JSON Schema which is interpreted in accordance with the YAML Specification and which governs the permitted contents of a specific YAML or JSON document used to define, in this case, a graph schema.  
+To achieve this independence we do need to avoid requiring parsing of a specific data language, but we also need to allow multiple property value type systems (value type systems, for short). Examples of distinct value type systems (or datatype systems as they are also called) are the GQL system, SQL’s datatypes, Cypher’s limited set of datatypes, GraphAr’s slightly wider system, and so on. File formats used for data serialization often define a type system. Each of these systems of value types varies.
+LEX:2026 GQL Extended Schema Specification
+LEX:2026 
+LEX-100 LEX:2026 GQL Extended Schema Specification (LEX-100 Specification) is a draft document that is being built up section by section (in multiple revisions) to define LEX:2026 as a superset of GQL:2027. 
+The current version of GQL:2027 is the Committee Draft 1 Sneak Peek (file 39075_2CD1SP1-GQL_2025-10-19.pdf).
+The LEX-100 Specification R0 (Revision 0) refers to the GQL:2027 CD1, and contains these sections:
+1. Value type systems. Each value type system is identified by a unique identifier. Text describes the characteristics of each value type system (enumeration of value types with identifiers and possible parameters).
+2. LEX Graph Schema Abstract Syntax 
+3. LEX Graph Schema JSON Schema
+4. Examples of LEX Graph Schemas as YAML documents
+
+
+
+
+Appendix A: PGQ structure is a subset of GQL structure
+Proviso: A graph view over SQL-data (a PGQ Tabular Property Graph, or TPG) must allow multiple labels, whereas a GQL implementation is free to set the maximum number of labels per element to one. I always assume (unless stated otherwise) that GQL means GQL with all its optional features and with multiple labels on both nodes and edges. 
+PGQ restriction 1: A property in a PGQ graph with a given name must always have the same datatype, whereas in a GQL graph a property called X in element (node or edge) e1 and X in element e2 can have different value types.
+PGQ restriction 2: If a label Y in a PGQ graph node n1 is associated with a set of properties SP, then the same label Y must be associated with the same set SP in a node n2. (The same is true of edges r1 and r2, but Y(n1) and Y(r1) may be associated with different sets of properties, e.g. SP and SP’ respectively.)
+In GQL nodes n1 and n2 with labels Y(n1) and Y(n2) may have different (possibly empty) sets of properties, and the same holds for two edges r1 and r2. An optional feature allows type keys (key label sets) to be defined in GQL: these state that for two nodes n1 and n2 if label set {Y, Z} is defined then both nodes must be associated with the same set of properties SP. (The same is true of edges r1 and r2, but {X,Y}(n1) and {X,Y}(r1) may be associated with different sets of properties, e.g. SP and SP’ respectively).
+Key Q can SQL/PGQ label Y be defined differently in N1 and N2?
+Note: although the way in which key label sets are defined differs in PGQ and GQL the effective difference is simply that PGQ mandates that there is a key label set for each node or edge table, with at least one member, whereas in GQL with key label set support, there may be a key label set on each node or edge type or there may not be. A graph type design (or GQL implementation) might mandate key label sets for every node and edge type, in which case there is no effective difference between GQL and PGQ for this feature. 
+________________
+Appendix B: The term “schema”
+The term “schema” has a very well-established meaning in computer science and software engineering, typified by XML or JSON schema (or the usage "graph schema”). A schema constrains a general data model to describe a set of schema-valid instances which is a subset of the universe of instances allowed by the model. PGQ uses the term “graph schema” in this sense. 
+Each graph type in GQL is a schema, in this conventional, everyday sense.
+In SQL an SQL-schema defines the schema in this sense for one instance, a database. The schema is the metadata about the tables in the database. The stored data of the database (called SQL-data) is deemed to exist when the SQL-schema in an SQL-catalog is loaded into a runtime SQL-environment. The SQL-schema, at runtime, is therefore a pool of SQL-data (an instance) structured in accordance with table metadata (a schema).
+In GQL a GQL-schema is much mire distant from the normal meaning of the word “schema”. It can contain multiple schemas (graph types) and multiple instances (graphs). This is very different from SQL.
+A GQL-schema is nothing but a container. Calling it a “schema” is highly confusing, and indeed misleading. To make this clear I will call this specialized leaf-node directory in the GQL-catalog a “types-graphs directory”. I will reserve the term “schema” for what GQL calls a “graph type”.

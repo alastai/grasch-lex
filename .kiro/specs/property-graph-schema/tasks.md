@@ -95,7 +95,55 @@
   - Create validation and testing framework for transformation accuracy
   - _Requirements: 52.8, 52.9, 52.10, 52.11, 52.19, 52.20, 52.21_
 
-- [ ] 13. Refactor codebase to match grasch-main coding style
+- [ ] 13. Implement GQL:2027 CD1SP1 constraint framework
+  - Implement CREATE/DROP CONSTRAINT statement syntax and semantics
+  - Create constraint specification parser supporting constraint_name constraint_body syntax
+  - Implement constraint graph patterns (node patterns, edge patterns with all direction types)
+  - Add KEY constraint support with key_value_specification IS KEY syntax
+  - Add UNIQUE constraint support with key_value_specification IS UNIQUE syntax
+  - Implement constraint descriptors with name, subject set, scope, and key value components
+  - Add constraint enforcement with validation, checking, and data-modification enforcement
+  - Create graph type descriptors with constraint set dictionaries
+  - _Requirements: LEX-6.1, LEX-6.2, LEX-6.3, LEX-6.4, LEX-6.5, LEX-6.6, LEX-6.11, LEX-6.12, LEX-6.13_
+
+- [ ] 14. Implement LEX organizational alternative for constraints (based on analysis)
+  - Implement LEX constraint organization (constraints outside graph type) as alternative to GQL:2027 organization
+  - Ensure identical information content between GQL:2027 and LEX constraint organizations
+  - Create constraint descriptor mapping between GQL:2027 (inside graph type) and LEX (outside graph type) formats
+  - Validate that LEX organizational alternative provides complete GQL:2027 constraint semantics
+  - _Requirements: LEX-7.3, LEX-7.4, LEX-7.10, LEX-7.11_
+
+- [ ] 15. Implement LEX:2026 extensions beyond GQL:2027 CD1SP1
+  - Create descriptor-based abstract syntax classes following LEX-100 specification (where complete)
+  - Add LEX extensions: explicit subtyping definitions, Information Schema Graphs
+  - Implement LEX graph schema structure with identifier, principal, value type system, graph type, and constraint alternatives
+  - Create YAML-based schema specification that is a strict superset of GQL:2027 DDL capabilities
+  - Build foundation for future constraint extensions (cardinality, participation) in LEX:2026.1+
+  - _Requirements: LEX-1.1, LEX-1.2, LEX-3.1, LEX-3.2, LEX-3.3, LEX-3.4, LEX-3.6, LEX-3.7, LEX-7.8_
+
+- [ ] 14. Implement extensible constraint framework for future LEX major versions
+  - Create plugin architecture for constraint types beyond GQL:2027 (keys, uniqueness)
+  - Design framework for LEX:2026.1+ major version extensions (cardinality, participation constraints)
+  - Implement version-specific constraint catalogs with monotonic expansion across major versions
+  - Add backward compatibility validation for constraint evolution
+  - _Requirements: LEX-4.1, LEX-4.2, LEX-4.3, LEX-4.4, LEX-4.6, LEX-4.7, LEX-4.8_
+
+- [ ] 15. Implement multi-language and pluggable value type system architecture
+  - Create programming-language-independent schema specification (Python, Rust, Java compatible)
+  - Implement pluggable value type system supporting SQL datatypes, GQL value types, Cypher types
+  - Add DDL-independent schema syntax not tied to any specific database DDL
+  - Create bidirectional type system mappings with semantic preservation
+  - Design extensible architecture for adding new value type systems
+  - _Requirements: LEX-5.1, LEX-5.2, LEX-5.3, LEX-5.4, LEX-5.5, LEX-5.7, LEX-5.8, LEX-5.10_
+
+- [ ] 15. Implement SQL/PGQ compatibility support
+  - Add PGQ schema import with restriction handling (same-name properties, consistent label-property associations)
+  - Create PGQ profile that enforces PGQ-like restrictions on LEX schemas
+  - Implement foreign key to edge type mapping for PGQ TPG schemas
+  - Add validation for PGQ subset compliance within LEX framework
+  - _Requirements: LEX-4.1, LEX-4.2, LEX-4.3, LEX-4.4, LEX-4.5, LEX-4.6_
+
+- [ ] 16. Refactor codebase to match grasch-main coding style
   - Convert all method names from snake_case to camelCase throughout src/grasch/
   - Add comprehensive type hints to all parameters, return values, and properties
   - Update class structure to match grasch-main patterns (nested result classes, property access)

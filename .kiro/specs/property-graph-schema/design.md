@@ -1181,3 +1181,44 @@ class UniversalTypeMapper:
 **Note**: This ILVT system is based on verified analysis of GQL property value types and SQL Foundation (ISO/IEC 9075-2) specifications, providing accurate type correspondence for multi-system interoperability.
 
 This design provides a solid foundation for implementing the comprehensive requirements while maintaining flexibility for future extensions and ensuring robust operation in production environments.
+## Addend
+um: GQL:2027 CD1SP1 vs LEX-100 Constraint Framework Analysis
+
+**Reference**: See [gql-2027-vs-lex-100-analysis.md](gql-2027-vs-lex-100-analysis.md) for complete analysis.
+
+### **Key Finding: LEX-100 Constraint Framework is Incomplete**
+
+Based on detailed analysis of GQL:2027 CD1SP1 constraint framework and LEX-100 specification, LEX-100 represents a **partial reorganization** rather than a complete alternative to GQL:2027 constraints.
+
+### **Critical Gaps Identified:**
+
+1. **Incomplete Constraint Descriptors**: LEX-100 acknowledges "The GQL specification is unclear to me with respect to descriptors in this area"
+2. **Missing Enforcement Framework**: No constraint validation, checking, or enforcement semantics
+3. **Simplified Structure**: LEX-100 constraint descriptors lack the richness of GQL:2027 CD1SP1
+4. **Omitted Features**: No CREATE/DROP CONSTRAINT syntax, exception handling, or deferred enforcement
+
+### **Design Decision: Implement Complete GQL:2027 CD1SP1 First**
+
+**Recommendation for LEX:2026.0 Implementation:**
+
+1. **Phase 1**: Implement complete GQL:2027 CD1SP1 constraint framework
+   - Full constraint descriptors with subject sets, scopes, enforcement
+   - CREATE/DROP CONSTRAINT statement support
+   - KEY and UNIQUE constraint types with proper semantics
+   - Exception handling (class 23, class G2)
+
+2. **Phase 2**: Add LEX organizational alternative
+   - Provide constraints-outside-graph-type organization
+   - Ensure identical information content to GQL:2027 approach
+   - Support both organizational patterns
+
+3. **Phase 3**: Add LEX constraint extensions
+   - Cardinality constraints (LEX:2026.1+)
+   - Participation constraints (LEX:2026.1+)
+   - Additional constraint types beyond GQL:2027
+
+### **Architectural Impact:**
+
+This analysis confirms that LEX:2026.0 must be built on a **complete** GQL:2027 CD1SP1 foundation, with LEX providing organizational alternatives and future extensions rather than replacing the GQL constraint framework.
+
+The LEX-100 reorganization (constraints outside graph type) has conceptual merit but requires the full GQL:2027 constraint semantics to be meaningful and complete.

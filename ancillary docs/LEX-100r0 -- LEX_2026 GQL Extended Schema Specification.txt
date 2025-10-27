@@ -1,0 +1,339 @@
+﻿LEX-100 
+LEX:2026 GQL Extended Schema Specification
+Alastair Green 27 October 2025
+
+
+Please see LEX-99 – GQL graph types, PCG graph views and LEX graph schemas for an explanation of the relationship of LEX to other schema languages. 
+
+
+LEX:2026 is maintained, and versions of it are published by, the Graph Data Council in close liaison with WG3 – the SQL and GQL standards committee – and other relevant projects, for example Apache GraphAr, which share an interest in data-language-, programming-language- and value-type-system-neutral property graph schemas.
+
+
+This document (for short, the LEX-100 Specification) is a draft document that is being built up section by section (through multiple revisions) to define LEX:2026 as a superset of GQL:2027. This means that LEX can move faster and further than GQL, while recognizing the primary of the official International Standard. 
+
+
+This specification uses major/minor versioning. A major version has a given functional scope, and its minor versions represent successive approximations of delivery of that scope. You can refer to a major version as LEX:2026.<major> and to a specific minor version as LEX:2026.<major>.<minor>. For example, the functionality of the first major version LEX:2026.0 is described in the table that follows. 
+
+
+Major version functionality
+
+
+Major
+version 
+	Functionality
+	0
+	1. A set of value type systems, at least for Cypher, SQL and GQL
+2. A canonical minimum value type system, which equates to Cypher
+3. The abstract syntax of a graph schema
+4. A graph schema’s mappings to the schema systems of at least Neo4j Cypher, SQL/PGQ and GQL
+5. A JSON Schema which defines the structure of the concrete syntax of a YAML (JSON) graph schema representing the information content of the abstract syntax
+6. Examples of YAML and JSON documents which define the graph schema of at least the SNB and FinBench LDBC Benchmark data models
+	
+
+
+
+________________
+
+
+Document revision table
+
+
+Major 
+	Minor
+
+
+	Doc
+rev
+	Date
+	Notes
+	0
+	1
+	R0
+	27 October 2025
+	First version, as basis for designing JSON Schema
+Draws on descriptors from LEX-056R1 GQL Descriptors to help design abstract syntax
+	
+
+
+
+Table of Contents
+Core reference to the latest version of the GQL:2027 specification        2
+Value type systems        2
+Cypher        2
+GQL        3
+SQL        3
+LEX Graph Schema Abstract Syntax        3
+LEX Graph Schema JSON Schema        10
+Examples of LEX Graph Schemas as YAML documents        10
+
+
+
+
+Core reference to the latest version of the GQL:2027 specification
+Committee Draft 1 Sneak Peek (file 39075_2CD1SP1-GQL_2025-10-19.pdf).
+
+
+Value type systems
+Each value type system is identified by a unique identifier and a version string  Text describes the characteristics of each value type system (enumeration of value types with identifiers and possible parameters).
+Cypher
+Value type system identifier        CYPHER
+Version                        OPEN
+Value types table
+Value type identifier
+	Parameters
+	STRING
+	NULLABLE
+	INTEGER
+	NULLABLE
+	FLOAT
+	NULLABLE
+	BOOLEAN
+	NULLABLE
+	LIST_OF
+	NULLABLE
+T (a value type identifier)
+	MAP
+	NULLABLE
+	DATE
+	NULLABLE
+	LOCAL TIME
+	NULLABLE
+	ZONED TIME
+	NULLABLE
+TZ (time zone as …)
+	LOCAL DATETIME
+	NULLABLE
+	ZONED DATETIME
+	NULLABLE
+TZ (time zone as …)
+	DURATION
+	NULLABLE
+	
+
+GQL
+Value type system identifier        GQL
+Version                        2027
+Value types table
+Value type identifier
+	Parameters
+	Set TBS 
+	TBS
+	
+
+SQL
+Value type system identifier        SQL
+Version                        2026
+Value types table
+Value type identifier
+	Parameters
+	Set TBS 
+	TBS
+	
+
+
+
+LEX Graph Schema Abstract Syntax 
+Concepts
+The following is based on an extract, lightly edited to replace symbols, of some of the descriptors defined in the Concepts clause of the GQL standard (39075_2CD1SP1-GQL_2025-10-19.pdf), which were included in LEX-056R1 GQL Descriptors by Stephen Cannan. 
+A descriptor is an object in a hierarchical collection called an abstract syntax which defines a piece of information required by a language operation. In this context, we are interested in the abstract syntax of a graph schema, which is required for the operation of schema validation on a (data) graph instance with respect to a graph schema. We are also interested in the association between graph instances and constraint definitions. 
+The GQL specification descriptors have been reordered to be slightly more hierarchical. Some have been amended or removed, and others have been added, to arrive at an abstract syntax which is the base for the proposed JSON Schema for LEX graph schema YAML, which will provide a concrete syntax for LEX:2026 graph schema. 
+A LEX:2026 graph schema (graph schema for short) contains an identifier, a graph structural type (akin to a graph type as defined in GQL:2024, i.e. without constraints), and a set of graph constraints. 
+To put it another way, a graph schema contains an identifier which equates to a path-qualified graph type name as defined in GQL:2027, as well as the named graph type, but minus its set of constraints. That set is also included in a graph schema, and has the same contents it would have if defined in GQL:2027, but in a LEX graph schema it is moved outside the graph type and is directly included by the schema. This seems more logical because a constraint applies to a graph and not to a graph type. It depends on the actual values in a specific graph. The next section discusses this a little further. 
+Types and constraints
+A graph constraint is a rule that applies to a class of graphs, which narrows the possible values of each graph in the class. A graph type is a different kind of rule that has the same effect. A graph may not have a type, and it may have no constraints. Or it may have both. If it has both and a constraint can never be satisfied by virtue of the application of the type, then the constraint falls away – it is never applied, and it may as well have never been defined. 
+For example, if a graph type specifies only two property types for a node type, and there is a key constraint which demands uniqueness of the compound value of three properties, only two of which are possibly present because of the limitation of the node type, then the key constraint will not operate for the collection of nodes of that node type. 
+A constraint can be defined for a graph type, in which case the class of graphs to which it applies (its scope) is the set of graphs which conform to that graph type. Or, it can be defined directly for a single graph. The class of graphs is then the class of all graphs for which the constraint has been separately defined. 
+The information content of a LEX:2026.0 graph schema is therefore intended to be a strict superset of the information content of a GQL:2027 graph type, even if organized differently.
+Note that LEX:2026 may (over time, but not in its first major version 0) define constraints which are not present in GQL:2027. 
+Descriptor syntax
+A descriptor has a name, which may be quoted in double quotation marks. A prefix – indicates inclusion by the first preceding descriptor to be indented by less than this one. The prefix ? indicates that the descriptor is optional (0 or 1 instances) and the symbol | indicates a choice. The prefix + indicates repetition of 1 or more instances of the descriptor, and the suffix * indicates repetition of 0 or more instances. 
+Free text is used to describe or define a descriptor’s contents or meaning. A parameter or parameters in angle brackets may be indicated. This value will either be given directly in CAPITALIZED text, or it will be represented by a type name like <string> or <integer> or <map K → V> etc. If symbols in italics like K and V are shown then they will be defined in accompanying free text. 
+Graph schema: Identifier, owner and value type system
+A graph schema is identified thus:
+
+
+graph schema
+    – identifier
+        – ? root <iri>
+        – * directory <string>
+        – ? types-graphs-directory <string>
+        – name <string>
+
+
+A graph schema may be owned by a principal (i.e. a piece of authorization data which is meaningful to a system maintaining a catalog of graph schemas).
+graph schema
+    – identifier
+    – ? principal <string>
+
+
+Value type systems defines a set of value type systems, each of which is named, and consists of a set of named property value types, or just value types, for short. The names of these value types form a set. Each value type may also have parameters. 
+Each graph schema includes a descriptor of its value type system, which is the type system’s name as given in this specification.
+graph schema
+    – identifier
+    – ? principal <string>
+    – value type system name <string>
+Graph schema: structural graph type
+A graph schema contains a graph type which describes the structure of conformant (schema-valid) data graphs or instances. 
+graph schema
+    – identifier
+    – ? principal <string>
+    – value type system name <string> // preferred names for types
+    – graph type
+A graph type descriptor contains the following descriptors:
+    – graph type
+        — graph preferred name // (implementation-defined (ID089) 
+            GRAPH | PROPERTY GRAPH
+        – node preferred name // (implementation-defined (ID090)
+            NODE | VERTEX
+        – edge preferred name // (implementation-defined (ID091)
+            EDGE | RELATIONSHIP
+        – node type minimum labels <positive integer> // (IL001)
+        – node type maximum labels <positive integer> // (IL001)
+        – node type minimum property types <positive integer> 
+            // (IL002)
+        – node type maximum property types <positive integer> 
+            // (IL002)
+        – edge type minimum labels <positive integer> // (IL001)
+        – edge type maximum labels <positive integer> // (IL001)
+        – edge type minimum property types // (IL002)
+        – edge type maximum property types // (IL002)
+        — node types <set>
+        — edge types <set>
+        — node type key label set dictionary <map KLS → NT>
+        — edge type key label set dictionary <map KLS → ET>
+
+
+KLS denotes a set of labels,
+NT denotes a member of the set of node types. In the mapping KLS → NT the KLS must be a subset of the labels in NT. 
+NT denotes a member of the set of edge types. In the mapping KLS → ET the KLS must be a subset of the labels in ET.
+A set of node type descriptors looks like this
+    – graph type
+        — node types <set>
+            – node type
+            – node type
+            . . .  
+
+
+A node type descriptor contains the following descriptors
+    – graph type
+        — node types <set>
+            – node type
+                – index <integer>              
+                – labels <set <string>>
+                – property types <set>
+Each node type has an integer index whose value is distinct for each node type in the set of  node types. These index values have a minimum value of 0 and amaximum value which is the same as the cardinality of that set, minus 1. A node type may be indexed by this value, providing a distinct identity for each node type, irrespective of whether it is also identified by a key label set. 
+A set of property type descriptors looks like this
+    – graph type
+        — node types <set>
+            – node type
+                – labels <set <string>>
+                – property types <set>
+                    – property type  
+                        – name <string>
+                        – value type
+                    – property type  
+                   . . . 
+
+
+In a property types set, the names of any two property type members must not be equal. 
+                                          
+A value type descriptor contains an identifier, whose value is the name of a value type in the value type system of the containing LEX schema. The descriptor may include additional information indicated as parameters in the value type system’s table of value types.  
+A value type descriptor looks like this
+    – graph type
+        — node types <set>
+            – node type
+                – labels <set <string>>
+                – property types <set>
+                    – property type  
+                        – name <string>
+                        – value type
+                            – name <string>
+                            – parameters <map <string> → <value>>
+
+
+Where the value of the string key in the map of parameters will be the name of the parameter given in the value type system’s table of value types, and the value will be parameter dependent. So for example, any value type may contain the key NULLABLE and the value TRUE, but other parameters like minimum or maximum length of a fixed length string may only make sense for particular value types. 
+
+
+COMMENT ONLY The full set of parameters and possible values for SQL and GQL remains to be done.    
+
+
+An edge type descriptor contains the following descriptors
+    – graph type
+        — edge types <set>
+            – edge type
+                – labels <set <string>>
+                – property types <set>
+                – direction DIRECTED | UNDIRECTED
+                – first endpoint node type <integer>
+                – second endpoint node type SAME | <integer>
+                   
+The rules for the contents of the first three descriptors contained in the edge type are identical to those for node types, with the difference that each reference to the set of node types or to a node type, are to be replaced with a reference to the set of edge types, or to an edge type, within the graph type. 
+
+
+The next three descriptors contained by an edge type related to its orientation. An edge is either directed or undirected. If an edge type is directed then the first endpoint node type is the source of an edge of this type,  and the second is the destination of the edge. If the edge is undirected then the order of the endpoint node types is irrelevant (has no semantic). If the edge is a loop then the second endpoint node type descriptor has the meaning that it is the SAME as the first. Otherwise the value of each of the endpoint descriptors is an integer value which is the index value of the node type which is the endpoint concerned. 
+
+
+Graph schema: Constraints
+We have now dealt with the identifier and graph type of a graph schema. A graph schema can also have a descriptor for a set of constraints, which is possibly empty. 
+
+
+graph schema
+    – identifier
+    – ? principal <string>
+    – value type system name <string> // preferred names for types
+    – graph type
+    – constraints <map CK → C>
+Where CK is a <string> which is a constraint name, and C is a constraint rule descriptor.   
+A constraint descriptor has these contents:
+    – constraints 
+        – constraint
+            – name <string>
+            – rule
+                – subject KEY | UNIQUE     
+                – constraint pattern
+                – unique key component property names <set>   
+                       
+COMMENT ONLY The GQL specification is unclear to me with respect to descriptors in this area. 
+Graph instance: Identifier and owner
+Graph instance: Structural graph type
+Graph instance: Constraints
+
+
+A graph descriptor comprises:
+— The optional constraining graph type that is a globally resolved reference to a graph type schema object.
+— A constraint dictionary, which is a set comprising zero or more uniquely named constraint descriptors of constraints of the graph that specify additional restrictions on the graph elements of the graph.
+
+
+— The constraint set dictionary that maps the name of each constraint in the constraint set of this graph type descriptor to that constraint.
+
+
+
+
+
+
+
+
+
+
+A constraint descriptor comprises:
+— The constraint name, which identifies the constraint in certain contexts implied by the parent descriptor of the constraint (e.g., the graph type specified by a graph type descriptor).
+— The constraint subject set, which is a set of valid reference values for the registered subjects of the constraint.
+In this document, modifications to the constraint subject set of a constraint descriptor of a constraint are always determined by explicit provisions in General Rules regarding the (un)registration of subjects of the constraint.
+— The constraint scope of the constraint, which describes the set of (graph) elements of each registered subject of the constraint, that are restricted by the constraint (the constrained elements of the registered subject of the constraint).
+No integrity constraint shall be defined whose constraint scope is not deterministic, for each potential registered subject of the constraint.
+
+
+A unique descriptor comprises:
+— The key value component specifications, which is a sequence of <key value component>s that specifies the key values of constrained elements of the constraint.
+
+
+A GQL-request descriptor comprises:
+— The GQL-program, which is a GQL source text.
+A GQL source text is a character string whose character repertoire shall be an implementation-defined (IV001) subset of the Universal Character Set repertoire specified by The Unicode® Standard that includes every <GQL language character> and every <other language character> supported by the GQL-implementation.
+— The GQL-request parameters, which are represented as a (possibly empty) dictionary of general parameters that is implicitly determined using an implementation-defined (IW006) mechanism.
+
+
+
+
+LEX Graph Schema JSON Schema
+Examples of LEX Graph Schemas as YAML documents

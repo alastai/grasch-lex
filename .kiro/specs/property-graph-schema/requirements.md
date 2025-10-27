@@ -2,7 +2,27 @@
 
 ## Introduction
 
-This feature involves creating a Python library called Grasch that acts as a LEX-extended GQL Catalog according to the GQL (Graph Query Language) specification with LEX (Language Extensions) capabilities. LEX is an extension of GQL, and Grasch implements both the GQL core and LEX extensions with configurable compliance modes. The library will provide a structured way to define and manage named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions) within a hierarchical filesystem-like structure. The Catalog has a root directory ("/"), directories forming a tree structure with unique names among siblings, and GQL-schemas (leaf nodes) containing named primary catalog objects with fully-qualified names. Directories can only contain other directories or GQL-schemas, while GQL-schemas can only contain named primary catalog objects.
+This feature involves creating a Python library called Grasch that implements **LEX:2026.0** (LDBC Extended GQL Schema, major version 0) as a strict superset of GQL:2027 according to the formal specifications LEX-99 and LEX-100. LEX:2026.0 is the first major version of the LEX (LDBC Extended GQL Schema) standard, maintained by the Graph Data Council in liaison with WG3 (the SQL and GQL standards committee).
+
+**LEX:2026 as GQL:2027 Strict Superset**: LEX:2026 implements a strict superset of GQL:2027 Committee Draft 1 Sneak Peek (39075_2CD1SP1-GQL_2025-10-19.pdf), maintaining backward compatibility while adding three main extension areas: (a) explicit and easier subtyping definitions, (b) additional constraints beyond GQL:2027's keys/uniqueness, and (c) standard Information Schema Graphs (ISGs) for graph metadata.
+
+**GQL:2027 CD1SP1 Constraint Framework**: GQL:2027 introduces a comprehensive constraint framework with CREATE/DROP CONSTRAINT statements, constraint specifications with graph patterns, and two constraint types: KEY constraints (enforcing identical elements with equal key values) and UNIQUE constraints (enforcing identical elements with non-distinct key values). Graph type descriptors include constraint set dictionaries mapping constraint names to constraint descriptors.
+
+**LEX:2026.0 Extensions Beyond GQL:2027**: The first major version LEX:2026.0 includes the complete GQL:2027 CD1SP1 feature set plus LEX extensions for explicit subtyping, enhanced constraint framework beyond KEY/UNIQUE, and Information Schema Graph definitions. Future major versions (LEX:2026.1, LEX:2026.2, etc.) will add further extensions like cardinality constraints and participation constraints. Minor versions (e.g., LEX:2026.0.1) provide bug fixes and patches without functional changes.
+
+**Multi-Language Independence**: LEX provides programming-language-independent schema specification (Python, Rust, Java, etc.) and DDL-independent syntax (not tied to GQL DDL, SQL DDL, or Neo4j DDL). The pluggable value type system allows schema design using SQL datatypes, GQL value types, or other type systems while maintaining functional equivalence to GQL:2027 capabilities.
+
+**YAML Schema Independence**: Grasch provides a YAML-based graph schema specification that is independent of any specific DDL syntax while being functionally driven by GQL:2027 features and the close functional relationship between GQL:2027 and SQL/graph schema capabilities.
+
+**LEX:2026.0 Scope**: This implementation provides (1) complete GQL:2027 feature set; (2) value type systems for Cypher, SQL, and GQL; (3) abstract syntax for graph schemas; (4) mappings to Neo4j Cypher, SQL/PGQ, and GQL schema systems; (5) JSON Schema defining concrete YAML/JSON syntax; and (6) examples for LDBC benchmark data models (SNB, FinBench).
+
+**Formal Specification Compliance**: Grasch implements the abstract syntax defined in LEX-100 using descriptor-based hierarchical structures for graph schema definitions. Each LEX:2026 graph schema contains an identifier (with IRI support), optional principal (authorization), value type system name, graph structural type (equivalent to GQL:2027 graph type), and constraint set (implementing GQL:2027's constraint framework).
+
+**Critical Analysis**: Detailed analysis of GQL:2027 CD1SP1 vs LEX-100 constraint frameworks reveals that LEX-100 is currently incomplete compared to the rich GQL:2027 constraint system. See [gql-2027-vs-lex-100-analysis.md](gql-2027-vs-lex-100-analysis.md) and the design document addendum for complete analysis. LEX:2026.0 implementation prioritizes complete GQL:2027 CD1SP1 constraint framework implementation before adding LEX organizational alternatives.
+
+**Terminology Clarification**: Following LEX-99, Grasch uses "types-graphs directory" instead of "GQL-schema" to avoid confusion, as GQL-schema is merely a container, not a schema in the traditional computer science sense. The term "schema" is reserved for graph types (descriptions of graph structure) following standard usage in XML Schema, JSON Schema, and database systems.
+
+The library provides a structured way to define and manage named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions) within a hierarchical filesystem-like structure. The Catalog has a root directory ("/"), directories forming a tree structure with unique names among siblings, and types-graphs directories (leaf nodes) containing named primary catalog objects with fully-qualified names. Directories can only contain other directories or types-graphs directories, while types-graphs directories can only contain named primary catalog objects.
 
 **Value Type System**: Grasch implements the Intermediate Language Value Types (ILVT) specification as defined in [value_types.md](.kiro/specs/property-graph-schema/value_types.md). The ILVT provides universal type mapping between GQL Property Value Types, SQL Foundation Data Types, and JSON Schema Extensions, enabling seamless interoperability across different type systems. All property types, attribute types, and content record types in Grasch are based on ILVT type definitions with their associated parameters, constraints, and implementation-defined behaviors.
 
@@ -14,6 +34,156 @@ This feature involves creating a Python library called Grasch that acts as a LEX
 - **GQL-schemas**: Containers of primary catalog objects that are leaf nodes in the Catalog (GQL-specific terminology)
 
 The library will model the fundamental concepts of elements (nodes and edges) with content records, element types with content types (content record types), graph types, and their relationships within this hierarchical Catalog structure. Elements have distinct identities and content records, while element types define content types as proper record types with nested structure. Content types consist of a vector of label types (with constant label datatype) followed by nested record types for properties, enabling hierarchical data structures similar to JSON documents within graph elements. Each graph type contains a bounded content type lattice with ANY_CONTENT_TYPE (empty attribute set) as the top element and NO_CONTENT_TYPE (uninhabitable) as the bottom element.
+
+## Requirements
+
+### Requirement LEX-1
+
+**User Story:** As a developer implementing LEX:2026.0, I want Grasch to implement the formal abstract syntax defined in LEX-100 using descriptor-based hierarchical structures, so that I can ensure compliance with the official LEX specification and maintain compatibility with future LEX versions.
+
+#### Acceptance Criteria
+
+1. WHEN I define graph schemas THEN the system SHALL implement the LEX-100 abstract syntax using descriptor objects in a hierarchical collection
+2. WHEN I work with descriptors THEN the system SHALL support the descriptor naming convention with optional double quotation marks and prefix symbols (-, ?, +, *, |) for inclusion, optionality, repetition, and choice
+3. WHEN I create graph schema identifiers THEN the system SHALL implement the formal identifier structure: root IRI (optional), directory path (multiple), types-graphs-directory (optional), and name (required)
+4. WHEN I specify graph schema principals THEN the system SHALL support optional principal strings for authorization data meaningful to catalog-maintaining systems
+5. WHEN I define value type systems THEN the system SHALL implement the formal value type system descriptor with name and version strings as specified in LEX-100
+6. WHEN I work with graph types THEN the system SHALL implement the complete graph type descriptor structure including preferred names, label/property cardinality constraints, node/edge type sets, and key label set dictionaries
+7. WHEN I define node types THEN the system SHALL implement node type descriptors with index (integer), labels (set of strings), and property types (set) as specified in the abstract syntax
+8. WHEN I define edge types THEN the system SHALL implement edge type descriptors with labels, property types, direction (DIRECTED|UNDIRECTED), first endpoint node type (integer), and second endpoint node type (SAME|integer)
+9. WHEN I work with property types THEN the system SHALL implement property type descriptors with name (string) and value type containing name and parameters map
+10. WHEN I define constraints THEN the system SHALL implement constraint descriptors with name, rule subject (KEY|UNIQUE), constraint pattern, and unique key component property names
+11. WHEN I validate descriptor compliance THEN the system SHALL ensure all descriptors conform to the LEX-100 abstract syntax specification
+12. WHEN I serialize descriptors THEN the system SHALL preserve the hierarchical descriptor structure for compatibility with LEX specification tools
+
+### Requirement LEX-2
+
+**User Story:** As a developer working with multiple value type systems, I want Grasch to implement the formal value type systems defined in LEX-100 (Cypher, GQL, SQL) with their specific identifiers, versions, and parameter structures, so that I can achieve data-language-neutral property graph schemas with accurate type mappings.
+
+#### Acceptance Criteria
+
+1. WHEN I work with Cypher value types THEN the system SHALL implement the CYPHER value type system (version OPEN) with all specified types: STRING, INTEGER, FLOAT, BOOLEAN, LIST_OF, MAP, DATE, LOCAL TIME, ZONED TIME, LOCAL DATETIME, ZONED DATETIME, DURATION
+2. WHEN I work with Cypher type parameters THEN the system SHALL support NULLABLE parameter for all Cypher types, T parameter for LIST_OF, and TZ parameter for zoned time types
+3. WHEN I work with GQL value types THEN the system SHALL implement the GQL value type system (version 2027) with complete type set as defined in GQL:2027 Committee Draft 1
+4. WHEN I work with SQL value types THEN the system SHALL implement the SQL value type system (version 2026) with complete SQL primitive datatype support
+5. WHEN I define value type system identifiers THEN the system SHALL use unique string identifiers (CYPHER, GQL, SQL) as specified in LEX-100
+6. WHEN I work with value type parameters THEN the system SHALL implement the parameters map structure with string keys and appropriate values for each type system
+7. WHEN I validate value types THEN the system SHALL ensure parameter compatibility with the specified value type system and version
+8. WHEN I convert between value type systems THEN the system SHALL provide accurate mappings while preserving semantic meaning and constraints
+9. WHEN I work with implementation-defined features THEN the system SHALL handle cases where SQL INTEGER types (SMALLINT, INTEGER, BIGINT) may have equal precision as implementation-defined behavior
+10. WHEN I serialize value type information THEN the system SHALL preserve value type system identifier, version, and parameter information for cross-system compatibility
+11. WHEN I extend value type systems THEN the system SHALL support addition of new value type systems while maintaining compatibility with the three core systems defined in LEX-100
+
+### Requirement LEX-3
+
+**User Story:** As a developer implementing LEX:2026 as a strict superset of GQL:2027, I want Grasch to provide complete GQL:2027 CD1SP1 feature support plus LEX extensions for explicit subtyping, enhanced constraints, and Information Schema Graphs, so that I can work with GQL:2027 capabilities plus LEX enhancements through a data-language-neutral YAML interface.
+
+#### Acceptance Criteria
+
+1. WHEN I work with GQL:2027 features THEN the system SHALL implement complete GQL:2027 CD1SP1 support including all constraint framework capabilities (keys, uniqueness)
+2. WHEN I work with LEX:2026 extensions THEN the system SHALL implement explicit subtyping definitions that make subtyping easier to define than in GQL:2027
+3. WHEN I work with LEX constraint extensions THEN the system SHALL provide additional constraints beyond GQL:2027's keys and uniqueness limitations
+4. WHEN I work with Information Schema Graphs THEN the system SHALL implement standard ISGs to reveal graph metadata (not available in GQL:2027)
+5. WHEN I use YAML schema specification THEN the system SHALL provide data-language-neutral schema definitions that are a strict superset of GQL:2027 DDL capabilities
+6. WHEN I maintain backward compatibility THEN the system SHALL ensure any valid GQL:2027 schema is also a valid LEX:2026 schema with identical semantics
+7. WHEN I validate LEX:2026 compliance THEN the system SHALL ensure complete coverage of GQL:2027 CD1SP1 features plus the three LEX extension areas
+8. WHEN I reference specifications THEN the system SHALL use GQL:2027 Committee Draft 1 Sneak Peek (39075_2CD1SP1-GQL_2025-10-19.pdf) as the base reference for LEX:2026 superset features
+9. WHEN I work with LEX extensions THEN the system SHALL clearly identify which features are GQL:2027 standard vs LEX:2026 extensions (subtyping, enhanced constraints, ISGs)
+10. WHEN I design for extensibility THEN the system SHALL ensure that future LEX major versions (LEX:2026.1+) can add further constraints and features beyond LEX:2026.0
+11. WHEN I work with YAML independence THEN the system SHALL provide schema specification that is independent of GQL DDL syntax while being a strict superset of GQL:2027 capabilities
+
+### Requirement LEX-4
+
+**User Story:** As a developer preparing for future LEX extensions, I want Grasch to provide an extensible constraint framework that can accommodate LEX:2026.1+ features beyond GQL:2027's key/uniqueness limitations, so that I can add advanced constraints like cardinality and participation constraints in future major versions.
+
+#### Acceptance Criteria
+
+1. WHEN I design the constraint system THEN the system SHALL provide extensible architecture that can accommodate constraint types beyond GQL:2027's keys and uniqueness
+2. WHEN I work with LEX:2026.0 THEN the system SHALL implement only GQL:2027 constraint types (keys, uniqueness) without additional constraint extensions
+3. WHEN I prepare for LEX:2026.1 THEN the system SHALL provide framework for adding cardinality constraints that specify minimum and maximum relationship counts (major version extension)
+4. WHEN I prepare for LEX:2026.2 THEN the system SHALL provide framework for adding participation constraints that specify mandatory vs optional relationship participation (major version extension)
+5. WHEN I design constraint extensibility THEN the system SHALL ensure new constraint types can be added without breaking existing LEX:2026.0 schemas
+6. WHEN I work with constraint versioning THEN the system SHALL provide version-specific constraint catalogs that expand monotonically across major versions (LEX:2026.1 includes all LEX:2026.0 constraints plus new ones)
+7. WHEN I validate constraint compatibility THEN the system SHALL ensure LEX:2026.0 schemas remain valid in future major LEX versions
+8. WHEN I implement constraint framework THEN the system SHALL provide plugin architecture for adding new constraint types in future versions
+9. WHEN I work with constraint evolution THEN the system SHALL maintain backward compatibility while allowing progressive enhancement of constraint capabilities
+10. WHEN I document constraint roadmap THEN the system SHALL clearly indicate which constraints are GQL:2027 standard vs future LEX extensions
+
+### Requirement LEX-5
+
+**User Story:** As a developer working across multiple programming languages and type systems, I want LEX to provide programming-language-independent schema specification with pluggable value type systems, so that I can design schemas using SQL datatypes, GQL value types, or other type systems while targeting implementations in Python, Rust, Java, or other languages.
+
+#### Acceptance Criteria
+
+1. WHEN I work with programming language independence THEN the system SHALL provide schema specifications that can be implemented in Python, Rust, Java, and other programming languages
+2. WHEN I work with DDL independence THEN the system SHALL provide schema syntax that is not tied to GQL DDL, SQL DDL, Neo4j DDL, or any specific database DDL
+3. WHEN I use pluggable value type systems THEN the system SHALL allow me to design schemas using SQL datatypes, GQL value types, Cypher types, or other supported type systems
+4. WHEN I switch value type systems THEN the system SHALL maintain schema semantic equivalence while adapting to the target type system's capabilities and constraints
+5. WHEN I work with type system plugins THEN the system SHALL provide extensible architecture for adding new value type systems beyond the core SQL/GQL/Cypher systems
+6. WHEN I validate cross-language compatibility THEN the system SHALL ensure schema definitions can be accurately represented and implemented across different programming languages
+7. WHEN I work with type system mappings THEN the system SHALL provide bidirectional mappings between different value type systems while preserving semantic meaning
+8. WHEN I serialize schemas THEN the system SHALL use programming-language-neutral formats (YAML, JSON) that can be consumed by implementations in any target language
+9. WHEN I design for portability THEN the system SHALL avoid language-specific constructs or dependencies that would limit implementation to specific programming languages
+10. WHEN I work with implementation diversity THEN the system SHALL enable the same LEX schema to drive implementations in different languages and target different graph database systems
+11. WHEN I configure value type preferences THEN the system SHALL allow selection of preferred value type system for schema design while maintaining compatibility with other systems
+
+### Requirement LEX-6
+
+**User Story:** As a developer implementing GQL:2027 CD1SP1 constraint framework, I want Grasch to support the complete constraint system including CREATE/DROP CONSTRAINT statements, constraint specifications with graph patterns, and KEY/UNIQUE constraint types, so that I can provide the full GQL:2027 constraint capabilities as the foundation for LEX:2026 extensions.
+
+#### Acceptance Criteria
+
+1. WHEN I work with GQL:2027 constraint statements THEN the system SHALL support CREATE CONSTRAINT [IF NOT EXISTS] and CREATE OR REPLACE CONSTRAINT syntax
+2. WHEN I work with constraint management THEN the system SHALL support DROP CONSTRAINT [IF EXISTS] statements with optional constraint parent graph specification
+3. WHEN I define constraint specifications THEN the system SHALL support the syntax: constraint_name constraint_body where constraint_body is FOR constraint_graph_pattern REQUIRE constraint_requirement
+4. WHEN I work with constraint graph patterns THEN the system SHALL support constraint element patterns including constraint node patterns and constraint edge patterns (directed, undirected, any direction)
+5. WHEN I define constraint requirements THEN the system SHALL support KEY constraint requirements with syntax: key_value_specification IS KEY
+6. WHEN I define constraint requirements THEN the system SHALL support UNIQUE constraint requirements with syntax: key_value_specification IS UNIQUE
+7. WHEN I specify key values THEN the system SHALL support key value components as element_variable[.property_name] and key value component lists
+8. WHEN I work with KEY constraints THEN the system SHALL enforce that any two constrained elements with equal key values are identical
+9. WHEN I work with UNIQUE constraints THEN the system SHALL enforce that any two constrained elements with non-distinct key values are identical
+10. WHEN I work with key values THEN the system SHALL ensure key values of KEY constraints are not null-containing (enforced by validation, checking, and enforcement)
+11. WHEN I work with graph type descriptors THEN the system SHALL include constraint set dictionaries that map constraint names to constraint descriptors
+12. WHEN I create constraint descriptors THEN the system SHALL include constraint name, constraint subject set, constraint scope, and key value component specifications
+13. WHEN I work with constraint enforcement THEN the system SHALL support constraint checking for newly registered subjects and constraint enforcement for data-modifying operations
+14. WHEN constraint enforcement fails THEN the system SHALL raise appropriate exception conditions (class 23 for integrity constraint violation, class G2 for graph type violation)
+15. WHEN I work with deferred enforcement THEN the system SHALL support implementation-defined deferred constraint enforcement until transaction commit
+16. WHEN I validate constraint compatibility THEN the system SHALL ensure constraint descriptors follow GQL:2027 CD1SP1 specification for key and unique constraints
+
+### Requirement LEX-7
+
+**User Story:** As a developer implementing LEX:2026.0 based on the GQL:2027 CD1SP1 vs LEX-100 analysis, I want Grasch to implement the complete GQL:2027 constraint framework first before adding LEX organizational alternatives, so that I can ensure full constraint functionality rather than the incomplete LEX-100 constraint specification.
+
+#### Acceptance Criteria
+
+1. WHEN I implement LEX:2026.0 constraints THEN the system SHALL prioritize complete GQL:2027 CD1SP1 constraint framework implementation over LEX-100's incomplete constraint specification
+2. WHEN I reference the constraint analysis THEN the system SHALL acknowledge that LEX-100 constraint descriptors are incomplete compared to GQL:2027 CD1SP1 (missing subject sets, scopes, enforcement semantics)
+3. WHEN I implement constraint organization THEN the system SHALL provide both GQL:2027 organization (constraints inside graph type) and LEX organizational alternative (constraints outside graph type) with identical information content
+4. WHEN I work with constraint descriptors THEN the system SHALL implement the complete GQL:2027 CD1SP1 constraint descriptor structure including constraint name, subject set, scope, and key value component specifications
+5. WHEN I implement constraint enforcement THEN the system SHALL provide the full GQL:2027 enforcement framework (validation, checking, enforcement) rather than LEX-100's omitted enforcement semantics
+6. WHEN I support CREATE/DROP CONSTRAINT statements THEN the system SHALL implement GQL:2027 CD1SP1 syntax rather than relying on LEX-100's missing DDL specification
+7. WHEN I handle constraint exceptions THEN the system SHALL implement GQL:2027 exception handling (class 23, class G2) rather than LEX-100's omitted exception framework
+8. WHEN I design for future LEX extensions THEN the system SHALL build constraint extensions (cardinality, participation) on the complete GQL:2027 foundation rather than the incomplete LEX-100 base
+9. WHEN I validate design decisions THEN the system SHALL reference the detailed analysis in gql-2027-vs-lex-100-analysis.md as justification for prioritizing GQL:2027 CD1SP1 implementation
+10. WHEN I implement LEX organizational alternatives THEN the system SHALL ensure they provide the same rich constraint semantics as GQL:2027 CD1SP1, just organized differently
+11. WHEN I document constraint capabilities THEN the system SHALL clearly indicate which features come from complete GQL:2027 CD1SP1 vs incomplete LEX-100 specification
+
+### Requirement LEX-8
+
+**User Story:** As a developer working with SQL/PGQ compatibility, I want Grasch to recognize that PGQ graph schemas are a subset of GQL:2027 schemas (and therefore LEX:2026.0 schemas), so that I can import and work with SQL/PGQ tabular property graphs within the LEX framework.
+
+#### Acceptance Criteria
+
+1. WHEN I work with SQL/PGQ schemas THEN the system SHALL recognize that PGQ Tabular Property Graph (TPG) schemas are a subset of GQL:2027 schemas
+2. WHEN I import PGQ schemas THEN the system SHALL handle the proviso that PGQ requires multiple labels while GQL implementations may limit to single labels (assuming GQL with all optional features)
+3. WHEN I work with PGQ restrictions THEN the system SHALL handle PGQ restriction 1: properties with the same name must have the same datatype across all elements (unlike GQL's flexibility)
+4. WHEN I work with PGQ restrictions THEN the system SHALL handle PGQ restriction 2: labels must be associated with consistent property sets across elements (unlike GQL's flexibility)
+5. WHEN I map PGQ to LEX THEN the system SHALL translate PGQ foreign key relationships between node and edge tables into appropriate GQL edge type definitions
+6. WHEN I validate PGQ compatibility THEN the system SHALL ensure that PGQ's mandatory key label sets map appropriately to GQL's optional key label set support
+7. WHEN I work with PGQ constraints THEN the system SHALL recognize that PGQ mandates key label sets for each table while GQL/LEX makes them optional
+8. WHEN I configure for PGQ compatibility THEN the system SHALL provide profile settings that enforce PGQ-like restrictions when needed
+9. WHEN I export to PGQ THEN the system SHALL validate that LEX schemas can be represented within PGQ's more restrictive model
+10. WHEN I document PGQ relationships THEN the system SHALL clearly explain how PGQ graph schemas fit within the LEX:2026.0 superset model
 
 ## Requirements
 

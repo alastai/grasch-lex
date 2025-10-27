@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grasch.org/schemas/gql-descriptors.json",
+  "title": "GQL Descriptors Schema",
+  "description": "JSON Schema for GQL descriptor hierarchy based on ISO/IEC 39075 GQL standard",
+  "type": "object",
+  "properties": {
+    "gqlDirectory": {
+      "$ref": "#/$defs/GQLDirectoryDescriptor"
+    },
+    "gqlSchema": {
+      "$ref": "#/$defs/GQLSchemaDescriptor"
+    },
+    "graphType": {
+      "$ref": "#/$defs/GraphTypeDescriptor"
+    }
+  },
+  "$defs": {
+    "GQLDirectoryDescriptor": {
+      "type": "object",
+      "description": "A GQL-directory descriptor",
+      "properties": {
+        "namedSubobjects": {
+          "type": "object",
+          "description": "Set of named subobjects that comprises (identifier, object descriptor) pairs",
+          "additionalProperties": {
+            "oneOf": [
+              {"$ref": "#/$defs/GQLDirectoryDescriptor"},
+              {"$ref": "#/$defs/GQLSchemaDescriptor"}
+            ]
+          }
+        }
+      },
+      "required": ["namedSubobjects"]
+    },
+    "GQLSchemaDescriptor": {
+      "type": "object",
+      "description": "A GQL-schema descriptor",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "The owner of the GQL-schema, an authorization identifier of a principal"
+        },
+        "namedSubobjects": {
+          "type": "object",
+          "description": "Set of named subobjects of the GQL-schema",
+          "additionalProperties": {
+            "$ref": "#/$defs/CatalogObjectDescriptor"
+          }
+        }
+      },
+      "required": ["owner", "namedSubobjects"]
+    },
+    "CatalogObjectDescriptor": {
+      "type": "object",
+      "description": "A catalog object descriptor",
+      "oneOf": [
+        {"$ref": "#/$defs/GraphDescriptor"},
+        {"$ref": "#/$defs/GraphTypeDescriptor"},
+        {"$ref": "#/$defs/BindingTableDescriptor"},
+        {"$ref": "#/$defs/NamedProcedureDescriptor"}
+      ]
+    },
+    "GraphDescriptor": {
+      "type": "object",
+      "description": "A graph descriptor",
+      "properties": {
+        "constrainingGraphType": {
+          "type": ["string", "null"],
+          "description": "Optional constraining graph type that is a globally resolved reference to a graph type schema object"
+        },
+        "constraintDictionary": {
+          "type": "object",
+          "description": "A constraint dictionary, which is a set comprising zero or more uniquely named constraint descriptors",
+          "additionalProperties": {
+            "$ref": "#/$defs/ConstraintDescriptor"
+          }
+        }
+      },
+      "required": ["constraintDictionary"]
+    },
+    "GraphTypeDescriptor": {
+      "type": "object",
+      "description": "A graph type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "description": "The declared name of the primary base type of all graph types",
+          "const": "GRAPH DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of graph types",
+          "enum": ["GRAPH", "PROPERTY GRAPH"]
+        },
+        "nodeTypeDescriptors": {
+          "type": "array",
+          "description": "The set of node type descriptors (also known as a node type set)",
+          "items": {
+            "$ref": "#/$defs/NodeTypeDescriptor"
+          }
+        },
+        "edgeTypeDescriptors": {
+          "type": "array",
+          "description": "The set of edge type descriptors (also known as an edge type set)",
+          "items": {
+            "$ref": "#/$defs/EdgeTypeDescriptor"
+          }
+        },
+        "nodeTypeKeyLabelSetDictionary": {
+          "type": "object",
+          "description": "Maps node type key label sets to node types contained in the node type set",
+          "additionalProperties": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "edgeTypeKeyLabelSetDictionary": {
+          "type": "object",
+          "description": "Maps edge type key label sets to sets of edge types contained in the edge type set",
+          "additionalProperties": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "constraintSetDictionary": {
+          "type": "object",
+          "description": "Maps the name of each constraint in the constraint set to that constraint",
+          "additionalProperties": {
+            "$ref": "#/$defs/ConstraintDescriptor"
+          }
+        }
+      },
+      "required": ["declaredName", "preferredName", "nodeTypeDescriptors", "edgeTypeDescriptors", "nodeTypeKeyLabelSetDictionary", "edgeTypeKeyLabelSetDictionary", "constraintSetDictionary"]
+    },
+    "NodeTypeDescriptor": {
+      "type": "object",
+      "description": "A node type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "description": "The declared name of the primary base type of all node types",
+          "const": "NODE DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of node types",
+          "enum": ["NODE", "VERTEX"]
+        },
+        "labelSet": {
+          "type": "array",
+          "description": "The set of zero or more labels (also known as a node type label set)",
+          "items": {
+            "type": "string",
+            "description": "A label has a name that is an identifier that is unique within the node type label set"
+          }
+        },
+        "propertyTypeSet": {
+          "type": "array",
+          "description": "The set of zero or more property type descriptors (also known as a node type property type set)",
+          "items": {
+            "$ref": "#/$defs/PropertyTypeDescriptor"
+          }
+        }
+      },
+      "required": ["declaredName", "preferredName", "labelSet", "propertyTypeSet"]
+    },
+    "EdgeTypeDescriptor": {
+      "type": "object",
+      "description": "The edge type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "description": "The declared name of the primary base type of all edge types",
+          "const": "EDGE DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of edge types",
+          "enum": ["EDGE", "RELATIONSHIP"]
+        },
+        "labelSet": {
+          "type": "array",
+          "description": "The set of zero or more labels (also known as an edge type label set)",
+          "items": {
+            "type": "string",
+            "description": "A label has a name that is an identifier that is unique within the edge type label set"
+          }
+        },
+        "propertyTypeSet": {
+          "type": "array",
+          "description": "The set of zero or more property type descriptors (also known as an edge type property type set)",
+          "items": {
+            "$ref": "#/$defs/PropertyTypeDescriptor"
+          }
+        },
+        "isDirected": {
+          "type": "boolean",
+          "description": "The indication of whether the edge type is directed or undirected"
+        },
+        "sourceNodeType": {
+          "type": ["string", "null"],
+          "description": "The source node type descriptor (if directed)"
+        },
+        "destinationNodeType": {
+          "type": ["string", "null"],
+          "description": "The destination node type descriptor (if directed)"
+        },
+        "endpointNodeTypes": {
+          "type": ["array", "null"],
+          "description": "The set of one or two endpoint node type descriptors (if undirected)",
+          "items": {"type": "string"},
+          "minItems": 1,
+          "maxItems": 2
+        }
+      },
+      "required": ["declaredName", "preferredName", "labelSet", "propertyTypeSet", "isDirected"],
+      "if": {
+        "properties": {"isDirected": {"const": true}}
+      },
+      "then": {
+        "required": ["sourceNodeType", "destinationNodeType"]
+      },
+      "else": {
+        "required": ["endpointNodeTypes"]
+      }
+    }
+  }
+}
