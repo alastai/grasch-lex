@@ -1,0 +1,457 @@
+\chapter{Data Definition}
+\label{sec:data-definition}
+
+This chapter describes the dataset used by \ldbcfinbench, including the data
+schema design and the data generation process. Generally, we design
+\ldbcfinbench balancing reality and abstraction. There are some annotations
+about the compromises in data design,
+\begin{itemize}
+    \item Although multiple persons/companies may own the same account in
+          reality, in the schema, an account is owned by only a single person
+          or company for simplicity.
+    \item Although rejected transactions may be recorded to support future loan
+          decisions, only approved transactions/transfers are recorded in the
+          benchmark dataset.
+    \item Considering the number of daily active users (DAU) of financial systems
+          in reality, there will be many signIn edges between medium and account
+          vertices. However, we do not generate so many signIn edges aligning to
+          reality with a limit in the simulation of the data generation process
+          since systems usually circumvent the problem by adding a medium attribute
+          to edges like transfer and withdraw to record the medium users used.
+\end{itemize}
+
+\section{Data Types}
+
+\autoref{table:types} describes the different data types used in the benchmark.
+Compared with \ldbcsnb, there is a new compound type, \textbf{Path}, which is
+widely applied in financial scenarios reflecting traces, \eg fund transfer
+traces.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|>{\typeCell}p{\attributeColumnWidth}|p{\largeDescriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Type} & \tableHeader{Description}                      \\
+        \hline
+        ID                      & Integer type with 64-bit precision. All IDs
+        within a single entity type (\eg Person) are unique, but different
+        entity types (\eg a Person and an Account) might have the same ID.       \\
+        \hline
+        32-bit Integer          & Integer type with 32-bit precision             \\
+        \hline
+        64-bit Integer          & Integer type with 64-bit precision             \\
+        \hline
+        32-bit Float            & Floating type with 32-bit precision            \\
+        \hline
+        64-bit Float            & Floating type with 64-bit precision            \\
+        \hline
+        String                  & Variable length text of size 40 Unicode
+        characters                                                               \\
+        \hline
+        Long String             & Variable length text of size 256 Unicode
+        characters                                                               \\
+        \hline
+        Text                    & Variable length text of size 2000 Unicode
+        characters                                                               \\
+        \hline
+        Date                    & Date with a precision of a day, encoded as a
+        string with the following format: \textit{yyyy-mm-dd}, where
+        \textit{yyyy} is a four-digit integer representing the year, the year,
+        \textit{mm} is a two-digit integer representing the month and
+        \textit{dd} is a two-digit integer representing the day.                 \\
+        \hline
+        DateTime                & Date with a precision of milliseconds, encoded
+        as a string with the following format:
+        \textit{yyyy-mm-ddTHH:MM:ss.sss+0000}, where \textit{yyyy} is a
+        four-digit integer representing the year, the year, \textit{mm} is a
+        two-digit integer representing the month and \textit{dd} is a two-digit
+        integer representing the day, \textit{HH} is a two-digit integer
+        representing the hour, \textit{MM} is a two-digit integer representing
+        the minute and \textit{ss.sss} is a five-digit fixed point real number
+        representing the seconds up to millisecond precision. Finally, the
+        \textit{+0000} of the end represents the timezone, which in this case is
+        always GMT.                                                              \\
+        \hline
+        Boolean                 & A logical type taking the value of either True
+        of False.                                                                \\
+        \hline
+        Enum                    & Enumeration type                               \\
+        \hline
+        Path                    & A compound type representing a trace which is
+        expressed in an ordered sequence of vertices' IDs in the trace. For
+        example, [1,3,4,8] expresses a trace 1->3->4->8.                         \\
+        \hline
+    \end{tabular}
+    \caption{Description of the data types.}
+    \label{table:types}
+\end{table}
+
+\subsection{Enumerations}
+{\flushleft \textbf{TRUNCATION\_ORDER:}} The enumeration describes the sort
+order before truncation. \textbf{TIMESTAMP\_ASCENDING} means truncation on
+ascending order of timestamp.
+
+
+\section{Data Schema}
+
+\autoref{figure:schema} shows the data schema in UML. The schema defines the
+structure of the data used in the benchmark in terms of entities and their
+relations. The data represents a snapshot of the activity in several financial
+scenarios during a period of time. The schema specifies different entities,
+their attributes, and their relations. All of them are described in the
+following sections.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/data-schema}
+    \caption{The \ldbcfinbench data schema}
+    \label{figure:schema}
+\end{figure}
+
+\subsection{Entities}
+
+{\flushleft \textbf{Person:}} A person of the real world. \autoref{table:person}
+shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} &
+        \tableHeader{Description}                                                                             \\
+        \hline
+        id                           & ID                 & The identifier of the person.                     \\
+        \hline
+        name                         & String             & The name of the person.                           \\
+        \hline
+        isBlocked                    & Boolean            & If the person is blocked or concerned in systems. \\
+        \hline
+        createTime                   & DateTime           & The time when the person created.                 \\
+        \hline
+        gender                       & String             & Gender of the person                              \\
+        \hline
+        birthday                     & Date               & Birthday of the person                            \\
+        \hline
+        country                      & String             & Country of the person                             \\
+        \hline
+        city                         & String             & City of the person                                \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of Person entity.}
+    \label{table:person}
+\end{table}
+
+{\flushleft \textbf{Company:}} A company of the real world, which persons or other companies invest in. \autoref{table:company} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} &
+        \tableHeader{Description}                                                                              \\
+        \hline
+        id                           & ID                 & The identifier of the company.                     \\
+        \hline
+        name                         & String             & The name of the company.                           \\
+        \hline
+        isBlocked                    & Boolean            & If the company is blocked or concerned in systems. \\
+        \hline
+        createTime                   & DateTime           & The time when the company is created.              \\
+        \hline
+        country                      & String             & Country of the company                             \\
+        \hline
+        city                         & String             & City of the company                                \\
+        \hline
+        business                     & String             & The main business of the company                   \\
+        \hline
+        description                  & Long String        & The description of the company                     \\
+        \hline
+        url                          & String             & The url of the company's official site             \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of Company entity.}
+    \label{table:company}
+\end{table}
+
+{\flushleft \textbf{Account:}} An account in real-world financial systems, which
+is registered and owned by persons and companies. It includes many types such as
+personalDeposit, personalCredit, etc. It can deal with other accounts.
+\autoref{table:account} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} &
+        \tableHeader{Description}                                                                              \\
+        \hline
+        id                           & ID                 & The identifier of the account.                     \\
+        \hline
+        createTime                   & DateTime           & The time when the account is created.              \\
+        \hline
+        isBlocked                    & Boolean            & If the account is blocked or concerned in systems. \\
+        \hline
+        type                         & String             & The type of the account.                           \\
+        \hline
+        nickname                     & String             & The nickname of the account.                       \\
+        \hline
+        phoneNumber                  & String             & The phone number of the account.                   \\
+        \hline
+        email                        & String             & The email of the account.                          \\
+        \hline
+        freqLoginType                & String             & The frequent login type of the account.            \\
+        \hline
+        lastLoginTime                & DateTime           & The last login time of the account.                \\
+        \hline
+        accountLevel                 & String             & The level of the account.                          \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of Account entity.}
+    \label{table:account}
+\end{table}
+
+{\flushleft \textbf{Loan:}} A loan for persons and companies to apply in real
+world. \autoref{table:loan} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} &
+        \tableHeader{Description}                                                        \\
+        \hline
+        id                           & ID                 & The identifier of the loan.  \\
+        \hline
+        loanAmount                   & 64-bit Float       & The amount of a loan.        \\
+        \hline
+        balance                      & 64-bit Float       & The balance of a loan.       \\
+        \hline
+        usage                        & String             & The usage of a loan.         \\
+        \hline
+        interestRate                 & 32-bit Float       & The interest rate of a loan. \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of Loan entity.}
+    \label{table:loan}
+\end{table}
+
+{\flushleft \textbf{Medium:}} An abstract standing for things that users use to
+sign in account in the real world, such as IP address, MAC address, phone numbers.
+\autoref{table:medium} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}                         \\
+        \hline
+        id                           & ID                 & The identifier of the medium.                     \\
+        \hline
+        type                         & String             & The medium type, \eg POS, IP.                     \\
+        \hline
+        createTime                   & DateTime           & The time when the medium is created.              \\
+        \hline
+        isBlocked                    & Boolean            & If the medium is blocked or concerned in systems. \\
+        \hline
+        lastLoginTime                & DateTime           & The last login time of the medium.                \\
+        \hline
+        riskLevel                    & String             & The risk level of the medium.                     \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of Medium entity.}
+    \label{table:medium}
+\end{table}
+
+\subsection{Relations}
+Relations connect entities of different types showed in
+\autoref{table:relations}. Except that own has no attributes, the
+attributes of other relations are shown in the following tables. Note that the
+Cardinality means the cardinal relationship from the tail to the head of the edge
+type and the Multiplicity means how many edges exist from the same tail to the
+same head. For example, the 1 : N cardinality of own means an account can
+only be owned by a person or a company.
+
+\begin{longtable}{|>{\centering\varNameCell}p{1.5cm}|>{\typeCell}p{1.5cm}|>{\centering\cardinalCell}p{2cm}|>{\typeCell}p{1.5cm}|>{\centering\edgeDirectionCell}p{2cm}|p{5.5cm}|}
+    \hline
+    \tableHeaderFirst{Name} & \tableHeader{Tail}       & \tableHeader{Cardinality} & \tableHeader{Head}       & \tableHeader{Multiplicity} & \tableHeader{Description}                                            \\
+    \hline
+    signIn                  & Medium                   & N:N                       & Account                  & N                          & An account signed in with a media.                                   \\
+    \hline
+    own                     & Person/ \newline Company & 1:N                       & Account                  & 1                          & An account owned by a person or a company.                           \\
+    \hline
+    transfer                & Account                  & N:N                       & Account                  & N                          & Fund transferred between two accounts.                               \\
+    \hline
+    withdraw                & Account                  & N:N                       & Account                  & N                          & Fund transferred from an account to another account of type card.    \\
+    \hline
+    apply                   & Person/ \newline Company & 1:N                       & Loan                     & 1                          & A person or a company applies a Loan.                                \\
+    \hline
+    deposit                 & Loan                     & N:N                       & Account                  & N                          & Loan fund deposited to an account.                                   \\
+    \hline
+    repay                   & Account                  & N:N                       & Loan                     & N                          & Loan repaid from an account.                                         \\
+    \hline
+    invest                  & Person/ \newline Company & N:N                       & Company                  & 1                          & A person or a company invests into a company.                        \\
+    \hline
+    guarantee               & Person/ \newline Company & N:N                       & Person/ \newline Company & 1                          & A person or a company guarantees another for some reason like loans. \\
+    \hline
+    \caption{Description of the data relations.}
+    \label{table:relations}
+\end{longtable}
+
+{\flushleft \textbf{transfer:}} Fund transfers between accounts. \autoref{table:transfer} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}         \\
+        \hline
+        timestamp                    & DateTime           & The time when transfer issues.    \\
+        \hline
+        amount                       & 64-bit Float       & The amount of the transfer.       \\
+        \hline
+        ordernumber                  & String             & The order number of the transfer. \\
+        \hline
+        comment                      & String             & The comment of the transfer.      \\
+        \hline
+        payType                      & String             & The pay type of the transfer.     \\
+        \hline
+        goodsType                    & String             & The goods type of the transfer.   \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of transfer relation.}
+    \label{table:transfer}
+\end{table}
+
+{\flushleft \textbf{withdraw:}} Fund is transferred from one account to another of type card. \autoref{table:withdraw} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}      \\
+        \hline
+        timestamp                    & DateTime           & The time when withdraw issues. \\
+        \hline
+        amount                       & 64-bit Float       & The amount of the withdraw.    \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of withdraw relation.}
+    \label{table:withdraw}
+\end{table}
+
+{\flushleft \textbf{repay:}} Loan is repaid from an account. \autoref{table:repay} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}   \\
+        \hline
+        timestamp                    & DateTime           & The time when repay issues. \\
+        \hline
+        amount                       & 64-bit Float       & The amount of the repay.    \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of repay relation.}
+    \label{table:repay}
+\end{table}
+
+{\flushleft \textbf{deposit:}} Loan fund is deposited to an account. \autoref{table:deposit} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}     \\
+        \hline
+        timestamp                    & DateTime           & The time when deposit issues. \\
+        \hline
+        amount                       & 64-bit Float       & The amount of the deposit.    \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of deposit relation.}
+    \label{table:deposit}
+\end{table}
+
+{\flushleft \textbf{signIn:}} An account is signed in with a Media. \autoref{table:signIn} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}     \\
+        \hline
+        timestamp                    & DateTime           & The time when signIn happens. \\
+        \hline
+        location                     & String             & The location of the signIn.   \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of signIn relation.}
+    \label{table:signIn}
+\end{table}
+
+{\flushleft \textbf{invest:}} A person or a company invests in a company. \autoref{table:invest} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}             \\
+        \hline
+        timestamp                    & DateTime           & The time when the investment happens. \\
+        \hline
+        ratio                        & 32-bit Float       & The ratio of the investment.          \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of invest relation.}
+    \label{table:invest}
+\end{table}
+
+{\flushleft \textbf{apply:}} A person or a company applies for a Loan. \autoref{table:apply} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}      \\
+        \hline
+        timestamp                    & DateTime           & The time when apply happens.   \\
+        \hline
+        organization                 & String             & The organization for the loan. \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of apply relation.}
+    \label{table:apply}
+\end{table}
+
+{\flushleft \textbf{guarantee:}} A person or a company guarantees another for some reason like Loans. \autoref{table:guarantee} shows the attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}                       \\
+        \hline
+        timestamp                    & DateTime           & The time when guarantee happens.                \\
+        \hline
+        relationship                 & String             & The relationship between guarantor and applier. \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of guarantee relation.}
+    \label{table:guarantee}
+\end{table}
+
+{\flushleft \textbf{own:}} A person or a company owns an account. This relation has no attributes.
+\begin{table}[H]
+    \begin{tabular}{|>{\varNameCell}p{\attributeColumnWidth}|>{\typeCell}p{\typeColumnWidth}|p{\descriptionColumnWidth}|}
+        \hline
+        \tableHeaderFirst{Attribute} & \tableHeader{Type} & \tableHeader{Description}        \\
+        \hline
+        timestamp                    & DateTime           & The time when guarantee happens. \\
+        \hline
+    \end{tabular}
+    \caption{Attributes of guarantee relation.}
+    \label{table:guarantee}
+\end{table}
+
+\section{Data Generation}
+
+The data generation process is designed to produce a dataset that is as close as possible to the real-world data. The
+data generator stimulates real-world financial activities in systems and generates the data according to the data
+schema. See the data generator for more details at \url{https://github.com/ldbc/ldbc_finbench_DataGen}.
+
+\section{Output Data}
+
+\subsection{Data Precision}
+
+The datasets are designed and created closely resembling real-world scenarios. {\DataGen} produces
+financial data having the precision as follows:
+\begin{itemize}
+    \item The generated 64-bit Float numbers will have precision up to two decimal places for both
+          the amount and balance values.
+    \item The timestamps are generated with millisecond precision.
+\end{itemize}
+
+\subsection{Scale Factors}
+\label{sec:scale-factors}
+
+\ldbcfinbench defines a set of scale factors (SFs), targeting systems of different sizes and budgets. Namely, the SF1
+dataset is 1 GiB, the SF10 is 10 GiB. In the initial version, CSV serializer is provided. We use the default settings
+to split the data into an initial (bulk-loaded) dataset and incremental data, 97\% for initial data and 3\% for
+incremental data. The currently available SFs are the following: 0.01, 0.1, 0.3, 1, 3, 10. By default, all SFs are
+defined over three years,  starting from 2020, and SFs are computed by scaling the number of Persons and Companies in
+the network. Please refer to \autoref{sec:sf-statistics} for the metrics of datasets of different scales.

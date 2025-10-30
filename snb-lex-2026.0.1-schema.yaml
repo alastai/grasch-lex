@@ -1,0 +1,428 @@
+# LDBC SNB (Social Network Benchmark) Schema
+# LEX:2026.0.1 Graph Schema Format
+# Based on LDBC SNB data.tex specification
+# Version: LEX:2026.0.1
+
+identifier:
+  name: "ldbc-snb"
+  directory: ["benchmarks", "ldbc"]
+  root: "https://ldbcouncil.org/schemas/"
+
+# valueTypeSystemName is optional in 0.1, defaults to CANONICAL
+# valueTypeSystemName: "CANONICAL"
+
+graphType:
+  graphPreferredName: "PROPERTY GRAPH"
+  nodePreferredName: "NODE"
+  edgePreferredName: "RELATIONSHIP"
+  
+  nodeTypeMinimumLabels: 1
+  nodeTypeMaximumLabels: 1
+  nodeTypeMinimumPropertyTypes: 1
+  nodeTypeMaximumPropertyTypes: 20
+  
+  edgeTypeMinimumLabels: 1
+  edgeTypeMaximumLabels: 1
+  edgeTypeMinimumPropertyTypes: 0
+  edgeTypeMaximumPropertyTypes: 5
+  
+  nodeTypes:
+    # Person - The avatar a real world person creates when joining the network
+    - index: 0
+      labels: ["Person"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "firstName"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "lastName"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "gender"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "birthday"
+          valueType:
+            name: "DATE"
+            parameters:
+              NULLABLE: false
+        - name: "creationDate"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "locationIP"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "browserUsed"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+    # Forum - A meeting point where people post messages
+    - index: 1
+      labels: ["Forum"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "title"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "creationDate"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+
+    # Post - A message posted in a forum
+    - index: 2
+      labels: ["Post"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "imageFile"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: true
+        - name: "creationDate"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "locationIP"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "browserUsed"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "language"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: true
+        - name: "content"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: true
+
+    # Comment - A comment to an existing message
+    - index: 3
+      labels: ["Comment"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "creationDate"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "locationIP"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "browserUsed"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "content"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+    # Tag - A topic or concept
+    - index: 4
+      labels: ["Tag"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+    # TagClass - A class used to build a hierarchy of tags
+    - index: 5
+      labels: ["TagClass"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+    # Place - A place in the world
+    - index: 6
+      labels: ["Place"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "type"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+    # Organisation - An institution
+    - index: 7
+      labels: ["Organisation"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "type"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+  edgeTypes:
+    # knows - Connects two Persons that know each other (undirected)
+    # NOTE: No index field in LEX:2026.0.1 - edge types are not indexed
+    - labels: ["knows"]
+      propertyTypes:
+        - name: "creationDate"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+      direction: "UNDIRECTED"
+      firstEndpointNodeType: 0  # Person
+      secondEndpointNodeType: 0  # Person
+
+    # hasCreator - Links posts/comments to their creators
+    - labels: ["hasCreator"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 2  # Post
+      secondEndpointNodeType: 0  # Person
+
+    # containerOf - Links forums to posts
+    - labels: ["containerOf"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 1  # Forum
+      secondEndpointNodeType: 2  # Post
+
+    # replyOf - Links comments to posts they reply to
+    - labels: ["replyOf"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 3  # Comment
+      secondEndpointNodeType: 2  # Post
+
+    # hasTag - Links posts to tags
+    - labels: ["hasTag"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 2  # Post
+      secondEndpointNodeType: 4  # Tag
+
+    # hasInterest - Links persons to tags they're interested in
+    - labels: ["hasInterest"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 0  # Person
+      secondEndpointNodeType: 4  # Tag
+
+    # hasMember - Links forums to their members
+    - labels: ["hasMember"]
+      propertyTypes:
+        - name: "joinDate"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 1  # Forum
+      secondEndpointNodeType: 0  # Person
+
+    # hasModerator - Links forums to their moderators
+    - labels: ["hasModerator"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 1  # Forum
+      secondEndpointNodeType: 0  # Person
+
+    # likes - Links persons to posts they like
+    - labels: ["likes"]
+      propertyTypes:
+        - name: "creationDate"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 0  # Person
+      secondEndpointNodeType: 2  # Post
+
+    # isLocatedIn - Links entities to places
+    - labels: ["isLocatedIn"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 0  # Person
+      secondEndpointNodeType: 6  # Place
+
+    # studyAt - Links persons to universities
+    - labels: ["studyAt"]
+      propertyTypes:
+        - name: "classYear"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 0  # Person
+      secondEndpointNodeType: 7  # Organisation
+
+    # workAt - Links persons to companies
+    - labels: ["workAt"]
+      propertyTypes:
+        - name: "workFrom"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 0  # Person
+      secondEndpointNodeType: 7  # Organisation
+
+    # hasType - Links tags to tag classes
+    - labels: ["hasType"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 4  # Tag
+      secondEndpointNodeType: 5  # TagClass
+
+    # isSubclassOf - Links tag classes in hierarchy
+    - labels: ["isSubclassOf"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 5  # TagClass
+      secondEndpointNodeType: "SAME"  # TagClass (self-reference)
+
+    # isPartOf - Links places in hierarchy
+    - labels: ["isPartOf"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeType: 6  # Place
+      secondEndpointNodeType: "SAME"  # Place (self-reference)
+
+  nodeTypeKeyLabelSetDictionary:
+    "Person": 0
+    "Forum": 1
+    "Post": 2
+    "Comment": 3
+    "Tag": 4
+    "TagClass": 5
+    "Place": 6
+    "Organisation": 7
+
+  edgeTypeKeyLabelSetDictionary:
+    "knows": ["knows"]
+    "hasCreator": ["hasCreator"]
+    "containerOf": ["containerOf"]
+    "replyOf": ["replyOf"]
+    "hasTag": ["hasTag"]
+    "hasInterest": ["hasInterest"]
+    "hasMember": ["hasMember"]
+    "hasModerator": ["hasModerator"]
+    "likes": ["likes"]
+    "isLocatedIn": ["isLocatedIn"]
+    "studyAt": ["studyAt"]
+    "workAt": ["workAt"]
+    "hasType": ["hasType"]
+    "isSubclassOf": ["isSubclassOf"]
+    "isPartOf": ["isPartOf"]
+
+# Constraints are optional in LEX:2026.0.1
+constraints:
+  personIdUnique:
+    name: "personIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "(:Person)"
+      uniqueKeyComponentPropertyNames: ["id"]
+  
+  forumIdUnique:
+    name: "forumIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "(:Forum)"
+      uniqueKeyComponentPropertyNames: ["id"]

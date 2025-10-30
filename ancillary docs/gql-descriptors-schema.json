@@ -1,0 +1,869 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grasch.org/schemas/gql-descriptors.json",
+  "title": "GQL Descriptors Schema",
+  "description": "JSON Schema for GQL descriptor hierarchy based on ISO/IEC 39075 GQL standard",
+  "type": "object",
+  "properties": {
+    "gqlDirectory": {
+      "$ref": "#/$defs/GQLDirectoryDescriptor"
+    },
+    "gqlSchema": {
+      "$ref": "#/$defs/GQLSchemaDescriptor"
+    },
+    "graphType": {
+      "$ref": "#/$defs/GraphTypeDescriptor"
+    },
+    "schemaValidationRules": {
+      "$ref": "#/$defs/SchemaValidationRules"
+    }
+  },
+  "$defs": {
+    "GQLDirectoryDescriptor": {
+      "type": "object",
+      "description": "A GQL-directory descriptor",
+      "properties": {
+        "namedSubobjects": {
+          "type": "object",
+          "description": "Set of named subobjects that comprises (identifier, object descriptor) pairs",
+          "additionalProperties": {
+            "oneOf": [
+              {"$ref": "#/$defs/GQLDirectoryDescriptor"},
+              {"$ref": "#/$defs/GQLSchemaDescriptor"}
+            ]
+          }
+        }
+      },
+      "required": ["namedSubobjects"]
+    },
+    "GQLSchemaDescriptor": {
+      "type": "object",
+      "description": "A GQL-schema descriptor",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "The owner of the GQL-schema, an authorization identifier of a principal"
+        },
+        "namedSubobjects": {
+          "type": "object",
+          "description": "Set of named subobjects of the GQL-schema",
+          "additionalProperties": {
+            "$ref": "#/$defs/CatalogObjectDescriptor"
+          }
+        }
+      },
+      "required": ["owner", "namedSubobjects"]
+    },
+    "CatalogObjectDescriptor": {
+      "type": "object",
+      "description": "A catalog object descriptor",
+      "oneOf": [
+        {"$ref": "#/$defs/GraphDescriptor"},
+        {"$ref": "#/$defs/GraphTypeDescriptor"},
+        {"$ref": "#/$defs/BindingTableDescriptor"},
+        {"$ref": "#/$defs/NamedProcedureDescriptor"}
+      ]
+    },
+    "GraphDescriptor": {
+      "type": "object",
+      "description": "A graph descriptor",
+      "properties": {
+        "constrainingGraphType": {
+          "type": ["string", "null"],
+          "description": "Optional constraining graph type that is a globally resolved reference to a graph type schema object"
+        },
+        "constraintDictionary": {
+          "type": "object",
+          "description": "A constraint dictionary, which is a set comprising zero or more uniquely named constraint descriptors",
+          "additionalProperties": {
+            "$ref": "#/$defs/ConstraintDescriptor"
+          }
+        }
+      },
+      "required": ["constraintDictionary"]
+    },
+    "GraphTypeDescriptor": {
+      "type": "object",
+      "description": "A graph type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "description": "The declared name of the primary base type of all graph types",
+          "const": "GRAPH DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of graph types",
+          "enum": ["GRAPH", "PROPERTY GRAPH"]
+        },
+        "nodeTypeDescriptors": {
+          "type": "array",
+          "description": "The set of node type descriptors (also known as a node type set)",
+          "items": {
+            "$ref": "#/$defs/NodeTypeDescriptor"
+          }
+        },
+        "edgeTypeDescriptors": {
+          "type": "array",
+          "description": "The set of edge type descriptors (also known as an edge type set)",
+          "items": {
+            "$ref": "#/$defs/EdgeTypeDescriptor"
+          }
+        },
+        "nodeTypeKeyLabelSetDictionary": {
+          "type": "object",
+          "description": "Maps node type key label sets to node types contained in the node type set",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "labels": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                  },
+                  "isAbstract": {"type": "boolean"},
+                  "inheritsFrom": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                  }
+                },
+                "required": ["labels"]
+              }
+            ]
+          }
+        },
+        "edgeTypeKeyLabelSetDictionary": {
+          "type": "object",
+          "description": "Maps edge type key label sets to sets of edge types contained in the edge type set",
+          "additionalProperties": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "constraintSetDictionary": {
+          "type": "object",
+          "description": "Maps the name of each constraint in the constraint set to that constraint",
+          "additionalProperties": {
+            "$ref": "#/$defs/ConstraintDescriptor"
+          }
+        }
+      },
+      "required": ["declaredName", "preferredName", "nodeTypeDescriptors", "edgeTypeDescriptors", "nodeTypeKeyLabelSetDictionary", "edgeTypeKeyLabelSetDictionary", "constraintSetDictionary"]
+    },
+    "NodeTypeDescriptor": {
+      "type": "object",
+      "description": "A node type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "description": "The declared name of the primary base type of all node types",
+          "const": "NODE DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of node types",
+          "enum": ["NODE", "VERTEX"]
+        },
+        "labelSet": {
+          "type": "array",
+          "description": "The set of zero or more labels (also known as a node type label set)",
+          "items": {
+            "type": "string",
+            "description": "A label has a name that is an identifier that is unique within the node type label set"
+          }
+        },
+        "propertyTypeSet": {
+          "type": "array",
+          "description": "The set of zero or more property type descriptors (also known as a node type property type set)",
+          "items": {
+            "$ref": "#/$defs/PropertyTypeDescriptor"
+          }
+        },
+        "isAbstract": {
+          "type": "boolean",
+          "description": "Whether this node type is abstract (cannot be instantiated directly)",
+          "default": false
+        },
+        "superTypes": {
+          "type": "array",
+          "description": "List of parent/super types this node type inherits from",
+          "items": {"type": "string"},
+          "default": []
+        },
+        "subTypes": {
+          "type": "array", 
+          "description": "List of child/sub types that inherit from this node type",
+          "items": {"type": "string"},
+          "default": []
+        }
+      },
+      "required": ["declaredName", "preferredName", "labelSet", "propertyTypeSet"]
+    },
+    "EdgeTypeDescriptor": {
+      "type": "object",
+      "description": "The edge type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "description": "The declared name of the primary base type of all edge types",
+          "const": "EDGE DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of edge types",
+          "enum": ["EDGE", "RELATIONSHIP"]
+        },
+        "labelSet": {
+          "type": "array",
+          "description": "The set of zero or more labels (also known as an edge type label set)",
+          "items": {
+            "type": "string",
+            "description": "A label has a name that is an identifier that is unique within the edge type label set"
+          }
+        },
+        "propertyTypeSet": {
+          "type": "array",
+          "description": "The set of zero or more property type descriptors (also known as an edge type property type set)",
+          "items": {
+            "$ref": "#/$defs/PropertyTypeDescriptor"
+          }
+        },
+        "isDirected": {
+          "type": "boolean",
+          "description": "The indication of whether the edge type is directed or undirected"
+        },
+        "sourceNodeType": {
+          "oneOf": [
+            {"type": "string"},
+            {"type": "array", "items": {"type": "string"}},
+            {"type": "null"}
+          ],
+          "description": "The source node type descriptor(s) (if directed) - can be a single type or array of types for inheritance"
+        },
+        "destinationNodeType": {
+          "oneOf": [
+            {"type": "string"},
+            {"type": "array", "items": {"type": "string"}},
+            {"type": "null"}
+          ],
+          "description": "The destination node type descriptor(s) (if directed) - can be a single type or array of types for inheritance"
+        },
+        "endpointNodeTypes": {
+          "type": ["array", "null"],
+          "description": "The set of one or two endpoint node type descriptors (if undirected)",
+          "items": {
+            "oneOf": [
+              {"type": "string"},
+              {"type": "array", "items": {"type": "string"}}
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 2
+        }
+      },
+      "required": ["declaredName", "preferredName", "labelSet", "propertyTypeSet", "isDirected"],
+      "if": {
+        "properties": {"isDirected": {"const": true}}
+      },
+      "then": {
+        "required": ["sourceNodeType", "destinationNodeType"]
+      },
+      "else": {
+        "required": ["endpointNodeTypes"]
+      }
+    },
+    "PropertyTypeDescriptor": {
+      "type": "object",
+      "description": "A property type descriptor",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A name, which is an identifier"
+        },
+        "valueType": {
+          "$ref": "#/$defs/DataTypeDescriptor",
+          "description": "A value type, which can be any supported property value type"
+        }
+      },
+      "required": ["name", "valueType"]
+    },
+    "DataTypeDescriptor": {
+      "type": "object",
+      "description": "A data type descriptor",
+      "oneOf": [
+        {"$ref": "#/$defs/BooleanDataTypeDescriptor"},
+        {"$ref": "#/$defs/NumericDataTypeDescriptor"},
+        {"$ref": "#/$defs/CharacterStringDataTypeDescriptor"},
+        {"$ref": "#/$defs/ByteStringDataTypeDescriptor"},
+        {"$ref": "#/$defs/TemporalInstantDataTypeDescriptor"},
+        {"$ref": "#/$defs/TemporalDurationDataTypeDescriptor"},
+        {"$ref": "#/$defs/ListValueDataTypeDescriptor"},
+        {"$ref": "#/$defs/RecordDataTypeDescriptor"},
+        {"$ref": "#/$defs/VectorDataTypeDescriptor"},
+        {"$ref": "#/$defs/ReferenceValueDataTypeDescriptor"},
+        {"$ref": "#/$defs/ImmaterialDataTypeDescriptor"},
+        {"$ref": "#/$defs/DynamicUnionDataTypeDescriptor"},
+        {"$ref": "#/$defs/PathValueDataTypeDescriptor"}
+      ]
+    },
+    "BooleanDataTypeDescriptor": {
+      "type": "object",
+      "description": "A Boolean data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "BOOLEAN DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "const": "BOOLEAN"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type includes the null value"
+        }
+      },
+      "required": ["declaredName", "preferredName", "includesNull"]
+    },
+    "NumericDataTypeDescriptor": {
+      "type": "object",
+      "description": "A numeric data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "enum": ["EXACT NUMERIC DATA", "FLOAT NUMERIC DATA"]
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of the specific numeric type"
+        },
+        "radix": {
+          "type": "integer",
+          "enum": [2, 10],
+          "description": "The radix (2 for binary, 10 for decimal)"
+        },
+        "precision": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The precision of the numeric type"
+        },
+        "scale": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The scale of the numeric type"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type includes the null value"
+        }
+      },
+      "required": ["declaredName", "preferredName", "radix", "precision", "scale", "includesNull"]
+    },
+    "CharacterStringDataTypeDescriptor": {
+      "type": "object",
+      "description": "A character string data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "STRING DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "enum": ["STRING", "CHAR", "VARCHAR"]
+        },
+        "minLength": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The minimum length in characters"
+        },
+        "maxLength": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The maximum length in characters"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type includes the null value"
+        }
+      },
+      "required": ["declaredName", "preferredName", "minLength", "maxLength", "includesNull"]
+    },
+    "ByteStringDataTypeDescriptor": {
+      "type": "object",
+      "description": "A byte string data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "BINARY DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "enum": ["BINARY", "BYTES", "VARBINARY"]
+        },
+        "minLength": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The minimum length in bytes"
+        },
+        "maxLength": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The maximum length in bytes"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the byte string type includes the null value"
+        }
+      },
+      "required": ["declaredName", "preferredName", "minLength", "maxLength", "includesNull"]
+    },
+    "TemporalInstantDataTypeDescriptor": {
+      "type": "object",
+      "description": "A temporal instant data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "TEMPORAL INSTANT DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of the specific temporal instant type"
+        },
+        "capturesDate": {
+          "type": "boolean",
+          "description": "The indication of whether the temporal instant values capture the date"
+        },
+        "capturesTimeOfDay": {
+          "type": "boolean",
+          "description": "The indication of whether the temporal instant values capture the time of day"
+        },
+        "includesTimeZone": {
+          "type": "boolean",
+          "description": "The indication of whether the temporal instant values include a time zone displacement"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type includes the null value"
+        }
+      },
+      "required": ["declaredName", "preferredName", "capturesDate", "capturesTimeOfDay", "includesTimeZone", "includesNull"]
+    },
+    "TemporalDurationDataTypeDescriptor": {
+      "type": "object",
+      "description": "A temporal duration data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "TEMPORAL DURATION DATA"
+        },
+        "durationUnitGroup": {
+          "type": "string",
+          "enum": ["year and month-based duration unit group", "day and time-based duration unit group"],
+          "description": "The temporal duration unit group"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type includes the null value"
+        }
+      },
+      "required": ["declaredName", "durationUnitGroup", "includesNull"]
+    },
+    "ListValueDataTypeDescriptor": {
+      "type": "object",
+      "description": "A list value data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "LIST VALUE DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of the specific list value type"
+        },
+        "listElementType": {
+          "$ref": "#/$defs/DataTypeDescriptor",
+          "description": "The list element type of the list value type"
+        },
+        "isGroupListType": {
+          "type": "boolean",
+          "description": "The indication of whether the type is a group list value type or a regular list value type"
+        },
+        "maxCardinality": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The maximum cardinality of the list value type"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type contains the null value"
+        }
+      },
+      "required": ["declaredName", "preferredName", "listElementType", "isGroupListType", "maxCardinality", "includesNull"]
+    },
+    "RecordDataTypeDescriptor": {
+      "type": "object",
+      "description": "A record data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "RECORD DATA"
+        },
+        "isClosed": {
+          "type": "boolean",
+          "description": "The indication of whether the type is closed or open"
+        },
+        "fieldTypes": {
+          "type": "array",
+          "description": "A (possibly empty) set of field types (if closed)",
+          "items": {
+            "$ref": "#/$defs/FieldTypeDescriptor"
+          }
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type contains the null value"
+        }
+      },
+      "required": ["declaredName", "isClosed", "includesNull"],
+      "if": {
+        "properties": {"isClosed": {"const": true}}
+      },
+      "then": {
+        "required": ["fieldTypes"]
+      }
+    },
+    "FieldTypeDescriptor": {
+      "type": "object",
+      "description": "A field type descriptor",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A name, which is an identifier"
+        },
+        "valueType": {
+          "$ref": "#/$defs/DataTypeDescriptor",
+          "description": "A value type"
+        }
+      },
+      "required": ["name", "valueType"]
+    },
+    "VectorDataTypeDescriptor": {
+      "type": "object",
+      "description": "A vector data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "VECTOR DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "const": "VECTOR"
+        },
+        "dimension": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The dimension of the vector type"
+        },
+        "coordinateType": {
+          "$ref": "#/$defs/DataTypeDescriptor",
+          "description": "The coordinate type of the vector type"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the vector type contains the null value"
+        }
+      },
+      "required": ["declaredName", "preferredName", "dimension", "coordinateType", "includesNull"]
+    },
+    "ReferenceValueDataTypeDescriptor": {
+      "type": "object",
+      "description": "A reference value data type descriptor",
+      "properties": {
+        "referenceBaseTypeName": {
+          "type": "string",
+          "description": "The reference base type name (always ends with REFERENCE)"
+        },
+        "objectBaseTypeName": {
+          "type": "string",
+          "description": "The object base type name"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of the reference value type"
+        },
+        "constrainingGQLObjectType": {
+          "type": ["string", "null"],
+          "description": "The optional constraining GQL-object type"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type contains the null value"
+        }
+      },
+      "required": ["referenceBaseTypeName", "objectBaseTypeName", "preferredName", "includesNull"]
+    },
+    "ImmaterialDataTypeDescriptor": {
+      "type": "object",
+      "description": "An immaterial data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "NULL DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "enum": ["NULL", "NOTHING"]
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type includes the null value"
+        }
+      },
+      "required": ["declaredName", "preferredName", "includesNull"]
+    },
+    "DynamicUnionDataTypeDescriptor": {
+      "type": "object",
+      "description": "A dynamic union data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "ANY DATA"
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name of the dynamic union type"
+        },
+        "isOpen": {
+          "type": "boolean",
+          "description": "The indication of whether the type is open or closed"
+        },
+        "componentTypes": {
+          "type": "array",
+          "description": "The component types, a finite set of two or more data types",
+          "items": {
+            "$ref": "#/$defs/DataTypeDescriptor"
+          },
+          "minItems": 2
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the dynamic union type includes the null value"
+        }
+      },
+      "required": ["declaredName", "preferredName", "isOpen", "componentTypes", "includesNull"]
+    },
+    "PathValueDataTypeDescriptor": {
+      "type": "object",
+      "description": "A path value data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "PATH VALUE DATA"
+        },
+        "includesNull": {
+          "type": "boolean",
+          "description": "The indication of whether the type contains the null value"
+        }
+      },
+      "required": ["declaredName", "includesNull"]
+    },
+    "ConstraintDescriptor": {
+      "type": "object",
+      "description": "A constraint descriptor",
+      "properties": {
+        "constraintName": {
+          "type": "string",
+          "description": "The constraint name, which identifies the constraint"
+        },
+        "constraintSubjectSet": {
+          "type": "array",
+          "description": "The constraint subject set, which is a set of valid reference values",
+          "items": {"type": "string"}
+        },
+        "constraintScope": {
+          "type": "string",
+          "description": "The constraint scope of the constraint"
+        }
+      },
+      "required": ["constraintName", "constraintSubjectSet", "constraintScope"]
+    },
+    "UniqueDescriptor": {
+      "type": "object",
+      "description": "A unique descriptor",
+      "allOf": [
+        {"$ref": "#/$defs/ConstraintDescriptor"}
+      ],
+      "properties": {
+        "keyValueComponentSpecifications": {
+          "type": "array",
+          "description": "The key value component specifications",
+          "items": {"type": "string"}
+        }
+      },
+      "required": ["keyValueComponentSpecifications"]
+    },
+    "BindingTableDescriptor": {
+      "type": "object",
+      "description": "A binding table descriptor",
+      "properties": {
+        "bindingTableType": {
+          "$ref": "#/$defs/BindingTableDataTypeDescriptor",
+          "description": "The binding table type of the binding table"
+        },
+        "isOrdered": {
+          "type": "boolean",
+          "description": "The indication of whether the binding table is ordered or unordered"
+        },
+        "preferredColumnNameSequence": {
+          "type": ["array", "null"],
+          "description": "The preferred column name sequence",
+          "items": {"type": "string"}
+        }
+      },
+      "required": ["bindingTableType", "isOrdered"]
+    },
+    "BindingTableDataTypeDescriptor": {
+      "type": "object",
+      "description": "A binding table data type descriptor",
+      "properties": {
+        "declaredName": {
+          "type": "string",
+          "const": "BINDING TABLE DATA"
+        },
+        "closedMaterialRecordType": {
+          "$ref": "#/$defs/RecordDataTypeDescriptor",
+          "description": "The closed material record type"
+        }
+      },
+      "required": ["declaredName", "closedMaterialRecordType"]
+    },
+    "NamedProcedureDescriptor": {
+      "type": "object",
+      "description": "A named procedure descriptor",
+      "properties": {
+        "mandatoryParameters": {
+          "type": "array",
+          "description": "The list of the declared types of the mandatory procedure parameters and their names",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "type": {"$ref": "#/$defs/DataTypeDescriptor"}
+            },
+            "required": ["name", "type"]
+          }
+        },
+        "optionalParameters": {
+          "type": "array",
+          "description": "The list of the declared types of the optional procedure parameters, their names, and their default values",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "type": {"$ref": "#/$defs/DataTypeDescriptor"},
+              "defaultValue": {}
+            },
+            "required": ["name", "type", "defaultValue"]
+          }
+        },
+        "procedureResultType": {
+          "$ref": "#/$defs/DataTypeDescriptor",
+          "description": "The procedure result type"
+        },
+        "sideEffectKind": {
+          "type": "string",
+          "enum": ["CATALOG PROCEDURE", "DATA PROCEDURE", "QUERY PROCEDURE"],
+          "description": "The indication of the kinds of side effects the execution can cause"
+        }
+      },
+      "required": ["mandatoryParameters", "optionalParameters", "procedureResultType", "sideEffectKind"]
+    },
+    "TypeReference": {
+      "type": "object",
+      "description": "A flexible type reference that can resolve to concrete or abstract types",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Simple type name reference"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeName": {"type": "string"},
+            "allowAbstract": {"type": "boolean", "default": true},
+            "allowInheritance": {"type": "boolean", "default": true},
+            "matchingStrategy": {
+              "type": "string",
+              "enum": ["exact", "subtype", "supertype", "any"],
+              "default": "any"
+            }
+          },
+          "required": ["typeName"]
+        },
+        {
+          "type": "array",
+          "description": "Union of multiple type references",
+          "items": {"$ref": "#/$defs/TypeReference"}
+        }
+      ]
+    },
+    "SchemaValidationRules": {
+      "type": "object",
+      "description": "Schema-level validation rules and inheritance resolution",
+      "properties": {
+        "inheritanceResolution": {
+          "type": "string",
+          "enum": ["strict", "flexible", "disabled"],
+          "default": "flexible",
+          "description": "How to handle inheritance in type references"
+        },
+        "allowAbstractTypeReferences": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether edges can reference abstract node types"
+        },
+        "typeResolutionStrategy": {
+          "type": "string",
+          "enum": ["label-based", "hierarchy-based", "hybrid"],
+          "default": "hybrid",
+          "description": "Strategy for resolving type references"
+        },
+        "customValidationRules": {
+          "type": "array",
+          "description": "Custom validation rules for specific schema patterns",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "description": {"type": "string"},
+              "pattern": {"type": "string"},
+              "severity": {"type": "string", "enum": ["error", "warning", "info"]}
+            },
+            "required": ["name", "pattern"]
+          }
+        }
+      }
+    },
+    "GQLRequestDescriptor": {
+      "type": "object",
+      "description": "A GQL-request descriptor",
+      "properties": {
+        "gqlProgram": {
+          "type": "string",
+          "description": "The GQL-program, which is a GQL source text"
+        },
+        "gqlRequestParameters": {
+          "type": "object",
+          "description": "The GQL-request parameters, represented as a dictionary of general parameters",
+          "additionalProperties": true
+        }
+      },
+      "required": ["gqlProgram", "gqlRequestParameters"]
+    }
+  }
+}

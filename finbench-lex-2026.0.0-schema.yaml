@@ -1,0 +1,460 @@
+# LDBC FinBench (Financial Benchmark) Schema
+# LEX:2026.0.0 Graph Schema Format
+# Based on LDBC FinBench data.tex specification
+# Version: LEX:2026.0.0
+
+identifier:
+  name: "ldbc-finbench"
+  directory: ["benchmarks", "ldbc"]
+  root: "https://ldbcouncil.org/schemas/"
+
+valueTypeSystemName: "CYPHER"
+
+graphType:
+  graphPreferredName: "PROPERTY GRAPH"
+  nodePreferredName: "NODE"
+  edgePreferredName: "RELATIONSHIP"
+  
+  nodeTypeMinimumLabels: 1
+  nodeTypeMaximumLabels: 1
+  nodeTypeMinimumPropertyTypes: 1
+  nodeTypeMaximumPropertyTypes: 15
+  
+  edgeTypeMinimumLabels: 1
+  edgeTypeMaximumLabels: 1
+  edgeTypeMinimumPropertyTypes: 0
+  edgeTypeMaximumPropertyTypes: 10
+  
+  nodeTypes:
+    # Person - A person of the real world
+    - index: 0
+      labels: ["Person"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "isBlocked"
+          valueType:
+            name: "BOOLEAN"
+            parameters:
+              NULLABLE: false
+        - name: "createTime"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "gender"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "birthday"
+          valueType:
+            name: "DATE"
+            parameters:
+              NULLABLE: false
+        - name: "country"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "city"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+    # Company - A company of the real world
+    - index: 1
+      labels: ["Company"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "isBlocked"
+          valueType:
+            name: "BOOLEAN"
+            parameters:
+              NULLABLE: false
+        - name: "createTime"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "country"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "city"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "business"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "description"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+    # Account - An account in financial systems
+    - index: 2
+      labels: ["Account"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "createTime"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "isBlocked"
+          valueType:
+            name: "BOOLEAN"
+            parameters:
+              NULLABLE: false
+        - name: "type"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "nickname"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "phoneNumber"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "email"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "freqLoginType"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "lastLoginTime"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "accountLevel"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+    # Loan - A loan for persons and companies
+    - index: 3
+      labels: ["Loan"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "loanAmount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              NULLABLE: false
+        - name: "balance"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              NULLABLE: false
+        - name: "usage"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "interestRate"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              NULLABLE: false
+
+    # Medium - Things users use to sign in accounts
+    - index: 4
+      labels: ["Medium"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              NULLABLE: false
+        - name: "type"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "createTime"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "isBlocked"
+          valueType:
+            name: "BOOLEAN"
+            parameters:
+              NULLABLE: false
+        - name: "lastLoginTime"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "riskLevel"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+
+  edgeTypes:
+    # signIn - An account signed in with a medium
+    - index: 0
+      labels: ["signIn"]
+      propertyTypes:
+        - name: "timestamp"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "location"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 4
+      secondEndpointNodeType: 2
+
+    # own - An account owned by a person or company
+    - index: 1
+      labels: ["own"]
+      propertyTypes:
+        - name: "timestamp"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 0
+      secondEndpointNodeType: 2
+
+    # transfer - Fund transferred between accounts
+    - index: 2
+      labels: ["transfer"]
+      propertyTypes:
+        - name: "timestamp"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "amount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              NULLABLE: false
+        - name: "ordernumber"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "comment"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "payType"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+        - name: "goodsType"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 2
+      secondEndpointNodeType: 2
+
+    # withdraw - Fund transferred from account to card account
+    - index: 3
+      labels: ["withdraw"]
+      propertyTypes:
+        - name: "timestamp"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "amount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 2
+      secondEndpointNodeType: 2
+
+    # apply - A person or company applies for a loan
+    - index: 4
+      labels: ["apply"]
+      propertyTypes:
+        - name: "timestamp"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "organization"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 0
+      secondEndpointNodeType: 3
+
+    # deposit - Loan fund deposited to an account
+    - index: 5
+      labels: ["deposit"]
+      propertyTypes:
+        - name: "timestamp"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "amount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 3
+      secondEndpointNodeType: 2
+
+    # repay - Loan repaid from an account
+    - index: 6
+      labels: ["repay"]
+      propertyTypes:
+        - name: "timestamp"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "amount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 2
+      secondEndpointNodeType: 3
+
+    # invest - A person or company invests in a company
+    - index: 7
+      labels: ["invest"]
+      propertyTypes:
+        - name: "timestamp"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "ratio"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 0
+      secondEndpointNodeType: 1
+
+    # guarantee - A person or company guarantees another
+    - index: 8
+      labels: ["guarantee"]
+      propertyTypes:
+        - name: "timestamp"
+          valueType:
+            name: "LOCAL DATETIME"
+            parameters:
+              NULLABLE: false
+        - name: "relationship"
+          valueType:
+            name: "STRING"
+            parameters:
+              NULLABLE: false
+      direction: "DIRECTED"
+      firstEndpointNodeType: 0
+      secondEndpointNodeType: 0
+
+  nodeTypeKeyLabelSetDictionary:
+    "Person": 0
+    "Company": 1
+    "Account": 2
+    "Loan": 3
+    "Medium": 4
+
+  edgeTypeKeyLabelSetDictionary:
+    "signIn": 0
+    "own": 1
+    "transfer": 2
+    "withdraw": 3
+    "apply": 4
+    "deposit": 5
+    "repay": 6
+    "invest": 7
+    "guarantee": 8
+
+constraints:
+  personIdUnique:
+    name: "personIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "(:Person)"
+      uniqueKeyComponentPropertyNames: ["id"]
+  
+  companyIdUnique:
+    name: "companyIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "(:Company)"
+      uniqueKeyComponentPropertyNames: ["id"]
+  
+  accountIdUnique:
+    name: "accountIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "(:Account)"
+      uniqueKeyComponentPropertyNames: ["id"]

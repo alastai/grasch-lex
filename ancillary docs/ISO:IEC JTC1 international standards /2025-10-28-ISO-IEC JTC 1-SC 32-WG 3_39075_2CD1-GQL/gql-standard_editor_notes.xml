@@ -1,0 +1,7574 @@
+<EditorNotes>
+<!--
+1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+-->
+<!-- ======================================= -->
+<!-- Current PPs and LOs, not yet resolved   -->
+<!-- ======================================= -->
+<!--
+   This is a list of all problems in the corresponding
+   document that are not yet resolved.co
+
+Possible
+Problem
+Number   Category
+======= ==========
+
+GQL-000  (pseudo-PP showing Editor's Notes convention)
+
+GQL-003        *Opportunity*
+GQL-004        *Opportunity*
+GQL-005        *Opportunity*
+GQL-011        *Opportunity*
+GQL-012        *Opportunity*
+GQL-017        *Opportunity*
+GQL-025        *Opportunity*
+GQL-030        *Opportunity*
+GQL-032        *Opportunity*
+GQL-034        *Opportunity*
+GQL-035        *Opportunity*
+GQL-036        *Opportunity*
+GQL-044        *Opportunity*
+GQL-052        *Opportunity*
+GQL-053        *Opportunity*
+GQL-054        *Opportunity*
+GQL-055        *Opportunity*
+GQL-056        *Opportunity*
+GQL-057        *Opportunity*
+GQL-161        *Opportunity*
+GQL-162        *Opportunity*
+GQL-163        *Opportunity*
+GQL-168        *Opportunity*
+GQL-169        *Opportunity*
+GQL-176        *Opportunity*
+GQL-177        *Opportunity*
+GQL-181        *Opportunity*
+GQL-185        *Opportunity*
+GQL-186        *Opportunity*
+GQL-194        *Opportunity*
+GQL-196        *Opportunity*
+GQL-197        *Opportunity*
+GQL-212        *Opportunity*
+GQL-213        *Opportunity*
+GQL-217        *Opportunity*
+GQL-218        *Opportunity*
+GQL-221        *Opportunity*
+GQL-222        *Opportunity*
+GQL-223        *Opportunity*
+GQL-224        *Opportunity*
+GQL-225        *Opportunity*
+GQL-226        *Opportunity*
+GQL-227        *Opportunity*
+GQL-229        *Opportunity*
+GQL-231        *Opportunity*
+GQL-233        *Opportunity*
+GQL-234        *Opportunity*
+GQL-235        *Opportunity*
+GQL-237        *Opportunity*
+GQL-241        *Opportunity*
+GQL-242        *Opportunity*
+GQL-243        *Opportunity*
+GQL-244        *Opportunity*
+GQL-245        *Opportunity*
+GQL-246        *Opportunity*
+GQL-247        *Opportunity*
+GQL-248        *Opportunity*
+GQL-250        *Opportunity*
+GQL-279        *Opportunity*
+GQL-281        *Opportunity*
+GQL-282        *Opportunity*
+GQL-283        *Opportunity*
+GQL-285        *Opportunity*
+GQL-288        *Opportunity*
+GQL-301        *Opportunity*
+GQL-304        *Opportunity*
+GQL-306        *Opportunity*
+GQL-308        *Opportunity*
+GQL-309        *Opportunity*
+GQL-310        *Opportunity*
+GQL-319        *Opportunity*
+GQL-325        *Opportunity*
+GQL-328        *Opportunity*
+GQL-329        *Opportunity*
+GQL-330        *Opportunity*
+GQL-336        *Opportunity*
+GQL-340        *Opportunity*
+GQL-342        *Opportunity*
+GQL-343        *Opportunity*
+GQL-344        *Opportunity*
+GQL-345        *Opportunity*
+GQL-346        *Opportunity*
+GQL-347        *Opportunity*
+GQL-348        *Opportunity*
+GQL-349        *Opportunity*
+GQL-350        *Opportunity*
+GQL-353        *Opportunity*
+GQL-354        *Opportunity*
+GQL-355        *Opportunity*
+GQL-356        *Opportunity*
+GQL-358        *Opportunity*
+GQL-359        *Opportunity*
+GQL-362        *Opportunity*
+GQL-364        *Opportunity*
+GQL-365        *Opportunity*
+GQL-366        *Opportunity*
+GQL-367        *Opportunity*
+GQL-368        *Opportunity*
+GQL-369        *Opportunity*
+GQL-370        *Opportunity*
+GQL-371        *Opportunity*
+GQL-373        *Opportunity*
+GQL-374        *Opportunity*
+GQL-375        *Opportunity*
+GQL-376        *Opportunity*
+GQL-377        *Opportunity*
+GQL-378        *Opportunity*
+GQL-379        *Opportunity*
+GQL-380        *Opportunity*
+GQL-381        *Opportunity*
+GQL-382        *Opportunity*
+GQL-388      *Minor Technical*
+GQL-391      *Major Technical*
+GQL-392      *Minor Editorial*
+GQL-393      *Minor Editorial*
+GQL-394        *Opportunity*
+GQL-395        *Opportunity*
+GQL-396        *Opportunity*
+GQL-397        *Opportunity*
+GQL-398        *Opportunity*
+GQL-399        *Opportunity*
+GQL-400        *Opportunity*
+GQL-401        *Opportunity*
+GQL-402        *Opportunity*
+GQL-403      *Major Technical*
+GQL-406      *Minor Technical*
+GQL-413        *Opportunity*
+GQL-414        *Opportunity*
+GQL-415      *Major Technical*
+GQL-416      *Major Technical*
+GQL-417      *Major Technical*
+GQL-418        *Opportunity*
+GQL-419        *Opportunity*
+GQL-420        *Opportunity*
+GQL-421        *Opportunity*
+GQL-422        *Opportunity*
+GQL-423      *Minor Technical*
+GQL-425      *Minor Technical*
+GQL-429        *Opportunity*
+GQL-432        *Opportunity*
+GQL-433        *Opportunity*
+GQL-434        *Opportunity*
+GQL-436        *Opportunity*
+GQL-437        *Opportunity*
+GQL-438      *Major Technical*
+GQL-440      *Minor Technical*
+GQL-441      *Minor Technical*
+GQL-442      *Minor Technical*
+GQL-443        *Opportunity*
+GQL-444     **Major Technical**
+GQL-445        *Opportunity*
+GQL-446        *Opportunity*
+GQL-447        *Opportunity*
+GQL-448        *Opportunity*
+GQL-449     **Major Technical**
+GQL-450        *Opportunity*
+GQL-451        *Opportunity*
+GQL-452     **Major Technical**
+GQL-453     **Major Technical**
+GQL-454     **Major Technical**
+GQL-455     **Major Technical**
+GQL-456     **Major Technical**
+GQL-457        *Opportunity*
+GQL-458        *Opportunity*
+GQL-459        *Opportunity*
+GQL-460        *Opportunity*
+GQL-461        *Opportunity*
+GQL-462        *Opportunity*
+GQL-463        *Opportunity*
+
+GQL-           *Opportunity*
+GQL-        **Major Technical**
+GQL-         *Minor Technical*
+GQL-        **Major Editorial**
+GQL-         *Minor Editorial*
+
+======= Largest GQL Possible Problem number *** GQL-463 *** ========
+=========== This is the end of the problem number list =============
+
+-->
+
+
+<!-- This is a template for Major Technical Possible Problems
+     ========================================================
+
+<PP id="PPgql" number="GQL-" severity="major" realm="technical">
+
+<brief area="Area of functionality">One-line summary of Possible Problem</brief>
+
+<reference><specref ref="gql_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+
+<!-- This is a template for an ednote pointing at an issue
+     =====================================================
+
+<ednote id="PPgql999_1">Reconsider.
+See <PPref ref="PPgql999"/>.
+</ednote>
+
+-->
+
+<!-- This is a template for minor technical Possible Problems
+     ========================================================
+
+<PP id="PPgql" number="GQL-" severity="minor" realm="technical">
+
+<brief area="Area of functionality">One-line summary of Possible Problem</brief>
+
+<reference><specref ref="gql_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+<!-- This is a template for Major Editorial Possible Problems
+     ========================================================
+
+<PP id="PPgql" number="GQL-" severity="major" realm="editorial">
+
+<brief area="Area of functionality">One-line summary of Possible Problem</brief>
+
+<reference><specref ref="gql_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+<!-- This is a template for minor editorial Possible Problems
+     ========================================================
+
+<PP id="PPgql" number="GQL-" severity="minor" realm="editorial">
+
+<brief area="Area of functionality">One-line summary of Possible Problem</brief>
+
+<reference><specref ref="gql_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+-->
+
+<!-- This is a template for Language Opportunities
+     =============================================
+
+<LO id="PPgql" number="GQL-" 
+    kind="!! One of: new_feat port_feat feat_ext port_ext improv"
+    size="!! One of: XS S M L XL">
+
+<brief area="Area of functionality">One-line summary of Language Opportunity</brief>
+
+<reference><specref ref="gql_"/>. !! If no appropriate reference, then use: No specific location. !!
+</reference>
+
+<noteAt>!! If there are no Notes, then use: None. !!
+</noteAt>
+
+<source>!! Always give source. !!
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+-->
+
+
+<!--
+    ============================================================================
+-->
+
+<comment>Not a real PP; merely documenting the Editor's Note convention</comment>
+<PP id="PPgql000" number="GQL-000" severity="major" realm="technical">
+
+<brief area="General">Editor<apos/>s Note convention</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>Your humble Editors.
+</source>
+
+<problem>
+
+<para>In the body of the Working Draft, there occasionally appears a point that requires particular
+attention, highlighted thus:
+</para>
+
+<para>Text of the problem.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<LO id="PPgql003" number="GQL-003" kind="new_feat" size="XL">
+
+<brief area="System and execution model">Host language bindings
+</brief>
+
+<reference><specref ref="gql_conc_prcmd_procs"/>, <specref ref="gql_named_procedure_call"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP003_procs"/>, <specref ref="gql_PP003_call"/>.
+</noteAt>
+
+<source>Editors, WG3:OHD-042, WG3:GYD-031.
+</source>
+
+<problem>
+
+<para>It is a language opportunity to provide an annex, probably informative, that defines 
+host language bindings that realize the abstract API defined in this document
+for at least one widely used programming language <eg/> Java, C++, or Python).
+This should include calling GQL procedures from the host language and
+calling functions and/or procedures, which are written in this or another host language, 
+from within GQL.
+</para>
+
+<para>Doing so will validate that the specification of the abstract API is complete and
+sufficiently well-defined to enable language bindings to be defined.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql004" number="GQL-004" kind="new_feat" size="XL">
+
+<brief area="Schema and metadata model">Information schema
+</brief>
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Converted to LO</comment>
+<reference><specref ref="gql_ddl"/>.
+</reference>
+
+<noteAt><specref ref="gql_ddl"/>, <specref ref="gql_PP004"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>The GQL schema and meta-graph need to be defined together with the statements to manipulate
+it.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql005" number="GQL-005" kind="new_feat" size="XL">
+
+<brief area="System and execution model">Security model
+</brief>
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Converted to LO</comment>
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Editors, WG3:W12-012, WG3:BER-040R3.
+</source>
+
+<problem>
+
+<para>The Security Model for GQL and related concepts such as roles need to be defined.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql011" number="GQL-011" kind="improv" size="L">
+
+<brief area="Specification mechanics">Concept of deterministic predicates and 
+expressions
+</brief>
+
+<reference><specref ref="gql_lexical"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP011_2"/>,
+<specref ref="gql_PP011_3"/>,
+<specref ref="gql_PP011_4"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<comment>Editorial: Stefan Plantikow 2021-04-26 Converted to LO</comment>
+
+<para>SQL pays a lot of attention as to whether an expression is deterministic or not, as this has
+consequences for its use in constraints.
+If GQL is to have a schema for graphs that includes constraints, then this will also need
+considerable attention.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql012" number="GQL-012" kind="feat_ext" size="L">
+
+<brief area="Data types and expressions">Full collation support
+</brief>
+
+<reference><specref ref="gql_comp"/>, <specref ref="gql_equality_ops"/>,
+<specref ref="gql_ordering_ops"/>.
+</reference>
+
+<noteAt><specref ref="SQL_diff20"/>, <specref ref="SQL_diff18"/>, <specref ref="SQL_diff19"/>.
+</noteAt>
+
+<source>Editors, WG3:W21-058.
+</source>
+
+<problem>
+
+<para>Consider explicit support for additional collations other than UCS_BASIC and UNICODE
+(<eg/> case insensitive variants, use of alternative collation tables).
+</para>
+</problem>
+
+</LO>
+
+
+<LO id="PPgql017" number="GQL-017" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Improved aggregation support
+</brief>
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Reworded</comment>
+<reference><specref ref="gql_stm_return"/>, <specref ref="gql_select"/>,
+<specref ref="gql_group_by"/>, <specref ref="gql_aggregate_func"/>,
+<specref ref="gql_valexpprim"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP017_af"/>, <specref ref="gql_PP017_return"/>,
+<specref ref="gql_PP017_select"/>, <specref ref="gql_PP017_group_by"/>,
+<specref ref="gql_PP017_group_by"/>, <specref ref="gql_PP017_tab"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Aggregation would benefit from being improved for the needs of GQL:
+</para>
+
+<ulist>
+
+<item>Revisit the set of provided aggregation functions in light of existing products and market
+needs (<eg/> add <mono>TIMES</mono> or graph-specific aggregation functions).
+</item>
+
+<item>Provide means to better control how aggregation functions behave on empty inputs (no
+rows), <eg/> by allowing the user to specify a default value or default failure behavior for
+aggregation on empty inputs.
+</item>
+
+<comment>Editorial: Stefan Plantikow, 2022-12-19 WG3:W24-009 539. P00-WG3-081</comment>
+<item>Allow aggregation to scope over whole subqueries (partition by), possibly taking advantage
+of using fixed variables as implicit grouping keys and supporting the evaluation of aggregation
+functions over the incoming working table in every statement.
+</item>
+
+</ulist>
+
+<para>See also <PPref ref="PPgql186"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql025" number="GQL-025" kind="improv" size="S">
+
+<brief area="Pattern matching">Define path pattern union using left recursion
+</brief>
+
+<reference><specref ref="gql_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="gql_bne034_3"/>.
+</noteAt>
+
+<source>WG3:SXM-052.
+</source>
+
+<problem>
+
+<para>Path pattern union is not defined using left recursion.
+SXM-052 believed that it should be possible to support left recursion but declined to do
+so for expediency.
+It is a Language Opportunity to support left recursion.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq019" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql030" number="GQL-030" kind="feat_ext" size="M">
+
+<brief area="System and execution model">Session-level control over auto-commit
+</brief>
+
+<reference><specref ref="gql_conc_tx_demarcation"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP030"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Currently transaction demarcation is defined such that any failure
+within a GQL-request procedure will cause a rollback attempt.
+Rollback on failure may not be the best option here.
+Consider an application that has multiple procedure invocations within a transaction context
+where the first N procedures succeed but procedure n+1 fails.
+It would be preferable to decide in the application logic whether to commit or rollback,
+<eg/> by using a session level configuration mechanism or by providing options to
+transaction demarcation commands.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql032" number="GQL-032" kind="new_feat" size="L">
+
+<brief area="Data types and expressions">Regular expressions
+</brief>
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Reworded</comment>
+<reference><specref ref="gql_charstrfunc"/>, <specref ref="gql_bytestrfunc"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP032_sql"/>, <specref ref="gql_PP032_cypher"/>,
+<specref ref="gql_PP032_exclude"/>, <specref ref="gql_PP032_bs"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>SQL, Cypher, and possibly other property graph query languages have various styles of
+regular expression substring functions as well as other possibly relevant string value functions
+that GQL currently is missing.
+It is a Language Opportunity to add functionality equivalent to at least that of SQL to GQL.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql034" number="GQL-034" kind="feat_ext" size="S">
+
+<brief area="Pattern matching">Macro names as <BNF name="simplified primary"/>s
+in <BNF name="simplified path pattern expression"/>s
+</brief>
+
+<reference><specref ref="gql_simpl_path_patt_expr"/>.
+</reference>
+
+<noteAt><specref ref="gql_mmx060_2"/>.
+</noteAt>
+
+<source>WG3:MMX-060.
+</source>
+
+<problem>
+
+<para>It has been proposed that a macro name may be a <BNF name="simplified primary"/> in
+a <BNF name="simplified path pattern expression"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq035" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql035" number="GQL-035" kind="new_feat" size="M">
+
+<brief area="Data model and catalog">TTL and auto-delete of graph elements
+</brief>
+
+<reference><specref ref="gql_insert"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP035_insert"/>.
+</noteAt>
+
+<source>WG3:MMX-047.
+</source>
+
+<problem>
+
+<para>Discussion paper WG3:MMX-047 suggests the addition of a <quote>Time To Live</quote> option,
+which would require specified graph elements be deleted after a certain time to save storage 
+space.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql036" number="GQL-036" kind="feat_ext" size="M">
+
+<brief area="Pattern matching">Nested quantifier support</brief>
+
+<reference><specref ref="gql_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP036"/>.
+</noteAt>
+
+<source>WG3:W01-014.
+</source>
+
+<problem>
+
+<para>It may be possible to permit nested quantifiers.
+WG3:W01-014 contained a discussion of a way to support aggregates at different depths of 
+aggregation if there are nested quantifiers.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq036" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql044" number="GQL-044" kind="feat_ext" size="S">
+
+<brief area="Pattern matching">Implicit join of unconditional singletons</brief>
+
+<reference><specref ref="gql_eval_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="gql_w04009_10"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>It may be possible to enforce implicit joins of unconditional singletons
+exposed by a <BNF name="path concatenation"/> as part of the GRs for
+<BNF name="path concatenation"/>.
+This was discussed in a SQL/PG ad hoc meeting on September 8, 2020.
+It was decided not to attempt that change as part of WG3:W04-009R1, leaving it as a future
+possibility.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq047" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql052" number="GQL-052" kind="new_feat" size="L">
+
+<brief area="Pattern matching">MATCH CHEAPEST</brief>
+
+<reference><specref ref="gql_path_pattern_prefix"/>.
+</reference>
+
+<noteAt><specref ref="gql_w04009_15"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>The ability to specify <quote>cheapest</quote> queries (analogous to <kw>SHORTEST</kw>
+but minimizing the sum of costs along a path) is desirable.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq052" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql053" number="GQL-053" kind="feat_ext" size="M">
+
+<brief area="Pattern matching">MATCH SHORTEST WITH TIES</brief>
+
+<reference><specref ref="gql_path_pattern_prefix"/>.
+</reference>
+
+<noteAt><specref ref="gql_w04009_16"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>In addition to <kw>SHORTEST</kw> <kw>GROUP</kw>, it has been proposed to
+support <kw>SHORTEST</kw> [ <sym>k</sym> ] WITH TIES, with the semantics to
+return the first <sym>k</sym> matches (where <sym>k</sym> defaults to 1) when sorting matches in
+ascending order on number of edges, and also return any matches that have the same number of edges
+as the last of the <sym>k</sym> matches.
+This is the semantics of WITH TIES in <extref standard="9075" part="02" ref="fnd_qexp"/> in 
+SQL/Foundation.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq053" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql054" number="GQL-054" kind="feat_ext" size="M">
+
+<brief area="Pattern matching">Nested selectors with recursion</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>No specific location.
+</noteAt>
+
+<source>WG3:W04-009R1, WG3:W09-031.
+</source>
+
+<problem>
+
+<para>WG3:W04-009R1 believed it should be possible to support nested selectors using
+recursion but did not undertake that.
+It is a Language Opportunity to support nested selectors.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq054" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql055" number="GQL-055" kind="feat_ext" size="M">
+
+<brief area="Pattern matching">Selectors with quantifiers with a finite upper bound</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>No specific location.
+</noteAt>
+
+<source>WG3:W04-009R1, WG3:W09-031.
+</source>
+
+<problem>
+
+<para>WG3:W04-009R1 believed it should be possible to support selectors within
+quantifiers with a finite upper bound, but did not undertake that.
+(This comment applies to a static upper bound, not dynamic, since we are forbidding multiple
+selectors within a restrictor.)
+It is a Language Opportunity to support selectors within quantifiers with a finite upper bound.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq055" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql056" number="GQL-056" kind="improv" size="S">
+
+<brief area="Pattern matching">Generalized definition of left and right boundary variable</brief>
+
+<reference><specref ref="gql_path_pattern_prefix"/>.
+</reference>
+
+<noteAt><specref ref="gql_w04009_19"/>.
+</noteAt>
+
+<source>WG3:W04-009R1.
+</source>
+
+<problem>
+
+<para>With more work, it is possible to recognize when a node variable is declared uniformly in
+the first or the last position in every operand of a <BNF name="path pattern union"/>.
+However, WG3:W04-009R1 declined to make the effort because it is easy for the user to factor out
+such a node pattern.
+For example, instead of
+</para>
+<code>(X) -> (Y) | (X) -> (Z)
+</code>
+<para>the user can write
+</para>
+<code>(X) ( -> (Y) | -> (Z))
+</code>
+<para>Thus, a more general definition of right or left boundary variable is possible.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq056" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql057" number="GQL-057" kind="improv" size="S">
+
+<brief area="Pattern matching">Overridable default path pattern prefix in KEEP</brief>
+
+
+<reference><specref ref="gql_graph_pattern"/>.
+</reference>
+
+<noteAt><specref ref="gql_w04009_12"/>.
+</noteAt>
+
+<source>WG3:W04-009R1, WG3:W09-031.
+</source>
+
+<problem>
+
+<para>It has been suggested that it might be possible to treat the
+<BNF name="path pattern prefix"/> specified in <BNF name="keep clause"/> as merely providing
+a default <BNF name="path pattern prefix"/> rather than a mandatory one for each
+<BNF name="path pattern"/>.
+Whereas nested <BNF name="path pattern prefix"/> is prohibited, this may be
+a feasible avenue of growth.
+On the other hand, perhaps a less definitive verb than <kw>KEEP</kw> may be appropriate when
+specifying a default <BNF name="path pattern prefix"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq049" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql161" number="GQL-161" kind="feat_ext" size="S">
+
+<brief area="Statements and clauses">Improved LIMIT</brief>
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Created for editors' notes</comment>
+<reference><specref ref="gql_limit"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP161"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Additional, commonly supported subclauses of <BNF name="limit clause"/> should be added.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql162" number="GQL-162" kind="feat_ext" size="S">
+
+<brief area="Statements and clauses">Improved OFFSET</brief>
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Created fir editors' notes</comment>
+<reference><specref ref="gql_offset"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP162"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Additional, commonly supported subclauses of <BNF name="offset clause"/> should be added.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql163" number="GQL-163" kind="new_feat" size="M">
+
+<brief area="Statements and clauses">ORDER BY support for WITH TIES, PARTITION BY,
+WITH [ GROUP ] OFFSET, and WITH [ GROUP ] ORDINALITY
+</brief>
+
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Created for editors' notes</comment>
+<reference><specref ref="gql_order_by_and_page"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP163"/>.
+</noteAt>
+
+<source>Editors, WG3:W15-020, WG3:GYD-031.
+</source>
+
+<problem>
+
+<para>Additional support for PARTITION BY, WITH TIES, WITH [ GROUP ] OFFSET, and 
+WITH [ GROUP ] ORDINALITY should be considered.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql168" number="GQL-168" kind="feat_ext" size="S">
+
+<brief area="Procedures">Standalone calls</brief>
+
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Create for editors' notes</comment>
+<reference><specref ref="gql_stm_proc_call"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP168"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Stand-alone calls need to be added (standalone calls are short-hand syntax for just calling
+a single GQL-procedure).
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql169" number="GQL-169" kind="feat_ext" size="S">
+
+<brief area="Statements and clauses">Optional WHERE clause support where feasible</brief>
+
+<reference><specref ref="gql_stm_proc_call"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP169"/>, <specref ref="gql_PP169_2"/>,
+<specref ref="gql_PP169_4"/>, <specref ref="gql_PP169_5"/>, <specref ref="gql_PP169_6"/>,
+<specref ref="gql_PP169_9"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>The addition of optional <BNF name="where clause"/>s should be considered throughout the
+document.
+</para>
+
+</problem>
+
+</LO>
+
+
+
+<LO id="PPgql176" number="GQL-176" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Additional numeric value functions
+</brief>
+
+<reference><specref ref="gql_numvalfunc"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP176_1"/>, <specref ref="gql_PP176_2"/>, <specref ref="gql_PP176_3"/>,
+<specref ref="gql_PP176_4"/>, <specref ref="gql_PP176_5"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<comment>Editorial: Stefan Plantikow 2021-04-26 Converted LO</comment>
+
+<para>It needs to be decided which additional numeric value functions should be included.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql177" number="GQL-177" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Additional predicates
+</brief>
+
+
+<reference><specref ref="gql_pred"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP177_1"/>, <specref ref="gql_PP177_2"/>, <specref ref="gql_PP177_3"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<comment>Editorial: Stefan Plantikow 2021-04-26 Converted to LO</comment>
+
+<para>It needs to be decided which additional predicates should be included.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql181" number="GQL-181" kind="feat_ext" size="S">
+
+<brief area="Pattern matching">Relax selector occurrence in alternatives
+</brief>
+
+
+<reference>No specific location.
+</reference>
+
+<noteAt>No specific location.
+</noteAt>
+
+<source>WG3:W08-018, WG3:W09-031.
+</source>
+
+<problem>
+
+<para>WG3:W08-018 prohibited a selector contained in a <BNF name="path pattern union"/> or
+<BNF name="path multiset alternation"/> <symdef>PU</symdef>, but believed that if <sym>PU</sym> is
+at the <quote>top</quote> of a path pattern, and a selector is at the <quote>top</quote> of
+an operand of <sym>PU</sym>, then this scenario does not violate compositionality.
+It is a Language Opportunity to permit this scenario.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq060" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql185" number="GQL-185" kind="new_feat" size="XL">
+
+<brief area="Data model and catalog">System-versioned graph
+</brief>
+
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Created for editors' notes</comment>
+<reference><specref ref="gql_conc_temporal"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP185"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<comment>WG3:UTC-117</comment>
+<para>Support for system-versioned graphs should be added.
+Such support should consider using the 9075 <quote>period</quote> terminology rather than
+the 8601 <quote>interval</quote> terminology.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql186" number="GQL-186" kind="feat_ext" size="L">
+
+<brief area="Procedures">Grouped procedure calls
+</brief>
+
+
+<reference><specref ref="gql_stm_proc_call"/>, <specref ref="gql_aggregate_func"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP186_2"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Support for grouped procedure calls needs to be specified.
+A grouped procedure call invokes a procedure for each partition of the binding table and combines
+(concatenates) all results received.
+Partitions may be determined by a user-specified grouping key or perhaps sets of grouping keys.
+</para>
+
+<para>See also <PPref ref="PPgql017"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>A possible solution might all a syntactic form like:
+</para>
+
+<code>
+CALL proc(args) PER key YIELD results
+</code>
+
+<para>or perhaps rely on per-query block partitioning:
+</para>
+
+<code>
+PER key
+<ellipsis/>
+CALL proc(args) YIELD results
+<ellipsis/>
+</code>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql194" number="GQL-194" kind="feat_ext" size="S">
+
+<brief area="Pattern matching">Subpath variable projection and handling
+</brief>
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Created for editors' notes</comment>
+<reference><specref ref="gql_graph_pattern"/>,
+<specref ref="gql_machinery_graph_pattern_matching"/>.
+</reference>
+
+<noteAt><specref ref="gql_w22053_1"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Projection and handling of subpath variables needs to be specified.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql196" number="GQL-196" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Additional date time functions from Cypher
+</brief>
+
+
+<comment>Editorial: Stefan Plantikow 2021-03-02 Created for editors' notes</comment>
+<reference><specref ref="gql_datevalfunc"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP196"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Cypher contains additional datetime functions.
+It is a Language Opportunity to add equivalent functionality to GQL.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql197" number="GQL-197" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Additional duration functions from Cypher
+</brief>
+<comment>Editorial: Stefan Plantikow 2021-03-02 Created for editors' notes</comment>
+<reference><specref ref="gql_durvalfunc"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP197"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Cypher contains additional duration functions.
+It is a Language Opportunity to add equivalent functionality to GQL.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql212" number="GQL-212" kind="feat_ext" size="S">
+
+<brief area="Pattern matching">Additional synonyms for undirected edge patterns
+</brief>
+
+<reference><specref ref="gql_path_pattern_expr"/>.
+</reference>
+
+<noteAt><specref ref="gql_w09017"/>.
+</noteAt>
+
+<source>WG3:W09-017, WG3:W09-036.
+</source>
+
+<problem>
+
+<para>In the BNF for <BNF name="full edge any direction"/>, the delimiter
+tokens &lt;~[ ]~&gt; have been suggested as a synonym for -[ ]- as part of <feature code="GH02"/>.
+The synonym for the <BNF name="abbreviated edge pattern"/> - (<BNF name="minus sign"/>)
+would then be &lt;~&gt;, the synonym for <BNF name="simplified defaulting any direction"/> would
+use the delimiter tokens &lt;~/ /~&gt; and the synonym for
+<BNF name="simplified override any direction"/> would use the tokens &lt;~ and &gt; surrounding
+a label as originally proposed in WG3:MMX-060.
+These synonyms might be considered to make the table of edge patterns more harmonious and
+internally consistent.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq062" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql213" number="GQL-213" kind="new_feat" size="M">
+
+<brief area="Data types and expressions">Regular expression operators from SQL
+</brief>
+<reference><specref ref="gql_pred"/>.
+</reference>
+
+<source>WG3:W10-017.
+</source>
+
+<problem>
+
+<para>SQL/Foundation defines five operators that use XQuery regular expression syntax:
+</para>
+<code>
+  LIKE_REGEX
+  OCCURRENCES_REGEX
+  POSITION_REGEX
+  SUBSTRING_REGEX
+  TRANSLATE_REGEX
+</code>
+
+<para>These REGEX operators could be very useful and should be considered.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql217" number="GQL-217" kind="feat_ext" size="S">
+
+<brief area="Data types and expressions">IEEE 754 floating point literals for Infinity and NaN
+</brief>
+
+<reference><specref ref="gql_conc_numeric"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP217"/>.
+</noteAt>
+
+<source>WG3:W12-029.
+</source>
+
+<problem>
+
+<para>Support for approximate numeric types that are compatible with the arithmetic formats for
+which ISO/IEC 60559:2020/IEEE 754:2019 defines interchange formats should be added.
+This needs to include provisions for infinity values and literals, NaN values and literals,
+rounding, casting, error handling, data types, the modification of existing operations, and related
+conformance features.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided but see paper WG3:W11-015 for a discussion.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql218" number="GQL-218" kind="improv" size="S">
+
+<brief area="Data types and expressions">Reconsider allowed behavior on loss of non-zero bytes due
+to truncation
+</brief>
+
+<reference><specref ref="gql_conc_numeric"/>.
+</reference>
+
+<source>WG3:W12-029.
+</source>
+
+<problem>
+
+<para>In SQL, it is <impDef annex="no" code="None"/> whether the loss of non-zero bytes due
+to truncation raises an exception or not.
+This should be reconsidered by GQL.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql221" number="GQL-221" kind="feat_ext" size="XS">
+
+<brief area="Cast">Cast BOOLEAN to INT
+</brief>
+
+<reference><specref ref="gql_cast_spec"/>.
+</reference>
+
+<source>WG3:W13-012
+</source>
+
+<problem>
+
+<para>Many programming languages support converting boolean types to numerics
+where <bool>True</bool> converts to 1 (one) and <bool>False</bool> converts to 0 (zero).
+Such conversions could be useful to GQL users.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql222" number="GQL-222" kind="feat_ext" size="S">
+
+<brief area="Cast">Explicit type conversion functions
+</brief>
+
+<reference><specref ref="gql_cast_spec"/>.
+</reference>
+
+<source>WG3:W13-012
+</source>
+
+<problem>
+
+<para>Many databases and programming languages include individual type conversion functions
+such as:
+</para>
+
+<ulist>
+
+<item>toBoolean
+</item>
+
+<item>toInteger
+</item>
+
+<item>toFloat
+</item>
+
+<item>toString
+</item>
+
+</ulist>
+
+<para>If there is a need at some point to add individual conversion functions to GQL,
+they could be specified as syntactic transformations to the appropriate <kw>CAST</kw> function.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql223" number="GQL-223" kind="feat_ext" size="S">
+
+<brief area="Cast">Temporal CAST with explicit FORMAT option
+</brief>
+
+<reference><specref ref="gql_cast_spec"/>.
+</reference>
+
+<source>WG3:W13-012
+</source>
+
+<problem>
+
+<para>In <docref ref="ISO9075-2_2023"/>, <BNF name="cast specification"/> includes an optional
+FORMAT <BNF name="cast template" standard="9075" part="02"/> that allows a user to
+provide a format when converting a datetime to a character string.
+A similar capability could be useful in GQL.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql224" number="GQL-224" kind="feat_ext" size="M">
+
+<brief area="Cast">Error trapping in CAST
+</brief>
+
+<reference><specref ref="gql_cast_spec"/>.
+</reference>
+
+<source>WG3:W13-012
+</source>
+
+<problem>
+
+<para>In a <kw>CAST</kw> expression, it could be useful to specify what the result should be if
+the <kw>CAST</kw> would otherwise raise an exception.
+For example:
+</para>
+
+<code><kw>CAST</kw> (<string>abc</string> AS INT ON EXCEPTION NULL)</code>
+<code><kw>CAST</kw> (<string>abc</string> AS INT ON EXCEPTION 0)</code>
+<code><kw>CAST</kw> (a.prop1 AS INT ON EXCEPTION a.prop2)</code>
+
+<para>An ON EXCEPTION capability would be particularly useful when loading large volumes of data.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql225" number="GQL-225" kind="feat_ext" size="M">
+
+<brief area="Cast">Cast between byte strings and character strings
+</brief>
+
+<reference><specref ref="gql_cast_spec"/>.
+</reference>
+
+<source>WG3:W13-012
+</source>
+
+<problem>
+
+<para><BNF name="cast specification"/> does not currently support converting byte strings to
+character strings or character strings to byte strings (using some well-known encoding).
+Such a capability might be useful.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql226" number="GQL-226" kind="feat_ext" size="S">
+
+<brief area="Cast">Temporal component extraction in CAST
+</brief>
+
+<reference><specref ref="gql_cast_spec"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>The ability to extract individual time scale components from temporal instances and duration
+would be useful and might be used to simplify the specification of <BNF name="cast specification"/>.
+SQL has an EXTRACT function that satisfies a similar need and openCypher in its CIP2015-08-06 Date
+and Time specification has defined the ability to extract all individual time scale components.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql227" number="GQL-227" kind="feat_ext" size="S">
+
+<brief area="DDL">Cascading DROP SCHEMA
+</brief>
+
+<reference><specref ref="gql_drop_schema"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W13-024.
+</source>
+
+<since>2021-07-21
+</since>
+
+<problem>
+
+<para><BNF name="drop schema statement"/> only allows dropping a schema if it does not contain any
+catalog object.
+More user convenience could potentially be added to the <BNF name="drop schema statement"/> by
+including a new option for cascading drop statements or by developing a general invalidation
+model for catalog objects.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql229" number="GQL-229" kind="new_feat" size="L">
+
+<brief area="Pattern matching">Pattern macros
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W15-018.
+</source>
+
+<problem>
+
+<para>Pattern Macros could provide powerful capabilities for GQL Users by providing
+a multi-use template.
+A Pattern Macro could be created in several places:
+</para>
+
+<ulist>
+
+<item>As a preamble to a single query that lasts for the life of the query.
+</item>
+
+<item>As a catalog object that can be created, used in multiple queries, and lasts until
+explicitly dropped.
+</item>
+
+</ulist>
+
+<para>This capability should be considered for a future GQL version.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql231" number="GQL-231" kind="feat_ext" size="S">
+
+<brief area="Pattern matching">Alternative syntax for testing source and destination
+</brief>
+
+<reference><specref ref="gql_src_dest_pred"/>.
+</reference>
+
+<noteAt>No specific location.
+</noteAt>
+
+<source>WG3:W15-022.
+</source>
+
+<problem>
+
+<para>The <BNF name="source/destination predicate"/> is expressed as a predicate about the node,
+while it is most often used to pose questions about the edge.
+If an alternative form of these predicates was available that put the edge as the first operand,
+this predicate would be more useful in combination with <BNF name="simple case"/>.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq071" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql233" number="GQL-233" kind="feat_ext" size="M">
+
+<brief area="Pattern matching">Handle desynchronized lists
+</brief>
+
+<reference><specref ref="gql_app_bind_eval_expr"/>.
+</reference>
+
+<noteAt><specref ref="gql_w13018_1"/>.
+</noteAt>
+
+<source>WG3:MMX-035r2, WG3:W13-018.
+</source>
+
+<problem>
+
+<para>The bindings of a group reference flatten nested lists.
+This may be acceptable for SQL aggregates, which have no support for nested groupings,
+but may be inadequate to fully capture the semantics of a group reference in a graph pattern.
+MMX-035r2 section 4.1 <quote>Desynchronized lists</quote> pointed out a problem with reducing
+group variables to lists: two lists may be interleaved, but the reduction to separate lists can
+lose this information.
+The example given is
+</para>
+
+<code>
+(   (A:Person) -[:SPOUSE]-> ()
+  | (B:Person) -[:FRIEND]-> () ){3}
+</code>
+
+<para>A solution may find matches to A and B in any order.
+With separate lists of matches of A and B, it will not be easy to reconstruct the precise
+sequence of interleaved matches to A and B.
+</para>
+
+<para>A similar problem can arise with nested quantifiers.
+MMX-035r2 section 4.2 <quote>Nested quantifiers</quote> gives this example:
+</para>
+
+<code>
+( (C1:CORP) (-[:TRANSFERS]->(B:BANK))*
+  -[:TRANSFERS]-> (C2:CORP) )*
+</code>
+
+<para>With this pattern, there can be 0 or more bindings to B between any two consecutive
+bindings to C1 and C2.
+With just independent lists of matches to C1, B and C2, it will not be easy to determine which
+bindings to B lie between which bindings to C1 and C2.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq069" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql234" number="GQL-234" kind="feat_ext" size="M">
+
+<brief area="Statements and clauses">Composite queries (<eg/> set operations) on graphs
+</brief>
+
+<reference><specref ref="gql_stm_comp_query_expr"/>.
+</reference>
+
+<source>WG3:W15-017.
+</source>
+
+<problem>
+
+<para><specref ref="gql_stm_comp_query_expr"/>, General Rules are written to compose the binding
+tables generated by pairs of queries.
+There might be a benefit in expanding the GRs to also support operations directly on graphs such
+that GQL gains the capability to do, <eg/> union of graphs.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql235" number="GQL-235" kind="new_feat" size="M">
+
+<brief area="Data model and catalog">Constant values in the GQL-catalog
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W16-038.
+</source>
+
+<problem>
+
+<para>The ability to create, reference, and drop constants as catalog objects could be
+very useful when constructing GQL queries.
+This capability should be considered for a future GQL version.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+</solution>
+
+</LO>
+
+
+<LO id="PPgql237" number="GQL-237" kind="new_feat" size="M">
+
+<brief area="Data model and catalog">Query catalog graphs by metadata
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W16-041.
+</source>
+
+<problem>
+
+<para>The ability to query a catalog to identify graphs with particular characteristics
+would be useful.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+</solution>
+
+</LO>
+
+
+<LO id="PPgql241" number="GQL-241" kind="new_feat" size="XL">
+
+<brief area="Data model and catalog">First class properties
+</brief>
+
+<reference><specref ref="gql_prop_type_set_defn"/>.
+</reference>
+
+<source>WG3:W19-019R1.
+</source>
+
+<problem>
+
+<para>Several future extensions of the GQL language (See <PPref ref="PPgql241"/>,
+<PPref ref="PPgql242"/>, <PPref ref="PPgql243"/>) depend on properties being
+directly referenceable as graph elements in their own rights.
+Currently properties only exist (from a schema point of view) as members in property type sets
+attached to either nodes or edges.
+A definition point of a property type as such is needed.
+Such a graph element will be necessary for future concept relationships between
+properties and, <eg/> other properties, other edges and other nodes than the ones that the
+current property set <quote>belongs to</quote>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql242" number="GQL-242" kind="new_feat" size="L">
+
+<brief area="Data model and catalog">First class properties to reify keys with functional
+dependencies
+</brief>
+
+<reference><specref ref="gql_prop_type_set_defn"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W19-019R1.
+</source>
+
+<problem>
+
+<para>Functional dependencies in a more specific manner (minimizing the
+need for inferencing in query planning) require explicit concept relationships between
+properties (<eg/> keys and non-keys) for dealing with uniqueness and key formation.
+See <PPref ref="PPgql241"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql243" number="GQL-243" kind="new_feat" size="L">
+
+<brief area="Data model and catalog">First class properties to reify versioning and timeline
+information
+</brief>
+
+<reference><specref ref="gql_prop_type_set_defn"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W19-019R1.
+</source>
+
+<problem>
+
+<para>Versioning (of both data and metadata) and timeline handling
+require explicit concept relationships between properties (<eg/> keys and non-keys) for
+dealing with uniqueness and key formation.
+See <PPref ref="PPgql241"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql244" number="GQL-244" kind="new_feat" size="L">
+
+<brief area="Data model and catalog">First class properties to map between RDF and LPG
+</brief>
+
+<reference><specref ref="gql_prop_type_set_defn"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W19-019R1.
+</source>
+
+<problem>
+
+<para>Coexistence between LPG(s) of different breeds and also RDF require meta transformations
+between concept systems describing: a source graph type, a <quote>universal</quote> abstract
+graph type system and a target graph type.
+This requires GQL properties to be directly referenceable as such in combinations with other
+graph elements, including other properties, edges and relationships.
+See <PPref ref="PPgql241"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql245" number="GQL-245" kind="new_feat" size="XL">
+
+<brief area="System and execution model">Multi-requests
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W19-017.
+</source>
+
+<problem>
+
+<para>Allowing the bundling of multiple requests into one is useful for reducing network round
+trips.
+This should include the capability for returning multiple results to the client in one round trip.
+</para>
+
+</problem>
+
+<solution>
+
+<para>One possibility is to introduce a new top-level Subclause &lt;GQL-multi-request&gt; next to
+<BNF name="GQL-program"/>.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql246" number="GQL-246" kind="new_feat" size="XL">
+
+<brief area="Data model and catalog">Named procedures
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W20-012.
+</source>
+
+<problem>
+
+<para>The ability to create and drop named stored procedures is a powerful capability 
+when building applications in a GQL database.
+This capability should be considered for a future GQL version and should include both
+mandatory and optional parameters.
+</para>
+
+<para>The last Informal Working Draft that contained a sketch of the functionality
+(deleted by W20-012) was 39075_1IWD21-GQL_2022-02, which is available here:
+<URI active="yes">https://sd.iso.org/documents/ui/#!/browse/iso/iso-iec-jtc-1/iso-iec-jtc-1-sc-32/iso-iec-jtc-1-sc-32-wg-3/library/6/16656391_LL/16656048_LL/39075_1IWD21-GQL_2022-02.pdf
+</URI>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql247" number="GQL-247" kind="new_feat" size="XL">
+
+<brief area="Data model and catalog">Named queries
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W20-012.
+</source>
+
+<problem>
+
+<para>The ability to create, invoke, and drop named, stored queries is a powerful
+capability when building applications in a GQL database.
+This capability should be considered for a future GQL version.
+</para>
+
+<para>The last Informal Working Draft that contained a sketch of the functionality
+(deleted by W20-012) was 39075_1IWD21-GQL_2022-02, which is available here:
+<URI active="yes">https://sd.iso.org/documents/ui/#!/browse/iso/iso-iec-jtc-1/iso-iec-jtc-1-sc-32/iso-iec-jtc-1-sc-32-wg-3/library/6/16656391_LL/16656048_LL/39075_1IWD21-GQL_2022-02.pdf
+</URI>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql248" number="GQL-248" kind="new_feat" size="XL">
+
+<brief area="Data model and catalog">Named functions
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W20-013.
+</source>
+
+<problem>
+
+<para>The ability to create, call, and drop named, stored functions is a powerful
+capability when building applications in a GQL database.
+This capability should be considered for a future GQL version and should include both
+mandatory and optional parameters.
+As part of the consideration, there should be a discussion of whether GQL should support the
+definition and/or calling of pure functions, impure functions, or both.
+</para>
+
+<para>The last Informal Working Draft that contained a sketch of the functionality
+(deleted by W20-013) was 39075_1IWD21-GQL_2022-02, which is available here:
+<URI active="yes">https://sd.iso.org/documents/ui/#!/browse/iso/iso-iec-jtc-1/iso-iec-jtc-1-sc-32/iso-iec-jtc-1-sc-32-wg-3/library/6/16656391_LL/16656048_LL/39075_1IWD21-GQL_2022-02.pdf
+</URI>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql250" number="GQL-250" kind="new_feat" size="XL">
+
+<brief area="Data model and catalog">Named subgraphs
+</brief>
+
+<reference><specref ref="gql_conc_g"/>.
+</reference>
+
+<source>WG3:RKE-040.
+</source>
+
+<problem>
+
+<para>GQL should be extended to support subgraphs for the most needed use cases.
+</para>
+
+<para>Paper WG3:RKE-046 Subgraphs of property graphs provides some commentary on this topic.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql279" number="GQL-279" kind="feat_ext" size="M">
+
+<brief area="Pattern matching">Subpath variable references
+</brief>
+
+<reference><specref ref="gql_graph_patt_var_ref"/>.
+</reference>
+
+<noteAt><specref ref="gql_ber031_1"/>.
+</noteAt>
+
+<source>WG3:BER-031.
+</source>
+
+<problem>
+
+<para>It is a Language Opportunity to support references to subpath variables, for
+example, in <BNF name="graphical path length function" standard="9075" part="16"/>, or
+a TOTAL_COST function once CHEAPEST is defined.
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq085" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql281" number="GQL-281" kind="new_feat" size="L">
+
+<brief area="Data types and expressions">IEEE 754 Rounding modes
+</brief>
+
+<reference><specref ref="gql_conc_numeric_intro"/>.
+</reference>
+
+<source>WG3:BER-026.
+</source>
+
+<problem>
+
+<para>There is the opportunity to support the IEEE rounding modes.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql282" number="GQL-282" kind="port_feat" size="M">
+
+<brief area="Data types and expressions">IS BOUND
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:BER-026.
+</source>
+
+<problem>
+
+<para>SQL/PGQ has an IS BOUND predicate to test whether an element variable is bound
+(See WG3:W18-028).
+This predicate should be considered for GQL as an advanced conformance feature.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql283" number="GQL-283" kind="new_feat" size="L">
+
+<brief area="Data types and expressions">Ordered Set support
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:BER-038R1.
+</source>
+
+<problem>
+
+<para>An ordered set collection type that provides an ordered collection of distinguishable
+elements might be useful for GQL users.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql285" number="GQL-285" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Additional syntax for edge types
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:BER-040R3.
+</source>
+
+<problem>
+
+<para>Support for additional syntactic forms currently ruled out for
+<BNF name="edge reference value type"/> should be considered.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+</solution>
+
+</LO>
+
+
+<LO id="PPgql288" number="GQL-288" kind="new_feat" size="L">
+
+<brief area="Statements and clauses">MERGE (MATCH-or-INSERT)
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:BER-050.
+</source>
+
+<problem>
+
+<para>The ability to MERGE an <BNF name="insert graph pattern"/> into an existing graph would be
+useful to GQL users.
+</para>
+
+<para>See WG3:BER-089, <quote>Thoughts about MERGE</quote>, for a discussion of this topic.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql301" number="GQL-301" kind="feat_ext" size="M">
+
+<brief area="DDL">DROP with CASCADE and RESTRICT
+</brief>
+
+
+<reference><specref ref="gql_drop_graph"/>,
+<specref ref="gql_drop_graph_type"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BER-037.
+</source>
+
+<problem>
+
+<para>GQL DROP statements should be extended to support &lt;drop behavior> CASCADE and RESTRICT, 
+with RESTRICT specified as the default behavior and CASCADE specified as an optional advanced 
+conformance feature.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql304" number="GQL-304" kind="new_feat" size="L">
+
+<brief area="DDL">Syntax support for working with and managing persistent binding tables
+</brief>
+
+
+<reference><specref ref="gql_conc_bt"/>.
+</reference>
+
+<source>WG3:W22-031.
+</source>
+
+<problem>
+
+<para>It might be useful to allow the user to store a binding table as the result of a query,
+rather than necessarily transmitting the final binding table to the client.
+</para>
+
+<para>A stored binding table might subsequently be referenced as the original binding
+table of another procedure (instead of starting from just the unit binding table).
+Storing objects or references to objects might be prohibited, <ie/> a stored binding
+table might only be supported with columns of scalar data types.
+</para>
+
+</problem>
+
+<solution>
+
+<Alist>
+
+<item>GQL is a graph query language. 
+If users would like to work with the persisted tables, they are recommended to use a system that 
+supports SQL. 
+Implementations that support GQL and SQL can use procedures to facilitate the use case of loading 
+a persisted table at the beginning GQL query as the working table as illustrated by
+the following example:
+
+<code>
+    CALL readTable(<stringd>foo</stringd>) YIELD a,b,c
+    MATCH (n) WHERE n.x > c
+    <ellipsis/>
+</code>
+
+<para>Likewise they can facilitate the use case of persisting a GQL result by calling 
+a GQL procedure from SQL even inline as illustrated by the following example:
+</para>
+
+<code>
+    CREATE TABLE foo (a,b,c) AS (
+      USE myGraph
+      MATCH (n)-[k:KNOWNS]->(m)
+      RETURN n.name AS a, m.name AS b, k.since AS c
+    ) WITH DATA
+</code>
+
+</item>
+
+<item>If GQL would want to pick specifying persisted tables itself, loading a persisted
+table as working table could be achieved, <eg/> with a FROM clause similar to the GQL<apos/>s 
+<BNF name="use graph clause"/>:
+
+<code>
+    FROM foo
+    MATCH (n) WHERE n.x > c
+    <ellipsis/>
+</code>
+
+<para>For persisting, GQL would require something akin to SQL<apos/>s CREATE TABLE <ellipsis/> AS,
+for instance:
+</para>
+
+<code>
+    CREATE BINDING TABLE foo AS {
+      USE myGraph
+      MATCH (n)-[k:KNOWNS]->(m)
+      RETURN n.name AS a, m.name AS b, k.since AS c
+    }
+</code>
+
+</item>
+
+</Alist>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql306" number="GQL-306" kind="new_feat" size="XL">
+
+<brief area="Data model and catalog">Procedure libraries
+</brief>
+
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:W22-033.
+</source>
+
+<problem>
+
+<para>It could be very useful to have a mechanism for inserting a library of procedures, <etc/>
+in a GQL schema, along with the ability to reference and execute objects in the library.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql308" number="GQL-308" kind="feat_ext" size="M">
+
+<brief area="Statements and clauses">Path deletion
+</brief>
+
+<reference><specref ref="gql_delete"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W22-042.
+</source>
+
+<problem>
+
+<para>The ability to delete a path should be considered.
+</para>
+
+<para>WG3:W22-042 said that given the lack of consensus on the mental model of the ability to 
+delete a path removed this ability.
+It went on to say that:
+</para>
+
+<para>We can illustrate how this would work with an example. 
+Consider the following current working graph:
+</para>
+
+<code>
+    (:A)-[:S]->(:A)
+</code>
+
+<para>To delete all of the graph elements we could execute the following query:
+</para>
+
+<code>
+    MATCH (m)-[r]->(n)
+    DELETE r, m, n
+</code>
+
+<para>According to the original definition, the same effect would be achievable with 
+a path variable bound to a path of those same three elements:
+</para>
+
+<code>
+    MATCH p = (:A)-[:S]->(:A)
+    DELETE p
+</code>
+
+<para>As a path is a sequence of graph elements, the mental model this feature is assuming is that
+an instruction to delete a path is equivalent to an instruction to delete its constituent elements. 
+A problem with this assumed mental model, however, is that unlike graph elements a path is not 
+a persisted object. 
+Discussions have shown a lack of consensus on treating the deletion of a path in this way.
+For the user attempting to delete the constituent elements of a path, an alternative would be to
+acquire a reference to each element and then pass them directly to the 
+<BNF name="delete statement"/>. 
+This is not feasible, however, with variable-length paths. 
+In the future, value functions that return lists of nodes and edges for a given path may be 
+introduced. 
+In that case, as an example, the following query:
+</para>
+
+<code>
+    MATCH p = (:A)-[:S]->+(:A)
+    DELETE p
+</code>
+
+<para>would be re-writeable as:
+</para>
+
+<code>
+MATCH p = (:A)-[:S]->+(:A)
+FOR e IN edges(p)
+DELETE e
+FOR n IN nodes(p)
+DELETE n
+</code>
+
+<para>where edges and nodes are value functions returning from a path a list of edges and nodes
+respectively.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql309" number="GQL-309" kind="feat_ext" size="M">
+
+<brief area="Procedures">Named procedure parameters
+</brief>
+
+<reference><specref ref="gql_named_procedure_call"/>.
+</reference>
+
+<source>WG3:W22-054.
+</source>
+
+<problem>
+
+<para>The ability to specify named parameters in addition to sequentially ordered parameters 
+should be considered in future GQL versions.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql310" number="GQL-310" kind="feat_ext" size="M">
+
+<brief area="Procedures">Omitted intermediary optional procedure parameters
+</brief>
+
+<reference><specref ref="gql_named_procedure_call"/>.
+</reference>
+
+<source>Discussion of WG3:W22-054.
+</source>
+
+<problem>
+
+<para>The ability to omit intermediate optional parameters should be considered in future GQL 
+versions.
+That is the optionality should not be restricted to trailing optional parameters.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql319" number="GQL-319" kind="new_feat" size="L">
+
+<brief area="Data model and catalog">Specify and query metadata of graphs and graph types
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W22-034R1.
+</source>
+
+<problem>
+
+<para>It could be very useful to be able to specify and query metadata for graphs and graph types.
+One way to accomplish this is to have graph labels and properties that are specified when the 
+graph and/or graph type is created. 
+The graph properties could be accessed through a graph.graphProperty syntax. 
+Graph labels would require a <quote>label exists</quote> function. 
+Graph properties could be used for information such as graph creation time, a description of the 
+graph, <etc/>
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql325" number="GQL-325" kind="new_feat" size="L">
+
+<brief area="DDL">ALTER GRAPH TYPE
+</brief>
+
+<reference><specref ref="gql_create_graph"/>, 
+<specref ref="gql_create_graph_type"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:OHD-020.
+</source>
+
+<problem>
+
+<para>It is potentially beneficial to be able to create a Graph Type with no nodes or edges and
+then incrementally expand the Graph Type definition using an ALTER <kw>GRAPH</kw> 
+<kw>TYPE</kw> statement. 
+It would also be useful to allow <kw>CREATE</kw> <kw>GRAPH</kw> with an inline 
+<BNF name="nested graph type specification"/> to be created with an empty 
+<BNF name="nested graph type specification"/> and incrementally enhanced with ALTER <kw>GRAPH</kw> 
+statements. 
+It might also be useful to have explicit syntax such as EMPTY <kw>GRAPH</kw> <kw>TYPE</kw> to 
+allow the creation of an empty graph type for when a graph is created.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql328" number="GQL-328" kind="improv" size="L">
+
+<brief area="Data model and catalog">Remove distinction between schema and directory
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:OHD-032R1.
+</source>
+
+<problem>
+
+<para>The distinction between schema and directory seems unnecessary, or at least somewhat
+confusing. 
+For instance, since path traversal starts at the current schema rather than some notion of 
+current directory, all relative paths must start with ../ to move from the current schema to its 
+containing directory.
+Could not all be schemas, where one schema can contain other schemas? 
+This should allow lifting existing syntax restrictions for the schema reference syntax and 
+reduce the number of concepts required for the GQL-catalog.
+</para>
+
+<para>Some care would be needed to make it clear that a schema <symdef>S</symdef> contained in
+schema <sym>PARENT</sym> is an independent schema, not an extension of <sym>PARENT</sym>.
+GQL does not currently implement directory or schema access controls; if and when it does, and 
+if this LO is implemented, the notion of a schema TRAVERSAL access right (as opposed to a schema 
+READ access right) might be useful.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql329" number="GQL-329" kind="feat_ext" size="M">
+
+<brief area="DDL">Parameter support in CREATE and DROP
+</brief>
+
+<reference><specref ref="gql_create_schema"/>, <specref ref="gql_drop_schema"/>,
+<specref ref="gql_create_graph"/>, <specref ref="gql_drop_graph"/>,
+<specref ref="gql_create_graph_type"/>, <specref ref="gql_drop_graph_type"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:OHD-032R1.
+</source>
+
+<problem>
+
+<para>The create and drop schema, graph, and graph type statements might benefit from allowing 
+<BNF name="reference parameter specification"/> to specify the schema, graph, or graph type to 
+be created or dropped.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql330" number="GQL-330" kind="new_feat" size="XL">
+
+<brief area="Data model and catalog">Graph serialization format
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:OHD-033
+</source>
+
+<problem>
+
+<para>It is a language opportunity to provide either a normative specification of a graph
+serialization format or to provide guidance on graph serialization in a guidance standard.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql336" number="GQL-336" kind="feat_ext" size="S">
+
+<brief area="Transactions">Defaults for implementation-provided transaction access modes
+</brief>
+
+<reference><specref ref="gql_conc_tx_isolation"/>
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W23-033
+</source>
+
+<problem>
+
+<para>It is a language opportunity to provide some standard specifications for
+<BNF name="implementation-defined access mode"/> modeled on the existing SQL specifications.
+However, it should also recognize that since the time the SQL specifications were made there are
+more recently-defined levels such as Snapshot Isolation or Serializable Snapshot Isolation, or 
+other industrially-applied or theoretical variants.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql340" number="GQL-340" kind="new_feat" size="M">
+
+<brief area="Statements and clauses">Re-introduce MANDATORY MATCH
+</brief>
+
+<reference><specref ref="gql_match"/>. 
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W23-015.
+</source>
+
+<problem>
+
+<para>Some applications (such as recommender systems) require queries involving nodes with unique 
+IDs and expect the match statement to always return something to be processed for other queries. 
+Consider additional syntax to handle non-matched patterns and provide the user with a powerful
+facility to detect semantic errors and failing early in the case of errors, thus avoiding
+unnecessary work and providing good diagnostics regarding which pattern failed to match.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql342" number="GQL-342" kind="feat_ext" size="L">
+
+<brief area="Schema and metadata model">Allow unions between node types in edge type definitions
+</brief>
+
+<reference><specref ref="gql_edge_type_defn"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W24-027.
+</source>
+
+<problem>
+
+<para>It could be useful to allow endpoint definitions in an edge type definition to be
+patterns that potentially match multiple node type definitions within the graph type.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql343" number="GQL-343" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Allow use of element type names in value types
+</brief>
+
+<reference><specref ref="gql_edge_type_defn"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W24-027.
+</source>
+
+<problem>
+
+<para>It could be useful to allow <BNF name="node reference value expression"/>s and 
+<BNF name="edge reference value expression"/>s to resolve to existing node types and 
+edge types using node type names and edge type names. 
+Such a capability would need to identify a graph type where the node types and edge types 
+might be found, either through the graph type of the current working graph or through 
+identifying a schema and graph type.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql344" number="GQL-344" kind="improv" size="M">
+
+<brief area="Data types and expressions">Disallow distinct node and edge types with the same name
+</brief>
+
+<reference><specref ref="gql_node_type_defn"/>, <specref ref="gql_edge_type_defn"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W24-027.
+</source>
+
+<problem>
+
+<para>It could be useful to restrict node type names and edge type names to be in the 
+same namespace. 
+That is, node type names are unique in the set of node type and edge type names in 
+a graph type, and edge type names unique in the set of node type and edge type names in 
+a graph type.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql345" number="GQL-345" kind="new_feat" size="S">
+
+<brief area="Data types and expressions">INDEG and OUTDEG functions
+</brief>
+
+<reference><specref ref="gql_numvalfunc"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W24-023.
+</source>
+
+<problem>
+
+<para>It could be useful to have functions that return the number of edges pointing into 
+a node (INDEGREE) and the number of edges pointing out from a node (OUTDEGREE).
+Such functions should take into account undirected edges.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql346" number="GQL-346" kind="new_feat" size="M">
+
+<brief area="Data types and expressions">Comparison predicates with more than two argument 
+expressions
+</brief>
+
+<reference><specref ref="gql_comp"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W24-037.
+</source>
+
+<problem>
+
+<para>Comparison predicate rules could be extended in the future to support comparing more than
+two value expressions at the same time. 
+For instance, how would GQL handle the evaluation of 2&lt;3&lt;1.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql347" number="GQL-347" kind="new_feat" size="L">
+
+<brief area="System and execution model">Returning multiple outcomes when executing multiple
+requests
+</brief>
+
+<reference><specref ref="gql_program"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W24-024R1.
+</source>
+
+<problem>
+
+<para>WG3:W24-009 P00-WG3-077 suggests that it would be useful to allow the bundling of multiple 
+requests into one as a way of reducing network round trips. 
+This should include the capability for returning multiple results to the client in one round trip.
+One possibility is to introduce a new top-level Subclause &lt;GQL-multi-request&gt; next to 
+<BNF name="GQL-program"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql348" number="GQL-348" kind="port_ext" size="L">
+
+<brief area="Statements and clauses">SQL-like update syntax
+</brief>
+
+<reference><specref ref="gql_dml"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W24-024R1.
+</source>
+
+<problem>
+
+<para>WG3:W24-009 P00-WG3-102 suggests that according to the Working Draft<apos/>s philosophy of 
+equally supporting an SQL-flavored syntax for easier onboarding of SQL developers, it would be 
+beneficial to add data modification statements that are SQL-inspired.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Adding syntax that supports, for example:
+</para>
+<code>
+  DELETE v
+  FROM personGraph
+  MATCH (p:Person)-[v:VOTED_FOR]->(:Person)
+    WHERE p.age &lt; 18
+</code>
+<para>and
+</para>
+<code>
+  UPDATE p
+  SET p.teen = TRUE
+  FROM personGraph
+  MATCH (p:Person) WHERE p.age &lt; 18
+</code>
+<para>Both examples reuse the FROM clause of the <BNF name="select statement"/>.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql349" number="GQL-349" kind="improv" size="M">
+
+<brief area="Pattern matching">Testing whether conditional variables are bound
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W24-024R1.
+</source>
+
+<problem>
+
+<para>GQL could benefit from a predicate checking if a conditional variable is bound. 
+One can check it with what is already there, for example, if an element x has property a, one can 
+check (x.a=x.a) IS NOT NULL, but this is not a very natural way. 
+This could be useful in patterns such as [ (A)? -> [ (B) -> (C) WHERE A.X = B.X+C.X ] -> (D)]{2}. 
+In such patterns that appear to be allowed (see also comment WG3:W24-009 P00-WG3-144) one may want 
+to test in the WHERE clause whether A is bound.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql350" number="GQL-350" kind="new_feat" size="XL">
+
+<brief area="DDL">ALTER GRAPH TYPE and ALTER GRAPH
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W24-024R1, WG3:UTC-084.
+</source>
+
+<problem>
+
+<para>Support for ALTER GRAPH TYPE and ALTER GRAPH statements should be considered.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql353" number="GQL-353" kind="feat_ext" size="M">
+
+<brief area="Statements and clauses">Multiple <BNF name="for item"/>s
+</brief>
+
+<reference><specref ref="gql_for"/>.
+</reference>
+
+<source>WG3:UTC-088.
+</source>
+
+<problem>
+
+<para>Consider, in future versions of GQL, looking at the possibility of using multiple
+<BNF name="for item"/>s in a <BNF name="for statement"/> while providing more advanced capabilities,
+such as handling list of lists or record types within the <BNF name="for item"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql354" number="GQL-354" kind="new_feat" size="M">
+
+<brief area="Data types and expressions">Array indexing
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:UTC-127R1.
+</source>
+
+<problem>
+
+<para>SQL/Foundation defines &lt;array element reference&gt; to return the <symdef>i</symdef>-th
+element of an array. 
+A similar way of referencing the <sym>i</sym>-th element of a list should be considered.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql355" number="GQL-355" kind="new_feat" size="M">
+
+<brief area="Data types and expressions">LEAST and GREATEST
+
+</brief>
+<reference>No specific location.
+</reference>
+
+<source>WG3:UTC-127R1.
+</source>
+
+<problem>
+
+<para>SQL/Foundation defines GREATEST and LEAST operators.
+It needs to be decided if these additional operators should be included.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql356" number="GQL-356" kind="new_feat" size="XL">
+
+<brief area="Specification mechanics">Improve nullability inference by SRs
+</brief>
+
+<reference><specref ref="gql_conc_nullability_req"/>.
+</reference>
+
+<noteAt><specref ref="PPgql356_1"/>.
+</noteAt>
+
+<source>WG3:UTC-051.
+</source>
+
+<problem>
+
+<para>Syntax rules determining the declared type of sites should be revisited to improve
+and specify (where lacking) the inference of the nullability of those sites.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql358" number="GQL-358" kind="improv" size="XL">
+
+<brief area="Specification mechanics">Reduce use of immediate containment
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:UTC-106.
+</source>
+
+<problem>
+
+<comment>WG3:UTC-106</comment>
+<para>The document relies on immediate containment to a great extent.
+Experience in SQL suggests that immediate containment is very fragile and therefore to be avoided
+if possible.
+The document should be swept for instances of immediate containment that could
+be replaced by some more robust form of containment.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql359" number="GQL-359" kind="improv" size="L">
+
+<brief area="Editorial">Add more pretty figures and diagrams
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:UTC-106.
+</source>
+
+<problem>
+
+<comment>WG3:UTC-106</comment>
+<para>The document could benefit from some additional diagrams to clarify aspects of
+the specification.
+</para>
+
+<para>The following aspects have been suggested:
+</para>
+
+<olist>
+
+<item>There are a lot of things in GQL that could be considered some form of executable
+(programs, requests, commands, procedures, function, statements, query, and others).
+The document needs a hierarchical diagram laying out the hierarchy of those to make
+the concepts accessible to the reader.
+</item>
+
+<item>The current execution context, the current request context, and
+the current session context seem to form some kind of hierarchy.
+It might be nice to have a diagram showing the nesting of these contexts.
+</item>
+
+</olist>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql362" number="GQL-362" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Relax syntax constraints on value queries
+</brief>
+
+<reference><specref ref="gql_valquery"/>.
+</reference>
+
+<source>WG3:UTC-064.
+</source>
+
+<problem>
+
+<comment>WG3:UTC-064</comment>
+<para>The Syntax Rules of  <specref ref="gql_valquery"/> could be made more permissive with regard
+to the contained <BNF name="nested query specification"/> to allow for more subqueries that
+syntactically guarantee to return a binding table with one column and at most one record.
+Paper WG3:UTC-064 has a discussion of cases not covered in Syntax Rules introduced by this paper.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql364" number="GQL-364" kind="new_feat" size="M">
+
+<brief area="Data types and expressions">IS DISTINCT
+</brief>
+
+<reference><specref ref="gql_distinct_vals"/>. 
+</reference>
+
+<source>WG3:UTC-082R1.
+</source>
+
+<problem>
+
+<para>It would be appropriate to consider &lt;distinct predicate&gt; in future versions of GQL.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql365" number="GQL-365" kind="improv" size="M">
+
+<brief area="Editorial">GR classification by possible kinds of side effects 
+</brief>
+
+<reference>No specific location
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Email from: Stefan Plantikow, 2023-08-23 1327.
+</source>
+
+<problem>
+
+<para>Resolution of WG3:CMN-019 P00-USA-351 and P00-USA-353 has removed remaining uses of active 
+voice in General Rules.
+While alignment with WG3:SD-004 is appropriate, these changes also removed the use of active voice
+as a mechanism for indicating which General Rules modify the GQL-environment, GQL-data, or any of 
+the major kinds of contexts, <ie/> which General Rules perform side-effects. 
+However, being able to easily identify such General Rules seems desirable for the reader.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Develop a facility for the further (informative) classification of General rules as 
+catalog-modifying, data-modifying, <etc/>
+</para>
+
+<para>Classifications should be indicated on the rules (<eg/> by an informative note or some kind 
+of tag such as [DATA CHANGE]) as well as in an informative annex listing all rules with the same 
+classification.
+</para>
+
+<para>Expansion of this facility to certain kinds of SRs (type inference, type requirement, 
+rewrite, <ellipsis/>) and CRs (removal of surface syntax) could be considered.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql366" number="GQL-366" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Trimming of all whitespace characters
+</brief>
+
+<reference><specref ref="gql_charstrfunc"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP366"/>.
+</noteAt>
+
+<source>WG3:CMN-024.
+</source>
+
+<problem>
+
+<para>By default, the trim functions (TRIM, BTRIM, LTRIM, and RTRIM) remove leading and
+trailing space characters.
+When data might be copied and pasted, it is easy for a user to include whitespace characters other
+than spaces.
+While it is possible to specify a trim string that contains all whitespace characters, it is tedious
+to do so.
+It would be useful to include support for trimming whitespace in GQL.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql367" number="GQL-367" kind="improv" size="XL">
+
+<brief area="Specification mechanics">ANTLR4-compatible grammar
+</brief>
+
+<reference>Artifact, bnf.txt
+</reference>
+
+<source>WG3:CMN-064
+</source>
+
+<problem>
+
+<para>From GQL DIS comment P00-NLD-044, ANTLR4 is a well-known parser generator and there is
+already known interest in an ANTLR4 version of the GQL syntax.
+(See <URI>https://github.com/TuGraph-family/gql-grammar</URI>).
+</para>
+
+<para>An ANTLR4 version of the GQL syntax should be developed and possibly replace
+the existing <mono>gql-standard.bnf.txt</mono> artifact.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql368" number="GQL-368" kind="improv" size="M">
+
+<brief area="Specification mechanics">Consider removal of aliasing BNF non-terminal definitions
+</brief>
+
+<reference><specref ref="gql_stm_comp_query_stm"/>.
+</reference>
+
+<source>WG3:CMN-064.
+</source>
+
+<problem>
+
+<para>From GQL DIS comment P00-USA-362, Is any purpose served by a subclause whose
+only BNF is:
+</para>
+
+<code>
+&lt;A&gt; ::= &lt;B&gt;?
+</code>
+
+<para>Can we simplify by just deleting one of these two BNF non-terminals?
+Note that the SRs and GRs do not add value, they merely pass along the static and
+the dynamic information from one BNF non-terminal to the other. 
+Perhaps one of these BNF non-terminals can be eliminated and their subclauses consolidated
+into one.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql369" number="GQL-369" kind="improv" size="S">
+
+<brief area="Specification mechanics">Consolidation of BNF non-terminals for synonyms
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<source>WG3:CMN-064.
+</source>
+
+<problem>
+
+<para>From GQL DIS comment P00-USA-208, Consolidation of all BNF non-terminals for defining synonyms
+(<eg/> <kw>GRAPH</kw> <kw>PROPERTY</kw> and <kw>GRAPH</kw>) in a dedicated Subclause
+should be considered and all such synonyms should be used consistently.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql370" number="GQL-370" kind="new_feat" size="XL">
+
+<brief area="Data types and expressions">Native JSON type
+</brief>
+
+<reference><specref ref="gql_conc_dt"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:CMN-057R1.
+</source>
+
+<problem>
+
+<para>GQL should add a native JSON data type the same way SQL has done. 
+It has been objected that JSON originally was for data communication, not data storage. 
+However, users have come to expect to store and manipulate JSON values in databases. 
+The relationship between GQL<apos/>s native support for nested data using records and list values 
+and such a JSON data type needs to be determined.
+</para>
+
+<para>See also <PPref ref="PPgql462"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql371" number="GQL-371" kind="feat_ext" size="L">
+
+<brief area="Data types and expressions">Mixed duration type
+</brief>
+
+<reference><specref ref="gql_value_type"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP371"/>.
+</noteAt>
+
+<source>WG3:CMN-048.
+</source>
+
+<problem>
+
+<para>Consider support for a mixed duration type that supports the full breadth of durations found
+in ISO 8601 and in current programming languages (such as the upcoming extension currently in
+development for ECMA JavaScript).
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql373" number="GQL-373" kind="improv" size="M">
+
+<brief area="Editorial">Improve naming of non-terminals for literals
+</brief>
+
+<reference><specref ref="gql_literals"/>.
+</reference>
+
+<noteAt><specref ref="gql_LO373"/>.
+</noteAt>
+
+<source>WG3:W26-023.
+</source>
+
+<problem>
+
+<para>The naming of some literal BNF terms should be reconsidered.
+</para>
+
+<para>Why is <BNF name="literal"/> not called &lt;signed literal&gt;. 
+Or conversely, why is <BNF name="signed numeric literal"/> not called just 
+&lt;numeric literal&gt;. 
+Or, why is <BNF name="unsigned literal"/> not called <BNF name="literal"/>. 
+What makes the signed the default and unsigned the special case? 
+Why does this default not happen for numeric literals?
+</para>
+
+<para>In the GQL language, unsigned literals appear to be the more regular case. 
+Any literal occurring an expression is generated via <BNF name="unsigned literal"/>. 
+<BNF name="literal"/> has only use in rules and in <BNF name="value specification"/> which itself 
+has only use in two Conformance Rules (outside its own Subclause).
+</para>
+
+<para>In many widely used programming languages numeric literals are unsigned, <cf/>
+</para>
+
+<ulist>
+
+<item>C: https://en.cppreference.com/w/c/language/integer_constant
+</item>
+
+<item>C++: https://en.cppreference.com/w/cpp/language/integer_literal 
+</item>
+
+<item>Haskell:  https://www.haskell.org/onlinereport/haskell2010/haskellch2.html#x7-190002.5 
+</item>
+
+<item>Java: https://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-IntegerLiteral
+</item>
+
+<item>JavaScript: https://262.ecma-international.org/#prod-NumericLiteral 
+</item>
+
+<item>Python: https://docs.python.org/3/reference/lexical_analysis.html#numeric-literals
+</item>
+
+</ulist>
+
+<para>In other words, it appears to be the widely used norm that a literal is by default 
+unsigned and that a signed literal is the special case.
+</para>
+
+<para>Note that this comment is solely about the naming of these non-terminals, not about their 
+productions.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql374" number="GQL-374" kind="new_feat" size="L">
+
+<brief area="System and execution model">Nested transactions and step-wise request
+execution and rollback
+</brief>
+
+<reference><specref ref="gql_conc_tx_demarcation"/>.
+</reference>
+
+<noteAt><specref ref="gql_LO374"/>.
+</noteAt>
+
+<source>WG3:W26-032R1.
+</source>
+
+<problem>
+
+<para>In SQL, if a statement terminates with an exception, the transaction will still be active
+and not rolled back.
+The action of the SQL-statement is rolled back, but prior successful statements
+are not rolled back.
+It would be beneficial, in a future version of GQL, to introduce the notion of nested transactions,
+and a <quote>step-wise</quote> transaction mode that automatically runs each request in
+subtransactions.
+Hence, in case of failure only statements within a subtransaction would be rolled back.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql375" number="GQL-375" kind="improv" size="M">
+
+<brief area="Editorial">Split Subclause on literals
+</brief>
+
+<reference><specref ref="gql_literals"/>.
+</reference>
+
+<noteAt><specref ref="gql_W26_026_1"/>.
+</noteAt>
+
+<source>WG3:W26-026R2.
+</source>
+
+<problem>
+
+<para>The <specref ref="gql_literals"/> is very long and would benefit from factoring out larger
+groups of types (<eg/> numerics, strings, temporals, constructed types).
+Similar considerations apply to <specref ref="gql_value_type"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql376" number="GQL-376" kind="new_feat" size="L">
+
+<brief area="Data types and expressions">Partial (half-open) types and width-subtyping of records
+</brief>
+
+<reference><specref ref="gql_conc_dt"/>.
+</reference>
+
+<noteAt><specref ref="gql_W26_026_2"/>.
+</noteAt>
+
+<source>WG3:W26-026R2.
+</source>
+
+<problem>
+
+<para>Subtyping in GQL is currently defined in terms of set inclusion. 
+Modern type theory has shifted to a model of substitutability instead in order to naturally model 
+features such as width-subtyping of records.
+</para>
+
+<para>It should be investigated, if GQL<apos/>s combination of set inclusion-subtyping amended 
+with optional implicit conversions provided by individual operators and assignability can be
+compatibly redefined in terms of substitutability instead. 
+The main motivation for this currently is the desire to support width-subtyping of records and, 
+possibly, other future <quote>partially open</quote> types (such as <quote>partially open</quote> 
+node and edge types).
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql377" number="GQL-377" kind="improv" size="M">
+
+<brief area="Editorial">Clause 3 and Clause 4 term definition clean-up
+</brief>
+
+<reference><specref ref="gql_definitions"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W26-035.
+</source>
+
+<problem>
+
+<para>There are too many terms in Clause 3.
+</para>
+
+<para>Many of these are also defined in Clause 4.
+This leads to different definitions of the same term, sometimes because of the restrictions on 
+the format of definitions in Clause 3.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Terms which are also defined in Clause 4 should generally be eliminated from Clause 3. 
+If it is felt absolutely necessary to also have the terms in Clause 3, then the
+definition in Clause 4 should be of the form: A <emph>term</emph> is defined in 
+<specref ref="gql_definitions"/>, as <emph>definition</emph>. 
+Where <emph>term</emph> is the term being defined and <emph>definition</emph> is the definition 
+copied from Clause 3. 
+The entire sentence should be generated by specific mark-up to avoid divergence of definitions.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql378" number="GQL-378" kind="new_feat" size="XL">
+
+<brief area="Schema and metadata model">Universal graph type system
+</brief>
+
+<reference><specref ref="gql_graph_type"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W26-038R1.
+</source>
+
+<problem>
+
+<para>Graph types are defined in <BNF name="create graph type statement"/> and other 
+BNF non-terminal contained within.
+These encompass concepts such as:
+</para>
+
+<ulist>
+
+<item>key label sets,
+</item>
+
+<item>element type identification restrictions,
+</item>
+
+<item>end-point node types,
+</item>
+
+<item>structural consistency matters, and
+</item>
+
+<item>property value type consistency matters.
+</item>
+
+</ulist>
+
+<para>However, these specifications are within a graph type scope.
+In daily use, GQL will make extensive reuse of graph elements, including the constructs
+described above, across (possibly) many graph types.
+This requires a <quote>universal</quote> abstract graph type system and a target graph type. 
+It also requires that GQL properties to be directly referenceable as such in combination with 
+other graph elements, including other properties, edges, relationships and graphs.
+</para>
+
+<para>This is also the case for other GQL language opportunities. 
+See also <PPref ref="PPgql241"/>, <PPref ref="PPgql242"/>, <PPref ref="PPgql243"/>, and 
+<PPref ref="PPgql241"/>.
+And see also paper WG3:W26-022R1.
+</para>
+
+<para>There are some industry and academic papers about such constructs using the terms
+<quote>canonical form</quote> and <quote>graph normal form</quote>.
+</para>
+
+<figure id="gql_PPgql378_fig" file="gql_PPgql378_fig.svg" padding-after="10pt" width="5.0in">
+<figureTitle>Metagraph</figureTitle>
+</figure>
+
+<para>The metagraph in <specref ref="gql_PPgql378_fig"/> is the backbone for the coming 
+GQL information schema graph, it needs not to be stored as a graph (certainly a good idea though),
+the metadata will mostly be generated from the schema syntax and the presentation may be along the 
+LPG paradigms.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql379" number="GQL-379" kind="new_feat" size="S">
+
+<brief area="Data types and expressions">Generic length expression
+</brief>
+
+<reference><specref ref="gql_numvalfunc"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP379"/>.
+</noteAt>
+
+<source>WG3:W26-037R3.
+</source>
+
+<problem>
+
+<para>Support for a generic <BNF name="length expression"/> LENGTH(<ellipsis/>), in the same spirit
+as the <BNF name="cardinality expression"/>, should be considered.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql380" number="GQL-380" kind="new_feat" size="S">
+
+<brief area="Data types and expressions">Node, edge, element set cardinality functions for graphs
+</brief>
+
+<reference><specref ref="gql_numvalfunc"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP380"/>.
+</noteAt>
+
+<source>WG3:W26-037R3.
+</source>
+
+<problem>
+
+<para>Support for determining the cardinalities of element, node, and edge sets of graphs
+referenced by graph reference values should be added (possibly by expanding the
+<BNF name="cardinality expression"/>).
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql381" number="GQL-381" kind="improv" size="S">
+
+<brief area="Specification mechanics">Move GRs for determining the values of literals to SRs
+</brief>
+
+<reference><specref ref="gql_literals"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP381"/>.
+</noteAt>
+
+<source>WG3:W26-023.
+</source>
+
+<problem>
+
+<para>The values specified by <BNF name="literal"/>s are currently determined by their 
+General Rules. 
+Instead, such values should be specified by Syntax Rules and then a corresponding 
+General Rule should simply return the specified value of each <BNF name="literal"/> literal>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql382" number="GQL-382" kind="feat_ext" size="S">
+
+<brief area="Data types and expressions">Extend aggregation functions to operate on temporal values
+</brief>
+
+<reference><specref ref="gql_aggregate_func"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP382"/>.
+</noteAt>
+
+<source>WG3:W26-036.
+</source>
+
+<problem>
+
+<para>The data aggregation functions <kw>SUM</kw> and <kw>AVG</kw> currently operate only on 
+numeric types. 
+It would be useful to also be able to apply <kw>SUM</kw> and <kw>AVG</kw> (and other data 
+aggregation functions) to temporal duration types.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPgql388" number="GQL-388" severity="minor" realm="editorial">
+
+<brief area="Editorial"><specref ref="gql_procedure_body"/>, 
+GR <itemref ref="gql_procedure_body_GR3bi"/> must use the &lt;applySC&gt; mark-up
+</brief>
+
+<reference><specref ref="gql_procedure_body"/>.
+</reference>
+
+<noteAt><specref ref="gql_PPgql388"/>.
+</noteAt>
+
+<source>Editor.
+</source>
+
+<problem>
+
+<para><itemref ref="gql_procedure_body_GR3bi"/> must use the &lt;applySC&gt; markup.
+This requires adding a signature to <specref ref="gql_yield"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql391" number="GQL-391" severity="major" realm="technical">
+
+<brief area="Data types and expressions">Lack of local type aliases
+</brief>
+
+<reference><specref ref="gql_node_type_defn"/>.
+</reference>
+
+<noteAt><specref ref="gql_PPgql391"/>.
+</noteAt>
+
+<source>LDBC GQL-IP-008.
+</source>
+
+<problem>
+
+<para>Explicit type name for node or edge type prevents definition of local type alias, but 
+edge spec requires a programmer to know what the alias is, which is hard if the system generates it.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Allow aliases for named types, and default aliases to the type name when not supplied.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql392" number="GQL-392" severity="minor" realm="editorial">
+
+<brief area="Editorial">Invalid use of the term <quote>formal semantics</quote>
+</brief>
+
+<reference><specref ref="gql_conc_graph_patt_match_path_patt_match"/>.
+</reference>
+
+<noteAt><specref ref="gql_PPgql392_1"/> and <specref ref="gql_PPgql392_2"/>.
+</noteAt>
+
+<source>LDBC GQL-IP-009.
+</source>
+
+<problem>
+
+<para><specref ref="gql_reject_pb"/> and <specref ref="gql_inf_sets"/> refer to 
+<quote>formal semantics</quote>. 
+It is not clear what formal semantics means. 
+It does not mean the formal semantics as it would be meant conventionally in CS 
+(denotational, operational, axiomatic).
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq099" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Edit as follows:
+</para>
+
+<para>the <strikethrough>formal semantic</strikethrough> stepwise presentation of the semantics 
+specified in <specref ref="gql_eval_path_pattern_expr"/>.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql393" number="GQL-393" severity="minor" realm="editorial">
+
+<brief area="Editorial">Invalid example in informative note
+</brief>
+
+<reference><specref ref="gql_conc_graph_patt_match_path_mode"/>.
+</reference>
+
+<noteAt><specref ref="gql_PPgql393"/>.
+</noteAt>
+
+<source>LDBC GQL-IP-010.
+</source>
+
+<problem>
+
+<para>Pattern in <specref ref="gql_path_mode_hier"/> is inconsistent with the text.
+The pattern ()-()-() cannot be matched in a graph ()~[]~().
+The pattern ()-[]-() can be. 
+Is that what was intended?
+</para>
+
+<para>Linked to <ExtPPref ref="PPpgq100" standard="9075" part="16"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<LO id="PPgql394" number="GQL-394" kind="improv" size="L">
+
+<brief area="Data model and catalog">Unify GQL-directory and GQL-schema
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>LDBC GQL-IP-001.
+</source>
+
+<since>2024-05-05.
+</since>
+
+<problem>
+
+<para>Remove the concept of a GQL-schema, and allow GQL-directory to be a root, inner or leaf node 
+of the  GQL-catalog hierarchy. 
+This would make the usage of a catalog exactly analogous to the usage of a file system. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql395" number="GQL-395" kind="improv" size="S">
+
+<brief area="Editorial">Improve figure on GQL-catalog</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>LDBC GQL-IP-003.
+</source>
+
+<since>2024-05-05.
+</since>
+
+<problem>
+
+<para>Illustrate relationship between GQL-schema and GQL-data.
+Augment informative <specref ref="gql_cat_diag"/> to show the association between primary catalog 
+objects and primary data objects.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql396" number="GQL-396" kind="new_feat" size="M">
+
+<brief area="Data model and catalog">Map catalog to IRIs
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>LDBC GQL-IP-004.
+</source>
+
+<since>2024-05-05.
+</since>
+
+<problem>
+
+<para>Define ways of using IRIs to uniquely identify a GQL catalog, such that catalog or data 
+objects can have universally unique identifiers.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql397" number="GQL-397" kind="improv" size="M">
+
+<brief area="Editorial">Favor use of <quote>content</quote> over <quote>filler</quote>
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>LDBC GQL-IP-006.
+</source>
+
+<since>2024-05-05.
+</since>
+
+<problem>
+
+<para>Stop saying <quote>filler</quote>, start saying <quote>content</quote>.
+<BNF name="node type implied content"/> points the way. 
+<quote>Content</quote> is widely used in the LDBC discussions on <eg/> schema. 
+Elements are objects with identity and content. 
+Labels + properties = content. 
+Keys imply the rest of the content. 
+Therefore, node types have content types, ditto edge types – they have 
+&gt;<ellipsis/> content type>, not &gt;<ellipsis/> filler>. 
+Insert patterns have insert content, match patterns have match content, not filler. 
+Use these terms in BNF NTs and it will help clarify the meaning and context of these parts of the 
+grammar. 
+It will also reinforce the point that DDL is type patterns, DML is insert patterns, 
+GPML is match patterns. 
+</para>
+
+</problem>
+
+<solution>
+
+<para>Replace &lt;<ellipsis/> filler> with 
+&lt;<ellipsis/> content type> in BNF non-terminals for element types.
+</para>
+
+<para>Replace &lt;<ellipsis/> filler> with 
+&lt;<ellipsis/> content> in BNF non-terminals for match and insert patterns. 
+</para>
+
+<para>Replace &lt;implied content> with &lt;implied content type>.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql398" number="GQL-398" kind="improv" size="S">
+
+<brief area="Data model and catalog">Clarify notion of empty catalog
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>LDBC GQL-IP-011.
+</source>
+
+<since>2024-05-09.
+</since>
+
+<problem>
+
+<para>In <specref ref="gql_conc_env_gendescr"/>, the fourth bullet is:
+</para>
+<ulist>
+<item>One GQL-catalog that comprises one GQL-catalog root. 
+<emph>A GQL-catalog that comprises only the GQL-catalog root is considered to be empty</emph>.
+The GQL-catalog is not required to be empty after the instantiation of the GQL-environment.
+</item>
+</ulist>
+<para>However, in <specref ref="gql_schema_refs"/> we read:
+</para>
+<olist>
+<item>If the <BNF name="schema reference"/> <symdef>SR</symdef> is specified, then the GQL-schema
+identified by <sym>SR</sym> is the GQL-schema identified by the immediately contained
+<BNF name="absolute catalog schema reference"/> or <BNF name="relative catalog schema reference"/>.
+</item>
+<item>If the <BNF name="absolute catalog schema reference"/> <symdef>ACSR</symdef> is specified,
+then
+<para>Case:
+</para>
+<olist>
+<item><emph>If <sym>ACSR</sym> is a <BNF name="solidus"/>, then:</emph>
+<olist>
+<item><emph>The GQL-catalog root shall be a GQL-schema</emph>.
+</item>
+<item><emph>The GQL-schema identified by <sym>ACSR</sym> is the GQL-catalog root</emph>.
+</item>
+</olist>
+</item>
+</olist>
+</item>
+</olist>
+<para>In <specref ref="gql_conc_env_schema"/>, there is a paragraph:
+</para>
+
+<para>A GQL-implementation may automatically populate a GQL-schema upon its creation in
+an <impDef code="IW016"/> way.
+</para>
+
+<para>Further, one cannot CREATE SCHEMA /. 
+But it is possible to refer to a schema AT /.
+</para>
+
+<para>Summary: there is nothing to attach an <impDef code="None" annex="no"/> schema to 
+a <quote>root schema</quote>. 
+The idea of a root schema (a GQL-catalog that is a GQL-schema) is contradicted by the idea that 
+a catalog containing only a root is empty.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Introduce an <quote>ambient (focused) schema</quote> analogous to the concepts of 
+an <quote>ambient (focused) graph</quote>. 
+If an implementation conjures up a schema on loading the environment, then such an ambient schema 
+should be considered as mutually exclusive of the ability to create or refer to a schema via 
+a catalog path (a focused schema). 
+An ambient schema may be referred to by  AT CURRENT_SCHEMA but not by AT .
+or AT /. 
+If there is a catalog, then it should be possible to create a schema [or primary catalog objects, 
+as per <PPref ref="PPgql394"/> (GQL-IP 001)] in the root, but not as the root. 
+If there is a catalog, then the root should always be present, and it should be a directory.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql399" number="GQL-399" kind="new_feat" size="L">
+
+<brief area="Specification mechanics">Well-defined GQL variants
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>LDBC GQL-IP-012.
+</source>
+
+<since>2024-05-09.
+</since>
+
+<problem>
+
+<para>Introduce two explicit conformance features:
+</para>
+<ulist>
+<item>GGnn GG03 Without catalog (ambient schema)
+</item>
+<item>GGmm GG04 With catalog (focused schema)
+</item>
+</ulist>
+<para>At present it is not possible to clearly delineate Core GQL variants, as an implementation 
+may conjure up a schema outside a catalog or where it is considered to be the root in some sense).
+</para>
+
+<para>This Language Opportunity depends on <PPref ref="PPgql398"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql400" number="GQL-400" kind="new_feat" size="L">
+
+<brief area="Specification mechanics">Define GQL Core language
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>LDBC GQL-IP-013.
+</source>
+
+<since>2024-05-09.
+</since>
+
+<problem>
+
+<para>Introduce term <quote>Core GQL</quote> as synonym for mandatory conformance features.
+Introduce human-readable descriptions of permitted Core GQL variants 
+(assuming <PPref ref="PPgql398"/> [GQL-IP 011] is agreed), with acronyms
+</para>
+<para>Core GQL With graph types, With catalog (GG02, GG04) – <bold>Core GQL+TC</bold>
+</para>
+<para>Core GQL Without graph types, Without catalog (GG01, GG03) – <bold>Core GQL</bold>
+</para>
+<para>Core GQL With graph types, Without catalog (GG02, GG03) – <bold>Core GQL + T</bold>
+</para>
+<para>Core GQL Without graph types, With catalog (GG01, GG04) – <bold>Core GQL + C</bold>
+</para>
+
+<para>This Language Opportunity depends on <PPref ref="PPgql399"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql401" number="GQL-401" kind="new_feat" size="XL">
+
+<brief area="Statements and clauses">Graph projection and construction</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Editor.
+</source>
+
+<since>2024-06-09
+</since>
+
+<problem>
+
+<para>Initial versions of GQL included the capability for dynamically projecting graphs
+without recourse to data-modifying statements.
+This baseline functionality enabled graph-returning queries whose result was either
+a (new) graph snapshot or a (derived) graph view. 
+</para> 
+
+<para>GQL is currently lacking such functionality.
+It has been argued that this is a major omission that prevents GQL from being
+a fully graph-composable language.
+Further, failing to support use cases requiring such a feature, ultimately will negatively impact 
+adoption.
+</para>
+
+<para>For prototypical designs regarding this feature, consider:
+</para>
+
+<ulist>
+
+<item>Early designs made in the context of openCypher:
+<URI active="yes">https://git.io/fjmrx</URI>
+</item>
+
+<item>CONSTRUCT in SPARQL:
+<URI active="yes">https://www.w3.org/TR/sparql11-query/#construct</URI>
+</item>
+
+</ulist>
+
+<para>The inclusion of functionality for the dynamic projection of graph snapshots and
+graph views should be strongly considered in the next version of GQL.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql402" number="GQL-402" kind="new_feat" size="M">
+
+<brief area="Data types and expressions">String interpolation
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Editor.
+</source>
+
+<since>2024-06-10
+</since>
+
+<problem>
+
+<para>Many programming languages contain facilities for string interpolation, <ie/>
+make it easy to construct a character string value whose content is partially generated
+from values of other data types (such as numbers).
+</para>
+
+<para>String interpolation is commonly provided via a syntactic approach that is highly
+readable and prevents accidental misgeneration of character strings (<ie/> help to avoid so-called
+injection attacks). 
+Further, string interpolation may play a role in the generation of input to LLMs that is
+derived from graph data.
+</para>
+
+<para>Addition of a string interpolation facility should be considered for GQL.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPgql403" number="GQL-403" severity="major" realm="technical">
+
+<brief area="Data types and expressions"><specref ref="gql_node_type_defn"/>, 
+<itemref ref="gql_node_type_defn_SR_local_node_type_alias" type="SR"/> misses a Syntax Rule
+</brief>
+
+<reference><specref ref="gql_node_type_defn"/>.
+</reference>
+
+<noteAt><specref ref="gql_PPgql391"/>.
+</noteAt>
+
+<source>Neo4j LANGSTAR.
+</source>
+
+<problem>
+
+<para><specref ref="gql_node_type_defn"/>, 
+<itemref ref="gql_node_type_defn_SR_local_node_type_alias" type="SR"/> misses a rule for 
+the case where a <BNF name="node type name"/> is given instead of 
+a <BNF name="local node type alias"/>. 
+Something like:
+</para>
+
+<lbllist>
+<lblitem label="b)">If <sym>ANTS</sym> simply contains a <BNF name="node type name"/> 
+<symdef>NTN</symdef>, then the local node type alias of <sym>ANTS</sym> is the name specified by 
+the <BNF name="identifier"/> that constitutes <sym>NTN</sym>.
+</lblitem>
+</lbllist>
+
+<para>This is needed for examples like:
+</para>
+
+<code>
+NODE TYPE Person ({name :: STRING}),
+
+NODE TYPE City ({name :: STRING}),
+
+DIRECTED EDGE TYPE LIVES_IN CONNECTING Person TO City
+</code>
+
+<para>to work. 
+Such example are given in large number in [WG3:W26-022r2], <eg/> SET-ETN-PE-1 and following. 
+Hence, this clearly was intended to work and it is bug in the rules put in by [WG3:W26-022r2].
+</para>
+
+<para>Side remark: <BNF name="local node type alias"/> is limited to 
+a <BNF name="regular identifier"/> while <BNF name="node type name"/> is not. 
+However, <quote>the <emph>local node type alias</emph> of 
+a <BNF name="node type specification"/></quote> 
+is not a name, <ie/> with any escaping and delimiting removed. 
+Hence, this difference between <BNF name="local node type alias"/> and <BNF name="node type name"/> 
+does not matter.
+</para>
+
+<para>[This is the minimal necessary bug fix to address LEX-61, GQL-IP-008. 
+GQL-IP-008 also proposes a relaxation of <specref ref="gql_node_type_defn"/>, 
+<itemref ref="gql_node_type_defn_SR_node_type_name" type="SR"/>, concretely the 
+removal of <itemref ref="gql_node_type_defn_SR_node_type_alias" type="SR"/>. 
+This is beyond [WG3:W26-022r2], hence it is an LO.]
+</para>
+
+<para>See also <PPref ref="PPgql391"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql406" number="GQL-406" severity="minor" realm="technical">
+
+<brief area="Specification mechanics">Ill-defined use of
+<quote>A is B</quote>
+</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Neo4j LANGSTAR.
+</source>
+
+<problem>
+
+<para>Observation: We are using <quote>A is B</quote> in the meaning of <quote>A simply contains 
+B and A does not simply contain any C that is not contained in B nor intervening between 
+A and B</quote>. 
+Note that this meaning works over production rules that can cause the instance tree to branch, 
+<eg/> &lt;A> ::= &lt;B> [ &lt;C> ]. 
+This meaning of <quote>to be</quote> is on non-terminal instance level — so to speak.
+</para>
+
+<para>However, <specref ref="gql_containment"/>, defines <quote>to be</quote> more strict because 
+it requires a production rules &lt;A> ::= &lt;B>, <ie/> that the possibility of a C is already 
+ruled out be the grammar. 
+The definition does not apply to production rules like &lt;A> ::= &lt;B> [ &lt;C> ]. 
+</para>
+
+<para>The defined meaning of <quote>to be</quote> is non-terminal level — so to speak.
+</para>
+
+<para>Since no one has complained about this, I wonder if the definition is simply disconnected 
+from how it is generally understood. 
+This requires finding examples not written by us, though. 
+If it demonstrates to be correct, it may be good to adjust the definition.
+</para>
+
+<para>If the misunderstanding is just on our part, it would be good it introduce a non-terminal 
+instance level <quote>to be</quote> because it is damn useful.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<LO id="PPgql413" number="GQL-413" kind="improv" size="S">
+
+<brief area="Data types and expressions">Relax restrictions on <BNF name="node type specification"/>
+</brief>
+
+<reference><specref ref="gql_node_type_defn"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Neo4j LANGSTAR.
+</source>
+
+<since>2024-07-15.
+</since>
+
+<problem>
+
+<para>LDBC LEX-61 GQL-IP-008 identifiers a missing rule in <specref ref="gql_node_type_defn"/>, 
+which is documented as a separate possible problem.
+</para>
+
+<para>GQL-IP-008 also proposes a relaxation of <specref ref="gql_node_type_defn"/>, 
+<itemref ref="gql_node_type_defn_SR_node_type_name" type="SR"/>, concretely the removal of 
+<itemref ref="gql_node_type_defn_SR_node_type_alias" type="SR"/>. 
+</para>
+
+<para>This is beyond [WG3:W26-022r2], hence it is an LO.
+</para>
+
+<para>See also <PPref ref="PPgql391"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql414" number="GQL-414" kind="feat_ext" size="S">
+
+<brief area="DDL">Syntax short-hand: CREATE GRAPH myGraph
+</brief>
+
+<reference><specref ref="gql_create_graph"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Neo4j LANGSTAR.
+</source>
+
+<since>2024-07-15
+</since>
+
+<problem>
+
+<para>In <specref ref="gql_create_graph"/>, the BNF for <BNF name="open graph type"/> is:
+</para>
+
+<grammar discussion="yes">
+<BNFdef name="open graph type">
+<rhs>
+<opt> <BNF name="typed"/> </opt> <kw>ANY</kw> <opt> 
+<opt> <kw>PROPERTY</kw> </opt> <kw>GRAPH</kw> </opt>
+</rhs>
+</BNFdef>
+</grammar>
+
+<para>With this BNF, creating an open graph requires a minimal syntax of:
+</para>
+
+<code>
+<kw>CREATE</kw> <kw>GRAPH</kw> MyGraph <kw>ANY</kw>
+</code>
+
+<para>It might be possible to make the entire production optional and add a syntax rule specifying 
+that a zero-length <BNF name="open graph type"/> implies ANY. 
+This would allow a minimal syntax of:
+</para>
+
+<code>
+<kw>CREATE</kw> <kw>GRAPH</kw> MyGraph
+</code>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPgql415" number="GQL-415" severity="major" realm="technical">
+
+<brief area="Data types and expressions">Ensure type lattice of each base type can be closed by 
+union types
+</brief>
+
+<reference><specref ref="gql_stat_combo_vts"/>.
+</reference>
+
+<noteAt><specref ref="gql_PPgql415"/>.
+</noteAt>
+
+<source>Email from Stefan Plantikow, 2024-09-18 13:40.
+</source>
+
+<problem>
+
+<para>All value types defined by the standard form a lattice with uniquely defined upper and 
+lower bounds for any finite set of value types as well both a top (ANY) and 
+a bottom (NOTHING) type. 
+However, some of the data types inherited from <SQL/> do not guarantee the existence of 
+upper bounds among the types of the same static base type.
+</para>
+
+<para>As a consequence of this, static value type combination is currently forced to pick some 
+arbitrary type that is not a proper upper bound for certain inputs. 
+Further, this design prevents implementations with support for dynamic union types to naturally 
+close per-base type sublattices by generating an appropriate dynamic union type via general value 
+type combination.
+</para>
+
+<para>This unnecessarily complicates and restricts implementations interested in providing 
+dynamic union type support. 
+A possible solution would be to allow implementations to fail in static value type combination 
+where no common upper bound exists for the given inputs in a respective static base type. 
+This relaxation of the current regime would then enable general value type combination to close 
+the lattice by producing the closed dynamic union type of the inputs.
+</para>
+
+<para>This issue in a narrow sense needs to be solved for numeric types.
+</para>
+
+<para>More broadly, for certain kinds of types, the current rules of static value type 
+combination are unnecessarily broad, forcing the return of base type-specific supertypes where 
+a more specific union type would be available in certain implementations. 
+This should be reviewed regarding whether the return of union types could be considered 
+permissible, too. 
+From a quick look at <specref ref="gql_stat_combo_vts"/>, this secondary issue seems to apply to: 
+byte string types, character string types, the zoned-ness of temporal instant types, and 
+reference value types.
+</para>
+
+<para>Both suggested solutions would be backward-compatible.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql416" number="GQL-416" severity="major" realm="technical">
+
+<brief area="Conditional statement">Support for conditional updates after NEXT</brief>
+
+<reference><specref ref="gql_conditional_stm"/>.
+</reference>
+
+<noteAt><specref ref="gsl_PPgql416"/>.
+</noteAt>
+
+<source>WG3:GYD-030.
+</source>
+
+<problem>
+
+<para><specref ref="gql_conditional_stm"/>, 
+<itemref ref="gql_gql_conditional_stm_SR_restiction" type="SR"/> forbids placing 
+a <BNF name="conditional statement"/> immediately after <kw>NEXT</kw> if any of its branches 
+is potentially data-modifying. 
+This restriction should be lifted.
+</para>
+
+<para>See also <PPref ref="PPgql418"/> and <PPref ref="PPgql417"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql417" number="GQL-417" severity="major" realm="technical">
+
+<brief area="Data-modifying statements">Deterministic conflict resolution.</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:GYD-030.
+</source>
+
+<problem>
+
+<para>Certain data-modifying statements (<kw>SET</kw>, <kw>REMOVE</kw>, <ellipsis/>) need to 
+resolve conflicting updates caused by processing the rows of the incoming working table. 
+Currently, conflict resolution of this nature is specified somewhat ad-hoc in the General Rules
+of each statement in a way that gives a lot of freedom to implementations but does not provide
+deterministic outcomes, hampering portability of queries. 
+It should be investigated how the user could be provided with more control over conflict 
+resolution (<eg/> via additional syntax for specifying conflict resolution strategies) in a way 
+that does not fail to address <PPref ref="PPgql418"/>. 
+At a minimum, introducing syntax that causes a runtime exception to be raised when a conflict 
+is detected should be provided (<quote>FORCE SET|REMOVE</quote>).
+</para>
+
+<para>Resolving this issue is particularly required to support conditional updates after 
+<kw>NEXT</kw> (See <PPref ref="PPgql416"/>).
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<LO id="PPgql418" number="GQL-418" 
+    kind="improv"
+    size="M">
+
+<brief area="Conflicts">Provide general definition of update conflict resolution</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:GYD-030.
+</source>
+
+<since>2024-09-28.
+</since>
+
+<problem>
+
+<para>Certain data-modifying statements (<kw>SET</kw>, <kw>REMOVE</kw>, <ellipsis/>) need to 
+resolve conflicting updates caused by processing different rows of the incoming working table.
+Currently, conflict resolution of this nature is specified somewhat ad hoc in the General Rules 
+of each statement. 
+It might improve the standard by instead providing a correct definition of (recordable) data 
+modification together with any additional required new terminology and specify the rules of 
+conflict resolution in a callable subclause. 
+Care needs to be taken to specify conflict resolution in a way that meets implementation 
+requirements (<eg/> in terms of supported subtransaction isolation) but does not fail to 
+address <PPref ref="PPgql417"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql419" number="GQL-419" 
+    kind="feat_ext"
+    size="S">
+
+<brief area="Conditional statement">Support for discarding branches</brief>
+
+<reference><specref ref="gql_conditional_stm"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:GYD-030.
+</source>
+
+<since>2024-09-28.
+</since>
+
+<problem>
+
+<para>A <BNF name="conditional statement"/> with support for <quote>discarding</quote> branches 
+(<eg/> using a new statement, such as BREAK) should be provided:
+</para>
+
+<code>
+MATCH (a)
+CALL {
+  WHEN a.size &lt;> 108 THEN BREAK
+  ELSE RETURN a.size AS size
+}
+RETURN a, size
+</code>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql420" number="GQL-420" 
+    kind="feat_ext"
+    size="S">
+
+<brief area="Conditional statement">Support for &lt;simple conditional statement>s</brief>
+
+<reference><specref ref="gql_conditional_stm"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:GYD-030.
+</source>
+
+<since>2024-09-28.
+</since>
+
+<problem>
+
+<para>A variant of <BNF name="conditional statement"/> with support for 
+&lt;simple conditional statement>s should be provided:
+</para>
+
+<code>
+CALL {
+  COND a.passion
+  WHEN <quote>movies</quote>
+  THEN
+    MATCH (a)-[:HAS]->(m:Movie)
+    RETURN <quote>loves movies</quote> AS msg, count(m) AS num
+  WHEN <quote>reading</quote>
+  THEN
+    MATCH (a)-[:HAS]->(b:Book)
+    RETURN <quote>loves books</quote> AS msg, count(b) AS num
+}
+</code>
+
+<para>Such a variant should start by establishing a &lt;conditional statement operand> in order 
+to support &lt;simple conditional statement when clause>s in the same style as
+a <BNF name="simple case"/>.
+</para>
+
+<para>See WG3:GYD-030 for draft changes of how such functionality might be specified.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql421" number="GQL-421" 
+    kind="feat_ext"
+    size="M">
+
+<brief area="Conditional statement">Support for <quote>match-and-run</quote> branches</brief>
+
+<reference><specref ref="gql_conditional_stm"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:GYD-030.
+</source>
+
+<since>2024-09-28.
+</since>
+
+<problem>
+
+<para>A variant of <BNF name="conditional statement"/> with support for 
+<quote>match-and-run</quote> branches like in the following example should be provided:
+</para>
+
+<code>
+MATCH (a)
+CALL {
+  WHEN BINDING (a)-[:HAS]->(b:Movie)
+  THEN
+    RETURN <quote>has movies</quote> AS msg, count(b) AS num
+  WHEN BINDING {
+    MATCH (a)
+    <ellipsis/>
+    MATCH (a)-[:HAS]->(b:Book)
+    RETURN *
+  }
+  THEN
+    RETURN <quote>has only books</quote> AS msg, count(b) AS num
+}
+</code>
+
+<para>Such a variant would provide the ability to use a tabular subquery as the search condition 
+of a <BNF name="conditional statement when clause"/> such that:
+</para>
+
+<olist>
+
+<item>The search condition is considered <bool>True</bool> if and only if it produces 
+at least one row.
+</item>
+
+<item>All new binding variables bound at the end of evaluating that search condition are made
+available to the <BNF name="conditional statement result"/>, 
+<eg/> any successful pattern matches become the incoming working table for the evaluation of 
+the branch result.
+</item>
+
+</olist>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql422" number="GQL-422" 
+    kind="feat_ext"
+    size="L">
+
+<brief area="Conditional statement">Support for returning from nested conditionals</brief>
+
+<reference><specref ref="gql_conditional_stm"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:GYD-030.
+</source>
+
+<since>2024-09-28.
+</since>
+
+<problem>
+
+<para><BNF name="conditional statement"/> with support for returning results from nested 
+conditionals should be provided (<eg/> using some form of <quote>jump</quote> labels, such as
+<quote>outer</quote> below):
+</para>
+
+<code>
+outer:
+WHEN <ellipsis/> THEN {
+  MATCH <ellipsis/>
+  CALL {
+   THEN <ellipsis/>
+     RETURN <ellipsis/> TO outer
+   WHEN <ellipsis/>
+   THEN <ellipsis/>
+     BREAK TO outer
+   ELSE
+     RETURN <ellipsis/>
+  }
+  RETURN *
+  NEXT
+  // keep going (!)
+  <ellipsis/>
+  RETURN <ellipsis/>
+}
+</code>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPgql423" number="GQL-423" severity="minor" realm="technical">
+
+<brief area="Specification mechanics">Missing type check</brief>
+
+<reference><specref ref="gql_stm_proc_call"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP423"/>.
+</noteAt>
+
+<source>Email from: Stefan Plantikow, 2024-10-12 1108.
+</source>
+
+<problem>
+
+<para>A <BNF name="named procedure call"/> can in principle return a result of any possible 
+result type, not just binding tables. 
+This needs to be protected against here as the calling context is not yet ready to handle 
+non-tabular returns. 
+If this is done, <itemref ref="gql_gql_stm_proc_call_SR_Other" type="SR"/> will become unreachable
+and should be removed. 
+It may also be appropriate to register an LO for handling non-tabular returns once this problem 
+is resolved.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql425" number="GQL-425" severity="minor" realm="technical">
+
+<brief area="Specification mechanics">Disallow single underscore as a valid 
+<BNF name="regular identifier"/></brief>
+
+<reference><specref ref="gql_token"/>.
+</reference>
+
+<noteAt><specref ref="gql_PP425"/>.
+</noteAt>
+
+<source>Email from: Stefan Plantikow, 2024-10-24 1210.
+</source>
+
+<problem>
+
+<para>The current definition of <BNF name="regular identifier"/> allows the use of 
+a single underscore as a valid identifier. 
+This is a consequence of adopting Unicode-based identifiers but misaligned with 9075 
+which does not allow this.
+Further, the use of a single underscore is sometimes adopted for default parameters or 
+wildcard variables in certain languages. 
+Continuing to allow a single underscore as a valid <BNF name="regular identifier"/> 
+prevents such use by future additions to the standard.
+</para>
+
+<para>We think this should be corrected.
+</para>
+
+<para>A possible solution might be:
+</para>
+
+<para>The representative form of a <BNF name="non-delimited identifier"/> shall not 
+comprise a sequence of <BNF name="underscore"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<LO id="PPgql429" number="GQL-429" 
+    kind="new_feat"
+    size="S">
+
+<brief area="Artifact">Minimum Syntax artifact</brief>
+
+<reference><specref ref="gql_mand"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:XRH-001 Agenda Item 12.12.
+</source>
+
+<since>!! Optional give date LO first created. !!
+</since>
+
+<problem>
+
+<para>Consider adding a new digital artifact containing only the absolute minimum syntax.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql432" number="GQL-432" kind="new_feat" size="S">
+
+<brief area="Data types and expressions">Allow optional parameters in
+<BNF name="vector value function"/></brief>
+
+<reference><specref ref="gql_vecvalfunc"/>.
+</reference>
+
+<noteAt><specref ref="PPgql432_1"/>.
+</noteAt>
+
+<source>WG3:POS-011R1
+</source>
+
+<since>2025-03-24
+</since>
+
+<problem>
+
+<para>The <BNF name="dimension"/> and <BNF name="coordinate type"/> parameters in
+the <kw>VECTOR</kw> function could be optional:
+</para>
+
+<!-- LINE LENGTH CHECK OFF -->
+<code>
+<kw>VECTOR</kw> <BNF name="left paren"/> <BNF name="character string value expression"/> [ <BNF name="comma"/>
+<BNF name="dimension"/> <BNF name="comma"/> <BNF name="coordinate type"/> ] <BNF name="right paren"/>
+</code>
+<!-- LINE LENGTH CHECK ON -->
+
+<para>A couple of additional syntax rules would be needed to derive  <BNF name="dimension"/> and 
+<BNF name="coordinate type"/> from the <BNF name="character string value expression"/>.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql433" number="GQL-433" kind="new_feat" size="S">
+
+<brief area="Data types and expressions">Additional metrics for
+<BNF name="vector distance function"/></brief>
+
+<reference><specref ref="gql_vecdistfunc"/>.
+</reference>
+
+<noteAt><specref ref="PPgql433_1"/>.
+</noteAt>
+
+<source>WG3:POS-011R1
+</source>
+
+<since>2025-03-24
+</since>
+
+<problem>
+
+<para>Support for additional <BNF name="vector distance function"/> metrics, like Jaccard,
+could be added.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql434" number="GQL-434" kind="new_feat" size="M">
+
+<brief area="Data types and expressions">Additional vector operations</brief>
+
+<reference><specref ref="gql_vecvalexp"/>.
+</reference>
+
+<noteAt><specref ref="PPgql434_1"/>.
+</noteAt>
+
+<source>WG3:POS-011R1
+</source>
+
+<since>2025-03-24
+</since>
+
+<problem>
+
+<para>Support for additional vector operations, like coordinate-wise
+addition, subtraction, multiplication, <etc/>, could be added.
+</para>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql436" number="GQL-436" kind="new_feat" size="S">
+
+<brief area="Data types and expressions">Passing of session parameters to
+a <BNF name="vector value constructor"/></brief>
+
+<reference><specref ref="gql_vecvalfunc"/>.
+</reference>
+
+<noteAt><specref ref="PPgql436_1"/>.
+</noteAt>
+
+<source>WG3:POS-011R1
+</source>
+
+<since>2025-03-24
+</since>
+
+<problem>
+
+<para>It would be useful to support session variables in the vector value constructor. 
+For example:
+</para>
+
+<code>
+LET vec = <kw>VECTOR</kw>($VecString, $VecDim, $VecType)
+<kw>INSERT</kw> (:Resume {EmpID: 123, ResumeVec: vec})
+</code>
+
+</problem>
+
+</LO>
+
+
+<LO id="PPgql437" number="GQL-437" kind="improv" size="M">
+
+<brief area="Data types and expressions">Some GQL data types miss sections on supported operations
+</brief>
+
+<reference><specref ref="gql_conc_dt"/>.
+</reference>
+
+<noteAt><specref ref="PPgql437_1"/>.
+</noteAt>
+
+<source>WG3:POS-011R1
+</source>
+
+<since>2025-03-24
+</since>
+
+<problem>
+
+<para>WG3:POS-011R1 added a section on the operations involving vector types.
+The only other GQL data types that have such a section are temporal types.
+For consistency, perhaps this information should not be given in a separate subclause.
+Another alternative would be to add such sections for other data types.
+</para>
+
+</problem>
+
+</LO>
+
+
+<PP id="PPgql438" number="GQL-438" realm="technical" severity="major">
+
+<brief area="Data types and expressions">Open vector types
+</brief>
+
+<reference><specref ref="gql_conc_vt_vec"/>.
+</reference>
+
+<noteAt><specref ref="PPgql438_1"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>WG3:POS-011R1 added support for closed vector types but omitted to include support for
+open vector types (<ie/> vector types that can contain arbitrary vectors).
+A key design principle of GQL is to support both dynamically typed and statically typed
+implementations.
+However, lack of open vector type support prevents adoption of vectors by dynamically typed
+implementations of GQL.
+Therefore, open vector type support needs to be added.
+</para>
+
+</problem>
+
+</PP>
+
+
+<PP id="PPgql440" number="GQL-440" realm="technical" severity="minor">
+
+<brief area="Transactions">Clarification on transaction rollback conditions
+</brief>
+
+<reference><specref ref="gql_conditions"/>.
+</reference>
+
+<noteAt><specref ref="PPgql440_1"/>.
+</noteAt>
+
+<source>Email from: Hannes Voigt, 2024-10-25 1203.
+</source>
+
+<problem>
+
+<para> Every exception condition for transaction rollback has precedence over every other
+exception condition.
+However, it is left unspecified what <squote>exception condition for transaction rollback</squote>
+refers to.
+Is it any exception condition of class 40? Looking at the paper trail suggest this might be
+a reasonable interpretation.
+This should be clarified.
+</para>
+
+</problem>
+
+</PP>
+
+
+<PP id="PPgql441" number="GQL-441" realm="technical" severity="minor">
+
+<brief area="Transactions">Clarification on transaction rollback conditions
+</brief>
+
+<reference><specref ref="gql_conditions"/>.
+</reference>
+
+<noteAt><specref ref="PPgql441_1"/>.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<problem>
+
+<para>Every exception condition for transaction rollback has precedence over every other
+exception condition.
+However, if an exception condition is raised during application of General Rules, then the current
+transaction is aborted.
+What should happen in such a situation?
+</para>
+
+<olist>
+
+<item>Implicitly a transaction rollback exception is raised.
+If this is the case, the actual exception might be dropped (unless attached as a cause in
+an implementation that supports causes).
+This seems not very desirable for the user.
+</item>
+
+<item>No transaction rollback exception is raised.
+If this is the case, perhaps transaction rollback exception would be more aptly named
+<squote>spurious transaction abort</squote>?
+</item>
+
+</olist>
+
+<para>It should be clarified, whether transaction rollback exceptions are to be raised when
+another exception condition causes an implicit transaction abort.
+</para>
+
+</problem>
+
+</PP>
+
+
+<PP id="PPgql442" number="GQL-442" realm="technical" severity="minor">
+
+<brief area="Grammar">Remove ambiguity related to closed dynamic union types
+</brief>
+
+<reference><specref ref="gql_conditions"/>.
+</reference>
+
+<noteAt><specref ref="PPgql442_1"/>.
+</noteAt>
+
+<source>Email from: Hannes Voigt, 2024-12-06 0834.
+</source>
+
+<problem>
+
+<para>The production for <BNF name="closed dynamic union type"/> if directly expanded to
+<BNF name="component type list"/> overlaps with the production for <BNF name="value type"/>.
+This is technically taken care of by left normal form derivation.
+To clarify the situation, the grammar could be improved by requiring that
+each <BNF name="component type list"/> needs to specify at least two component types.
+However, this would cause difficulties with the definition of normal forms for closed dynamic
+union types, which considers a single component type to be a valid normal form.
+</para>
+
+<para>In light of this discussion, the following solutions are suggested:
+</para>
+
+<olist>
+
+<item>Prohibit <BNF name="component type list"/>s that specify a single component type 
+in user-facing syntax via a new CR, to justify implementations in adjusting their product grammar
+accordingly.
+</item>
+
+<item>Generally prohibit <BNF name="component type list"/>s that specify a single component type
+and clarify that normal forms of dynamic union types are not necessarily dynamic union types.
+</item>
+
+</olist>
+
+</problem>
+
+</PP>
+
+
+<LO id="PPgql443" number="GQL-443" 
+    kind="new_feat"
+    size="L">
+
+<brief area="Model">Allow an edge to connect to multiple nodes by multiple possibly named 
+links</brief>
+
+<reference><specref ref="gql_conc_g_intro"/>, <specref ref="gql_conc_ot_edge"/>, 
+<specref ref="gql_insert_graph_pattern"/>, <specref ref="gql_path_pattern_expr"/>,
+<specref ref="gql_edge_type_defn"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Email from: Malcolm Crow, 2025-03-24 2114. 
+</source>
+
+<since>2025-03-26
+</since>
+
+<problem>
+
+<para>The literature on the Typed Graph Model includes models where an edge e may be connected to
+<emph>sets</emph> O<sub>e</sub> and A<sub>e</sub> of nodes and associated Typed Graph Schema 
+proposals (<eg/> Fritz Laux arXiv:2110.00991, 2021). 
+Keith Hare has reported that some suggestions have been made in WG3 that N-ary edges might be 
+included in a future version of GQL.
+</para>
+
+</problem>
+
+<solution>
+
+<para>Rough draft: an open-source implementation of these ideas is in progress.
+</para>
+
+<para><specref ref="gql_conc_g_intro"/>: For the dash-headed section beginning 
+<quote>A set of zero or  more identifiable edges</quote> read
+</para>
+
+<ulist>
+
+<item>A set of zero or more globally identifiable edges. 
+Each edge comprises:
+
+<ulist>
+
+<item>An edge label set that comprises a set of zero or more labels. 
+A label has a name, which is an identifier that is unique within the edge.
+<para>The minimum cardinality of edge label sets is <impDef code="IL001"/>.
+</para>
+<para>The maximum cardinality of edge label sets is <impDef code="IL001"/>.
+</para>
+</item>
+
+<item>An edge property set that comprises zero or more properties. 
+Each property comprises:
+
+<ulist>
+
+<item>Its name, which is an identifier that uniquely identifies the property within
+the edge property set.
+<note>The names of edge labels and of edge properties are in separate namespaces. 
+That is, a label and a property can have the same name in an edge.
+</note>
+</item>
+
+<item>Its value, which can be of any supported property value type. 
+The maximum cardinality of edge property sets is <impDef code="IL002"/>.
+</item>
+
+</ulist>
+
+</item>
+
+<item>Two <mark-inserted>or more (not necessarily different)</mark-inserted> endpoints, 
+which are nodes contained in the same graph.
+</item>
+
+<item><mark-inserted>For each endpoint, the indication of whether the association with the edge is 
+a directed connection or an undirected connection (which is also called the
+directionality of the connection).</mark-inserted>
+<para><mark-inserted>Connections may have identifiers (named connections) to discriminate between
+connections to endpoints that are both sources, both destinations, and/or of the
+same node type.</mark-inserted>
+</para>
+<para><mark-inserted>Additionally, a directed connection</mark-inserted> identifies one of its 
+endpoints as its <mark-inserted>source</mark-inserted>,
+and the other as its <mark-inserted>destination</mark-inserted>. 
+The direction of a directed <mark-inserted>connection</mark-inserted> is from its
+source to its destination. 
+If both end points of a directed <mark-inserted>connection</mark-inserted> are identical,
+such an edge is a directed loop on a single graph node.
+</para>
+</item>
+
+</ulist>
+
+</item>
+
+</ulist>
+
+<para><specref ref="gql_conc_ot_edge"/>: For the section beginning
+<quote>Each edge type comprises</quote>, read
+Each edge type comprises:
+</para>
+
+<ulist>
+
+<item>An edge type label set that comprises a set of zero or more labels. 
+A label has a name that is an identifier that is unique within the edge type.
+</item>
+
+<item>An edge type property type set that comprises a set of zero or more property types.
+<note>See <specref ref="gql_conc_property_types"/>.
+</note>
+</item>
+
+<item>Two <mark-inserted>or more (not necessarily different)</mark-inserted> end point node types
+that are node types contained in the same graph type.
+</item>
+
+<item>The indication of whether the <mark-inserted>association between the edge and each end 
+point</mark-inserted> is a directed <mark-inserted>connection</mark-inserted> or an undirected 
+<mark-inserted>connection</mark-inserted> (which is also called the directionality
+of the connection). 
+Additionally, a directed <mark-inserted>connection</mark-inserted> identifies one of its 
+endpoint node types as its source node type, and the other as its destination node type. 
+The direction of a directed edge type is from its source node type to its destination node type.
+<note>The names of edge type labels<mark-inserted>, edge type named connections, 
+and</mark-inserted> edge type property types are in separate namespaces. 
+That is, a label<mark-inserted>, a named connection</mark-inserted> and a property type can have 
+the same name in an edge type.
+</note>
+</item>
+
+</ulist>
+
+<para>A GQL-implementation is permitted to regard two <BNF name="edge type specification"/>s as 
+equivalent, if they are either both directed or undirected, have the same endpoint node types, 
+<mark-inserted>connection name, </mark-inserted> type label sets and edge type property type sets,
+as permitted by the Syntax Rules of <specref ref="gql_edge_type_defn"/>, 
+<specref ref="gql_lbl_set_defn"/>, and <specref ref="gql_prop_type_set_defn"/>. 
+When two or more <BNF name="edge type specification"/>s are equivalent, the GQL-implementation 
+chooses one of these equivalent <BNF name="edge type specification"/>s as the normal form 
+representing that equivalence class of <BNF name="edge type specification"/>s. 
+The normal form determines the preferred name of the edge type in data type descriptors.
+</para>
+
+<para>An edge E in a graph is of an edge type ET (<ie/> is included in ET) if the label set of E 
+and the edge type label set of ET are the same, 
+<mark-inserted>the edge connection names if any, </mark-inserted>the number of properties of E 
+and the number of property types of ET are 
+the same, and every property of E is of a property type of ET, and one of the following is true:
+</para>
+
+<ulist>
+
+<item>E and ET are directed and the source and destination endpoints of E are of the source and
+destination endpoint node types of ET, respectively.
+</item>
+
+<item>E and ET are undirected and the binary relation over E and ET that relates each endpoint
+in E to each of its endpoint node types in ET is left-total and right-total. 
+An edge type is described by the edge type descriptor. 
+</item>
+
+</ulist>
+
+<para>The edge type descriptor comprises:
+</para>
+
+<ulist>
+
+<item>The declared name of the primary base type of all edge types (EDGEDATA).
+</item>
+
+<item>The preferred name of edge types (<impDef code="ID091"/> choice of EDGE or
+RELATIONSHIP).
+</item>
+
+<item>The set of zero or more labels (also known as an edge type label set). 
+A label has a name that is an identifier that is unique within the edge type label set.
+
+<para>The minimum cardinality of edge type label sets is the <impDef code="IL001"/>
+minimum cardinality of edge label sets.
+</para>
+
+<para>The maximum cardinality of edge type label sets is the <impDef code="IL001"/>
+maximum cardinality of edge label sets.
+</para>
+
+</item>
+
+<item>The set of zero or more property type descriptors (also known as an edge type property
+type set).
+<para>The maximum cardinality of edge type property type sets is the <impDef code="IL002"/> maximum 
+cardinality of edge property sets.
+</para>
+</item>
+
+<item><mark-inserted>For each connection, </mark-inserted>
+
+<ulist>
+
+<item><mark-inserted>the name of the connection (which may be empty)</mark-inserted>
+</item>
+
+<item>the indication of whether the <mark-inserted>connection</mark-inserted> is directed or 
+undirected
+</item>
+
+</ulist>
+
+</item>
+
+<item>Case:
+
+<ulist>
+
+<item>If the <mark-inserted>connection</mark-inserted> is directed, then:
+
+<ulist>
+
+<item>The source node type descriptor.
+</item>
+
+<item>The destination node type descriptor.
+</item>
+
+</ulist>
+
+</item>
+
+<item>If the <mark-inserted>connection</mark-inserted> is undirected, then the set of one or two 
+endpoint node type descriptors.
+</item>
+
+</ulist>
+
+<note>If the two end point node types of an undirected <mark-inserted>connection</mark-inserted> 
+are the same, then the set contains only one endpoint node type descriptor; otherwise, it contains 
+two endpoint node type descriptors.
+</note>
+
+</item>
+
+</ulist>
+
+<para>Two edge type descriptors describe equal edge types if they contain:
+</para>
+
+<ulist>
+
+<item>Equal edge type label sets,
+</item>
+
+<item>Equal edge type property type sets,
+</item>
+
+<item><mark-inserted>Equal connection names, </mark-inserted>
+</item>
+
+<item>Equal indications whether connections are directed or undirected, and
+</item>
+
+<item>Case:
+
+<ulist>
+
+<item>If the <mark-inserted>connections</mark-inserted> are directed, then:
+
+<ulist>
+
+<item>Equal source node types and
+</item>
+
+<item>Equal destination node types.
+</item>
+
+</ulist>
+
+</item>
+
+<item>If the <mark-inserted>connections</mark-inserted> are undirected, then equal sets of 
+endpoint node types.
+</item>
+
+</ulist>
+
+</item>
+
+</ulist>
+
+<para><specref ref="gql_insert_graph_pattern"/>
+</para>
+
+<grammar discussion="yes">
+
+<BNFdef name="insert edge pointing left">
+<rhs>
+<BNF name="left arrow bracket"/> <opt> <BNF name="insert element pattern filler"/> </opt> 
+<BNF name="right bracket minus"/> <opt> <BNF name="identifier"/><BNF name="minus sign"/> </opt>
+</rhs>
+</BNFdef>
+
+<BNFdef name="insert edge pointing right">
+<rhs>
+<opt> <BNF name="minus sign"/><BNF name="identifier"/> </opt><BNF name="minus left bracket"/> 
+<opt> <BNF name="insert element pattern filler"/> </opt> <BNF name="bracket right arrow"/>
+</rhs>
+</BNFdef>
+
+<BNFdef name="insert edge undirected">
+<rhs>
+<opt> <BNF name="tilde"/><BNF name="identifier"/> </opt> <BNF name="tilde left bracket"/> 
+<opt> <BNF name="insert element pattern filler"/>  </opt> <BNF name="right bracket tilde"/> 
+<opt> <BNF name="identifier"/><BNF name="tilde"/>  </opt>
+</rhs>
+</BNFdef>
+
+</grammar>
+
+<para>Additional Syntax rule: At most one <BNF name="identifier"/> can be used in the above 
+syntax for <BNF name="insert edge undirected"/>.
+</para>
+
+<para><specref ref="gql_path_pattern_expr"/>
+</para>
+
+<grammar discussion="yes">
+
+<BNFdef name="full edge pointing left">
+<rhs>
+<BNF name="left arrow bracket"/> <BNF name="element pattern filler"/> 
+<BNF name="right bracket minus"/> <opt> <BNF name="identifier"/><BNF name="minus sign"/>  </opt>
+</rhs>
+</BNFdef>
+
+<BNFdef name="full edge undirected">
+<rhs>
+<opt><BNF name="tilde"/><BNF name="identifier"/> </opt> <BNF name="tilde left bracket"/> 
+<BNF name="element pattern filler"/> <BNF name="right bracket tilde"/>
+</rhs>
+</BNFdef>
+
+<BNFdef name="full edge pointing right">
+<rhs>
+<opt> <BNF name="minus sign"/><BNF name="identifier"/>  </opt> <BNF name="minus left bracket"/> 
+<BNF name="element pattern filler"/> <BNF name="bracket right arrow"/>
+</rhs>
+</BNFdef>
+
+<BNFdef name="full edge left or undirected">
+<rhs>
+<BNF name="left arrow tilde bracket"/> <BNF name="element pattern filler"/> 
+<BNF name="right bracket tilde"/> <opt> <BNF name="identifier"/><BNF name="tilde"/> </opt>
+</rhs>
+</BNFdef>
+
+<BNFdef name="full edge undirected or right">
+<rhs>
+<opt> <BNF name="tilde"/><BNF name="identifier"/> </opt> <BNF name="tilde left bracket"/> 
+<BNF name="element pattern filler"/> <BNF name="bracket tilde right arrow"/>
+</rhs>
+</BNFdef>
+
+<BNFdef name="full edge any direction">
+<rhs>
+<opt><BNF name="minus sign"/><BNF name="identifier"/> </opt> <BNF name="minus left bracket"/>
+<BNF name="element pattern filler"/><BNF name="right bracket minus"/>
+<opt><BNF name="identifier"/><BNF name="minus sign"/> </opt>
+</rhs>
+</BNFdef>
+
+</grammar>
+
+<para>Additional Syntax rule: At most one <BNF name="identifier"/> can be used in the above syntax
+for <BNF name="insert edge undirected"/>.
+</para>
+
+<para><specref ref="gql_edge_type_defn"/>
+</para>
+
+<para>Should support the following informal syntax:
+</para>
+
+<code>
+GraphTypeDef = <squote>{</squote>  ElementList <squote>}</squote> .
+
+ElementList = (NodeTypeDetails|EdgeTypeDetails) {Metadata}<footnote>For an edge type CARDINALITY specifies the maximum number of edges that can connect to a given pair of endpoints (default is no limit).</footnote> {<squote>,</squote> ElementList}.
+
+NodeTypeDetails = [Node [TYPE] id] <squote>(</squote> Filler <squote>)</squote>
+                | Node [TYPE] Filler [AS id].
+                
+Filler = [Alias_id] [Labels] [<squote>=></squote> [Labels]][<squote>{</squote>Properties<squote>}</squote>] .
+
+Labels = LABEL id | (LABELS[<squote>:</squote>|IS]) id {<squote>&amp;/></squote> id} .
+
+Properties = (id [<squote>::</squote>|TYPED] Type) {<squote>,</squote> Properties} .
+
+Node = NODE | VERTEX .
+
+EdgeTypeDetails = [Direction Edge [TYPE] id] EdgePattern
+                 | Direction Edge [TYPE] (id|Filler) EndPoints.
+                 
+EndPoints = CONNECTING <squote>(</squote> Connections <squote>)</squote> .
+
+Connections = [FROM Connectors ][WITH Connectors][TO Connectors] .
+
+Connectors = Connector {<squote>,</squote> Connector} .
+
+Connector = [id<squote>=</squote>] Type_id {<squote>|</squote> Type_id } [SET] Metadata .
+
+EdgePattern = <squote>(</squote>NodeTypeRef |Filler<squote>)</squote> <squote>-[</squote>Filler<squote>]-></squote> <squote>(</squote>NodeTypeRef |Filler<squote>)</squote>
+            | <squote>(</squote>NodeTypeRef |Filler<squote>)</squote> <squote>&lt;-[</squote> Filler 
+<squote>]-</squote> <squote>(</squote>NodeTypeRef |Filler<squote>)</squote> .
+            | <squote>(</squote>NodeTypeRef |Filler<squote>)</squote> <squote>~[</squote> Filler 
+<squote>]~</squote> <squote>(</squote>NodeTypeRef |Filler<squote>)</squote> .
+
+NodeTypeRef = NodeType_id {Metadata} {<squote>|</squote> NodeType_id {Metadata}<footnote>The <emph>NodeType</emph>_id can refer to a node or edge type. 
+MULTIPLICITY specifies the maximum number of connections to a given endpoint (default is no limit).</footnote> }.
+
+Edge = EDGE | RELATIONSHIP .
+
+Direction = DIRECTED | UNDIRECTED .
+</code>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPgql444" number="GQL-444" severity="major" realm="technical">
+
+<brief area="Specification mechanics">Incomplete numeric data type descriptor</brief>
+
+<reference><specref ref="gql_conc_numeric_intro"/>, <specref ref="gql_value_type"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Jeyhun Karimov (Microsoft)
+</source>
+
+<problem>
+
+<para>GQL supports both signed and unsigned exact numeric types with scale 0 (zero) but 
+the numeric data type descriptor lacks 
+an <quote>indication of whether the numeric type is signed or unsigned</quote>.
+</para>
+
+<para>As a workaround, such an indication can be inferred from the preferred name of the type, 
+which is included in the descriptor.
+</para>
+
+<para>However, relying on being able to infer a secondary characteristic of a type from its 
+preferred name is a) brittle and b) very hard to understand for implementers.
+</para>
+
+<para>Instead, the <quote>indication of whether the numeric type is signed or unsigned</quote> 
+should be added to the descriptor explicitly and the rules in <specref ref="gql_value_type"/> 
+should be adjusted accordingly.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<LO id="PPgql445" number="GQL-445" kind="feat_ext" size="M">
+
+<brief area="Data types and expressions">Relax the diamond inheritance rule</brief>
+
+<reference><specref ref="gql_graph_type"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Stefan Plantikow.
+</source>
+
+<since>2025-06-18.
+</since>
+
+<problem>
+
+<para><specref ref="gql_graph_type"/>, <itemref ref="gql_graph_type_SR_ets" type="GR"/> currently
+reads as follows:
+</para>
+
+<olist>
+<item>For every <BNF name="edge type specification"/> 
+<symdef>OETS</symdef> that is simply contained in <sym>GTSB</sym> and implies <sym>ETS</sym>, 
+all of the following shall be true:
+
+<olist>
+
+<item><sym>OETS</sym> is structurally consistent with <sym>ETS</sym>.
+</item>
+
+<item><sym>OETS</sym> is structurally endpoint-consistent with <sym>ETS</sym>.
+</item>
+
+</olist>
+
+</item>
+</olist>
+
+<para>This effectively requires the endpoint node types of an edge subtype to be subtypes of 
+the corresponding endpoint node types of each of its direct edge super types.
+</para>
+
+<para>This is unnecessarily strict in that it fails to recognize how keyed edge types together 
+with conformance <feature code="GG25"/>, effectively bundle multiple edge types into 
+one edge type family. 
+To provide an analogy from object oriented programming, such an edge type family can be thought of 
+as a:
+</para>
+
+<code>
+class MyEdgeTypeFamily {
+   keyLabels: List&lt;String&gt;
+   properties: Map&lt;String, PropertyType&gt;
+
+   endpoints: Pair (A, B) | Pair(A, C) | Pair (X, Y) | <ellipsis/>
+}
+</code>
+
+<para>Applying generally agreed principles of substitution in object-oriented languages, 
+a subclass MySubEdgeTypeFamily &lt;: MyEdgeTypeFamily that wants to override 
+<quote>endpoints</quote> could narrow its type to any subtype of <quote>endpoints</quote> in 
+MyEdgeTypeFamily, such as (A, B) only or (A1 &lt;: A, B) | (A, C1 &lt;: C) <etc/> 
+</para>
+
+<para>Further, a subclass of multiple edge type families could narrow the type of 
+<quote>endpoints</quote> to any type that is a subtype of the type of <quote>endpoints</quote> of 
+each of its direct edge type super families.
+</para>
+
+<para><itemref ref="gql_graph_type_SR_ets" type="GR"/> should be adjusted to support this more 
+relaxed requirement for implementations that provide <feature code="GG25"/>.
+</para>
+
+<para>In order to prevent proliferation of feature codes, it seems acceptable to the author of 
+this Language Opportunity to bundle this change with the existing feature, as the proposed 
+relaxation of <itemref ref="gql_graph_type_SR_ets" type="GR"/> would allow more graph types
+to be valid and hence would not cause backwards compatibility issues.
+</para>
+
+<para>In summary:
+</para>
+
+<ulist>
+
+<item>Consider adding the terminological concept of an edge type family for a group of edge types
+with the same key label set (as can be defined by supporting <feature code="GG25"/>).
+</item>
+
+<item>Change <itemref ref="gql_graph_type_SR_ets_b" type="GR"/> to only require 
+structural-endpoint consistency with implied <sym>ETS</sym> that are not part of
+an edge type family and with at least one implied <sym>ETS</sym> per direct super edge type family,
+for implementations that provide <feature code="GG25"/>. 
+</item>
+
+</ulist>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql446" number="GQL-446" kind="feat_ext" size="L">
+
+<brief area="Statements and clauses">Extend LET with support for windowing</brief>
+
+<reference><specref ref="gql_let"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Stefan Plantikow.
+</source>
+
+<since>2025-06-18.
+</since>
+
+<problem>
+
+<para>GQL currently has no support for window functions, however, many of the required ingredients
+are beginning to be in place:
+</para>
+
+<ulist>
+
+<item><PPref ref="PPgql186"/> already proposes the introduction of partitioned procedure calls.
+</item>
+
+<item>The <BNF name="order by and page statement"/> is freely placeable, thus allowing us 
+to enforce the in-order processing of the incoming binding table by a subsequent statement.
+</item>
+
+</ulist>
+
+<para>What is missing is essentially framing (5 ROWS PRECEDING) and certain window-sensitive 
+functions (<eg/> RANK).
+</para>
+
+<para>As a possible approach, this LO proposes to extend the <BNF name="let statement"/> with 
+support for framing over the incoming binding table as follows:
+</para>
+
+<code>
+CALL PER &lt;partition key&gt; {
+   ORDER BY <BNF name="sort specification"/>
+   LET var=expr ALONG ROWS 5 PRECEDING 
+   <ellipsis/>
+}
+</code>
+
+<para>Evaluation semantics would treat all variables from the current working table as 
+grouping variables containing the values in the window for the current row and 
+corresponding column.
+This approach would enable re-use of horizontal aggregation functionality for 
+the actual evaluation of aggregates in the window.
+</para>
+
+<para>Caveats:
+</para>
+
+<ulist>
+
+<item>Due to the rewrites involved in the current specification in LET, 
+realizing this approach will likely move the framing feature to variable definitions.
+</item>
+
+<item>A full analysis of the <SQL/> windowing capabilities should be performed to ensure possibly 
+feature parity of this approach.
+</item>
+
+<item>Horizontal aggregation functionality needs to be expanded for this to become practical.
+</item>
+
+<item>Window-sensitive expressions like RANK() need to be added, too.
+
+</item>
+
+</ulist>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql447" number="GQL-447"  kind="new_feat" size="M">
+
+<brief area="Area of functionality">Replace current working table</brief>
+
+<reference><specref ref="gql_stm_lin_query_stm"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Stefan Plantikow.
+</source>
+
+<since>2025-06-18.
+</since>
+
+<problem>
+
+<para>Currently, GQL provides no mechanism for explicitly replacing the current working table with 
+a binding table provided by a catalog reference or an expression.
+</para>
+
+<para>Available functionality to that end is:
+</para>
+
+<ulist>
+
+<item>FINISH, for establishing a unit binding table to start from.
+</item>
+
+<item>CALL for unwinding the columns of the result of a procedure call (currently lacking
+table support).
+</item>
+
+<item>FOR record_var IN table_expression, for iterating over the records of a table.
+</item>
+
+</ulist>
+
+<para>Beyond these features, there appears to be a gap for just replacing the current working table.
+Possible approaches might be:
+</para>
+
+<ulist>
+
+<item>Extend named CALL to also iterate tables (<ie/> solve by FINISH and extending CALL).
+</item>
+
+<item>Introduce dedicated syntax for replacing the current working table from a table expression 
+(<ie/> solve by a new construct such as FROM table_expression).
+</item>
+
+<item>Introduce dedicated syntax for replacing the current record from a record expression 
+(<ie/> solve by FINISH, FOR record_var IN table_expression, and a new construct such as
+RETURN <BNF name="record expression"/> AS ROW).
+</item>
+
+</ulist>
+
+<para>A feature for replacing the current working table with the result of a table expression
+should be added.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql448" number="GQL-448"  kind="new_feat" size="M">
+
+<brief area=" Statements and clauses">Cross join</brief>
+
+<reference><specref ref="gql_stm_comp_query_expr"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Stefan Plantikow.
+</source>
+
+<since>2025-06-18.
+</since>
+
+<problem>
+
+<para>GQL has no dedicated statement for expressing full outer cross joins or full outer natural 
+joins. 
+While CALL can be used to that effect, the required linearization and syntactic duplication of 
+subqueries is cumbersome at best.
+</para>
+
+<para>Consider adding a new optional statement at the same level of set operations for performing 
+cross joins, natural joins and their full outer counter parts to close a gap in 
+relational capabilities of GQL.
+</para>
+
+<ulist>
+
+<item>{ <ellipsis/> } [ NATURAL | CROSS ] JOIN { <ellipsis/> }
+</item>
+
+<item>{<ellipsis/> } OPTIONAL  [ NATURAL | CROSS ] JOIN { <ellipsis/> }
+</item>
+
+</ulist>
+
+<para>(NATURAL being the default)
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPgql449" number="GQL-449" severity="major" realm="technical">
+
+<brief area="Area of functionality">Portable LIST indexing</brief>
+
+<reference>No specific location.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Email from Keith Hare, 2025-09-25
+</source>
+
+<problem>
+
+<para>During the discussion of WG3:BCN-033 <quote>GQL LIST Element References</quote>, there was 
+considerable discussion about the need for a portable code to be able to specify list behaviors at
+a finer granularity than the SET SESSION LIST BEHAVIOR command. 
+</para>
+
+<para>WG3:BCN-033 discussion section 2.6, Local Qualifiers, suggests a keyword approach that might 
+use syntax such as:
+</para>
+
+<code>
+some_numbers[1 BY POSITION]
+</code>
+
+<para>or
+</para>
+
+<code>
+some_numbers[1 BY OFFSET]
+</code>
+
+<para>Local qualifiers would allow a particular list access to override the session-level 
+settings.
+</para>
+
+<para>A complimentary option would be to allow list behavior to be specified as a part of 
+a <BNF name="call procedure statement"/> or a <BNF name="nested procedure specification"/>.
+</para>
+
+<para>The finer granularity for specifying list reference behavior is critical for supporting 
+procedures stored in a GQL databases and for porting code segments between GQL implementations 
+and porting code segments between GQL and SQL/PGQ.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<LO id="PPgql450" number="GQL-450" kind="new_feat" size="M">
+
+<brief area="Schema and metadata model">Extensible key constraints</brief>
+
+<reference><specref ref="gql_conc_int_constraints"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BCN-047R1.
+</source>
+
+<since>2025-09-30
+</since>
+
+<problem>
+
+<para>Support for extensible key constraints, <ie/> key constraints that allow 
+subconstraint scopes to add additional key value components to an already effective 
+key value component specification, should be considered.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql451" number="GQL-451" kind="new_feat" size="M">
+
+<brief area="Schema and metadata model">Support for deferred and unenforced constraints</brief>
+
+<reference><specref ref="gql_conc_int_constraints"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:BCN-047R1.
+</source>
+
+<since>2025-09-30
+</since>
+
+<problem>
+
+<para>SQL:
+</para>
+
+<alist>
+
+<item>Distinguishes between initially immediate or initially deferred constraints to control 
+when constraint checking occurs initially. 
+</item>
+
+<item>Whether constraint checking may be deferred at all.
+</item>
+
+<item>whether the constraint is currently enforced or not.
+</item>
+
+</alist>
+
+<para>Also, consider syntax for manually triggering constraint checking for 
+an explicitly referenced graph or the current working graph, 
+<eg/> <kw>REQUIRE</kw> emp_pk or <kw>REQUIRE</kw> *).
+</para>
+
+<para>Development of similar capabilities should be considered for GQL.
+</para>
+
+<para>See also <PPref ref="PPgql457"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<PP id="PPgql452" number="GQL-452" severity="major" realm="technical">
+
+<brief area="Schema and metadata model">Support for weak entity constraints</brief>
+
+<reference><specref ref="gql_conc_int_constraints"/>.
+</reference>
+
+<noteAt><specref ref="PPgql452_1"/>.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<problem>
+
+<para>The current design for key constraints does not support weak entity key constraints,
+even though a design for weak entity key constraints is already available in PG-KEYS.
+This functionality is critical and should be added. 
+</para>
+
+<para>The following syntactic approaches could be considered for extending the current design with
+support for weak entity key constraints:
+</para>
+
+<ulist>
+
+<item>Allow specifying the focus variable of a key constraint, like so:
+
+<code>
+FOR n IN (n:A)-[e:E]->(m:B)
+</code>
+</item>
+
+<item>Allow specifying separate scope and constraint patterns, like so:
+
+<code>
+FOR (a:A)
+WITHIN (a)-[e]->(b)
+</code>
+</item>
+
+<item>Both.
+</item>
+
+</ulist>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql453" number="GQL-453" severity="major" realm="technical">
+
+<brief area="Schema and metadata model">Specifying constraint semantics without queries</brief>
+
+<reference><specref ref="gql_conc_int_constraints"/>, <specref ref="gql_constraint_sat_pred"/>.
+</reference>
+
+<noteAt><specref ref="PPgql453_1"/>.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<problem>
+
+<para>The current design for key constraints specifies the semantics of constraint checking
+in terms of the result of certain queries, which are generated by the Syntax Rules of
+<specref ref="gql_constraint_sat_pred"/>.
+</para>
+
+<para>This could be challenging for providing mathematical proofs of key characteristics
+of the design and thus specifying the semantics of constrain checking more directly should be
+considered as a possible alternative.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql454" number="GQL-454" severity="major" realm="technical">
+
+<brief area="Schema and metadata model">Null-handling in integrity constraints</brief>
+
+<reference><specref ref="gql_conc_int_constraints"/>, <specref ref="gql_constraint_sat_pred"/>.
+</reference>
+
+<noteAt><specref ref="PPgql454_1"/>.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<problem>
+
+<para>The current design for key constraints requires key component values to be null-free.
+The precise details of null handling in key and unique constraints should be revisited
+in light of similar functionality in ISO/IEC 9075 SQL (unique with nulls distinct,
+unique with nulls not distinct).
+</para>
+
+<para>See <PPref ref="PPgql364"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql455" number="GQL-455" severity="major" realm="technical">
+
+<brief area="Schema and metadata model">Invariant constraint patterns</brief>
+
+<reference><specref ref="gql_conc_int_constraints"/>, <specref ref="gql_constraint_sat_pred"/>.
+</reference>
+
+<noteAt><specref ref="PPgql455_1"/>.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<problem>
+
+<para>The current design for key constraints only support the specification of
+covariant constraint patterns. 
+The addition of support for invariant constraint patterns should be considered.
+</para>
+
+<para>Background: An invariant constraint pattern would be a constraint pattern that specifies
+the exact set of labels and properties required of matched nodes and edges.
+A covariant constraint pattern only specifies the minimally (<quote>at least</quote>) required 
+labels and properties of matched nodes and edges.
+</para>
+
+<para>The question of invariant pattern support naturally extends to
+the pattern matching language at large, as well as SQL/PGQ (at least for label expressions).
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql456" number="GQL-456" severity="major" realm="technical">
+
+<brief area="Schema and metadata model">Compatibility of constraints with SQL/PGQ</brief>
+
+<reference><specref ref="gql_conc_int_constraints"/>, <specref ref="gql_constraint_sat_pred"/>.
+</reference>
+
+<noteAt><specref ref="PPgql456_1"/>.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<problem>
+
+<para>The current design for key constraints is specific to the handling of graph types and graphs
+in GQL.
+For compatibility, it should be demonstrated that this design is equivalent in
+expressive power to how node and edge identity is established in the tabular property graph model
+of SQL/PGQ.
+Any gaps discovered in this regard should be addressed. 
+</para>
+
+<para>See also <PPref ref="PPgql455"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql457" number="GQL-457" severity="major" realm="technical">
+
+<brief area="Schema and metadata model">Revisit deferred constraint enforcement</brief>
+
+<reference><specref ref="gql_conc_int_constraints"/>, <specref ref="gql_constraint_sat_pred"/>,
+<specref ref="gql_conc_gt_intro"/>.
+</reference>
+
+<noteAt><specref ref="PPgql457_1"/>.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<problem>
+
+<para>The current design for integrity constraints allows implementations to defer constraint
+enforcement until the current transaction is committed.
+This allows a data-modifying operation to temporarily violate a constraint.
+In turn, it becomes impossible to trust whether a passed graph actually upholds the constraints
+of its graph type or not!
+</para>
+
+<para>This topic requires further investigation. 
+The following options could be explored to improve the current situation:
+</para>
+
+<ulist>
+
+<item>Introduction of explicit syntax for triggering constraint enforcement.
+</item>
+
+<item>Tightening the rules of constraint enforcement, such as requiring constraint enforcement
+to happen at assignment time.
+</item>
+
+<item>Introduction of additional annotations to constraint definitions
+for providing more precise control to the user regarding the timing of constraint enforcement
+and the guarantees offered by a graph of a given graph type.
+</item>
+
+<item>Introduction of a facility for the deferred execution of data-modifying operations as
+a means for ensuring that such updates are immediately followed by constraint enforcement. 
+</item>
+
+<item>Introduction of explicit syntax for temporarily disabling constraint enforcement.
+</item>
+
+<item><ellipsis/>
+</item>
+
+</ulist>
+
+<para>Resolving this issue will very likely also require revisiting the rules that enforce
+the relationship between graphs and their graph types in order to avoid exceptions
+to be raised untimely due to delayed enforcement of constraints!
+</para>
+
+<para>See also <PPref ref="PPgql451"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<PP id="PPgql458" number="GQL-458" severity="major" realm="technical">
+
+<brief area="Schema and metadata model">Syntax ambiguity in specifying constraint requirements
+</brief>
+
+<reference><specref ref="gql_conc_int_constraints"/>, <specref ref="gql_constraint_sat_pred"/>,
+<specref ref="gql_conc_gt_intro"/>.
+</reference>
+
+<noteAt><specref ref="PPgql458_1"/>.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<problem>
+
+<para>The current syntax for the definition of integrity constraints places the constraint kind
+of a constraint requirement in tail position
+(<eg/> <mono><ellipsis/> <kw>IS</kw> <kw>KEY</kw></mono>).
+While feasible in principle, this is not a very extensible approach that might lead to difficulties
+regarding parsing when introducing new constraint kinds in the future, due to the tail positioning
+of the essential disambiguating syntax.
+</para>
+
+<para>Alternative or at least additional syntax that allows specifiying the constraint kind in 
+head position should be considered, such as:
+</para>
+
+<code>
+<kw>CONSTRAINT</kw> myConstraint
+<kw>FOR</kw> <ellipsis/>
+<kw>REQUIRE</kw> <kw>KEY</kw>(k1, k2)
+</code>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</PP>
+
+
+<LO id="PPgql459" number="GQL-459" kind="feat_ext" size="M">
+
+<brief area="Schema and metadata model">Element-type attached constraints</brief>
+
+<reference><specref ref="gql_conc_gt_intro"/>, <specref ref="gql_conc_int_constraints"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<since>2025-10-18
+</since>
+
+<problem>
+
+<para>Support for attaching constraint definitions directly to element type definitions
+via additional syntax shorthands should be considered, such as:
+</para>
+
+<code>
+(:Person => :HasAddress { first :: STRING, last :: String => address :: STRING })
+</code>
+
+<code>
+(:Person(first :: STRING, last :: String) => :HasAddress { address :: STRING })
+</code>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql460" number="GQL-460" kind="new_feat" size="L">
+
+<brief area="Schema and metadata model">Independent constraint aspect objects</brief>
+
+<reference><specref ref="gql_conc_gt_intro"/>, <specref ref="gql_conc_int_constraints"/>.
+</reference>
+ 
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<since>2025-10-18
+</since>
+
+<problem>
+
+<para>Support for defining primary constraint aspect objects outside of graphs and/or graph types
+whose definition declaratively selects constraint subjects from the catalog should be considered.
+</para>
+
+<para>This would allow defining constraints independently in a way that is not directly tied to
+their subjects or the types of their subjects and perhaps can be seen as a form of
+aspect-orientation.
+</para>
+
+<para>Syntax sketch:
+</para>
+
+<code>
+<kw>CREATE</kw> <kw>CONSTRAINT</kw> myConstraint <kw>ON</kw> /mySchema/myDir1/myGraph 
+<kw>FOR</kw> <ellipsis/> <kw>REQUIRE</kw> <ellipsis/>
+</code>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql461" number="GQL-461" kind="new_feat" size="M">
+
+<brief area="Schema and metadata model">Check constraints</brief>
+
+<reference><specref ref="gql_conc_gt_intro"/>, <specref ref="gql_conc_int_constraints"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<since>2025-10-18
+</since>
+
+<problem>
+
+<para>Support for defining general check constraints should be added.
+</para>
+
+<code>
+<kw>FOR</kw> <ellipsis/> <kw>REQUIRE</kw> CHECK <BNF name="search condition"/>
+</code>
+
+<para>Limiting the expressive power of supported checks needs to be considered.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql462" number="GQL-462" kind="new_feat" size="XL">
+
+<brief area="Schema and metadata model">JSON-schema check constraints</brief>
+
+<reference><specref ref="gql_conc_gt_intro"/>, <specref ref="gql_conc_int_constraints"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>WG3:W30-001.
+</source>
+
+<since>2025-10-18
+</since>
+
+<problem>
+
+<para>Adding support for defining check constraints in terms of JSON-schema should be considered.
+</para>
+
+<para>This likely requires the addition of various independent features:
+</para>
+
+<ulist>
+
+<item>Support for general check constraints.
+See <PPref ref="PPgql460"/>.
+</item>
+
+<item>Support for generating and parsing a well-defined JSON-representation of GQL values.
+</item>
+
+
+<item>Addition of a new predicate for testing whether the JSON-representation of a given
+GQL value would adhere to a given JSON-schema.
+Defining this predicate requires to determine how JSON-schemas should be referenced
+within GQL.
+</item>
+
+</ulist>
+
+<para>Syntax sketch:
+</para>
+
+<code>
+<kw>FOR</kw> <ellipsis/> <kw>REQUIRE</kw> CHECK JSON_CONFORMS(TO_JSON(myVal), mySchema)
+</code>
+
+<para>See also <PPref ref="PPgql370"/>.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+
+<LO id="PPgql463" number="GQL-463" kind="improv" size="M">
+
+<brief area="Specification mechanics">Improve aggregation specification</brief>
+
+<reference><specref ref="gql_aggregate_func"/>.
+</reference>
+
+<noteAt>None.
+</noteAt>
+
+<source>Editors.
+</source>
+
+<since>2025-10-26
+</since>
+
+<problem>
+
+<para>The specification of horizontal and vertical aggregation is difficult to follow and
+should be improved.
+</para>
+
+<para>One approach could be:
+</para>
+
+<olist>
+
+<item>Clearly distinguish horizontal from vertical aggregation depending on whether
+group list variables are referenced or not.
+</item>
+
+<item>Rewrite horizontal aggregates to scalar value expressions that use vertical aggregates.
+</item>
+
+<item>Focus expression semantics on vertical aggregates only.
+</item>
+
+</olist>
+
+<para>To the side, such a change could allow <BNF name="aggregating value expression"/>s that are 
+not <BNF name="aggregate function"/>s (but contain them) and clarify the semantics of 
+<BNF name="aggregating value expression"/>s that do not involve aggregation but are also not part of
+the grouping key.
+</para>
+
+</problem>
+
+<solution>
+
+<para>None provided with comment.
+</para>
+
+</solution>
+
+</LO>
+
+<!-- ^^^ LAST ENTRY ^^^ -->
+
+<!-- Move resolved issues to gql-standard_editor_notes_resolved.xml -->
+
+</EditorNotes>
