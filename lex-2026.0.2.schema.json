@@ -1,0 +1,590 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grasch.org/schemas/lex-2026.0.2.json",
+  "title": "LEX:2026.0.2 JSON Schema",
+  "description": "JSON Schema for specifications of graph catalogs, graph schemas and graph instances, allowing YAML spec documents for all three classes of specification as defined in LEX-100r2",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/Catalog"
+    },
+    {
+      "$ref": "#/$defs/GraphSchema"
+    },
+    {
+      "$ref": "#/$defs/Graph"
+    }
+  ],
+  "$defs": {
+    "Catalog": {
+      "type": "object",
+      "description": "Graph catalog specification - a hierarchical collection of named primary catalog objects",
+      "properties": {
+        "catalog": {
+          "type": "object",
+          "properties": {
+            "IRI": {
+              "type": "string",
+              "format": "iri",
+              "description": "Optional IRI for global catalog identification"
+            },
+            "directories": {
+              "type": "array",
+              "description": "Directory nodes in the catalog tree",
+              "items": {
+                "$ref": "#/$defs/Directory"
+              }
+            },
+            "graphs": {
+              "type": "array",
+              "description": "Graph objects in the catalog",
+              "items": {
+                "$ref": "#/$defs/CatalogGraph"
+              }
+            },
+            "graphSchemas": {
+              "type": "array",
+              "description": "Graph schema objects in the catalog",
+              "items": {
+                "$ref": "#/$defs/CatalogGraphSchema"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["catalog"],
+      "additionalProperties": false
+    },
+    "Directory": {
+      "type": "object",
+      "description": "Directory node in catalog tree",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Directory name"
+        },
+        "directories": {
+          "type": "array",
+          "description": "Subdirectories",
+          "items": {
+            "$ref": "#/$defs/Directory"
+          }
+        },
+        "graphs": {
+          "type": "array",
+          "description": "Graph objects in this directory",
+          "items": {
+            "$ref": "#/$defs/CatalogGraph"
+          }
+        },
+        "graphSchemas": {
+          "type": "array",
+          "description": "Graph schema objects in this directory",
+          "items": {
+            "$ref": "#/$defs/CatalogGraphSchema"
+          }
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "CatalogGraph": {
+      "type": "object",
+      "description": "Graph object reference in catalog",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Graph name"
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "CatalogGraphSchema": {
+      "type": "object",
+      "description": "Graph schema object reference in catalog",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Graph schema name"
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "GraphSchema": {
+      "type": "object",
+      "description": "Graph schema specification - structural graph type plus constraints",
+      "properties": {
+        "identifier": {
+          "$ref": "#/$defs/GraphSchemaIdentifier"
+        },
+        "principal": {
+          "type": "string",
+          "description": "The owner of the graph schema, an authorization identifier of a principal"
+        },
+        "valueTypeSystemName": {
+          "type": "string",
+          "description": "The name of the value type system used by this graph schema (optional, defaults to CANONICAL)",
+          "enum": ["CANONICAL", "CYPHER", "GQL", "SQL"],
+          "default": "CANONICAL"
+        },
+        "graphType": {
+          "$ref": "#/$defs/GraphType"
+        },
+        "constraints": {
+          "type": "object",
+          "description": "A map of constraint names to constraint descriptors (optional)",
+          "additionalProperties": {
+            "$ref": "#/$defs/Constraint"
+          }
+        }
+      },
+      "required": ["identifier", "graphType"],
+      "additionalProperties": false
+    },
+    "Graph": {
+      "type": "object",
+      "description": "Graph instance specification - with optional schema, constraints, and storage schema",
+      "properties": {
+        "identifier": {
+          "$ref": "#/$defs/GraphIdentifier"
+        },
+        "principal": {
+          "type": "string",
+          "description": "The owner of the graph, an authorization identifier of a principal"
+        },
+        "valueTypeSystemName": {
+          "type": "string",
+          "description": "The name of the value type system used by this graph (optional, defaults to CANONICAL)",
+          "enum": ["CANONICAL", "CYPHER", "GQL", "SQL"],
+          "default": "CANONICAL"
+        },
+        "graphSchema": {
+          "$ref": "#/$defs/GraphSchemaIdentifier",
+          "description": "Reference to the graph schema for this graph instance"
+        },
+        "constraints": {
+          "type": "object",
+          "description": "A map of constraint names to constraint descriptors (optional)",
+          "additionalProperties": {
+            "$ref": "#/$defs/Constraint"
+          }
+        },
+        "storageSchema": {
+          "$ref": "#/$defs/StorageSchema",
+          "description": "Storage schema for graph serialization/deserialization"
+        }
+      },
+      "required": ["identifier"],
+      "additionalProperties": false
+    },
+    "GraphSchemaIdentifier": {
+      "type": "object",
+      "description": "Identifier for a graph schema - supports both LQON and GQON formats",
+      "oneOf": [
+        {
+          "description": "Locally Qualified Object Name (LQON)",
+          "properties": {
+            "locallyQualifiedObjectName": {
+              "type": "string",
+              "pattern": "^/.*",
+              "description": "Path-qualified name starting with /"
+            }
+          },
+          "required": ["locallyQualifiedObjectName"],
+          "additionalProperties": false
+        },
+        {
+          "description": "Globally Qualified Object Name (GQON)",
+          "properties": {
+            "globallyQualifiedObjectName": {
+              "type": "string",
+              "pattern": "^[^|]+\\|/.*",
+              "description": "IRI|LQON format with pipe delimiter"
+            }
+          },
+          "required": ["globallyQualifiedObjectName"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "GraphIdentifier": {
+      "type": "object",
+      "description": "Identifier for a graph instance - supports both LQON and GQON formats",
+      "oneOf": [
+        {
+          "description": "Locally Qualified Object Name (LQON)",
+          "properties": {
+            "locallyQualifiedObjectName": {
+              "type": "string",
+              "pattern": "^/.*",
+              "description": "Path-qualified name starting with /"
+            }
+          },
+          "required": ["locallyQualifiedObjectName"],
+          "additionalProperties": false
+        },
+        {
+          "description": "Globally Qualified Object Name (GQON)",
+          "properties": {
+            "globallyQualifiedObjectName": {
+              "type": "string",
+              "pattern": "^[^|]+\\|/.*",
+              "description": "IRI|LQON format with pipe delimiter"
+            }
+          },
+          "required": ["globallyQualifiedObjectName"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "StorageSchema": {
+      "type": "object",
+      "description": "Storage schema for graph serialization - placeholder for future GraphAr integration",
+      "properties": {
+        "storageType": {
+          "type": "string",
+          "description": "Storage type identifier (e.g., file format)"
+        }
+      },
+      "additionalProperties": true
+    },
+    "GraphType": {
+      "type": "object",
+      "description": "Graph type descriptor defining the structural graph type",
+      "properties": {
+        "graphPreferredName": {
+          "type": "string",
+          "enum": ["GRAPH", "PROPERTY GRAPH"],
+          "description": "Implementation-defined preferred name for graph"
+        },
+        "nodePreferredName": {
+          "type": "string",
+          "enum": ["NODE", "VERTEX"],
+          "description": "Implementation-defined preferred name for nodes"
+        },
+        "edgePreferredName": {
+          "type": "string",
+          "enum": ["EDGE", "RELATIONSHIP"],
+          "description": "Implementation-defined preferred name for edges"
+        },
+        "nodeTypeMinimumLabels": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of labels for node types"
+        },
+        "nodeTypeMaximumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of labels for node types"
+        },
+        "nodeTypeMinimumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of property types for node types"
+        },
+        "nodeTypeMaximumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of property types for node types"
+        },
+        "edgeTypeMinimumLabels": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of labels for edge types"
+        },
+        "edgeTypeMaximumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of labels for edge types"
+        },
+        "edgeTypeMinimumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of property types for edge types"
+        },
+        "edgeTypeMaximumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of property types for edge types"
+        },
+        "nodeTypes": {
+          "type": "array",
+          "description": "Set of node type descriptors",
+          "items": {
+            "$ref": "#/$defs/NodeType"
+          }
+        },
+        "edgeTypes": {
+          "type": "array",
+          "description": "Set of edge type descriptors",
+          "items": {
+            "$ref": "#/$defs/EdgeType"
+          }
+        }
+      },
+      "required": [
+        "graphPreferredName", "nodePreferredName", "edgePreferredName",
+        "nodeTypeMinimumLabels", "nodeTypeMaximumLabels",
+        "nodeTypeMinimumPropertyTypes", "nodeTypeMaximumPropertyTypes",
+        "edgeTypeMinimumLabels", "edgeTypeMaximumLabels",
+        "edgeTypeMinimumPropertyTypes", "edgeTypeMaximumPropertyTypes",
+        "nodeTypes", "edgeTypes"
+      ],
+      "additionalProperties": false
+    },
+    "NodeType": {
+      "type": "object",
+      "description": "Node type descriptor with flexible identification",
+      "properties": {
+        "nodeTypeIdentifier": {
+          "$ref": "#/$defs/NodeTypeIdentifier"
+        },
+        "labels": {
+          "type": "array",
+          "description": "Set of labels for this node type",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "propertyTypes": {
+          "type": "array",
+          "description": "Set of property type descriptors",
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          }
+        }
+      },
+      "required": ["nodeTypeIdentifier", "labels", "propertyTypes"],
+      "additionalProperties": false
+    },
+    "NodeTypeIdentifier": {
+      "description": "Flexible node type identification - index, type name label, or type identifying labels",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "nodeTypeIndex": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Integer index for node type identification"
+            }
+          },
+          "required": ["nodeTypeIndex"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeNameLabel": {
+              "type": "string",
+              "pattern": "^[a-zA-Z]",
+              "description": "Single label that serves as type name"
+            }
+          },
+          "required": ["typeNameLabel"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeIdentifyingLabels": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-zA-Z]"
+              },
+              "uniqueItems": true,
+              "minItems": 1,
+              "description": "Set of labels that uniquely identify this type"
+            }
+          },
+          "required": ["typeIdentifyingLabels"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeType": {
+      "type": "object",
+      "description": "Edge type descriptor with flexible identification",
+      "properties": {
+        "edgeTypeIdentifier": {
+          "$ref": "#/$defs/EdgeTypeIdentifier"
+        },
+        "labels": {
+          "type": "array",
+          "description": "Set of labels for this edge type",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "propertyTypes": {
+          "type": "array",
+          "description": "Set of property type descriptors",
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          }
+        },
+        "direction": {
+          "type": "string",
+          "enum": ["DIRECTED", "UNDIRECTED"],
+          "description": "Edge direction"
+        },
+        "firstEndpointNodeTypeIdentifier": {
+          "$ref": "#/$defs/NodeTypeIdentifier",
+          "description": "First endpoint node type identifier"
+        },
+        "secondEndpointNodeTypeIdentifier": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["SAME"],
+              "description": "Same as first endpoint (loop edge)"
+            },
+            {
+              "$ref": "#/$defs/NodeTypeIdentifier",
+              "description": "Second endpoint node type identifier"
+            }
+          ]
+        }
+      },
+      "required": [
+        "edgeTypeIdentifier", "labels", "propertyTypes", "direction",
+        "firstEndpointNodeTypeIdentifier", "secondEndpointNodeTypeIdentifier"
+      ],
+      "additionalProperties": false
+    },
+    "EdgeTypeIdentifier": {
+      "description": "Flexible edge type identification - index, type name label, or type identifying labels",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "edgeTypeIndex": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Integer index for edge type identification"
+            }
+          },
+          "required": ["edgeTypeIndex"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeNameLabel": {
+              "type": "string",
+              "pattern": "^[a-zA-Z]",
+              "description": "Single label that serves as type name"
+            }
+          },
+          "required": ["typeNameLabel"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeIdentifyingLabels": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-zA-Z]"
+              },
+              "uniqueItems": true,
+              "minItems": 1,
+              "description": "Set of labels that uniquely identify this type"
+            }
+          },
+          "required": ["typeIdentifyingLabels"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "PropertyType": {
+      "type": "object",
+      "description": "Property type descriptor",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Property name"
+        },
+        "valueType": {
+          "$ref": "#/$defs/ValueType"
+        }
+      },
+      "required": ["name", "valueType"],
+      "additionalProperties": false
+    },
+    "ValueType": {
+      "type": "object",
+      "description": "Value type descriptor with parameters",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "STRING", "INTEGER", "FLOAT", "BOOLEAN", "VECTOR",
+            "LIST", "RECORD", "DATE", "LOCAL TIME", "ZONED TIME",
+            "LOCAL DATETIME", "ZONED DATETIME", "DURATION"
+          ],
+          "description": "Value type name from the canonical VTS"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Value type parameters (e.g., nullable, etc.)",
+          "properties": {
+            "nullable": {
+              "type": "boolean",
+              "description": "Whether the value type is nullable"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "Constraint": {
+      "type": "object",
+      "description": "Constraint descriptor",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Constraint name"
+        },
+        "rule": {
+          "$ref": "#/$defs/ConstraintRule"
+        }
+      },
+      "required": ["name", "rule"],
+      "additionalProperties": false
+    },
+    "ConstraintRule": {
+      "type": "object",
+      "description": "Constraint rule descriptor",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "enum": ["KEY", "UNIQUE"],
+          "description": "Constraint subject type"
+        },
+        "constraintPattern": {
+          "type": "string",
+          "description": "Constraint pattern specification"
+        },
+        "uniqueKeyComponentPropertyNames": {
+          "type": "array",
+          "description": "Set of property names for unique key components",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["subject", "constraintPattern", "uniqueKeyComponentPropertyNames"],
+      "additionalProperties": false
+    }
+  }
+}
