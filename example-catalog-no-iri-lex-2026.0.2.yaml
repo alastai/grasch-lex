@@ -1,0 +1,21 @@
+# Example LEX:2026.0.2 Catalog Specification without IRI
+# Demonstrates catalog structure with only LQON addressing
+# Version: LEX:2026.0.2
+
+catalog:
+  # No IRI specified - only LQON addressing available
+  
+  directories:
+    - name: "local"
+      directories:
+        - name: "test"
+          graphSchemas:
+            - name: "test-schema"
+          graphs:
+            - name: "test-graph"
+        - name: "dev"
+          graphSchemas:
+            - name: "dev-schema"
+          graphs:
+            - name: "dev-graph-1"
+            - name: "dev-graph-2"

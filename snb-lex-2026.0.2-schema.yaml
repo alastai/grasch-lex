@@ -1,0 +1,484 @@
+# LDBC SNB (Social Network Benchmark) Schema
+# LEX:2026.0.2 Graph Schema Format
+# Based on LDBC SNB data.tex specification and LEX-100r2
+# Version: LEX:2026.0.2
+
+identifier:
+  locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+
+# valueTypeSystemName defaults to CANONICAL in 0.2
+# valueTypeSystemName: "CANONICAL"
+
+graphType:
+  graphPreferredName: "PROPERTY GRAPH"
+  nodePreferredName: "NODE"
+  edgePreferredName: "RELATIONSHIP"
+  
+  nodeTypeMinimumLabels: 1
+  nodeTypeMaximumLabels: 1
+  nodeTypeMinimumPropertyTypes: 1
+  nodeTypeMaximumPropertyTypes: 20
+  
+  edgeTypeMinimumLabels: 1
+  edgeTypeMaximumLabels: 1
+  edgeTypeMinimumPropertyTypes: 0
+  edgeTypeMaximumPropertyTypes: 5
+  
+  nodeTypes:
+    # Person - The avatar a real world person creates when joining the network
+    - nodeTypeIdentifier:
+        typeNameLabel: "Person"
+      labels: ["Person"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "firstName"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "lastName"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "gender"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "birthday"
+          valueType:
+            name: "DATE"
+            parameters:
+              nullable: false
+        - name: "creationDate"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "locationIP"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "browserUsed"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "language"
+          valueType:
+            name: "LIST"
+            parameters:
+              nullable: true
+        - name: "email"
+          valueType:
+            name: "LIST"
+            parameters:
+              nullable: true
+
+    # Organisation - Companies and universities
+    - nodeTypeIdentifier:
+        typeNameLabel: "Organisation"
+      labels: ["Organisation"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "type"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+
+    # Place - Cities, countries, continents
+    - nodeTypeIdentifier:
+        typeNameLabel: "Place"
+      labels: ["Place"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "type"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+
+    # Tag - Represents an interest, a topic
+    - nodeTypeIdentifier:
+        typeNameLabel: "Tag"
+      labels: ["Tag"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+
+    # TagClass - Hierarchical classification of tags
+    - nodeTypeIdentifier:
+        typeNameLabel: "TagClass"
+      labels: ["TagClass"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+
+    # Forum - A discussion forum
+    - nodeTypeIdentifier:
+        typeNameLabel: "Forum"
+      labels: ["Forum"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "title"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "creationDate"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+
+    # Post - A top-level message in a forum
+    - nodeTypeIdentifier:
+        typeNameLabel: "Post"
+      labels: ["Post"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "imageFile"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: true
+        - name: "creationDate"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "locationIP"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "browserUsed"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "language"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: true
+        - name: "content"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: true
+        - name: "length"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+
+    # Comment - A reply to a post or another comment
+    - nodeTypeIdentifier:
+        typeNameLabel: "Comment"
+      labels: ["Comment"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "creationDate"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "locationIP"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "browserUsed"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "content"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "length"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+
+  edgeTypes:
+    # Person knows Person
+    - edgeTypeIdentifier:
+        typeNameLabel: "KNOWS"
+      labels: ["KNOWS"]
+      propertyTypes:
+        - name: "creationDate"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+      direction: "UNDIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+
+    # Person likes Post/Comment
+    - edgeTypeIdentifier:
+        typeNameLabel: "LIKES"
+      labels: ["LIKES"]
+      propertyTypes:
+        - name: "creationDate"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeIdentifyingLabels: ["Post", "Comment"]
+
+    # Person has interest in Tag
+    - edgeTypeIdentifier:
+        typeNameLabel: "HAS_INTEREST"
+      labels: ["HAS_INTEREST"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Tag"
+
+    # Person is located in Place
+    - edgeTypeIdentifier:
+        typeNameLabel: "IS_LOCATED_IN"
+      labels: ["IS_LOCATED_IN"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeIdentifyingLabels: ["Person", "Organisation", "Post", "Comment"]
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Place"
+
+    # Person studies at/works at Organisation
+    - edgeTypeIdentifier:
+        typeNameLabel: "STUDY_AT"
+      labels: ["STUDY_AT"]
+      propertyTypes:
+        - name: "classYear"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Organisation"
+
+    - edgeTypeIdentifier:
+        typeNameLabel: "WORK_AT"
+      labels: ["WORK_AT"]
+      propertyTypes:
+        - name: "workFrom"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Organisation"
+
+    # Forum has member/moderator Person
+    - edgeTypeIdentifier:
+        typeNameLabel: "HAS_MEMBER"
+      labels: ["HAS_MEMBER"]
+      propertyTypes:
+        - name: "joinDate"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Forum"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+
+    - edgeTypeIdentifier:
+        typeNameLabel: "HAS_MODERATOR"
+      labels: ["HAS_MODERATOR"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Forum"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+
+    # Forum contains Post
+    - edgeTypeIdentifier:
+        typeNameLabel: "CONTAINER_OF"
+      labels: ["CONTAINER_OF"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Forum"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Post"
+
+    # Post/Comment has creator Person
+    - edgeTypeIdentifier:
+        typeNameLabel: "HAS_CREATOR"
+      labels: ["HAS_CREATOR"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeIdentifyingLabels: ["Post", "Comment"]
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+
+    # Comment replies to Post/Comment
+    - edgeTypeIdentifier:
+        typeNameLabel: "REPLY_OF"
+      labels: ["REPLY_OF"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Comment"
+      secondEndpointNodeTypeIdentifier:
+        typeIdentifyingLabels: ["Post", "Comment"]
+
+    # Post/Comment has tag Tag
+    - edgeTypeIdentifier:
+        typeNameLabel: "HAS_TAG"
+      labels: ["HAS_TAG"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeIdentifyingLabels: ["Post", "Comment", "Forum"]
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Tag"
+
+    # Tag has type TagClass
+    - edgeTypeIdentifier:
+        typeNameLabel: "HAS_TYPE"
+      labels: ["HAS_TYPE"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Tag"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "TagClass"
+
+    # TagClass is subclass of TagClass
+    - edgeTypeIdentifier:
+        typeNameLabel: "IS_SUBCLASS_OF"
+      labels: ["IS_SUBCLASS_OF"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "TagClass"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "TagClass"
+
+    # Place is part of Place
+    - edgeTypeIdentifier:
+        typeNameLabel: "IS_PART_OF"
+      labels: ["IS_PART_OF"]
+      propertyTypes: []
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Place"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Place"
+
+# Optional constraints (same as 0.1 for compatibility)
+constraints:
+  personIdUnique:
+    name: "personIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "Person"
+      uniqueKeyComponentPropertyNames: ["id"]
+  
+  postIdUnique:
+    name: "postIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "Post"
+      uniqueKeyComponentPropertyNames: ["id"]
