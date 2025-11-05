@@ -1,0 +1,45 @@
+# LDBC FinBench SF1 Graph Instance Specification
+# LEX:2026.0.2 Graph Instance Format
+# Demonstrates graph instance with schema reference and storage schema
+# Textual incorporation is achieved through schema reference rather than embedding
+# Version: LEX:2026.0.2
+
+identifier:
+  locallyQualifiedObjectName: "/benchmarks/ldbc/finbench-sf1"
+
+# valueTypeSystemName defaults to CANONICAL in 0.2
+# valueTypeSystemName: "CANONICAL"
+
+# Graph schema reference - references the FinBench schema by LQON
+# This demonstrates textual incorporation by reference rather than embedding
+graphSchema:
+  locallyQualifiedObjectName: "/benchmarks/ldbc/finbench"
+
+# Graph instance constraints (instance-specific constraints, could be different from schema)
+constraints:
+  personIdUnique:
+    name: "personIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "Person"
+      uniqueKeyComponentPropertyNames: ["id"]
+  
+  accountIdUnique:
+    name: "accountIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "Account"
+      uniqueKeyComponentPropertyNames: ["id"]
+      
+  companyIdUnique:
+    name: "companyIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "Company"
+      uniqueKeyComponentPropertyNames: ["id"]
+
+# Storage schema placeholder (empty as requested - future GraphAr integration)
+storageSchema:
+  storageType: "TBD"
+  # Additional storage-specific properties will be defined here
+  # when GraphAr integration requirements are finalized
