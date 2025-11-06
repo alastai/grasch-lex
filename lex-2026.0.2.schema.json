@@ -527,7 +527,7 @@
           "enum": [
             "STRING", "INTEGER", "FLOAT", "BOOLEAN", "VECTOR",
             "LIST", "RECORD", "DATE", "LOCAL TIME", "ZONED TIME",
-            "LOCAL DATETIME", "ZONED DATETIME", "DURATION"
+            "LOCAL DATETIME", "ZONED DATETIME", "DURATION", "JSON"
           ],
           "description": "Value type name from the canonical VTS"
         },
