@@ -347,10 +347,11 @@ The Universal VTS is designed to accommodate additional value type systems:
 
 ## Complete JSON Schema Type Definitions
 
-All Universal VTS types map to JSON Schema extensions with three naming fields:
+All Universal VTS types map to JSON Schema extensions with four naming fields:
 - `data.<name>`: Universal intermediate representation
 - `gql.<name>`: GQL-specific type name (undefined for SQL-only types)  
 - `sql.<name>`: SQL Foundation type name (undefined for GQL-only types)
+- `canonical.<name>`: LEX:2026.0.2 Canonical VTS type name (undefined for non-canonical types)
 
 ### Boolean Types
 ```json
@@ -361,7 +362,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "type": "boolean"
       },
       "gql.boolean": "BOOLEAN",
-      "sql.boolean": "BOOLEAN"
+      "sql.boolean": "BOOLEAN",
+      "canonical.boolean": "BOOLEAN"
     }
   }
 }
@@ -378,7 +380,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maximum": 127
       },
       "gql.int8": "INT8",
-      "sql.int8": "undefined"
+      "sql.int8": "undefined",
+      "canonical.int8": "undefined"
     },
     "int16": {
       "data.int16": {
@@ -387,7 +390,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maximum": 32767
       },
       "gql.int16": "SMALLINT",
-      "sql.int16": "SMALLINT"
+      "sql.int16": "SMALLINT",
+      "canonical.int16": "undefined"
     },
     "int32": {
       "data.int32": {
@@ -396,7 +400,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maximum": 2147483647
       },
       "gql.int32": "INTEGER",
-      "sql.int32": "INTEGER"
+      "sql.int32": "INTEGER",
+      "canonical.int32": "undefined"
     },
     "int64": {
       "data.int64": {
@@ -405,7 +410,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maximum": 9223372036854775807
       },
       "gql.int64": "BIGINT", 
-      "sql.int64": "BIGINT"
+      "sql.int64": "BIGINT",
+      "canonical.int64": "INTEGER"
     },
     "int128": {
       "data.int128": {
@@ -414,7 +420,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maximum": 170141183460469231731687303715884105727
       },
       "gql.int128": "INT128",
-      "sql.int128": "undefined"
+      "sql.int128": "undefined",
+      "canonical.int128": "undefined"
     },
     "int256": {
       "data.int256": {
@@ -423,7 +430,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maximum": 57896044618658097711785492504343953926634992332820282019728792003956564819967
       },
       "gql.int256": "INT256",
-      "sql.int256": "undefined"
+      "sql.int256": "undefined",
+      "canonical.int256": "undefined"
     },
     "uint8": {
       "data.uint8": {
@@ -432,7 +440,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maximum": 255
       },
       "gql.uint8": "UINT8",
-      "sql.uint8": "undefined"
+      "sql.uint8": "undefined",
+      "canonical.uint8": "undefined"
     },
     "uint16": {
       "data.uint16": {
@@ -441,7 +450,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maximum": 65535
       },
       "gql.uint16": "UINT16",
-      "sql.uint16": "undefined"
+      "sql.uint16": "undefined",
+      "canonical.uint16": "undefined"
     },
     "uint32": {
       "data.uint32": {
@@ -526,7 +536,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "type": "number"
       },
       "gql.float64": "DOUBLE",
-      "sql.float64": "DOUBLE PRECISION"
+      "sql.float64": "DOUBLE PRECISION",
+      "canonical.float64": "FLOAT"
     },
     "float128": {
       "data.float128": {
@@ -577,7 +588,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maxLength": {"type": "integer", "minimum": 0}
       },
       "gql.string": "STRING",
-      "sql.string": "VARCHAR"
+      "sql.string": "VARCHAR",
+      "canonical.string": "STRING"
     },
     "char": {
       "data.char": {
@@ -619,7 +631,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "format": "date"
       },
       "gql.date": "DATE",
-      "sql.date": "DATE"
+      "sql.date": "DATE",
+      "canonical.date": "DATE"
     },
     "time": {
       "data.time": {
@@ -628,7 +641,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "precision": {"type": "integer", "minimum": 0, "maximum": 9}
       },
       "gql.time": "LOCAL TIME",
-      "sql.time": "TIME"
+      "sql.time": "TIME",
+      "canonical.time": "LOCAL TIME"
     },
     "time_tz": {
       "data.timeWithTimezone": {
@@ -637,7 +651,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "precision": {"type": "integer", "minimum": 0, "maximum": 9}
       },
       "gql.timeWithTimezone": "ZONED TIME",
-      "sql.timeWithTimezone": "TIME WITH TIME ZONE"
+      "sql.timeWithTimezone": "TIME WITH TIME ZONE",
+      "canonical.timeWithTimezone": "ZONED TIME"
     },
     "datetime": {
       "data.datetime": {
@@ -646,7 +661,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "precision": {"type": "integer", "minimum": 0, "maximum": 9}
       },
       "gql.datetime": "LOCAL DATETIME",
-      "sql.datetime": "TIMESTAMP"
+      "sql.datetime": "TIMESTAMP",
+      "canonical.datetime": "LOCAL DATETIME"
     },
     "datetime_tz": {
       "data.datetimeWithTimezone": {
@@ -655,7 +671,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "precision": {"type": "integer", "minimum": 0, "maximum": 9}
       },
       "gql.datetimeWithTimezone": "ZONED DATETIME",
-      "sql.datetimeWithTimezone": "TIMESTAMP WITH TIME ZONE"
+      "sql.datetimeWithTimezone": "TIMESTAMP WITH TIME ZONE",
+      "canonical.datetimeWithTimezone": "ZONED DATETIME"
     },
     "duration": {
       "data.duration": {
@@ -664,7 +681,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "fields": {"type": "string", "enum": ["YEAR", "MONTH", "DAY", "HOUR", "MINUTE", "SECOND"]}
       },
       "gql.duration": "DURATION",
-      "sql.duration": "INTERVAL"
+      "sql.duration": "INTERVAL",
+      "canonical.duration": "DURATION"
     }
   }
 }
@@ -680,7 +698,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "fields": {"type": "object"}
       },
       "gql.record": "RECORD",
-      "sql.record": "ROW"
+      "sql.record": "ROW",
+      "canonical.record": "RECORD"
     },
     "array": {
       "data.array": {
@@ -689,7 +708,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "maxCardinality": {"type": "integer", "minimum": 0}
       },
       "gql.array": "LIST",
-      "sql.array": "ARRAY"
+      "sql.array": "ARRAY",
+      "canonical.array": "LIST"
     },
     "multiset": {
       "data.multiset": {
@@ -698,14 +718,16 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "elementType": {"type": "string"}
       },
       "gql.multiset": "undefined",
-      "sql.multiset": "MULTISET"
+      "sql.multiset": "MULTISET",
+      "canonical.multiset": "undefined"
     },
     "json": {
       "data.json": {
         "type": ["object", "array", "string", "number", "boolean", "null"]
       },
       "gql.json": "undefined",
-      "sql.json": "JSON"
+      "sql.json": "JSON",
+      "canonical.json": "JSON"
     },
     "vector": {
       "data.vector": {
@@ -715,7 +737,8 @@ All Universal VTS types map to JSON Schema extensions with three naming fields:
         "elementType": {"type": "string", "enum": ["float32", "float64", "int32", "int64"]}
       },
       "gql.vector": "VECTOR",
-      "sql.vector": "VECTOR"
+      "sql.vector": "VECTOR",
+      "canonical.vector": "VECTOR"
     },
     "null": {
       "data.null": {
