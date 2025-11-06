@@ -102,12 +102,12 @@ def analyze_schema_structure(yaml_data: dict) -> dict:
 
 def main():
     """Main validation function"""
-    print("LEX:2026.0.2 SNB Schema Validation")
+    print("LEX:2026.0.2.1 SNB Schema Validation")
     print("=" * 50)
     
     # File paths
-    json_schema_path = "lex-2026.0.2.schema.json"
-    yaml_schema_path = "snb-lex-2026.0.2-schema.yaml"
+    json_schema_path = "../src/grasch/schemas/lex-2026.0.2.1.schema.json"
+    yaml_schema_path = "../src/grasch/examples/snb-lex-2026.0.2.1-schema.yaml"
     
     # Check if files exist
     if not Path(json_schema_path).exists():

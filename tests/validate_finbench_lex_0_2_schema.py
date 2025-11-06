@@ -106,8 +106,8 @@ def main():
     print("=" * 50)
     
     # File paths
-    json_schema_path = "lex-2026.0.2.schema.json"
-    yaml_schema_path = "finbench-lex-2026.0.2-schema.yaml"
+    json_schema_path = "../src/grasch/schemas/lex-2026.0.2.schema.json"
+    yaml_schema_path = "../src/grasch/examples/finbench-lex-2026.0.2-schema.yaml"
     
     # Check if files exist
     if not Path(json_schema_path).exists():

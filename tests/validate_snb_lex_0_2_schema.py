@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Validation script for LDBC FinBench LEX:2026.0.2 Graph Schema
-Validates the FinBench schema against the LEX:2026.0.2 JSON Schema for LEX specifications
+Validation script for LDBC SNB LEX:2026.0.2 Graph Schema
+Validates the SNB schema against the LEX:2026.0.2 JSON Schema for LEX specifications
 """
 
 import json
@@ -102,12 +102,12 @@ def analyze_schema_structure(yaml_data: dict) -> dict:
 
 def main():
     """Main validation function"""
-    print("LEX:2026.0.2.1 FinBench Schema Validation")
+    print("LEX:2026.0.2 SNB Schema Validation")
     print("=" * 50)
     
     # File paths
-    json_schema_path = "lex-2026.0.2.1.schema.json"
-    yaml_schema_path = "finbench-lex-2026.0.2.1-schema.yaml"
+    json_schema_path = "../src/grasch/schemas/lex-2026.0.2.schema.json"
+    yaml_schema_path = "../src/grasch/examples/snb-lex-2026.0.2-schema.yaml"
     
     # Check if files exist
     if not Path(json_schema_path).exists():
@@ -158,7 +158,7 @@ def main():
     for i, identifier in analysis['edge_type_identifiers'].items():
         print(f"    [{i}] {identifier}")
     
-    print(f"\n🎉 FinBench LEX:2026.0.2 schema validation completed successfully!")
+    print(f"\n🎉 SNB LEX:2026.0.2 schema validation completed successfully!")
     print(f"   Schema defines {analysis['node_types']} node types and {analysis['edge_types']} edge types")
     print(f"   with {analysis['total_properties']} total properties and {analysis['constraints']} constraints")
 
