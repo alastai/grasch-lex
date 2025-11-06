@@ -76,7 +76,41 @@ This document tracks the versions of LEX:2026 Graph Schema artifacts.
 
 ---
 
-## Version LEX:2026.0.2 (Released)
+## Version LEX:2026.0.2.1 (Current)
+
+**Release Date**: November 6, 2025
+
+### New in 0.2.1
+- **Enhanced JSON Schema**: Added complete `$defs` section with canonical value type definitions
+- **Four-Way Type Mappings**: Each canonical type includes data/gql/sql/canonical mappings  
+- **Validation Ready**: JSON Schema now self-validates canonical type usage
+- **Cross-System Documentation**: Complete type system interoperability in schema
+- **Build Numbering**: Introduced build/revision numbers for iterative delivery
+
+### Artifacts
+
+#### Core Schema Definition
+- `lex-2026.0.2.1.schema.json` - Enhanced JSON Schema with embedded canonical type definitions
+
+#### Example Schemas
+- `snb-lex-2026.0.2.1-schema.yaml` - LDBC SNB schema (canonical types validated)
+- `finbench-lex-2026.0.2.1-schema.yaml` - LDBC FinBench schema (canonical types validated)
+- `example-catalog-lex-2026.0.2.1.yaml` - Example catalog specification
+
+#### Example Graph Instances
+- `finbench-sf1-graph-lex-2026.0.2.1.yaml` - FinBench SF1 graph instance
+
+#### Validation Tools
+- `validate_snb_lex_0_2_1_schema.py` - SNB schema validation script for 0.2.1
+- `validate_finbench_lex_0_2_1_schema.py` - FinBench schema validation script for 0.2.1
+
+### Features Enhanced in 0.2.1
+- **Canonical Type System**: Complete JSON Schema definitions for all 14 canonical types
+- **Type System Interoperability**: Four-way mappings (Universal VTS ↔ GQL ↔ SQL ↔ Canonical)
+- **Self-Documenting Schema**: Type definitions embedded in JSON Schema for tooling
+- **Validated Examples**: All YAML examples use only canonical types
+
+## Version LEX:2026.0.2 (Superseded)
 
 **Release Date**: November 6, 2025
 
