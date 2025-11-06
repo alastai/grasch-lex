@@ -1,18 +1,18 @@
-# Intermediate Language Value Types (ILVT) Specification
+# Universal Value Type System (Universal VTS) Specification
 
 **Version**: 1.0  
 **Date**: 2025-08-22  
-**Purpose**: Universal type mapping system for interoperability between GQL, SQL Foundation, JSON Schema extensions, and future type systems.
+**Purpose**: Universal type mapping system for interoperability between GQL, SQL Foundation, JSON Schema extensions, and future value type systems.
 
 ## Architecture Overview
 
-The ILVT system creates a union of all supported value types from different systems and provides bidirectional mappings through a centralized intermediate representation:
+The Universal VTS creates a union of all supported value types from different systems and provides bidirectional mappings through a centralized intermediate representation:
 
 ```
 ┌─────────────┐    ┌─────────────────────┐    ┌─────────────────┐
-│ GQL Property│◄──►│ Intermediate        │◄──►│ SQL Foundation  │
-│ Value Types │    │ Language Value      │    │ Data Types      │
-└─────────────┘    │ Types (ILVT)        │    └─────────────────┘
+│ GQL Property│◄──►│ Universal Value     │◄──►│ SQL Foundation  │
+│ Value Types │    │ Type System         │    │ Data Types      │
+└─────────────┘    │ (Universal VTS)     │    └─────────────────┘
                    │                     │
 ┌─────────────┐    │                     │    ┌─────────────────┐
 │ Cypher      │◄──►│                     │◄──►│ JSON Schema     │
@@ -20,14 +20,14 @@ The ILVT system creates a union of all supported value types from different syst
 └─────────────┘    └─────────────────────┘    └─────────────────┘
                    │                     │
                    │                     │    ┌─────────────────┐
-                   │                     │◄──►│ Future Type     │
-                   │                     │    │ Systems         │
+                   │                     │◄──►│ Future Value    │
+                   │                     │    │ Type Systems    │
                    └─────────────────────┘    └─────────────────┘
 ```
 
-## Core ILVT Type Registry
+## Core Universal VTS Type Registry
 
-| **ILVT Type** | **Category** | **Description** | **Parameters** |
+| **Universal VTS Type** | **Category** | **Description** | **Parameters** |
 |---------------|--------------|-----------------|----------------|
 | **Boolean Types** | | | |
 | `boolean` | Logical | Boolean true/false values | - |
@@ -78,15 +78,15 @@ The ILVT system creates a union of all supported value types from different syst
 | `vector` | Numeric Array | Fixed-size numeric vector | `dimension`, `element_type` |
 | `null` | Special | Null/missing value | - |
 
-## 5-Way Type Mapping Tables
+## 5-Way Value Type System Mapping Tables
 
 ### Boolean Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+| **Universal VTS Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|----------------------|---------------------------|
 | `boolean` | `BOOLEAN`, `BOOL` | `BOOLEAN` | `BOOLEAN` | `data.boolean` |
 
 ### Integer Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+| **Universal VTS Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|----------------------|---------------------------|
 | `int8` | `INT8` | *No SQL equivalent* | *No Cypher equivalent* | `data.int8` |
 | `int16` | `SMALLINT`, `INT16` | `SMALLINT` | *No Cypher equivalent* | `data.int16` |
@@ -112,7 +112,7 @@ The ILVT system creates a union of all supported value types from different syst
 **Affected Types**: `int8`, `int16`, `int32`, `int64` - SQL precision and ranges are implementation-defined
 
 ### Decimal and Floating Point Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+| **Universal VTS Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|----------------------|---------------------------|
 | `decimal` | `DECIMAL`, `DEC` | `DECIMAL`, `NUMERIC`, `DEC` | *No Cypher equivalent* | `data.decimal` |
 | `numeric` | `NUMERIC` | `NUMERIC` | *No Cypher equivalent* | `data.numeric` |
@@ -126,15 +126,19 @@ The ILVT system creates a union of all supported value types from different syst
 | `decfloat128` | *No GQL equivalent* | `DECFLOAT(34)` | *No Cypher equivalent* | `data.decfloat128` |
 
 ### String and Binary Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+| **Universal VTS Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|----------------------|---------------------------|
 | `string` | `STRING` | `VARCHAR`, `CHARACTER VARYING` | `STRING` | `data.string` |
 | `char` | `CHAR` | `CHAR`, `CHARACTER` | *No Cypher equivalent* | `data.char` |
+| `clob` | *No GQL equivalent* | `CLOB`, `CHARACTER LARGE OBJECT` | *No Cypher equivalent* | `data.clob` |
+| `nchar` | *No GQL equivalent* | `NCHAR`, `NATIONAL CHARACTER` | *No Cypher equivalent* | `data.nchar` |
+| `nclob` | *No GQL equivalent* | `NCLOB`, `NATIONAL CHARACTER LARGE OBJECT` | *No Cypher equivalent* | `data.nclob` |
 | `bytes` | `BYTES` | `BLOB`, `BINARY LARGE OBJECT` | *No Cypher equivalent* | `data.bytes` |
 | `binary` | `BINARY` | `BINARY` | *No Cypher equivalent* | `data.binary` |
+| `varbinary` | *No GQL equivalent* | `VARBINARY`, `BINARY VARYING` | *No Cypher equivalent* | `data.varbinary` |
 
 ### Temporal Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+| **Universal VTS Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|----------------------|---------------------------|
 | `date` | `DATE` | `DATE` | `DATE` | `data.date` |
 | `time` | `LOCAL TIME` | `TIME` | `TIME` | `data.time` |
@@ -144,11 +148,12 @@ The ILVT system creates a union of all supported value types from different syst
 | `duration` | `DURATION` | `INTERVAL` | `DURATION` | `data.duration` |
 
 ### Structured and Special Types
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
+| **Universal VTS Type** | **GQL Property Value Type** | **SQL Foundation Type** | **Cypher Data Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|----------------------|---------------------------|
 | `record` | `RECORD` | `ROW` | *No Cypher equivalent* | `data.record` |
 | `array` | `LIST` | `ARRAY` | `LIST` | `data.array` |
 | `multiset` | *No GQL equivalent* | `MULTISET` | *No Cypher equivalent* | `data.multiset` |
+| `ref` | *No GQL equivalent* | `REF` | *No Cypher equivalent* | `data.ref` |
 | `json` | *No GQL equivalent* | `JSON` | *No Cypher equivalent* | `data.json` |
 | `vector` | `VECTOR` | `VECTOR` | *No Cypher equivalent* | `data.vector` |
 | `null` | `NULL` | `NULL` | `NULL` | `data.null` |
@@ -156,9 +161,9 @@ The ILVT system creates a union of all supported value types from different syst
 ## Cypher Data Type System Integration
 
 ### Core Cypher Types
-Cypher supports a limited but practical set of data types that map to ILVT as follows:
+Cypher supports a limited but practical set of data types that map to Universal VTS as follows:
 
-| **Cypher Type** | **ILVT Mapping** | **Description** | **Value Range/Format** |
+| **Cypher Type** | **Universal VTS Mapping** | **Description** | **Value Range/Format** |
 |-----------------|------------------|-----------------|------------------------|
 | `BOOLEAN` | `boolean` | Boolean true/false values | `true`, `false` |
 | `INTEGER` | `int64` | 64-bit signed integer | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
@@ -173,7 +178,7 @@ Cypher supports a limited but practical set of data types that map to ILVT as fo
 
 ### Cypher Collection Types
 - **LIST**: Cypher lists are heterogeneous (can contain mixed types), unlike strongly-typed arrays in GQL/SQL
-- **MAP**: Cypher supports map/dictionary types (key-value pairs) but these map to `record` in ILVT
+- **MAP**: Cypher supports map/dictionary types (key-value pairs) but these map to `record` in Universal VTS
 
 ### Cypher Type Characteristics
 - **Dynamic Typing**: Cypher is dynamically typed, allowing mixed-type collections
@@ -183,15 +188,15 @@ Cypher supports a limited but practical set of data types that map to ILVT as fo
 - **No Decimal Types**: Cypher uses floating-point for all non-integer numbers
 
 ### Language Level Mapping Strategy
-When translating between ILVT and Cypher types based on language level:
+When translating between Universal VTS and Cypher types based on language level:
 
 **GQL Language Level**:
-- Use full ILVT type system with precise type mappings
+- Use full Universal VTS with precise type mappings
 - Support all GQL-specific types (INT8, UINT*, extended precision)
 - Strict type validation and constraint enforcement
 
 **LEX Language Level** (Cypher compatibility):
-- Map to Cypher-compatible subset of ILVT
+- Map to Cypher-compatible subset of Universal VTS
 - `int64` for all integer types (with range validation)
 - `float64` for all floating-point types
 - `string` for all text types
@@ -223,7 +228,7 @@ When translating between ILVT and Cypher types based on language level:
 - `multiset` - Unordered collections with duplicates
 
 ### Future Extension Types
-The ILVT system is designed to accommodate additional type systems:
+The Universal VTS is designed to accommodate additional value type systems:
 - **Apache Arrow**: Columnar data types
 - **Apache Parquet**: File format types
 - **Apache Avro**: Schema evolution types
@@ -232,7 +237,7 @@ The ILVT system is designed to accommodate additional type systems:
 
 ## Complete JSON Schema Type Definitions
 
-All ILVT types map to JSON Schema extensions with three naming fields:
+All Universal VTS types map to JSON Schema extensions with three naming fields:
 - `data.<name>`: Universal intermediate representation
 - `gql.<name>`: GQL-specific type name (undefined for SQL-only types)  
 - `sql.<name>`: SQL Foundation type name (undefined for GQL-only types)
@@ -720,7 +725,7 @@ All ILVT types map to JSON Schema extensions with three naming fields:
 
 ## Annexe: Specification Evidence and Corrections
 
-**IMPORTANT**: This annexe contains the actual specification excerpts that were used to create the ILVT mappings, along with corrections to initial assumptions.
+**IMPORTANT**: This annexe contains the actual specification excerpts that were used to create the Universal VTS mappings, along with corrections to initial assumptions.
 
 ### A.1 Major Corrections to Initial Assumptions
 
@@ -910,21 +915,21 @@ All ILVT types map to JSON Schema extensions with three naming fields:
     VECTOR <left paren> <dimension> <comma> <coordinate type> <right paren> [ <not null> ]
 ```
 
-### A.3 Revised ILVT Mappings Based on Specification Evidence
+### A.3 Revised Universal VTS Mappings Based on Specification Evidence
 
 #### A.3.1 Corrected Integer Type Mappings
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
+| **Universal VTS Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|---------------------------|
 | `int8` | `INT8` | *No SQL equivalent* | `data.int8` |
 | `uint8` | `UINT8` | *No SQL equivalent* | `data.uint8` |
 
 #### A.3.2 Corrected Vector Type Mappings
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
+| **Universal VTS Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|---------------------------|
 | `vector` | `VECTOR` | `VECTOR` | `data.vector` |
 
 #### A.3.3 Corrected JSON Type Mappings
-| **ILVT Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
+| **Universal VTS Type** | **GQL Property Value Type** | **SQL Foundation Type** | **JSON Schema Extension** |
 |---------------|----------------------------|-------------------------|---------------------------|
 | `json` | *No GQL equivalent* | `JSON` | `data.json` |
 

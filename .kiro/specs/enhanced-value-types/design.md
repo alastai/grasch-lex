@@ -2,15 +2,15 @@
 
 ## Overview
 
-This design document outlines the architecture for implementing the Intermediate Language Value Types (ILVT) system as defined in the property-graph-schema specification. The system provides universal type mapping and validation capabilities for interoperability between GQL, SQL Foundation, JSON Schema extensions, and future type systems. The design maintains backward compatibility while implementing the complete ILVT type registry and cross-language mapping capabilities.
+This design document outlines the architecture for implementing the Universal Value Type System (Universal VTS) as defined in the property-graph-schema specification. The system provides universal type mapping and validation capabilities for interoperability between GQL, SQL Foundation, JSON Schema extensions, and future value type systems. The design maintains backward compatibility while implementing the complete Universal VTS type registry and cross-language mapping capabilities.
 
 ## Architecture
 
 ### Core Components
 
 ```
-ILVT-Based Value Types System
-├── ILVTType (Enum)
+Universal VTS-Based Value Types System
+├── UniversalVTSType (Enum)
 │   ├── Boolean Types (boolean)
 │   ├── Integer Types (int8, int16, int32, int64, int128, int256, uint8, uint16, uint32, uint64, uint128, uint256)
 │   ├── Decimal Types (decimal, numeric)
