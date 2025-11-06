@@ -127,6 +127,11 @@ graphType:
             name: "STRING"
             parameters:
               nullable: true
+        - name: "metadata"
+          valueType:
+            name: "JSON"
+            parameters:
+              nullable: true
 
     # Medium - A communication medium (phone, email, etc.)
     - nodeTypeIdentifier:

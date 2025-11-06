@@ -202,6 +202,116 @@ When translating between Universal VTS and Cypher types based on language level:
 - `string` for all text types
 - Allow heterogeneous collections (relaxed type constraints)
 
+## LEX:2026.0.2 Canonical Value Type System
+
+### Canonical VTS Overview
+
+The LEX:2026.0.2 Canonical VTS represents a curated subset of the Universal VTS, designed for practical graph database applications with broad compatibility across different systems.
+
+### Canonical VTS Types
+
+| **Canonical VTS Type** | **Universal VTS Mapping** | **Description** | **Rationale** |
+|------------------------|---------------------------|-----------------|---------------|
+| `BOOLEAN` | `boolean` | Boolean true/false values | Universal support |
+| `STRING` | `string` | Variable-length text strings | Universal support |
+| `INTEGER` | `int64` | 64-bit signed integers | Cypher-compatible, practical range |
+| `FLOAT` | `float64` | IEEE 754 double-precision | Cypher-compatible, sufficient precision |
+| `DATE` | `date` | Calendar dates | Universal temporal support |
+| `LOCAL TIME` | `time` | Time without timezone | Common use case |
+| `ZONED TIME` | `time_tz` | Time with timezone | International applications |
+| `LOCAL DATETIME` | `datetime` | Timestamp without timezone | Common use case |
+| `ZONED DATETIME` | `datetime_tz` | Timestamp with timezone | International applications |
+| `DURATION` | `duration` | Time intervals | Universal temporal support |
+| `LIST` | `array` | Ordered collections | Universal collection support |
+| `RECORD` | `record` | Structured nested objects | Universal structured data |
+| `VECTOR` | `vector` | Numeric vectors for ML/AI | Emerging graph analytics need |
+| `JSON` | `json` | JSON documents | Semi-structured data support |
+
+### Canonical VTS Design Principles
+
+1. **Cypher Compatibility**: All types have direct Cypher equivalents or reasonable mappings
+2. **Practical Sufficiency**: Covers 95% of real-world graph database use cases
+3. **Cross-System Support**: Each type supported by multiple target systems
+4. **Future-Proof**: Extensible through Universal VTS for specialized needs
+
+## Canonical VTS Cross-System Mappings
+
+### Canonical ↔ GQL Property Value Types
+
+| **Canonical Type** | **GQL Mapping** | **Notes** |
+|-------------------|-----------------|-----------|
+| `BOOLEAN` | `BOOLEAN`, `BOOL` | Direct mapping |
+| `STRING` | `STRING` | Direct mapping |
+| `INTEGER` | `BIGINT`, `INT64` | 64-bit signed integer |
+| `FLOAT` | `DOUBLE`, `DOUBLE PRECISION`, `FLOAT64` | Double precision |
+| `DATE` | `DATE` | Direct mapping |
+| `LOCAL TIME` | `LOCAL TIME` | Direct mapping |
+| `ZONED TIME` | `ZONED TIME` | Direct mapping |
+| `LOCAL DATETIME` | `LOCAL DATETIME` | Direct mapping |
+| `ZONED DATETIME` | `ZONED DATETIME` | Direct mapping |
+| `DURATION` | `DURATION` | Direct mapping |
+| `LIST` | `LIST` | Direct mapping |
+| `RECORD` | `RECORD` | Direct mapping |
+| `VECTOR` | `VECTOR` | Direct mapping |
+| `JSON` | *No direct GQL equivalent* | Use RECORD for structured representation |
+
+### Canonical ↔ SQL Foundation Types
+
+| **Canonical Type** | **SQL Mapping** | **Notes** |
+|-------------------|-----------------|-----------|
+| `BOOLEAN` | `BOOLEAN` | Direct mapping |
+| `STRING` | `VARCHAR`, `CHARACTER VARYING` | Variable-length strings |
+| `INTEGER` | `BIGINT` | 64-bit signed integer |
+| `FLOAT` | `DOUBLE PRECISION` | Double precision floating point |
+| `DATE` | `DATE` | Direct mapping |
+| `LOCAL TIME` | `TIME` | Time without timezone |
+| `ZONED TIME` | `TIME WITH TIME ZONE` | Time with timezone |
+| `LOCAL DATETIME` | `TIMESTAMP` | Timestamp without timezone |
+| `ZONED DATETIME` | `TIMESTAMP WITH TIME ZONE` | Timestamp with timezone |
+| `DURATION` | `INTERVAL` | Time intervals |
+| `LIST` | `ARRAY` | Ordered collections |
+| `RECORD` | `ROW` | Structured row types |
+| `VECTOR` | `VECTOR` | Numeric vector type |
+| `JSON` | `JSON` | Direct mapping |
+
+### Canonical ↔ Cypher Data Types
+
+| **Canonical Type** | **Cypher Mapping** | **Notes** |
+|-------------------|-------------------|-----------|
+| `BOOLEAN` | `BOOLEAN` | Direct mapping |
+| `STRING` | `STRING` | Direct mapping |
+| `INTEGER` | `INTEGER` | 64-bit signed integer |
+| `FLOAT` | `FLOAT` | IEEE 754 double precision |
+| `DATE` | `DATE` | Direct mapping |
+| `LOCAL TIME` | `TIME` | Direct mapping |
+| `ZONED TIME` | *No Cypher equivalent* | Use STRING representation |
+| `LOCAL DATETIME` | `DATETIME` | Direct mapping |
+| `ZONED DATETIME` | *No Cypher equivalent* | Use STRING representation |
+| `DURATION` | `DURATION` | Direct mapping |
+| `LIST` | `LIST` | Direct mapping (heterogeneous) |
+| `RECORD` | *No direct equivalent* | Use MAP for key-value pairs |
+| `VECTOR` | *No Cypher equivalent* | Use LIST of numbers |
+| `JSON` | *No Cypher equivalent* | Use MAP or STRING representation |
+
+### Canonical ↔ JSON Schema Extensions
+
+| **Canonical Type** | **JSON Schema Mapping** | **Notes** |
+|-------------------|------------------------|-----------|
+| `BOOLEAN` | `data.boolean` | Boolean type extension |
+| `STRING` | `data.string` | String type extension |
+| `INTEGER` | `data.int64` | 64-bit signed integer |
+| `FLOAT` | `data.float64` | Double precision float |
+| `DATE` | `data.date` | ISO 8601 date format |
+| `LOCAL TIME` | `data.time` | ISO 8601 time format |
+| `ZONED TIME` | `data.timeWithTimezone` | ISO 8601 time with timezone |
+| `LOCAL DATETIME` | `data.datetime` | ISO 8601 datetime format |
+| `ZONED DATETIME` | `data.datetimeWithTimezone` | ISO 8601 datetime with timezone |
+| `DURATION` | `data.duration` | ISO 8601 duration format |
+| `LIST` | `data.array` | Array type extension |
+| `RECORD` | `data.record` | Object type extension |
+| `VECTOR` | `data.vector` | Numeric vector extension |
+| `JSON` | `data.json` | JSON document type |
+
 ## Type System Coverage Analysis
 
 ### Universal Types (Supported by All Systems)
