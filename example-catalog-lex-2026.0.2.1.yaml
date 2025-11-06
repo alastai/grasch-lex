@@ -1,0 +1,36 @@
+# Example LEX:2026.0.2 Catalog Specification
+# Demonstrates the catalog structure with hierarchical organization
+# Version: LEX:2026.0.2
+
+catalog:
+  IRI: "https://ldbcouncil.org/schemas/"
+  
+  directories:
+    - name: "benchmarks"
+      directories:
+        - name: "ldbc"
+          graphSchemas:
+            - name: "snb"
+            - name: "finbench"
+          graphs:
+            - name: "snb-sf1"
+            - name: "finbench-sf1"
+        - name: "tpc"
+          graphSchemas:
+            - name: "tpc-h-graph"
+      
+    - name: "production"
+      directories:
+        - name: "finance"
+          graphSchemas:
+            - name: "trading-schema"
+            - name: "risk-schema"
+          graphs:
+            - name: "trading-live"
+            - name: "risk-live"
+        - name: "social"
+          graphSchemas:
+            - name: "user-schema"
+          graphs:
+            - name: "user-prod"
+            - name: "user-staging"

@@ -1,0 +1,429 @@
+# LDBC FinBench (Financial Benchmark) Schema
+# LEX:2026.0.2 Graph Schema Format
+# Based on LDBC FinBench data.tex specification and LEX-100r2
+# Version: LEX:2026.0.2
+
+identifier:
+  globallyQualifiedObjectName: "https://ldbcouncil.org/schemas/|/benchmarks/ldbc/finbench"
+
+# valueTypeSystemName defaults to CANONICAL in 0.2
+# valueTypeSystemName: "CANONICAL"
+
+graphType:
+  graphPreferredName: "PROPERTY GRAPH"
+  nodePreferredName: "NODE"
+  edgePreferredName: "RELATIONSHIP"
+  
+  nodeTypeMinimumLabels: 1
+  nodeTypeMaximumLabels: 1
+  nodeTypeMinimumPropertyTypes: 1
+  nodeTypeMaximumPropertyTypes: 15
+  
+  edgeTypeMinimumLabels: 1
+  edgeTypeMaximumLabels: 1
+  edgeTypeMinimumPropertyTypes: 0
+  edgeTypeMaximumPropertyTypes: 10
+  
+  nodeTypes:
+    # Person - A person of the real world
+    - nodeTypeIdentifier:
+        typeNameLabel: "Person"
+      labels: ["Person"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "isBlocked"
+          valueType:
+            name: "BOOLEAN"
+            parameters:
+              nullable: false
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+
+    # Account - A bank account
+    - nodeTypeIdentifier:
+        typeNameLabel: "Account"
+      labels: ["Account"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "isBlocked"
+          valueType:
+            name: "BOOLEAN"
+            parameters:
+              nullable: false
+        - name: "type"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+
+    # Company - A business entity
+    - nodeTypeIdentifier:
+        typeNameLabel: "Company"
+      labels: ["Company"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "name"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "isBlocked"
+          valueType:
+            name: "BOOLEAN"
+            parameters:
+              nullable: false
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "country"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "city"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "business"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "description"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: true
+        - name: "url"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: true
+        - name: "metadata"
+          valueType:
+            name: "JSON"
+            parameters:
+              nullable: true
+
+    # Medium - A communication medium (phone, email, etc.)
+    - nodeTypeIdentifier:
+        typeNameLabel: "Medium"
+      labels: ["Medium"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "type"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "isBlocked"
+          valueType:
+            name: "BOOLEAN"
+            parameters:
+              nullable: false
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "lastLoginTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: true
+        - name: "riskLevel"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              nullable: false
+
+    # Loan - A financial loan
+    - nodeTypeIdentifier:
+        typeNameLabel: "Loan"
+      labels: ["Loan"]
+      propertyTypes:
+        - name: "id"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "loanAmount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              nullable: false
+        - name: "balance"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              nullable: false
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "loanUsage"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "interestRate"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              nullable: false
+
+  edgeTypes:
+    # Person owns Account
+    - edgeTypeIdentifier:
+        typeNameLabel: "OWN"
+      labels: ["OWN"]
+      propertyTypes:
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Account"
+
+    # Account transfers to Account
+    - edgeTypeIdentifier:
+        typeNameLabel: "TRANSFER"
+      labels: ["TRANSFER"]
+      propertyTypes:
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "amount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              nullable: false
+        - name: "orderNum"
+          valueType:
+            name: "INTEGER"
+            parameters:
+              nullable: false
+        - name: "comment"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: true
+        - name: "payType"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+        - name: "goodsType"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: true
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Account"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Account"
+
+    # Account withdraws from Account
+    - edgeTypeIdentifier:
+        typeNameLabel: "WITHDRAW"
+      labels: ["WITHDRAW"]
+      propertyTypes:
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "amount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Account"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Account"
+
+    # Account repays Loan
+    - edgeTypeIdentifier:
+        typeNameLabel: "REPAY"
+      labels: ["REPAY"]
+      propertyTypes:
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "amount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Account"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Loan"
+
+    # Loan deposits to Account
+    - edgeTypeIdentifier:
+        typeNameLabel: "DEPOSIT"
+      labels: ["DEPOSIT"]
+      propertyTypes:
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "amount"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Loan"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Account"
+
+    # Person applies for Loan
+    - edgeTypeIdentifier:
+        typeNameLabel: "APPLY"
+      labels: ["APPLY"]
+      propertyTypes:
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "org"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Loan"
+
+    # Person guarantees Person
+    - edgeTypeIdentifier:
+        typeNameLabel: "GUARANTEE"
+      labels: ["GUARANTEE"]
+      propertyTypes:
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "relation"
+          valueType:
+            name: "STRING"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+
+    # Person invests in Company
+    - edgeTypeIdentifier:
+        typeNameLabel: "INVEST"
+      labels: ["INVEST"]
+      propertyTypes:
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+        - name: "ratio"
+          valueType:
+            name: "FLOAT"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeNameLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Company"
+
+    # Person/Company uses Medium
+    - edgeTypeIdentifier:
+        typeNameLabel: "USE"
+      labels: ["USE"]
+      propertyTypes:
+        - name: "createTime"
+          valueType:
+            name: "ZONED DATETIME"
+            parameters:
+              nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeIdentifyingLabels: ["Person", "Company"]
+      secondEndpointNodeTypeIdentifier:
+        typeNameLabel: "Medium"
+
+# Optional constraints
+constraints:
+  personIdUnique:
+    name: "personIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "Person"
+      uniqueKeyComponentPropertyNames: ["id"]
+  
+  accountIdUnique:
+    name: "accountIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "Account"
+      uniqueKeyComponentPropertyNames: ["id"]
+      
+  companyIdUnique:
+    name: "companyIdUnique"
+    rule:
+      subject: "UNIQUE"
+      constraintPattern: "Company"
+      uniqueKeyComponentPropertyNames: ["id"]
