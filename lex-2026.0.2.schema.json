@@ -586,5 +586,141 @@
       "required": ["subject", "constraintPattern", "uniqueKeyComponentPropertyNames"],
       "additionalProperties": false
     }
+  },
+  "$defs": {
+    "canonicalValueTypes": {
+      "boolean": {
+        "data.boolean": {
+          "type": "boolean"
+        },
+        "gql.boolean": "BOOLEAN",
+        "sql.boolean": "BOOLEAN",
+        "canonical.boolean": "BOOLEAN"
+      },
+      "string": {
+        "data.string": {
+          "type": "string",
+          "maxLength": {"type": "integer", "minimum": 0}
+        },
+        "gql.string": "STRING",
+        "sql.string": "VARCHAR",
+        "canonical.string": "STRING"
+      },
+      "integer": {
+        "data.int64": {
+          "type": "integer",
+          "minimum": -9223372036854775808,
+          "maximum": 9223372036854775807
+        },
+        "gql.int64": "BIGINT",
+        "sql.int64": "BIGINT",
+        "canonical.int64": "INTEGER"
+      },
+      "float": {
+        "data.float64": {
+          "type": "number"
+        },
+        "gql.float64": "DOUBLE",
+        "sql.float64": "DOUBLE PRECISION",
+        "canonical.float64": "FLOAT"
+      },
+      "date": {
+        "data.date": {
+          "type": "string",
+          "format": "date"
+        },
+        "gql.date": "DATE",
+        "sql.date": "DATE",
+        "canonical.date": "DATE"
+      },
+      "localTime": {
+        "data.time": {
+          "type": "string",
+          "format": "time",
+          "precision": {"type": "integer", "minimum": 0, "maximum": 9}
+        },
+        "gql.time": "LOCAL TIME",
+        "sql.time": "TIME",
+        "canonical.time": "LOCAL TIME"
+      },
+      "zonedTime": {
+        "data.timeWithTimezone": {
+          "type": "string",
+          "format": "time",
+          "precision": {"type": "integer", "minimum": 0, "maximum": 9}
+        },
+        "gql.timeWithTimezone": "ZONED TIME",
+        "sql.timeWithTimezone": "TIME WITH TIME ZONE",
+        "canonical.timeWithTimezone": "ZONED TIME"
+      },
+      "localDatetime": {
+        "data.datetime": {
+          "type": "string",
+          "format": "date-time",
+          "precision": {"type": "integer", "minimum": 0, "maximum": 9}
+        },
+        "gql.datetime": "LOCAL DATETIME",
+        "sql.datetime": "TIMESTAMP",
+        "canonical.datetime": "LOCAL DATETIME"
+      },
+      "zonedDatetime": {
+        "data.datetimeWithTimezone": {
+          "type": "string",
+          "format": "date-time",
+          "precision": {"type": "integer", "minimum": 0, "maximum": 9}
+        },
+        "gql.datetimeWithTimezone": "ZONED DATETIME",
+        "sql.datetimeWithTimezone": "TIMESTAMP WITH TIME ZONE",
+        "canonical.datetimeWithTimezone": "ZONED DATETIME"
+      },
+      "duration": {
+        "data.duration": {
+          "type": "string",
+          "format": "duration",
+          "fields": {"type": "string", "enum": ["YEAR", "MONTH", "DAY", "HOUR", "MINUTE", "SECOND"]}
+        },
+        "gql.duration": "DURATION",
+        "sql.duration": "INTERVAL",
+        "canonical.duration": "DURATION"
+      },
+      "list": {
+        "data.array": {
+          "type": "array",
+          "elementType": {"type": "string"},
+          "maxCardinality": {"type": "integer", "minimum": 0}
+        },
+        "gql.array": "LIST",
+        "sql.array": "ARRAY",
+        "canonical.array": "LIST"
+      },
+      "record": {
+        "data.record": {
+          "type": "object",
+          "fields": {"type": "object"}
+        },
+        "gql.record": "RECORD",
+        "sql.record": "ROW",
+        "canonical.record": "RECORD"
+      },
+      "vector": {
+        "data.vector": {
+          "type": "array",
+          "items": {"type": "number"},
+          "dimension": {"type": "integer", "minimum": 1},
+          "elementType": {"type": "string", "enum": ["float32", "float64", "int32", "int64"]}
+        },
+        "gql.vector": "VECTOR",
+        "sql.vector": "VECTOR",
+        "canonical.vector": "VECTOR"
+      },
+      "json": {
+        "data.json": {
+          "type": ["object", "array", "string", "number", "boolean", "null"]
+        },
+        "gql.json": "undefined",
+        "sql.json": "JSON",
+        "canonical.json": "JSON"
+      }
+    }
   }
 }
