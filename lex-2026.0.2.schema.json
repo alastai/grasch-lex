@@ -585,142 +585,138 @@
       },
       "required": ["subject", "constraintPattern", "uniqueKeyComponentPropertyNames"],
       "additionalProperties": false
-    }
-  },
-  "$defs": {
-    "canonicalValueTypes": {
-      "boolean": {
-        "data.boolean": {
-          "type": "boolean"
-        },
-        "gql.boolean": "BOOLEAN",
-        "sql.boolean": "BOOLEAN",
-        "canonical.boolean": "BOOLEAN"
+    },
+    "canonicalBoolean": {
+      "data.boolean": {
+        "type": "boolean"
       },
-      "string": {
-        "data.string": {
-          "type": "string",
-          "maxLength": {"type": "integer", "minimum": 0}
-        },
-        "gql.string": "STRING",
-        "sql.string": "VARCHAR",
-        "canonical.string": "STRING"
+      "gql.boolean": "BOOLEAN",
+      "sql.boolean": "BOOLEAN",
+      "canonical.boolean": "BOOLEAN"
+    },
+    "canonicalString": {
+      "data.string": {
+        "type": "string",
+        "maxLength": {"type": "integer", "minimum": 0}
       },
-      "integer": {
-        "data.int64": {
-          "type": "integer",
-          "minimum": -9223372036854775808,
-          "maximum": 9223372036854775807
-        },
-        "gql.int64": "BIGINT",
-        "sql.int64": "BIGINT",
-        "canonical.int64": "INTEGER"
+      "gql.string": "STRING",
+      "sql.string": "VARCHAR",
+      "canonical.string": "STRING"
+    },
+    "canonicalInteger": {
+      "data.int64": {
+        "type": "integer",
+        "minimum": -9223372036854775808,
+        "maximum": 9223372036854775807
       },
-      "float": {
-        "data.float64": {
-          "type": "number"
-        },
-        "gql.float64": "DOUBLE",
-        "sql.float64": "DOUBLE PRECISION",
-        "canonical.float64": "FLOAT"
+      "gql.int64": "BIGINT",
+      "sql.int64": "BIGINT",
+      "canonical.int64": "INTEGER"
+    },
+    "canonicalFloat": {
+      "data.float64": {
+        "type": "number"
       },
-      "date": {
-        "data.date": {
-          "type": "string",
-          "format": "date"
-        },
-        "gql.date": "DATE",
-        "sql.date": "DATE",
-        "canonical.date": "DATE"
+      "gql.float64": "DOUBLE",
+      "sql.float64": "DOUBLE PRECISION",
+      "canonical.float64": "FLOAT"
+    },
+    "canonicalDate": {
+      "data.date": {
+        "type": "string",
+        "format": "date"
       },
-      "localTime": {
-        "data.time": {
-          "type": "string",
-          "format": "time",
-          "precision": {"type": "integer", "minimum": 0, "maximum": 9}
-        },
-        "gql.time": "LOCAL TIME",
-        "sql.time": "TIME",
-        "canonical.time": "LOCAL TIME"
+      "gql.date": "DATE",
+      "sql.date": "DATE",
+      "canonical.date": "DATE"
+    },
+    "canonicalLocalTime": {
+      "data.time": {
+        "type": "string",
+        "format": "time",
+        "precision": {"type": "integer", "minimum": 0, "maximum": 9}
       },
-      "zonedTime": {
-        "data.timeWithTimezone": {
-          "type": "string",
-          "format": "time",
-          "precision": {"type": "integer", "minimum": 0, "maximum": 9}
-        },
-        "gql.timeWithTimezone": "ZONED TIME",
-        "sql.timeWithTimezone": "TIME WITH TIME ZONE",
-        "canonical.timeWithTimezone": "ZONED TIME"
+      "gql.time": "LOCAL TIME",
+      "sql.time": "TIME",
+      "canonical.time": "LOCAL TIME"
+    },
+    "canonicalZonedTime": {
+      "data.timeWithTimezone": {
+        "type": "string",
+        "format": "time",
+        "precision": {"type": "integer", "minimum": 0, "maximum": 9}
       },
-      "localDatetime": {
-        "data.datetime": {
-          "type": "string",
-          "format": "date-time",
-          "precision": {"type": "integer", "minimum": 0, "maximum": 9}
-        },
-        "gql.datetime": "LOCAL DATETIME",
-        "sql.datetime": "TIMESTAMP",
-        "canonical.datetime": "LOCAL DATETIME"
+      "gql.timeWithTimezone": "ZONED TIME",
+      "sql.timeWithTimezone": "TIME WITH TIME ZONE",
+      "canonical.timeWithTimezone": "ZONED TIME"
+    },
+    "canonicalLocalDatetime": {
+      "data.datetime": {
+        "type": "string",
+        "format": "date-time",
+        "precision": {"type": "integer", "minimum": 0, "maximum": 9}
       },
-      "zonedDatetime": {
-        "data.datetimeWithTimezone": {
-          "type": "string",
-          "format": "date-time",
-          "precision": {"type": "integer", "minimum": 0, "maximum": 9}
-        },
-        "gql.datetimeWithTimezone": "ZONED DATETIME",
-        "sql.datetimeWithTimezone": "TIMESTAMP WITH TIME ZONE",
-        "canonical.datetimeWithTimezone": "ZONED DATETIME"
+      "gql.datetime": "LOCAL DATETIME",
+      "sql.datetime": "TIMESTAMP",
+      "canonical.datetime": "LOCAL DATETIME"
+    },
+    "canonicalZonedDatetime": {
+      "data.datetimeWithTimezone": {
+        "type": "string",
+        "format": "date-time",
+        "precision": {"type": "integer", "minimum": 0, "maximum": 9}
       },
-      "duration": {
-        "data.duration": {
-          "type": "string",
-          "format": "duration",
-          "fields": {"type": "string", "enum": ["YEAR", "MONTH", "DAY", "HOUR", "MINUTE", "SECOND"]}
-        },
-        "gql.duration": "DURATION",
-        "sql.duration": "INTERVAL",
-        "canonical.duration": "DURATION"
+      "gql.datetimeWithTimezone": "ZONED DATETIME",
+      "sql.datetimeWithTimezone": "TIMESTAMP WITH TIME ZONE",
+      "canonical.datetimeWithTimezone": "ZONED DATETIME"
+    },
+    "canonicalDuration": {
+      "data.duration": {
+        "type": "string",
+        "format": "duration",
+        "fields": {"type": "string", "enum": ["YEAR", "MONTH", "DAY", "HOUR", "MINUTE", "SECOND"]}
       },
-      "list": {
-        "data.array": {
-          "type": "array",
-          "elementType": {"type": "string"},
-          "maxCardinality": {"type": "integer", "minimum": 0}
-        },
-        "gql.array": "LIST",
-        "sql.array": "ARRAY",
-        "canonical.array": "LIST"
+      "gql.duration": "DURATION",
+      "sql.duration": "INTERVAL",
+      "canonical.duration": "DURATION"
+    },
+    "canonicalList": {
+      "data.array": {
+        "type": "array",
+        "elementType": {"type": "string"},
+        "maxCardinality": {"type": "integer", "minimum": 0}
       },
-      "record": {
-        "data.record": {
-          "type": "object",
-          "fields": {"type": "object"}
-        },
-        "gql.record": "RECORD",
-        "sql.record": "ROW",
-        "canonical.record": "RECORD"
+      "gql.array": "LIST",
+      "sql.array": "ARRAY",
+      "canonical.array": "LIST"
+    },
+    "canonicalRecord": {
+      "data.record": {
+        "type": "object",
+        "fields": {"type": "object"}
       },
-      "vector": {
-        "data.vector": {
-          "type": "array",
-          "items": {"type": "number"},
-          "dimension": {"type": "integer", "minimum": 1},
-          "elementType": {"type": "string", "enum": ["float32", "float64", "int32", "int64"]}
-        },
-        "gql.vector": "VECTOR",
-        "sql.vector": "VECTOR",
-        "canonical.vector": "VECTOR"
+      "gql.record": "RECORD",
+      "sql.record": "ROW",
+      "canonical.record": "RECORD"
+    },
+    "canonicalVector": {
+      "data.vector": {
+        "type": "array",
+        "items": {"type": "number"},
+        "dimension": {"type": "integer", "minimum": 1},
+        "elementType": {"type": "string", "enum": ["float32", "float64", "int32", "int64"]}
       },
-      "json": {
-        "data.json": {
-          "type": ["object", "array", "string", "number", "boolean", "null"]
-        },
-        "gql.json": "undefined",
-        "sql.json": "JSON",
-        "canonical.json": "JSON"
-      }
+      "gql.vector": "VECTOR",
+      "sql.vector": "VECTOR",
+      "canonical.vector": "VECTOR"
+    },
+    "canonicalJson": {
+      "data.json": {
+        "type": ["object", "array", "string", "number", "boolean", "null"]
+      },
+      "gql.json": "undefined",
+      "sql.json": "JSON",
+      "canonical.json": "JSON"
     }
   }
 }
