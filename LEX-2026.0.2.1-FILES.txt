@@ -1,0 +1,20 @@
+LEX:2026.0.2.1 Key Files Reference
+===================================
+
+Core Schema:
+- src/grasch/schemas/lex-2026.0.2.1.schema.json
+
+Schema Examples:
+- src/grasch/examples/finbench-lex-2026.0.2.1-schema.yaml
+- src/grasch/examples/snb-lex-2026.0.2.1-schema.yaml
+
+Graph Instance & Catalog:
+- src/grasch/examples/finbench-sf1-graph-lex-2026.0.2.1.yaml
+- src/grasch/examples/example-catalog-lex-2026.0.2.1.yaml
+
+Validation Scripts:
+- tests/validate_finbench_lex_0_2_1_schema.py
+- tests/validate_snb_lex_0_2_1_schema.py
+
+Documentation:
+- LEX-2026.0.2.1-GUIDE.md
