@@ -384,64 +384,72 @@
     },
     "NodeType": {
       "type": "object",
-      "description": "Node type descriptor with flexible identification (LEX:2026.0.3 - labels now mandatory)",
+      "description": "Node type descriptor with flexible identification (LEX:2026.0.3 - labels now mandatory, implies structure)",
       "properties": {
         "nodeTypeIdentifier": {
           "$ref": "#/$defs/NodeTypeIdentifier"
         },
-        "labels": {
-          "type": "array",
-          "description": "Set of labels for this node type (at least one required in 0.3)",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true,
-          "minItems": 1
-        },
-        "supertypes": {
-          "type": "array",
-          "description": "Set of supertype labels (LEX:2026.0.3 - enables subtyping)",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
-        },
-        "propertyTypes": {
-          "oneOf": [
-            {
-              "type": "array",
-              "description": "Set of property type descriptors",
-              "items": {
-                "$ref": "#/$defs/PropertyType"
-              }
-            },
-            {
-              "type": "string",
-              "pattern": "^\\$ref\\(",
-              "description": "Import property types via $ref"
-            }
-          ]
-        },
-        "extensionInterpretation": {
+        "implies": {
           "type": "object",
-          "description": "Controls whether type can be extended (LEX:2026.0.3)",
+          "description": "Container for supertypes, labels, and property types (LEX:2026.0.3 structure)",
           "properties": {
-            "open": {
-              "type": "boolean",
-              "description": "If true, allows undefined subtypes"
+            "supertypes": {
+              "type": "array",
+              "description": "Set of supertype labels (LEX:2026.0.3 - enables subtyping)",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
             },
-            "closed": {
-              "type": "boolean",
-              "description": "If true, only defined subtypes allowed (default)"
+            "labels": {
+              "type": "array",
+              "description": "Set of labels for this node type (at least one required in 0.3)",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            },
+            "propertyTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Set of property type descriptors",
+                  "items": {
+                    "$ref": "#/$defs/PropertyType"
+                  }
+                },
+                {
+                  "type": "string",
+                  "pattern": "^\\$ref\\(",
+                  "description": "Import property types via $ref"
+                }
+              ]
+            },
+            "extensionInterpretation": {
+              "type": "object",
+              "description": "Controls whether type can be extended (LEX:2026.0.3)",
+              "properties": {
+                "open": {
+                  "type": "boolean",
+                  "description": "If true, allows undefined subtypes"
+                },
+                "closed": {
+                  "type": "boolean",
+                  "description": "If true, only defined subtypes allowed (default)"
+                }
+              },
+              "oneOf": [
+                {"required": ["open"]},
+                {"required": ["closed"]}
+              ]
             }
           },
-          "oneOf": [
-            {"required": ["open"]},
-            {"required": ["closed"]}
-          ]
+          "required": ["labels", "propertyTypes"],
+          "additionalProperties": false
         }
       },
-      "required": ["nodeTypeIdentifier", "labels", "propertyTypes"],
+      "required": ["nodeTypeIdentifier", "implies"],
       "additionalProperties": false
     },
     "NodeTypeIdentifier": {
@@ -462,13 +470,13 @@
         {
           "type": "object",
           "properties": {
-            "typeNameLabel": {
+            "typeLabel": {
               "type": "string",
               "pattern": "^[a-zA-Z]",
               "description": "Single label that serves as type name (preferred in LEX:2026.0.3)"
             }
           },
-          "required": ["typeNameLabel"],
+          "required": ["typeLabel"],
           "additionalProperties": false
         },
         {
@@ -492,43 +500,69 @@
     },
     "EdgeType": {
       "type": "object",
-      "description": "Edge type descriptor with flexible identification (LEX:2026.0.3 - labels now mandatory)",
+      "description": "Edge type descriptor with flexible identification (LEX:2026.0.3 - labels now mandatory, implies structure)",
       "properties": {
         "edgeTypeIdentifier": {
           "$ref": "#/$defs/EdgeTypeIdentifier"
         },
-        "labels": {
-          "type": "array",
-          "description": "Set of labels for this edge type (at least one required in 0.3)",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true,
-          "minItems": 1
-        },
-        "supertypes": {
-          "type": "array",
-          "description": "Set of supertype labels (LEX:2026.0.3 - enables subtyping)",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
-        },
-        "propertyTypes": {
-          "oneOf": [
-            {
+        "implies": {
+          "type": "object",
+          "description": "Container for supertypes, labels, and property types (LEX:2026.0.3 structure)",
+          "properties": {
+            "supertypes": {
               "type": "array",
-              "description": "Set of property type descriptors",
+              "description": "Set of supertype labels (LEX:2026.0.3 - enables subtyping)",
               "items": {
-                "$ref": "#/$defs/PropertyType"
-              }
+                "type": "string"
+              },
+              "uniqueItems": true
             },
-            {
-              "type": "string",
-              "pattern": "^\\$ref\\(",
-              "description": "Import property types via $ref"
+            "labels": {
+              "type": "array",
+              "description": "Set of labels for this edge type (at least one required in 0.3)",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            },
+            "propertyTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Set of property type descriptors",
+                  "items": {
+                    "$ref": "#/$defs/PropertyType"
+                  }
+                },
+                {
+                  "type": "string",
+                  "pattern": "^\\$ref\\(",
+                  "description": "Import property types via $ref"
+                }
+              ]
+            },
+            "extensionInterpretation": {
+              "type": "object",
+              "description": "Controls whether type can be extended (LEX:2026.0.3)",
+              "properties": {
+                "open": {
+                  "type": "boolean",
+                  "description": "If true, allows undefined subtypes"
+                },
+                "closed": {
+                  "type": "boolean",
+                  "description": "If true, only defined subtypes allowed (default)"
+                }
+              },
+              "oneOf": [
+                {"required": ["open"]},
+                {"required": ["closed"]}
+              ]
             }
-          ]
+          },
+          "required": ["labels", "propertyTypes"],
+          "additionalProperties": false
         },
         "direction": {
           "type": "string",
@@ -551,28 +585,10 @@
               "description": "Second endpoint node type identifier"
             }
           ]
-        },
-        "extensionInterpretation": {
-          "type": "object",
-          "description": "Controls whether type can be extended (LEX:2026.0.3)",
-          "properties": {
-            "open": {
-              "type": "boolean",
-              "description": "If true, allows undefined subtypes"
-            },
-            "closed": {
-              "type": "boolean",
-              "description": "If true, only defined subtypes allowed (default)"
-            }
-          },
-          "oneOf": [
-            {"required": ["open"]},
-            {"required": ["closed"]}
-          ]
         }
       },
       "required": [
-        "edgeTypeIdentifier", "labels", "propertyTypes", "direction",
+        "edgeTypeIdentifier", "implies", "direction",
         "firstEndpointNodeTypeIdentifier", "secondEndpointNodeTypeIdentifier"
       ],
       "additionalProperties": false
@@ -595,13 +611,13 @@
         {
           "type": "object",
           "properties": {
-            "typeNameLabel": {
+            "typeLabel": {
               "type": "string",
               "pattern": "^[a-zA-Z]",
               "description": "Single label that serves as type name (preferred in LEX:2026.0.3)"
             }
           },
-          "required": ["typeNameLabel"],
+          "required": ["typeLabel"],
           "additionalProperties": false
         },
         {
