@@ -81,7 +81,7 @@ storageSchema:
     
     # Vertex (Node) storage configuration
     vertices:
-      - typeLabel: "Person"
+      - type_label: "Person"
         chunk_size: 1024
         prefix: "person/"
         # Property groups with different storage formats
@@ -96,16 +96,16 @@ storageSchema:
               properties: ["email"]
               file_type: "json"
       
-      - typeLabel: "Company"
+      - type_label: "Company"
         chunk_size: 512
         prefix: "company/"
         file_type: "orc"
     
     # Edge storage configuration
     edges:
-      - src_typeLabel: "Person"
-        edge_typeLabel: "WORKS_FOR"
-        dst_typeLabel: "Company"
+      - src_type_label: "Person"
+        type_label: "WORKS_FOR"
+        dst_type_label: "Company"
         chunk_size: 2048
         prefix: "works_for/"
         directed: true
