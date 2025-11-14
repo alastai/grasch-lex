@@ -5,11 +5,13 @@ graph:
   identifier:
     locallyQualifiedObjectName: "/examples/my-graph-instance"
   
-  # Pattern: Reference the schema identifier explicitly, import the schema contents
-  graphSchema:
-    identifier:
-      locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
-    import: "snb-lex-2026.0.3.1-schema.yaml"
+  # Pattern: Schema type interpretation wraps the graphSchema
+  # Default is exactlyOfThisSchemaType (can be omitted)
+  subtypesOfSchemaType:
+    graphSchema:
+      identifier:
+        locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+      import: "snb-lex-2026.0.3.1-schema.yaml"
   
   # Storage schema for this graph instance
   storageSchema:
