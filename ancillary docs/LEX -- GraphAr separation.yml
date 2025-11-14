@@ -29,6 +29,19 @@ graphType:
               valueType: "STRING"
             - name: "birthDate"
               valueType: "DATE"
+    
+    - nodeType:
+        typeLabel: "Company"
+        implies:
+          propertyTypes:
+            - name: "id"
+              valueType: "INTEGER"
+              notNull: true
+            - name: "name"
+              valueType: "STRING"
+              notNull: true
+            - name: "industry"
+              valueType: "STRING"
   
   edgeTypes:
     - edgeType:
@@ -79,11 +92,14 @@ storageSchema:
           - property_group:
               properties: ["lastName", "birthDate"]
               file_type: "csv"
-        # Standalone properties stored individually
-        standalone_properties:
-          - property:
-              name: "email"
+          - property_group:
+              properties: ["email"]
               file_type: "json"
+      
+      - typeLabel: "Company"
+        chunk_size: 512
+        prefix: "company/"
+        file_type: "orc"
     
     # Edge storage configuration
     edges:
@@ -97,7 +113,6 @@ storageSchema:
           - property_group:
               properties: ["creationDate"]
               file_type: "parquet"
-        standalone_properties: []
   
   # File system layout
   fileLayout:
