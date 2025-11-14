@@ -1,8 +1,14 @@
-# Complete Import Example - Shows importing entire graphSchema
+# Complete Import Example - Shows importing entire graphSchema within a graph
 
-identifier:
-  locallyQualifiedObjectName: "/examples/complete-import-demo"
-
-# Pattern: Import entire graphSchema from external file
-graphSchema:
-  import: "snb-lex-2026.0.3.1-schema.yaml"
+# This is a GRAPH (instance), not a standalone schema
+graph:
+  identifier:
+    locallyQualifiedObjectName: "/examples/my-graph-instance"
+  
+  # Pattern: Import entire graphSchema from external file
+  graphSchema:
+    import: "snb-lex-2026.0.3.1-schema.yaml"
+  
+  # Storage schema for this graph instance
+  storageSchema:
+    storageType: "kuzu"
