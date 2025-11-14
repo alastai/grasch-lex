@@ -343,15 +343,24 @@
           "oneOf": [
             {
               "type": "array",
-              "description": "Set of node type descriptors",
+              "description": "Set of node type descriptors or $ref imports",
               "items": {
-                "$ref": "#/$defs/NodeType"
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/NodeType"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\$ref\\(",
+                    "description": "Import individual node type via $ref"
+                  }
+                ]
               }
             },
             {
               "type": "string",
               "pattern": "^\\$ref\\(",
-              "description": "Import node types via $ref"
+              "description": "Import all node types via $ref"
             }
           ]
         },
@@ -359,15 +368,24 @@
           "oneOf": [
             {
               "type": "array",
-              "description": "Set of edge type descriptors",
+              "description": "Set of edge type descriptors or $ref imports",
               "items": {
-                "$ref": "#/$defs/EdgeType"
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/EdgeType"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\$ref\\(",
+                    "description": "Import individual edge type via $ref"
+                  }
+                ]
               }
             },
             {
               "type": "string",
               "pattern": "^\\$ref\\(",
-              "description": "Import edge types via $ref"
+              "description": "Import all edge types via $ref"
             }
           ]
         }

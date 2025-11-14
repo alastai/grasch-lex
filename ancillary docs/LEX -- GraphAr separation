@@ -1,0 +1,20 @@
+LEX graph
+   LEX graph schema
+       node types
+           node type Person
+                property
+                    name "id"
+                    valueType integer
+       Edge types
+   StorageSchema
+       Type “GraphAr”
+       Location <file>
+
+   GraphAr Storage schema
+       LEX graph schema <file>
+       Graph: <physical characteristics>
+       Person: <physical characteristics>
+       propertyGroups
+            Person/[“id”, “name”]: <physical characteristics
+       Person/[“id”, “name”]        Person/id <physical characteristics>
+

@@ -1,0 +1,697 @@
+﻿LEX-100R3 
+LEX:2026 Extended Graph Schema Specification
+Akon Dey
+Alastair Green
+Keith Hare
+Stefan Plantikow
+Dominik Tomaczuk
+Lyu Songlin
+Dusan Živković
+ 
+11 November 2025
+
+
+Introduction
+Please see LEX-99 – GQL graph types, PCG graph views and LEX graph schemas for an explanation of the relationship of LEX to other schema languages. 
+
+
+LEX:2026 is maintained, and versions of it are published by the Graph Data Council in close liaison with WG3 – the SQL and GQL standards committee – and other relevant projects, for example Apache GraphAr[1].
+
+
+These projects share an interest in standard representations of identified property graphs, graph schemas and storage schemas, which are neutral with respect to data language, general-purpose programming language and value type system (VTS).
+
+
+The concrete syntax of LEX is YAML, whose format and some restrictions can be defined in JSON Schema. The JSON Schemas for LEX are included in this specification, directly or by reference, and are versioned in lock-step with it.  
+
+
+YAML documents are concrete representations of an abstract syntax defined here, which is a superset of the information content of a GQL:2027 catalog/graph type, and of a SQL:2023/PGQ tabular property graph. 
+
+
+Specification status
+This document (for short, the LEX-100 Specification) is a “rolling draft” document that is being built up section by section (through multiple revisions) to define LEX:2026 as a superset of GQL:2027.
+
+
+At certain points of transition the “supersetting” may be inexact. For example, we might support single-label key label sets (type labels) before we support full multiple-label key label sets. 
+
+
+At this stage LEX is an informal, de facto standard which is required by Apache GraphAr (in incubation), and GDC’s Text2GraphQuery project.[2] LEX does a useful job that is not currently within the remit of WG3. 
+
+
+This also means that LEX can move faster and further than GQL, while recognizing the primary of the official International Standard. 
+
+
+This specification uses major/minor versioning. A major version has a given functional scope, and its minor versions represent successive approximations of delivery of that scope. 
+
+
+You can refer to a major version as LEX:2026.<major> and to a specific minor version as LEX:2026.<major>.<minor>. For example, the functionality of the first major version LEX:2026.0 is described in the table that follows. 
+
+
+Major version functionality
+
+
+Major
+version 
+	Functionality
+	0
+	1. A set of value type systems, at least for Cypher, SQL and GQL
+2. A canonical minimum value type system (VTS), which roughly equates to Cypher’s system or to GQL’s system with selected defaults
+3. A JSON Schema which defines the VTS
+4. A set of mappings from the VTS to other VTS (GQL, SQL etc)
+5. The abstract syntax of a graph schema
+6. A graph schema’s mappings to the schema systems of at least Neo4j Cypher, SQL/PGQ and GQL
+7. A JSON Schema which defines the structure of the concrete syntax of a YAML (JSON) graph schema representing the information content of the abstract syntax
+8. Examples of YAML and JSON documents which define the graph schema of at least the SNB and FinBench LDBC Benchmark data models
+9. Mapping of a graph schema to one or more GFF (graph file formats)
+	
+
+
+
+________________
+
+
+Document revision table
+
+
+Major 
+	Minor
+
+
+	Doc
+rev
+	Date
+	Notes
+	0
+	0
+	R0
+	27 October 2025
+	First version, as basis for designing JSON Schema
+Draws on descriptors from LEX-056R1 GQL Descriptors to help design abstract syntax
+	
+
+	1
+	R1
+	30 October
+	Post LEX discussion, pre-GraphAr discussion
+One canonical VTS
+Add physical schema mapping concept
+Add JSON Schema/Structure for property types
+	
+
+	2
+	R2
+	6 November
+	Post GraphAr discussion
+Amplifications/precisions
+Cut back to MVP, create Futures section 
+Catalog, schema, graph, common JSch. Add IRIs
+	
+
+	3
+	R3
+	12 November
+	Post LEX discussion. 
+Focus on type labels (singleton key label set)
+Make type labels mandatory (at least one label)
+Support multiple labels, to support subtyping in principle. Remove repetition of key label. 
+Simplify YAML style/correct naming.
+Add imports via Swagger-style $ref (‘<path>’)
+Add file paths and LQONs to catalog YAML
+	
+
+
+
+________________
+
+
+Table of Contents
+Introduction        1
+Specification status        1
+With reference to this version of the GQL:2027 specification        5
+LEX descriptors and abstract syntax        5
+Concepts and components        5
+Descriptor syntax        5
+LEX Graph Catalog abstract syntax        6
+LEX Value type systems abstract syntax        8
+Canonical value type system        8
+External value type systems and mappings        9
+Cypher        9
+GQL        10
+SQL        10
+LEX Graph Schema abstract syntax        11
+Types and constraints        11
+Catalog, schema, graph        12
+Graph schema: Identifier, owner and value type system        12
+Graph schema: structural graph type        13
+Graph schema: Constraints        17
+LEX Graph abstract syntax        17
+Graph instance: without storage schema        17
+Graph instance: with storage schema        18
+LEX JSON Schema        18
+Examples of YAML documents        18
+Graph schemas        18
+Graphs without storage schemas        18
+Graphs with storage schemas        18
+Appendix A: Possible future functionality        18
+
+
+
+
+________________
+With reference to this version of the GQL:2027 specification
+Committee Draft 1 (2)         ISO-IEC JTC 1-SC 32-WG 3_39075_2CD1-GQL_2025-10-28.pdf
+Source files                        2025-10-28-ISO-IEC JTC 1-SC 32-WG 3_39075_2CD1-GQL.
+
+
+LEX descriptors and abstract syntax
+Concepts and components
+A descriptor[3] specifies the abstract syntax of an object which is part of a hierarchically-organized collection of objects called a graph catalog. A descriptor defines a piece of information required by a language operation. 
+In this version, we define the abstract syntax of 
+1. A graph catalog’s collection, which defines a directory structure containing a collection of named primary catalog objects. A PCO is either a graph or a graph schema[4].
+2. A system of value type systems, including a lowest common denominator or canonical VTS, with mappings of its value types to default value types in external VTS, like the datatypes of SQL or Cypher or Parquet/Arrow.
+3. A single logical-model graph schema (structural graph type plus graph constraints) which is required for the operation of schema validation of a (data) graph instance. 
+4. A set of physical-model graph storage schemas, which are required to support the operations of graph serialization and deserialization.
+The goal of this version is to create a minimal capability which will replace the YAML used by GraphAr for logical schema with LEX YAML, and add optional physical storage schemas to LEX which are required by GraphAr. The final shape of this version of LEX YAML will therefore be agreed in conjunction with the GraphAr project. However, LEX logical schemas will always be usable independently of graph serialization. 
+Potential added functionality in future versions is summarized in Appendix A: Possible future functionality.
+Descriptor syntax
+A descriptor has a name, which may be quoted in double quotation marks, and may have a value and/or contents. 
+A prefix – indicates inclusion by the first preceding descriptor to be indented by less than this one. The prefix ? indicates that the descriptor is optional (0 or 1 instances) and the symbol | indicates a choice. The prefix + indicates repetition of 1 or more instances of the descriptor, and the suffix * indicates repetition of 0 or more instances. 
+Free text is used to describe or define a descriptor’s contents or meaning. A parameter or parameters in angle brackets may be indicated. This value will either be given directly in CAPITALIZED text, or it will be represented by a type name like <string> or <integer> or <map K → V> etc. If symbols in italics like K and V are shown then they will be defined in accompanying free text. 
+The type name <identifier> is a string which starts with an alpha character, and is defined as it is in GQL:2027.
+A colon symbol after a descriptor indicates a natural language qualification or feature to be taken taken into account in interpreting the descriptor, Examples include
+    <descriptor> : default value <integer | string | date> 
+// has a default value of X
+    <descriptor> : choice 
+// indicating that the descriptors that follow are alternatives
+The following qualifier
+    <descriptor> : importable 
+
+
+has the meaning that in a concrete syntax a means will be found to allow importation of a source module, which can contain a concrete representation of the descriptors contained in the descriptor so qualified. This allows the importing source to be modularized and therefore placed in various file system locations, while forming a single logical whole. This is particularly useful for distributed or partitioned storage schemas, whose existence may force the physically-subdivided placement of partitioned logical schema elements like node type or edge type definitions. 
+Implementation note: in YAML this could be done the way Swagger does it: $ref (‘<file path>). 
+
+
+LEX Graph Catalog abstract syntax
+A catalog is a collection of objects, each of which is the last node in a path from the root of a tree to one of its leafs. A path in a tree is a sequence of nodes, > 0 elements. 
+
+
+If the catalog tree has depth 0 (i.e. it only contains a root node), then that root node is also a leaf node, and that node is an object. The path to that node is a single node. If the tree has depth 1 (has a root node, which has some children nodes) then each object\s path is root-leaf. If the tree has depth 2 (or more) then each object’s path is root-inner+-leaf (where inner+ represents a sequence of one or more inner nodes).
+A tree-structured document can be used to represent the union of the paths which lead to an object in the collection, whose root element is called “catalog”. There may be inner nodes, which are children of the catalog or children of inner nodes, and these inner node elements are called “directory”. A directory may have a child which is a leaf node called either “graph” or “graphSchema”. 
+The “catalog” has an optional child element called “IRI”, which if present has a string value which is a valid IRI. This IRI need not be referenceable. Each “directory”, “graph” or “graph Schema” element has a child called “name”, with a string value, and each graph or graph schema child element has a child called “qualified name” which is a GQON string if the catalog has an “IRI” and is an LQON string if it does not. These acronyms are described below. 
+A path from the root to an object can be identified by forming a locally-qualified object name (LQON), where the “catalog” root is represented by the string “/” (irrespective of the presence of an “IRI” element, or of its value). Each directory in the path is then represented by the value of its “name”, with the character “/” appended, and the “graph” or “graphSchema” object is represented by the value of its “name”.
+An example of a LQON might be:
+   /finance/eod/valuationSchema
+If the “catalog” element has a child “IRI” then the path to an object can be identified by a globally-qualified object name (GQON). For a given object with a LQON, its GQON will be the LQON prefixed by the value of “IRI”, with a pipe separator. For example:
+   https://finance.bank.com|/finance/eod/valuationSchema
+In the abstract syntax for a graph or graph schema object given below the globally- or locally-qualified name element has a value which has the format of a GQON or LQON respectively. A LQON is a path name of exactly the form defined by GQL:2027. A GQON extends an LQON, adding a facility not present in GQL:2027, namely the identification of a catalog by an IRI. Note that If a graph is in a catalog which is globally identified by an IRI, then it follows that every identified object contained in that graph has a globally unique identifier. This opens the road to giving IRIs to graph elements (nodes, edges) and to their properties, as implementations are responsible for allocating graph-unique identifiers to all of their graphs’ elements. 
+https://finance.bank.com|/finance/eod/valuationGraph/node/43567
+https://finance.bank.com|/finance/eod/valuationGraph/edge/236
+It is up to an application or tool or implementation using this specification to ensure that objects which are enumerated in the catalog match up with the name elements of YAML documents for graphs and graph schemas. 
+One way of doing this is to give a catalog an IRI which is referenceable, and to give a graph or schema document a globally-qualified name such that the GQON dereferences to the YAML document. 
+In addition to the LQON or GQON a graph or graph  can have an optional child element called “file”, whose value is a $ref to a file system path containing a YAML specification file, for the graph or graph schema concerned. This allows the reference to the spec to be divorced from the IRI, and indicates to the consumer that the IRI should not be dereferenced, even if it has the form of an IRL. 
+LEX Value type systems abstract syntax
+
+
+Canonical value type system
+Value type system identifier        CANONICAL
+Version                        2025.0
+Value types table
+Value type identifier
+	Parameters
+	Facets
+	STRING
+	nullable
+	
+
+	INTEGER
+	nullable
+	
+
+	FLOAT
+	nullable
+	
+
+	BOOLEAN
+	nullable
+	
+
+	VECTOR
+	nullable
+	
+
+	LIST
+	nullable
+T (a value type identifier)
+	
+
+	RECORD
+	nullable throughout nesting
+	
+
+	DATE
+	nullable
+	
+
+	LOCAL TIME
+	nullable
+	
+
+	ZONED TIME
+	nullable
+TZ (time zone as …)
+	
+
+	LOCAL DATETIME
+	nullable
+	
+
+	ZONED DATETIME
+	nullable
+TZ (time zone as …)
+	
+
+	DURATION[a]
+	nullable
+	
+
+	JSON
+	nullable
+[b]	
+
+
+	
+
+
+
+External value type systems and mappings
+Each value type system is identified by a unique identifier and a version string.  
+A table describes the characteristics of each value type system (enumeration of value types with identifiers and possible parameters, restrictions).
+Cypher
+Value type system identifier        CYPHER
+Version                        OPEN 2025
+Value types table
+Value type identifier
+	Parameters
+	STRING
+	nullable
+	INTEGER
+	nullable
+	FLOAT
+	nullable
+	BOOLEAN
+	nullable
+	LIST_OF
+	nullable
+T (a value type identifier)
+	MAP
+	nullable
+	DATE
+	nullable
+	LOCAL TIME
+	nullable
+	ZONED TIME
+	nullable
+TZ (time zone as …)
+	LOCAL DATETIME
+	nullable
+	ZONED DATETIME
+	nullable
+TZ (time zone as …)
+	DURATION
+	nullable
+	
+
+Canonical mapping table
+Canonical value type identifier
+	Cypher Open 2025 value type identifier
+	STRING
+	STRING
+	INTEGER
+	INTEGER
+	FLOAT
+	FLOAT
+	BOOLEAN
+	BOOLEAN
+	VECTOR
+	absent
+	LIST
+	LIST_OF
+	RECORD
+	MAP
+	DATE
+	DATE
+	LOCAL TIME
+	LOCAL TIME
+	ZONED TIME
+	ZONED TIME
+	LOCAL DATETIME
+	LOCAL DATETIME
+	ZONED DATETIME
+	ZONED DATETIME
+	DURATION
+	DURATION
+	
+
+COMMENT ONLY The full set of parameters and possible values for SQL and GQL remains to be done.    
+
+
+GQL
+Value type system identifier        GQL
+Version                        2027
+Value types table
+Value type identifier
+	Parameters
+	Set TBS 
+	TBS
+	
+
+
+
+SQL
+Value type system identifier        SQL
+Version                        2026
+Value types table
+Value type identifier
+	Parameters
+	Set TBS 
+	TBS
+	
+
+
+
+LEX Graph Schema abstract syntax
+A LEX:2026 graph schema (graph schema, or schema for short) contains an identifier, a structural graph type (akin to a graph type as defined in GQL:2024, i.e. without constraints), and a set of graph constraints. 
+To put it another way, a graph schema contains 
+1. an identifier which is either 1) a path-qualified graph type name as defined in GQL:2027 (a LEX LQON), or 2) a LEX GQON, 
+2. a graph type, like the one defined in GQL:2024 (or GQL:2027 but minus its set of constraints)
+3. a (possibly empty) set of constraints, which could be exactly the set of constraints that can be present in a GQ::2027 graph type. That set has the same information contents that it would have had, if defined in GQL:2027. Note that in a LEX graph schema it is moved outside the graph type and is instead directly included by the graph schema. 
+This organization seems logical because a constraint applies to a graph and not to a graph type. By separating constraints from the structural graph type, it becomes more natural to allow the definition of a set of constraints directly on a graph, even if that graph does not have a graph type. This is exactly the situation that obtains with Neo4j graphs.  
+Types and constraints
+A graph constraint is a rule that applies to a class of graphs, which narrows the possible values of each graph in the class. A graph type is a different kind of rule that has the same effect. A graph may not have a type, and it may have no constraints. Or it may have both. If it has both and a constraint can never be satisfied by virtue of the application of the type, then the constraint falls away – it is never applied, and it may as well have never been defined. 
+For example, if a graph type specifies only two property types for a node type, and there is a key constraint which demands uniqueness of the compound value of three properties, only two of which are possibly present because of the limitation of the node type, then the key constraint will not operate for the collection of nodes of that node type. 
+A constraint can be defined for a graph type, in which case the class of graphs to which it applies (its scope) is the set of graphs which conform to that graph type. Or, it can be defined directly for a single graph. The class of graphs is then the class of all graphs for which the constraint has been individually defined. 
+The information content of a LEX:2026.0 graph schema is therefore intended to be a strict superset of the information content of a GQL:2027 graph type, even if organized differently.
+Note that LEX:2026 may (over time, but not in its first major Version 0) define constraints which are not present in GQL:2027. Examples include cardinality constraints or value type facets or restrictions like max/min values, lengths, etc. 
+It may also allow for user-defined types and for use of a de facto or proto-standard like JSON Schema or JSON Structure to define property types. None of the above additional features are supported by Version 0.
+Catalog, schema, graph
+A YAML document may specify a “catalog”, a “graph schema” or a “graph”. The abstract syntax of a specification object contains a parent or root which identifies the class of specification to which the object belongs. 
+Graph schema: Identifier, owner and value type system
+A graph schema specification object is classified and identified thus:
+
+
+graph schema
+    – identifier
+        – locally-qualifed object name 
+        | globally-qualified object name
+
+
+A graph schema may be owned by a principal (i.e. a piece of authorization data which is meaningful to a system maintaining a catalog of graph schemas).
+graph schema
+    – identifier
+    – ? principal <string>
+
+
+Value type systems defines a set of value type systems, each of which is named, and consists of a set of named property value types, or just value types, for short. The names of these value types form a set. Each value type may also have parameters. 
+Each graph schema includes a descriptor of its value type system, which is the type system’s name as given in this specification. If this is omitted then the canonical VTS (for some default version) is the default value.
+graph schema
+    – identifier
+    – ? principal <string>
+    – ? value type system name <string> // defaults to CANONICAL
+Graph schema: structural graph type
+A graph schema contains a graph type which describes the structure of conformant (schema-valid) data graphs or instances. 
+graph schema
+    – identifier
+    – ? principal <string>
+    – ? value type system name <string> // TODO preferred type names
+    – graph type
+A graph type descriptor contains the following descriptors:
+    – graph type
+            – default characteristics: importable
+            — graph preferred name 
+ // (implementation-defined (ID089) 
+            default = GRAPH | PROPERTY GRAPH
+            – node preferred name // (implementation-defined (ID090)
+                : default value = NODE | VERTEX
+            – edge preferred name // (implementation-defined (ID091)
+                : default value = EDGE | RELATIONSHIP
+            – node type minimum labels <positive integer> // (IL001)
+                : default value = 1
+            – node type maximum labels <positive integer> // (IL001)
+                : default value = 20
+            – node type minimum property types <positive integer> 
+                // (IL002)
+                : default value = 0
+            – node type maximum property types <positive integer> 
+                // (IL002)
+                : default value = 1000
+            – edge type minimum labels <positive integer> // (IL001)
+                : default value = 1
+            – edge type maximum labels <positive integer> // (IL001)
+               : default value = 20
+            – edge type minimum property types // (IL002)
+               : default value = 0
+            – edge type maximum property types // (IL002)
+              : default value = 1000
+        — node types <set>
+        — edge types <set>
+
+
+A set of node type descriptors looks like this
+    – graph type
+        — node types <set>
+            – node type : importable
+            – node type : importable 
+            . . .  
+
+
+A node type descriptor contains the following descriptors (simplified view)
+    – graph type
+        — node types <set> : importable 
+            – node type: choice             
+                – identified node type
+              – type identifier : choice 
+              – implies
+                  – ? labels <set <string>>
+                  – ? property types <set <property type>>
+                
+                – anonymous node type
+                    – type index <integer>
+                    – labels <set <string>>
+                    – property types <set <property type>>
+
+
+A node type either has a unique type identifier which is one of:
+1. a type name label which is in the set of labels in the descriptor  – labels
+2. a type identifying set of labels, which does not intersect the set of labels in the descriptor  – labels
+Or it has 
+3. an integer index, whose value indicates that the node type is the 0th, 1st, … etc. anonymous node type in the lexical order of the definition of the graph type
+The descriptor 
+    – type identifier: choice  
+is therefore equivalent to this choice:
+    – type label <identifier> | 
+      Type identifying labels <set <identifier>> 
+Whether a node is identified or anonymous, it must have a unique node identifier or a node type index, across all node types in a graph type. This means that the user can mix anonymous node types with types identified by type labels with those identified by key label sets.  
+In examples and discussion we assume that all nodes are identified by a type label. 
+A more complete view of a node type descriptor with type labels follows. This view allows the explicit definition of subtype relations in a way which resembles Java interface mixins. 
+    – graph type
+        — node types <set> : importable 
+            – node type            
+                – identified node type
+              – type identifier 
+              – implies
+                  – ? supertypes <set <type label>>
+                  – ? labels <set <identifier>>
+                  – ? property types <set <property type>>
+
+
+A node type with supertypes pulls in, or incorporates into the node type being specified, the labels and property types implied by each type label
+In addition, it is possible to add descriptors which qualify the way in which a node type is interpreted or understood in the course of validating a graph against a graph schema. By default each node (or edge) type is interpreted in an invariant or exact manner. If a graph element can be exactly matched against the set of attributes (labels and property types) in an element type, then the element is valid. 
+If the node type is contained by a type interpretation descriptor then it will be interpreted covariantly during validation. This means, for a node type as the simpler case, that a node which contains at least the attributes of a node type is considered to be a valid element.
+type interpretation: choice 
+    exactlyOfThisType | anySubtypeOf | anyProperSubtypeOf
+        default value = exactlyOfThisType
+
+
+If the type interpretation descriptor is absent then it is deemed to present with the specified default value. That is the case with the examples seen previously. Here it is present explicitly. 
+    – graph type
+        — node types <set> 
+            – type interpretation
+                – node type            
+                    – identified node type
+               – type identifier 
+               – implies
+                  – ? supertypes <set <type label>>
+                  – ? labels <set <identifier>>
+                  – ? property types <set <property type>>
+
+
+Another optional descriptor allows the extension interpretation to be specified for either of the labels or the property types descriptors, if present:
+extension interpretation: choice 
+     open <boolean> | closed <boolean>
+        default value = closed = true // GQL setting
+
+
+        — node types <set> 
+            – type interpretation
+                – node type            
+                    – identified node type
+               – type identifier 
+               – implies
+                  – ? supertypes <set <type label>>
+                  – ? labels <set <identifier>>
+                      – extension interpretation
+                  – ? property types <set <property type>>
+                      – extension interpretation
+
+
+If a node type has an extension interpretation where open is true (or equivalently, closed is false) then a node may be present in the graph which is of an inferred structural type (has a set of attributes) which is a subtype of such an extensible node type, even if there is no specified node subtype of that kind. If the interpretation is open = false (closed = true) then a node may be valid because it is of a subtype (given a supertype interpretation) but only if the node’s type is a defined, specified subtype of the stated supertype. 
+At a later date, we will refine this further with an additional descriptor called finality. This will have a default value of final : false
+
+
+A set of property type descriptors looks like this
+    – graph type
+        — node types <set>
+            – identified node type
+                – type identifier 
+               – implies
+                   – ? supertypes <set <type label>>
+                   – ? labels <set <identifer>>
+                        – ? property types <set>
+                            – extension interpretation
+                            – property type  
+                               – name <string>
+                               – value type
+                            – property type  
+                           . . . 
+
+
+In a property types set, the names of any two property type members must not be equal. 
+                                          
+A value type descriptor contains an identifier, whose value is the name of a value type in the value type system of the containing LEX schema. The descriptor may include additional information indicated as parameters in the value type system’s table of value types.  
+A value type descriptor looks like this
+    – graph type
+        — node types <set>
+            – node type
+                – labels <set <string>>
+                – property types <set>
+                    – property type  
+                        – name <string>
+                        – value type
+                            – name <string>
+                            – parameters <map <string> → <value>>
+
+
+Where the value of the string key in the map of parameters will be the name of the parameter given in the value type system’s table of value types, and the value will be parameter dependent. So for example, any value type may contain the key nullable and the value TRUE, but other parameters like minimum or maximum length of a fixed length string may only make sense for particular value types. 
+
+
+An edge type descriptor contains the following descriptors
+    – graph type
+        — edge types <set>
+            – edge type
+                – edge type identifier
+                – labels <set <string>>
+                – property types <set>
+                – direction DIRECTED | UNDIRECTED
+                – first endpoint node type identifier
+                – second endpoint node type identifier | SAME 
+                   
+The descriptor 
+    – edgeTypeIdentifier 
+is therefore equivalent to this choice:
+    – edgeTypeIndex <integer> | 
+      typeNameLabel <string starts alpha> | 
+      typeIdentifyingLabels <set <string starts alpha>> 
+Whatever the value of the edge type identifier it must be unique for all node type identifiers. This means that the user can mix default node types with name labels with key label sets.  
+
+
+The rules for the contents of the second and third descriptors contained in the edge type are identical to those for node types, with the difference that each reference to the set of node types or to a node type, isto be replaced with a reference to the set of edge types, or to an edge type, within the graph type. 
+
+
+The next three descriptors contained by an edge type related to its orientation. An edge is either directed or undirected. If an edge type is directed then the first endpoint node type is the source of an edge of this type,  and the second is the destination of the edge. If the edge is undirected then the order of the endpoint node types is irrelevant (has no semantic). If the edge is a loop then the second endpoint node type descriptor has the meaning that it is the SAME as the first. 
+
+
+Otherwise the value of each of the endpoint descriptors is a node type identifier for the endpoint concerned, which can be an index, a type name label, or a set of labels (a key label set) which identify the node type.  
+
+
+Graph schema: Constraints
+We have now dealt with the identifier and graph type of a graph schema. A graph schema can also have a descriptor for a set of constraints, which is possibly empty. 
+
+
+graph schema
+    – identifier
+    – ? principal <string>
+    – ? value type system name <string> // preferred names for types
+    – graph type
+    – ? constraints <map CK → C>
+Where CK is a <string> which is a constraint name, and C is a constraint rule descriptor.   
+A constraint descriptor has these contents:
+    – constraints 
+        – constraint
+            – name <string>
+            – rule
+                – subject KEY | UNIQUE     
+                – constraint pattern
+                – unique key component property names <set>   
+                       
+COMMENT ONLY The GQL specification is unclear to me with respect to descriptors in this area. 
+
+
+LEX Graph abstract syntax
+A graph (instance) descriptor may include any of a graph schema, a set of constraints and a storage schema.
+
+
+Graph instance: without storage schema 
+graph 
+    – identifier
+    – ? principal <string>
+    – ? value type system name <string> 
+    – ? graph schema <identifier>
+    – ? constraints <map CK → C>
+The content of these descriptors is the same as those for the graph schema descriptor, mutatis mutandis. If a graph’s graph schema contains a set of constraints then the graph cannot contain a second, independent set of constraints.
+
+
+Graph instance: with storage schema
+graph 
+    – identifier
+    – ? principal <string>
+    – ? value type system name <string> 
+    – ? graph schema <identifier>
+    – ? constraints <map CK → C>
+    – ? storage schema
+
+
+COMMENT ONLY TBS with GraphAr or by Dominik if he’s already done the analysis re the storage schema
+
+
+The descriptor for storage schema includes a descriptor for storage type (file type in GraphAr), which is used to switch between different additional descriptors which are specific to a storage type. 
+
+
+LEX JSON Schema
+LEX JSON Schema defines a concrete syntax for LEX, in the form of YAML. YAML documents can be produced which contain only the information defined in the abstract syntaxes for catalogs, schemas and graphs. The JSON Schema therefore defines permitted document for these three classes of specifications, and it also defines database value types, starting with the CANONICAL VTS, enabling YAML graph schema property types to be specified with a given canonical data or value type. 
+ 
+Examples of YAML documents
+Graph schemas
+Graphs without storage schemas
+Graphs with storage schemas
+
+
+Appendix A: Possible future functionality
+JSON Schema or Structure to define property types, including for nested records. 
+Cardinality constraints (min/max of instances of a node or edge type)
+Participation constraints (min/max of instances of a node type, relative to another node type, where the two node types will often
+
+
+
+
+
+
+________________
+[1] We hope to add Apache Tinkerpop to that list soon, as well. 
+[2] Parts of LEX, like data VTS rationalization, may be relevant for other projects like JTC1 29075. 
+
+
+[3] The following was originally based on an extract, lightly edited to replace symbols, of some of the descriptors defined in the Concepts clause of the GQL standard  (2CD1SP1, dated 2025-10-19), which were included in LEX-056R1 GQL Descriptors by Stephen Cannan. The GQL specification descriptors have been reordered to be slightly more hierarchical. Some have been amended or removed, and others have been added, to arrive at our abstract syntax.
+
+
+[4] Binding tables and named procedures are primary catalog objects in GQL:2024-2027 but are not included in this specification. 
+[a]Two classes of DURATION
+[b]Nullable all the way down

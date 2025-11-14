@@ -1,0 +1,30 @@
+LEX:2026.0.3.1 Key Files Reference
+===================================
+
+Core Schema:
+- src/grasch/schemas/lex-2026.0.3.1.schema.json
+
+Schema Examples:
+- src/grasch/examples/finbench-lex-2026.0.3.1-schema.yaml
+- src/grasch/examples/snb-lex-2026.0.3.1-schema.yaml
+
+Graph Instance & Catalog:
+- src/grasch/examples/finbench-sf1-graph-lex-2026.0.3.1.yaml
+- src/grasch/examples/example-catalog-lex-2026.0.3.1.yaml
+- src/grasch/examples/example-catalog-no-iri-lex-2026.0.3.1.yaml
+
+Validation Scripts:
+- tests/validate_finbench_lex_0_3_1_schema.py
+- tests/validate_snb_lex_0_3_1_schema.py
+- tests/validate_catalog_example_0_3_1.py
+- tests/validate_catalog_no_iri_0_3_1.py
+
+Documentation:
+- LEX-2026.0.3.1-GUIDE.md
+- LEX-2026.0.3-CHANGES.md
+- LEX-2026-VERSION-HISTORY.md
+- ancillary docs/LEX-100r3 -- LEX_2026 Extended Graph Schema Specification.txt
+
+Archived Versions:
+- archive/lex-2026.0.2.1/ (LEX:2026.0.2.1 files)
+- archive/lex-2026.0.0-0.2.0/ (Earlier versions: 0.0, 0.1, 0.2.0)

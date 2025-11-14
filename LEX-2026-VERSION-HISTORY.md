@@ -177,3 +177,77 @@ This document tracks the versions of LEX:2026 Graph Schema artifacts.
 - TBD: Storage schema integration for GraphAr
 - TBD: Enhanced constraint types
 - TBD: Additional value type system mappings
+
+## Versi
+on LEX:2026.0.3.1 (Current Release)
+
+**Release Date**: November 12, 2025  
+**Specification**: LEX-100r3
+
+### Breaking Changes
+- **Mandatory Labels**: All node and edge types must have at least one label (minimum changed from 0 to 1)
+- **Type Identification**: Focus on typeNameLabel as preferred identification method
+
+### New Features
+
+#### Subtyping Support
+- Types can declare supertypes for inheritance
+- Java interface mixin-style composition
+- Pulls in labels and property types from supertypes
+
+#### Import/Modularization
+- Schemas can be split across files using `$ref` syntax
+- Swagger-style imports: `$ref('path/to/file.yaml')`
+- Applies to node types, edge types, and property types
+
+#### Type Interpretation Modes
+- `exactlyOfThisType` (default): Exact match required
+- `anySubtypeOf`: Covariant interpretation
+- `anyProperSubtypeOf`: Proper subtype required
+
+#### Extension Interpretation
+- Control whether types can be extended
+- `open: true` / `closed: false`: Allow undefined subtypes
+- `open: false` / `closed: true`: Only defined subtypes (default)
+- Applies separately to labels and property types
+
+#### File References in Catalogs
+- Catalog entries can reference external files
+- Format: `file: $ref('path/to/schema.yaml')`
+- Separates IRI from actual file location
+
+### Artifacts
+
+#### Core Schema Definition
+- `src/grasch/schemas/lex-2026.0.3.1.schema.json` - JSON Schema with mandatory labels, subtyping, and imports
+
+#### Example Schemas
+- `src/grasch/examples/finbench-lex-2026.0.3.1-schema.yaml` - FinBench schema with mandatory labels
+- `src/grasch/examples/snb-lex-2026.0.3.1-schema.yaml` - SNB schema with mandatory labels
+
+#### Graph Instance Examples
+- `src/grasch/examples/finbench-sf1-graph-lex-2026.0.3.1.yaml` - FinBench SF1 graph instance
+
+#### Catalog Examples
+- `src/grasch/examples/example-catalog-lex-2026.0.3.1.yaml` - Catalog with IRI
+- `src/grasch/examples/example-catalog-no-iri-lex-2026.0.3.1.yaml` - Catalog without IRI
+
+#### Validation Tools
+- `tests/validate_finbench_lex_0_3_1_schema.py` - FinBench validation with subtyping detection
+- `tests/validate_snb_lex_0_3_1_schema.py` - SNB validation with subtyping detection
+- `tests/validate_catalog_example_0_3_1.py` - Catalog validation with IRI
+- `tests/validate_catalog_no_iri_0_3_1.py` - Catalog validation without IRI
+
+### Documentation
+- `LEX-2026.0.3.1-GUIDE.md` - Complete implementation guide
+- `LEX-2026.0.3-CHANGES.md` - Detailed changelog from 0.2 to 0.3
+- `ancillary docs/LEX-100r3 -- LEX_2026 Extended Graph Schema Specification.txt` - Official specification
+
+### Migration from 0.2.1
+- All types must have at least one label
+- Schemas without labels will fail validation
+- New features (subtyping, imports, type interpretation) are optional
+- Default behaviors maintain compatibility where possible
+
+### Archive Location
+- Previous versions archived in `archive/lex-2026.0.2.1/` and `archive/lex-2026.0.0-0.2.0/`

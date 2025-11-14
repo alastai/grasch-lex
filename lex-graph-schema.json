@@ -1,0 +1,157 @@
+{
+  ,
+    "N
+odeType": {
+      "type": "object",
+      "description": "A node type descriptor",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Unique integer index for this node type within the graph type"
+        },
+        "labels": {
+          "type": "array",
+          "description": "Set of labels for this node type",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "propertyTypes": {
+          "type": "array",
+          "description": "Set of property type descriptors for this node type",
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          }
+        }
+      },
+      "required": ["index", "labels", "propertyTypes"],
+      "additionalProperties": false
+    },
+    "EdgeType": {
+      "type": "object",
+      "description": "An edge type descriptor",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Unique integer index for this edge type within the graph type"
+        },
+        "labels": {
+          "type": "array",
+          "description": "Set of labels for this edge type",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "propertyTypes": {
+          "type": "array",
+          "description": "Set of property type descriptors for this edge type",
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          }
+        },
+        "direction": {
+          "type": "string",
+          "enum": ["DIRECTED", "UNDIRECTED"],
+          "description": "Whether the edge type is directed or undirected"
+        },
+        "firstEndpointNodeType": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Index of the first endpoint node type"
+        },
+        "secondEndpointNodeType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "SAME",
+              "description": "Indicates the second endpoint is the same as the first (loop edge)"
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the second endpoint node type"
+            }
+          ]
+        }
+      },
+      "required": ["index", "labels", "propertyTypes", "direction", "firstEndpointNodeType", "secondEndpointNodeType"],
+      "additionalProperties": false
+    },
+    "PropertyType": {
+      "type": "object",
+      "description": "A property type descriptor",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the property"
+        },
+        "valueType": {
+          "$ref": "#/$defs/ValueType"
+        }
+      },
+      "required": ["name", "valueType"],
+      "additionalProperties": false
+    },
+    "ValueType": {
+      "type": "object",
+      "description": "A value type descriptor with name and optional parameters",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the value type from the value type system"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Map of parameter names to parameter values",
+          "additionalProperties": true
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "Constraint": {
+      "type": "object",
+      "description": "A constraint descriptor",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the constraint"
+        },
+        "rule": {
+          "$ref": "#/$defs/ConstraintRule"
+        }
+      },
+      "required": ["name", "rule"],
+      "additionalProperties": false
+    },
+    "ConstraintRule": {
+      "type": "object",
+      "description": "A constraint rule descriptor",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "enum": ["KEY", "UNIQUE"],
+          "description": "The type of constraint"
+        },
+        "constraintPattern": {
+          "type": "string",
+          "description": "The constraint pattern specification"
+        },
+        "uniqueKeyComponentPropertyNames": {
+          "type": "array",
+          "description": "Set of property names that form the unique key components",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["subject", "constraintPattern", "uniqueKeyComponentPropertyNames"],
+      "additionalProperties": false
+    }
+  }
+}

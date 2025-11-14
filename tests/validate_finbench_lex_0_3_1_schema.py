@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Validation script for LDBC SNB LEX:2026.0.3 Graph Schema
-Validates the SNB schema against the LEX:2026.0.3.1 JSON Schema for LEX specifications
+Validation script for LDBC FinBench LEX:2026.0.3 Graph Schema
+Validates the FinBench schema against the LEX:2026.0.3.1 JSON Schema for LEX specifications
 """
 
 import json
@@ -80,15 +80,15 @@ def analyze_schema_structure(yaml_data: dict) -> dict:
         elif 'nodeTypeIndex' in node_type_obj:
             analysis['node_type_identifiers'][i] = f"nodeTypeIndex: {node_type_obj['nodeTypeIndex']}"
         
-        # Check for supertypes (LEX:2026.0.3 feature)
+        # Check for supertypes (LEX:2026.0.3 feature) - now in implies
         implies = node_type_obj.get('implies', {})
         if 'supertypes' in implies and implies['supertypes']:
             analysis['has_supertypes'] = True
             type_name = node_type_obj.get('typeLabel', f"NodeType[{i}]")
             analysis['types_with_supertypes'].append(f"{type_name} extends {implies['supertypes']}")
         
-        # Count properties
-        analysis['total_properties'] += len(node_type.get('implies', {}).get('propertyTypes', []))
+        # Count properties - now in implies
+        analysis['total_properties'] += len(implies.get('propertyTypes', []))
     
     # Analyze edge type identifiers
     for i, edge_type in enumerate(edge_types):
@@ -100,15 +100,15 @@ def analyze_schema_structure(yaml_data: dict) -> dict:
         elif 'edgeTypeIndex' in edge_type_obj:
             analysis['edge_type_identifiers'][i] = f"edgeTypeIndex: {edge_type_obj['edgeTypeIndex']}"
         
-        # Check for supertypes
+        # Check for supertypes - now in implies
         implies = edge_type_obj.get('implies', {})
         if 'supertypes' in implies and implies['supertypes']:
             analysis['has_supertypes'] = True
             type_name = edge_type_obj.get('typeLabel', f"EdgeType[{i}]")
             analysis['types_with_supertypes'].append(f"{type_name} extends {implies['supertypes']}")
         
-        # Count properties
-        analysis['total_properties'] += len(edge_type.get('implies', {}).get('propertyTypes', []))
+        # Count properties - now in implies
+        analysis['total_properties'] += len(implies.get('propertyTypes', []))
     
     # Count constraints
     constraints = yaml_data.get('constraints', {})
@@ -118,7 +118,7 @@ def analyze_schema_structure(yaml_data: dict) -> dict:
 
 def main():
     """Main validation function"""
-    print("LEX:2026.0.3.1 SNB Schema Validation")
+    print("LEX:2026.0.3.1 FinBench Schema Validation")
     print("=" * 50)
     
     # File paths (work from both workspace root and tests directory)
@@ -126,9 +126,9 @@ def main():
     if not Path(json_schema_path).exists():
         json_schema_path = "../src/grasch/schemas/lex-2026.0.3.1.schema.json"
     
-    yaml_schema_path = "src/grasch/examples/snb-lex-2026.0.3.1-schema.yaml"
+    yaml_schema_path = "src/grasch/examples/finbench-lex-2026.0.3.1-schema.yaml"
     if not Path(yaml_schema_path).exists():
-        yaml_schema_path = "../src/grasch/examples/snb-lex-2026.0.3.1-schema.yaml"
+        yaml_schema_path = "../src/grasch/examples/finbench-lex-2026.0.3.1-schema.yaml"
     
     # Check if files exist
     if not Path(json_schema_path).exists():
@@ -185,7 +185,7 @@ def main():
     for i, identifier in analysis['edge_type_identifiers'].items():
         print(f"    [{i}] {identifier}")
     
-    print(f"\n🎉 SNB LEX:2026.0.3.1 schema validation completed successfully!")
+    print(f"\n🎉 FinBench LEX:2026.0.3.1 schema validation completed successfully!")
     print(f"   Schema defines {analysis['node_types']} node types and {analysis['edge_types']} edge types")
     print(f"   with {analysis['total_properties']} total properties and {analysis['constraints']} constraints")
     print(f"   ✨ LEX:2026.0.3 - All types have mandatory labels (minimum 1)")
