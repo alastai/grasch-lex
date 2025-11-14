@@ -12,3 +12,7 @@ graph:
   # Storage schema for this graph instance
   storageSchema:
     storageType: "kuzu"
+    databasePath: "./data/my-graph-instance.kuzu"
+    # Optional Kuzu-specific configuration
+    bufferPoolSize: "1GB"
+    maxNumThreads: 4
