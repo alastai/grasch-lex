@@ -373,14 +373,9 @@
         }
       },
       "required": [
-        "graphPreferredName", "nodePreferredName", "edgePreferredName",
-        "nodeTypeMinimumLabels", "nodeTypeMaximumLabels",
-        "nodeTypeMinimumPropertyTypes", "nodeTypeMaximumPropertyTypes",
-        "edgeTypeMinimumLabels", "edgeTypeMaximumLabels",
-        "edgeTypeMinimumPropertyTypes", "edgeTypeMaximumPropertyTypes",
         "nodeTypes", "edgeTypes"
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "NodeType": {
       "type": "object",
