@@ -24,43 +24,41 @@ graphType:
   edgeTypeMaximumPropertyTypes: 10
   
   nodeTypes:
-    - nodeTypeIdentifier:
+    - nodeType:
         typeLabel: "Person"
-      implies:
-        labels: ["Person"]
-        propertyTypes:
-          - name: "id"
-            valueType:
-              name: "INTEGER"
-              parameters:
-                nullable: false
-          - name: "firstName"
-            valueType:
-              name: "STRING"
-              parameters:
-                nullable: false
-          - name: "lastName"
-            valueType:
-              name: "STRING"
-              parameters:
-                nullable: false
+        implies:
+          propertyTypes:
+            - name: "id"
+              valueType:
+                name: "INTEGER"
+                parameters:
+                  nullable: false
+            - name: "firstName"
+              valueType:
+                name: "STRING"
+                parameters:
+                  nullable: false
+            - name: "lastName"
+              valueType:
+                name: "STRING"
+                parameters:
+                  nullable: false
   
   edgeTypes:
-    - edgeTypeIdentifier:
+    - edgeType:
         typeLabel: "KNOWS"
-      implies:
-        labels: ["KNOWS"]
-        propertyTypes:
-          - name: "creationDate"
-            valueType:
-              name: "DATE"
-              parameters:
-                nullable: false
-      direction: "DIRECTED"
-      firstEndpointNodeTypeIdentifier:
-        typeLabel: "Person"
-      secondEndpointNodeTypeIdentifier:
-        typeLabel: "Person"
+        implies:
+          propertyTypes:
+            - name: "creationDate"
+              valueType:
+                name: "DATE"
+                parameters:
+                  nullable: false
+        direction: "DIRECTED"
+        firstEndpointNodeType:
+          typeLabel: "Person"
+        secondEndpointNodeType:
+          typeLabel: "Person"
 
   # Reference to storage schema
   storageSchema:
