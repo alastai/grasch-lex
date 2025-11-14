@@ -1,12 +1,14 @@
-# Complete Import Example - Shows importing entire graphSchema within a graph
+# Complete Import Example - Shows importing graphSchema contents within a graph
 
 # This is a GRAPH (instance), not a standalone schema
 graph:
   identifier:
     locallyQualifiedObjectName: "/examples/my-graph-instance"
   
-  # Pattern: Import entire graphSchema from external file
+  # Pattern: Reference the schema identifier explicitly, import the schema contents
   graphSchema:
+    identifier:
+      locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
     import: "snb-lex-2026.0.3.1-schema.yaml"
   
   # Storage schema for this graph instance
