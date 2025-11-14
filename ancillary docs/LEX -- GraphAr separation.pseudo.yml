@@ -28,7 +28,7 @@
        graph: 
            <storage characteristics>
        - nodeType
-           typeLabel Person
+           typeLabel "Person"
                <storage characteristics>
            - propertyGroup
                properties ["id", "name"]
@@ -37,6 +37,6 @@
                name "id"
                <storage characteristics>
       - edgeType
-          typeLabel Person_KNOWS_Person
+          typeLabel "Person_KNOWS_Person"
           <storage characteristics>
 
