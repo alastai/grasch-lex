@@ -9,19 +9,7 @@ identifier:
 valueTypeSystemName: "CANONICAL"
 
 graphType:
-  graphPreferredName: "PROPERTY GRAPH"
-  nodePreferredName: "NODE"
-  edgePreferredName: "EDGE"
-  
-  nodeTypeMinimumLabels: 1
-  nodeTypeMaximumLabels: 3
-  nodeTypeMinimumPropertyTypes: 0
-  nodeTypeMaximumPropertyTypes: 20
-  
-  edgeTypeMinimumLabels: 1
-  edgeTypeMaximumLabels: 1
-  edgeTypeMinimumPropertyTypes: 0
-  edgeTypeMaximumPropertyTypes: 10
+  $ref: "graph_type_defaults.yaml"
   
   nodeTypes:
     - nodeType:
@@ -29,31 +17,21 @@ graphType:
         implies:
           propertyTypes:
             - name: "id"
-              valueType:
-                name: "INTEGER"
-                parameters:
-                  nullable: false
+              valueType: "INTEGER"
+              notNull: true
             - name: "firstName"
-              valueType:
-                name: "STRING"
-                parameters:
-                  nullable: false
+              valueType: "STRING"
+              notNull: true
             - name: "lastName"
-              valueType:
-                name: "STRING"
-                parameters:
-                  nullable: false
+              valueType: "STRING"
+              notNull: true
   
   edgeTypes:
     - edgeType:
         typeLabel: "KNOWS"
-        implies:
-          propertyTypes:
-            - name: "creationDate"
-              valueType:
-                name: "DATE"
-                parameters:
-                  nullable: false
+
+
+              notNull: true
         direction: "DIRECTED"
         firstEndpointNodeType:
           typeLabel: "Person"
@@ -83,33 +61,24 @@ storageSchema:
     
     # Vertex (Node) storage configuration
     vertices:
-      - label: "Person"
+      - typeLabel: "Person"
         chunk_size: 1024
         prefix: "person/"
         property_groups:
-          - file_type: "parquet"
-            properties:
-              - name: "id"
-                data_type: "int64"
-                is_primary: true
-              - name: "firstName"
-                data_type: "string"
-              - name: "lastName"
-                data_type: "string"
+          - property_group:
+              properties: ["id", "firstName", "lastName"]
     
     # Edge storage configuration
     edges:
-      - src_label: "Person"
-        edge_label: "KNOWS"
-        dst_label: "Person"
+      - src_typeLabel: "Person"
+        edge_typeLabel: "KNOWS"
+        dst_typeLabel: "Person"
         chunk_size: 2048
         prefix: "knows/"
         directed: true
         property_groups:
-          - file_type: "parquet"
-            properties:
-              - name: "creationDate"
-                data_type: "date32"
+          - property_group:
+              properties: ["creationDate"]
   
   # File system layout
   fileLayout:
