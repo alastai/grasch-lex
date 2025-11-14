@@ -1,0 +1,128 @@
+# LEX Schema and GraphAr Storage Schema Separation Example
+# This demonstrates how LEX schema (logical) can be separated from GraphAr storage schema (physical)
+# Two YAML documents in one file, separated by ---
+
+# Document 1: LEX Schema (Logical Graph Schema)
+identifier:
+  locallyQualifiedObjectName: "/examples/snb-demo-graph"
+
+valueTypeSystemName: "CANONICAL"
+
+graphType:
+  graphPreferredName: "PROPERTY GRAPH"
+  nodePreferredName: "NODE"
+  edgePreferredName: "EDGE"
+  
+  nodeTypeMinimumLabels: 1
+  nodeTypeMaximumLabels: 3
+  nodeTypeMinimumPropertyTypes: 0
+  nodeTypeMaximumPropertyTypes: 20
+  
+  edgeTypeMinimumLabels: 1
+  edgeTypeMaximumLabels: 1
+  edgeTypeMinimumPropertyTypes: 0
+  edgeTypeMaximumPropertyTypes: 10
+  
+  nodeTypes:
+    - nodeTypeIdentifier:
+        typeLabel: "Person"
+      implies:
+        labels: ["Person"]
+        propertyTypes:
+          - name: "id"
+            valueType:
+              name: "INTEGER"
+              parameters:
+                nullable: false
+          - name: "firstName"
+            valueType:
+              name: "STRING"
+              parameters:
+                nullable: false
+          - name: "lastName"
+            valueType:
+              name: "STRING"
+              parameters:
+                nullable: false
+  
+  edgeTypes:
+    - edgeTypeIdentifier:
+        typeLabel: "KNOWS"
+      implies:
+        labels: ["KNOWS"]
+        propertyTypes:
+          - name: "creationDate"
+            valueType:
+              name: "DATE"
+              parameters:
+                nullable: false
+      direction: "DIRECTED"
+      firstEndpointNodeTypeIdentifier:
+        typeLabel: "Person"
+      secondEndpointNodeTypeIdentifier:
+        typeLabel: "Person"
+
+  # Reference to storage schema
+  storageSchema:
+    kind: "GraphAr"
+    reference: "snb-demo-graph-storage.yml"
+
+---
+# Document 2: GraphAr Storage Schema (Physical Storage Layout)
+storageSchema:
+  format: "GraphAr"
+  version: "0.11.0"
+  
+  # Reference back to logical schema
+  logicalSchema:
+    kind: "LEX"
+    reference: "snb-demo-graph-schema.yml"
+  
+  # GraphAr-specific configuration
+  graphInfo:
+    name: "snb-demo-graph"
+    prefix: "/data/snb-demo/"
+    
+    # Vertex (Node) storage configuration
+    vertices:
+      - label: "Person"
+        chunk_size: 1024
+        prefix: "person/"
+        property_groups:
+          - file_type: "parquet"
+            properties:
+              - name: "id"
+                data_type: "int64"
+                is_primary: true
+              - name: "firstName"
+                data_type: "string"
+              - name: "lastName"
+                data_type: "string"
+    
+    # Edge storage configuration
+    edges:
+      - src_label: "Person"
+        edge_label: "KNOWS"
+        dst_label: "Person"
+        chunk_size: 2048
+        prefix: "knows/"
+        directed: true
+        property_groups:
+          - file_type: "parquet"
+            properties:
+              - name: "creationDate"
+                data_type: "date32"
+  
+  # File system layout
+  fileLayout:
+    baseDirectory: "/data/snb-demo/"
+    vertexDirectory: "vertices/"
+    edgeDirectory: "edges/"
+    
+  # Compression and optimization settings
+  optimization:
+    compression: "snappy"
+    columnOriented: true
+    indexing:
+      - type: "btree"
+        columns: ["id"]
