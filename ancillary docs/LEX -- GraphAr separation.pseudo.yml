@@ -1,0 +1,42 @@
+// LEX 
+    graph
+        metadata
+            identifier SNB_demo_graph
+        schema
+            identifier SNB_schema
+            - nodeType 
+                typeLabel Person
+                propertyType 
+                    name "id"
+                    valueType integer
+            - edgeType
+                typeLabel Person_KNOWS_Person
+                firstEndpointNodeType
+                secondEndpointNodeType
+       storageSchema
+           kind “GraphAr”
+           $ref (<fileLocation>)
+
+// GraphAr storage schema
+    graphStorageSchemm
+        metadata
+            identifier SNB_demo_graph
+            schema
+                kind “LEX”
+                $ref (<fileLocation>)
+
+       graph: 
+           <storage characteristics>
+       - nodeType
+           typeLabel Person
+               <storage characteristics>
+           - propertyGroup
+               properties ["id", "name"]
+               <storage characteristics
+           - property
+               name "id"
+               <storage characteristics>
+      - edgeType
+          typeLabel Person_KNOWS_Person
+          <storage characteristics>
+
