@@ -25,12 +25,18 @@ graphType:
             - name: "lastName"
               valueType: "STRING"
               notNull: true
+            - name: "email"
+              valueType: "STRING"
+            - name: "birthDate"
+              valueType: "DATE"
   
   edgeTypes:
     - edgeType:
         typeLabel: "KNOWS"
-
-
+        implies:
+          propertyTypes:
+            - name: "creationDate"
+              valueType: "DATE"
               notNull: true
         direction: "DIRECTED"
         firstEndpointNodeType:
@@ -45,6 +51,7 @@ graphType:
 
 ---
 # Document 2: GraphAr Storage Schema (Physical Storage Layout)
+# Demonstrates different storage formats for different property groups
 storageSchema:
   format: "GraphAr"
   version: "0.11.0"
@@ -64,9 +71,19 @@ storageSchema:
       - typeLabel: "Person"
         chunk_size: 1024
         prefix: "person/"
+        # Property groups with different storage formats
         property_groups:
           - property_group:
-              properties: ["id", "firstName", "lastName"]
+              properties: ["id", "firstName"]
+              file_type: "parquet"
+          - property_group:
+              properties: ["lastName", "birthDate"]
+              file_type: "csv"
+        # Standalone properties stored individually
+        standalone_properties:
+          - property:
+              name: "email"
+              file_type: "json"
     
     # Edge storage configuration
     edges:
@@ -79,6 +96,8 @@ storageSchema:
         property_groups:
           - property_group:
               properties: ["creationDate"]
+              file_type: "parquet"
+        standalone_properties: []
   
   # File system layout
   fileLayout:
