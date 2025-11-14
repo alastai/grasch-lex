@@ -45,17 +45,17 @@ graphType:
   
   edgeTypes:
     - edgeType:
-        typeLabel: "KNOWS"
+        typeLabel: "WORKS_FOR"
         implies:
           propertyTypes:
-            - name: "creationDate"
+            - name: "startDate"
               valueType: "DATE"
               notNull: true
         direction: "DIRECTED"
         firstEndpointNodeType:
           typeLabel: "Person"
         secondEndpointNodeType:
-          typeLabel: "Person"
+          typeLabel: "Company"
 
   # Reference to storage schema
   storageSchema:
@@ -104,14 +104,14 @@ storageSchema:
     # Edge storage configuration
     edges:
       - src_typeLabel: "Person"
-        edge_typeLabel: "KNOWS"
-        dst_typeLabel: "Person"
+        edge_typeLabel: "WORKS_FOR"
+        dst_typeLabel: "Company"
         chunk_size: 2048
-        prefix: "knows/"
+        prefix: "works_for/"
         directed: true
         property_groups:
           - property_group:
-              properties: ["creationDate"]
+              properties: ["startDate"]
               file_type: "parquet"
   
   # File system layout
