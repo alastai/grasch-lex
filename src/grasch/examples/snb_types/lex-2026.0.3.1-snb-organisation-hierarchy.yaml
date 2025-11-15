@@ -9,6 +9,8 @@ allowSubtypesOf:
     - nodeType:
         typeLabel: Organisation
         implies:
+          labels:
+            - Organisation
           propertyTypes:
             - name: id
               valueType: INTEGER
@@ -26,15 +28,19 @@ allowSubtypesOf:
     # Company subtype - instances have labels [Organisation, Company]
     - nodeType:
         typeLabel: Company
-        implies:
+        extends:
           supertypes:
             - Organisation
-          propertyTypes: []
+          adding:
+            labels:
+              - Company
 
     # University subtype - instances have labels [Organisation, University]
     - nodeType:
         typeLabel: University
-        implies:
+        extends:
           supertypes:
             - Organisation
-          propertyTypes: []
+          adding:
+            labels:
+              - University

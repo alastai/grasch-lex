@@ -467,7 +467,7 @@
       "properties": {
         "nodeType": {
           "type": "object",
-          "description": "Node type container with identifier and implies",
+          "description": "Node type container with identifier and implies or extends",
           "oneOf": [
             {
               "type": "object",
@@ -497,6 +497,30 @@
                 }
               },
               "required": ["typeLabel", "implies"],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "typeLabel": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z]",
+                  "description": "Single label that serves as type name"
+                },
+                "extends": {
+                  "type": "array",
+                  "description": "Supertypes this type extends (synonym for supertypes)",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                },
+                "adding": {
+                  "$ref": "#/$defs/AddingDescriptor"
+                }
+              },
+              "required": ["typeLabel", "extends"],
               "additionalProperties": false
             },
             {
@@ -582,6 +606,29 @@
         }
       },
       "required": ["propertyTypes"],
+      "additionalProperties": false
+    },
+    "AddingDescriptor": {
+      "type": "object",
+      "description": "Container for labels and property types being added to a supertype (used with extends)",
+      "properties": {
+        "labels": {
+          "type": "array",
+          "description": "Additional labels beyond typeLabel (typeLabel never included)",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "propertyTypes": {
+          "type": "array",
+          "description": "New property types being added (inherited properties not included)",
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          }
+        }
+      },
       "additionalProperties": false
     },
     "NodeTypeIdentifier": {
@@ -752,6 +799,52 @@
                 }
               },
               "required": ["typeIdentifyingLabels", "implies", "direction", "firstEndpointNodeType", "secondEndpointNodeType"],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "typeLabel": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z]",
+                  "description": "Single label that serves as type name"
+                },
+                "extends": {
+                  "type": "array",
+                  "description": "Supertypes this type extends (synonym for supertypes)",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                },
+                "adding": {
+                  "$ref": "#/$defs/AddingDescriptor"
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": ["DIRECTED", "UNDIRECTED"],
+                  "description": "Edge direction"
+                },
+                "firstEndpointNodeType": {
+                  "$ref": "#/$defs/NodeTypeIdentifier",
+                  "description": "First endpoint node type identifier"
+                },
+                "secondEndpointNodeType": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "enum": ["SAME"],
+                      "description": "Same as first endpoint (loop edge)"
+                    },
+                    {
+                      "$ref": "#/$defs/NodeTypeIdentifier",
+                      "description": "Second endpoint node type identifier"
+                    }
+                  ]
+                }
+              },
+              "required": ["typeLabel", "extends", "direction", "firstEndpointNodeType", "secondEndpointNodeType"],
               "additionalProperties": false
             }
           ]

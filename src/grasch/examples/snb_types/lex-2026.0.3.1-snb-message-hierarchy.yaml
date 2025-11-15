@@ -9,6 +9,8 @@ allowSubtypesOf:
     - nodeType:
         typeLabel: Message
         implies:
+          labels:
+            - Message
           propertyTypes:
             - name: id
               valueType: INTEGER
@@ -31,19 +33,24 @@ allowSubtypesOf:
     # Post subtype - instances have labels [Message, Post]
     - nodeType:
         typeLabel: Post
-        implies:
+        extends:
           supertypes:
             - Message
-          propertyTypes:
-            - name: imageFile
-              valueType: STRING
-            - name: language
-              valueType: STRING
+          adding:
+            labels:
+              - Post
+            propertyTypes:
+              - name: imageFile
+                valueType: STRING
+              - name: language
+                valueType: STRING
 
     # Comment subtype - instances have labels [Message, Comment]
     - nodeType:
         typeLabel: Comment
-        implies:
+        extends:
           supertypes:
             - Message
-          propertyTypes: []
+          adding:
+            labels:
+              - Comment
