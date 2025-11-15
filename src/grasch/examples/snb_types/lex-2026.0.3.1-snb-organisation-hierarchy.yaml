@@ -2,8 +2,9 @@
 # Organisation is an abstract supertype for Company and University
 # All instances have the Organisation label plus their specific subtype label
 
-subtypesOfAbstractElementSupertype:
-  nodeTypes:
+allowSubtypesOf:
+  abstractSupertype:
+    nodeTypes:
     # Abstract Organisation supertype - never instantiated directly
     - nodeType:
         typeLabel: Organisation

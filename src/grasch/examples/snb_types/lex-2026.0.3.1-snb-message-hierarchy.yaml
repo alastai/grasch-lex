@@ -2,8 +2,9 @@
 # Message is an abstract supertype for Post and Comment
 # All instances have the Message label plus their specific subtype label
 
-subtypesOfAbstractElementSupertype:
-  nodeTypes:
+allowSubtypesOf:
+  abstractSupertype:
+    nodeTypes:
     # Abstract Message supertype - never instantiated directly
     - nodeType:
         typeLabel: Message

@@ -2,8 +2,9 @@
 # Place is an abstract supertype for City, Country, and Continent
 # All instances have the Place label plus their specific subtype label
 
-subtypesOfAbstractElementSupertype:
-  nodeTypes:
+allowSubtypesOf:
+  abstractSupertype:
+    nodeTypes:
     # Abstract Place supertype - never instantiated directly
     - nodeType:
         typeLabel: Place
