@@ -8,7 +8,7 @@ pathName: "/examples/snb-demo-graph"
 valueTypeSystemName: "CANONICAL"
 
 graphType:
-  $ref: "graph_type_defaults.yaml"
+  $ref: "lex-2026.0.3.1-graph-type-defaults.yaml"
   
   nodeTypes:
     - nodeType:

@@ -6,7 +6,7 @@
 pathName: "/examples/default-exact-schema"
 
 graphType:
-  $ref: graph_type_defaults.yaml
+  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
   
   # No interpretation descriptor = exactlyOfTheseElementTypes (default)
   nodeTypes:
@@ -34,7 +34,7 @@ graphType:
 pathName: "/examples/exact-nodes-schema"
 
 graphType:
-  $ref: graph_type_defaults.yaml
+  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
   
   exactlyOfTheseElementTypes:
     nodeTypes:
@@ -62,7 +62,7 @@ graphType:
 pathName: "/examples/node-subtype-schema"
 
 graphType:
-  $ref: graph_type_defaults.yaml
+  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
   
   # Person nodes use exact matching (default)
   nodeTypes:
@@ -115,11 +115,11 @@ graphType:
           typeLabel: Message
 
 ---
-# Example 4: Proper subtypes only (abstract base type pattern)
+# Example 4: Abstract supertype (proper subtypes only)
 pathName: "/examples/abstract-relationship-schema"
 
 graphType:
-  $ref: graph_type_defaults.yaml
+  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
   
   nodeTypes:
     - nodeType:
@@ -131,7 +131,7 @@ graphType:
               notNull: true
   
   # RELATIONSHIP is abstract - only proper subtypes allowed
-  properSubtypesOfTheseElementTypes:
+  subtypesOfAbstractElementSupertype:
     edgeTypes:
       - edgeType:
           typeLabel: RELATIONSHIP
@@ -176,7 +176,7 @@ graphType:
 pathName: "/examples/mixed-interpretation-schema"
 
 graphType:
-  $ref: graph_type_defaults.yaml
+  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
   
   # Exact match for nodes (default, no descriptor needed)
   nodeTypes:
@@ -219,7 +219,7 @@ graphType:
 pathName: "/examples/multi-scope-schema"
 
 graphType:
-  $ref: graph_type_defaults.yaml
+  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
   
   # Exact matching for Person
   nodeTypes:

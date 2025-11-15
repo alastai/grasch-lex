@@ -8,7 +8,7 @@
 pathName: /benchmarks/ldbc/snb-special
 
 graphType:
-  $ref: graph_type_defaults.yaml
+  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
   
   nodeTypes:
     # Standard single typeLabel identification

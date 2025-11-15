@@ -1,6 +1,6 @@
 pathName: /benchmarks/ldbc/snb
 graphType:
-  $ref: graph_type_defaults.yaml
+  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
   nodeTypes:
   - nodeType:
       typeLabel: Person
@@ -34,38 +34,10 @@ graphType:
           valueType: LIST
         - name: email
           valueType: LIST
-  - nodeType:
-      typeLabel: Organisation
-      implies:
-        propertyTypes:
-        - name: id
-          valueType: INTEGER
-          notNull: true
-        - name: type
-          valueType: STRING
-          notNull: true
-        - name: name
-          valueType: STRING
-          notNull: true
-        - name: url
-          valueType: STRING
-          notNull: true
-  - nodeType:
-      typeLabel: Place
-      implies:
-        propertyTypes:
-        - name: id
-          valueType: INTEGER
-          notNull: true
-        - name: name
-          valueType: STRING
-          notNull: true
-        - name: url
-          valueType: STRING
-          notNull: true
-        - name: type
-          valueType: STRING
-          notNull: true
+  # Organisation type hierarchy imported from modular file
+  - $ref(snb_types/lex-2026.0.3.1-snb-organisation-hierarchy.yaml)
+  # Place type hierarchy imported from modular file
+  - $ref(snb_types/lex-2026.0.3.1-snb-place-hierarchy.yaml)
   - nodeType:
       typeLabel: Tag
       implies:
@@ -106,7 +78,7 @@ graphType:
           valueType: ZONED DATETIME
           notNull: true
   # Message type hierarchy imported from modular file
-  - $ref(snb_types/message_hierarchy.yaml)
+  - $ref(snb_types/lex-2026.0.3.1-snb-message-hierarchy.yaml)
   edgeTypes:
   - edgeType:
       typeLabel: KNOWS

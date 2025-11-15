@@ -8,7 +8,7 @@ valueTypeSystemName: "CANONICAL"
 graphType:
   # Pattern 1: Import defaults block
   defaults:
-    import: "graph_type_defaults.yaml"
+    import: "lex-2026.0.3.1-graph-type-defaults.yaml"
   
   # Pattern 2: Import entire nodeTypes array
   nodeTypes:

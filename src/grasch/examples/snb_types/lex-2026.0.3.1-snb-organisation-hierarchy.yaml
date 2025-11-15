@@ -1,0 +1,39 @@
+# SNB Organisation Type Hierarchy
+# Organisation is an abstract supertype for Company and University
+# All instances have the Organisation label plus their specific subtype label
+
+subtypesOfAbstractElementSupertype:
+  nodeTypes:
+    # Abstract Organisation supertype - never instantiated directly
+    - nodeType:
+        typeLabel: Organisation
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+            - name: type
+              valueType: STRING
+              notNull: true
+            - name: name
+              valueType: STRING
+              notNull: true
+            - name: url
+              valueType: STRING
+              notNull: true
+
+    # Company subtype - instances have labels [Organisation, Company]
+    - nodeType:
+        typeLabel: Company
+        implies:
+          supertypes:
+            - Organisation
+          propertyTypes: []
+
+    # University subtype - instances have labels [Organisation, University]
+    - nodeType:
+        typeLabel: University
+        implies:
+          supertypes:
+            - Organisation
+          propertyTypes: []

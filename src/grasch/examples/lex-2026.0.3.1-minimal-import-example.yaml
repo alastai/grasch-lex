@@ -1,26 +1,20 @@
-# Mixed Import Example
-# Shows importing a subset of types within an array alongside inline types
+# Minimal Import Example - Demonstrates all three import patterns
 
-pathName: "/examples/mixed-import"
+identifier:
+  locallyQualifiedObjectName: "/examples/minimal-import-demo"
 
 valueTypeSystemName: "CANONICAL"
 
 graphType:
+  # Pattern 1: Import defaults block
   defaults:
-    import: "graph_type_defaults.yaml"
+    import: "lex-2026.0.3.1-graph-type-defaults.yaml"
   
-  # Pattern: Mix imported subset with inline types
+  # Pattern 2: Import subset of node types (Message hierarchy)
   nodeTypes:
-    - import: "snb_types/message_hierarchy.yaml"  # Imports Message, Post, Comment
+    - import: "snb_types/message_hierarchy.yaml"
     - nodeType:
         typeLabel: "Person"
-        implies:
-          propertyTypes:
-            - name: "id"
-              valueType: "INTEGER"
-              notNull: true
-    - nodeType:
-        typeLabel: "Company"
         implies:
           propertyTypes:
             - name: "id"
@@ -32,14 +26,14 @@ graphType:
   
   edgeTypes:
     - edgeType:
-        typeLabel: "WORKS_FOR"
+        typeLabel: "AUTHORED"
         implies:
           propertyTypes:
-            - name: "startDate"
+            - name: "creationDate"
               valueType: "DATE"
               notNull: true
         direction: "DIRECTED"
         firstEndpointNodeType:
           typeLabel: "Person"
         secondEndpointNodeType:
-          typeLabel: "Company"
+          typeLabel: "Post"
