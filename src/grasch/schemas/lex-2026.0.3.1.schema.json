@@ -138,8 +138,9 @@
       "type": "object",
       "description": "Graph schema specification - structural graph type plus constraints",
       "properties": {
-        "identifier": {
-          "$ref": "#/$defs/GraphSchemaIdentifier"
+        "pathName": {
+          "type": "string",
+          "description": "Path name for the graph schema"
         },
         "principal": {
           "type": "string",
@@ -162,7 +163,7 @@
           }
         }
       },
-      "required": ["identifier", "graphType"],
+      "required": ["pathName", "graphType"],
       "additionalProperties": false
     },
     "Graph": {
@@ -339,60 +340,125 @@
           "default": "exactlyOfThisType",
           "description": "How types are interpreted during validation (LEX:2026.0.3)"
         },
+        "import": {
+          "type": "string",
+          "description": "Import file path for graph type defaults"
+        },
         "nodeTypes": {
           "oneOf": [
             {
               "type": "array",
-              "description": "Set of node type descriptors or $ref imports",
+              "description": "Set of node type descriptors or imports",
               "items": {
                 "oneOf": [
                   {
                     "$ref": "#/$defs/NodeType"
                   },
                   {
-                    "type": "string",
-                    "pattern": "^\\$ref\\(",
-                    "description": "Import individual node type via $ref"
+                    "type": "object",
+                    "properties": {
+                      "import": {
+                        "type": "string",
+                        "description": "Import individual node type from file"
+                      }
+                    },
+                    "required": ["import"],
+                    "additionalProperties": false
                   }
                 ]
               }
             },
             {
-              "type": "string",
-              "pattern": "^\\$ref\\(",
-              "description": "Import all node types via $ref"
+              "type": "object",
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Import all node types from file"
+                }
+              },
+              "required": ["import"],
+              "additionalProperties": false
             }
           ]
+        },
+        "allowSubtypesOf": {
+          "type": "object",
+          "description": "Allow subtypes of specified element types (covariant matching)",
+          "properties": {
+            "abstractSupertypes": {
+              "type": "object",
+              "description": "Abstract supertypes that cannot be instantiated directly",
+              "properties": {
+                "nodeTypes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/NodeType"
+                  }
+                },
+                "edgeTypes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/EdgeType"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "nodeTypes": {
+              "type": "array",
+              "description": "Node types that allow subtypes (supertype can be instantiated)",
+              "items": {
+                "$ref": "#/$defs/NodeType"
+              }
+            },
+            "edgeTypes": {
+              "type": "array",
+              "description": "Edge types that allow subtypes (supertype can be instantiated)",
+              "items": {
+                "$ref": "#/$defs/EdgeType"
+              }
+            }
+          },
+          "additionalProperties": false
         },
         "edgeTypes": {
           "oneOf": [
             {
               "type": "array",
-              "description": "Set of edge type descriptors or $ref imports",
+              "description": "Set of edge type descriptors or imports",
               "items": {
                 "oneOf": [
                   {
                     "$ref": "#/$defs/EdgeType"
                   },
                   {
-                    "type": "string",
-                    "pattern": "^\\$ref\\(",
-                    "description": "Import individual edge type via $ref"
+                    "type": "object",
+                    "properties": {
+                      "import": {
+                        "type": "string",
+                        "description": "Import individual edge type from file"
+                      }
+                    },
+                    "required": ["import"],
+                    "additionalProperties": false
                   }
                 ]
               }
             },
             {
-              "type": "string",
-              "pattern": "^\\$ref\\(",
-              "description": "Import all edge types via $ref"
+              "type": "object",
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Import all edge types from file"
+                }
+              },
+              "required": ["import"],
+              "additionalProperties": false
             }
           ]
         }
       },
-      "required": [
-        "nodeTypes", "edgeTypes"
-      ],
       "additionalProperties": true
     },
     "NodeType": {
