@@ -1,16 +1,16 @@
-# Graph Schema Type Interpretation Example
+# Graph Schema Type Interpretation Example (LEX-2026.0.3.1)
 # Shows how a graph instance can interpret its schema with different type matching modes
+# The interpretation descriptor wraps the graphSchema it governs
 
-# Example 1: Exact schema type matching (default, strictest)
+# Example 1: Exact schema type matching (default - can be omitted)
 graph:
   identifier:
     locallyQualifiedObjectName: "/examples/exact-match-graph"
   
+  # When omitted, defaults to exactlyOfThisSchemaType
   graphSchema:
     identifier:
       locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
-    schemaTypeInterpretation:
-      exactlyOfThisSchemaType: true
     import: "snb-lex-2026.0.3.1-schema.yaml"
   
   storageSchema:
@@ -18,34 +18,48 @@ graph:
     databasePath: "./data/exact-match-graph.kuzu"
 
 ---
-# Example 2: Allow subtypes of schema types
+# Example 2: Explicit exact matching (same as default)
+graph:
+  identifier:
+    locallyQualifiedObjectName: "/examples/explicit-exact-graph"
+  
+  exactlyOfThisSchemaType:
+    graphSchema:
+      identifier:
+        locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+      import: "snb-lex-2026.0.3.1-schema.yaml"
+  
+  storageSchema:
+    storageType: "kuzu"
+    databasePath: "./data/explicit-exact-graph.kuzu"
+
+---
+# Example 3: Allow subtypes of schema types
 graph:
   identifier:
     locallyQualifiedObjectName: "/examples/subtype-match-graph"
   
-  graphSchema:
-    identifier:
-      locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
-    schemaTypeInterpretation:
-      subtypesOfSchemaType: true
-    import: "snb-lex-2026.0.3.1-schema.yaml"
+  subtypesOfSchemaType:
+    graphSchema:
+      identifier:
+        locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+      import: "snb-lex-2026.0.3.1-schema.yaml"
   
   storageSchema:
     storageType: "kuzu"
     databasePath: "./data/subtype-match-graph.kuzu"
 
 ---
-# Example 3: Allow only proper subtypes (excludes exact type)
+# Example 4: Allow only proper subtypes (excludes exact type)
 graph:
   identifier:
     locallyQualifiedObjectName: "/examples/proper-subtype-match-graph"
   
-  graphSchema:
-    identifier:
-      locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
-    schemaTypeInterpretation:
-      properSubtypesOfSchemaType: true
-    import: "snb-lex-2026.0.3.1-schema.yaml"
+  properSubtypesOfSchemaType:
+    graphSchema:
+      identifier:
+        locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+      import: "snb-lex-2026.0.3.1-schema.yaml"
   
   storageSchema:
     storageType: "kuzu"
