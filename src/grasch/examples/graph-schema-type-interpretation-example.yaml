@@ -4,13 +4,11 @@
 
 # Example 1: Exact schema type matching (default - can be omitted)
 graph:
-  identifier:
-    locallyQualifiedObjectName: "/examples/exact-match-graph"
+  pathName: "/examples/exact-match-graph"
   
   # When omitted, defaults to exactlyOfThisSchemaType
   graphSchema:
-    identifier:
-      locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+    pathName: "/benchmarks/ldbc/snb"
     import: "snb-lex-2026.0.3.1-schema.yaml"
   
   storageSchema:
@@ -20,13 +18,11 @@ graph:
 ---
 # Example 2: Explicit exact matching (same as default)
 graph:
-  identifier:
-    locallyQualifiedObjectName: "/examples/explicit-exact-graph"
+  pathName: "/examples/explicit-exact-graph"
   
   exactlyOfThisSchemaType:
     graphSchema:
-      identifier:
-        locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+      pathName: "/benchmarks/ldbc/snb"
       import: "snb-lex-2026.0.3.1-schema.yaml"
   
   storageSchema:
@@ -36,13 +32,11 @@ graph:
 ---
 # Example 3: Allow subtypes of schema types
 graph:
-  identifier:
-    locallyQualifiedObjectName: "/examples/subtype-match-graph"
+  pathName: "/examples/subtype-match-graph"
   
   subtypesOfSchemaType:
     graphSchema:
-      identifier:
-        locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+      pathName: "/benchmarks/ldbc/snb"
       import: "snb-lex-2026.0.3.1-schema.yaml"
   
   storageSchema:
@@ -52,13 +46,11 @@ graph:
 ---
 # Example 4: Allow only proper subtypes (excludes exact type)
 graph:
-  identifier:
-    locallyQualifiedObjectName: "/examples/proper-subtype-match-graph"
+  pathName: "/examples/proper-subtype-match-graph"
   
   properSubtypesOfSchemaType:
     graphSchema:
-      identifier:
-        locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+      pathName: "/benchmarks/ldbc/snb"
       import: "snb-lex-2026.0.3.1-schema.yaml"
   
   storageSchema:

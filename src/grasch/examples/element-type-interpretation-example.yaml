@@ -1,0 +1,267 @@
+# Element Type Interpretation Example (LEX-2026.0.3.1)
+# Shows how a graph schema can specify which element types to include with different matching modes
+# The interpretation descriptor wraps the element types it governs
+
+# Example 1: Default exact matching (interpretation descriptor omitted)
+pathName: "/examples/default-exact-schema"
+
+graphType:
+  $ref: graph_type_defaults.yaml
+  
+  # No interpretation descriptor = exactlyOfTheseElementTypes (default)
+  nodeTypes:
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+  
+  edgeTypes:
+    - edgeType:
+        typeLabel: KNOWS
+        implies:
+          propertyTypes: []
+        direction: DIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Person
+
+---
+# Example 2: Explicit exact matching for all node types
+pathName: "/examples/exact-nodes-schema"
+
+graphType:
+  $ref: graph_type_defaults.yaml
+  
+  exactlyOfTheseElementTypes:
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: id
+                valueType: INTEGER
+                notNull: true
+  
+  edgeTypes:
+    - edgeType:
+        typeLabel: KNOWS
+        implies:
+          propertyTypes: []
+        direction: DIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Person
+
+---
+# Example 3: Subtypes allowed for specific node types
+pathName: "/examples/node-subtype-schema"
+
+graphType:
+  $ref: graph_type_defaults.yaml
+  
+  # Person nodes use exact matching (default)
+  nodeTypes:
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+  
+  # Message and its subtypes allowed
+  subtypesOfTheseElementTypes:
+    nodeTypes:
+      - nodeType:
+          typeLabel: Message
+          implies:
+            propertyTypes:
+              - name: id
+                valueType: INTEGER
+                notNull: true
+              - name: content
+                valueType: STRING
+      
+      - nodeType:
+          typeLabel: Post
+          implies:
+            supertypes: [Message]
+            propertyTypes:
+              - name: imageFile
+                valueType: STRING
+      
+      - nodeType:
+          typeLabel: Comment
+          implies:
+            supertypes: [Message]
+            propertyTypes:
+              - name: replyCount
+                valueType: INTEGER
+  
+  edgeTypes:
+    - edgeType:
+        typeLabel: CREATED
+        implies:
+          propertyTypes: []
+        direction: DIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Message
+
+---
+# Example 4: Proper subtypes only (abstract base type pattern)
+pathName: "/examples/abstract-relationship-schema"
+
+graphType:
+  $ref: graph_type_defaults.yaml
+  
+  nodeTypes:
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+  
+  # RELATIONSHIP is abstract - only proper subtypes allowed
+  properSubtypesOfTheseElementTypes:
+    edgeTypes:
+      - edgeType:
+          typeLabel: RELATIONSHIP
+          implies:
+            propertyTypes:
+              - name: since
+                valueType: DATE
+          direction: DIRECTED
+          firstEndpointNodeType:
+            typeLabel: Person
+          secondEndpointNodeType:
+            typeLabel: Person
+      
+      - edgeType:
+          typeLabel: KNOWS
+          implies:
+            supertypes: [RELATIONSHIP]
+            propertyTypes:
+              - name: strength
+                valueType: FLOAT
+          direction: UNDIRECTED
+          firstEndpointNodeType:
+            typeLabel: Person
+          secondEndpointNodeType:
+            typeLabel: Person
+      
+      - edgeType:
+          typeLabel: WORKS_WITH
+          implies:
+            supertypes: [RELATIONSHIP]
+            propertyTypes:
+              - name: project
+                valueType: STRING
+          direction: UNDIRECTED
+          firstEndpointNodeType:
+            typeLabel: Person
+          secondEndpointNodeType:
+            typeLabel: Person
+
+---
+# Example 5: Mixed interpretations - different for nodes vs edges
+pathName: "/examples/mixed-interpretation-schema"
+
+graphType:
+  $ref: graph_type_defaults.yaml
+  
+  # Exact match for nodes (default, no descriptor needed)
+  nodeTypes:
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+  
+  # Allow subtypes for edges
+  subtypesOfTheseElementTypes:
+    edgeTypes:
+      - edgeType:
+          typeLabel: KNOWS
+          implies:
+            propertyTypes: []
+          direction: UNDIRECTED
+          firstEndpointNodeType:
+            typeLabel: Person
+          secondEndpointNodeType:
+            typeLabel: Person
+      
+      - edgeType:
+          typeLabel: CLOSE_FRIEND
+          implies:
+            supertypes: [KNOWS]
+            propertyTypes:
+              - name: yearsKnown
+                valueType: INTEGER
+          direction: UNDIRECTED
+          firstEndpointNodeType:
+            typeLabel: Person
+          secondEndpointNodeType:
+            typeLabel: Person
+
+---
+# Example 6: Multiple interpretation scopes
+pathName: "/examples/multi-scope-schema"
+
+graphType:
+  $ref: graph_type_defaults.yaml
+  
+  # Exact matching for Person
+  nodeTypes:
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+  
+  # Subtypes allowed for Company hierarchy
+  subtypesOfTheseElementTypes:
+    nodeTypes:
+      - nodeType:
+          typeLabel: Company
+          implies:
+            propertyTypes:
+              - name: id
+                valueType: INTEGER
+                notNull: true
+              - name: name
+                valueType: STRING
+      
+      - nodeType:
+          typeLabel: TechCompany
+          implies:
+            supertypes: [Company]
+            propertyTypes:
+              - name: techStack
+                valueType: STRING
+  
+  # Exact matching for WORKS_FOR
+  edgeTypes:
+    - edgeType:
+        typeLabel: WORKS_FOR
+        implies:
+          propertyTypes:
+            - name: startDate
+              valueType: DATE
+        direction: DIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Company

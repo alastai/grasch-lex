@@ -3,8 +3,7 @@
 # Two YAML documents in one file, separated by ---
 
 # Document 1: LEX Schema (Logical Graph Schema)
-identifier:
-  locallyQualifiedObjectName: "/examples/snb-demo-graph"
+pathName: "/examples/snb-demo-graph"
 
 valueTypeSystemName: "CANONICAL"
 

@@ -5,8 +5,7 @@
 # - index (anonymous node types)
 # - no identifier (anonymous edge types)
 
-identifier:
-  pathName: /benchmarks/ldbc/snb-special
+pathName: /benchmarks/ldbc/snb-special
 
 graphType:
   $ref: graph_type_defaults.yaml

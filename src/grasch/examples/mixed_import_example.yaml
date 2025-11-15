@@ -1,0 +1,45 @@
+# Mixed Import Example
+# Shows importing a subset of types within an array alongside inline types
+
+pathName: "/examples/mixed-import"
+
+valueTypeSystemName: "CANONICAL"
+
+graphType:
+  defaults:
+    import: "graph_type_defaults.yaml"
+  
+  # Pattern: Mix imported subset with inline types
+  nodeTypes:
+    - import: "snb_types/message_hierarchy.yaml"  # Imports Message, Post, Comment
+    - nodeType:
+        typeLabel: "Person"
+        implies:
+          propertyTypes:
+            - name: "id"
+              valueType: "INTEGER"
+              notNull: true
+    - nodeType:
+        typeLabel: "Company"
+        implies:
+          propertyTypes:
+            - name: "id"
+              valueType: "INTEGER"
+              notNull: true
+            - name: "name"
+              valueType: "STRING"
+              notNull: true
+  
+  edgeTypes:
+    - edgeType:
+        typeLabel: "WORKS_FOR"
+        implies:
+          propertyTypes:
+            - name: "startDate"
+              valueType: "DATE"
+              notNull: true
+        direction: "DIRECTED"
+        firstEndpointNodeType:
+          typeLabel: "Person"
+        secondEndpointNodeType:
+          typeLabel: "Company"

@@ -2,15 +2,13 @@
 
 # This is a GRAPH (instance), not a standalone schema
 graph:
-  identifier:
-    locallyQualifiedObjectName: "/examples/my-graph-instance"
+  pathName: "/examples/my-graph-instance"
   
   # Pattern: Schema type interpretation wraps the graphSchema
   # Default is exactlyOfThisSchemaType (can be omitted)
   subtypesOfSchemaType:
     graphSchema:
-      identifier:
-        locallyQualifiedObjectName: "/benchmarks/ldbc/snb"
+      pathName: "/benchmarks/ldbc/snb"
       import: "snb-lex-2026.0.3.1-schema.yaml"
   
   # Storage schema for this graph instance

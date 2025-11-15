@@ -1,5 +1,4 @@
-identifier:
-  globallyQualifiedObjectName: https://ldbcouncil.org/schemas/|/benchmarks/ldbc/finbench
+pathName: https://ldbcouncil.org/schemas/|/benchmarks/ldbc/finbench
 graphType:
   $ref: graph_type_defaults.yaml
   nodeTypes:
