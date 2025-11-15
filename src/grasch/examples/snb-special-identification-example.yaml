@@ -1,0 +1,171 @@
+# SNB Special Identification Example (LEX-2026.0.3.1)
+# Demonstrates all element type identification patterns:
+# - typeLabel (single label)
+# - typeLabels (multiple labels) 
+# - index (anonymous node types)
+# - no identifier (anonymous edge types)
+
+identifier:
+  pathName: /benchmarks/ldbc/snb-special
+
+graphType:
+  $ref: graph_type_defaults.yaml
+  
+  nodeTypes:
+    # Standard single typeLabel identification
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+            - name: firstName
+              valueType: STRING
+              notNull: true
+            - name: lastName
+              valueType: STRING
+              notNull: true
+    
+    # Anonymous indexed node type (index: 0)
+    - nodeType:
+        index: 0
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+            - name: name
+              valueType: STRING
+              notNull: true
+    
+    # Anonymous indexed node type (index: 1)
+    - nodeType:
+        index: 1
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+            - name: title
+              valueType: STRING
+              notNull: true
+    
+    # Message base type with single label
+    - nodeType:
+        typeLabel: Message
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+            - name: content
+              valueType: STRING
+            - name: creationDate
+              valueType: ZONED DATETIME
+              notNull: true
+    
+    # Post identified by multiple labels (typeLabels)
+    - nodeType:
+        typeLabels: ["Post", "Message"]
+        implies:
+          supertypes: [Message]
+          propertyTypes:
+            - name: imageFile
+              valueType: STRING
+            - name: language
+              valueType: STRING
+    
+    # Comment identified by multiple labels (typeLabels)
+    - nodeType:
+        typeLabels: ["Comment", "Message"]
+        implies:
+          supertypes: [Message]
+          propertyTypes:
+            - name: replyCount
+              valueType: INTEGER
+  
+  edgeTypes:
+    # Standard single typeLabel identification
+    - edgeType:
+        typeLabel: KNOWS
+        implies:
+          propertyTypes:
+            - name: creationDate
+              valueType: ZONED DATETIME
+              notNull: true
+        direction: UNDIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Person
+    
+    # Edge referencing anonymous indexed node type
+    - edgeType:
+        typeLabel: WORKS_AT
+        implies:
+          propertyTypes:
+            - name: startDate
+              valueType: DATE
+              notNull: true
+        direction: DIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          index: 0  # References anonymous node type with index 0
+    
+    # Edge referencing another anonymous indexed node type
+    - edgeType:
+        typeLabel: MODERATES
+        implies:
+          propertyTypes: []
+        direction: DIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          index: 1  # References anonymous node type with index 1
+    
+    # Edge referencing node type by multiple labels
+    - edgeType:
+        typeLabel: LIKES
+        implies:
+          propertyTypes:
+            - name: creationDate
+              valueType: ZONED DATETIME
+              notNull: true
+        direction: DIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabels: ["Post", "Message"]  # References Post by multiple labels
+    
+    # Anonymous edge type (no identifier)
+    - edgeType:
+        implies:
+          propertyTypes:
+            - name: weight
+              valueType: FLOAT
+        direction: DIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabels: ["Comment", "Message"]  # References Comment by multiple labels
+    
+    # Another anonymous edge type
+    - edgeType:
+        implies:
+          propertyTypes: []
+        direction: UNDIRECTED
+        firstEndpointNodeType:
+          index: 0
+        secondEndpointNodeType:
+          index: 1
+
+constraints:
+  personIdUnique:
+    name: personIdUnique
+    rule:
+      subject: UNIQUE
+      constraintPattern: Person
+      uniqueKeyComponentPropertyNames:
+        - id
