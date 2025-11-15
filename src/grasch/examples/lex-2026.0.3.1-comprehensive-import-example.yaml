@@ -1,0 +1,60 @@
+# Comprehensive Import Example
+# Shows all supported import patterns at different levels
+
+pathName: "/examples/comprehensive-imports"
+
+graphType:
+  # Level 1: Import defaults at graphType level
+  import: "lex-2026.0.3.1-graph-type-defaults.yaml"
+  
+  # Level 2: Mix inline and imported node types
+  nodeTypes:
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+    
+    # Level 3: Import individual node type
+    - import: "snb_types/lex-2026.0.3.1-snb-organisation-hierarchy.yaml"
+    
+    - nodeType:
+        typeLabel: Tag
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+  
+  # Level 2: Mix inline and imported edge types
+  edgeTypes:
+    - edgeType:
+        typeLabel: KNOWS
+        implies:
+          propertyTypes: []
+        direction: UNDIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Person
+    
+    # Level 3: Import individual edge type
+    - import: "edge_types/works_for.yaml"
+  
+  # Level 2: Import within allowSubtypesOf
+  allowSubtypesOf:
+    abstractSupertypes:
+      # Level 3: Import node type hierarchy
+      nodeTypes:
+        - import: "snb_types/lex-2026.0.3.1-snb-message-hierarchy.yaml"
+
+constraints:
+  personIdUnique:
+    name: personIdUnique
+    rule:
+      subject: UNIQUE
+      constraintPattern: Person
+      uniqueKeyComponentPropertyNames:
+        - id
