@@ -3,7 +3,7 @@
 # All instances have the Message label plus their specific subtype label
 
 allowSubtypesOf:
-  abstractSupertype:
+  abstractSupertypes:
     nodeTypes:
     # Abstract Message supertype - never instantiated directly
     - nodeType:

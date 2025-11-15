@@ -3,7 +3,7 @@
 # All instances have the Place label plus their specific subtype label
 
 allowSubtypesOf:
-  abstractSupertype:
+  abstractSupertypes:
     nodeTypes:
     # Abstract Place supertype - never instantiated directly
     - nodeType:

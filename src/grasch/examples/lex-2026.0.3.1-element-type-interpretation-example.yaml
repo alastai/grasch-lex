@@ -132,7 +132,7 @@ graphType:
   
   # RELATIONSHIP is abstract - only proper subtypes allowed
   allowSubtypesOf:
-    abstractSupertype:
+    abstractSupertypes:
       edgeTypes:
       - edgeType:
           typeLabel: RELATIONSHIP
