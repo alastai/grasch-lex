@@ -87,23 +87,23 @@ class GraphType(ABC):
     """
     
     @abstractmethod
-    def getNodeTypes(self) -> List[NodeType]:
-        """Get all node types"""
+    def getNodeTypes(self) -> NodeTypes:
+        """Get the node types collection"""
         pass
     
     @abstractmethod
-    def getEdgeTypes(self) -> List[EdgeType]:
-        """Get all edge types"""
+    def getEdgeTypes(self) -> EdgeTypes:
+        """Get the edge types collection"""
         pass
     
     @abstractmethod
     def findNodeType(self, typeLabel: str) -> Optional[NodeType]:
-        """Find a node type by type label"""
+        """Find a node type by type label (searches all interpretations)"""
         pass
     
     @abstractmethod
     def findEdgeType(self, typeLabel: str) -> Optional[EdgeType]:
-        """Find an edge type by type label"""
+        """Find an edge type by type label (searches all interpretations)"""
         pass
     
     @abstractmethod
@@ -114,6 +114,77 @@ class GraphType(ABC):
     @abstractmethod
     def getEdgeTypeMinimumLabels(self) -> int:
         """Get minimum number of labels for edge types"""
+        pass
+
+
+class NodeTypes(ABC):
+    """
+    Interface for a collection of node type interpretations.
+    Represents the hierarchical structure of type definitions with inheritance.
+    """
+    
+    @abstractmethod
+    def getInterpretations(self) -> List[TypeInterpretation]:
+        """Get all type interpretations in this collection"""
+        pass
+    
+    @abstractmethod
+    def getAllNodeTypes(self) -> List[NodeType]:
+        """Get flattened list of all node types across all interpretations"""
+        pass
+    
+    @abstractmethod
+    def findNodeType(self, typeLabel: str) -> Optional[NodeType]:
+        """Find a node type by type label"""
+        pass
+
+
+class EdgeTypes(ABC):
+    """
+    Interface for a collection of edge type interpretations.
+    Represents the hierarchical structure of type definitions with inheritance.
+    """
+    
+    @abstractmethod
+    def getInterpretations(self) -> List[TypeInterpretation]:
+        """Get all type interpretations in this collection"""
+        pass
+    
+    @abstractmethod
+    def getAllEdgeTypes(self) -> List[EdgeType]:
+        """Get flattened list of all edge types across all interpretations"""
+        pass
+    
+    @abstractmethod
+    def findEdgeType(self, typeLabel: str) -> Optional[EdgeType]:
+        """Find an edge type by type label"""
+        pass
+
+
+class TypeInterpretation(ABC):
+    """
+    Interface for a type interpretation - a set of types with possible subtypes.
+    Can be nested to represent hierarchical type structures.
+    """
+    
+    @abstractmethod
+    def getInterpretationMode(self) -> str:
+        """Get interpretation mode: 'exact', 'allowSubtypes', or 'abstractSupertypes'"""
+        pass
+    
+    @abstractmethod
+    def getTypes(self) -> List[NodeType | EdgeType]:
+        """Get types defined in this interpretation"""
+        pass
+    
+    @abstractmethod
+    def getNestedInterpretations(self) -> List[TypeInterpretation]:
+        """Get nested type interpretations (for hierarchical structures)"""
+        pass
+    
+    @abstractmethod
+    def isAbstract(self) -> bool:
+        """Check if this interpretation defines abstract supertypes"""
         pass
 
 

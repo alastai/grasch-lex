@@ -12,8 +12,12 @@ from .interfaces import (
     Graph,
     Constraint,
     StorageSchema,
+    NodeTypes,
+    EdgeTypes,
+    TypeInterpretation,
     NodeType,
     EdgeType,
+    PropertyType,
 )
 
 from .impl import (
@@ -23,8 +27,12 @@ from .impl import (
     GraphImpl,
     ConstraintImpl,
     StorageSchemaImpl,
+    NodeTypesImpl,
+    EdgeTypesImpl,
+    TypeInterpretationImpl,
     NodeTypeImpl,
     EdgeTypeImpl,
+    PropertyTypeImpl,
 )
 
 __all__ = [
@@ -35,8 +43,12 @@ __all__ = [
     "Graph",
     "Constraint",
     "StorageSchema",
+    "NodeTypes",
+    "EdgeTypes",
+    "TypeInterpretation",
     "NodeType",
     "EdgeType",
+    "PropertyType",
     # Implementations
     "CatalogImpl",
     "GraphSchemaImpl",
@@ -44,6 +56,10 @@ __all__ = [
     "GraphImpl",
     "ConstraintImpl",
     "StorageSchemaImpl",
+    "NodeTypesImpl",
+    "EdgeTypesImpl",
+    "TypeInterpretationImpl",
     "NodeTypeImpl",
     "EdgeTypeImpl",
+    "PropertyTypeImpl",
 ]
