@@ -6,7 +6,7 @@ Defines abstract interfaces for all primary catalog objects and their components
 
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from typing import List, Dict, Optional, Iterator
+from typing import List, Dict, Optional, Iterator, Any
 
 
 class Catalog(ABC):
@@ -349,6 +349,6 @@ class StorageSchema(ABC):
         pass
     
     @abstractmethod
-    def getProperties(self) -> Dict[str, any]:
+    def getProperties(self) -> Dict[str, Any]:
         """Get all storage properties"""
         pass

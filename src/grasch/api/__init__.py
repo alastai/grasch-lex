@@ -20,7 +20,7 @@ from .interfaces import (
     PropertyType,
 )
 
-from .impl import (
+from .implementations import (
     CatalogImpl,
     GraphSchemaImpl,
     GraphTypeImpl,
@@ -33,6 +33,21 @@ from .impl import (
     NodeTypeImpl,
     EdgeTypeImpl,
     PropertyTypeImpl,
+)
+
+from .builders import (
+    CatalogBuilder,
+    GraphSchemaBuilder,
+    GraphTypeBuilder,
+    NodeTypesBuilder,
+    EdgeTypesBuilder,
+    TypeInterpretationBuilder,
+    NodeTypeBuilder,
+    EdgeTypeBuilder,
+    PropertyTypeBuilder,
+    GraphBuilder,
+    ConstraintBuilder,
+    StorageSchemaBuilder,
 )
 
 __all__ = [
@@ -62,4 +77,17 @@ __all__ = [
     "NodeTypeImpl",
     "EdgeTypeImpl",
     "PropertyTypeImpl",
+    # Builders
+    "CatalogBuilder",
+    "GraphSchemaBuilder",
+    "GraphTypeBuilder",
+    "NodeTypesBuilder",
+    "EdgeTypesBuilder",
+    "TypeInterpretationBuilder",
+    "NodeTypeBuilder",
+    "EdgeTypeBuilder",
+    "PropertyTypeBuilder",
+    "GraphBuilder",
+    "ConstraintBuilder",
+    "StorageSchemaBuilder",
 ]
