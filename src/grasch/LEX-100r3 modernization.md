@@ -390,6 +390,19 @@ Subtype Relation Properties (Armstrong's Axioms):
   - Reflexive: Every type is a subtype of itself
   - Transitive: If A <: B and B <: C, then A <: C
   These properties ensure consistent type hierarchy semantics.
+
+Edge Type Subtyping:
+  An edge type S is a subtype of edge type T if:
+  1. S's property types are a subtype of T's property types (structural)
+  2. S's endpoint node types are subtypes of T's endpoint node types:
+     - For DIRECTED edges: source <: source AND destination <: destination
+     - For UNDIRECTED edges: endpoints match in either order
+     - Self-loops (SAME endpoint) require special handling
+  3. Direction must be compatible (DIRECTED <: DIRECTED, UNDIRECTED <: UNDIRECTED)
+  
+  Example:
+    CLOSE_FRIEND(Person, Person) <: KNOWS(Person, Person)
+    KNOWS(Employee, Employee) <: KNOWS(Person, Person)  // covariant endpoints
 ```
 
 ### Section: "Type Interpretation" (NEW SECTION NEEDED)

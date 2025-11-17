@@ -318,29 +318,99 @@ class EdgeTypeImpl(EdgeType):
     def getDirection(self) -> str:
         return self.__direction
     
+    def getFirstEndpointNodeType(self) -> str:
+        return self.__firstEndpointNodeType
+    
+    def getSecondEndpointNodeType(self) -> str:
+        return self.__secondEndpointNodeType
+    
     def isSubtypeOf(self, otherTypeLabel: str, graphType: GraphType) -> bool:
         """
-        Check if this type is a subtype of another type.
+        Check if this edge type is a subtype of another edge type.
+        
+        An edge type S is a subtype of T if:
+        1. S's type hierarchy includes T (reflexive/transitive)
+        2. S's endpoint node types are subtypes of T's endpoints (covariant)
+        3. Direction is compatible
         
         Implements Armstrong's Axioms:
         - Reflexive: Every type is a subtype of itself
         - Transitive: If A <: B and B <: C, then A <: C
         """
+        # Find the other edge type
+        other = graphType.findEdgeType(otherTypeLabel)
+        if not other:
+            return False
+        
         # Reflexive: Every type is a subtype of itself
         if self.__typeLabel == otherTypeLabel:
             return True
         
-        # Check direct supertypes
+        # Direction must be compatible
+        if self.__direction != other.getDirection():
+            return False
+        
+        # Check if this type extends the other through type hierarchy
+        type_hierarchy_match = False
         if otherTypeLabel in self.__supertypes:
-            return True
+            type_hierarchy_match = True
+        else:
+            # Transitive: Check if any supertype is a subtype of otherTypeLabel
+            for supertypeLabel in self.__supertypes:
+                supertype = graphType.findEdgeType(supertypeLabel)
+                if supertype and supertype.isSubtypeOf(otherTypeLabel, graphType):
+                    type_hierarchy_match = True
+                    break
         
-        # Transitive: Check if any supertype is a subtype of otherTypeLabel
-        for supertypeLabel in self.__supertypes:
-            supertype = graphType.findEdgeType(supertypeLabel)
-            if supertype and supertype.isSubtypeOf(otherTypeLabel, graphType):
-                return True
+        # If not in type hierarchy, check structural subtyping via endpoints
+        if not type_hierarchy_match:
+            # Structural subtyping: endpoints must be subtypes (covariant)
+            if not self._checkEndpointSubtyping(other, graphType):
+                return False
         
-        return False
+        return True
+    
+    def _checkEndpointSubtyping(self, other: EdgeType, graphType: GraphType) -> bool:
+        """
+        Check if this edge type's endpoints are subtypes of other's endpoints.
+        
+        For DIRECTED edges: source <: source AND destination <: destination
+        For UNDIRECTED edges: endpoints match in either order
+        """
+        # Get endpoint node types
+        self_first = graphType.findNodeType(self.__firstEndpointNodeType)
+        self_second_label = self.__secondEndpointNodeType
+        
+        # Handle SAME endpoint (self-loop)
+        if self_second_label == "SAME":
+            self_second = self_first
+        else:
+            self_second = graphType.findNodeType(self_second_label)
+        
+        other_first = graphType.findNodeType(other.getFirstEndpointNodeType())
+        other_second_label = other.getSecondEndpointNodeType()
+        
+        # Handle SAME endpoint (self-loop)
+        if other_second_label == "SAME":
+            other_second = other_first
+        else:
+            other_second = graphType.findNodeType(other_second_label)
+        
+        # If any endpoint type not found, cannot determine subtyping
+        if not (self_first and self_second and other_first and other_second):
+            return False
+        
+        if self.__direction == "DIRECTED":
+            # DIRECTED: source <: source AND destination <: destination
+            return (self_first.isSubtypeOf(other_first.getTypeLabel(), graphType) and
+                    self_second.isSubtypeOf(other_second.getTypeLabel(), graphType))
+        else:
+            # UNDIRECTED: endpoints match in either order
+            forward = (self_first.isSubtypeOf(other_first.getTypeLabel(), graphType) and
+                      self_second.isSubtypeOf(other_second.getTypeLabel(), graphType))
+            reverse = (self_first.isSubtypeOf(other_second.getTypeLabel(), graphType) and
+                      self_second.isSubtypeOf(other_first.getTypeLabel(), graphType))
+            return forward or reverse
     
     def getFirstEndpointNodeType(self) -> str:
         return self.__firstEndpointNodeType
