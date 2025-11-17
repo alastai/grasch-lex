@@ -217,6 +217,24 @@ class NodeType(ABC):
     def isAbstract(self) -> bool:
         """Check if this is an abstract type"""
         pass
+    
+    @abstractmethod
+    def isSubtypeOf(self, otherTypeLabel: str, graphType: GraphType) -> bool:
+        """
+        Check if this type is a subtype of another type.
+        
+        Implements Armstrong's Axioms:
+        - Reflexive: Every type is a subtype of itself
+        - Transitive: If A <: B and B <: C, then A <: C
+        
+        Args:
+            otherTypeLabel: The type label to check against
+            graphType: The graph type context for resolving supertypes
+            
+        Returns:
+            True if this type is a subtype of otherTypeLabel
+        """
+        pass
 
 
 class EdgeType(ABC):
@@ -247,6 +265,24 @@ class EdgeType(ABC):
     @abstractmethod
     def getDirection(self) -> str:
         """Get edge direction (DIRECTED or UNDIRECTED)"""
+        pass
+    
+    @abstractmethod
+    def isSubtypeOf(self, otherTypeLabel: str, graphType: GraphType) -> bool:
+        """
+        Check if this type is a subtype of another type.
+        
+        Implements Armstrong's Axioms:
+        - Reflexive: Every type is a subtype of itself
+        - Transitive: If A <: B and B <: C, then A <: C
+        
+        Args:
+            otherTypeLabel: The type label to check against
+            graphType: The graph type context for resolving supertypes
+            
+        Returns:
+            True if this type is a subtype of otherTypeLabel
+        """
         pass
     
     @abstractmethod

@@ -253,6 +253,30 @@ class NodeTypeImpl(NodeType):
     
     def isAbstract(self) -> bool:
         return self.__isAbstract
+    
+    def isSubtypeOf(self, otherTypeLabel: str, graphType: GraphType) -> bool:
+        """
+        Check if this type is a subtype of another type.
+        
+        Implements Armstrong's Axioms:
+        - Reflexive: Every type is a subtype of itself
+        - Transitive: If A <: B and B <: C, then A <: C
+        """
+        # Reflexive: Every type is a subtype of itself
+        if self.__typeLabel == otherTypeLabel:
+            return True
+        
+        # Check direct supertypes
+        if otherTypeLabel in self.__supertypes:
+            return True
+        
+        # Transitive: Check if any supertype is a subtype of otherTypeLabel
+        for supertypeLabel in self.__supertypes:
+            supertype = graphType.findNodeType(supertypeLabel)
+            if supertype and supertype.isSubtypeOf(otherTypeLabel, graphType):
+                return True
+        
+        return False
 
 
 class EdgeTypeImpl(EdgeType):
@@ -293,6 +317,30 @@ class EdgeTypeImpl(EdgeType):
     
     def getDirection(self) -> str:
         return self.__direction
+    
+    def isSubtypeOf(self, otherTypeLabel: str, graphType: GraphType) -> bool:
+        """
+        Check if this type is a subtype of another type.
+        
+        Implements Armstrong's Axioms:
+        - Reflexive: Every type is a subtype of itself
+        - Transitive: If A <: B and B <: C, then A <: C
+        """
+        # Reflexive: Every type is a subtype of itself
+        if self.__typeLabel == otherTypeLabel:
+            return True
+        
+        # Check direct supertypes
+        if otherTypeLabel in self.__supertypes:
+            return True
+        
+        # Transitive: Check if any supertype is a subtype of otherTypeLabel
+        for supertypeLabel in self.__supertypes:
+            supertype = graphType.findEdgeType(supertypeLabel)
+            if supertype and supertype.isSubtypeOf(otherTypeLabel, graphType):
+                return True
+        
+        return False
     
     def getFirstEndpointNodeType(self) -> str:
         return self.__firstEndpointNodeType

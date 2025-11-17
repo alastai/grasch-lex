@@ -385,6 +385,11 @@ When supertypes are specified, the type inherits all labels and property
 types from its supertypes. This enables type hierarchies like:
   Entity (abstract) → Person, Company
   Message (abstract) → Comment, Post
+
+Subtype Relation Properties (Armstrong's Axioms):
+  - Reflexive: Every type is a subtype of itself
+  - Transitive: If A <: B and B <: C, then A <: C
+  These properties ensure consistent type hierarchy semantics.
 ```
 
 ### Section: "Type Interpretation" (NEW SECTION NEEDED)
