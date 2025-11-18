@@ -8,8 +8,24 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.grasch.api.builders import (
-    GraphTypeBuilder, NodeTypeBuilder, EdgeTypeBuilder
+    GraphTypeBuilder, NodeTypeBuilder, EdgeTypeBuilder,
+    NodeTypesBuilder, EdgeTypesBuilder, TypeInterpretationBuilder
 )
+
+
+def build_graph_type(node_types_list, edge_types_list):
+    """Helper to build GraphType from lists of NodeType and EdgeType objects"""
+    node_interp = TypeInterpretationBuilder("exact")
+    for nt in node_types_list:
+        node_interp.addType(nt)
+    node_types = NodeTypesBuilder().addInterpretation(node_interp.build()).build()
+    
+    edge_interp = TypeInterpretationBuilder("exact")
+    for et in edge_types_list:
+        edge_interp.addType(et)
+    edge_types = EdgeTypesBuilder().addInterpretation(edge_interp.build()).build()
+    
+    return GraphTypeBuilder().withNodeTypes(node_types).withEdgeTypes(edge_types).build()
 
 
 def test_edge_reflexive():
@@ -17,7 +33,7 @@ def test_edge_reflexive():
     person = NodeTypeBuilder("Person").build()
     knows = EdgeTypeBuilder("KNOWS", "Person", "Person").build()
     
-    gt = GraphTypeBuilder().addNodeType(person).addEdgeType(knows).build()
+    gt = build_graph_type([person], [knows])
     
     assert knows.isSubtypeOf("KNOWS", gt)
 
@@ -29,11 +45,7 @@ def test_edge_hierarchy():
     knows = EdgeTypeBuilder("KNOWS", "Person", "Person") \
         .withSupertypes(["RELATIONSHIP"]).build()
     
-    gt = GraphTypeBuilder() \
-        .addNodeType(person) \
-        .addEdgeType(relationship) \
-        .addEdgeType(knows) \
-        .build()
+    gt = build_graph_type([person], [relationship, knows])
     
     assert knows.isSubtypeOf("RELATIONSHIP", gt)
 
@@ -46,12 +58,7 @@ def test_edge_covariant_endpoints():
     knows_person = EdgeTypeBuilder("KNOWS", "Person", "Person").build()
     knows_employee = EdgeTypeBuilder("KNOWS_EMP", "Employee", "Employee").build()
     
-    gt = GraphTypeBuilder() \
-        .addNodeType(person) \
-        .addNodeType(employee) \
-        .addEdgeType(knows_person) \
-        .addEdgeType(knows_employee) \
-        .build()
+    gt = build_graph_type([person, employee], [knows_person, knows_employee])
     
     # KNOWS(Employee, Employee) <: KNOWS(Person, Person)
     assert knows_employee.isSubtypeOf("KNOWS", gt)
@@ -64,11 +71,7 @@ def test_edge_direction_mismatch():
     undirected = EdgeTypeBuilder("KNOWS_UNDIR", "Person", "Person") \
         .asUndirected().build()
     
-    gt = GraphTypeBuilder() \
-        .addNodeType(person) \
-        .addEdgeType(directed) \
-        .addEdgeType(undirected) \
-        .build()
+    gt = build_graph_type([person], [directed, undirected])
     
     assert not directed.isSubtypeOf("KNOWS_UNDIR", gt)
     assert not undirected.isSubtypeOf("KNOWS_DIR", gt)
@@ -83,13 +86,7 @@ def test_edge_mixed_endpoints():
     works_person = EdgeTypeBuilder("WORKS_AT", "Person", "Company").build()
     works_employee = EdgeTypeBuilder("WORKS_EMP", "Employee", "Company").build()
     
-    gt = GraphTypeBuilder() \
-        .addNodeType(person) \
-        .addNodeType(employee) \
-        .addNodeType(company) \
-        .addEdgeType(works_person) \
-        .addEdgeType(works_employee) \
-        .build()
+    gt = build_graph_type([person, employee, company], [works_person, works_employee])
     
     # WORKS_AT(Employee, Company) <: WORKS_AT(Person, Company)
     assert works_employee.isSubtypeOf("WORKS_AT", gt)
@@ -103,12 +100,7 @@ def test_edge_not_subtype():
     knows = EdgeTypeBuilder("KNOWS", "Person", "Person").build()
     owns = EdgeTypeBuilder("OWNS", "Person", "Company").build()
     
-    gt = GraphTypeBuilder() \
-        .addNodeType(person) \
-        .addNodeType(company) \
-        .addEdgeType(knows) \
-        .addEdgeType(owns) \
-        .build()
+    gt = build_graph_type([person, company], [knows, owns])
     
     assert not knows.isSubtypeOf("OWNS", gt)
     assert not owns.isSubtypeOf("KNOWS", gt)
@@ -126,14 +118,7 @@ def test_edge_transitive():
     friend = EdgeTypeBuilder("FRIEND", "Employee", "Employee") \
         .withSupertypes(["KNOWS"]).build()
     
-    gt = GraphTypeBuilder() \
-        .addNodeType(entity) \
-        .addNodeType(person) \
-        .addNodeType(employee) \
-        .addEdgeType(rel) \
-        .addEdgeType(knows) \
-        .addEdgeType(friend) \
-        .build()
+    gt = build_graph_type([entity, person, employee], [rel, knows, friend])
     
     # Transitive: FRIEND <: KNOWS <: REL
     assert friend.isSubtypeOf("KNOWS", gt)
