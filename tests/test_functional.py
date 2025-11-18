@@ -41,18 +41,18 @@ class TestGraschFunctional:
         """Create a test session configuration"""
         full_profile = ProfileConfiguration(
             name="Full Profile",
-            optional_features={"GC04", "GG25", "IL001"},
-            implementation_defined={"IL001": {"min": 0, "max": None}},
-            lex_compatibility=LEXCompatibility.FULL
+            optionalFeatures={"GC04", "GG25", "IL001"},
+            implementationDefined={"IL001": {"min": 0, "max": None}},
+            lexCompatibility=LEXCompatibility.FULL
         )
         
         return SessionConfiguration(
             profile=full_profile,
-            language_level=LanguageLevel.LEX,
-            catalog_root="file:.",
-            default_catalog_path="/",
-            nested_record_schema_processor_type="JSON Schema",
-            nested_record_schema_processor="default"
+            languageLevel=LanguageLevel.LEX,
+            catalogRoot="file:.",
+            defaultCatalogPath="/",
+            nestedRecordSchemaProcessorType="JSON Schema",
+            nestedRecordSchemaProcessor="default"
         )
     
     def createContentTypes(self):
@@ -60,7 +60,7 @@ class TestGraschFunctional:
         # Person content type
         personContent = ContentRecordTypeBuilder() \
             .addLabel("Person") \
-            .addPropertyType(PropertyType("name", "STRING", not_null=True)) \
+            .addPropertyType(PropertyType("name", "STRING", notNull=True)) \
             .addPropertyType(PropertyType("age", "INTEGER")) \
             .addPropertyType(PropertyType("email", "STRING")) \
             .addTypeName("Person") \
@@ -69,7 +69,7 @@ class TestGraschFunctional:
         # Company content type
         companyContent = ContentRecordTypeBuilder() \
             .addLabel("Company") \
-            .addPropertyType(PropertyType("name", "STRING", not_null=True)) \
+            .addPropertyType(PropertyType("name", "STRING", notNull=True)) \
             .addPropertyType(PropertyType("industry", "STRING")) \
             .addTypeName("Company") \
             .create()
@@ -177,7 +177,7 @@ class TestGraschFunctional:
             
             # Step 1: Create catalog structure
             print("\n1. Creating catalog structure...")
-            grasch_session.create_catalog_structure()
+            grasch_session.createCatalogStructure()
             
             # Verify catalog structure
             assert grasch_session.catalog.root.children["production"] is not None
@@ -231,11 +231,11 @@ class TestGraschFunctional:
             
             # Step 6: Demonstrate queries
             print("\n6. Demonstrating Cypher queries...")
-            grasch_session.demonstrate_cypher_queries()
+            grasch_session.demonstrateCypherQueries()
             
             # Step 7: Demonstrate spectral typing concepts
             print("\n7. Demonstrating spectral typing concepts...")
-            grasch_session.demonstrate_spectral_typing()
+            grasch_session.demonstrateSpectralTyping()
             
             print("\n" + "=" * 60)
             print("✓ FUNCTIONAL TEST COMPLETED SUCCESSFULLY!")

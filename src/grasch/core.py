@@ -124,21 +124,21 @@ class GraschSession:
         # Query 1: Find all persons
         print("\n1. Find all persons:")
         query1 = "MATCH (p:Person) RETURN p.name, p.age, p.email"
-        results1 = self.kuzu_connection.execute(query1)
+        results1 = self.kuzuConnection.execute(query1)
         for result in results1:
             print(f"   {result}")
         
         # Query 2: Find all companies
         print("\n2. Find all companies:")
         query2 = "MATCH (c:Company) RETURN c.name, c.industry"
-        results2 = self.kuzu_connection.execute(query2)
+        results2 = self.kuzuConnection.execute(query2)
         for result in results2:
             print(f"   {result}")
         
         # Query 3: Find employment relationships
         print("\n3. Find employment relationships:")
         query3 = "MATCH (p:Person)-[r:WORKS_FOR]->(c:Company) RETURN p.name, r.position, r.start_date, c.name"
-        results3 = self.kuzu_connection.execute(query3)
+        results3 = self.kuzuConnection.execute(query3)
         for result in results3:
             print(f"   {result}")
         
@@ -149,7 +149,7 @@ class GraschSession:
         WHERE c.industry = 'Technology'
         RETURN p.name, r.position, c.name
         """
-        results4 = self.kuzu_connection.execute(query4)
+        results4 = self.kuzuConnection.execute(query4)
         for result in results4:
             print(f"   {result}")
     

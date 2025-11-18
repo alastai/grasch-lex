@@ -258,14 +258,14 @@ class EdgeType(ElementType):
     """Edge type with endpoint node types, direction, and arc type"""
     def __init__(self, name: str, first_node_type: NodeType, second_node_type: NodeType, 
                  arc_type: ArcType, direction: Optional[EdgeDirection] = None):
-        super().__init__(name, arc_type.content_type)
+        super().__init__(name, arc_type.contentType)
         self.first_node_type = first_node_type
         self.second_node_type = second_node_type
         self.arc_type = arc_type
         self.direction = direction
         
         # Backward compatibility
-        self.arc_content_type = arc_type.content_type
+        self.arc_content_type = arc_type.contentType
     
     def getElementKind(self) -> str:
         return "edge"
