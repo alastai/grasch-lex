@@ -1,0 +1,483 @@
+# LEX-2026.0.3.2 Edge Type Syntax Examples
+# Comprehensive demonstration of all edge type syntax variations
+# Note: This file defines only edgeTypes and can be imported into graph types
+# Node types are defined in lex-2026.0.3.2-node-type-syntax-examples.yaml
+
+edgeTypes:
+  # ========================================
+  # DIRECTED EDGES - from:/to: syntax
+  # ========================================
+  
+  # Pattern 1: Basic directed edge with type labels
+  - edgeType:
+      directed:
+        from: Person
+        via: KNOWS
+        to: Person
+      implies:
+        propertyTypes:
+        - name: since
+          valueType: DATE
+  
+  # Pattern 2: Directed edge - via before from/to
+  - edgeType:
+      directed:
+        via: WORKS_FOR
+        from: Person
+        to: Company
+      implies:
+        propertyTypes:
+        - name: startDate
+          valueType: DATE
+          notNull: true
+  
+  # Pattern 2b: arc synonym for via
+  - edgeType:
+      directed:
+        arc: EMPLOYED_BY
+        from: Person
+        to: Company
+      implies:
+        propertyTypes:
+        - name: startDate
+          valueType: DATE
+          notNull: true
+  
+  # Pattern 3: Directed edge - via between from/to (no properties)
+  - edgeType:
+      directed:
+        from: Person
+        via: MANAGES
+        to: Company
+  
+  # Pattern 4: Self-loop using SAME (no properties)
+  - edgeType:
+      directed:
+        from: Person
+        via: REPORTS_TO
+        to: SAME
+  
+  # Pattern 5: Self-loop using SELF
+  - edgeType:
+      directed:
+        from: Employee
+        via: MENTORS
+        to: SELF
+      implies:
+        propertyTypes:
+        - name: startDate
+          valueType: DATE
+  
+  # Pattern 6: Using anonymous node type with index (no properties)
+  - edgeType:
+      directed:
+        from: Person
+        via: LINKS_TO
+        to: 0
+  
+  # Pattern 7: Using typeIdentifier (array of labels)
+  - edgeType:
+      directed:
+        from: ["Person", "Employee"]
+        via: CREATED_BY
+        to: Company
+      implies:
+        propertyTypes:
+        - name: creationDate
+          valueType: ZONED DATETIME
+          notNull: true
+  
+  # ========================================
+  # DIRECTED EDGES - tail:/head: synonyms
+  # ========================================
+  
+  - edgeType:
+      directed:
+        tail: Person
+        via: FOLLOWS
+        head: Person
+      implies:
+        propertyTypes:
+        - name: since
+          valueType: DATE
+  
+  # ========================================
+  # DIRECTED EDGES - src:/dst: synonyms
+  # ========================================
+  
+  - edgeType:
+      directed:
+        src: Person
+        via: SENDS_TO
+        dst: Person
+      implies:
+        propertyTypes:
+        - name: timestamp
+          valueType: ZONED DATETIME
+  
+  # Pattern with dest: instead of dst:
+  - edgeType:
+      directed:
+        src: Person
+        via: TRANSFERS_TO
+        dest: Company
+      implies:
+        propertyTypes:
+        - name: amount
+          valueType: FLOAT
+  
+  # ========================================
+  # DIRECTED EDGES - Inline node type definitions
+  # ========================================
+  
+  # Inline definition of existing type (Person)
+  - edgeType:
+      directed:
+        from:
+          nodeType:
+            typeLabel: Person
+            implies:
+              propertyTypes:
+              - name: id
+                valueType: INTEGER
+                notNull: true
+        via: CONNECTS_TO
+        to: Company
+  
+  # Inline definition of NEW type not in node type spec
+  - edgeType:
+      directed:
+        from: Person
+        via: OWNS
+        to:
+          nodeType:
+            typeLabel: Property
+            implies:
+              propertyTypes:
+              - name: id
+                valueType: INTEGER
+                notNull: true
+              - name: address
+                valueType: STRING
+                notNull: true
+              - name: value
+                valueType: FLOAT
+      implies:
+        propertyTypes:
+        - name: purchaseDate
+          valueType: DATE
+  
+  # Inline anonymous node type (not in node type spec)
+  - edgeType:
+      undirected:
+        between: Company
+        via: LINKED_TO
+        and:
+          nodeType:
+            index: 99
+            implies:
+              propertyTypes:
+              - name: linkId
+                valueType: STRING
+  
+  # ========================================
+  # UNDIRECTED EDGES - between:/and: syntax
+  # ========================================
+  
+  # Pattern 1: Basic undirected edge
+  - edgeType:
+      undirected:
+        between: Person
+        via: COLLABORATES_WITH
+        and: Person
+      implies:
+        propertyTypes:
+        - name: projectName
+          valueType: STRING
+  
+  # Pattern 2: via before between/and
+  - edgeType:
+      undirected:
+        via: PARTNERS_WITH
+        between: Company
+        and: Company
+      implies:
+        propertyTypes:
+        - name: since
+          valueType: DATE
+  
+  # Pattern 2b: arc synonym for via
+  - edgeType:
+      undirected:
+        arc: ALLIED_WITH
+        between: Company
+        and: Company
+      implies:
+        propertyTypes:
+        - name: since
+          valueType: DATE
+  
+  # Pattern 3: via after between/and (no properties)
+  - edgeType:
+      undirected:
+        between: Person
+        and: Person
+        via: SHARES_WITH
+  
+  # Pattern 4: Self-loop with SAME
+  - edgeType:
+      undirected:
+        between: Person
+        via: SIMILAR_TO
+        and: SAME
+      implies:
+        propertyTypes:
+        - name: similarity
+          valueType: FLOAT
+  
+  # Pattern 5: Self-loop with SELF
+  - edgeType:
+      undirected:
+        between: Person
+        via: RELATED_TO
+        and: SELF
+      implies:
+        propertyTypes:
+        - name: relationship
+          valueType: STRING
+  
+  # Pattern 6: Using index reference (no properties)
+  - edgeType:
+      undirected:
+        between: 0
+        via: ASSOCIATED_WITH
+        and: Person
+  
+  # Pattern 7: Using typeIdentifier (string array)
+  - edgeType:
+      undirected:
+        between: ["Person", "Employee"]
+        via: WORKS_WITH
+        and: Person
+      implies:
+        propertyTypes:
+        - name: project
+          valueType: STRING
+  
+  # ========================================
+  # EDGE TYPE INHERITANCE - extends with adding
+  # ========================================
+  
+  # Base edge type
+  - edgeType:
+      undirected:
+        between: Person
+        via: KNOWS
+        and: Person
+      implies:
+        propertyTypes:
+        - name: since
+          valueType: DATE
+  
+  # Subtype using extends with adding (singleton string)
+  - edgeType:
+      undirected:
+        between: Person
+        arc: CLOSE_FRIEND
+        and: Person
+      extends: KNOWS
+      adding:
+        propertyTypes:
+        - name: closeness
+          valueType: FLOAT
+        - name: sharedInterests
+          valueType: LIST
+  
+  # Another subtype using extends (array form)
+  - edgeType:
+      undirected:
+        between: Person
+        via: BEST_FRIEND
+        and: Person
+      extends: [CLOSE_FRIEND]
+      adding:
+        propertyTypes:
+        - name: yearsKnown
+          valueType: INTEGER
+  
+  # Edge type inheritance with directed edges
+  - edgeType:
+      directed:
+        from: Person
+        via: RELATIONSHIP
+        to: Person
+      implies:
+        propertyTypes:
+        - name: startDate
+          valueType: DATE
+  
+  # Subtype: MARRIED_TO extends RELATIONSHIP
+  - edgeType:
+      directed:
+        from: Person
+        arc: MARRIED_TO
+        to: Person
+      extends: RELATIONSHIP
+      adding:
+        propertyTypes:
+        - name: weddingDate
+          valueType: DATE
+          notNull: true
+        - name: location
+          valueType: STRING
+  
+  # Another relationship subtype
+  - edgeType:
+      directed:
+        from: Person
+        via: ENGAGED_TO
+        to: Person
+      extends: RELATIONSHIP
+      adding:
+        propertyTypes:
+        - name: engagementDate
+          valueType: DATE
+        - name: weddingPlanned
+          valueType: BOOLEAN
+  
+  # ========================================
+  # ANONYMOUS EDGE TYPES (no via: label)
+  # ========================================
+  
+  # Anonymous directed edge - via can be omitted
+  - edgeType:
+      directed:
+        from: Person
+        to: Company
+      implies:
+        propertyTypes:
+        - name: weight
+          valueType: FLOAT
+  
+  # Anonymous undirected edge - via can be omitted (no properties)
+  - edgeType:
+      undirected:
+        between: Person
+        and: Person
+  
+  # ========================================
+  # ABSTRACT EDGE TYPES
+  # ========================================
+  
+  # Abstract edge type - only subtypes can be instantiated
+  # Using abstract: keyword
+  - abstract:
+      edgeType:
+        directed:
+          from: Person
+          via: RELATIONSHIP
+          to: Person
+        implies:
+          propertyTypes:
+          - name: since
+            valueType: DATE
+  
+  # Concrete subtype of abstract RELATIONSHIP
+  - edgeType:
+      directed:
+        from: Person
+        via: FRIENDSHIP
+        to: Person
+      implies:
+        supertypes: [RELATIONSHIP]
+        propertyTypes:
+        - name: closeness
+          valueType: FLOAT
+  
+  # Another concrete subtype - singleton supertype as string
+  - edgeType:
+      directed:
+        from: Person
+        via: PROFESSIONAL_RELATIONSHIP
+        to: Person
+      implies:
+        supertypes: RELATIONSHIP
+        propertyTypes:
+        - name: context
+          valueType: STRING
+  
+  # Abstract edge type using abstractSupertype: synonym
+  - abstractSupertype:
+      edgeType:
+        undirected:
+          between: Company
+          via: PARTNERSHIP
+          and: Company
+        implies:
+          propertyTypes:
+          - name: startDate
+            valueType: DATE
+  
+  # Concrete subtype of PARTNERSHIP - singleton as string
+  - edgeType:
+      undirected:
+        between: Company
+        via: STRATEGIC_PARTNERSHIP
+        and: Company
+      implies:
+        supertypes: PARTNERSHIP
+        propertyTypes:
+        - name: value
+          valueType: FLOAT
+  
+  # ========================================
+  # ABSTRACT ENDPOINT TYPES
+  # ========================================
+  
+  # Edge requiring proper subtype of Person at target
+  # Person can exist as isolated node, but edge requires subtype
+  - edgeType:
+      directed:
+        from: Employee
+        via: MANAGES
+        to:
+          abstract: Person
+      implies:
+        propertyTypes:
+        - name: startDate
+          valueType: DATE
+  
+  # Same using abstractSupertype: synonym
+  - edgeType:
+      directed:
+        from: Manager
+        via: SUPERVISES
+        to:
+          abstractSupertype: Person
+      implies:
+        propertyTypes:
+        - name: role
+          valueType: STRING
+  
+  # Both endpoints can be abstract
+  - edgeType:
+      directed:
+        from:
+          abstract: Person
+        via: REPORTS_TO
+        to:
+          abstract: Person
+      implies:
+        propertyTypes: []
+  
+  # Undirected with abstract endpoint
+  - edgeType:
+      undirected:
+        between:
+          abstract: Person
+        via: COLLABORATES_ON
+        and: Company
+      implies:
+        propertyTypes:
+        - name: projectName
+          valueType: STRING

@@ -15,12 +15,12 @@ _SCHEMAS_DIR = Path(__file__).parent
 
 def load_gql_descriptors_schema() -> Dict[str, Any]:
     """
-    Load the GQL Descriptors JSON Schema for validating graph schema configurations.
+    Load the LEX-2026 JSON Schema for validating graph schema configurations.
     
     Returns:
-        Dict containing the JSON Schema for GQL descriptors
+        Dict containing the JSON Schema for LEX-2026 specifications
     """
-    schema_path = _SCHEMAS_DIR / "gql-descriptors.schema.json"
+    schema_path = _SCHEMAS_DIR / "lex-2026.0.3.2.schema.json"
     with open(schema_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
@@ -35,7 +35,9 @@ def get_schema_path(schema_name: str) -> Path:
         Path to the schema file
     """
     if schema_name == "gql-descriptors" or schema_name == "gql_descriptors":
-        return _SCHEMAS_DIR / "gql-descriptors.schema.json"
+        return _SCHEMAS_DIR / "lex-2026.0.3.2.schema.json"
+    elif schema_name == "lex-2026" or schema_name == "lex_2026":
+        return _SCHEMAS_DIR / "lex-2026.0.3.2.schema.json"
     elif not schema_name.endswith('.json'):
         return _SCHEMAS_DIR / f"{schema_name}.schema.json"
     else:

@@ -1,6 +1,6 @@
 ---
 name: "Auto-commit All Changes"
-description: "Automatically commit file changes (max once per hour) and push to remote (max once per 3 hours)"
+description: "Automatically commit file changes (max once per hour) and push to remote (max once per 4 hours)"
 trigger:
   type: "file_save"
   pattern: "**/*"
@@ -8,14 +8,14 @@ trigger:
 
 # Auto-commit All Changes
 
-When any file in the repository is saved, automatically commit the changes to Git if the last commit was more than 1 hour ago. Push to remote only if the last push was more than 3 hours ago.
+When any file in the repository is saved, automatically commit the changes to Git if the last commit was more than 1 hour ago. Push to remote only if the last push was more than 4 hours ago.
 
 ## Instructions
 
 1. Check if there are any changes in the repository
 2. Check if the last commit was more than 1 hour ago
 3. If yes, add all changed files to Git staging and create a commit
-4. Check if the last push was more than 3 hours ago
+4. Check if the last push was more than 4 hours ago
 5. If yes (or if there are unpushed commits), push to remote; otherwise, defer the push
 
 ## Commands to execute
@@ -53,7 +53,7 @@ if [ -n "$(git status --porcelain)" ]; then
     
     echo "Changes committed: $TOTAL_CHANGES files"
     
-    # Check if we should push (only if last push was more than 3 hours ago)
+    # Check if we should push (only if last push was more than 4 hours ago)
     SHOULD_PUSH=false
     LAST_PUSH_TIME=$(git log --branches --not --remotes --format="%ct" | head -1)
     
@@ -62,9 +62,9 @@ if [ -n "$(git status --porcelain)" ]; then
         LAST_REMOTE_COMMIT=$(git log origin/main -1 --format="%ct" 2>/dev/null)
         if [ -n "$LAST_REMOTE_COMMIT" ]; then
             TIME_DIFF=$((CURRENT_TIME - LAST_REMOTE_COMMIT))
-            THREE_HOURS=$((3 * 60 * 60))
+            FOUR_HOURS=$((4 * 60 * 60))
             
-            if [ "$TIME_DIFF" -gt "$THREE_HOURS" ]; then
+            if [ "$TIME_DIFF" -gt "$FOUR_HOURS" ]; then
                 SHOULD_PUSH=true
             fi
         else
@@ -80,7 +80,7 @@ if [ -n "$(git status --porcelain)" ]; then
         git push origin main
         echo "Pushed to GitHub"
     else
-        echo "Push deferred (last push was less than 3 hours ago)"
+        echo "Push deferred (last push was less than 4 hours ago)"
     fi
 else
     echo "No changes to commit"

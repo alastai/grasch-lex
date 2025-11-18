@@ -1,10 +1,98 @@
 # LEX-100r3 Modernization Guide
 
 ## Purpose
-Update the LEX-100r3 specification document to accurately reflect the LEX:2026.0.3.1 implementation, JSON Schema, examples, and Python API that have been developed.
+Update the LEX-100r3 specification document to accurately reflect the LEX:2026.0.3.2 implementation, JSON Schema, examples, and Python API that have been developed.
 
 ## Executive Summary
-The implementation has run ahead of the specification. This guide identifies where LEX-100r3 needs to be updated to match what we've actually built and validated in LEX:2026.0.3.1.
+The implementation has run ahead of the specification. This guide identifies where LEX-100r3 needs to be updated to match what we've actually built and validated in LEX:2026.0.3.2.
+
+## Recent Updates (0.3.2)
+
+### New Edge Type Syntax
+Complete redesign of edge type syntax for better readability and expressiveness:
+
+**Directed Edges:**
+```yaml
+- edgeType:
+    directed:
+      from: Person
+      via: KNOWS
+      to: Person
+    implies:
+      propertyTypes: [...]
+```
+
+**Undirected Edges:**
+```yaml
+- edgeType:
+    undirected:
+      between: Person
+      via: COLLABORATES_WITH
+      and: Person
+```
+
+**Key Features:**
+- `via:` replaces separate `typeLabel:` (edge label is part of direction spec)
+- `arc:` as synonym for `via:`
+- Multiple endpoint synonym sets: `from:`/`to:`, `tail:`/`head:`, `src:`/`dst:`/`dest:`
+- `SAME`/`SELF` keywords for self-loops
+- `abstract:` and `abstractSupertype:` for abstract edge types and endpoints
+- Inline node type definitions for edge-only types
+- `implies:` optional when no properties/labels defined
+
+See: `lex-2026.0.3.2-edge-type-syntax-examples.yaml`
+
+### Node Type Enhancements
+- `supertypes:` accepts both string (singleton) and array forms
+- `abstract:` and `abstractSupertype:` as synonyms
+- `extends:` and `supertypes:` as synonyms
+- Isolated node types (never referenced by edges)
+- Edge-only node types (inline definitions)
+- **Type finalization**: `final:` prevents subtyping
+- **Sealed hierarchies**: `sealed:` closes a type hierarchy
+- Validation rules for abstract interpretations with final/sealed types
+
+See: `lex-2026.0.3.2-node-type-syntax-examples.yaml`
+
+### Type Finalization and Sealing
+
+**Final Types:**
+```yaml
+- final:
+    nodeType:
+      typeLabel: Company
+      extends: Organisation
+```
+- Cannot be subtyped
+- Marks a type as a leaf in the hierarchy
+
+**Sealed Hierarchies:**
+```yaml
+- sealed:
+    nodeTypes:
+    - abstract:
+        nodeType:
+          typeLabel: Place
+    - nodeType:
+        typeLabel: City
+        extends: Place
+```
+- Closed set of types
+- No external subtypes allowed
+- Equivalent to marking all leaves as final
+
+**Validation Rules:**
+1. `sealed:` ≡ `final:` on all leaf subtypes
+2. `abstract:` interpretation + all `final:` types = INVALID
+3. `abstract:` interpretation + all types in `sealed:` = INVALID
+4. Rationale: Abstract interpretation requires proper subtypes, but final/sealed types have none
+
+### API Enhancements
+- All edge endpoint accessors as synonyms (no canonical form)
+- `getTypeLabel()` returns `Optional[str]` for singleton identifiers
+- Support for isolated vs edge-only node type distinction
+
+See: `LEX-2026.0.3.2-API-DESIGN.md`
 
 ## What We've Actually Implemented (LEX:2026.0.3.1)
 

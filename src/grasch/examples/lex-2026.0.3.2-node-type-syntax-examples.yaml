@@ -1,0 +1,308 @@
+# LEX-2026.0.3.2 Node Type Syntax Examples
+# Comprehensive demonstration of all node type syntax variations
+
+# This file defines only nodeTypes and can be imported into graph types
+
+nodeTypes:
+# ========================================
+# BASE TYPES - No supertypes
+# ========================================
+
+# Pattern 1: Basic type with typeLabel
+- nodeType:
+    typeLabel: Person
+    implies:
+      propertyTypes:
+      - name: id
+        valueType: INTEGER
+        notNull: true
+      - name: name
+        valueType: STRING
+        notNull: true
+
+# Pattern 2: Type with additional labels beyond typeLabel
+- nodeType:
+    typeLabel: Company
+    implies:
+      labels:
+      - Organization
+      - LegalEntity
+      propertyTypes:
+      - name: id
+        valueType: INTEGER
+        notNull: true
+      - name: name
+        valueType: STRING
+        notNull: true
+
+# Pattern 3: Anonymous node type with index
+- nodeType:
+    index: 0
+    implies:
+      propertyTypes:
+      - name: id
+        valueType: INTEGER
+        notNull: true
+
+# ========================================
+# SUBTYPES - Using supertypes with implies
+# ========================================
+
+# Pattern 4: Subtype with singleton supertype (string form)
+- nodeType:
+    typeLabel: Employee
+    implies:
+      supertypes: Person
+      propertyTypes:
+      - name: employeeId
+        valueType: STRING
+        notNull: true
+
+# Pattern 5: Subtype with singleton supertype (array form)
+- nodeType:
+    typeLabel: Contractor
+    implies:
+      supertypes: [Person]
+      propertyTypes:
+      - name: contractId
+        valueType: STRING
+        notNull: true
+
+# Pattern 6: Subtype with multiple supertypes
+- nodeType:
+    typeLabel: Manager
+    implies:
+      supertypes: [Employee, Person]
+      propertyTypes:
+      - name: department
+        valueType: STRING
+        notNull: true
+
+# ========================================
+# SUBTYPES - Using extends with adding
+# ========================================
+
+# Pattern 7: Subtype using extends (singleton string)
+- nodeType:
+    typeLabel: Director
+    extends: Manager
+    adding:
+      propertyTypes:
+      - name: division
+        valueType: STRING
+        notNull: true
+
+# Pattern 8: Subtype using extends (array form)
+- nodeType:
+    typeLabel: VicePresident
+    extends: [Director]
+    adding:
+      propertyTypes:
+      - name: region
+        valueType: STRING
+
+# Pattern 9: Subtype with extends and additional labels
+- nodeType:
+    typeLabel: CEO
+    extends: VicePresident
+    adding:
+      labels:
+      - Executive
+      - BoardMember
+      propertyTypes:
+      - name: boardSeat
+        valueType: INTEGER
+
+# ========================================
+# ABSTRACT TYPES
+# ========================================
+
+# Pattern 10: Abstract type using abstract: wrapper
+- abstract:
+    nodeType:
+      typeLabel: Vehicle
+      implies:
+        propertyTypes:
+        - name: id
+          valueType: INTEGER
+          notNull: true
+        - name: manufacturer
+          valueType: STRING
+
+# Pattern 11: Concrete subtype of abstract type
+- nodeType:
+    typeLabel: Car
+    implies:
+      supertypes: Vehicle
+      propertyTypes:
+      - name: doors
+        valueType: INTEGER
+
+# Pattern 12: Abstract type using abstractSupertype: synonym
+- abstractSupertype:
+    nodeType:
+      typeLabel: Asset
+      implies:
+        propertyTypes:
+        - name: id
+          valueType: INTEGER
+          notNull: true
+        - name: value
+          valueType: FLOAT
+
+# Pattern 13: Concrete subtype of abstract Asset
+- nodeType:
+    typeLabel: RealEstate
+    extends: Asset
+    adding:
+      propertyTypes:
+      - name: address
+        valueType: STRING
+
+# ========================================
+# TYPES WITHOUT PROPERTIES
+# ========================================
+
+# Pattern 14: Type with no properties (implies can be omitted)
+- nodeType:
+    typeLabel: Tag
+
+# Pattern 15: Subtype with no additional properties
+- nodeType:
+    typeLabel: CategoryTag
+    extends: Tag
+
+# ========================================
+# SEALED/FINALIZED HIERARCHIES
+# ========================================
+
+# Pattern 16: Sealed hierarchy - no subtypes can be added outside this definition
+- sealed:
+    nodeTypes:
+    - abstract:
+        nodeType:
+          typeLabel: Place
+          implies:
+            propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+            - name: name
+              valueType: STRING
+              notNull: true
+    
+    - nodeType:
+        typeLabel: Continent
+        extends: Place
+        adding:
+          propertyTypes:
+          - name: area
+            valueType: FLOAT
+    
+    - nodeType:
+        typeLabel: Country
+        extends: Place
+        adding:
+          propertyTypes:
+          - name: population
+            valueType: INTEGER
+    
+    - nodeType:
+        typeLabel: City
+        extends: Place
+        adding:
+          propertyTypes:
+          - name: population
+            valueType: INTEGER
+          - name: coordinates
+            valueType: STRING
+
+# Pattern 17: Another sealed hierarchy (Message types)
+- sealed:
+    nodeTypes:
+    - abstract:
+        nodeType:
+          typeLabel: Message
+          implies:
+            propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+            - name: content
+              valueType: STRING
+            - name: creationDate
+              valueType: ZONED DATETIME
+              notNull: true
+    
+    - nodeType:
+        typeLabel: Post
+        extends: Message
+        adding:
+          propertyTypes:
+          - name: imageFile
+            valueType: STRING
+          - name: language
+            valueType: STRING
+    
+    - nodeType:
+        typeLabel: Comment
+        extends: Message
+        adding:
+          propertyTypes:
+          - name: replyCount
+            valueType: INTEGER
+
+# Pattern 18: Organization hierarchy with final concrete types
+# Organisation can be extended, but Company and University cannot
+- abstract:
+    nodeType:
+      typeLabel: Organisation
+      implies:
+        propertyTypes:
+        - name: id
+          valueType: INTEGER
+          notNull: true
+        - name: name
+          valueType: STRING
+          notNull: true
+
+- final:
+    nodeType:
+      typeLabel: Company
+      extends: Organisation
+      adding:
+        propertyTypes:
+        - name: industry
+          valueType: STRING
+
+- final:
+    nodeType:
+      typeLabel: University
+      extends: Organisation
+      adding:
+        propertyTypes:
+        - name: ranking
+          valueType: INTEGER
+
+# ========================================
+# COMPLEX HIERARCHIES
+# ========================================
+
+# Pattern 19: Multi-level inheritance (unsealed)
+- nodeType:
+    typeLabel: SeniorManager
+    implies:
+      supertypes: Manager
+      propertyTypes:
+      - name: yearsExperience
+        valueType: INTEGER
+
+- nodeType:
+    typeLabel: ExecutiveManager
+    extends: SeniorManager
+    adding:
+      labels:
+      - Leadership
+      propertyTypes:
+      - name: strategicInitiatives
+        valueType: LIST

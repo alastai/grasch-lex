@@ -1,0 +1,32 @@
+# LEX-2026.0.3.2 Complete Graph Type Example
+# Demonstrates importing node types and edge types to create a complete graph schema
+
+pathName: /examples/complete-graph-type
+
+graphType:
+  import: lex-2026.0.3.2-graph-type-defaults.yaml
+  
+  # Import all node type definitions
+  nodeTypes:
+  - import: lex-2026.0.3.2-node-type-syntax-examples.yaml
+  
+  # Import all edge type definitions  
+  edgeTypes:
+  - import: lex-2026.0.3.2-edge-type-syntax-examples.yaml
+
+constraints:
+  personIdUnique:
+    name: personIdUnique
+    rule:
+      subject: UNIQUE
+      constraintPattern: Person
+      uniqueKeyComponentPropertyNames:
+      - id
+  
+  companyIdUnique:
+    name: companyIdUnique
+    rule:
+      subject: UNIQUE
+      constraintPattern: Company
+      uniqueKeyComponentPropertyNames:
+      - id
