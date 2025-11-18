@@ -1,4 +1,4 @@
-# Graph Schema Type Interpretation Example (LEX-2026.0.3.1)
+# Graph Schema Type Interpretation Example (LEX-2026.0.3.2)
 # Shows how a graph instance can interpret its schema with different type matching modes
 # The interpretation descriptor wraps the graphSchema it governs
 
@@ -9,7 +9,7 @@ graph:
   # When omitted, defaults to exactlyOfThisSchemaType
   graphSchema:
     pathName: "/benchmarks/ldbc/snb"
-    import: "snb-lex-2026.0.3.1-schema.yaml"
+    import: "lex-2026.0.3.2-snb-schema.yaml"
   
   storageSchema:
     storageType: "kuzu"
@@ -23,7 +23,7 @@ graph:
   exactlyOfThisSchemaType:
     graphSchema:
       pathName: "/benchmarks/ldbc/snb"
-      import: "snb-lex-2026.0.3.1-schema.yaml"
+      import: "lex-2026.0.3.2-snb-schema.yaml"
   
   storageSchema:
     storageType: "kuzu"
@@ -37,7 +37,7 @@ graph:
   subtypesOfSchemaType:
     graphSchema:
       pathName: "/benchmarks/ldbc/snb"
-      import: "snb-lex-2026.0.3.1-schema.yaml"
+      import: "lex-2026.0.3.2-snb-schema.yaml"
   
   storageSchema:
     storageType: "kuzu"
@@ -52,7 +52,7 @@ graph:
     abstractSupertypes:
       graphSchema:
         pathName: "/benchmarks/ldbc/snb"
-      import: "snb-lex-2026.0.3.1-schema.yaml"
+      import: "lex-2026.0.3.2-snb-schema.yaml"
   
   storageSchema:
     storageType: "kuzu"

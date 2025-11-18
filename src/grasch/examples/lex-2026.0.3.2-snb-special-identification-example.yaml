@@ -1,4 +1,4 @@
-# SNB Special Identification Example (LEX-2026.0.3.1)
+# SNB Special Identification Example (LEX-2026.0.3.2)
 # Demonstrates all element type identification patterns:
 # - typeLabel (single label)
 # - typeLabels (multiple labels) 
@@ -8,7 +8,7 @@
 pathName: /benchmarks/ldbc/snb-special
 
 graphType:
-  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
+  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
   
   nodeTypes:
     # Standard single typeLabel identification

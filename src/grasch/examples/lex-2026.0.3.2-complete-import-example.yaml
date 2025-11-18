@@ -9,7 +9,7 @@ graph:
   subtypesOfSchemaType:
     graphSchema:
       pathName: "/benchmarks/ldbc/snb"
-      import: "snb-lex-2026.0.3.1-schema.yaml"
+      import: "lex-2026.0.3.2-snb-schema.yaml"
   
   # Storage schema for this graph instance
   storageSchema:

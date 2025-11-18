@@ -1,6 +1,6 @@
 pathName: https://ldbcouncil.org/schemas/|/benchmarks/ldbc/finbench
 graphType:
-  $ref: lex-2026.0.3.1-graph-type-defaults.yaml
+  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
   nodeTypes:
   - nodeType:
       typeLabel: Person

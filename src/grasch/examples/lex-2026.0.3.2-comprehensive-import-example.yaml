@@ -5,7 +5,7 @@ pathName: "/examples/comprehensive-imports"
 
 graphType:
   # Level 1: Import defaults at graphType level
-  import: "lex-2026.0.3.1-graph-type-defaults.yaml"
+  import: "lex-2026.0.3.2-graph-type-defaults.yaml"
   
   # Level 2: Mix inline and imported node types
   nodeTypes:
@@ -18,7 +18,7 @@ graphType:
               notNull: true
     
     # Level 3: Import individual node type
-    - import: "snb_types/lex-2026.0.3.1-snb-organisation-hierarchy.yaml"
+    - import: "lex-2026.0.3.2-snb-types/lex-2026.0.3.2-snb-organisation-hierarchy.yaml"
     
     - nodeType:
         typeLabel: Tag
@@ -48,7 +48,7 @@ graphType:
     abstractSupertypes:
       # Level 3: Import node type hierarchy
       nodeTypes:
-        - import: "snb_types/lex-2026.0.3.1-snb-message-hierarchy.yaml"
+        - import: "lex-2026.0.3.2-snb-types/lex-2026.0.3.2-snb-message-hierarchy.yaml"
 
 constraints:
   personIdUnique:

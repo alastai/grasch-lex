@@ -1,0 +1,595 @@
+pathName: /conservation/jaguar
+graphType:
+  nodeTypeMinimumLabels: 1
+  edgeTypeMinimumLabels: 1
+  typeInterpretation: exactlyOfThisType
+  nodeTypes:
+  - nodeType:
+      typeLabel: Animal
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+        - name: scientificName
+          valueType: STRING
+        - name: hasLifespan
+          valueType: INTEGER
+  - nodeType:
+      typeLabel: Mammal
+      extends:
+      - Animal
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: BigCat
+      extends:
+      - Mammal
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Jaguar
+      extends:
+      - BigCat
+      adding:
+        propertyTypes:
+        - name: hasGender
+          valueType: STRING
+        - name: hasIdentificationMark
+          valueType: STRING
+        - name: hasMonitoringStartDate
+          valueType: DATE
+        - name: hasLastSightingDate
+          valueType: DATE
+        - name: wasKilled
+          valueType: BOOLEAN
+        - name: causeOfDeath
+          valueType: STRING
+        - name: isOrphaned
+          valueType: BOOLEAN
+        - name: isRehabilitated
+          valueType: BOOLEAN
+        - name: isReleased
+          valueType: BOOLEAN
+        - name: hasRescueDate
+          valueType: DATE
+        - name: hasReleaseDate
+          valueType: DATE
+  - nodeType:
+      typeLabel: Prey
+      extends:
+      - Animal
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Livestock
+      extends:
+      - Prey
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Herbivore
+      extends:
+      - Prey
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Mesopredator
+      extends:
+      - Prey
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Fish
+      extends:
+      - Prey
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Reptile
+      extends:
+      - Prey
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: JaguarPopulation
+      implies:
+        propertyTypes:
+        - name: hasPopulationEstimate
+          valueType: INTEGER
+  - nodeType:
+      typeLabel: Habitat
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+  - nodeType:
+      typeLabel: Forest
+      extends:
+      - Habitat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Rainforest
+      extends:
+      - Forest
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Wetland
+      extends:
+      - Habitat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Grassland
+      extends:
+      - Habitat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Shrubland
+      extends:
+      - Habitat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: WaterBody
+      extends:
+      - Habitat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Location
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+  - nodeType:
+      typeLabel: Country
+      extends:
+      - Location
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: State
+      extends:
+      - Location
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Region
+      extends:
+      - Location
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: MountainRange
+      extends:
+      - Location
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: HabitatArea
+      extends:
+      - Location
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: DietType
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+  - nodeType:
+      typeLabel: CarnivoreDiet
+      extends:
+      - DietType
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Observation
+      implies:
+        propertyTypes:
+        - name: observedDate
+          valueType: DATE
+  - nodeType:
+      typeLabel: Person
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+  - nodeType:
+      typeLabel: Researcher
+      extends:
+      - Person
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Rancher
+      extends:
+      - Person
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Conservationist
+      extends:
+      - Person
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: IndigenousPerson
+      extends:
+      - Person
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Tourist
+      extends:
+      - Person
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: LawEnforcement
+      extends:
+      - Person
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: ConservationOrganization
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+  - nodeType:
+      typeLabel: GovernmentAgency
+      extends:
+      - ConservationOrganization
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: NGO
+      extends:
+      - ConservationOrganization
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: AcademicInstitution
+      extends:
+      - ConservationOrganization
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Threat
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+        - name: description
+          valueType: STRING
+  - nodeType:
+      typeLabel: AnthropogenicThreat
+      extends:
+      - Threat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: HabitatLoss
+      extends:
+      - AnthropogenicThreat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: HabitatFragmentation
+      extends:
+      - AnthropogenicThreat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Poaching
+      extends:
+      - AnthropogenicThreat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: IllegalWildlifeTrade
+      extends:
+      - AnthropogenicThreat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: HumanWildlifeConflict
+      extends:
+      - AnthropogenicThreat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: BorderBarrier
+      extends:
+      - AnthropogenicThreat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: EnvironmentalThreat
+      extends:
+      - Threat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: ClimateChange
+      extends:
+      - EnvironmentalThreat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Wildfire
+      extends:
+      - EnvironmentalThreat
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: ConservationEffort
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+        - name: description
+          valueType: STRING
+  - nodeType:
+      typeLabel: RecoveryPlan
+      extends:
+      - ConservationEffort
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: WildlifeCorridor
+      extends:
+      - ConservationEffort
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: RewildingProgram
+      extends:
+      - ConservationEffort
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: CommunityEngagement
+      extends:
+      - ConservationEffort
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: InternationalCooperation
+      extends:
+      - ConservationEffort
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: MonitoringTechnique
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+  - nodeType:
+      typeLabel: CameraTrap
+      extends:
+      - MonitoringTechnique
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: ScatDetection
+      extends:
+      - MonitoringTechnique
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: GPSTracking
+      extends:
+      - MonitoringTechnique
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: LegalFramework
+      implies:
+        propertyTypes:
+        - name: name
+          valueType: STRING
+        - name: description
+          valueType: STRING
+  - nodeType:
+      typeLabel: Act
+      extends:
+      - LegalFramework
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: Convention
+      extends:
+      - LegalFramework
+      adding:
+        propertyTypes: []
+  - nodeType:
+      typeLabel: CulturalSignificance
+      implies:
+        propertyTypes:
+        - name: description
+          valueType: STRING
+  - nodeType:
+      typeLabel: EconomicBenefit
+      implies:
+        propertyTypes:
+        - name: description
+          valueType: STRING
+        - name: estimatedValue
+          valueType: FLOAT
+  - nodeType:
+      typeLabel: Event
+      implies:
+        propertyTypes:
+        - name: eventDate
+          valueType: DATE
+        - name: description
+          valueType: STRING
+  edgeTypes:
+  - edgeType:
+      typeLabel: HAS_OBSERVATION
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Animal
+      secondEndpointNodeType:
+        typeLabel: Observation
+  - edgeType:
+      typeLabel: OBSERVED_BY
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Observation
+      secondEndpointNodeType:
+        typeLabel: Person
+  - edgeType:
+      typeLabel: MONITORED_BY_ORG
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Animal
+      secondEndpointNodeType:
+        typeLabel: ConservationOrganization
+  - edgeType:
+      typeLabel: MONITORED_BY_TECHNIQUE
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Jaguar
+      secondEndpointNodeType:
+        typeLabel: MonitoringTechnique
+  - edgeType:
+      typeLabel: LOCATED_IN_COUNTRY
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: State
+      secondEndpointNodeType:
+        typeLabel: Country
+  - edgeType:
+      typeLabel: LOCATED_IN
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Habitat
+      secondEndpointNodeType:
+        typeLabel: Location
+  - edgeType:
+      typeLabel: OCCURS_IN
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Animal
+      secondEndpointNodeType:
+        typeLabel: Location
+  - edgeType:
+      typeLabel: ORIGINATES_FROM
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Jaguar
+      secondEndpointNodeType:
+        typeLabel: Location
+  - edgeType:
+      typeLabel: HAS_HABITAT
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Animal
+      secondEndpointNodeType:
+        typeLabel: Habitat
+  - edgeType:
+      typeLabel: HAS_DIET_TYPE
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Animal
+      secondEndpointNodeType:
+        typeLabel: DietType
+  - edgeType:
+      typeLabel: HAS_OFFSPRING
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Jaguar
+      secondEndpointNodeType:
+        typeLabel: Jaguar
+  - edgeType:
+      typeLabel: RESCUED_BY
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Jaguar
+      secondEndpointNodeType:
+        typeLabel: ConservationOrganization
+  - edgeType:
+      typeLabel: REINTRODUCED_BY
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Jaguar
+      secondEndpointNodeType:
+        typeLabel: ConservationOrganization
+  - edgeType:
+      typeLabel: NAMED_BY
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Jaguar
+      secondEndpointNodeType:
+        typeLabel: Person
+  - edgeType:
+      typeLabel: FACES_THREAT
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Jaguar
+      secondEndpointNodeType:
+        typeLabel: Threat
+  - edgeType:
+      typeLabel: IMPLEMENTS_EFFORT
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: ConservationOrganization
+      secondEndpointNodeType:
+        typeLabel: ConservationEffort
+  - edgeType:
+      typeLabel: CONNECTS_HABITAT
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: WildlifeCorridor
+      secondEndpointNodeType:
+        typeLabel: HabitatArea
+  - edgeType:
+      typeLabel: IS_DEPENDENT_ON
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: JaguarPopulation
+      secondEndpointNodeType:
+        typeLabel: JaguarPopulation
