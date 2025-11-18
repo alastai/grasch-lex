@@ -1,15 +1,6 @@
 graphType:
   import: lex-2026.0.3.2-graph-type-defaults.yaml
-  edgeTypes:
-  - edgeType:
-      typeLabel: KNOWS
-      implies:
-        propertyTypes: []
-      direction: UNDIRECTED
-      firstEndpointNodeType:
-        index: 0
-      secondEndpointNodeType:
-        index: 0
+  
   nodeTypes:
   - nodeType:
       index: 0
@@ -20,6 +11,17 @@ graphType:
         - name: id
           valueType: INTEGER
           notNull: true
+  
+  edgeTypes:
+  - edgeType:
+      typeLabel: KNOWS
+      implies:
+        propertyTypes: []
+      direction: UNDIRECTED
+      firstEndpointNodeType:
+        index: 0
+      secondEndpointNodeType:
+        index: 0
 identifier:
   directory:
   - test
