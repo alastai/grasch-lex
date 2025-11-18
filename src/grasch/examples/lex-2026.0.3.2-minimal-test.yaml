@@ -1,9 +1,5 @@
 graphType:
-  edgePreferredName: EDGE
-  edgeTypeMaximumLabels: 1
-  edgeTypeMaximumPropertyTypes: 5
-  edgeTypeMinimumLabels: 1
-  edgeTypeMinimumPropertyTypes: 0
+  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
   edgeTypes:
   - direction: UNDIRECTED
     firstEndpointNodeType: 0
@@ -12,12 +8,6 @@ graphType:
     - knows
     propertyTypes: []
     secondEndpointNodeType: 0
-  graphPreferredName: PROPERTY GRAPH
-  nodePreferredName: NODE
-  nodeTypeMaximumLabels: 1
-  nodeTypeMaximumPropertyTypes: 10
-  nodeTypeMinimumLabels: 1
-  nodeTypeMinimumPropertyTypes: 0
   nodeTypes:
   - index: 0
     labels:
