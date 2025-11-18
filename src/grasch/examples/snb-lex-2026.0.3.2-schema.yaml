@@ -1,0 +1,260 @@
+pathName: /benchmarks/ldbc/snb
+graphType:
+  import: lex-2026.0.3.1-graph-type-defaults.yaml
+  nodeTypes:
+  - nodeType:
+      typeLabel: Person
+      implies:
+        propertyTypes:
+        - name: id
+          valueType: INTEGER
+          notNull: true
+        - name: firstName
+          valueType: STRING
+          notNull: true
+        - name: lastName
+          valueType: STRING
+          notNull: true
+        - name: gender
+          valueType: STRING
+          notNull: true
+        - name: birthday
+          valueType: DATE
+          notNull: true
+        - name: creationDate
+          valueType: ZONED DATETIME
+          notNull: true
+        - name: locationIP
+          valueType: STRING
+          notNull: true
+        - name: browserUsed
+          valueType: STRING
+          notNull: true
+        - name: language
+          valueType: LIST
+        - name: email
+          valueType: LIST
+  # Organisation type hierarchy imported from modular file
+  - import: snb_types/lex-2026.0.3.1-snb-organisation-hierarchy.yaml
+  # Place type hierarchy imported from modular file
+  - import: snb_types/lex-2026.0.3.1-snb-place-hierarchy.yaml
+  - nodeType:
+      typeLabel: Tag
+      implies:
+        propertyTypes:
+        - name: id
+          valueType: INTEGER
+          notNull: true
+        - name: name
+          valueType: STRING
+          notNull: true
+        - name: url
+          valueType: STRING
+          notNull: true
+  - nodeType:
+      typeLabel: TagClass
+      implies:
+        propertyTypes:
+        - name: id
+          valueType: INTEGER
+          notNull: true
+        - name: name
+          valueType: STRING
+          notNull: true
+        - name: url
+          valueType: STRING
+          notNull: true
+  - nodeType:
+      typeLabel: Forum
+      implies:
+        propertyTypes:
+        - name: id
+          valueType: INTEGER
+          notNull: true
+        - name: title
+          valueType: STRING
+          notNull: true
+        - name: creationDate
+          valueType: ZONED DATETIME
+          notNull: true
+  # Message type hierarchy imported from modular file
+  - import: snb_types/lex-2026.0.3.1-snb-message-hierarchy.yaml
+  edgeTypes:
+  - edgeType:
+      typeLabel: KNOWS
+      implies:
+        propertyTypes:
+        - name: creationDate
+          valueType: ZONED DATETIME
+          notNull: true
+      direction: UNDIRECTED
+      firstEndpointNodeType:
+        typeLabel: Person
+      secondEndpointNodeType:
+        typeLabel: Person
+  - edgeType:
+      typeLabel: LIKES
+      implies:
+        propertyTypes:
+        - name: creationDate
+          valueType: ZONED DATETIME
+          notNull: true
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Person
+      secondEndpointNodeType:
+        typeIdentifyingLabels:
+        - Post
+        - Comment
+  - edgeType:
+      typeLabel: HAS_INTEREST
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Person
+      secondEndpointNodeType:
+        typeLabel: Tag
+  - edgeType:
+      typeLabel: IS_LOCATED_IN
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeIdentifyingLabels:
+        - Person
+        - Organisation
+        - Post
+        - Comment
+      secondEndpointNodeType:
+        typeLabel: Place
+  - edgeType:
+      typeLabel: STUDY_AT
+      implies:
+        propertyTypes:
+        - name: classYear
+          valueType: INTEGER
+          notNull: true
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Person
+      secondEndpointNodeType:
+        typeLabel: Organisation
+  - edgeType:
+      typeLabel: WORK_AT
+      implies:
+        propertyTypes:
+        - name: workFrom
+          valueType: INTEGER
+          notNull: true
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Person
+      secondEndpointNodeType:
+        typeLabel: Organisation
+  - edgeType:
+      typeLabel: HAS_MEMBER
+      implies:
+        propertyTypes:
+        - name: joinDate
+          valueType: ZONED DATETIME
+          notNull: true
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Forum
+      secondEndpointNodeType:
+        typeLabel: Person
+  - edgeType:
+      typeLabel: HAS_MODERATOR
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Forum
+      secondEndpointNodeType:
+        typeLabel: Person
+  - edgeType:
+      typeLabel: CONTAINER_OF
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Forum
+      secondEndpointNodeType:
+        typeLabel: Post
+  - edgeType:
+      typeLabel: HAS_CREATOR
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeIdentifyingLabels:
+        - Post
+        - Comment
+      secondEndpointNodeType:
+        typeLabel: Person
+  - edgeType:
+      typeLabel: REPLY_OF
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Comment
+      secondEndpointNodeType:
+        typeIdentifyingLabels:
+        - Post
+        - Comment
+  - edgeType:
+      typeLabel: HAS_TAG
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeIdentifyingLabels:
+        - Post
+        - Comment
+        - Forum
+      secondEndpointNodeType:
+        typeLabel: Tag
+  - edgeType:
+      typeLabel: HAS_TYPE
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Tag
+      secondEndpointNodeType:
+        typeLabel: TagClass
+  - edgeType:
+      typeLabel: IS_SUBCLASS_OF
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: TagClass
+      secondEndpointNodeType:
+        typeLabel: TagClass
+  - edgeType:
+      typeLabel: IS_PART_OF
+      implies:
+        propertyTypes: []
+      direction: DIRECTED
+      firstEndpointNodeType:
+        typeLabel: Place
+      secondEndpointNodeType:
+        typeLabel: Place
+constraints:
+  personIdUnique:
+    name: personIdUnique
+    rule:
+      subject: UNIQUE
+      constraintPattern: Person
+      uniqueKeyComponentPropertyNames:
+      - id
+  postIdUnique:
+    name: postIdUnique
+    rule:
+      subject: UNIQUE
+      constraintPattern: Post
+      uniqueKeyComponentPropertyNames:
+      - id

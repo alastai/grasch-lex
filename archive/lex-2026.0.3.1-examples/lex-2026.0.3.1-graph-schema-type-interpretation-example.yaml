@@ -1,0 +1,59 @@
+# Graph Schema Type Interpretation Example (LEX-2026.0.3.1)
+# Shows how a graph instance can interpret its schema with different type matching modes
+# The interpretation descriptor wraps the graphSchema it governs
+
+# Example 1: Exact schema type matching (default - can be omitted)
+graph:
+  pathName: "/examples/exact-match-graph"
+  
+  # When omitted, defaults to exactlyOfThisSchemaType
+  graphSchema:
+    pathName: "/benchmarks/ldbc/snb"
+    import: "snb-lex-2026.0.3.1-schema.yaml"
+  
+  storageSchema:
+    storageType: "kuzu"
+    databasePath: "./data/exact-match-graph.kuzu"
+
+---
+# Example 2: Explicit exact matching (same as default)
+graph:
+  pathName: "/examples/explicit-exact-graph"
+  
+  exactlyOfThisSchemaType:
+    graphSchema:
+      pathName: "/benchmarks/ldbc/snb"
+      import: "snb-lex-2026.0.3.1-schema.yaml"
+  
+  storageSchema:
+    storageType: "kuzu"
+    databasePath: "./data/explicit-exact-graph.kuzu"
+
+---
+# Example 3: Allow subtypes of schema types
+graph:
+  pathName: "/examples/subtype-match-graph"
+  
+  subtypesOfSchemaType:
+    graphSchema:
+      pathName: "/benchmarks/ldbc/snb"
+      import: "snb-lex-2026.0.3.1-schema.yaml"
+  
+  storageSchema:
+    storageType: "kuzu"
+    databasePath: "./data/subtype-match-graph.kuzu"
+
+---
+# Example 4: Allow only proper subtypes (excludes exact type)
+graph:
+  pathName: "/examples/proper-subtype-match-graph"
+  
+  allowSubtypesOf:
+    abstractSupertypes:
+      graphSchema:
+        pathName: "/benchmarks/ldbc/snb"
+      import: "snb-lex-2026.0.3.1-schema.yaml"
+  
+  storageSchema:
+    storageType: "kuzu"
+    databasePath: "./data/proper-subtype-match-graph.kuzu"

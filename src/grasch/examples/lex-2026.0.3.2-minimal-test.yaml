@@ -1,0 +1,35 @@
+graphType:
+  edgePreferredName: EDGE
+  edgeTypeMaximumLabels: 1
+  edgeTypeMaximumPropertyTypes: 5
+  edgeTypeMinimumLabels: 1
+  edgeTypeMinimumPropertyTypes: 0
+  edgeTypes:
+  - direction: UNDIRECTED
+    firstEndpointNodeType: 0
+    index: 0
+    labels:
+    - knows
+    propertyTypes: []
+    secondEndpointNodeType: 0
+  graphPreferredName: PROPERTY GRAPH
+  nodePreferredName: NODE
+  nodeTypeMaximumLabels: 1
+  nodeTypeMaximumPropertyTypes: 10
+  nodeTypeMinimumLabels: 1
+  nodeTypeMinimumPropertyTypes: 0
+  nodeTypes:
+  - index: 0
+    labels:
+    - Person
+    propertyTypes:
+    - name: id
+      valueType:
+        name: INTEGER
+        parameters:
+          NULLABLE: false
+identifier:
+  directory:
+  - test
+  name: test_schema
+valueTypeSystemName: GQL

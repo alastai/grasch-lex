@@ -1,0 +1,20 @@
+# Complete Import Example - Shows importing graphSchema contents within a graph
+
+# This is a GRAPH (instance), not a standalone schema
+graph:
+  pathName: "/examples/my-graph-instance"
+  
+  # Pattern: Schema type interpretation wraps the graphSchema
+  # Default is exactlyOfThisSchemaType (can be omitted)
+  subtypesOfSchemaType:
+    graphSchema:
+      pathName: "/benchmarks/ldbc/snb"
+      import: "snb-lex-2026.0.3.1-schema.yaml"
+  
+  # Storage schema for this graph instance
+  storageSchema:
+    storageType: "kuzu"
+    databasePath: "./data/my-graph-instance.kuzu"
+    # Optional Kuzu-specific configuration
+    bufferPoolSize: "1GB"
+    maxNumThreads: 4
