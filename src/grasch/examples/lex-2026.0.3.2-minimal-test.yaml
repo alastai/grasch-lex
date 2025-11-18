@@ -1,5 +1,5 @@
 graphType:
-  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
+  import: lex-2026.0.3.2-graph-type-defaults.yaml
   edgeTypes:
   - direction: UNDIRECTED
     firstEndpointNodeType: 0

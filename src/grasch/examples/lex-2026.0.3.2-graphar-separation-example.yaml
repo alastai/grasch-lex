@@ -15,7 +15,7 @@
                 secondEndpointNodeType
        storageSchema
            kind “GraphAr”
-           $ref (<fileLocation>)
+           import: (<fileLocation>)
 
 // GraphAr storage schema
     graphStorageSchemm
@@ -23,7 +23,7 @@
             identifier SNB_demo_graph
             schema
                 kind “LEX”
-                $ref (<fileLocation>)
+                import: (<fileLocation>)
 
        graph: 
            <storage characteristics>

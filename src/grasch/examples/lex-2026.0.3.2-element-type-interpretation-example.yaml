@@ -6,7 +6,7 @@
 pathName: "/examples/default-exact-schema"
 
 graphType:
-  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
+  import: lex-2026.0.3.2-graph-type-defaults.yaml
   
   # No interpretation descriptor = exactlyOfTheseElementTypes (default)
   nodeTypes:
@@ -34,7 +34,7 @@ graphType:
 pathName: "/examples/exact-nodes-schema"
 
 graphType:
-  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
+  import: lex-2026.0.3.2-graph-type-defaults.yaml
   
   exactlyOfTheseElementTypes:
     nodeTypes:
@@ -62,7 +62,7 @@ graphType:
 pathName: "/examples/node-subtype-schema"
 
 graphType:
-  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
+  import: lex-2026.0.3.2-graph-type-defaults.yaml
   
   # Person nodes use exact matching (default)
   nodeTypes:
@@ -119,7 +119,7 @@ graphType:
 pathName: "/examples/abstract-relationship-schema"
 
 graphType:
-  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
+  import: lex-2026.0.3.2-graph-type-defaults.yaml
   
   nodeTypes:
     - nodeType:
@@ -177,7 +177,7 @@ graphType:
 pathName: "/examples/mixed-interpretation-schema"
 
 graphType:
-  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
+  import: lex-2026.0.3.2-graph-type-defaults.yaml
   
   # Exact match for nodes (default, no descriptor needed)
   nodeTypes:
@@ -220,7 +220,7 @@ graphType:
 pathName: "/examples/multi-scope-schema"
 
 graphType:
-  $ref: lex-2026.0.3.2-graph-type-defaults.yaml
+  import: lex-2026.0.3.2-graph-type-defaults.yaml
   
   # Exact matching for Person
   nodeTypes:

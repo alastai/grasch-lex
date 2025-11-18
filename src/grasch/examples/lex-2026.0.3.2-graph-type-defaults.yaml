@@ -1,6 +1,6 @@
 # LEX-100r3 Graph Type Default Values
 # These are the default values specified in the LEX-100r3 specification
-# and can be imported into graph schemas using $ref
+# and can be imported into graph schemas using import:
 
 graphPreferredName: "GRAPH"
 nodePreferredName: "NODE"
