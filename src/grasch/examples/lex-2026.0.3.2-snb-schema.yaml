@@ -8,7 +8,7 @@ graphSchema:
     - nodeType:
         typeLabel: Person
         implies:
-        propertyTypes:
+          propertyTypes:
         - name: id
           valueType: INTEGER
           notNull: true
@@ -44,7 +44,7 @@ graphSchema:
     - nodeType:
         typeLabel: Tag
         implies:
-        propertyTypes:
+          propertyTypes:
         - name: id
           valueType: INTEGER
           notNull: true
