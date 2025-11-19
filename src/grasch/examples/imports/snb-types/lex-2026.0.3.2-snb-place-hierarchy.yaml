@@ -1,47 +1,45 @@
 # SNB Place Type Hierarchy
 # Place is an abstract supertype for City, Country, and Continent
 # All instances have the Place label plus their specific subtype label
-# This is an importable fragment containing only core type definitions
-# Type interpretations (abstract, final, sealed, subtypesOf) are applied by the importing file
+# This is an importable fragment with a sealed hierarchy
+# sealed is allowed in imports as it defines a complete closed type hierarchy
 
-# Abstract Place supertype - never instantiated directly
-- nodeType:
-    typeLabel: Place
-    implies:
-      propertyTypes:
-        - name: id
-          valueType: INTEGER
-          notNull: true
-        - name: name
-          valueType: STRING
-          notNull: true
-        - name: url
-          valueType: STRING
-          notNull: true
-        - name: type
-          valueType: STRING
-          notNull: true
+sealed:
+  - abstract:
+      nodeType:
+        typeLabel: Place
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+              notNull: true
+            - name: name
+              valueType: STRING
+              notNull: true
+            - name: url
+              valueType: STRING
+              notNull: true
+            - name: type
+              valueType: STRING
+              notNull: true
 
-# City subtype - instances have labels [Place, City]
-- nodeType:
-    typeLabel: City
-    implies:
-      supertypes:
-        - Place
-      propertyTypes: []
+  - nodeType:
+      typeLabel: City
+      implies:
+        supertypes:
+          - Place
+        propertyTypes: []
 
-# Country subtype - instances have labels [Place, Country]
-- nodeType:
-    typeLabel: Country
-    implies:
-      supertypes:
-        - Place
-      propertyTypes: []
+  - nodeType:
+      typeLabel: Country
+      implies:
+        supertypes:
+          - Place
+        propertyTypes: []
 
-# Continent subtype - instances have labels [Place, Continent]
-- nodeType:
-    typeLabel: Continent
-    implies:
-      supertypes:
-        - Place
-      propertyTypes: []
+  - nodeType:
+      typeLabel: Continent
+      implies:
+        supertypes:
+          - Place
+        propertyTypes: []
