@@ -4,13 +4,13 @@
 graphSchema:
   pathName: /examples/type-definition-syntax
   graphType:
-    defaults:
-      import: lex-2026.0.3.2-graph-type-defaults.yaml
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model.yaml
     
     # Import comprehensive node type syntax examples
     nodeTypes:
-      import: lex-2026.0.3.2-node-type-syntax-examples.yaml
+      import: imports/lex-2026.0.3.2-node-type-syntax-examples.yaml
     
     # Import comprehensive edge type syntax examples
     edgeTypes:
-      import: lex-2026.0.3.2-edge-type-syntax-examples.yaml
+      import: imports/lex-2026.0.3.2-edge-type-syntax-examples.yaml
