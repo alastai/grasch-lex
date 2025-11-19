@@ -699,6 +699,29 @@
                 "implies"
               ],
               "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "typeLabels": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[a-zA-Z]"
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "description": "Array of labels for multi-label node types"
+                },
+                "implies": {
+                  "$ref": "#/$defs/ImpliesDescriptor"
+                }
+              },
+              "required": [
+                "typeLabels",
+                "implies"
+              ],
+              "additionalProperties": false
             }
           ]
         }
@@ -845,6 +868,25 @@
           },
           "required": [
             "typeIdentifyingLabels"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeLabels": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-zA-Z]"
+              },
+              "uniqueItems": true,
+              "minItems": 1,
+              "description": "Array of labels for multi-label node type references"
+            }
+          },
+          "required": [
+            "typeLabels"
           ],
           "additionalProperties": false
         }
