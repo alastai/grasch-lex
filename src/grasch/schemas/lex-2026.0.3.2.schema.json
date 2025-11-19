@@ -680,7 +680,7 @@
             {
               "type": "object",
               "properties": {
-                "typeIdentifyingLabels": {
+                "typeIdentifier": {
                   "type": "array",
                   "items": {
                     "type": "string",
@@ -688,14 +688,14 @@
                   },
                   "uniqueItems": true,
                   "minItems": 1,
-                  "description": "Set of labels that uniquely identify this type"
+                  "description": "Array of labels that identify this type"
                 },
                 "implies": {
                   "$ref": "#/$defs/ImpliesDescriptor"
                 }
               },
               "required": [
-                "typeIdentifyingLabels",
+                "typeIdentifier",
                 "implies"
               ],
               "additionalProperties": false
@@ -855,7 +855,7 @@
         {
           "type": "object",
           "properties": {
-            "typeIdentifyingLabels": {
+            "typeIdentifier": {
               "type": "array",
               "items": {
                 "type": "string",
@@ -863,11 +863,11 @@
               },
               "uniqueItems": true,
               "minItems": 1,
-              "description": "Set of labels that uniquely identify this type"
+              "description": "Array of labels that identify this type"
             }
           },
           "required": [
-            "typeIdentifyingLabels"
+            "typeIdentifier"
           ],
           "additionalProperties": false
         },
@@ -999,7 +999,7 @@
             {
               "type": "object",
               "properties": {
-                "typeIdentifyingLabels": {
+                "typeIdentifier": {
                   "type": "array",
                   "items": {
                     "type": "string",
@@ -1041,7 +1041,7 @@
                 }
               },
               "required": [
-                "typeIdentifyingLabels",
+                "typeIdentifier",
                 "implies",
                 "direction",
                 "firstEndpointNodeType",
@@ -1105,6 +1105,49 @@
                 "secondEndpointNodeType"
               ],
               "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "description": "Anonymous edge type (no identifier)",
+              "properties": {
+                "implies": {
+                  "$ref": "#/$defs/ImpliesDescriptor"
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "DIRECTED",
+                    "UNDIRECTED"
+                  ],
+                  "description": "Edge direction"
+                },
+                "firstEndpointNodeType": {
+                  "$ref": "#/$defs/NodeTypeIdentifier",
+                  "description": "First endpoint node type identifier"
+                },
+                "secondEndpointNodeType": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "SAME"
+                      ],
+                      "description": "Same as first endpoint (loop edge)"
+                    },
+                    {
+                      "$ref": "#/$defs/NodeTypeIdentifier",
+                      "description": "Second endpoint node type identifier"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "implies",
+                "direction",
+                "firstEndpointNodeType",
+                "secondEndpointNodeType"
+              ],
+              "additionalProperties": false
             }
           ]
         }
@@ -1148,7 +1191,7 @@
         {
           "type": "object",
           "properties": {
-            "typeIdentifyingLabels": {
+            "typeIdentifier": {
               "type": "array",
               "items": {
                 "type": "string",
@@ -1160,7 +1203,7 @@
             }
           },
           "required": [
-            "typeIdentifyingLabels"
+            "typeIdentifier"
           ],
           "additionalProperties": false
         }
