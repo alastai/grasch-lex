@@ -119,23 +119,21 @@ def main():
         print(f"Validating: {yaml_file.name}")
         
         # Step 1: Validate raw file (with imports)
-        print(f"  [1/2] Raw validation (with imports)...")
         is_valid_raw, errors_raw, data_raw = validate_file(yaml_file, schema, validator, preprocess=False)
         
         if is_valid_raw:
-            print(f"      ✓ Raw file valid")
+            print(f"  BEFORE IMPORTS: ✓ SUCCESS")
         else:
-            print(f"      ✗ Raw file invalid ({len(errors_raw)} errors)")
+            print(f"  BEFORE IMPORTS: ✗ FAILURE ({len(errors_raw)} errors)")
         
         # Step 2: Validate preprocessed file (imports resolved)
         if PREPROCESSOR_AVAILABLE:
-            print(f"  [2/2] Preprocessed validation (imports resolved)...")
             is_valid_preprocessed, errors_preprocessed, data_preprocessed = validate_file(yaml_file, schema, validator, preprocess=True)
             
             if is_valid_preprocessed:
-                print(f"      ✓ Preprocessed file valid")
+                print(f"  AFTER IMPORTS:  ✓ SUCCESS")
             else:
-                print(f"      ✗ Preprocessed file invalid ({len(errors_preprocessed)} errors)")
+                print(f"  AFTER IMPORTS:  ✗ FAILURE ({len(errors_preprocessed)} errors)")
             
             # Overall result: both must pass
             is_valid = is_valid_raw and is_valid_preprocessed
