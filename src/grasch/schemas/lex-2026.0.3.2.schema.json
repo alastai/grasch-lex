@@ -169,7 +169,6 @@
       "properties": {
         "pathName": {
           "type": "string",
-          "pattern": "^/.*",
           "description": "Path name for the graph schema"
         },
         "principal": {
@@ -207,7 +206,6 @@
       "properties": {
         "pathName": {
           "type": "string",
-          "pattern": "^/.*",
           "description": "Path name for the graph instance"
         },
         "principal": {
