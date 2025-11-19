@@ -32,20 +32,21 @@ schema in the traditional computer science sense.
 
 **Should be**:
 ```
-**Terminology Clarification**: Following LEX-99, Grasch uses "leaf directory" instead of 
-"GQL-schema" to avoid confusion. GQL-schema (from the GQL spec) refers to a leaf node 
-directory that can contain graphs and graph schemas. LEX simplifies this with a rule: 
-graphs and graph schemas can only exist in leaf directories. The term "schema" is reserved 
-for graph types (descriptions of graph structure).
+**Terminology Clarification**: GQL-schema (from GQL spec) = Leaf directory (LEX approach). 
+The GQL spec uses "GQL-schema" to refer to a leaf node directory that can contain graphs 
+and graph schemas. LEX uses the simpler rule: graphs and graph schemas can only exist in 
+leaf node directories. When differentiation is needed, we use "data-schema (leaf) directory". 
+The deprecated term "types-graphs directory" should not be used. The term "schema" is 
+reserved for graph types (descriptions of graph structure).
 ```
 
 ### Line 26: Introduction - Catalog Structure
 **Current**: "types-graphs directories (leaf nodes)"
-**Replace with**: "leaf directories"
+**Replace with**: "data-schema (leaf) directories"
 
 ### Line 34: Terminology Note
 **Current**: "GQL-schemas / types-graphs directories"
-**Replace with**: "Leaf directories (called GQL-schemas in GQL spec)"
+**Replace with**: "Data-schema (leaf) directories (called GQL-schemas in GQL spec)"
 
 ### Requirement 6 (Lines 295-329): Catalog Requirements
 **Multiple occurrences** of "types-graphs directory" should be replaced with "leaf directory"
@@ -83,8 +84,8 @@ Changes needed:
 ## Recommended Approach
 
 1. **Global find/replace** for simple cases:
-   - "types-graphs directories" → "leaf directories"
-   - "types-graphs directory" → "leaf directory"
+   - "types-graphs directories" → "data-schema (leaf) directories"
+   - "types-graphs directory" → "data-schema (leaf) directory"
 
 2. **Manual updates** for complex cases:
    - Line 23: Rewrite terminology clarification section
