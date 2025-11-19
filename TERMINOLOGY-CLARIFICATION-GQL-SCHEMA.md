@@ -1,4 +1,4 @@
-# Terminology Clarification: GQL-schema vs Data-Schema Directory
+# Terminology Clarification: GQL-schema vs Data-Schema (Leaf) Directory
 
 ## Official GQL Specification
 
@@ -6,18 +6,19 @@
 
 ## LEX Approach
 
-Instead of using the term "GQL-schema", LEX uses a simpler rule-based approach:
+Instead of using the term "GQL-schema", LEX uses a simpler rule-based approach with clearer terminology:
 
 ### Rule
 **Graphs and graph schemas can only exist in leaf node directories.**
 
-### Terminology
-- **Leaf node directory**: A directory that has no subdirectories
-- **Data-schema directory**: Optional differentiating name for a leaf node directory (when needed for clarity)
+### Standard LEX Terminology
+- **Data-schema (leaf) directory**: The standard LEX term for what GQL calls a "GQL-schema"
+- **Leaf directory**: A directory that has no subdirectories
+- The parenthetical "(leaf)" clarifies that this is specifically a leaf node in the catalog tree
 
 ### Equivalence
 ```
-GQL-schema (GQL spec) ≡ Leaf node directory containing graphs/schemas (LEX)
+GQL-schema (GQL spec) ≡ Data-schema (leaf) directory (LEX)
 ```
 
 ## Rationale
@@ -36,44 +37,59 @@ GQL-schema (GQL spec) ≡ Leaf node directory containing graphs/schemas (LEX)
 
 ## Deprecated Terms
 
-- ❌ "GQL-schema" (GQL spec term, not used in LEX)
+- ❌ "GQL-schema" (GQL spec term, not used in LEX except when referencing the GQL spec)
 - ❌ "types-graphs directory" (previous LEX term, now deprecated)
-- ❌ "type-graph" (should go away)
+- ❌ "type-graph" (deprecated)
+- ❌ "leaf directory" alone (ambiguous - use full term "data-schema (leaf) directory")
 
-## Preferred Terms
+## Standard LEX Terms
 
-- ✅ "Leaf directory" or "leaf node directory" (primary)
-- ✅ "Data-schema directory" (when differentiation needed)
-- ✅ "Graph schema" (for actual schemas)
+- ✅ **"Data-schema (leaf) directory"** (primary standard term - equivalent to GQL-schema)
+- ✅ "Graph schema" (for actual schemas - the content, not the container)
 - ✅ "Graph" (for graph instances)
+- ✅ "Leaf directory" (acceptable when context is clear, but prefer the full term)
 
 ## Usage in Documentation
 
 ### When referring to the container:
-- "Graphs and graph schemas must be placed in leaf directories"
-- "A leaf directory can contain graph references and graph schema references"
-- "Data-schema directories are leaf nodes in the catalog tree"
+- "Graphs and graph schemas must be placed in data-schema (leaf) directories"
+- "A data-schema (leaf) directory can contain graph references and graph schema references"
+- "Data-schema (leaf) directories are leaf nodes in the catalog tree"
+- When context is clear: "leaf directories" is acceptable shorthand
 
 ### When referring to actual schemas:
 - "A graph schema defines the structure of a graph"
 - "The graph schema contains node types and edge types"
-- "Graph schemas are stored in leaf directories"
+- "Graph schemas are stored in data-schema (leaf) directories"
+
+### When referencing the GQL specification:
+- "The GQL spec calls this a 'GQL-schema', which LEX refers to as a data-schema (leaf) directory"
+- "GQL-schema (in GQL spec terminology) is equivalent to a data-schema (leaf) directory in LEX"
 
 ## Impact on Specifications
 
-### Requirements Document
-- Replace "GQL-schema" with "leaf directory" or "data-schema directory"
-- Emphasize the rule: graphs/schemas only in leaf directories
-- Remove references to "types-graphs directory"
+### Requirements Document ✅ COMPLETED
+- ✅ Replaced "GQL-schema" and "types-graphs directory" with "data-schema (leaf) directory"
+- ✅ Added terminology note explaining equivalence to GQL-schema
+- ✅ Emphasizes the rule: graphs/schemas only in leaf directories
 
-### API Design
-- Use "leaf directory" in method names and documentation
-- Avoid "GQL-schema" terminology
-- Use "data-schema directory" only when clarification is needed
+### Design Document (design.md) - TO DO
+- Replace "GQL-schema" with "data-schema (leaf) directory"
+- Update catalog management component descriptions
+- Ensure consistency with requirements terminology
 
-### Examples
-- Catalog examples should show leaf directories containing references
-- Documentation should explain the leaf directory rule clearly
+### API Design (LEX-2026.0.3.2-API-DESIGN.md) - TO DO
+- Use "data-schema (leaf) directory" in method documentation
+- Add note about GQL-schema equivalence
+- Update catalog-related interface descriptions
+
+### Modernization Guide (LEX-100r3 modernization.md) - TO DO
+- Update terminology throughout
+- Clarify GQL-schema vs LEX terminology differences
+
+### Examples and JSON Schema - NO CHANGES NEEDED
+- These are the source of truth and remain as-is
+- Design documents are being brought into alignment with them
 
 ---
 
