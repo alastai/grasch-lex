@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 """
 Regression test script to validate all existing YAML examples against the updated LEX-2026.0.3.2 schema.
-This helps identify what needs to be fixed in the examples after schema changes.
+This script:
+1. Validates raw YAML files (with imports) against the pre-import schema
+2. Preprocesses imports to resolve all import: directives
+3. Validates preprocessed files against the post-import schema (no imports allowed)
 """
 
 import json
 import yaml
+import sys
 from pathlib import Path
 from typing import Dict, List, Tuple
+
+# Add src to path for imports
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 try:
     import jsonschema
@@ -18,6 +25,13 @@ except ImportError:
     JSONSCHEMA_AVAILABLE = False
     exit(1)
 
+try:
+    from grasch.import_preprocessor import preprocess_yaml_with_imports
+    PREPROCESSOR_AVAILABLE = True
+except ImportError:
+    print("WARNING: Import preprocessor not available. Will only validate raw files.")
+    PREPROCESSOR_AVAILABLE = False
+
 
 def load_schema() -> dict:
     """Load the LEX-2026.0.3.2 JSON Schema."""
@@ -27,26 +41,39 @@ def load_schema() -> dict:
 
 
 def find_yaml_files() -> List[Path]:
-    """Find all YAML example files."""
+    """Find all top-level YAML example files (excluding imports directory)."""
     examples_dir = Path("src/grasch/examples")
     yaml_files = list(examples_dir.glob("lex-2026.0.3.2-*.yaml"))
+    # Exclude files in the imports subdirectory
+    yaml_files = [f for f in yaml_files if 'imports' not in f.parts]
     return sorted(yaml_files)
 
 
-def validate_file(file_path: Path, schema: dict, validator: Draft202012Validator) -> Tuple[bool, List[str]]:
+def validate_file(file_path: Path, schema: dict, validator: Draft202012Validator, preprocess: bool = False) -> Tuple[bool, List[str], any]:
     """
     Validate a single YAML file against the schema.
     
+    Args:
+        file_path: Path to the YAML file
+        schema: JSON Schema to validate against
+        validator: JSON Schema validator
+        preprocess: If True, preprocess imports before validation
+    
     Returns:
-        (is_valid, error_messages)
+        (is_valid, error_messages, data)
     """
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            data = yaml.safe_load(f)
+        if preprocess and PREPROCESSOR_AVAILABLE:
+            # Preprocess to resolve imports
+            data = preprocess_yaml_with_imports(file_path)
+        else:
+            # Load raw YAML
+            with open(file_path, 'r', encoding='utf-8') as f:
+                data = yaml.safe_load(f)
     except yaml.YAMLError as e:
-        return False, [f"YAML parsing error: {e}"]
+        return False, [f"YAML parsing error: {e}"], None
     except Exception as e:
-        return False, [f"File reading error: {e}"]
+        return False, [f"File reading/preprocessing error: {e}"], None
     
     errors = list(validator.iter_errors(data))
     if errors:
@@ -58,9 +85,9 @@ def validate_file(file_path: Path, schema: dict, validator: Draft202012Validator
             if error.validator:
                 error_messages.append(f"  Validator: {error.validator}")
             error_messages.append("")
-        return False, error_messages
+        return False, error_messages, data
     
-    return True, []
+    return True, [], data
 
 
 def main():
@@ -86,17 +113,43 @@ def main():
     print(f"Found {len(yaml_files)} YAML example files")
     print()
     
-    # Validate each file
+    # Validate each file (both raw and preprocessed)
     results = []
     for yaml_file in yaml_files:
         print(f"Validating: {yaml_file.name}")
-        is_valid, errors = validate_file(yaml_file, schema, validator)
+        
+        # Step 1: Validate raw file (with imports)
+        print(f"  [1/2] Raw validation (with imports)...")
+        is_valid_raw, errors_raw, data_raw = validate_file(yaml_file, schema, validator, preprocess=False)
+        
+        if is_valid_raw:
+            print(f"      ✓ Raw file valid")
+        else:
+            print(f"      ✗ Raw file invalid ({len(errors_raw)} errors)")
+        
+        # Step 2: Validate preprocessed file (imports resolved)
+        if PREPROCESSOR_AVAILABLE:
+            print(f"  [2/2] Preprocessed validation (imports resolved)...")
+            is_valid_preprocessed, errors_preprocessed, data_preprocessed = validate_file(yaml_file, schema, validator, preprocess=True)
+            
+            if is_valid_preprocessed:
+                print(f"      ✓ Preprocessed file valid")
+            else:
+                print(f"      ✗ Preprocessed file invalid ({len(errors_preprocessed)} errors)")
+            
+            # Overall result: both must pass
+            is_valid = is_valid_raw and is_valid_preprocessed
+            errors = errors_raw + errors_preprocessed if not is_valid else []
+        else:
+            is_valid = is_valid_raw
+            errors = errors_raw
+        
         results.append((yaml_file, is_valid, errors))
         
         if is_valid:
-            print(f"  ✓ VALID")
+            print(f"  ✓ OVERALL: VALID")
         else:
-            print(f"  ✗ INVALID ({len(errors)} errors)")
+            print(f"  ✗ OVERALL: INVALID")
         print()
     
     # Summary
