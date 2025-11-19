@@ -249,16 +249,16 @@ graphSchema:
   
   constraints:
     personIdUnique:
-    name: personIdUnique
-    rule:
-      subject: UNIQUE
-      constraintPattern: Person
-      uniqueKeyComponentPropertyNames:
-      - id
-  postIdUnique:
-    name: postIdUnique
-    rule:
-      subject: UNIQUE
-      constraintPattern: Post
-      uniqueKeyComponentPropertyNames:
-      - id
+      name: personIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Person
+        uniqueKeyComponentPropertyNames:
+        - id
+    postIdUnique:
+      name: postIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Post
+        uniqueKeyComponentPropertyNames:
+        - id
