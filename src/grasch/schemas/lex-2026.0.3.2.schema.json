@@ -6,7 +6,9 @@
   "oneOf": [
     {
       "type": "object",
-      "required": ["catalog"],
+      "required": [
+        "catalog"
+      ],
       "properties": {
         "catalog": {
           "$ref": "#/$defs/CatalogContent"
@@ -16,7 +18,9 @@
     },
     {
       "type": "object",
-      "required": ["graphSchema"],
+      "required": [
+        "graphSchema"
+      ],
       "properties": {
         "graphSchema": {
           "$ref": "#/$defs/GraphSchemaContent"
@@ -26,7 +30,9 @@
     },
     {
       "type": "object",
-      "required": ["graph"],
+      "required": [
+        "graph"
+      ],
       "properties": {
         "graph": {
           "$ref": "#/$defs/GraphContent"
@@ -39,7 +45,9 @@
     "CatalogContent": {
       "type": "object",
       "description": "Graph catalog specification - a hierarchical collection of named primary catalog objects",
-      "required": ["IRI"],
+      "required": [
+        "IRI"
+      ],
       "properties": {
         "IRI": {
           "type": "string",
@@ -58,7 +66,9 @@
             {
               "type": "object",
               "description": "Import directories from file",
-              "required": ["import"],
+              "required": [
+                "import"
+              ],
               "properties": {
                 "import": {
                   "type": "string",
@@ -70,7 +80,9 @@
             {
               "type": "object",
               "description": "Mixed: import directories with additional inline directories",
-              "required": ["import"],
+              "required": [
+                "import"
+              ],
               "properties": {
                 "import": {
                   "type": "string"
@@ -92,7 +104,9 @@
     "Directory": {
       "type": "object",
       "description": "Directory node in catalog tree",
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -125,7 +139,10 @@
     "GraphReference": {
       "type": "object",
       "description": "Graph reference in catalog",
-      "required": ["name", "qualifiedName"],
+      "required": [
+        "name",
+        "qualifiedName"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -145,7 +162,10 @@
     "GraphSchemaReference": {
       "type": "object",
       "description": "Graph schema reference in catalog",
-      "required": ["name", "qualifiedName"],
+      "required": [
+        "name",
+        "qualifiedName"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -165,7 +185,10 @@
     "GraphSchemaContent": {
       "type": "object",
       "description": "Graph schema specification - structural graph type plus constraints",
-      "required": ["pathName", "graphType"],
+      "required": [
+        "pathName",
+        "graphType"
+      ],
       "properties": {
         "pathName": {
           "type": "string",
@@ -174,17 +197,6 @@
         "principal": {
           "type": "string",
           "description": "The owner of the graph schema, an authorization identifier of a principal"
-        },
-        "valueTypeSystemName": {
-          "type": "string",
-          "description": "The name of the value type system used by this graph schema (optional, defaults to CANONICAL)",
-          "enum": [
-            "CANONICAL",
-            "CYPHER",
-            "GQL",
-            "SQL"
-          ],
-          "default": "CANONICAL"
         },
         "graphType": {
           "$ref": "#/$defs/GraphType"
@@ -202,7 +214,9 @@
     "GraphContent": {
       "type": "object",
       "description": "Graph instance specification - with optional schema, constraints, and storage schema",
-      "required": ["pathName"],
+      "required": [
+        "pathName"
+      ],
       "properties": {
         "pathName": {
           "type": "string",
@@ -229,7 +243,9 @@
               "type": "object",
               "description": "Inline graphSchema definition",
               "not": {
-                "required": ["import"]
+                "required": [
+                  "import"
+                ]
               },
               "properties": {
                 "pathName": {
@@ -240,12 +256,17 @@
                   "$ref": "#/$defs/GraphType"
                 }
               },
-              "required": ["pathName", "graphType"]
+              "required": [
+                "pathName",
+                "graphType"
+              ]
             },
             {
               "type": "object",
               "description": "Import graphSchema from file",
-              "required": ["import"],
+              "required": [
+                "import"
+              ],
               "properties": {
                 "import": {
                   "type": "string"
@@ -256,7 +277,9 @@
             {
               "type": "object",
               "description": "Mixed: import graphSchema with overrides",
-              "required": ["import"],
+              "required": [
+                "import"
+              ],
               "properties": {
                 "import": {
                   "type": "string"
@@ -282,7 +305,9 @@
             {
               "type": "object",
               "description": "Import storage schema from file",
-              "required": ["import"],
+              "required": [
+                "import"
+              ],
               "properties": {
                 "import": {
                   "type": "string"
@@ -293,7 +318,9 @@
             {
               "type": "object",
               "description": "Mixed: import storage schema with overrides",
-              "required": ["import"],
+              "required": [
+                "import"
+              ],
               "properties": {
                 "import": {
                   "type": "string"
@@ -334,12 +361,10 @@
     "GraphType": {
       "type": "object",
       "description": "Graph type descriptor defining the structural graph type",
-      "required": ["defaults"],
+      "required": [
+        "propertyGraphDataModel"
+      ],
       "properties": {
-        "pathName": {
-          "type": "string",
-          "description": "Optional path name (only present if graphType is imported)"
-        },
         "graphPreferredName": {
           "type": "string",
           "enum": [
@@ -409,11 +434,11 @@
         "typeInterpretation": {
           "type": "string",
           "enum": [
-            "exactlyOfThisType",
-            "anySubtypeOf",
-            "anyProperSubtypeOf"
+            "exactlyOf",
+            "subtypesOf",
+            "properSubtypesOf"
           ],
-          "default": "exactlyOfThisType",
+          "default": "exactlyOf",
           "description": "How types are interpreted during validation (LEX:2026.0.3)"
         },
         "import": {
@@ -433,11 +458,230 @@
                   {
                     "type": "object",
                     "description": "Import node types from file",
-                    "required": ["import"],
+                    "required": [
+                      "import"
+                    ],
                     "properties": {
                       "import": {
                         "type": "string",
                         "description": "Import node types from file"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Abstract node type (cannot be instantiated)",
+                    "required": [
+                      "abstract"
+                    ],
+                    "properties": {
+                      "abstract": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Abstract node type",
+                    "required": [
+                      "abstract"
+                    ],
+                    "properties": {
+                      "abstract": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Final node type (cannot be subtyped)",
+                    "required": [
+                      "final"
+                    ],
+                    "properties": {
+                      "final": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Sealed hierarchy of node types",
+                    "required": [
+                      "sealed"
+                    ],
+                    "properties": {
+                      "sealed": {
+                        "type": "object",
+                        "required": [
+                          "nodeTypes"
+                        ],
+                        "properties": {
+                          "nodeTypes": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "$ref": "#/$defs/NodeType"
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "abstract"
+                                  ],
+                                  "properties": {
+                                    "abstract": {
+                                      "$ref": "#/$defs/NodeType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "final"
+                                  ],
+                                  "properties": {
+                                    "final": {
+                                      "$ref": "#/$defs/NodeType"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Subtypes declaration",
+                    "required": [
+                      "subtypesOf"
+                    ],
+                    "properties": {
+                      "subtypesOf": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "description": "Direct nodeTypes (concrete by default)",
+                            "required": [
+                              "nodeTypes"
+                            ],
+                            "properties": {
+                              "nodeTypes": {
+                                "type": "array",
+                                "items": {
+                                  "oneOf": [
+                                    {
+                                      "$ref": "#/$defs/NodeType"
+                                    },
+                                    {
+                                      "type": "object",
+                                      "required": [
+                                        "abstract"
+                                      ],
+                                      "properties": {
+                                        "abstract": {
+                                          "$ref": "#/$defs/NodeType"
+                                        }
+                                      },
+                                      "additionalProperties": false
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "description": "Abstract nodeTypes",
+                            "required": [
+                              "abstract"
+                            ],
+                            "properties": {
+                              "abstract": {
+                                "type": "object",
+                                "required": [
+                                  "nodeTypes"
+                                ],
+                                "properties": {
+                                  "nodeTypes": {
+                                    "type": "array",
+                                    "items": {
+                                      "oneOf": [
+                                        {
+                                          "$ref": "#/$defs/NodeType"
+                                        },
+                                        {
+                                          "type": "object",
+                                          "required": [
+                                            "abstract"
+                                          ],
+                                          "properties": {
+                                            "abstract": {
+                                              "$ref": "#/$defs/NodeType"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "description": "Concrete nodeTypes (explicit)",
+                            "required": [
+                              "concrete"
+                            ],
+                            "properties": {
+                              "concrete": {
+                                "type": "object",
+                                "required": [
+                                  "nodeTypes"
+                                ],
+                                "properties": {
+                                  "nodeTypes": {
+                                    "type": "array",
+                                    "items": {
+                                      "oneOf": [
+                                        {
+                                          "$ref": "#/$defs/NodeType"
+                                        },
+                                        {
+                                          "type": "object",
+                                          "required": [
+                                            "abstract"
+                                          ],
+                                          "properties": {
+                                            "abstract": {
+                                              "$ref": "#/$defs/NodeType"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        ]
                       }
                     },
                     "additionalProperties": false
@@ -448,7 +692,9 @@
             {
               "type": "object",
               "description": "Import all node types from file",
-              "required": ["import"],
+              "required": [
+                "import"
+              ],
               "properties": {
                 "import": {
                   "type": "string",
@@ -459,13 +705,13 @@
             }
           ]
         },
-        "allowSubtypesOf": {
+        "subtypesOf": {
           "type": "object",
-          "description": "Allow subtypes of specified element types (covariant matching)",
+          "description": "Subtypes of specified element types (covariant matching)",
           "properties": {
-            "abstractSupertypes": {
+            "abstract": {
               "type": "object",
-              "description": "Abstract supertypes that cannot be instantiated directly",
+              "description": "Abstracts that cannot be instantiated directly",
               "properties": {
                 "nodeTypes": {
                   "type": "array",
@@ -484,14 +730,14 @@
             },
             "nodeTypes": {
               "type": "array",
-              "description": "Node types that allow subtypes (supertype can be instantiated)",
+              "description": "Node types that subtypes (supertype can be instantiated)",
               "items": {
                 "$ref": "#/$defs/NodeType"
               }
             },
             "edgeTypes": {
               "type": "array",
-              "description": "Edge types that allow subtypes (supertype can be instantiated)",
+              "description": "Edge types that subtypes (supertype can be instantiated)",
               "items": {
                 "$ref": "#/$defs/EdgeType"
               }
@@ -512,11 +758,180 @@
                   {
                     "type": "object",
                     "description": "Import edge types from file",
-                    "required": ["import"],
+                    "required": [
+                      "import"
+                    ],
                     "properties": {
                       "import": {
                         "type": "string",
                         "description": "Import edge types from file"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Abstract edge type (cannot be instantiated)",
+                    "required": [
+                      "abstract"
+                    ],
+                    "properties": {
+                      "abstract": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Abstract edge type",
+                    "required": [
+                      "abstract"
+                    ],
+                    "properties": {
+                      "abstract": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Final edge type (cannot be subtyped)",
+                    "required": [
+                      "final"
+                    ],
+                    "properties": {
+                      "final": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Subtypes declaration",
+                    "required": [
+                      "subtypesOf"
+                    ],
+                    "properties": {
+                      "subtypesOf": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "description": "Direct edgeTypes (concrete by default)",
+                            "required": [
+                              "edgeTypes"
+                            ],
+                            "properties": {
+                              "edgeTypes": {
+                                "type": "array",
+                                "items": {
+                                  "oneOf": [
+                                    {
+                                      "$ref": "#/$defs/EdgeType"
+                                    },
+                                    {
+                                      "type": "object",
+                                      "required": [
+                                        "abstract"
+                                      ],
+                                      "properties": {
+                                        "abstract": {
+                                          "$ref": "#/$defs/EdgeType"
+                                        }
+                                      },
+                                      "additionalProperties": false
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "description": "Abstract edgeTypes",
+                            "required": [
+                              "abstract"
+                            ],
+                            "properties": {
+                              "abstract": {
+                                "type": "object",
+                                "required": [
+                                  "edgeTypes"
+                                ],
+                                "properties": {
+                                  "edgeTypes": {
+                                    "type": "array",
+                                    "items": {
+                                      "oneOf": [
+                                        {
+                                          "$ref": "#/$defs/EdgeType"
+                                        },
+                                        {
+                                          "type": "object",
+                                          "required": [
+                                            "abstract"
+                                          ],
+                                          "properties": {
+                                            "abstract": {
+                                              "$ref": "#/$defs/EdgeType"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "description": "Concrete edgeTypes (explicit)",
+                            "required": [
+                              "concrete"
+                            ],
+                            "properties": {
+                              "concrete": {
+                                "type": "object",
+                                "required": [
+                                  "edgeTypes"
+                                ],
+                                "properties": {
+                                  "edgeTypes": {
+                                    "type": "array",
+                                    "items": {
+                                      "oneOf": [
+                                        {
+                                          "$ref": "#/$defs/EdgeType"
+                                        },
+                                        {
+                                          "type": "object",
+                                          "required": [
+                                            "abstract"
+                                          ],
+                                          "properties": {
+                                            "abstract": {
+                                              "$ref": "#/$defs/EdgeType"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        ]
                       }
                     },
                     "additionalProperties": false
@@ -527,7 +942,9 @@
             {
               "type": "object",
               "description": "Import all edge types from file",
-              "required": ["import"],
+              "required": [
+                "import"
+              ],
               "properties": {
                 "import": {
                   "type": "string",
@@ -538,7 +955,7 @@
             }
           ]
         },
-        "defaults": {
+        "propertyGraphDataModel": {
           "oneOf": [
             {
               "type": "object",
@@ -557,6 +974,17 @@
               "type": "object",
               "description": "Inline default values for graph type",
               "properties": {
+                "valueTypeSystemName": {
+                  "type": "string",
+                  "description": "The name of the value type system used by this graph schema (optional, defaults to CANONICAL)",
+                  "enum": [
+                    "CANONICAL",
+                    "CYPHER",
+                    "GQL",
+                    "SQL"
+                  ],
+                  "default": "CANONICAL"
+                },
                 "graphPreferredName": {
                   "type": "string"
                 },
@@ -645,8 +1073,7 @@
                 }
               },
               "required": [
-                "typeLabel",
-                "implies"
+                "typeLabel"
               ],
               "additionalProperties": false
             },
@@ -659,13 +1086,21 @@
                   "description": "Single label that serves as type name"
                 },
                 "extends": {
-                  "type": "array",
-                  "description": "Supertypes this type extends (synonym for supertypes)",
-                  "items": {
-                    "type": "string"
-                  },
-                  "uniqueItems": true,
-                  "minItems": 1
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "description": "Single supertype this type extends"
+                    },
+                    {
+                      "type": "array",
+                      "description": "Supertypes this type extends (synonym for supertypes)",
+                      "items": {
+                        "type": "string"
+                      },
+                      "uniqueItems": true,
+                      "minItems": 1
+                    }
+                  ]
                 },
                 "adding": {
                   "$ref": "#/$defs/AddingDescriptor"
@@ -736,12 +1171,21 @@
       "description": "Container for supertypes, labels, and property types (LEX:2026.0.3 structure)",
       "properties": {
         "supertypes": {
-          "type": "array",
-          "description": "Set of supertype labels (LEX:2026.0.3 - enables subtyping)",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Single supertype label"
+            },
+            {
+              "type": "array",
+              "description": "Set of supertype labels (LEX:2026.0.3 - enables subtyping)",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            }
+          ]
         },
         "labels": {
           "type": "array",
@@ -835,7 +1279,9 @@
               "description": "Integer index for node type identification"
             }
           },
-          "required": ["index"],
+          "required": [
+            "index"
+          ],
           "additionalProperties": false
         },
         {
@@ -894,260 +1340,17 @@
     },
     "EdgeType": {
       "type": "object",
-      "description": "Edge type descriptor with flexible identification (LEX:2026.0.3.2 - labels optional when matching typeLabel)",
+      "description": "Edge type descriptor using LEX-2026 directed/undirected syntax",
       "properties": {
         "edgeType": {
           "type": "object",
-          "description": "Edge type container with identifier, implies, direction, and endpoints",
+          "description": "Edge type with directed or undirected specification",
           "oneOf": [
             {
-              "type": "object",
-              "properties": {
-                "edgeTypeIndex": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "description": "Integer index for edge type identification"
-                },
-                "implies": {
-                  "$ref": "#/$defs/ImpliesDescriptor"
-                },
-                "direction": {
-                  "type": "string",
-                  "enum": [
-                    "DIRECTED",
-                    "UNDIRECTED"
-                  ],
-                  "description": "Edge direction"
-                },
-                "firstEndpointNodeType": {
-                  "$ref": "#/$defs/NodeTypeIdentifier",
-                  "description": "First endpoint node type identifier"
-                },
-                "secondEndpointNodeType": {
-                  "oneOf": [
-                    {
-                      "type": "string",
-                      "enum": [
-                        "SAME"
-                      ],
-                      "description": "Same as first endpoint (loop edge)"
-                    },
-                    {
-                      "$ref": "#/$defs/NodeTypeIdentifier",
-                      "description": "Second endpoint node type identifier"
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "edgeTypeIndex",
-                "implies",
-                "direction",
-                "firstEndpointNodeType",
-                "secondEndpointNodeType"
-              ],
-              "additionalProperties": false
+              "$ref": "#/$defs/DirectedEdgeDescriptor"
             },
             {
-              "type": "object",
-              "properties": {
-                "typeLabel": {
-                  "type": "string",
-                  "pattern": "^[a-zA-Z]",
-                  "description": "Single label that serves as type name (preferred in LEX:2026.0.3)"
-                },
-                "implies": {
-                  "$ref": "#/$defs/ImpliesDescriptor"
-                },
-                "direction": {
-                  "type": "string",
-                  "enum": [
-                    "DIRECTED",
-                    "UNDIRECTED"
-                  ],
-                  "description": "Edge direction"
-                },
-                "firstEndpointNodeType": {
-                  "$ref": "#/$defs/NodeTypeIdentifier",
-                  "description": "First endpoint node type identifier"
-                },
-                "secondEndpointNodeType": {
-                  "oneOf": [
-                    {
-                      "type": "string",
-                      "enum": [
-                        "SAME"
-                      ],
-                      "description": "Same as first endpoint (loop edge)"
-                    },
-                    {
-                      "$ref": "#/$defs/NodeTypeIdentifier",
-                      "description": "Second endpoint node type identifier"
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "typeLabel",
-                "implies",
-                "direction",
-                "firstEndpointNodeType",
-                "secondEndpointNodeType"
-              ],
-              "additionalProperties": false
-            },
-            {
-              "type": "object",
-              "properties": {
-                "typeIdentifier": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "pattern": "^[a-zA-Z]"
-                  },
-                  "uniqueItems": true,
-                  "minItems": 1,
-                  "description": "Set of labels that uniquely identify this type"
-                },
-                "implies": {
-                  "$ref": "#/$defs/ImpliesDescriptor"
-                },
-                "direction": {
-                  "type": "string",
-                  "enum": [
-                    "DIRECTED",
-                    "UNDIRECTED"
-                  ],
-                  "description": "Edge direction"
-                },
-                "firstEndpointNodeType": {
-                  "$ref": "#/$defs/NodeTypeIdentifier",
-                  "description": "First endpoint node type identifier"
-                },
-                "secondEndpointNodeType": {
-                  "oneOf": [
-                    {
-                      "type": "string",
-                      "enum": [
-                        "SAME"
-                      ],
-                      "description": "Same as first endpoint (loop edge)"
-                    },
-                    {
-                      "$ref": "#/$defs/NodeTypeIdentifier",
-                      "description": "Second endpoint node type identifier"
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "typeIdentifier",
-                "implies",
-                "direction",
-                "firstEndpointNodeType",
-                "secondEndpointNodeType"
-              ],
-              "additionalProperties": false
-            },
-            {
-              "type": "object",
-              "properties": {
-                "typeLabel": {
-                  "type": "string",
-                  "pattern": "^[a-zA-Z]",
-                  "description": "Single label that serves as type name"
-                },
-                "extends": {
-                  "type": "array",
-                  "description": "Supertypes this type extends (synonym for supertypes)",
-                  "items": {
-                    "type": "string"
-                  },
-                  "uniqueItems": true,
-                  "minItems": 1
-                },
-                "adding": {
-                  "$ref": "#/$defs/AddingDescriptor"
-                },
-                "direction": {
-                  "type": "string",
-                  "enum": [
-                    "DIRECTED",
-                    "UNDIRECTED"
-                  ],
-                  "description": "Edge direction"
-                },
-                "firstEndpointNodeType": {
-                  "$ref": "#/$defs/NodeTypeIdentifier",
-                  "description": "First endpoint node type identifier"
-                },
-                "secondEndpointNodeType": {
-                  "oneOf": [
-                    {
-                      "type": "string",
-                      "enum": [
-                        "SAME"
-                      ],
-                      "description": "Same as first endpoint (loop edge)"
-                    },
-                    {
-                      "$ref": "#/$defs/NodeTypeIdentifier",
-                      "description": "Second endpoint node type identifier"
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "typeLabel",
-                "extends",
-                "direction",
-                "firstEndpointNodeType",
-                "secondEndpointNodeType"
-              ],
-              "additionalProperties": false
-            },
-            {
-              "type": "object",
-              "description": "Anonymous edge type (no identifier)",
-              "properties": {
-                "implies": {
-                  "$ref": "#/$defs/ImpliesDescriptor"
-                },
-                "direction": {
-                  "type": "string",
-                  "enum": [
-                    "DIRECTED",
-                    "UNDIRECTED"
-                  ],
-                  "description": "Edge direction"
-                },
-                "firstEndpointNodeType": {
-                  "$ref": "#/$defs/NodeTypeIdentifier",
-                  "description": "First endpoint node type identifier"
-                },
-                "secondEndpointNodeType": {
-                  "oneOf": [
-                    {
-                      "type": "string",
-                      "enum": [
-                        "SAME"
-                      ],
-                      "description": "Same as first endpoint (loop edge)"
-                    },
-                    {
-                      "$ref": "#/$defs/NodeTypeIdentifier",
-                      "description": "Second endpoint node type identifier"
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "implies",
-                "direction",
-                "firstEndpointNodeType",
-                "secondEndpointNodeType"
-              ],
-              "additionalProperties": false
+              "$ref": "#/$defs/UndirectedEdgeDescriptor"
             }
           ]
         }
@@ -1247,6 +1450,264 @@
         "valueType"
       ],
       "additionalProperties": false
+    },
+    "NodeTypeItem": {
+      "description": "A single item in a nodeTypes array - can be a plain NodeType, wrapped with interpretation, or an import",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NodeType"
+        },
+        {
+          "type": "object",
+          "description": "Abstract node type (cannot be instantiated)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "$ref": "#/$defs/NodeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Final node type (cannot be subtyped)",
+          "required": [
+            "final"
+          ],
+          "properties": {
+            "final": {
+              "$ref": "#/$defs/NodeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Import node type from file",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import node type from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NodeTypesArray": {
+      "type": "array",
+      "description": "Array of node type items",
+      "items": {
+        "$ref": "#/$defs/NodeTypeItem"
+      }
+    },
+    "NodeTypesProperty": {
+      "description": "The nodeTypes property with optional type interpretation wrappers",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NodeTypesArray"
+        },
+        {
+          "type": "object",
+          "description": "Abstract nodeTypes (all types cannot be instantiated)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "$ref": "#/$defs/NodeTypesArray"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Final nodeTypes (all types cannot be subtyped)",
+          "required": [
+            "final"
+          ],
+          "properties": {
+            "final": {
+              "$ref": "#/$defs/NodeTypesArray"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Sealed nodeTypes hierarchy",
+          "required": [
+            "sealed"
+          ],
+          "properties": {
+            "sealed": {
+              "$ref": "#/$defs/NodeTypesArray"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Subtypes of specified node types",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "$ref": "#/$defs/NodeTypesArray"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Import all node types from file",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import all node types from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypeItem": {
+      "description": "A single item in an edgeTypes array - can be a plain EdgeType, wrapped with interpretation, or an import",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/EdgeType"
+        },
+        {
+          "type": "object",
+          "description": "Abstract edge type (cannot be instantiated)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "$ref": "#/$defs/EdgeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Final edge type (cannot be subtyped)",
+          "required": [
+            "final"
+          ],
+          "properties": {
+            "final": {
+              "$ref": "#/$defs/EdgeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Import edge type from file",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import edge type from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypesArray": {
+      "type": "array",
+      "description": "Array of edge type items",
+      "items": {
+        "$ref": "#/$defs/EdgeTypeItem"
+      }
+    },
+    "EdgeTypesProperty": {
+      "description": "The edgeTypes property with optional type interpretation wrappers",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/EdgeTypesArray"
+        },
+        {
+          "type": "object",
+          "description": "Abstract edgeTypes (all types cannot be instantiated)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "$ref": "#/$defs/EdgeTypesArray"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Final edgeTypes (all types cannot be subtyped)",
+          "required": [
+            "final"
+          ],
+          "properties": {
+            "final": {
+              "$ref": "#/$defs/EdgeTypesArray"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Sealed edgeTypes hierarchy",
+          "required": [
+            "sealed"
+          ],
+          "properties": {
+            "sealed": {
+              "$ref": "#/$defs/EdgeTypesArray"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Subtypes of specified edge types",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "$ref": "#/$defs/EdgeTypesArray"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Import all edge types from file",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import all edge types from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
     },
     "Constraint": {
       "type": "object",
@@ -1485,6 +1946,301 @@
       "gql.json": "undefined",
       "sql.json": "JSON",
       "canonical.json": "JSON"
+    },
+    "EndpointReference": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Type label, or SAME/SELF for self-loops"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Type identifier (array of labels)"
+        },
+        {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Type index"
+        },
+        {
+          "type": "object",
+          "required": [
+            "typeLabels"
+          ],
+          "properties": {
+            "typeLabels": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "typeLabel"
+          ],
+          "properties": {
+            "typeLabel": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "typeIdentifier"
+          ],
+          "properties": {
+            "typeIdentifier": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "index"
+          ],
+          "properties": {
+            "index": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "nodeType"
+          ],
+          "properties": {
+            "nodeType": {
+              "type": "object",
+              "description": "Inline node type specification",
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "typeLabel"
+                  ],
+                  "properties": {
+                    "typeLabel": {
+                      "type": "string"
+                    },
+                    "implies": {
+                      "$ref": "#/$defs/ImpliesDescriptor"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "index"
+                  ],
+                  "properties": {
+                    "index": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "implies": {
+                      "$ref": "#/$defs/ImpliesDescriptor"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "description": "Inline node type definition"
+        },
+        {
+          "type": "object",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Abstract type reference"
+        },
+        {
+          "type": "object",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Abstract reference"
+        }
+      ]
+    },
+    "DirectedEdgeDescriptor": {
+      "type": "object",
+      "description": "Directed edge type with from/to endpoints",
+      "required": [
+        "directed"
+      ],
+      "properties": {
+        "directed": {
+          "type": "object",
+          "description": "Directed edge specification with endpoint names",
+          "properties": {
+            "from": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "to": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "tail": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "head": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "src": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "dst": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "dest": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "via": {
+              "type": "string",
+              "description": "Edge label"
+            },
+            "arc": {
+              "type": "string",
+              "description": "Edge label (synonym for via)"
+            }
+          },
+          "oneOf": [
+            {
+              "required": [
+                "from",
+                "to"
+              ]
+            },
+            {
+              "required": [
+                "tail",
+                "head"
+              ]
+            },
+            {
+              "required": [
+                "src",
+                "dst"
+              ]
+            },
+            {
+              "required": [
+                "src",
+                "dest"
+              ]
+            }
+          ]
+        },
+        "implies": {
+          "$ref": "#/$defs/ImpliesDescriptor"
+        },
+        "extends": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Single supertype"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Multiple supertypes"
+            }
+          ]
+        },
+        "adding": {
+          "$ref": "#/$defs/AddingDescriptor"
+        }
+      },
+      "additionalProperties": false
+    },
+    "UndirectedEdgeDescriptor": {
+      "type": "object",
+      "description": "Undirected edge type with between/and endpoints",
+      "required": [
+        "undirected"
+      ],
+      "properties": {
+        "undirected": {
+          "type": "object",
+          "description": "Undirected edge specification",
+          "required": [
+            "between",
+            "and"
+          ],
+          "properties": {
+            "between": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "and": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "via": {
+              "type": "string",
+              "description": "Edge label"
+            },
+            "arc": {
+              "type": "string",
+              "description": "Edge label (synonym for via)"
+            }
+          }
+        },
+        "implies": {
+          "$ref": "#/$defs/ImpliesDescriptor"
+        },
+        "extends": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Single supertype"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Multiple supertypes"
+            }
+          ]
+        },
+        "adding": {
+          "$ref": "#/$defs/AddingDescriptor"
+        }
+      },
+      "additionalProperties": false
     }
   }
 }
