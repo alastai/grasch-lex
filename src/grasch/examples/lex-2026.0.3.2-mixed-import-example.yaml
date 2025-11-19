@@ -1,16 +1,15 @@
 # Mixed Import Example
 # Shows importing a subset of types within an array alongside inline types
 
-pathName: "/examples/mixed-import"
-
-valueTypeSystemName: "CANONICAL"
-
-graphType:
-  defaults:
-    import: "lex-2026.0.3.2-graph-type-defaults.yaml"
+graphSchema:
+  pathName: "/examples/mixed-import"
   
-  # Pattern: Mix imported subset with inline types
-  nodeTypes:
+  graphType:
+    defaults:
+      import: "lex-2026.0.3.2-graph-type-defaults.yaml"
+    
+    # Pattern: Mix imported subset with inline types
+    nodeTypes:
     - import: "snb_types/message_hierarchy.yaml"  # Imports Message, Post, Comment
     - nodeType:
         typeLabel: "Person"
@@ -29,8 +28,8 @@ graphType:
             - name: "name"
               valueType: "STRING"
               notNull: true
-  
-  edgeTypes:
+    
+    edgeTypes:
     - edgeType:
         typeLabel: "WORKS_FOR"
         implies:
