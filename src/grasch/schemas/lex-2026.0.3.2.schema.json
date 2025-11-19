@@ -338,7 +338,6 @@
       "properties": {
         "pathName": {
           "type": "string",
-          "pattern": "^/.*",
           "description": "Optional path name (only present if graphType is imported)"
         },
         "graphPreferredName": {
@@ -425,14 +424,30 @@
           "oneOf": [
             {
               "type": "array",
-              "description": "Inline array of node type descriptors",
+              "description": "Array of node type descriptors (can mix inline and imports)",
               "items": {
-                "$ref": "#/$defs/NodeType"
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/NodeType"
+                  },
+                  {
+                    "type": "object",
+                    "description": "Import node types from file",
+                    "required": ["import"],
+                    "properties": {
+                      "import": {
+                        "type": "string",
+                        "description": "Import node types from file"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                ]
               }
             },
             {
               "type": "object",
-              "description": "Import node types from file",
+              "description": "Import all node types from file",
               "required": ["import"],
               "properties": {
                 "import": {
@@ -488,14 +503,30 @@
           "oneOf": [
             {
               "type": "array",
-              "description": "Inline array of edge type descriptors",
+              "description": "Array of edge type descriptors (can mix inline and imports)",
               "items": {
-                "$ref": "#/$defs/EdgeType"
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/EdgeType"
+                  },
+                  {
+                    "type": "object",
+                    "description": "Import edge types from file",
+                    "required": ["import"],
+                    "properties": {
+                      "import": {
+                        "type": "string",
+                        "description": "Import edge types from file"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                ]
               }
             },
             {
               "type": "object",
-              "description": "Import edge types from file",
+              "description": "Import all edge types from file",
               "required": ["import"],
               "properties": {
                 "import": {
@@ -586,7 +617,7 @@
             {
               "type": "object",
               "properties": {
-                "nodeTypeIndex": {
+                "index": {
                   "type": "integer",
                   "minimum": 0,
                   "description": "Integer index for node type identification"
@@ -596,7 +627,7 @@
                 }
               },
               "required": [
-                "nodeTypeIndex",
+                "index",
                 "implies"
               ],
               "additionalProperties": false
@@ -775,30 +806,14 @@
         {
           "type": "object",
           "properties": {
-            "nodeTypeIndex": {
-              "type": "integer",
-              "minimum": 0,
-              "description": "Integer index for node type identification"
-            },
             "index": {
               "type": "integer",
               "minimum": 0,
-              "description": "Integer index for node type identification (synonym for nodeTypeIndex)"
+              "description": "Integer index for node type identification"
             }
           },
-          "additionalProperties": false,
-          "anyOf": [
-            {
-              "required": [
-                "index"
-              ]
-            },
-            {
-              "required": [
-                "nodeTypeIndex"
-              ]
-            }
-          ]
+          "required": ["index"],
+          "additionalProperties": false
         },
         {
           "type": "object",
