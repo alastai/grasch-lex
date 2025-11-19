@@ -1,0 +1,206 @@
+# LEX-2026.0.3.2 Subtype and Abstract Type Test
+# Tests all subtype and supertype patterns that the JSON Schema validates
+# Note: abstract:, abstractSupertype:, sealed:, final: wrappers are NOT validated by schema
+# They are syntactic markers for application logic (see node/edge-type-syntax-examples.yaml)
+
+graphSchema:
+  pathName: /test/subtype-abstract
+  
+  graphType:
+    defaults:
+      import: lex-2026.0.3.2-graph-type-defaults.yaml
+    
+    nodeTypes:
+    # Pattern 1: Base type (no supertypes)
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: name
+            valueType: STRING
+            notNull: true
+    
+    # Pattern 2: Subtype with supertypes (implies, singleton string)
+    - nodeType:
+        typeLabel: Employee
+        implies:
+          supertypes: Person
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: name
+            valueType: STRING
+            notNull: true
+          - name: employeeId
+            valueType: STRING
+            notNull: true
+    
+    # Pattern 3: Subtype with supertypes (implies, array with one element)
+    - nodeType:
+        typeLabel: Contractor
+        implies:
+          supertypes: [Person]
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: name
+            valueType: STRING
+            notNull: true
+          - name: contractId
+            valueType: STRING
+            notNull: true
+    
+    # Pattern 4: Subtype with multiple supertypes
+    - nodeType:
+        typeLabel: Manager
+        implies:
+          supertypes: [Employee, Person]
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: name
+            valueType: STRING
+            notNull: true
+          - name: employeeId
+            valueType: STRING
+            notNull: true
+          - name: department
+            valueType: STRING
+            notNull: true
+    
+    # Pattern 5: Subtype using extends (singleton string)
+    - nodeType:
+        typeLabel: Director
+        extends: Manager
+        adding:
+          propertyTypes:
+          - name: division
+            valueType: STRING
+    
+    # Pattern 6: Subtype using extends (array with one element)
+    - nodeType:
+        typeLabel: VicePresident
+        extends: [Director]
+        adding:
+          propertyTypes:
+          - name: region
+            valueType: STRING
+    
+    # Pattern 7: Subtype using extends (array with multiple elements) with additional labels
+    - nodeType:
+        typeLabel: CEO
+        extends: [VicePresident, Director]
+        adding:
+          labels:
+          - Executive
+          - BoardMember
+          propertyTypes:
+          - name: boardSeat
+            valueType: INTEGER
+    
+    edgeTypes:
+    # Pattern 8: Base edge type
+    - edgeType:
+        typeLabel: KNOWS
+        implies:
+          propertyTypes:
+          - name: since
+            valueType: DATE
+        direction: UNDIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Person
+    
+    # Pattern 9: Edge subtype with supertypes (implies, singleton string)
+    - edgeType:
+        typeLabel: FRIENDSHIP
+        implies:
+          supertypes: KNOWS
+          propertyTypes:
+          - name: since
+            valueType: DATE
+          - name: closeness
+            valueType: FLOAT
+        direction: UNDIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Person
+    
+    # Pattern 10: Edge subtype with supertypes (implies, array with one element)
+    - edgeType:
+        typeLabel: PROFESSIONAL_RELATIONSHIP
+        implies:
+          supertypes: [KNOWS]
+          propertyTypes:
+          - name: since
+            valueType: DATE
+          - name: context
+            valueType: STRING
+        direction: UNDIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Person
+    
+    # Pattern 11: Edge subtype using extends (singleton string)
+    - edgeType:
+        typeLabel: CLOSE_FRIEND
+        extends: FRIENDSHIP
+        adding:
+          propertyTypes:
+          - name: yearsKnown
+            valueType: INTEGER
+        direction: UNDIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Person
+    
+    # Pattern 12: Edge subtype using extends (array with one element)
+    - edgeType:
+        typeLabel: BEST_FRIEND
+        extends: [CLOSE_FRIEND]
+        adding:
+          propertyTypes:
+          - name: trustLevel
+            valueType: FLOAT
+        direction: UNDIRECTED
+        firstEndpointNodeType:
+          typeLabel: Person
+        secondEndpointNodeType:
+          typeLabel: Person
+    
+    # Pattern 13: allowSubtypesOf with abstractSupertypes
+    allowSubtypesOf:
+      abstractSupertypes:
+        nodeTypes:
+        - nodeType:
+            typeLabel: Message
+            implies:
+              propertyTypes:
+              - name: id
+                valueType: INTEGER
+                notNull: true
+              - name: content
+                valueType: STRING
+        
+        edgeTypes:
+        - edgeType:
+            typeLabel: RELATIONSHIP
+            implies:
+              propertyTypes:
+              - name: startDate
+                valueType: DATE
+            direction: DIRECTED
+            firstEndpointNodeType:
+              typeLabel: Person
+            secondEndpointNodeType:
+              typeLabel: Person
