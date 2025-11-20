@@ -6,6 +6,7 @@ from typing import List, Dict, Any, Optional
 from abc import ABC, abstractmethod
 from enum import Enum
 import uuid
+from src.grasch.type_interpretation import TypeInterpretation
 
 
 class AttributeType:
@@ -180,25 +181,65 @@ class ElementType(ABC):
 
 
 class NodeType(ElementType):
-    """Node type based on content record type"""
-    def __init__(self, contentType: ContentRecordType):
+    """Node type based on content record type with type interpretation support"""
+    def __init__(self, contentType: ContentRecordType, interpretation: Optional[TypeInterpretation] = None):
         # NodeType name is derived from content type pseudo-name, or first identifier if available
         nodeName = contentType.name or (contentType.identifier[0] if contentType.identifier else "UnnamedNode")
         super().__init__(nodeName, contentType)
         self.contentType = contentType  # Keep for backward compatibility
+        self._interpretation = interpretation or TypeInterpretation.exactlyConcrete(nodeName)
+    
+    @property
+    def interpretation(self) -> TypeInterpretation:
+        """Get the type interpretation for this node type"""
+        return self._interpretation
+    
+    def isAbstract(self) -> bool:
+        """Check if this node type is abstract (cannot be directly instantiated)"""
+        return self._interpretation.isAbstract()
+    
+    def isConcrete(self) -> bool:
+        """Check if this node type is concrete (can be directly instantiated)"""
+        return self._interpretation.isConcrete()
+    
+    def isExactMatch(self) -> bool:
+        """Check if this node type requires exact type match"""
+        return self._interpretation.isExactMatch()
+    
+    def allowsSubtypes(self) -> bool:
+        """Check if this node type allows subtypes"""
+        return self._interpretation.allowsSubtypes()
     
     def getElementKind(self) -> str:
         return "node"
 
 
 class NodeTypeBuilder:
-    """Builder for NodeType instances"""
+    """Builder for NodeType instances with type interpretation support"""
     def __init__(self, contentType: ContentRecordType):
         self.contentType = contentType
+        self._interpretation: Optional[TypeInterpretation] = None
+    
+    def setInterpretation(self, interpretation: TypeInterpretation) -> 'NodeTypeBuilder':
+        """Set the type interpretation"""
+        self._interpretation = interpretation
+        return self
+    
+    def setAbstract(self) -> 'NodeTypeBuilder':
+        """Set as abstract (subtypesOf: abstract:)"""
+        nodeName = self.contentType.name or (self.contentType.identifier[0] if self.contentType.identifier else "UnnamedNode")
+        self._interpretation = TypeInterpretation.subtypesAbstract(nodeName)
+        return self
+    
+    def setConcrete(self) -> 'NodeTypeBuilder':
+        """Set as concrete (exactlyOf: concrete:) - this is the default"""
+        nodeName = self.contentType.name or (self.contentType.identifier[0] if self.contentType.identifier else "UnnamedNode")
+        self._interpretation = TypeInterpretation.exactlyConcrete(nodeName)
+        return self
     
     def create(self) -> NodeType:
         """Create and return the NodeType instance"""
-        return NodeType(self.contentType)
+        return NodeType(self.contentType, self._interpretation)
 
 
 class EdgeDirection:
