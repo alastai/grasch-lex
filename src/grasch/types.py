@@ -610,13 +610,17 @@ class EdgeTypeBuilder:
 class GraphType:
     """GQL graph type with LEX constraint extensions and type interpretation support"""
     def __init__(self, name: str, allElementTypesKeyed: bool = False, 
-                 interpretation: Optional[TypeInterpretation] = None):
+                 interpretation: Optional[TypeInterpretation] = None,
+                 nodeTypesInterpretation: Optional[TypeInterpretation] = None,
+                 edgeTypesInterpretation: Optional[TypeInterpretation] = None):
         self.name = name
         self.nodeTypes: List[NodeType] = []
         self.edgeTypes: List[EdgeType] = []
         self.constraints: List['KeyConstraint'] = []
         self.allElementTypesKeyed = allElementTypesKeyed
         self._interpretation = interpretation or TypeInterpretation.exactlyConcrete(name)
+        self._nodeTypesInterpretation = nodeTypesInterpretation
+        self._edgeTypesInterpretation = edgeTypesInterpretation
     
     @property
     def interpretation(self) -> TypeInterpretation:
@@ -639,6 +643,27 @@ class GraphType:
         """Check if this graph type allows subtypes"""
         return self._interpretation.allowsSubtypes()
     
+    # Collection-level interpretation properties
+    @property
+    def nodeTypesInterpretation(self) -> Optional[TypeInterpretation]:
+        """Get the type interpretation for the nodeTypes collection"""
+        return self._nodeTypesInterpretation
+    
+    @nodeTypesInterpretation.setter
+    def nodeTypesInterpretation(self, interpretation: Optional[TypeInterpretation]) -> None:
+        """Set the type interpretation for the nodeTypes collection"""
+        self._nodeTypesInterpretation = interpretation
+    
+    @property
+    def edgeTypesInterpretation(self) -> Optional[TypeInterpretation]:
+        """Get the type interpretation for the edgeTypes collection"""
+        return self._edgeTypesInterpretation
+    
+    @edgeTypesInterpretation.setter
+    def edgeTypesInterpretation(self, interpretation: Optional[TypeInterpretation]) -> None:
+        """Set the type interpretation for the edgeTypes collection"""
+        self._edgeTypesInterpretation = interpretation
+    
     def addNodeType(self, nodeType: NodeType) -> None:
         self.nodeTypes.append(nodeType)
     
@@ -657,6 +682,9 @@ class GraphTypeBuilder:
         self._edgeTypes: List[EdgeType] = []
         self._constraints: List['KeyConstraint'] = []
         self._allElementTypesKeyed: bool = False
+        self._interpretation: Optional[TypeInterpretation] = None
+        self._nodeTypesInterpretation: Optional[TypeInterpretation] = None
+        self._edgeTypesInterpretation: Optional[TypeInterpretation] = None
     
     # Build methods - return builders for contained objects
     def buildNodeType(self, content_type: ContentRecordType) -> NodeTypeBuilder:
@@ -702,11 +730,39 @@ class GraphTypeBuilder:
         self._allElementTypesKeyed = keyed
         return self
     
+    def setInterpretation(self, interpretation: TypeInterpretation) -> 'GraphTypeBuilder':
+        """Set the graph type interpretation"""
+        self._interpretation = interpretation
+        return self
+    
+    def setNodeTypesInterpretation(self, interpretation: TypeInterpretation) -> 'GraphTypeBuilder':
+        """Set the nodeTypes collection interpretation"""
+        self._nodeTypesInterpretation = interpretation
+        return self
+    
+    def setEdgeTypesInterpretation(self, interpretation: TypeInterpretation) -> 'GraphTypeBuilder':
+        """Set the edgeTypes collection interpretation"""
+        self._edgeTypesInterpretation = interpretation
+        return self
+    
+    def setAbstract(self) -> 'GraphTypeBuilder':
+        """Set as abstract (subtypesOf: abstract:)"""
+        self._interpretation = TypeInterpretation.subtypesAbstract(self.name)
+        return self
+    
+    def setConcrete(self) -> 'GraphTypeBuilder':
+        """Set as concrete (exactlyOf: concrete:) - this is the default"""
+        self._interpretation = TypeInterpretation.exactlyConcrete(self.name)
+        return self
+    
     def create(self) -> GraphType:
         """Create and return the GraphType instance"""
         graph_type = GraphType(
             name=self.name,
-            allElementTypesKeyed=self._allElementTypesKeyed
+            allElementTypesKeyed=self._allElementTypesKeyed,
+            interpretation=self._interpretation,
+            nodeTypesInterpretation=self._nodeTypesInterpretation,
+            edgeTypesInterpretation=self._edgeTypesInterpretation
         )
         
         # Add all collected components
