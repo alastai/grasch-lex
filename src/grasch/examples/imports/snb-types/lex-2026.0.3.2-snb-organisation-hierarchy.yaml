@@ -1,0 +1,29 @@
+# SNB Organisation Type Hierarchy
+# Organisation is an abstract supertype for Company and University
+# This is an importable array - the interpretation wrapper is applied by the importing file
+
+- abstract:
+    nodeType:
+      typeLabel: Organisation
+      implies:
+        propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: type
+            valueType: STRING
+            notNull: true
+          - name: name
+            valueType: STRING
+            notNull: true
+          - name: url
+            valueType: STRING
+            notNull: true
+
+- nodeType:
+    typeLabel: Company
+    extends: Organisation
+
+- nodeType:
+    typeLabel: University
+    extends: Organisation
