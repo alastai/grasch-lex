@@ -1,15 +1,21 @@
 catalog:
+  IRI: file:///examples/lex-2026.0.3.2-example-catalog-no-iri
   directories:
   - name: local
     directories:
     - name: test
-      graphSchemas:
+      graphSchemaReferences:
       - name: test-schema
-      graphs:
+        qualifiedName: /local/test/test-schema
+      graphReferences:
       - name: test-graph
+        qualifiedName: /local/test/test-graph
     - name: dev
-      graphSchemas:
+      graphSchemaReferences:
       - name: dev-schema
-      graphs:
+        qualifiedName: /local/dev/dev-schema
+      graphReferences:
       - name: dev-graph-1
+        qualifiedName: /local/dev/dev-graph-1
       - name: dev-graph-2
+        qualifiedName: /local/dev/dev-graph-2

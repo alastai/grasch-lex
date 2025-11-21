@@ -1,0 +1,21 @@
+# Zero-Level Wrapper Examples
+# Demonstrates bare type references (no wrappers)
+# Default interpretation: exactlyOf: concrete:
+
+graphType: SocialNetwork
+
+propertyGraphDataModel:
+  defaults:
+    nodeLabelsAre: required
+    edgeLabelsAre: required
+
+nodeTypes:
+  - Person  # Bare reference - defaults to exactlyOf: concrete:
+  - Company
+
+edgeTypes:
+  - typeLabel: WORKS_FOR
+    directed:
+      from: Person      # Bare reference
+      via: WORKS_FOR    # Bare reference
+      to: Company       # Bare reference

@@ -1,44 +1,37 @@
-# Mixed Import Example
-# Shows importing a subset of types within an array alongside inline types
-
 graphSchema:
-  pathName: "/examples/mixed-import"
-  
+  pathName: /examples/mixed-import
   graphType:
-    defaults:
-      import: "lex-2026.0.3.2-graph-type-defaults.yaml"
-    
-    # Pattern: Mix imported subset with inline types
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model.yaml
     nodeTypes:
-    - import: "snb_types/message_hierarchy.yaml"  # Imports Message, Post, Comment
+    - import: imports/snb-types/lex-2026.0.3.2-snb-message-hierarchy.yaml
     - nodeType:
-        typeLabel: "Person"
+        typeLabel: Person
         implies:
           propertyTypes:
-            - name: "id"
-              valueType: "INTEGER"
-              notNull: true
+          - name: id
+            valueType: INTEGER
+            notNull: true
     - nodeType:
-        typeLabel: "Company"
+        typeLabel: Company
         implies:
           propertyTypes:
-            - name: "id"
-              valueType: "INTEGER"
-              notNull: true
-            - name: "name"
-              valueType: "STRING"
-              notNull: true
-    
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: name
+            valueType: STRING
+            notNull: true
     edgeTypes:
     - edgeType:
-        typeLabel: "WORKS_FOR"
+        directed:
+          from:
+            typeLabel: Person
+          to:
+            typeLabel: Company
+          via: WORKS_FOR
         implies:
           propertyTypes:
-            - name: "startDate"
-              valueType: "DATE"
-              notNull: true
-        direction: "DIRECTED"
-        firstEndpointNodeType:
-          typeLabel: "Person"
-        secondEndpointNodeType:
-          typeLabel: "Company"
+          - name: startDate
+            valueType: DATE
+            notNull: true

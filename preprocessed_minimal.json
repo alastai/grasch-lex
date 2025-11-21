@@ -1,0 +1,155 @@
+{
+  "graphSchema": {
+    "pathName": "/examples/minimal-import",
+    "graphType": {
+      "propertyGraphDataModel": {
+        "valueTypeSystemName": "CANONICAL",
+        "graphPreferredName": "GRAPH",
+        "nodePreferredName": "NODE",
+        "edgePreferredName": "EDGE",
+        "nodeTypeMinimumLabels": 1,
+        "nodeTypeMaximumLabels": 20,
+        "nodeTypeMinimumPropertyTypes": 0,
+        "nodeTypeMaximumPropertyTypes": 1000,
+        "edgeTypeMinimumLabels": 1,
+        "edgeTypeMaximumLabels": 20,
+        "edgeTypeMinimumPropertyTypes": 0,
+        "edgeTypeMaximumPropertyTypes": 1000
+      },
+      "nodeTypes": [
+        {
+          "subtypesOf": {
+            "abstract": {
+              "nodeTypes": [
+                {
+                  "nodeType": {
+                    "typeLabel": "Message",
+                    "implies": {
+                      "labels": [
+                        "Message"
+                      ],
+                      "propertyTypes": [
+                        {
+                          "name": "id",
+                          "valueType": "INTEGER",
+                          "notNull": true
+                        },
+                        {
+                          "name": "creationDate",
+                          "valueType": "ZONED DATETIME",
+                          "notNull": true
+                        },
+                        {
+                          "name": "locationIP",
+                          "valueType": "STRING",
+                          "notNull": true
+                        },
+                        {
+                          "name": "browserUsed",
+                          "valueType": "STRING",
+                          "notNull": true
+                        },
+                        {
+                          "name": "content",
+                          "valueType": "STRING"
+                        },
+                        {
+                          "name": "length",
+                          "valueType": "INTEGER",
+                          "notNull": true
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "nodeType": {
+                    "typeLabel": "Post",
+                    "extends": {
+                      "supertypes": [
+                        "Message"
+                      ],
+                      "adding": {
+                        "labels": [
+                          "Post"
+                        ],
+                        "propertyTypes": [
+                          {
+                            "name": "imageFile",
+                            "valueType": "STRING"
+                          },
+                          {
+                            "name": "language",
+                            "valueType": "STRING"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "nodeType": {
+                    "typeLabel": "Comment",
+                    "extends": {
+                      "supertypes": [
+                        "Message"
+                      ],
+                      "adding": {
+                        "labels": [
+                          "Comment"
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "Person",
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "id",
+                  "valueType": "INTEGER",
+                  "notNull": true
+                },
+                {
+                  "name": "name",
+                  "valueType": "STRING",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "edgeTypes": [
+        {
+          "edgeType": {
+            "directed": {
+              "from": {
+                "typeLabel": "Person"
+              },
+              "to": {
+                "typeLabel": "Post"
+              },
+              "via": "AUTHORED"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "creationDate",
+                  "valueType": "DATE",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

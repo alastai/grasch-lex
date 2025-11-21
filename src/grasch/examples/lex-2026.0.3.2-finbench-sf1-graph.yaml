@@ -1,28 +1,28 @@
-identifier:
-  locallyQualifiedObjectName: /benchmarks/ldbc/finbench-sf1
-graphSchema:
-  locallyQualifiedObjectName: /benchmarks/ldbc/finbench
-constraints:
-  personIdUnique:
-    name: personIdUnique
-    rule:
-      subject: UNIQUE
-      constraintPattern: Person
-      uniqueKeyComponentPropertyNames:
-      - id
-  accountIdUnique:
-    name: accountIdUnique
-    rule:
-      subject: UNIQUE
-      constraintPattern: Account
-      uniqueKeyComponentPropertyNames:
-      - id
-  companyIdUnique:
-    name: companyIdUnique
-    rule:
-      subject: UNIQUE
-      constraintPattern: Company
-      uniqueKeyComponentPropertyNames:
-      - id
-storageSchema:
-  storageType: TBD
+graph:
+  pathName: /benchmarks/ldbc/finbench-sf1
+  graphSchema:
+    import: lex-2026.0.3.2-finbench-schema.yaml
+  constraints:
+    personIdUnique:
+      name: personIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Person
+        uniqueKeyComponentPropertyNames:
+        - id
+    accountIdUnique:
+      name: accountIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Account
+        uniqueKeyComponentPropertyNames:
+        - id
+    companyIdUnique:
+      name: companyIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Company
+        uniqueKeyComponentPropertyNames:
+        - id
+  graphStorageSchema:
+    storageType: TBD

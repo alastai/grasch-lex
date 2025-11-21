@@ -4,54 +4,10 @@
   "title": "LEX:2026 GQL Extended Schema Specification",
   "description": "JSON Schema for LEX:2026 graph schemas as defined in LEX-100 specification",
   "type": "object",
-  "required": [
-    "identifier",
-    "valueTypeSystemName",
-    "graphType"
-  ],
   "properties": {
-    "identifier": {
-      "type": "object",
-      "description": "Graph schema identifier with optional root IRI and directory structure",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "root": {
-          "type": "string",
-          "format": "iri",
-          "description": "Optional root IRI for the schema"
-        },
-        "directory": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Directory path components"
-        },
-        "typesGraphsDirectory": {
-          "type": "string",
-          "description": "Optional types-graphs directory name"
-        },
-        "name": {
-          "type": "string",
-          "description": "Schema name"
-        }
-      },
-      "additionalProperties": false
-    },
     "principal": {
       "type": "string",
       "description": "Optional owner/principal for authorization"
-    },
-    "valueTypeSystemName": {
-      "type": "string",
-      "enum": [
-        "CYPHER",
-        "GQL",
-        "SQL"
-      ],
-      "description": "Name of the value type system used in this schema"
     },
     "graphType": {
       "$ref": "#/$defs/GraphType"
@@ -65,93 +21,23 @@
         }
       },
       "additionalProperties": false
+    },
+    "pathName": {
+      "type": "string",
+      "description": "Hierarchical path name for the graph schema (e.g., '/benchmarks/ldbc/snb')",
+      "pattern": "^/.*"
     }
   },
-  "additionalProperties": false,
   "$defs": {
     "GraphType": {
       "type": "object",
       "description": "Graph type descriptor defining structure of conformant data graphs",
       "required": [
-        "graphPreferredName",
-        "nodePreferredName",
-        "edgePreferredName",
-        "nodeTypeMinimumLabels",
-        "nodeTypeMaximumLabels",
-        "nodeTypeMinimumPropertyTypes",
-        "nodeTypeMaximumPropertyTypes",
-        "edgeTypeMinimumLabels",
-        "edgeTypeMaximumLabels",
-        "edgeTypeMinimumPropertyTypes",
-        "edgeTypeMaximumPropertyTypes",
         "nodeTypes",
-        "edgeTypes"
+        "edgeTypes",
+        "defaults"
       ],
       "properties": {
-        "graphPreferredName": {
-          "type": "string",
-          "enum": [
-            "GRAPH",
-            "PROPERTY GRAPH"
-          ],
-          "description": "Implementation-defined preferred name for graph"
-        },
-        "nodePreferredName": {
-          "type": "string",
-          "enum": [
-            "NODE",
-            "VERTEX"
-          ],
-          "description": "Implementation-defined preferred name for nodes"
-        },
-        "edgePreferredName": {
-          "type": "string",
-          "enum": [
-            "EDGE",
-            "RELATIONSHIP"
-          ],
-          "description": "Implementation-defined preferred name for edges"
-        },
-        "nodeTypeMinimumLabels": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Minimum number of labels per node type"
-        },
-        "nodeTypeMaximumLabels": {
-          "type": "integer",
-          "minimum": 1,
-          "description": "Maximum number of labels per node type"
-        },
-        "nodeTypeMinimumPropertyTypes": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Minimum number of property types per node type"
-        },
-        "nodeTypeMaximumPropertyTypes": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Maximum number of property types per node type"
-        },
-        "edgeTypeMinimumLabels": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Minimum number of labels per edge type"
-        },
-        "edgeTypeMaximumLabels": {
-          "type": "integer",
-          "minimum": 1,
-          "description": "Maximum number of labels per edge type"
-        },
-        "edgeTypeMinimumPropertyTypes": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Minimum number of property types per edge type"
-        },
-        "edgeTypeMaximumPropertyTypes": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Maximum number of property types per edge type"
-        },
         "nodeTypes": {
           "type": "array",
           "items": {
@@ -189,6 +75,201 @@
             }
           },
           "additionalProperties": false
+        },
+        "defaults": {
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "Direct specification of defaults (no import)",
+              "properties": {
+                "graphPreferredName": {
+                  "type": "string",
+                  "enum": [
+                    "GRAPH",
+                    "PROPERTY GRAPH"
+                  ],
+                  "description": "Implementation-defined preferred name for graph"
+                },
+                "nodePreferredName": {
+                  "type": "string",
+                  "enum": [
+                    "NODE",
+                    "VERTEX"
+                  ],
+                  "description": "Implementation-defined preferred name for nodes"
+                },
+                "edgePreferredName": {
+                  "type": "string",
+                  "enum": [
+                    "EDGE",
+                    "RELATIONSHIP"
+                  ],
+                  "description": "Implementation-defined preferred name for edges"
+                },
+                "nodeTypeMinimumLabels": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Minimum number of labels per node type"
+                },
+                "nodeTypeMaximumLabels": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Maximum number of labels per node type"
+                },
+                "nodeTypeMinimumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Minimum number of property types per node type"
+                },
+                "nodeTypeMaximumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Maximum number of property types per node type"
+                },
+                "edgeTypeMinimumLabels": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Minimum number of labels per edge type"
+                },
+                "edgeTypeMaximumLabels": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Maximum number of labels per edge type"
+                },
+                "edgeTypeMinimumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Minimum number of property types per edge type"
+                },
+                "edgeTypeMaximumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Maximum number of property types per edge type"
+                },
+                "valueTypeSystemName": {
+                  "type": "string",
+                  "enum": [
+                    "CANONICAL",
+                    "CYPHER",
+                    "GQL",
+                    "SQL"
+                  ],
+                  "description": "Name of the value type system used in this schema (defaults to CANONICAL)",
+                  "default": "CANONICAL"
+                }
+              },
+              "additionalProperties": false,
+              "not": {
+                "required": [
+                  "import"
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "description": "Import defaults from external file (no overrides)",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Path to defaults file"
+                }
+              },
+              "additionalProperties": false,
+              "maxProperties": 1
+            },
+            {
+              "type": "object",
+              "description": "Mixed: import with overrides",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string"
+                },
+                "graphPreferredName": {
+                  "type": "string",
+                  "enum": [
+                    "GRAPH",
+                    "PROPERTY GRAPH"
+                  ],
+                  "description": "Implementation-defined preferred name for graph"
+                },
+                "nodePreferredName": {
+                  "type": "string",
+                  "enum": [
+                    "NODE",
+                    "VERTEX"
+                  ],
+                  "description": "Implementation-defined preferred name for nodes"
+                },
+                "edgePreferredName": {
+                  "type": "string",
+                  "enum": [
+                    "EDGE",
+                    "RELATIONSHIP"
+                  ],
+                  "description": "Implementation-defined preferred name for edges"
+                },
+                "nodeTypeMinimumLabels": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Minimum number of labels per node type"
+                },
+                "nodeTypeMaximumLabels": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Maximum number of labels per node type"
+                },
+                "nodeTypeMinimumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Minimum number of property types per node type"
+                },
+                "nodeTypeMaximumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Maximum number of property types per node type"
+                },
+                "edgeTypeMinimumLabels": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Minimum number of labels per edge type"
+                },
+                "edgeTypeMaximumLabels": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Maximum number of labels per edge type"
+                },
+                "edgeTypeMinimumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Minimum number of property types per edge type"
+                },
+                "edgeTypeMaximumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Maximum number of property types per edge type"
+                },
+                "valueTypeSystemName": {
+                  "type": "string",
+                  "enum": [
+                    "CANONICAL",
+                    "CYPHER",
+                    "GQL",
+                    "SQL"
+                  ],
+                  "description": "Name of the value type system used in this schema (defaults to CANONICAL)",
+                  "default": "CANONICAL"
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 2
+            }
+          ]
         }
       },
       "additionalProperties": false
@@ -372,6 +453,161 @@
         }
       },
       "additionalProperties": false
+    },
+    "GraphTypeDefaults": {
+      "type": "object",
+      "description": "Default values for graph type characteristics",
+      "properties": {
+        "graphPreferredName": {
+          "type": "string",
+          "enum": [
+            "GRAPH",
+            "PROPERTY GRAPH"
+          ],
+          "description": "Implementation-defined preferred name for graph"
+        },
+        "nodePreferredName": {
+          "type": "string",
+          "enum": [
+            "NODE",
+            "VERTEX"
+          ],
+          "description": "Implementation-defined preferred name for nodes"
+        },
+        "edgePreferredName": {
+          "type": "string",
+          "enum": [
+            "EDGE",
+            "RELATIONSHIP"
+          ],
+          "description": "Implementation-defined preferred name for edges"
+        },
+        "nodeTypeMinimumLabels": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of labels per node type"
+        },
+        "nodeTypeMaximumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of labels per node type"
+        },
+        "nodeTypeMinimumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of property types per node type"
+        },
+        "nodeTypeMaximumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of property types per node type"
+        },
+        "edgeTypeMinimumLabels": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of labels per edge type"
+        },
+        "edgeTypeMaximumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of labels per edge type"
+        },
+        "edgeTypeMinimumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of property types per edge type"
+        },
+        "edgeTypeMaximumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of property types per edge type"
+        },
+        "valueTypeSystemName": {
+          "type": "string",
+          "enum": [
+            "CANONICAL",
+            "CYPHER",
+            "GQL",
+            "SQL"
+          ],
+          "description": "Name of the value type system used in this schema (defaults to CANONICAL)",
+          "default": "CANONICAL"
+        }
+      },
+      "additionalProperties": false
     }
-  }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "description": "Graph Schema document",
+      "required": [
+        "pathName",
+        "graphSchema"
+      ],
+      "properties": {
+        "pathName": {
+          "type": "string",
+          "description": "Hierarchical path name",
+          "pattern": "^/.*"
+        },
+        "principal": {
+          "type": "string",
+          "description": "Optional owner/principal for authorization"
+        },
+        "graphSchema": {
+          "$ref": "#/$defs/GraphType"
+        },
+        "constraints": {
+          "type": "object",
+          "description": "Map of constraint names to constraint definitions",
+          "patternProperties": {
+            "^[a-zA-Z_][a-zA-Z0-9_]*$": {
+              "$ref": "#/$defs/Constraint"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "description": "Graph instance document",
+      "required": [
+        "pathName",
+        "graph"
+      ],
+      "properties": {
+        "pathName": {
+          "type": "string",
+          "description": "Hierarchical path name",
+          "pattern": "^/.*"
+        },
+        "principal": {
+          "type": "string",
+          "description": "Optional owner/principal for authorization"
+        },
+        "graph": {
+          "type": "object",
+          "description": "Graph instance definition"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "description": "Catalog document",
+      "required": [
+        "catalog"
+      ],
+      "properties": {
+        "catalog": {
+          "type": "object",
+          "description": "Catalog definition"
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
 }

@@ -1,0 +1,219 @@
+# LEX-2026.0.3.2 Type Interpretation Wrappers Example
+# 
+# This example demonstrates all supported type interpretation wrapper patterns:
+# - Zero-level wrappers (bare type references)
+# - One-level wrappers (abstract, concrete, properSubtypesOf)
+# - Two-level wrappers (exactlyOf/subtypesOf with concrete/abstract)
+# - Wrappers around single properties
+# - Wrappers around array items
+# - Mixed wrapped and unwrapped items
+
+graphSchema:
+  pathName: /examples/type-interpretation-wrappers
+  
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+    
+    nodeTypes:
+      # ===== ZERO-LEVEL WRAPPERS (Bare References) =====
+      # Default semantics: exactlyOf: concrete:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+              - name: age
+                valueType: INTEGER
+      
+      # ===== ONE-LEVEL WRAPPERS =====
+      
+      # abstract: wrapper (maps to subtypesOf: abstract:)
+      # Cannot be directly instantiated, only through subtypes
+      - abstract:
+          nodeType:
+            typeLabel: Entity
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: STRING
+      
+      # concrete: wrapper (maps to exactlyOf: concrete:)
+      # Can be directly instantiated, exact type match required
+      - concrete:
+          nodeType:
+            typeLabel: Company
+            implies:
+              propertyTypes:
+                - name: name
+                  valueType: STRING
+                - name: founded
+                  valueType: INTEGER
+      
+      # properSubtypesOf: wrapper (maps to subtypesOf: abstract:)
+      # Explicitly indicates proper subtypes only
+      - properSubtypesOf:
+          nodeType:
+            typeLabel: Organization
+            implies:
+              propertyTypes:
+                - name: name
+                  valueType: STRING
+      
+      # ===== TWO-LEVEL WRAPPERS =====
+      
+      # exactlyOf: concrete: - Exact match, can be instantiated
+      - exactlyOf:
+          concrete:
+            nodeType:
+              typeLabel: Product
+              implies:
+                propertyTypes:
+                  - name: name
+                    valueType: STRING
+                  - name: price
+                    valueType: FLOAT
+      
+      # exactlyOf: abstract: - Exact match, cannot be instantiated
+      # (Edge case: type must match exactly but cannot be instantiated)
+      - exactlyOf:
+          abstract:
+            nodeType:
+              typeLabel: Asset
+              implies:
+                propertyTypes:
+                  - name: value
+                    valueType: FLOAT
+      
+      # subtypesOf: concrete: - Allows subtypes, can be instantiated
+      - subtypesOf:
+          concrete:
+            nodeType:
+              typeLabel: Employee
+              implies:
+                propertyTypes:
+                  - name: employeeId
+                    valueType: STRING
+                  - name: department
+                    valueType: STRING
+      
+      # subtypesOf: abstract: - Allows subtypes, cannot be instantiated
+      # (Most common pattern for abstract base types)
+      - subtypesOf:
+          abstract:
+            nodeType:
+              typeLabel: Vehicle
+              implies:
+                propertyTypes:
+                  - name: make
+                    valueType: STRING
+                  - name: model
+                    valueType: STRING
+      
+      # ===== MIXED PATTERNS IN SAME ARRAY =====
+      # Demonstrates that wrapped and unwrapped items can coexist
+      
+      - nodeType:
+          typeLabel: Tag
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+      
+      - abstract:
+          nodeType:
+            typeLabel: Place
+            implies:
+              propertyTypes:
+                - name: name
+                  valueType: STRING
+      
+      - concrete:
+          nodeType:
+            typeLabel: City
+            extends: Place
+            adding:
+              propertyTypes:
+                - name: population
+                  valueType: INTEGER
+    
+    edgeTypes:
+      # ===== EDGE TYPE WRAPPERS =====
+      
+      # Zero-level (bare) edge type - using modern directed: syntax
+      - edgeType:
+          directed:
+            from: Person
+            via: WORKS_FOR
+            to: Company
+          implies:
+            propertyTypes:
+              - name: since
+                valueType: INTEGER
+      
+      # Abstract edge type - using modern directed: syntax
+      - abstract:
+          edgeType:
+            directed:
+              from: Person
+              via: RELATIONSHIP
+              to: Person
+            implies:
+              propertyTypes:
+                - name: since
+                  valueType: INTEGER
+      
+      # Concrete edge type with explicit wrapper
+      - concrete:
+          edgeType:
+            directed:
+              from: Person
+              via: KNOWS
+              to: Person
+            extends: RELATIONSHIP
+            adding:
+              propertyTypes:
+                - name: howMet
+                  valueType: STRING
+      
+      # Two-level wrapper on edge type - using modern undirected: syntax
+      - subtypesOf:
+          abstract:
+            edgeType:
+              undirected:
+                between: Entity
+                via: CONNECTED_TO
+                and: Entity
+              implies:
+                propertyTypes: []
+      
+      # ===== EDGE TYPE COMPONENT-LEVEL WRAPPERS =====
+      
+      # Wrappers on individual edge components (from, via, to)
+      - edgeType:
+          directed:
+            from:
+              abstract: Person
+            via: MANAGES
+            to:
+              concrete: Person
+          implies:
+            propertyTypes:
+              - name: startDate
+                valueType: DATE
+      
+      # Two-level wrappers on edge components
+      - edgeType:
+          directed:
+            from:
+              subtypesOf:
+                concrete: Person
+            via: SUPERVISES
+            to:
+              exactlyOf:
+                abstract: Person
+          implies:
+            propertyTypes:
+              - name: role
+                valueType: STRING

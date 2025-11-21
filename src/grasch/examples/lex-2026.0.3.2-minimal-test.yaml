@@ -1,29 +1,25 @@
-graphType:
-  import: lex-2026.0.3.2-graph-type-defaults.yaml
-  
-  nodeTypes:
-  - nodeType:
-      index: 0
-      implies:
-        labels:
-        - Person
-        propertyTypes:
-        - name: id
-          valueType: INTEGER
-          notNull: true
-  
-  edgeTypes:
-  - edgeType:
-      typeLabel: KNOWS
-      implies:
-        propertyTypes: []
-      direction: UNDIRECTED
-      firstEndpointNodeType:
+graphSchema:
+  pathName: /test/test_schema
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model.yaml
+    nodeTypes:
+    - nodeType:
         index: 0
-      secondEndpointNodeType:
-        index: 0
-identifier:
-  directory:
-  - test
-  name: test_schema
-valueTypeSystemName: GQL
+        implies:
+          labels:
+          - Person
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+    edgeTypes:
+    - edgeType:
+        undirected:
+          between:
+            index: 0
+          and:
+            index: 0
+          via: KNOWS
+        implies:
+          propertyTypes: []

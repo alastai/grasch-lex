@@ -1,274 +1,276 @@
-pathName: https://ldbcouncil.org/schemas/|/benchmarks/ldbc/finbench
-graphType:
-  import: lex-2026.0.3.2-graph-type-defaults.yaml
-  nodeTypes:
-  - nodeType:
-      typeLabel: Person
-      implies:
-        propertyTypes:
-        - name: id
-          valueType: INTEGER
-          notNull: true
-        - name: name
-          valueType: STRING
-          notNull: true
-        - name: isBlocked
-          valueType: BOOLEAN
-          notNull: true
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-  - nodeType:
-      typeLabel: Account
-      implies:
-        propertyTypes:
-        - name: id
-          valueType: INTEGER
-          notNull: true
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: isBlocked
-          valueType: BOOLEAN
-          notNull: true
-        - name: type
-          valueType: STRING
-          notNull: true
-  - nodeType:
-      typeLabel: Company
-      implies:
-        propertyTypes:
-        - name: id
-          valueType: INTEGER
-          notNull: true
-        - name: name
-          valueType: STRING
-          notNull: true
-        - name: isBlocked
-          valueType: BOOLEAN
-          notNull: true
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: country
-          valueType: STRING
-          notNull: true
-        - name: city
-          valueType: STRING
-          notNull: true
-        - name: business
-          valueType: STRING
-          notNull: true
-        - name: description
-          valueType: STRING
-        - name: url
-          valueType: STRING
-        - name: metadata
-          valueType: JSON
-  - nodeType:
-      typeLabel: Medium
-      implies:
-        propertyTypes:
-        - name: id
-          valueType: INTEGER
-          notNull: true
-        - name: type
-          valueType: STRING
-          notNull: true
-        - name: isBlocked
-          valueType: BOOLEAN
-          notNull: true
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: lastLoginTime
-          valueType: ZONED DATETIME
-        - name: riskLevel
-          valueType: FLOAT
-          notNull: true
-  - nodeType:
-      typeLabel: Loan
-      implies:
-        propertyTypes:
-        - name: id
-          valueType: INTEGER
-          notNull: true
-        - name: loanAmount
-          valueType: FLOAT
-          notNull: true
-        - name: balance
-          valueType: FLOAT
-          notNull: true
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: loanUsage
-          valueType: STRING
-          notNull: true
-        - name: interestRate
-          valueType: FLOAT
-          notNull: true
-  edgeTypes:
-  - edgeType:
-      typeLabel: OWN
-      implies:
-        propertyTypes:
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-      direction: DIRECTED
-      firstEndpointNodeType:
+graphSchema:
+  pathName: https://ldbcouncil.org/schemas/|/benchmarks/ldbc/finbench
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model.yaml
+    nodeTypes:
+    - nodeType:
         typeLabel: Person
-      secondEndpointNodeType:
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: name
+            valueType: STRING
+            notNull: true
+          - name: isBlocked
+            valueType: BOOLEAN
+            notNull: true
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+    - nodeType:
         typeLabel: Account
-  - edgeType:
-      typeLabel: TRANSFER
-      implies:
-        propertyTypes:
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: amount
-          valueType: FLOAT
-          notNull: true
-        - name: orderNum
-          valueType: INTEGER
-          notNull: true
-        - name: comment
-          valueType: STRING
-        - name: payType
-          valueType: STRING
-          notNull: true
-        - name: goodsType
-          valueType: STRING
-      direction: DIRECTED
-      firstEndpointNodeType:
-        typeLabel: Account
-      secondEndpointNodeType:
-        typeLabel: Account
-  - edgeType:
-      typeLabel: WITHDRAW
-      implies:
-        propertyTypes:
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: amount
-          valueType: FLOAT
-          notNull: true
-      direction: DIRECTED
-      firstEndpointNodeType:
-        typeLabel: Account
-      secondEndpointNodeType:
-        typeLabel: Account
-  - edgeType:
-      typeLabel: REPAY
-      implies:
-        propertyTypes:
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: amount
-          valueType: FLOAT
-          notNull: true
-      direction: DIRECTED
-      firstEndpointNodeType:
-        typeLabel: Account
-      secondEndpointNodeType:
-        typeLabel: Loan
-  - edgeType:
-      typeLabel: DEPOSIT
-      implies:
-        propertyTypes:
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: amount
-          valueType: FLOAT
-          notNull: true
-      direction: DIRECTED
-      firstEndpointNodeType:
-        typeLabel: Loan
-      secondEndpointNodeType:
-        typeLabel: Account
-  - edgeType:
-      typeLabel: APPLY
-      implies:
-        propertyTypes:
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: org
-          valueType: STRING
-          notNull: true
-      direction: DIRECTED
-      firstEndpointNodeType:
-        typeLabel: Person
-      secondEndpointNodeType:
-        typeLabel: Loan
-  - edgeType:
-      typeLabel: GUARANTEE
-      implies:
-        propertyTypes:
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: relation
-          valueType: STRING
-          notNull: true
-      direction: DIRECTED
-      firstEndpointNodeType:
-        typeLabel: Person
-      secondEndpointNodeType:
-        typeLabel: Person
-  - edgeType:
-      typeLabel: INVEST
-      implies:
-        propertyTypes:
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-        - name: ratio
-          valueType: FLOAT
-          notNull: true
-      direction: DIRECTED
-      firstEndpointNodeType:
-        typeLabel: Person
-      secondEndpointNodeType:
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: isBlocked
+            valueType: BOOLEAN
+            notNull: true
+          - name: type
+            valueType: STRING
+            notNull: true
+    - nodeType:
         typeLabel: Company
-  - edgeType:
-      typeLabel: USE
-      implies:
-        propertyTypes:
-        - name: createTime
-          valueType: ZONED DATETIME
-          notNull: true
-      direction: DIRECTED
-      firstEndpointNodeType:
-        typeIdentifyingLabels:
-        - Person
-        - Company
-      secondEndpointNodeType:
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: name
+            valueType: STRING
+            notNull: true
+          - name: isBlocked
+            valueType: BOOLEAN
+            notNull: true
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: country
+            valueType: STRING
+            notNull: true
+          - name: city
+            valueType: STRING
+            notNull: true
+          - name: business
+            valueType: STRING
+            notNull: true
+          - name: description
+            valueType: STRING
+          - name: url
+            valueType: STRING
+          - name: metadata
+            valueType: JSON
+    - nodeType:
         typeLabel: Medium
-constraints:
-  personIdUnique:
-    name: personIdUnique
-    rule:
-      subject: UNIQUE
-      constraintPattern: Person
-      uniqueKeyComponentPropertyNames:
-      - id
-  accountIdUnique:
-    name: accountIdUnique
-    rule:
-      subject: UNIQUE
-      constraintPattern: Account
-      uniqueKeyComponentPropertyNames:
-      - id
-  companyIdUnique:
-    name: companyIdUnique
-    rule:
-      subject: UNIQUE
-      constraintPattern: Company
-      uniqueKeyComponentPropertyNames:
-      - id
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: type
+            valueType: STRING
+            notNull: true
+          - name: isBlocked
+            valueType: BOOLEAN
+            notNull: true
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: lastLoginTime
+            valueType: ZONED DATETIME
+          - name: riskLevel
+            valueType: FLOAT
+            notNull: true
+    - nodeType:
+        typeLabel: Loan
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: loanAmount
+            valueType: FLOAT
+            notNull: true
+          - name: balance
+            valueType: FLOAT
+            notNull: true
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: loanUsage
+            valueType: STRING
+            notNull: true
+          - name: interestRate
+            valueType: FLOAT
+            notNull: true
+    edgeTypes:
+    - edgeType:
+        directed:
+          from:
+            typeLabel: Person
+          to:
+            typeLabel: Account
+          via: OWN
+        implies:
+          propertyTypes:
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+    - edgeType:
+        directed:
+          from:
+            typeLabel: Account
+          to:
+            typeLabel: Account
+          via: TRANSFER
+        implies:
+          propertyTypes:
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: amount
+            valueType: FLOAT
+            notNull: true
+          - name: orderNum
+            valueType: INTEGER
+            notNull: true
+          - name: comment
+            valueType: STRING
+          - name: payType
+            valueType: STRING
+            notNull: true
+          - name: goodsType
+            valueType: STRING
+    - edgeType:
+        directed:
+          from:
+            typeLabel: Account
+          to:
+            typeLabel: Account
+          via: WITHDRAW
+        implies:
+          propertyTypes:
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: amount
+            valueType: FLOAT
+            notNull: true
+    - edgeType:
+        directed:
+          from:
+            typeLabel: Account
+          to:
+            typeLabel: Loan
+          via: REPAY
+        implies:
+          propertyTypes:
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: amount
+            valueType: FLOAT
+            notNull: true
+    - edgeType:
+        directed:
+          from:
+            typeLabel: Loan
+          to:
+            typeLabel: Account
+          via: DEPOSIT
+        implies:
+          propertyTypes:
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: amount
+            valueType: FLOAT
+            notNull: true
+    - edgeType:
+        directed:
+          from:
+            typeLabel: Person
+          to:
+            typeLabel: Loan
+          via: APPLY
+        implies:
+          propertyTypes:
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: org
+            valueType: STRING
+            notNull: true
+    - edgeType:
+        directed:
+          from:
+            typeLabel: Person
+          to:
+            typeLabel: Person
+          via: GUARANTEE
+        implies:
+          propertyTypes:
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: relation
+            valueType: STRING
+            notNull: true
+    - edgeType:
+        directed:
+          from:
+            typeLabel: Person
+          to:
+            typeLabel: Company
+          via: INVEST
+        implies:
+          propertyTypes:
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: ratio
+            valueType: FLOAT
+            notNull: true
+    - edgeType:
+        directed:
+          from:
+            typeIdentifier:
+            - Person
+            - Company
+          to:
+            typeLabel: Medium
+          via: USE
+        implies:
+          propertyTypes:
+          - name: createTime
+            valueType: ZONED DATETIME
+            notNull: true
+  constraints:
+    personIdUnique:
+      name: personIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Person
+        uniqueKeyComponentPropertyNames:
+        - id
+    accountIdUnique:
+      name: accountIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Account
+        uniqueKeyComponentPropertyNames:
+        - id
+    companyIdUnique:
+      name: companyIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Company
+        uniqueKeyComponentPropertyNames:
+        - id

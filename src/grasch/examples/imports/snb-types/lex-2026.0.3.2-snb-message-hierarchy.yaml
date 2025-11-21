@@ -1,0 +1,40 @@
+# SNB Message Type Hierarchy
+# Message is an abstract supertype for Post and Comment
+# This is an importable array - the interpretation wrapper is applied by the importing file
+
+- abstract:
+    nodeType:
+      typeLabel: Message
+      implies:
+        propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: creationDate
+            valueType: ZONED DATETIME
+            notNull: true
+          - name: locationIP
+            valueType: STRING
+            notNull: true
+          - name: browserUsed
+            valueType: STRING
+            notNull: true
+          - name: content
+            valueType: STRING
+          - name: length
+            valueType: INTEGER
+            notNull: true
+
+- nodeType:
+    typeLabel: Post
+    extends: Message
+    adding:
+      propertyTypes:
+        - name: imageFile
+          valueType: STRING
+        - name: language
+          valueType: STRING
+
+- nodeType:
+    typeLabel: Comment
+    extends: Message

@@ -1,0 +1,29 @@
+CypherValueTypeMapping:
+  version: 1.0
+  
+  logicalTypes:
+    - name: STRING
+      parquetType: STRING
+      orcType: string
+      csvType: string
+      jsonType: string
+    - name: INTEGER
+      parquetType: INT32
+      orcType: int32
+      csvType: int32
+      jsonType: number
+    - name: FLOAT
+      parquetType: FLOAT
+      orcType: float
+      csvType: float
+      jsonType: number
+    - name: BOOLEAN
+      parquetType: BOOLEAN
+      orcType: boolean
+      csvType: boolean
+      jsonType: boolean
+    - name: LIST_OF
+      parquetType: LIST
+      orcType: list
+      csvType: UNSUPPORTED
+      jsonType: array

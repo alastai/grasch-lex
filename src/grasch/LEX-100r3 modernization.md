@@ -54,7 +54,69 @@ See: `lex-2026.0.3.2-edge-type-syntax-examples.yaml`
 
 See: `lex-2026.0.3.2-node-type-syntax-examples.yaml`
 
-### Type Finalization and Sealing
+### Type Interpretation System (0.3.2)
+
+**Core Design: Type Interpretation = Matching Mode + Concreteness**
+
+**Matching Modes:**
+- `exactlyOf:` (default) - exact type matching only
+- `subtypesOf:` - allows subtype matching
+
+**Concreteness:**
+- `concrete` (default) - type can be instantiated
+- `abstract` - type cannot be instantiated (only subtypes can)
+
+**Valid Combinations:**
+1. `exactlyOf` + `concrete` (double default) - most common case
+2. `subtypesOf` + `concrete` - polymorphic with instantiable supertype
+3. `subtypesOf` + `abstract` - polymorphic with abstract supertype
+
+**Invalid Combination:**
+- `exactlyOf` + `abstract` - logically impossible (can't instantiate abstract types exactly)
+
+**Shorthands:**
+```yaml
+# These are equivalent:
+abstract:
+  nodeTypes:
+    - nodeType: {...}
+
+subtypesOf:
+  abstract:
+    nodeTypes:
+      - nodeType: {...}
+
+properSubtypesOf:
+  nodeTypes:
+    - nodeType: {...}
+```
+
+**Examples:**
+```yaml
+# Default: exactlyOf + concrete
+nodeTypes:
+  - nodeType:
+      typeLabel: Person
+
+# Subtypes with concrete supertype
+nodeTypes:
+  - subtypesOf:
+      nodeTypes:
+        - nodeType:
+            typeLabel: Person
+
+# Abstract supertype (shorthand)
+nodeTypes:
+  - abstract:
+      nodeTypes:
+        - nodeType:
+            typeLabel: Message
+        - nodeType:
+            typeLabel: Post
+            extends: Message
+```
+
+**Type Finalization and Sealing:**
 
 **Final Types:**
 ```yaml
@@ -86,6 +148,14 @@ See: `lex-2026.0.3.2-node-type-syntax-examples.yaml`
 2. `abstract:` interpretation + all `final:` types = INVALID
 3. `abstract:` interpretation + all types in `sealed:` = INVALID
 4. Rationale: Abstract interpretation requires proper subtypes, but final/sealed types have none
+
+**Terminology Evolution:**
+- `allowSubtypesOf` → `subtypesOf`
+- `allowsProperSubtypesOf` → `properSubtypesOf`
+- `exactlyOfThisType` → `exactlyOf`
+- `abstractSupertype` → `abstract`
+
+See: `TYPE-INTERPRETATION-DESIGN.md` for complete design documentation
 
 ### API Enhancements
 - All edge endpoint accessors as synonyms (no canonical form)

@@ -1,0 +1,85 @@
+graphStorageSchema:
+  metadata:
+    identifier: SNB_demo_graph
+    schema:
+      kind: "LEX"
+      ref: "file:///home/graphar/ldbc/snb_demo_graph_lex.yaml"
+
+  graph:
+    name: "SNB_demo_graph"
+    pathPrefix: "file:///home/graphar/ldbc/"
+    version: "gar_lex/v1"
+
+  nodeTypes:
+    - typeLabel: "organisation"
+      pathPrefix: "vertex/organisation/"
+      chunkSize: 128
+      propertyGroups:
+        - fileFormat: "parquet"
+          properties: ["_LABELS"]
+          pathPrefix: "_labels/"
+        - fileFormat: "orc"
+          properties: [ "id", "name", "url"]
+          pathPrefix: "id_name_url/"
+
+    - typeLabel: "person"
+      pathPrefix: "vertex/person/"
+      chunkSize: 128
+      propertyGroups:
+        - fileFormat: "parquet"
+          properties: ["id"]
+          pathPrefix: "id/"
+        - fileFormat: "orc"
+          properties: ["firstName", "lastName"]
+          pathPrefix: "name/"
+        - fileFormat: "csv"
+          properties: ["gender", "birthday"]
+          pathPrefix: "gender_birthday/"
+        - fileFormat: "json"
+          properties: ["creationDate", "locationIP", "browserUsed"]
+          pathPrefix: "creationDate_locationIP_browserUsed/"
+        - fileFormat: "parquet"
+          properties: ["emails"]
+          pathPrefix: "file:///home/graphar/emails/"
+        - fileFormat: "parquet"
+          properties: ["speaks"]
+          pathPrefix: "file:///home/graphar/speaks/"
+
+  edgeTypes:
+    - typeLabel: "knows"
+      srcType: "person"
+      dstType: "person"
+      pathPrefix: "edge/person_knows_person/"
+      chunkSize: 256
+      srcChunkSize: 128
+      dstChunkSize: 128
+      propertyGroups:
+        - fileFormat: "parquet"
+          properties: ["creationDate"]
+          pathPrefix: "creationDate/"
+      adjLists:
+        - ordered: true
+          alignedBy: "destination"
+          fileFormat: "parquet"
+        - ordered: true
+          alignedBy: "source"
+          fileFormat: "csv"
+
+    - typeLabel: "workAt"
+      srcType: "person"
+      dstType: "organisation"
+      pathPrefix: "edge/person_workAt_organisation/"
+      chunkSize: 256
+      srcChunkSize: 128
+      dstChunkSize: 128
+      propertyGroups:
+        - fileFormat: "parquet"
+          properties: ["workFrom"]
+          pathPrefix: "workFrom/"
+      adjLists:
+        - ordered: true
+          alignedBy: "destination"
+          fileFormat: "parquet"
+        - ordered: true
+          alignedBy: "source"
+          fileFormat: "csv"

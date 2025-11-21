@@ -1,0 +1,20 @@
+# LEX-2026.0.3.2 Property Graph Data Model Default Values
+# These are the default values for the property graph data model
+# specified in the LEX-2026.0.3.2 specification
+# This is an importable fragment, not a top-level document
+
+valueTypeSystemName: "CANONICAL"
+
+graphPreferredName: "GRAPH"
+nodePreferredName: "NODE"
+edgePreferredName: "EDGE"
+
+nodeTypeMinimumLabels: 1
+nodeTypeMaximumLabels: 20
+nodeTypeMinimumPropertyTypes: 0
+nodeTypeMaximumPropertyTypes: 1000
+
+edgeTypeMinimumLabels: 1
+edgeTypeMaximumLabels: 20
+edgeTypeMinimumPropertyTypes: 0
+edgeTypeMaximumPropertyTypes: 1000

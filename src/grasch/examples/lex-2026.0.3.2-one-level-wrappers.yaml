@@ -1,0 +1,26 @@
+# One-Level Wrapper Examples
+# Demonstrates convenience wrappers that canonicalize to two-level form
+
+graphType: TransportNetwork
+
+propertyGraphDataModel:
+  defaults:
+    nodeLabelsAre: required
+    edgeLabelsAre: required
+
+nodeTypes:
+  # abstract: canonicalizes to subtypesOf: abstract:
+  - abstract: Vehicle
+  
+  # concrete: canonicalizes to exactlyOf: concrete:
+  - concrete: Car
+  
+  # properSubtypesOf: canonicalizes to subtypesOf: abstract:
+  - properSubtypesOf: Boat
+
+edgeTypes:
+  - typeLabel: CONNECTS
+    directed:
+      from: abstract: Location
+      via: CONNECTS
+      to: concrete: City

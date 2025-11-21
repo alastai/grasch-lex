@@ -452,12 +452,17 @@ class ImportPreprocessor:
                     processed[key] = self.process(value, current_path, key)
                 return self.canonicalize_edge_type(processed, f"edgeType:{parent_key}")
             
+            # Check if this dict is already a wrapper before processing
+            if self.detect_wrapper(data):
+                # This is a wrapper - canonicalize it directly without processing keys first
+                return self.canonicalize_wrapper(data, parent_key, f"{parent_key}" if parent_key else "root")
+            
             # Process each key-value pair normally
             result = {}
             for key, value in data.items():
                 result[key] = self.process(value, current_path, key)
             
-            # Canonicalize after processing
+            # Canonicalize after processing (but this won't double-wrap because we check above)
             return self.canonicalize_wrapper(result, parent_key, f"{parent_key}" if parent_key else "root")
         
         elif isinstance(data, list):

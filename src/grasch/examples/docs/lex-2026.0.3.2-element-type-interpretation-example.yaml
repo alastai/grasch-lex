@@ -75,7 +75,7 @@ graphType:
               notNull: true
   
   # Message and its subtypes allowed
-  allowSubtypesOf:
+  subtypesOf:
     nodeTypes:
       - nodeType:
           typeLabel: Message
@@ -131,8 +131,8 @@ graphType:
               notNull: true
   
   # RELATIONSHIP is abstract - only proper subtypes allowed
-  allowSubtypesOf:
-    abstractSupertypes:
+  subtypesOf:
+    abstract:
       edgeTypes:
       - edgeType:
           typeLabel: RELATIONSHIP
@@ -190,7 +190,7 @@ graphType:
               notNull: true
   
   # Allow subtypes for edges
-  allowSubtypesOf:
+  subtypesOf:
     edgeTypes:
       - edgeType:
           typeLabel: KNOWS
@@ -233,7 +233,7 @@ graphType:
               notNull: true
   
   # Subtypes allowed for Company hierarchy
-  allowSubtypesOf:
+  subtypesOf:
     nodeTypes:
       - nodeType:
           typeLabel: Company

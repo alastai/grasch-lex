@@ -1,0 +1,63 @@
+# Comprehensive Type Interpretation Wrapper Examples
+# Demonstrates all wrapper patterns and edge type component-level interpretations
+
+graphType: 
+  subtypesOf:
+    abstract: SocialNetwork
+
+propertyGraphDataModel:
+  defaults:
+    nodeLabelsAre: required
+    edgeLabelsAre: required
+
+# Array-level wrapper (Task 6.5)
+nodeTypes:
+  subtypesOf:
+    - Person          # Item in wrapped array
+    - Organization    # Item in wrapped array
+    - abstract: Entity  # Mixed: wrapped item in wrapped array (Task 6.8)
+
+# Individual item wrappers (Task 6.6)
+edgeTypes:
+  - typeLabel: KNOWS
+    directed:
+      from: Person
+      via: KNOWS
+      to: Person
+  
+  # Wrapper around entire edgeType (Task 6.9)
+  - subtypesOf:
+      abstract:
+        typeLabel: RELATIONSHIP
+        directed:
+          from:
+            subtypesOf:
+              abstract: Entity
+          via: RELATIONSHIP
+          to:
+            subtypesOf:
+              abstract: Entity
+  
+  # Component-level wrappers (Task 6.9)
+  - typeLabel: MANAGES
+    directed:
+      from:
+        exactlyOf:
+          concrete: Person
+      via:
+        exactlyOf:
+          concrete: MANAGES
+      to:
+        subtypesOf:
+          abstract: Person
+  
+  # Undirected edge with component wrappers (Task 6.9)
+  - typeLabel: FRIEND
+    undirected:
+      between:
+        subtypesOf:
+          concrete: Person
+      arc: FRIEND
+      and:
+        subtypesOf:
+          concrete: Person

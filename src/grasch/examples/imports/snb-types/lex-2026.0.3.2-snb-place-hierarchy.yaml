@@ -1,45 +1,33 @@
 # SNB Place Type Hierarchy
 # Place is an abstract supertype for City, Country, and Continent
-# All instances have the Place label plus their specific subtype label
-# This is an importable fragment with a sealed hierarchy
-# sealed is allowed in imports as it defines a complete closed type hierarchy
+# This is an importable array - the interpretation wrapper is applied by the importing file
 
-sealed:
-  - abstract:
-      nodeType:
-        typeLabel: Place
-        implies:
-          propertyTypes:
-            - name: id
-              valueType: INTEGER
-              notNull: true
-            - name: name
-              valueType: STRING
-              notNull: true
-            - name: url
-              valueType: STRING
-              notNull: true
-            - name: type
-              valueType: STRING
-              notNull: true
-
-  - nodeType:
-      typeLabel: City
+- abstract:
+    nodeType:
+      typeLabel: Place
       implies:
-        supertypes:
-          - Place
-        propertyTypes: []
+        propertyTypes:
+          - name: id
+            valueType: INTEGER
+            notNull: true
+          - name: name
+            valueType: STRING
+            notNull: true
+          - name: url
+            valueType: STRING
+            notNull: true
+          - name: type
+            valueType: STRING
+            notNull: true
 
-  - nodeType:
-      typeLabel: Country
-      implies:
-        supertypes:
-          - Place
-        propertyTypes: []
+- nodeType:
+    typeLabel: City
+    extends: Place
 
-  - nodeType:
-      typeLabel: Continent
-      implies:
-        supertypes:
-          - Place
-        propertyTypes: []
+- nodeType:
+    typeLabel: Country
+    extends: Place
+
+- nodeType:
+    typeLabel: Continent
+    extends: Place

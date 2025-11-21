@@ -1,0 +1,1214 @@
+{
+  "graphSchema": {
+    "pathName": "/examples/all-import-patterns",
+    "graphType": {
+      "propertyGraphDataModel": {
+        "valueTypeSystemName": "CANONICAL",
+        "graphPreferredName": "GRAPH",
+        "nodePreferredName": "NODE",
+        "edgePreferredName": "EDGE",
+        "nodeTypeMinimumLabels": 1,
+        "nodeTypeMaximumLabels": 20,
+        "nodeTypeMinimumPropertyTypes": 0,
+        "nodeTypeMaximumPropertyTypes": 1000,
+        "edgeTypeMinimumLabels": 1,
+        "edgeTypeMaximumLabels": 20,
+        "edgeTypeMinimumPropertyTypes": 0,
+        "edgeTypeMaximumPropertyTypes": 1000
+      },
+      "nodeTypes": [
+        {
+          "nodeType": {
+            "typeLabel": "Person",
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "id",
+                  "valueType": "INTEGER",
+                  "notNull": true
+                },
+                {
+                  "name": "name",
+                  "valueType": "STRING",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "Company",
+            "implies": {
+              "labels": [
+                "Organization",
+                "LegalEntity"
+              ],
+              "propertyTypes": [
+                {
+                  "name": "id",
+                  "valueType": "INTEGER",
+                  "notNull": true
+                },
+                {
+                  "name": "name",
+                  "valueType": "STRING",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "index": 0,
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "id",
+                  "valueType": "INTEGER",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabels": [
+              "Product",
+              "Sellable"
+            ],
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "id",
+                  "valueType": "INTEGER",
+                  "notNull": true
+                },
+                {
+                  "name": "price",
+                  "valueType": "FLOAT",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "Employee",
+            "implies": {
+              "supertypes": "Person",
+              "propertyTypes": [
+                {
+                  "name": "employeeId",
+                  "valueType": "STRING",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "Contractor",
+            "implies": {
+              "supertypes": [
+                "Person"
+              ],
+              "propertyTypes": [
+                {
+                  "name": "contractId",
+                  "valueType": "STRING",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "Manager",
+            "implies": {
+              "supertypes": [
+                "Employee",
+                "Person"
+              ],
+              "propertyTypes": [
+                {
+                  "name": "department",
+                  "valueType": "STRING",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "Director",
+            "extends": "Manager",
+            "adding": {
+              "propertyTypes": [
+                {
+                  "name": "division",
+                  "valueType": "STRING",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "VicePresident",
+            "extends": [
+              "Director"
+            ],
+            "adding": {
+              "propertyTypes": [
+                {
+                  "name": "region",
+                  "valueType": "STRING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "CEO",
+            "extends": "VicePresident",
+            "adding": {
+              "labels": [
+                "Executive",
+                "BoardMember"
+              ],
+              "propertyTypes": [
+                {
+                  "name": "boardSeat",
+                  "valueType": "INTEGER"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "abstract": {
+            "nodeType": {
+              "typeLabel": "Vehicle",
+              "implies": {
+                "propertyTypes": [
+                  {
+                    "name": "id",
+                    "valueType": "INTEGER",
+                    "notNull": true
+                  },
+                  {
+                    "name": "manufacturer",
+                    "valueType": "STRING"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "Car",
+            "implies": {
+              "supertypes": "Vehicle",
+              "propertyTypes": [
+                {
+                  "name": "doors",
+                  "valueType": "INTEGER"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "abstractSupertype": {
+            "nodeType": {
+              "typeLabel": "Asset",
+              "implies": {
+                "propertyTypes": [
+                  {
+                    "name": "id",
+                    "valueType": "INTEGER",
+                    "notNull": true
+                  },
+                  {
+                    "name": "value",
+                    "valueType": "FLOAT"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "RealEstate",
+            "extends": "Asset",
+            "adding": {
+              "propertyTypes": [
+                {
+                  "name": "address",
+                  "valueType": "STRING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "Tag"
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "CategoryTag",
+            "extends": "Tag"
+          }
+        },
+        {
+          "sealed": {
+            "nodeTypes": [
+              {
+                "abstract": {
+                  "nodeType": {
+                    "typeLabel": "Place",
+                    "implies": {
+                      "propertyTypes": [
+                        {
+                          "name": "id",
+                          "valueType": "INTEGER",
+                          "notNull": true
+                        },
+                        {
+                          "name": "name",
+                          "valueType": "STRING",
+                          "notNull": true
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "nodeType": {
+                  "typeLabel": "Continent",
+                  "extends": "Place",
+                  "adding": {
+                    "propertyTypes": [
+                      {
+                        "name": "area",
+                        "valueType": "FLOAT"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "nodeType": {
+                  "typeLabel": "Country",
+                  "extends": "Place",
+                  "adding": {
+                    "propertyTypes": [
+                      {
+                        "name": "population",
+                        "valueType": "INTEGER"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "nodeType": {
+                  "typeLabel": "City",
+                  "extends": "Place",
+                  "adding": {
+                    "propertyTypes": [
+                      {
+                        "name": "population",
+                        "valueType": "INTEGER"
+                      },
+                      {
+                        "name": "coordinates",
+                        "valueType": "STRING"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "sealed": {
+            "nodeTypes": [
+              {
+                "abstract": {
+                  "nodeType": {
+                    "typeLabel": "Message",
+                    "implies": {
+                      "propertyTypes": [
+                        {
+                          "name": "id",
+                          "valueType": "INTEGER",
+                          "notNull": true
+                        },
+                        {
+                          "name": "content",
+                          "valueType": "STRING"
+                        },
+                        {
+                          "name": "creationDate",
+                          "valueType": "ZONED DATETIME",
+                          "notNull": true
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "nodeType": {
+                  "typeLabel": "Post",
+                  "extends": "Message",
+                  "adding": {
+                    "propertyTypes": [
+                      {
+                        "name": "imageFile",
+                        "valueType": "STRING"
+                      },
+                      {
+                        "name": "language",
+                        "valueType": "STRING"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "nodeType": {
+                  "typeLabel": "Comment",
+                  "extends": "Message",
+                  "adding": {
+                    "propertyTypes": [
+                      {
+                        "name": "replyCount",
+                        "valueType": "INTEGER"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "abstract": {
+            "nodeType": {
+              "typeLabel": "Organisation",
+              "implies": {
+                "propertyTypes": [
+                  {
+                    "name": "id",
+                    "valueType": "INTEGER",
+                    "notNull": true
+                  },
+                  {
+                    "name": "name",
+                    "valueType": "STRING",
+                    "notNull": true
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "final": {
+            "nodeType": {
+              "typeLabel": "Company",
+              "extends": "Organisation",
+              "adding": {
+                "propertyTypes": [
+                  {
+                    "name": "industry",
+                    "valueType": "STRING"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "final": {
+            "nodeType": {
+              "typeLabel": "University",
+              "extends": "Organisation",
+              "adding": {
+                "propertyTypes": [
+                  {
+                    "name": "ranking",
+                    "valueType": "INTEGER"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "SeniorManager",
+            "implies": {
+              "supertypes": "Manager",
+              "propertyTypes": [
+                {
+                  "name": "yearsExperience",
+                  "valueType": "INTEGER"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "nodeType": {
+            "typeLabel": "ExecutiveManager",
+            "extends": "SeniorManager",
+            "adding": {
+              "labels": [
+                "Leadership"
+              ],
+              "propertyTypes": [
+                {
+                  "name": "strategicInitiatives",
+                  "valueType": "LIST"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "edgeTypes": [
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "KNOWS",
+              "to": "Person"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "since",
+                  "valueType": "DATE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "via": "WORKS_FOR",
+              "from": "Person",
+              "to": "Company"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "startDate",
+                  "valueType": "DATE",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "arc": "EMPLOYED_BY",
+              "from": "Person",
+              "to": "Company"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "startDate",
+                  "valueType": "DATE",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "MANAGES",
+              "to": "Company"
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "REPORTS_TO",
+              "to": "SAME"
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Employee",
+              "via": "MENTORS",
+              "to": "SELF"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "startDate",
+                  "valueType": "DATE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "LINKS_TO",
+              "to": 0
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": [
+                "Person",
+                "Employee"
+              ],
+              "via": "CREATED_BY",
+              "to": "Company"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "creationDate",
+                  "valueType": "ZONED DATETIME",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "PURCHASES",
+              "to": {
+                "typeLabels": [
+                  "Product",
+                  "Sellable"
+                ]
+              }
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "purchaseDate",
+                  "valueType": "DATE",
+                  "notNull": true
+                },
+                {
+                  "name": "quantity",
+                  "valueType": "INTEGER"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "tail": "Person",
+              "via": "FOLLOWS",
+              "head": "Person"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "since",
+                  "valueType": "DATE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "src": "Person",
+              "via": "SENDS_TO",
+              "dst": "Person"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "timestamp",
+                  "valueType": "ZONED DATETIME"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "src": "Person",
+              "via": "TRANSFERS_TO",
+              "dest": "Company"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "amount",
+                  "valueType": "FLOAT"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": {
+                "nodeType": {
+                  "typeLabel": "Person",
+                  "implies": {
+                    "propertyTypes": [
+                      {
+                        "name": "id",
+                        "valueType": "INTEGER",
+                        "notNull": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "via": "CONNECTS_TO",
+              "to": "Company"
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "OWNS",
+              "to": {
+                "nodeType": {
+                  "typeLabel": "Property",
+                  "implies": {
+                    "propertyTypes": [
+                      {
+                        "name": "id",
+                        "valueType": "INTEGER",
+                        "notNull": true
+                      },
+                      {
+                        "name": "address",
+                        "valueType": "STRING",
+                        "notNull": true
+                      },
+                      {
+                        "name": "value",
+                        "valueType": "FLOAT"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "purchaseDate",
+                  "valueType": "DATE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Company",
+              "via": "LINKED_TO",
+              "and": {
+                "nodeType": {
+                  "index": 99,
+                  "implies": {
+                    "propertyTypes": [
+                      {
+                        "name": "linkId",
+                        "valueType": "STRING"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Person",
+              "via": "COLLABORATES_WITH",
+              "and": "Person"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "projectName",
+                  "valueType": "STRING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "via": "PARTNERS_WITH",
+              "between": "Company",
+              "and": "Company"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "since",
+                  "valueType": "DATE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "arc": "ALLIED_WITH",
+              "between": "Company",
+              "and": "Company"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "since",
+                  "valueType": "DATE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Person",
+              "and": "Person",
+              "via": "SHARES_WITH"
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Person",
+              "via": "SIMILAR_TO",
+              "and": "SAME"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "similarity",
+                  "valueType": "FLOAT"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Person",
+              "via": "RELATED_TO",
+              "and": "SELF"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "relationship",
+                  "valueType": "STRING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": 0,
+              "via": "ASSOCIATED_WITH",
+              "and": "Person"
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": [
+                "Person",
+                "Employee"
+              ],
+              "via": "WORKS_WITH",
+              "and": "Person"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "project",
+                  "valueType": "STRING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Person",
+              "via": "KNOWS",
+              "and": "Person"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "since",
+                  "valueType": "DATE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Person",
+              "arc": "CLOSE_FRIEND",
+              "and": "Person"
+            },
+            "extends": "KNOWS",
+            "adding": {
+              "propertyTypes": [
+                {
+                  "name": "closeness",
+                  "valueType": "FLOAT"
+                },
+                {
+                  "name": "sharedInterests",
+                  "valueType": "LIST"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Person",
+              "via": "BEST_FRIEND",
+              "and": "Person"
+            },
+            "extends": [
+              "CLOSE_FRIEND"
+            ],
+            "adding": {
+              "propertyTypes": [
+                {
+                  "name": "yearsKnown",
+                  "valueType": "INTEGER"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "RELATIONSHIP",
+              "to": "Person"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "startDate",
+                  "valueType": "DATE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "arc": "MARRIED_TO",
+              "to": "Person"
+            },
+            "extends": "RELATIONSHIP",
+            "adding": {
+              "propertyTypes": [
+                {
+                  "name": "weddingDate",
+                  "valueType": "DATE",
+                  "notNull": true
+                },
+                {
+                  "name": "location",
+                  "valueType": "STRING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "ENGAGED_TO",
+              "to": "Person"
+            },
+            "extends": "RELATIONSHIP",
+            "adding": {
+              "propertyTypes": [
+                {
+                  "name": "engagementDate",
+                  "valueType": "DATE"
+                },
+                {
+                  "name": "weddingPlanned",
+                  "valueType": "BOOLEAN"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "to": "Company"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "weight",
+                  "valueType": "FLOAT"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Person",
+              "and": "Person"
+            }
+          }
+        },
+        {
+          "abstract": {
+            "edgeType": {
+              "directed": {
+                "from": "Person",
+                "via": "RELATIONSHIP",
+                "to": "Person"
+              },
+              "implies": {
+                "propertyTypes": [
+                  {
+                    "name": "since",
+                    "valueType": "DATE"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "FRIENDSHIP",
+              "to": "Person"
+            },
+            "implies": {
+              "supertypes": [
+                "RELATIONSHIP"
+              ],
+              "propertyTypes": [
+                {
+                  "name": "closeness",
+                  "valueType": "FLOAT"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Person",
+              "via": "PROFESSIONAL_RELATIONSHIP",
+              "to": "Person"
+            },
+            "implies": {
+              "supertypes": "RELATIONSHIP",
+              "propertyTypes": [
+                {
+                  "name": "context",
+                  "valueType": "STRING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "abstractSupertype": {
+            "edgeType": {
+              "undirected": {
+                "between": "Company",
+                "via": "PARTNERSHIP",
+                "and": "Company"
+              },
+              "implies": {
+                "propertyTypes": [
+                  {
+                    "name": "startDate",
+                    "valueType": "DATE"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": "Company",
+              "via": "STRATEGIC_PARTNERSHIP",
+              "and": "Company"
+            },
+            "implies": {
+              "supertypes": "PARTNERSHIP",
+              "propertyTypes": [
+                {
+                  "name": "value",
+                  "valueType": "FLOAT"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Employee",
+              "via": "MANAGES",
+              "to": {
+                "abstract": "Person"
+              }
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "startDate",
+                  "valueType": "DATE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": "Manager",
+              "via": "SUPERVISES",
+              "to": {
+                "abstractSupertype": "Person"
+              }
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "role",
+                  "valueType": "STRING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "directed": {
+              "from": {
+                "abstract": "Person"
+              },
+              "via": "REPORTS_TO",
+              "to": {
+                "abstract": "Person"
+              }
+            },
+            "implies": {
+              "propertyTypes": []
+            }
+          }
+        },
+        {
+          "edgeType": {
+            "undirected": {
+              "between": {
+                "abstract": "Person"
+              },
+              "via": "COLLABORATES_ON",
+              "and": "Company"
+            },
+            "implies": {
+              "propertyTypes": [
+                {
+                  "name": "projectName",
+                  "valueType": "STRING"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

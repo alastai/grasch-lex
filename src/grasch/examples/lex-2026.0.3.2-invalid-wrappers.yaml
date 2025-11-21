@@ -1,0 +1,30 @@
+# Invalid Wrapper Examples
+# These examples should fail validation
+
+# Example 1: Nested wrappers (INVALID)
+graphType: InvalidNested
+
+propertyGraphDataModel:
+  defaults:
+    nodeLabelsAre: required
+
+nodeTypes:
+  # INVALID: Nested wrappers
+  - subtypesOf:
+      abstract:
+        subtypesOf:  # ERROR: Wrapper nesting not allowed
+          concrete: NestedType
+
+# Example 2: Wrapper inside nodeType definition (INVALID)
+# This would be in a separate file as it conflicts with Example 1
+# nodeTypes:
+#   - typeLabel: Person
+#     subtypesOf:  # ERROR: Wrappers only allowed at reference points
+#       abstract: Person
+
+# Example 3: Deprecated direction property (INVALID)
+# edgeTypes:
+#   - typeLabel: OLD_EDGE
+#     direction: firstToSecond  # ERROR: Use directed: or undirected: instead
+#     from: Person
+#     to: Person

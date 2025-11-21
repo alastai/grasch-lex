@@ -20,9 +20,9 @@ This feature involves creating a Python library called Grasch that implements **
 
 **Critical Analysis**: Detailed analysis of GQL:2027 CD1SP1 vs LEX-100 constraint frameworks reveals that LEX-100 is currently incomplete compared to the rich GQL:2027 constraint system. See [gql-2027-vs-lex-100-analysis.md](gql-2027-vs-lex-100-analysis.md) and the design document addendum for complete analysis. LEX:2026.0 implementation prioritizes complete GQL:2027 CD1SP1 constraint framework implementation before adding LEX organizational alternatives.
 
-**Terminology Clarification**: Following LEX-99, Grasch uses "types-graphs directory" instead of "GQL-schema" to avoid confusion, as GQL-schema is merely a container, not a schema in the traditional computer science sense. The term "schema" is reserved for graph types (descriptions of graph structure) following standard usage in XML Schema, JSON Schema, and database systems.
+**Terminology Clarification**: GQllowing LEX-99, Grasch uses "data-schema (leaf) directory" instead of "GQL-schema" to avoid confusion, as GQL-schema is merely a container, not a schema in the traditional computer science sense. The term "schema" is reserved for graph types (descriptions of graph structure) following standard usage in XML Schema, JSON Schema, and database systems.
 
-The library provides a structured way to define and manage named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions) within a hierarchical filesystem-like structure. The Catalog has a root directory ("/"), directories forming a tree structure with unique names among siblings, and types-graphs directories (leaf nodes) containing named primary catalog objects with fully-qualified names. Directories can only contain other directories or types-graphs directories, while types-graphs directories can only contain named primary catalog objects.
+The library provides a structured way to define and manage named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions) within a hierarchical filesystem-like structure. The Catalog has a root directory ("/"), directories forming a tree structure with unique names among siblings, and data-schema (leaf) directories (leaf nodes) containing named primary catalog objects with fully-qualified names. Directories can only contain other directories or data-schema (leaf) directories, while data-schema (leaf) directories can only contain named primary catalog objects.
 
 **Value Type System**: Grasch implements the Intermediate Language Value Types (ILVT) specification as defined in [value_types.md](.kiro/specs/property-graph-schema/value_types.md). The ILVT provides universal type mapping between GQL Property Value Types, SQL Foundation Data Types, and JSON Schema Extensions, enabling seamless interoperability across different type systems. All property types, attribute types, and content record types in Grasch are based on ILVT type definitions with their associated parameters, constraints, and implementation-defined behaviors.
 
@@ -31,7 +31,7 @@ The library provides a structured way to define and manage named primary catalog
 **Terminology Note**: In Grasch, "schema" refers to a description of a set of instances (following standard computer science usage). We distinguish between:
 - **Graph schemas**: Graph types with additional user-defined constraints (descriptions of graph structure)
 - **Graphs/Graph instances**: Instances of graph schemas (actual graph data conforming to the schema)
-- **GQL-schemas**: Containers of primary catalog objects that are leaf nodes in the Catalog (GQL-specific terminology)
+- **GQL-schemas / data-schema (leaf) directories**: Containers of primary catalog objects that are leaf nodes in the Catalog (GQL-specific terminology; in LEX we prefer "data-schema (leaf) directory" to avoid confusion with graphSchema documents)
 
 The library will model the fundamental concepts of elements (nodes and edges) with content records, element types with content types (content record types), graph types, and their relationships within this hierarchical Catalog structure. Elements have distinct identities and content records, while element types define content types as proper record types with nested structure. Content types consist of a vector of label types (with constant label datatype) followed by nested record types for properties, enabling hierarchical data structures similar to JSON documents within graph elements. Each graph type contains a bounded content type lattice with ANY_CONTENT_TYPE (empty attribute set) as the top element and NO_CONTENT_TYPE (uninhabitable) as the bottom element.
 
@@ -45,7 +45,7 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 
 1. WHEN I define graph schemas THEN the system SHALL implement the LEX-100 abstract syntax using descriptor objects in a hierarchical collection
 2. WHEN I work with descriptors THEN the system SHALL support the descriptor naming convention with optional double quotation marks and prefix symbols (-, ?, +, *, |) for inclusion, optionality, repetition, and choice
-3. WHEN I create graph schema identifiers THEN the system SHALL implement the formal identifier structure: root IRI (optional), directory path (multiple), types-graphs-directory (optional), and name (required)
+3. WHEN I create graph schema identifiers THEN the system SHALL implement the formal identifier structure: root IRI (optional), directory path (multiple), leaf-directory (optional), and name (required)
 4. WHEN I specify graph schema principals THEN the system SHALL support optional principal strings for authorization data meaningful to catalog-maintaining systems
 5. WHEN I define value type systems THEN the system SHALL implement the formal value type system descriptor with name and version strings as specified in LEX-100
 6. WHEN I work with graph types THEN the system SHALL implement the complete graph type descriptor structure including preferred names, label/property cardinality constraints, node/edge type sets, and key label set dictionaries
@@ -293,8 +293,8 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 9. WHEN I don't specify a default for a setting THEN the system SHALL use the corresponding default default
 10. WHEN I work with path names in my session THEN the system SHALL allow me to set one default Catalog path at any time (if catalog support is included in the active GQL profile)
 11. WHEN no default path prefix is set in my session THEN the system SHALL use "/" (solidus) as the default default path prefix (if catalog support is available)
-12. WHEN the root directory is also a GQL-schema THEN the system SHALL allow primary catalog objects to be placed directly at the root level (if catalog support is available)
-13. WHEN I define a primary catalog object named "Foo" within a GQL-schema at my session's default path THEN the system SHALL assign it the fully-qualified name "<default_path>/Foo"
+12. WHEN the root directory is also a data-schema (leaf) directory THEN the system SHALL allow primary catalog objects to be placed directly at the root level (if catalog support is available)
+13. WHEN I define a primary catalog object named "Foo" within a data-schema (leaf) directory at my session's default path THEN the system SHALL assign it the fully-qualified name "<default_path>/Foo"
 14. WHEN my session's default path is the default default "/" THEN primary catalog objects get FQNs of the form "/<name>"
 15. WHEN I change my session's default path THEN the system SHALL apply the new default path to subsequent unqualified path operations
 16. WHEN I attempt to use LEX extensions with GQL language level THEN the system SHALL provide clear error messages indicating that LEX features require LEX language level
@@ -319,14 +319,14 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 1. WHEN I create a Catalog THEN the system SHALL provide a GQL-compliant catalog structure organized hierarchically like a filesystem
 2. WHEN I work with a Catalog THEN the system SHALL provide a root directory denoted by solidus "/"
 3. WHEN I create directories in the Catalog THEN the system SHALL organize them in a tree structure with string names unique among children of each parent directory
-4. WHEN I add primary catalog objects THEN the system SHALL place them within GQL-schemas (leaf nodes) with string names unique among their siblings
-5. WHEN I reference any GQL-schema THEN the system SHALL provide a fully-qualified name starting with "/" and consisting of successive directory names separated by "/" and terminating with "/" + GQL-schema name
-6. WHEN I work with directories THEN the system SHALL ensure they can only contain other directories or GQL-schemas
-7. WHEN I work with GQL-schemas THEN the system SHALL ensure they can only contain named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions)
-8. WHEN I reference a primary catalog object THEN the system SHALL provide a fully-qualified name consisting of the GQL-schema's fully-qualified path name + "/" + the primary catalog object's name
-9. WHEN I work with a Catalog THEN the system SHALL allow me to store and manage multiple types of named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions) within GQL-schemas
-10. WHEN I navigate the Catalog THEN the system SHALL provide filesystem-like operations for traversing directories and accessing GQL-schemas and their contained primary catalog objects
-11. WHEN I serialize a Catalog THEN the system SHALL preserve the complete hierarchical structure including all directory paths, GQL-schemas, and named primary catalog objects
+4. WHEN I add primary catalog objects THEN the system SHALL place them within data-schema (leaf) directories (leaf nodes) with string names unique among their siblings
+5. WHEN I reference any data-schema (leaf) directory THEN the system SHALL provide a fully-qualified name starting with "/" and consisting of successive directory names separated by "/" and terminating with "/" + data-schema (leaf) directory name
+6. WHEN I work with directories THEN the system SHALL ensure they can only contain other directories or leaf directories
+7. WHEN I work with leaf directories THEN the system SHALL ensure they can only contain named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions)
+8. WHEN I reference a primary catalog object THEN the system SHALL provide a fully-qualified name consisting of the data-schema (leaf) directory's fully-qualified pathName + "/" + the primary catalog object's name
+9. WHEN I work with a Catalog THEN the system SHALL allow me to store and manage multiple types of named primary catalog objects (graphs, graph types, tables, procedures, JSON Schema definitions) within leaf directories
+10. WHEN I navigate the Catalog THEN the system SHALL provide filesystem-like operations for traversing directories and accessing leaf directories and their contained primary catalog objects
+11. WHEN I serialize a Catalog THEN the system SHALL preserve the complete hierarchical structure including all directory paths, leaf directories, and named primary catalog objects
 12. WHEN I store a JSON Schema definition as a primary catalog object THEN the system SHALL allow other primary catalog objects to reference it by its catalog name
 13. WHEN a JSON Schema definition is updated THEN the system SHALL ensure that all referring graph types are updated synchronously to reflect the changes
 
@@ -441,7 +441,7 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 8. WHEN I query the schema graph THEN the system SHALL show the connections between node types through edge types as defined in the graph type
 9. WHEN I work with the content type lattice THEN the system SHALL recognize it as a graph structure with nodes representing content types and edges representing subtype relationships
 10. WHEN I navigate the content type lattice THEN the system SHALL provide graph traversal operations to move between supertypes and subtypes
-11. WHEN I work with the Catalog structure THEN the system SHALL recognize it as a tree graph with directories as internal nodes and GQL-schemas as leaf nodes
+11. WHEN I work with the Catalog structure THEN the system SHALL recognize it as a tree graph with directories as internal nodes and leaf directories as leaf nodes
 12. WHEN I analyze the system THEN the system SHALL provide access to three distinct graph structures: the Catalog tree, the content type lattice within each graph type, and the schema graph (including edge-reflection nodes) for each graph type
 13. WHEN I work with a graph schema (graph type + constraints) THEN the system SHALL distinguish it from the basic graph type and associate additional constraint information with the schema graph
 14. WHEN I serialize or export schema information THEN the system SHALL preserve the graph-theoretic relationships at all levels (Catalog tree, content type lattice, and schema graph with edge-reflection nodes)
@@ -472,7 +472,7 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 1. WHEN I work with the complete Grasch system THEN the system SHALL recognize that the Catalog tree, all ISGs, and all content type lattices together form one large interconnected graph
 2. WHEN I want to visualize parts of the system THEN the system SHALL integrate with the g.V() library for graph visualization
 3. WHEN I request visualization of a subgraph THEN the system SHALL be able to extract the relevant portion from the Kuzu database and format it for g.V() rendering
-4. WHEN I visualize the Catalog tree THEN the system SHALL show directories, GQL-schemas, and their hierarchical relationships
+4. WHEN I visualize the Catalog tree THEN the system SHALL show directories, leaf directories, and their hierarchical relationships
 5. WHEN I visualize an ISG THEN the system SHALL show element types, content types, and their relationships within a single graph type
 6. WHEN I visualize a content type lattice THEN the system SHALL show the subtype/supertype relationships between content types
 7. WHEN I visualize cross-component relationships THEN the system SHALL show connections between Catalog nodes and ISG type nodes
@@ -496,9 +496,11 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 
 ### Requirement 17
 
-**User Story:** As a developer, I want to use LEX catalog DDL commands to create and manage directory structures and GQL-schemas in the catalog, so that I can organize my schemas hierarchically using DDL syntax that extends GQL's existing capabilities.
+**User Story:** As a developer, I want to use LEX catalog DDL commands to create and manage directory structures and leaf directories in the catalog, so that I can organize my schemas hierarchically using DDL syntax that extends GQL's existing capabilities.
 
-**GQL Standard Summary**: GQL provides USE <graph_expression> for specifying working graphs in statements and AT <schema_reference> for schema context in procedures. Schema references support absolute paths like "/production/analytics/schema1" and relative paths like "../schema2", "HOME_SCHEMA", "CURRENT_SCHEMA". However, GQL lacks DDL commands to CREATE/DROP directories or GQL-schemas, and has no SHOW commands for catalog inspection.
+**Terminology Note**: In DDL syntax, the keyword is "GQL SCHEMA" (following GQL standard terminology). In LEX conceptual documentation, we use "data-schema (leaf) directory" to avoid confusion with graph schemas (graphSchema in YAML). In YAML documents, the top-level type is `graphSchema:`.
+
+**GQL Standard Summary**: GQL provides USE <graph_expression> for specifying working graphs in statements and AT <schema_reference> for schema context in procedures. Schema references support absolute paths like "/production/analytics/schema1" and relative paths like "../schema2", "HOME_SCHEMA", "CURRENT_SCHEMA". However, GQL lacks DDL commands to CREATE/DROP directories or leaf directories, and has no SHOW commands for catalog inspection.
 
 **Examples of GQL Standard Usage**:
 - `USE /production/graphs/customer_graph` (absolute graph reference)
@@ -510,8 +512,8 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 
 1. WHEN I use LEX catalog DDL THEN the system SHALL provide CREATE DIRECTORY syntax for creating catalog directories (missing from GQL standard)
 2. WHEN I use LEX catalog DDL THEN the system SHALL provide DROP DIRECTORY syntax for removing catalog directories (missing from GQL standard)
-3. WHEN I use LEX catalog DDL THEN the system SHALL provide CREATE GQL SCHEMA syntax for creating GQL-schema containers (missing from GQL standard)
-4. WHEN I use LEX catalog DDL THEN the system SHALL provide DROP GQL SCHEMA syntax for removing GQL-schema containers (missing from GQL standard)
+3. WHEN I use LEX catalog DDL THEN the system SHALL provide CREATE GQL SCHEMA syntax for creating data-schema (leaf) directory containers (missing from GQL standard, "GQL SCHEMA" is the DDL keyword)
+4. WHEN I use LEX catalog DDL THEN the system SHALL provide DROP GQL SCHEMA syntax for removing data-schema (leaf) directory containers (missing from GQL standard, "GQL SCHEMA" is the DDL keyword)
 5. WHEN I create directories or schemas THEN the system SHALL support both absolute paths (starting with "/") and relative paths from the current default path
 6. WHEN I create nested directories THEN the system SHALL support CREATE DIRECTORY with recursive creation (similar to mkdir -p)
 7. WHEN I work with GQL's existing USE clause THEN the system SHALL support USE <graph_expression> for specifying the working graph within statements (GQL standard feature)
@@ -520,7 +522,7 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 10. WHEN I work with LEX SHOW commands THEN the system SHALL provide SHOW DIRECTORIES, SHOW SCHEMAS, and SHOW GRAPH SCHEMA commands for catalog navigation and ISG examination (LEX extension, not in GQL or SQL standards)
 11. WHEN I use SHOW GRAPH SCHEMA THEN the system SHALL display the Information Schema Graph (ISG) structure for examining graph schema metadata
 12. WHEN I create directories or schemas THEN the system SHALL validate that names are unique among siblings and follow GQL naming conventions
-13. WHEN I perform directory operations THEN the system SHALL maintain referential integrity for all contained GQL-schemas and their primary catalog objects
+13. WHEN I perform directory operations THEN the system SHALL maintain referential integrity for all contained leaf directories and their primary catalog objects
 14. WHEN I use LEX directory/schema DDL in GQL-strict mode THEN the system SHALL reject CREATE/DROP DIRECTORY and CREATE/DROP GQL SCHEMA commands with clear error messages
 15. WHEN I use LEX SHOW commands in GQL-strict mode THEN the system SHALL reject these commands as they are LEX extensions not present in GQL or SQL standards
 16. WHEN I use LEX catalog DDL in LEX-extended mode THEN the system SHALL execute all LEX directory, schema, and SHOW commands as extensions to the GQL standard
@@ -736,8 +738,8 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 2. WHEN I specify a catalog name THEN the system SHALL create a catalog IRI by appending "/" + catalog_name to the base IRI
 3. WHEN I work with catalog paths THEN the system SHALL treat the root solidus "/" as an alias for the catalog IRI
 4. WHEN I reference a directory in the catalog THEN the system SHALL create an IRI by extending the catalog IRI with the directory path
-5. WHEN I reference a GQL-schema (leaf node) THEN the system SHALL create an IRI by extending the parent directory's IRI with "/" + schema_name
-6. WHEN I reference a Primary Catalog Object (PCO) THEN the system SHALL create an IRI by extending the GQL-schema's IRI with "/" + PCO_name
+5. WHEN I reference a data-schema (leaf) directory (leaf node) THEN the system SHALL create an IRI by extending the parent directory's IRI with "/" + schema_name
+6. WHEN I reference a Primary Catalog Object (PCO) THEN the system SHALL create an IRI by extending the data-schema (leaf) directory's IRI with "/" + PCO_name
 7. WHEN I work with fully-qualified names THEN the system SHALL provide both traditional path notation ("/dir/schema/object") and IRI notation for the same logical entity
 8. WHEN I serialize or export catalog references THEN the system SHALL support both IRI format and traditional path format
 9. WHEN I share catalog objects across systems THEN the system SHALL use IRIs to provide globally unique identification that includes storage location context
@@ -765,7 +767,7 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 9. WHEN I validate against a LEX schema THEN the system SHALL additionally validate against all LEX-specific constraints
 10. WHEN I work with LEX schemas THEN the system SHALL maintain backward compatibility with standard GQL graph types
 11. WHEN I export LEX schemas THEN the system SHALL be able to extract the underlying GQL graph type for systems that don't support LEX extensions
-12. WHEN I store LEX schemas in GQL-schemas THEN the system SHALL treat them as extended primary catalog objects
+12. WHEN I store LEX schemas in leaf directories THEN the system SHALL treat them as extended primary catalog objects
 13. WHEN I work with LEX constraint validation THEN the system SHALL provide detailed error messages indicating which specific constraints were violated
 14. WHEN I define LEX constraints THEN the system SHALL support constraint composition and dependency relationships between constraints
 15. WHEN I work with LEX schemas THEN the system SHALL position Grasch as extending the GQL standard with enhanced validation capabilities
@@ -774,11 +776,11 @@ The library will model the fundamental concepts of elements (nodes and edges) wi
 
 ### Requirement 19
 
-**User Story:** As a developer, I want to store data graphs (graph instances) as Primary Catalog Objects in GQL-schemas, with support for both user-defined schemas and schema-free operation, so that I can manage actual graph data alongside schema definitions.
+**User Story:** As a developer, I want to store data graphs (graph instances) as Primary Catalog Objects in leaf directories, with support for both user-defined schemas and schema-free operation, so that I can manage actual graph data alongside schema definitions.
 
 #### Acceptance Criteria
 
-1. WHEN I store a data graph in a GQL-schema THEN the system SHALL treat it as a Primary Catalog Object (PCO) distinct from graph schemas
+1. WHEN I store a data graph in a data-schema (leaf) directory THEN the system SHALL treat it as a Primary Catalog Object (PCO) distinct from graph schemas
 2. WHEN I create a data graph THEN the system SHALL allow me to specify a user-defined graph schema (LEX or GQL graph type) for validation
 3. WHEN I create a schema-free data graph THEN the system SHALL automatically assign it a default permissive schema
 4. WHEN I work with the default permissive schema THEN the system SHALL recognize it as a very loose schema that permits the general property graph data model structure without additional constraints
@@ -1935,4 +1937,171 @@ classDiagram
 51. WHEN I use a GQL-compatible database THEN the system SHALL support Cypher 2025 implementations with appropriate profile restrictions
 52. WHEN I switch between language levels THEN the system SHALL validate that the current database profile supports the target language's requirements
 53. WHEN I document language-database compatibility THEN the system SHALL provide clear matrices showing which languages are compatible with which database profiles
-54. WHEN I handle profile mismatches THEN the system SHALL provide specific guidance on how to adjust either the language level or database configuration to achieve compatibility
+54. WHEN I handle profile mismatches THEN the system SHALL provide specific guidance on how to adjust either the language level or database configuration to achieve compatibility### Requirement LEX-9
+
+**User Story:** As a developer working with LEX:2026.0.3.2, I want to work with three distinct top-level document types (catalog, graphSchema, graph), so that I can clearly distinguish between catalog definitions, schema definitions, and graph instance definitions.
+
+#### Acceptance Criteria
+
+1. WHEN I create a LEX document THEN the system SHALL support exactly three top-level document types: catalog, graphSchema, and graph
+2. WHEN I create a catalog document THEN the system SHALL require the root element to be `catalog:` with IRI and optional directories
+3. WHEN I create a graphSchema document THEN the system SHALL require the root element to be `graphSchema:` with pathName and graphType
+4. WHEN I create a graph instance document THEN the system SHALL require the root element to be `graph:` with pathName and optional graphSchema
+5. WHEN I attempt to create a graphType as a top-level document THEN the system SHALL reject it as invalid (graphType must be contained within graphSchema)
+6. WHEN I validate a LEX document THEN the system SHALL use JSON Schema oneOf to discriminate between the three document types
+7. WHEN I serialize a catalog THEN the system SHALL use `catalog:` as the root element
+8. WHEN I serialize a graphSchema THEN the system SHALL use `graphSchema:` as the root element
+9. WHEN I serialize a graph instance THEN the system SHALL use `graph:` as the root element
+10. WHEN I work with graphType THEN the system SHALL ensure it only appears nested within graphSchema documents
+11. WHEN I reference document types in APIs THEN the system SHALL use consistent terminology: Catalog, GraphSchema, Graph (not GraphType as top-level)
+### Requirement LEX-10
+
+**User Story:** As a developer working with complex schemas, I want comprehensive import and modularization capabilities, so that I can organize schemas into reusable components and maintain them separately.
+
+#### Acceptance Criteria
+
+1. WHEN I work with IMPORTABLE elements THEN the system SHALL support three import modes: inline-only, import-only, and mixed (import with inline overrides)
+2. WHEN I import an element THEN the system SHALL use the syntax `import: "filepath"` to reference external files
+3. WHEN I import graphType defaults THEN the system SHALL support `defaults: import: "file.yaml"` syntax
+4. WHEN I import nodeTypes THEN the system SHALL support importing the entire nodeTypes array with `nodeTypes: import: "file.yaml"`
+5. WHEN I import edgeTypes THEN the system SHALL support importing the entire edgeTypes array with `edgeTypes: import: "file.yaml"`
+6. WHEN I use mixed mode for nodeTypes THEN the system SHALL allow arrays containing both inline definitions and import references
+7. WHEN I use mixed mode for edgeTypes THEN the system SHALL allow arrays containing both inline definitions and import references
+8. WHEN I import a file THEN the system SHALL support two file formats: with root element (e.g., `nodeTypes: [...]`) or without root element (just the array contents)
+9. WHEN I import directories in catalogs THEN the system SHALL support `directories: import: "file.yaml"` syntax
+10. WHEN I import graphSchema in a graph document THEN the system SHALL support `graphSchema: import: "file.yaml"` syntax
+11. WHEN I import graphStorageSchema THEN the system SHALL support `graphStorageSchema: import: "file.yaml"` syntax
+12. WHEN I use nested imports THEN the system SHALL resolve imports recursively (imported files can import other files)
+13. WHEN I work with import paths THEN the system SHALL resolve relative paths relative to the importing file's location
+14. WHEN I serialize schemas with imports THEN the system SHALL preserve import references rather than inlining content
+15. WHEN import resolution fails THEN the system SHALL provide clear error messages indicating which file and import path failed
+### Requirement LEX-11
+
+**User Story:** As a developer working with LEX:2026.0.3.2, I want to use the new edge type syntax with semantic endpoint names and integrated direction, so that I can write more readable and expressive edge type definitions.
+
+#### Acceptance Criteria
+
+1. WHEN I define a directed edge type THEN the system SHALL support the `directed:` wrapper containing endpoint and label specifications
+2. WHEN I define an undirected edge type THEN the system SHALL support the `undirected:` wrapper containing endpoint and label specifications
+3. WHEN I specify an edge label THEN the system SHALL support the `via:` keyword within the direction wrapper
+4. WHEN I specify an edge label THEN the system SHALL support `arc:` as a synonym for `via:`
+5. WHEN I define directed edge endpoints THEN the system SHALL support the primary syntax: `from:` for source and `to:` for target
+6. WHEN I define directed edge endpoints THEN the system SHALL support synonym set 1: `tail:` for source and `head:` for target
+7. WHEN I define directed edge endpoints THEN the system SHALL support synonym set 2: `src:` for source and `dst:` or `dest:` for target
+8. WHEN I define undirected edge endpoints THEN the system SHALL support the primary syntax: `between:` for first endpoint and `and:` for second endpoint
+9. WHEN I define a self-loop edge THEN the system SHALL support the `SAME` keyword to indicate the second endpoint is the same as the first
+10. WHEN I define a self-loop edge THEN the system SHALL support `SELF` as a synonym for `SAME`
+11. WHEN I reference node types in endpoints THEN the system SHALL support typeLabel strings (e.g., `from: Person`)
+12. WHEN I reference node types in endpoints THEN the system SHALL support typeIdentifier arrays (e.g., `from: [Person, Employee]`)
+13. WHEN I reference node types in endpoints THEN the system SHALL support index integers (e.g., `from: 0`)
+14. WHEN I define edge-only node types THEN the system SHALL support inline node type definitions within endpoint specifications
+15. WHEN I define abstract endpoint requirements THEN the system SHALL support `abstract:` wrapper for endpoint node types (e.g., `to: abstract: Person`)
+16. WHEN I define abstract endpoint requirements THEN the system SHALL support `abstractSupertype:` as a synonym for `abstract:`
+17. WHEN I omit the edge label THEN the system SHALL allow anonymous edge types without `via:` or `arc:` keywords
+18. WHEN I omit properties THEN the system SHALL allow edge types without `implies:` block when no properties are defined
+19. WHEN I work with the API THEN the system SHALL provide all synonym accessors (getVia, getArc, getFrom, getTail, getSrc, getTo, getHead, getDst, getDest, getBetween, getAnd) with no canonical form
+20. WHEN I migrate from old syntax THEN the system SHALL continue to validate old syntax (`direction:`, `firstEndpointNodeType:`, `secondEndpointNodeType:`) but mark it as deprecated
+### Requirement LEX-12
+
+**User Story:** As a developer designing type hierarchies, I want to use abstract, sealed, and final type modifiers, so that I can control type instantiation and extension in my schemas.
+
+#### Acceptance Criteria
+
+1. WHEN I define an abstract type THEN the system SHALL support the `abstract:` wrapper around nodeType or edgeType definitions
+2. WHEN I define an abstract type THEN the system SHALL support `abstractSupertype:` as a synonym for `abstract:`
+3. WHEN I work with abstract types THEN the system SHALL prevent direct instantiation of abstract types (only subtypes can be instantiated)
+4. WHEN I define a sealed hierarchy THEN the system SHALL support the `sealed:` wrapper around a collection of related types
+5. WHEN I work with sealed hierarchies THEN the system SHALL ensure no types outside the sealed block can extend types within it
+6. WHEN I work with sealed hierarchies THEN the system SHALL treat all leaf types in the hierarchy as implicitly final
+7. WHEN I define a final type THEN the system SHALL support the `final:` wrapper around nodeType or edgeType definitions
+8. WHEN I work with final types THEN the system SHALL prevent any subtyping of final types
+9. WHEN I validate type hierarchies THEN the system SHALL enforce the equivalence rule: `sealed:` ≡ `final:` on all leaf subtypes
+10. WHEN I use abstract interpretation with allowSubtypesOf THEN the system SHALL reject schemas where all element types are final (abstract interpretation requires extensible types)
+11. WHEN I use abstract interpretation with allowSubtypesOf THEN the system SHALL reject schemas where all element types are in sealed hierarchies
+12. WHEN I work with the API THEN the system SHALL provide `isAbstract()` method to check if a type is abstract
+13. WHEN I work with the API THEN the system SHALL provide `isFinal()` method to check if a type is final
+14. WHEN I work with the API THEN the system SHALL provide `isSealed()` method to check if a type is part of a sealed hierarchy
+15. WHEN I work with the API THEN the system SHALL provide `getSealedHierarchy()` method to retrieve all types in a sealed hierarchy
+16. WHEN I validate schemas THEN the system SHALL use application-level semantic validation to enforce abstract/sealed/final constraints (JSON Schema validates syntax only)
+17. WHEN I document type hierarchies THEN the system SHALL clearly indicate which types are abstract, sealed, or final in schema metadata
+### Requirement LEX-13
+
+**User Story:** As a developer defining graph types, I want to specify default values for graph type characteristics in a required defaults block, so that I can configure minimum/maximum labels and properties consistently.
+
+#### Acceptance Criteria
+
+1. WHEN I define a graphType THEN the system SHALL require a `defaults:` block as a mandatory property
+2. WHEN I specify defaults THEN the system SHALL support inline definition with properties like graphPreferredName, nodePreferredName, edgePreferredName
+3. WHEN I specify defaults THEN the system SHALL support import syntax: `defaults: import: "file.yaml"`
+4. WHEN I define node type constraints THEN the system SHALL support `nodeTypeMinimumLabels` with default value 1
+5. WHEN I define node type constraints THEN the system SHALL support `nodeTypeMaximumLabels` as optional integer
+6. WHEN I define node type constraints THEN the system SHALL support `nodeTypeMinimumPropertyTypes` with default value 0
+7. WHEN I define node type constraints THEN the system SHALL support `nodeTypeMaximumPropertyTypes` as optional integer
+8. WHEN I define edge type constraints THEN the system SHALL support `edgeTypeMinimumLabels` with default value 1
+9. WHEN I define edge type constraints THEN the system SHALL support `edgeTypeMaximumLabels` as optional integer
+10. WHEN I define edge type constraints THEN the system SHALL support `edgeTypeMinimumPropertyTypes` with default value 0
+11. WHEN I define edge type constraints THEN the system SHALL support `edgeTypeMaximumPropertyTypes` as optional integer
+12. WHEN I specify preferred names THEN the system SHALL support `graphPreferredName` with values "GRAPH" or "PROPERTY GRAPH"
+13. WHEN I specify preferred names THEN the system SHALL support `nodePreferredName` with values "NODE" or "VERTEX"
+14. WHEN I specify preferred names THEN the system SHALL support `edgePreferredName` with values "EDGE" or "RELATIONSHIP"
+15. WHEN I import defaults THEN the system SHALL resolve the import path relative to the importing file
+16. WHEN I validate graphType THEN the system SHALL ensure defaults block is present and valid
+17. WHEN I share common defaults THEN the system SHALL allow multiple graphTypes to import the same defaults file
+### Requirement LEX-14
+
+**User Story:** As a developer working with edge type hierarchies, I want edge types to support subtyping with covariant endpoint types, so that I can create specialized edge types that work with specialized node types.
+
+#### Acceptance Criteria
+
+1. WHEN I define edge type subtyping THEN the system SHALL support the subtype relation (<:) with reflexive and transitive properties (Armstrong's Axioms)
+2. WHEN I determine if edge type S is a subtype of edge type T THEN the system SHALL verify that S's property types are a subtype of T's property types (structural subtyping)
+3. WHEN I determine if edge type S is a subtype of edge type T THEN the system SHALL verify that S's endpoint node types are subtypes of T's endpoint node types
+4. WHEN I work with directed edge subtyping THEN the system SHALL require source <: source AND destination <: destination (covariant in both endpoints)
+5. WHEN I work with undirected edge subtyping THEN the system SHALL allow endpoints to match in either order
+6. WHEN I work with edge direction subtyping THEN the system SHALL require direction compatibility (DIRECTED <: DIRECTED, UNDIRECTED <: UNDIRECTED)
+7. WHEN I work with self-loop edges THEN the system SHALL handle SAME endpoint keyword with special subtyping rules
+8. WHEN I define edge subtypes using implies THEN the system SHALL support `supertypes:` property listing parent edge type labels
+9. WHEN I define edge subtypes using extends THEN the system SHALL support `extends:` property with `adding:` block for incremental definition
+10. WHEN I validate edge type hierarchies THEN the system SHALL ensure all subtype relationships satisfy the covariant endpoint rule
+11. WHEN I work with the API THEN the system SHALL provide methods to query edge type supertypes and subtypes
+12. WHEN I work with the API THEN the system SHALL provide methods to check if one edge type is a subtype of another
+13. WHEN I instantiate edges THEN the system SHALL allow edges of subtype S to satisfy constraints requiring supertype T
+14. WHEN I define complex edge hierarchies THEN the system SHALL support multiple levels of edge type inheritance
+15. WHEN I combine node and edge subtyping THEN the system SHALL correctly handle cases like CLOSE_FRIEND(Employee, Employee) <: KNOWS(Person, Person)
+### Requirement LEX-15
+
+**User Story:** As a developer defining property types, I want to specify notNull constraints on individual properties, so that I can enforce mandatory property values at the schema level.
+
+#### Acceptance Criteria
+
+1. WHEN I define a property type THEN the system SHALL support an optional `notNull:` boolean property
+2. WHEN I set notNull to true THEN the system SHALL require that property to have a non-null value in all instances
+3. WHEN I set notNull to false or omit it THEN the system SHALL allow null values for that property
+4. WHEN I validate graph instances THEN the system SHALL check that all notNull properties have non-null values
+5. WHEN I work with property inheritance THEN the system SHALL preserve notNull constraints from supertypes
+6. WHEN I define subtypes THEN the system SHALL allow subtypes to add notNull constraints to inherited properties
+7. WHEN I serialize schemas THEN the system SHALL preserve notNull property values
+8. WHEN validation fails for notNull THEN the system SHALL provide clear error messages indicating which property and element violated the constraint
+9. WHEN I work with the API THEN the system SHALL provide methods to query whether a property type has notNull constraint
+10. WHEN I work with GQL:2027 compatibility THEN the system SHALL relate notNull to GQL's constraint framework
+11. WHEN I work with SQL compatibility THEN the system SHALL map notNull to SQL's NOT NULL constraint
+### Requirement LEX-16
+
+**User Story:** As a developer organizing schemas in catalogs, I want to use lightweight references instead of embedded definitions, so that I can maintain a clean separation between catalog structure and actual schema content.
+
+#### Acceptance Criteria
+
+1. WHEN I add graphs to a catalog THEN the system SHALL use `graphReferences` containing only metadata (name, qualifiedName, optional filePath)
+2. WHEN I add graph schemas to a catalog THEN the system SHALL use `graphSchemaReferences` containing only metadata (name, qualifiedName, optional filePath)
+3. WHEN I create graph references THEN the system SHALL require `name` and `qualifiedName` properties
+4. WHEN I create graph schema references THEN the system SHALL require `name` and `qualifiedName` properties
+5. WHEN I specify file paths in references THEN the system SHALL support optional `filePath` property pointing to the actual definition file
+6. WHEN I place references in directories THEN the system SHALL only allow references in data-schema (leaf) directories (directories without subdirectories)
+7. WHEN I attempt to place references in non-data-schema (leaf) directories THEN the system SHALL reject the catalog as invalid
+8. WHEN I work with catalog structure THEN the system SHALL ensure directories can contain either subdirectories OR references, not both
+9. WHEN I serialize catalogs THEN the system SHALL use reference objects rather than embedding full graph or schema definitions
+10. WHEN I resolve references THEN the system SHALL use filePath if provided, otherwise use qualifiedName to locate definitions
+11. WHEN I validate catalogs THEN the system SHALL check that all references have valid qualifiedName format (starting with "/")
+12. WHEN I work with the API THEN the system SHALL provide methods to navigate from references to actual definitions
+13. WHEN I work with the API THEN the system SHALL provide methods to list all references in a catalog
+14. WHEN reference resolution fails THEN the system SHALL provide clear error messages indicating which reference and path failed

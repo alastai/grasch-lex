@@ -201,3 +201,81 @@ class TypeInterpretationValidator:
                 interpretation.typeReference,
                 instance_type
             )
+
+    
+    def validate_edge_component(
+        self,
+        edge_type: EdgeType,
+        component: str,
+        instance_type: str,
+        is_direct_instance: bool,
+        is_subtype: bool = False
+    ) -> None:
+        """
+        Validate an edge type component against its type interpretation.
+        
+        Args:
+            edge_type: The edge type definition
+            component: The component name ('from', 'via', 'to')
+            instance_type: The type of the instance being validated
+            is_direct_instance: True if this is a direct instance (not a subtype)
+            is_subtype: True if instance_type is a subtype
+            
+        Raises:
+            AbstractTypeInstantiationError: If instantiating abstract type
+            ExactMatchViolationError: If subtype provided where exact match required
+            ValueError: If invalid component name
+        """
+        # Get the appropriate component interpretation
+        if component == 'from':
+            interpretation = edge_type.fromInterpretation
+        elif component == 'via':
+            interpretation = edge_type.viaInterpretation
+        elif component == 'to':
+            interpretation = edge_type.toInterpretation
+        else:
+            raise ValueError(f"Invalid edge component: {component}")
+        
+        # Check abstract type instantiation
+        self.validate_abstract_type_not_instantiated(interpretation, is_direct_instance)
+        
+        # Check exact match requirement
+        if interpretation.isExactMatch():
+            self.validate_exact_match(
+                interpretation,
+                interpretation.typeReference,
+                instance_type
+            )
+    
+    def validate_graph_type(
+        self,
+        graph_type: GraphType,
+        instance_type: str,
+        is_direct_instance: bool,
+        is_subtype: bool = False
+    ) -> None:
+        """
+        Validate a graph type instance against its type interpretation.
+        
+        Args:
+            graph_type: The graph type definition
+            instance_type: The type of the instance being validated
+            is_direct_instance: True if this is a direct instance (not a subtype)
+            is_subtype: True if instance_type is a subtype of graph_type
+            
+        Raises:
+            AbstractTypeInstantiationError: If instantiating abstract type
+            ExactMatchViolationError: If subtype provided where exact match required
+        """
+        interpretation = graph_type.interpretation
+        
+        # Check abstract type instantiation
+        self.validate_abstract_type_not_instantiated(interpretation, is_direct_instance)
+        
+        # Check exact match requirement
+        if interpretation.isExactMatch():
+            self.validate_exact_match(
+                interpretation,
+                interpretation.typeReference,
+                instance_type
+            )

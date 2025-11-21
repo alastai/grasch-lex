@@ -1,0 +1,8 @@
+# Minimal graphSchema document to test new schema structure
+graphSchema:
+  pathName: /test/minimal
+  graphType:
+    defaults:
+      graphPreferredName: GRAPH
+      nodePreferredName: NODE
+      edgePreferredName: EDGE

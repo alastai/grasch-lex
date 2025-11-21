@@ -1,0 +1,57 @@
+{
+  "graphSchema": {
+    "pathName": "/test/test_schema",
+    "graphType": {
+      "propertyGraphDataModel": {
+        "valueTypeSystemName": "CANONICAL",
+        "graphPreferredName": "GRAPH",
+        "nodePreferredName": "NODE",
+        "edgePreferredName": "EDGE",
+        "nodeTypeMinimumLabels": 1,
+        "nodeTypeMaximumLabels": 20,
+        "nodeTypeMinimumPropertyTypes": 0,
+        "nodeTypeMaximumPropertyTypes": 1000,
+        "edgeTypeMinimumLabels": 1,
+        "edgeTypeMaximumLabels": 20,
+        "edgeTypeMinimumPropertyTypes": 0,
+        "edgeTypeMaximumPropertyTypes": 1000
+      },
+      "nodeTypes": [
+        {
+          "nodeType": {
+            "index": 0,
+            "implies": {
+              "labels": [
+                "Person"
+              ],
+              "propertyTypes": [
+                {
+                  "name": "id",
+                  "valueType": "INTEGER",
+                  "notNull": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "edgeTypes": [
+        {
+          "edgeType": {
+            "typeLabel": "KNOWS",
+            "implies": {
+              "propertyTypes": []
+            },
+            "direction": "UNDIRECTED",
+            "firstEndpointNodeType": {
+              "index": 0
+            },
+            "secondEndpointNodeType": {
+              "index": 0
+            }
+          }
+        }
+      ]
+    }
+  }
+}

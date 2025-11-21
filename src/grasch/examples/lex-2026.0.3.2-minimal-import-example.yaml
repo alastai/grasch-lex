@@ -1,11 +1,10 @@
 graphSchema:
   pathName: /examples/minimal-import
-  valueTypeSystemName: CANONICAL
   graphType:
-    defaults:
-      import: lex-2026.0.3.2-graph-type-defaults.yaml
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model.yaml
     nodeTypes:
-    - import: snb_types/message_hierarchy.yaml
+    - import: imports/snb-types/lex-2026.0.3.2-snb-message-hierarchy.yaml
     - nodeType:
         typeLabel: Person
         implies:
@@ -18,14 +17,14 @@ graphSchema:
             notNull: true
     edgeTypes:
     - edgeType:
-        typeLabel: AUTHORED
+        directed:
+          from:
+            typeLabel: Person
+          to:
+            typeLabel: Post
+          via: AUTHORED
         implies:
           propertyTypes:
           - name: creationDate
             valueType: DATE
             notNull: true
-        direction: DIRECTED
-        firstEndpointNodeType:
-          typeLabel: Person
-        secondEndpointNodeType:
-          typeLabel: Post

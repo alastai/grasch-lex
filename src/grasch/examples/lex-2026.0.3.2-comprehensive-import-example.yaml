@@ -1,57 +1,43 @@
-# Comprehensive Import Example
-# Shows all supported import patterns at different levels
-
 graphSchema:
-  pathName: "/examples/comprehensive-imports"
-  
+  pathName: /examples/comprehensive-imports
   graphType:
-    # Level 1: Import defaults at graphType level
-    defaults:
-      import: "lex-2026.0.3.2-graph-type-defaults.yaml"
-    
-    # Level 2: Mix inline and imported node types
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model.yaml
     nodeTypes:
     - nodeType:
         typeLabel: Person
         implies:
           propertyTypes:
-            - name: id
-              valueType: INTEGER
-              notNull: true
-    
-    # Level 3: Import individual node type
-    - import: "lex-2026.0.3.2-snb-types/lex-2026.0.3.2-snb-organisation-hierarchy.yaml"
-    
+          - name: id
+            valueType: INTEGER
+            notNull: true
     - nodeType:
         typeLabel: Tag
         implies:
           propertyTypes:
-            - name: id
-              valueType: INTEGER
-              notNull: true
-    
-    # Level 2: Mix inline and imported edge types
+          - name: id
+            valueType: INTEGER
+            notNull: true
     edgeTypes:
-      - edgeType:
-          typeLabel: KNOWS
-          implies:
-            propertyTypes: []
-          direction: UNDIRECTED
-          firstEndpointNodeType:
+    - edgeType:
+        undirected:
+          between:
             typeLabel: Person
-          secondEndpointNodeType:
+          and:
             typeLabel: Person
-      
-      # Level 3: Import individual edge type
-      - import: "edge_types/works_for.yaml"
-    
-    # Level 2: Import within allowSubtypesOf
-    allowSubtypesOf:
-      abstractSupertypes:
-        # Level 3: Import node type hierarchy
+          via: KNOWS
+        implies:
+          propertyTypes: []
+    subtypesOf:
+      abstract:
         nodeTypes:
-          - import: "lex-2026.0.3.2-snb-types/lex-2026.0.3.2-snb-message-hierarchy.yaml"
-  
+        - nodeType:
+            typeLabel: Message
+            implies:
+              propertyTypes:
+              - name: id
+                valueType: INTEGER
+                notNull: true
   constraints:
     personIdUnique:
       name: personIdUnique
@@ -59,4 +45,4 @@ graphSchema:
         subject: UNIQUE
         constraintPattern: Person
         uniqueKeyComponentPropertyNames:
-          - id
+        - id

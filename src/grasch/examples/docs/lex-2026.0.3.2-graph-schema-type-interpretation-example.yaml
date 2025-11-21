@@ -48,8 +48,8 @@ graph:
 graph:
   pathName: "/examples/proper-subtype-match-graph"
   
-  allowSubtypesOf:
-    abstractSupertypes:
+  subtypesOf:
+    abstract:
       graphSchema:
         pathName: "/benchmarks/ldbc/snb"
       import: "lex-2026.0.3.2-snb-schema.yaml"

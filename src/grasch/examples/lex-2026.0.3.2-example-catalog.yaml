@@ -4,27 +4,39 @@ catalog:
   - name: benchmarks
     directories:
     - name: ldbc
-      graphSchemas:
+      graphSchemaReferences:
       - name: snb
+        qualifiedName: /benchmarks/ldbc/snb
       - name: finbench
-      graphs:
+        qualifiedName: /benchmarks/ldbc/finbench
+      graphReferences:
       - name: snb-sf1
+        qualifiedName: /benchmarks/ldbc/snb-sf1
       - name: finbench-sf1
+        qualifiedName: /benchmarks/ldbc/finbench-sf1
     - name: tpc
-      graphSchemas:
+      graphSchemaReferences:
       - name: tpc-h-graph
+        qualifiedName: /benchmarks/tpc/tpc-h-graph
   - name: production
     directories:
     - name: finance
-      graphSchemas:
+      graphSchemaReferences:
       - name: trading-schema
+        qualifiedName: /production/finance/trading-schema
       - name: risk-schema
-      graphs:
+        qualifiedName: /production/finance/risk-schema
+      graphReferences:
       - name: trading-live
+        qualifiedName: /production/finance/trading-live
       - name: risk-live
+        qualifiedName: /production/finance/risk-live
     - name: social
-      graphSchemas:
+      graphSchemaReferences:
       - name: user-schema
-      graphs:
+        qualifiedName: /production/social/user-schema
+      graphReferences:
       - name: user-prod
+        qualifiedName: /production/social/user-prod
       - name: user-staging
+        qualifiedName: /production/social/user-staging
