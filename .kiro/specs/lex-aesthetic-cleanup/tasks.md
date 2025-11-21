@@ -16,12 +16,12 @@
     - Apply same aesthetic cleanup
     - _Requirements: 1.1, 1.3, 2.1, 2.3_
   
-  - [x] 2.3 Update message hierarchy
+  - [ ] 2.3 Update message hierarchy
     - Apply same aesthetic cleanup
     - _Requirements: 1.1, 1.3, 2.1, 2.3_
 
 - [ ] 3. Update main example files
-  - [ ] 3.1 Update type-definition-syntax-examples.yaml
+  - [-] 3.1 Update type-definition-syntax-examples.yaml
     - Clean up all type definitions
     - Use bracketed arrays for label sets
     - _Requirements: 1.1, 2.1, 3.1, 4.1_

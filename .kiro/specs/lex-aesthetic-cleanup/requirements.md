@@ -59,6 +59,8 @@ This specification addresses the aesthetic and syntactic consistency of LEX-2026
 2. WHEN `adding:` would only contain a typeLabel already declared THEN the system SHALL allow `adding:` to be omitted
 3. WHEN `implies:` would only contain the typeLabel THEN the system SHALL allow `implies:` to be omitted
 4. WHEN validating schemas THEN the JSON schema SHALL make redundant keys optional
+5. WHEN a property is nullable THEN the system SHALL use `?` suffix instead of `notNull: false`
+6. WHEN a property is not nullable THEN the system SHALL omit `notNull: true` (non-null is default)
 
 ### Requirement 5: Update All Example Files
 
