@@ -1,0 +1,26 @@
+graphSchema:
+  pathName: /test/subtype-abstract
+  graphType:
+    subtypesOf:
+      abstract:
+        nodeTypes:
+        - nodeType:
+            typeLabel: Message
+            implies:
+              propertyTypes:
+              - name: id
+                valueType: INTEGER
+              - name: content
+                valueType: STRING
+        edgeTypes:
+        - edgeType:
+            directed:
+              from:
+                typeLabel: Person
+              to:
+                typeLabel: Person
+              via: RELATIONSHIP
+            implies:
+              propertyTypes:
+              - name: startDate
+                valueType: DATE

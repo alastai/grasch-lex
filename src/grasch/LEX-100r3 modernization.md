@@ -694,3 +694,117 @@ Proposed LEX-100r4 structure:
 - **Review and polish**: 1 day
 
 **Total**: 6-8 days for complete spec modernization
+
+#
+# Validation Pipeline and Canonicalization Gap (Task 8 Findings)
+
+### PC → C Validation Pipeline Results
+
+**Date**: 2024 (Task 8 completion)
+
+**Validation Methodology:**
+1. JS Validation of PC (pre-canonical) form against JSON Schema
+2. Canonicalization: PC → C transformation (resolve imports, normalize wrappers)
+3. Write C (canonical) form to disk with `CANON_` prefix
+4. JS Validation of C form against JSON Schema
+5. Compare PC vs C to identify transformation effects
+
+**Key Findings:**
+
+| Metric | Count | Percentage |
+|--------|-------|------------|
+| Total files tested | 14 | 100% |
+| Importing files | 12 | 86% |
+| No-imports files | 2 | 14% |
+| PC form valid (JS validation) | 14 | 100% ✅ |
+| C form valid (JS validation) | 2 | 14% ❌ |
+| C form invalid (JS validation) | 12 | 86% ❌ |
+| No-op transformations (PC == C) | 2 | 14% |
+| Changed transformations (PC ≠ C) | 12 | 86% |
+
+**Critical Issue Identified:**
+
+All 12 files that undergo canonicalization (importing files) produce C forms that **fail JS validation**. This reveals a fundamental gap:
+
+1. **PC forms validate successfully** - The pre-canonical syntax is correct
+2. **Canonicalization transforms the data** - Imports are resolved, wrappers are normalized
+3. **C forms fail validation** - The canonical output doesn't match the JSON Schema
+
+**Root Cause Analysis:**
+
+The canonicalizing preprocessor (`canonicalizing_preprocessor.py`) performs transformations that produce structures not recognized by the JSON Schema. Specifically:
+
+1. **Type interpretation wrapper canonicalization** - Converts one-level wrappers to two-level canonical form
+2. **Import resolution** - Merges imported content inline
+3. **Wrapper normalization** - Ensures consistent `exactlyOf: concrete:` structure
+
+The JSON Schema may not properly validate these canonical forms, suggesting either:
+- The schema needs updates to accept canonical forms
+- The canonicalizer needs adjustments to produce schema-compliant output
+- Both need alignment
+
+**Files Affected:**
+
+All importing files fail C form validation:
+- `lex-2026.0.3.2-minimal-test.yaml`
+- `lex-2026.0.3.2-all-import-patterns.yaml`
+- `lex-2026.0.3.2-complete-import-example.yaml`
+- `lex-2026.0.3.2-comprehensive-import-example.yaml`
+- `lex-2026.0.3.2-finbench-schema.yaml`
+- `lex-2026.0.3.2-finbench-sf1-graph.yaml`
+- `lex-2026.0.3.2-minimal-import-example.yaml`
+- `lex-2026.0.3.2-mixed-import-example.yaml`
+- `lex-2026.0.3.2-snb-schema.yaml`
+- `lex-2026.0.3.2-snb-special-identification-example.yaml`
+- `lex-2026.0.3.2-subtype-abstract-test.yaml`
+- `lex-2026.0.3.2-type-definition-syntax-examples.yaml`
+
+Only no-imports files pass both PC and C validation:
+- `lex-2026.0.3.2-example-catalog-no-iri.yaml` ✅
+- `lex-2026.0.3.2-example-catalog.yaml` ✅
+
+**Terminology Clarifications:**
+
+- **PC (Pre-Canonical)**: All documents start in this form (may or may not contain imports)
+- **C (Canonical)**: Normalized form after canonicalization (imports resolved, wrappers normalized)
+- **Importing file**: A file that contains `import:` directives
+- **No-imports file**: A file without `import:` directives (but still in PC form)
+- **JS Validation**: JSON Schema validation (structural validation only, no semantic checks)
+- **Canonicalizing preprocessor**: The correct term (not "import preprocessor") - it performs import merging as PART of canonicalization
+
+**Gap Between Grasch and LEX Spec:**
+
+This validation reveals a critical implementation gap:
+
+1. **Grasch implements PC → C transformation** - The canonicalizing preprocessor works
+2. **LEX spec doesn't define C form** - No specification for what canonical form should look like
+3. **JSON Schema validates PC form** - But doesn't properly validate C form
+4. **No round-trip guarantee** - PC → C transformation may not preserve semantics
+
+**Required Actions:**
+
+1. **Update JSON Schema** - Ensure it validates both PC and C forms correctly
+2. **Document C form specification** - Add to LEX spec what canonical form means
+3. **Fix canonicalizer** - Ensure output matches schema expectations
+4. **Add round-trip tests** - Verify PC → C → validation → semantics preservation
+5. **Semantic validation** - Integrate `type_interpretation_validator.py` into pipeline
+
+**Validation Script:**
+
+The comprehensive validation script `validate_pc_and_c_forms.py` implements:
+- Full PC → C pipeline testing
+- Line/column error reporting (where possible with JSON Schema)
+- Canonical form persistence (CANON_*.yaml files)
+- Transformation analysis (no-op vs changed)
+- Detailed markdown reporting
+
+**Next Steps:**
+
+1. Investigate specific validation errors in C forms
+2. Determine if schema or canonicalizer needs fixes
+3. Add semantic validation layer beyond JS validation
+4. Document canonical form specification in LEX
+5. Ensure all examples pass full PC → C → validation pipeline
+
+See: `PC-C-VALIDATION-RESULTS.md` for detailed validation report
+See: `validate_pc_and_c_forms.py` for validation implementation

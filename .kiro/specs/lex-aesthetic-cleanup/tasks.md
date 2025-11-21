@@ -103,5 +103,53 @@
   - Document new nullability syntax
   - _Requirements: 5.1, 5.2, 5.3, 5.4, 7.6_
 
-- [ ] 8. Final checkpoint
+- [x] 8. Final checkpoint
   - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 9. Resolve C form validation failures
+  - [ ] 9.1 Update validation script to write CANON files to examples directory
+    - Modify validate_pc_and_c_forms.py to write to src/grasch/examples/
+    - Overwrite existing CANON_*.yaml files on each run
+    - Ensure canonical forms are version controlled
+    - _Requirements: 5.5, 6.5_
+  
+  - [ ] 9.2 Analyze C form validation failures
+    - Examine specific schema errors for all 12 failing files
+    - Identify common patterns in validation failures
+    - Document root causes (schema vs canonicalizer issues)
+    - _Requirements: 5.5, 6.5_
+  
+  - [ ] 9.3 Fix schema or canonicalizer alignment
+    - Determine whether schema or canonicalizer needs updates
+    - Implement fixes to ensure C forms validate
+    - Test fixes against all 14 example files
+    - Verify PC and C forms both validate successfully
+    - _Requirements: 5.5, 6.5_
+  
+  - [ ] 9.4 Define canonical form specification
+    - Document what C form should look like in LEX spec
+    - Add canonical form examples to documentation
+    - Ensure schema validates C form correctly
+    - Update LEX-100r3 modernization document
+    - _Requirements: 5.5, 6.5_
+  
+  - [ ] 9.5 Integrate semantic validation layer
+    - Add type_interpretation_validator.py to validation pipeline
+    - Validate type interpretation rules beyond JS validation
+    - Test abstract type instantiation rules
+    - Verify final/sealed type constraints
+    - _Requirements: 5.5, 6.5_
+  
+  - [ ] 9.6 Implement round-trip testing
+    - Verify PC → C → semantics preservation
+    - Test idempotence (C → C == C)
+    - Ensure no information loss during canonicalization
+    - Document round-trip guarantees
+    - _Requirements: 5.5, 6.5_
+  
+  - [ ] 9.7 Final validation checkpoint
+    - Run complete validation pipeline on all examples
+    - Verify 100% PC and C form validation success
+    - Generate final validation report
+    - Update documentation with findings
+    - _Requirements: 5.5, 6.5_

@@ -1,0 +1,838 @@
+graphSchema:
+  pathName: /examples/type-definition-syntax
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+      graphPreferredName: GRAPH
+      nodePreferredName: NODE
+      edgePreferredName: EDGE
+      nodeTypeMinimumLabels: 1
+      nodeTypeMaximumLabels: 20
+      nodeTypeMinimumPropertyTypes: 0
+      nodeTypeMaximumPropertyTypes: 1000
+      edgeTypeMinimumLabels: 1
+      edgeTypeMaximumLabels: 20
+      edgeTypeMinimumPropertyTypes: 0
+      edgeTypeMaximumPropertyTypes: 1000
+    nodeTypes:
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+          - name: name
+            valueType: STRING
+    - nodeType:
+        typeLabel: Company
+        implies:
+          labels:
+          - Organization
+          - LegalEntity
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+          - name: name
+            valueType: STRING
+    - nodeType:
+        index: 0
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+    - nodeType:
+        typeLabels:
+        - Product
+        - Sellable
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+          - name: price
+            valueType: FLOAT
+    - nodeType:
+        typeLabel: Employee
+        implies:
+          supertypes: Person
+          propertyTypes:
+          - name: employeeId
+            valueType: STRING
+    - nodeType:
+        typeLabel: Contractor
+        implies:
+          supertypes:
+          - Person
+          propertyTypes:
+          - name: contractId
+            valueType: STRING
+    - nodeType:
+        typeLabel: Manager
+        implies:
+          supertypes:
+          - Employee
+          - Person
+          propertyTypes:
+          - name: department
+            valueType: STRING
+    - nodeType:
+        typeLabel: Director
+        extends: Manager
+        adding:
+          propertyTypes:
+          - name: division
+            valueType: STRING
+    - nodeType:
+        typeLabel: VicePresident
+        extends:
+        - Director
+        adding:
+          propertyTypes:
+          - name: region
+            valueType: STRING
+    - nodeType:
+        typeLabel: CEO
+        extends: VicePresident
+        adding:
+          labels:
+          - Executive
+          - BoardMember
+          propertyTypes:
+          - name: boardSeat
+            valueType: INTEGER
+    - subtypesOf:
+        abstract:
+          nodeType:
+            typeLabel: Vehicle
+            implies:
+              propertyTypes:
+              - name: id
+                valueType: INTEGER
+              - name: manufacturer
+                valueType: STRING
+    - nodeType:
+        typeLabel: Car
+        implies:
+          supertypes: Vehicle
+          propertyTypes:
+          - name: doors
+            valueType: INTEGER
+    - subtypesOf:
+        abstract:
+          nodeType:
+            typeLabel: Asset
+            implies:
+              propertyTypes:
+              - name: id
+                valueType: INTEGER
+              - name: value
+                valueType: FLOAT
+    - nodeType:
+        typeLabel: RealEstate
+        extends: Asset
+        adding:
+          propertyTypes:
+          - name: address
+            valueType: STRING
+    - nodeType:
+        typeLabel: Tag
+    - nodeType:
+        typeLabel: CategoryTag
+        extends: Tag
+    - sealed:
+        nodeTypes:
+        - subtypesOf:
+            abstract:
+              nodeType:
+                typeLabel: Place
+                implies:
+                  propertyTypes:
+                  - name: id
+                    valueType: INTEGER
+                  - name: name
+                    valueType: STRING
+        - nodeType:
+            typeLabel: Continent
+            extends: Place
+            adding:
+              propertyTypes:
+              - name: area
+                valueType: FLOAT
+        - nodeType:
+            typeLabel: Country
+            extends: Place
+            adding:
+              propertyTypes:
+              - name: population
+                valueType: INTEGER
+        - nodeType:
+            typeLabel: City
+            extends: Place
+            adding:
+              propertyTypes:
+              - name: population
+                valueType: INTEGER
+              - name: coordinates
+                valueType: STRING
+    - sealed:
+        nodeTypes:
+        - subtypesOf:
+            abstract:
+              nodeType:
+                typeLabel: Message
+                implies:
+                  propertyTypes:
+                  - name: id
+                    valueType: INTEGER
+                  - name: content
+                    valueType: STRING
+                  - name: creationDate
+                    valueType: ZONED DATETIME
+        - nodeType:
+            typeLabel: Post
+            extends: Message
+            adding:
+              propertyTypes:
+              - name: imageFile
+                valueType: STRING
+              - name: language
+                valueType: STRING
+        - nodeType:
+            typeLabel: Comment
+            extends: Message
+            adding:
+              propertyTypes:
+              - name: replyCount
+                valueType: INTEGER
+    - subtypesOf:
+        abstract:
+          nodeType:
+            typeLabel: Organisation
+            implies:
+              propertyTypes:
+              - name: id
+                valueType: INTEGER
+              - name: name
+                valueType: STRING
+    - final:
+        nodeType:
+          typeLabel: Company
+          extends: Organisation
+          adding:
+            propertyTypes:
+            - name: industry
+              valueType: STRING
+    - final:
+        nodeType:
+          typeLabel: University
+          extends: Organisation
+          adding:
+            propertyTypes:
+            - name: ranking
+              valueType: INTEGER
+    - nodeType:
+        typeLabel: SeniorManager
+        implies:
+          supertypes: Manager
+          propertyTypes:
+          - name: yearsExperience
+            valueType: INTEGER
+    - nodeType:
+        typeLabel: ExecutiveManager
+        extends: SeniorManager
+        adding:
+          labels:
+          - Leadership
+          propertyTypes:
+          - name: strategicInitiatives
+            valueType: LIST
+    edgeTypes:
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: KNOWS
+          to:
+            exactlyOf:
+              concrete: Person
+        implies:
+          propertyTypes:
+          - name: since
+            valueType: DATE
+    - edgeType:
+        directed:
+          via:
+            exactlyOf:
+              concrete: WORKS_FOR
+          from:
+            exactlyOf:
+              concrete: Person
+          to:
+            exactlyOf:
+              concrete: Company
+        implies:
+          propertyTypes:
+          - name: startDate
+            valueType: DATE
+    - edgeType:
+        directed:
+          arc:
+            exactlyOf:
+              concrete: EMPLOYED_BY
+          from:
+            exactlyOf:
+              concrete: Person
+          to:
+            exactlyOf:
+              concrete: Company
+        implies:
+          propertyTypes:
+          - name: startDate
+            valueType: DATE
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: MANAGES
+          to:
+            exactlyOf:
+              concrete: Company
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: REPORTS_TO
+          to:
+            exactlyOf:
+              concrete: SAME
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Employee
+          via:
+            exactlyOf:
+              concrete: MENTORS
+          to:
+            exactlyOf:
+              concrete: SELF
+        implies:
+          propertyTypes:
+          - name: startDate
+            valueType: DATE
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: LINKS_TO
+          to:
+            exactlyOf:
+              concrete: 0
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete:
+              - Person
+              - Employee
+          via:
+            exactlyOf:
+              concrete: CREATED_BY
+          to:
+            exactlyOf:
+              concrete: Company
+        implies:
+          propertyTypes:
+          - name: creationDate
+            valueType: ZONED DATETIME
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: PURCHASES
+          to:
+            typeLabels:
+            - Product
+            - Sellable
+        implies:
+          propertyTypes:
+          - name: purchaseDate
+            valueType: DATE
+          - name: quantity
+            valueType: INTEGER
+    - edgeType:
+        directed:
+          tail:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: FOLLOWS
+          head:
+            exactlyOf:
+              concrete: Person
+        implies:
+          propertyTypes:
+          - name: since
+            valueType: DATE
+    - edgeType:
+        directed:
+          src:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: SENDS_TO
+          dst:
+            exactlyOf:
+              concrete: Person
+        implies:
+          propertyTypes:
+          - name: timestamp
+            valueType: ZONED DATETIME
+    - edgeType:
+        directed:
+          src:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: TRANSFERS_TO
+          dest:
+            exactlyOf:
+              concrete: Company
+        implies:
+          propertyTypes:
+          - name: amount
+            valueType: FLOAT
+    - edgeType:
+        directed:
+          from:
+            nodeType:
+              typeLabel: Person
+              implies:
+                propertyTypes:
+                - name: id
+                  valueType: INTEGER
+          via:
+            exactlyOf:
+              concrete: CONNECTS_TO
+          to:
+            exactlyOf:
+              concrete: Company
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: OWNS
+          to:
+            nodeType:
+              typeLabel: Property
+              implies:
+                propertyTypes:
+                - name: id
+                  valueType: INTEGER
+                - name: address
+                  valueType: STRING
+                - name: value
+                  valueType: FLOAT
+        implies:
+          propertyTypes:
+          - name: purchaseDate
+            valueType: DATE
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Company
+          via:
+            exactlyOf:
+              concrete: LINKED_TO
+          and:
+            nodeType:
+              index: 99
+              implies:
+                propertyTypes:
+                - name: linkId
+                  valueType: STRING
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: COLLABORATES_WITH
+          and:
+            exactlyOf:
+              concrete: Person
+        implies:
+          propertyTypes:
+          - name: projectName
+            valueType: STRING
+    - edgeType:
+        undirected:
+          via:
+            exactlyOf:
+              concrete: PARTNERS_WITH
+          between:
+            exactlyOf:
+              concrete: Company
+          and:
+            exactlyOf:
+              concrete: Company
+        implies:
+          propertyTypes:
+          - name: since
+            valueType: DATE
+    - edgeType:
+        undirected:
+          arc:
+            exactlyOf:
+              concrete: ALLIED_WITH
+          between:
+            exactlyOf:
+              concrete: Company
+          and:
+            exactlyOf:
+              concrete: Company
+        implies:
+          propertyTypes:
+          - name: since
+            valueType: DATE
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Person
+          and:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: SHARES_WITH
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: SIMILAR_TO
+          and:
+            exactlyOf:
+              concrete: SAME
+        implies:
+          propertyTypes:
+          - name: similarity
+            valueType: FLOAT
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: RELATED_TO
+          and:
+            exactlyOf:
+              concrete: SELF
+        implies:
+          propertyTypes:
+          - name: relationship
+            valueType: STRING
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: 0
+          via:
+            exactlyOf:
+              concrete: ASSOCIATED_WITH
+          and:
+            exactlyOf:
+              concrete: Person
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete:
+              - Person
+              - Employee
+          via:
+            exactlyOf:
+              concrete: WORKS_WITH
+          and:
+            exactlyOf:
+              concrete: Person
+        implies:
+          propertyTypes:
+          - name: project
+            valueType: STRING
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: KNOWS
+          and:
+            exactlyOf:
+              concrete: Person
+        implies:
+          propertyTypes:
+          - name: since
+            valueType: DATE
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Person
+          arc:
+            exactlyOf:
+              concrete: CLOSE_FRIEND
+          and:
+            exactlyOf:
+              concrete: Person
+        extends: KNOWS
+        adding:
+          propertyTypes:
+          - name: closeness
+            valueType: FLOAT
+          - name: sharedInterests
+            valueType: LIST
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: BEST_FRIEND
+          and:
+            exactlyOf:
+              concrete: Person
+        extends:
+        - CLOSE_FRIEND
+        adding:
+          propertyTypes:
+          - name: yearsKnown
+            valueType: INTEGER
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: RELATIONSHIP
+          to:
+            exactlyOf:
+              concrete: Person
+        implies:
+          propertyTypes:
+          - name: startDate
+            valueType: DATE
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          arc:
+            exactlyOf:
+              concrete: MARRIED_TO
+          to:
+            exactlyOf:
+              concrete: Person
+        extends: RELATIONSHIP
+        adding:
+          propertyTypes:
+          - name: weddingDate
+            valueType: DATE
+          - name: location
+            valueType: STRING
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: ENGAGED_TO
+          to:
+            exactlyOf:
+              concrete: Person
+        extends: RELATIONSHIP
+        adding:
+          propertyTypes:
+          - name: engagementDate
+            valueType: DATE
+          - name: weddingPlanned
+            valueType: BOOLEAN
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          to:
+            exactlyOf:
+              concrete: Company
+        implies:
+          propertyTypes:
+          - name: weight
+            valueType: FLOAT
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Person
+          and:
+            exactlyOf:
+              concrete: Person
+    - subtypesOf:
+        abstract:
+          edgeType:
+            directed:
+              from: Person
+              via: RELATIONSHIP
+              to: Person
+            implies:
+              propertyTypes:
+              - name: since
+                valueType: DATE
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: FRIENDSHIP
+          to:
+            exactlyOf:
+              concrete: Person
+        implies:
+          supertypes:
+          - RELATIONSHIP
+          propertyTypes:
+          - name: closeness
+            valueType: FLOAT
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Person
+          via:
+            exactlyOf:
+              concrete: PROFESSIONAL_RELATIONSHIP
+          to:
+            exactlyOf:
+              concrete: Person
+        implies:
+          supertypes: RELATIONSHIP
+          propertyTypes:
+          - name: context
+            valueType: STRING
+    - subtypesOf:
+        abstract:
+          edgeType:
+            undirected:
+              between: Company
+              via: PARTNERSHIP
+              and: Company
+            implies:
+              propertyTypes:
+              - name: startDate
+                valueType: DATE
+    - edgeType:
+        undirected:
+          between:
+            exactlyOf:
+              concrete: Company
+          via:
+            exactlyOf:
+              concrete: STRATEGIC_PARTNERSHIP
+          and:
+            exactlyOf:
+              concrete: Company
+        implies:
+          supertypes: PARTNERSHIP
+          propertyTypes:
+          - name: value
+            valueType: FLOAT
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Employee
+          via:
+            exactlyOf:
+              concrete: MANAGES
+          to:
+            subtypesOf:
+              abstract: Person
+        implies:
+          propertyTypes:
+          - name: startDate
+            valueType: DATE
+    - edgeType:
+        directed:
+          from:
+            exactlyOf:
+              concrete: Manager
+          via:
+            exactlyOf:
+              concrete: SUPERVISES
+          to:
+            subtypesOf:
+              abstract: Person
+        implies:
+          propertyTypes:
+          - name: role
+            valueType: STRING
+    - edgeType:
+        directed:
+          from:
+            subtypesOf:
+              abstract: Person
+          via:
+            exactlyOf:
+              concrete: REPORTS_TO
+          to:
+            subtypesOf:
+              abstract: Person
+        implies:
+          propertyTypes: []
+    - edgeType:
+        undirected:
+          between:
+            subtypesOf:
+              abstract: Person
+          via:
+            exactlyOf:
+              concrete: COLLABORATES_ON
+          and:
+            exactlyOf:
+              concrete: Company
+        implies:
+          propertyTypes:
+          - name: projectName
+            valueType: STRING
