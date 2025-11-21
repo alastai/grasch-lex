@@ -314,6 +314,11 @@ class ImportPreprocessor:
         """
         Canonicalize an edge type structure, handling component-level wrappers.
         
+        The canonicalizer is "dumb" - it doesn't parse or understand what a 
+        <node type for endpoint> is. It just checks if a type interpretation 
+        wrapper exists, and if not, inserts the default exactlyOf: concrete: 
+        wrapper around the ENTIRE value.
+        
         Args:
             edge_data: The edge type data (should contain 'directed' or 'undirected')
             context: Context string for error messages
@@ -336,20 +341,17 @@ class ImportPreprocessor:
                             # This is an edge component - check for wrappers
                             wrapper = self.parse_wrapper(comp_value, f"{context}.{key}.{comp_key}")
                             if wrapper:
-                                # Canonicalize the wrapper
+                                # Already has a wrapper - canonicalize it
                                 edge_components[comp_key] = wrapper.to_canonical_dict()
                             else:
-                                # No wrapper - default to exactlyOf: concrete:
-                                if isinstance(comp_value, (str, int, list)):
-                                    edge_components[comp_key] = {
-                                        SubtypeMatchingMode.EXACTLY_OF.value: {
-                                            Concreteness.CONCRETE.value: comp_value
-                                        }
+                                # No wrapper - insert default exactlyOf: concrete: wrapper
+                                # around the ENTIRE value (the <node type for endpoint>)
+                                # Don't try to understand what the value is - just wrap it
+                                edge_components[comp_key] = {
+                                    SubtypeMatchingMode.EXACTLY_OF.value: {
+                                        Concreteness.CONCRETE.value: comp_value
                                     }
-                                else:
-                                    edge_components[comp_key] = self.canonicalize_wrapper(
-                                        comp_value, comp_key, f"{context}.{key}.{comp_key}"
-                                    )
+                                }
                         else:
                             # Not an edge component - recursively process
                             edge_components[comp_key] = self.canonicalize_wrapper(
