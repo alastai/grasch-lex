@@ -37,29 +37,67 @@ nodeTypes:
 
 **Purpose**: Normalize all convenience syntax to canonical form
 
+**Critical Rule**: Type interpretation wrappers surround the **type identifier**, not the type definition structure.
+
+**Type Identifier Forms**:
+- `X` - single type label (string)
+- `[X, Y]` - type labels set (array)
+- `0` - type index for anonymous type (integer)
+
 **Transformations**:
 
-1. **Type interpretation wrappers**:
+1. **Type interpretation wrappers** (surround identifier):
    ```yaml
    # PC form → C form
-   abstract: {...}           → subtypesOf: abstract: {...}
-   properSubtypesOf: {...}   → subtypesOf: abstract: {...}
-   <omitted>                 → exactlyOf: concrete: {...}
+   abstract:
+     nodeType:
+       typeLabel: Message
+   
+   →
+   
+   subtypesOf:
+     abstract:
+       nodeType:
+         typeLabel: Message
    ```
 
-2. **Edge endpoint wrappers**:
+2. **Edge endpoint wrappers** (surround identifier, NOT structure):
    ```yaml
    # PC form → C form
    from: Person              → from: exactlyOf: concrete: Person
    to: Company               → to: exactlyOf: concrete: Company
+   via: KNOWS                → via: exactlyOf: concrete: KNOWS
+   
+   # NOT this (WRONG):
+   from: typeLabel: Person   → from: exactlyOf: concrete: typeLabel: Person
+   
+   # The wrapper surrounds the VALUE (Person), not the key-value pair
    ```
 
-3. **Other normalizations**:
-   - Ensure consistent structure
-   - Expand defaults
-   - Normalize synonyms
+3. **Type identifier simplification**:
+   ```yaml
+   # PC form (verbose) → C form (simplified)
+   from:
+     typeLabel: Person       → from: exactlyOf: concrete: Person
+   
+   to:
+     typeLabels: [X, Y]      → to: exactlyOf: concrete: [X, Y]
+   
+   via:
+     typeLabel: KNOWS        → via: exactlyOf: concrete: KNOWS
+   ```
 
-**Result**: Canonical form with explicit, normalized syntax
+4. **Default wrapper insertion**:
+   ```yaml
+   # PC form (omitted wrapper) → C form (explicit default)
+   from: Person              → from: exactlyOf: concrete: Person
+   nodeType: Person          → nodeType: exactlyOf: concrete: Person
+   ```
+
+**Result**: Canonical form with:
+- Explicit type interpretation wrappers
+- Simplified type identifiers (no `typeLabel:` keys)
+- Normalized structure
 
 ## Critical Requirements
 
@@ -132,22 +170,52 @@ Pick a simple failing file (e.g., `minimal-import-example.yaml`):
 
 ### Step 2: Check Wrapper Canonicalization
 
-Verify type interpretation wrappers are correct:
+Verify type interpretation wrappers surround identifiers correctly:
 ```yaml
-# PC form
+# PC form (verbose)
 nodeTypes:
   - abstract:
       nodeType:
         typeLabel: Message
 
-# Expected C form
+# Expected C form (simplified identifier)
+nodeTypes:
+  - subtypesOf:
+      abstract:
+        nodeType: Message
+
+# NOT this (WRONG - keeps verbose form):
 nodeTypes:
   - subtypesOf:
       abstract:
         nodeType:
           typeLabel: Message
 
-# Check: Does C form match this pattern?
+# Check: Are identifiers simplified to bare values?
+```
+
+```yaml
+# PC form (edge endpoint)
+edgeType:
+  directed:
+    from: Person
+    via: KNOWS
+    to: Person
+
+# Expected C form
+edgeType:
+  directed:
+    from:
+      exactlyOf:
+        concrete: Person
+    via:
+      exactlyOf:
+        concrete: KNOWS
+    to:
+      exactlyOf:
+        concrete: Person
+
+# Check: Do wrappers surround the VALUE, not the structure?
 ```
 
 ### Step 3: Check Import Resolution
