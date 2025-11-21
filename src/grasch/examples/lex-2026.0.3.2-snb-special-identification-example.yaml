@@ -10,45 +10,36 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: firstName
             valueType: STRING
-            notNull: true
           - name: lastName
             valueType: STRING
-            notNull: true
     - nodeType:
         index: 0
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
     - nodeType:
         index: 1
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: title
             valueType: STRING
-            notNull: true
     - nodeType:
         typeLabel: Message
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: content
             valueType: STRING
           - name: creationDate
             valueType: ZONED DATETIME
-            notNull: true
     - nodeType:
         typeLabels:
         - Post
@@ -83,7 +74,6 @@ graphSchema:
           propertyTypes:
           - name: creationDate
             valueType: ZONED DATETIME
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -95,7 +85,6 @@ graphSchema:
           propertyTypes:
           - name: startDate
             valueType: DATE
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -118,7 +107,6 @@ graphSchema:
           propertyTypes:
           - name: creationDate
             valueType: ZONED DATETIME
-            notNull: true
     - edgeType:
         directed:
           from:

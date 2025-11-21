@@ -10,10 +10,8 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
     - nodeType:
         typeLabel: Employee
         implies:
@@ -21,13 +19,10 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
           - name: employeeId
             valueType: STRING
-            notNull: true
     - nodeType:
         typeLabel: Contractor
         implies:
@@ -36,13 +31,10 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
           - name: contractId
             valueType: STRING
-            notNull: true
     - nodeType:
         typeLabel: Manager
         implies:
@@ -52,16 +44,12 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
           - name: employeeId
             valueType: STRING
-            notNull: true
           - name: department
             valueType: STRING
-            notNull: true
     - nodeType:
         typeLabel: Director
         extends: Manager
@@ -164,7 +152,6 @@ graphSchema:
               propertyTypes:
               - name: id
                 valueType: INTEGER
-                notNull: true
               - name: content
                 valueType: STRING
         edgeTypes:

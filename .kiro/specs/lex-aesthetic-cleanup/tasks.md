@@ -21,20 +21,20 @@
     - _Requirements: 1.1, 1.3, 2.1, 2.3_
 
 - [ ] 3. Update main example files
-  - [-] 3.1 Update type-definition-syntax-examples.yaml
+  - [x] 3.1 Update type-definition-syntax-examples.yaml
     - Clean up all type definitions
     - Use bracketed arrays for label sets
     - _Requirements: 1.1, 2.1, 3.1, 4.1_
   
-  - [ ] 3.2 Update snb-schema.yaml
+  - [x] 3.2 Update snb-schema.yaml
     - Apply aesthetic cleanup throughout
     - _Requirements: 1.1, 2.1, 3.1, 4.1_
   
-  - [ ] 3.3 Update finbench-schema.yaml
+  - [x] 3.3 Update finbench-schema.yaml
     - Apply aesthetic cleanup throughout
     - _Requirements: 1.1, 2.1, 3.1, 4.1_
   
-  - [ ] 3.4 Update other example files
+  - [x] 3.4 Update other example files
     - Review and clean remaining examples
     - _Requirements: 5.1, 5.2, 5.3, 5.4_
 
@@ -56,7 +56,7 @@
     - Ensure flow-style and block-style both validate
     - _Requirements: 3.4, 6.4_
 
-- [ ] 5. Validate all examples
+- [x] 5. Validate all examples
   - Run validation suite on all updated examples
   - Ensure backward compatibility maintained
   - Fix any validation failures

@@ -11,10 +11,8 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
     edgeTypes:
     - edgeType:
         directed:
@@ -27,4 +25,3 @@ graphSchema:
           propertyTypes:
           - name: creationDate
             valueType: DATE
-            notNull: true

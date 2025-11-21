@@ -10,14 +10,12 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
     - nodeType:
         typeLabel: Tag
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
     edgeTypes:
     - edgeType:
         undirected:
@@ -37,7 +35,6 @@ graphSchema:
               propertyTypes:
               - name: id
                 valueType: INTEGER
-                notNull: true
   constraints:
     personIdUnique:
       name: personIdUnique

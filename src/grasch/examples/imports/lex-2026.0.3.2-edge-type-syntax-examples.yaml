@@ -29,7 +29,6 @@ edgeTypes:
         propertyTypes:
         - name: startDate
           valueType: DATE
-          notNull: true
   
   # Pattern 2b: arc synonym for via
   - edgeType:
@@ -41,7 +40,6 @@ edgeTypes:
         propertyTypes:
         - name: startDate
           valueType: DATE
-          notNull: true
   
   # Pattern 3: Directed edge - via between from/to (no properties)
   - edgeType:
@@ -85,7 +83,6 @@ edgeTypes:
         propertyTypes:
         - name: creationDate
           valueType: ZONED DATETIME
-          notNull: true
   
   # Pattern 8: Using typeLabels for multi-label endpoint reference
   - edgeType:
@@ -100,7 +97,6 @@ edgeTypes:
         propertyTypes:
         - name: purchaseDate
           valueType: DATE
-          notNull: true
         - name: quantity
           valueType: INTEGER
   
@@ -157,7 +153,6 @@ edgeTypes:
               propertyTypes:
               - name: id
                 valueType: INTEGER
-                notNull: true
         via: CONNECTS_TO
         to: Company
   
@@ -173,10 +168,8 @@ edgeTypes:
               propertyTypes:
               - name: id
                 valueType: INTEGER
-                notNull: true
               - name: address
                 valueType: STRING
-                notNull: true
               - name: value
                 valueType: FLOAT
       implies:
@@ -344,7 +337,6 @@ edgeTypes:
         propertyTypes:
         - name: weddingDate
           valueType: DATE
-          notNull: true
         - name: location
           valueType: STRING
   

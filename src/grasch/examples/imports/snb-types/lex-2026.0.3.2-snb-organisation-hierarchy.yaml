@@ -9,16 +9,12 @@
         propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: type
             valueType: STRING
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
           - name: url
             valueType: STRING
-            notNull: true
 
 - nodeType:
     typeLabel: Company

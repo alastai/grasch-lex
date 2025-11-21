@@ -16,7 +16,6 @@ graphType:
           propertyTypes:
             - name: id
               valueType: INTEGER
-              notNull: true
   
   edgeTypes:
     - edgeType:
@@ -44,7 +43,6 @@ graphType:
             propertyTypes:
               - name: id
                 valueType: INTEGER
-                notNull: true
   
   edgeTypes:
     - edgeType:
@@ -72,7 +70,6 @@ graphType:
           propertyTypes:
             - name: id
               valueType: INTEGER
-              notNull: true
   
   # Message and its subtypes allowed
   subtypesOf:
@@ -83,7 +80,6 @@ graphType:
             propertyTypes:
               - name: id
                 valueType: INTEGER
-                notNull: true
               - name: content
                 valueType: STRING
       
@@ -128,7 +124,6 @@ graphType:
           propertyTypes:
             - name: id
               valueType: INTEGER
-              notNull: true
   
   # RELATIONSHIP is abstract - only proper subtypes allowed
   subtypesOf:
@@ -187,7 +182,6 @@ graphType:
           propertyTypes:
             - name: id
               valueType: INTEGER
-              notNull: true
   
   # Allow subtypes for edges
   subtypesOf:
@@ -230,7 +224,6 @@ graphType:
           propertyTypes:
             - name: id
               valueType: INTEGER
-              notNull: true
   
   # Subtypes allowed for Company hierarchy
   subtypesOf:
@@ -241,7 +234,6 @@ graphType:
             propertyTypes:
               - name: id
                 valueType: INTEGER
-                notNull: true
               - name: name
                 valueType: STRING
       

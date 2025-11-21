@@ -10,28 +10,20 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: firstName
             valueType: STRING
-            notNull: true
           - name: lastName
             valueType: STRING
-            notNull: true
           - name: gender
             valueType: STRING
-            notNull: true
           - name: birthday
             valueType: DATE
-            notNull: true
           - name: creationDate
             valueType: ZONED DATETIME
-            notNull: true
           - name: locationIP
             valueType: STRING
-            notNull: true
           - name: browserUsed
             valueType: STRING
-            notNull: true
           - name: language
             valueType: LIST
           - name: email
@@ -44,39 +36,30 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
           - name: url
             valueType: STRING
-            notNull: true
     - nodeType:
         typeLabel: TagClass
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
           - name: url
             valueType: STRING
-            notNull: true
     - nodeType:
         typeLabel: Forum
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: title
             valueType: STRING
-            notNull: true
           - name: creationDate
             valueType: ZONED DATETIME
-            notNull: true
     - import: imports/snb-types/lex-2026.0.3.2-snb-message-hierarchy.yaml
     edgeTypes:
     - edgeType:
@@ -90,7 +73,6 @@ graphSchema:
           propertyTypes:
           - name: creationDate
             valueType: ZONED DATETIME
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -104,7 +86,6 @@ graphSchema:
           propertyTypes:
           - name: creationDate
             valueType: ZONED DATETIME
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -138,7 +119,6 @@ graphSchema:
           propertyTypes:
           - name: classYear
             valueType: INTEGER
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -150,7 +130,6 @@ graphSchema:
           propertyTypes:
           - name: workFrom
             valueType: INTEGER
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -162,7 +141,6 @@ graphSchema:
           propertyTypes:
           - name: joinDate
             valueType: ZONED DATETIME
-            notNull: true
     - edgeType:
         directed:
           from:

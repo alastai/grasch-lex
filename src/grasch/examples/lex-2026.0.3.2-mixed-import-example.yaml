@@ -11,17 +11,14 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
     - nodeType:
         typeLabel: Company
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
     edgeTypes:
     - edgeType:
         directed:
@@ -34,4 +31,3 @@ graphSchema:
           propertyTypes:
           - name: startDate
             valueType: DATE
-            notNull: true

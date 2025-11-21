@@ -10,57 +10,42 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
           - name: isBlocked
             valueType: BOOLEAN
-            notNull: true
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
     - nodeType:
         typeLabel: Account
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: isBlocked
             valueType: BOOLEAN
-            notNull: true
           - name: type
             valueType: STRING
-            notNull: true
     - nodeType:
         typeLabel: Company
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: name
             valueType: STRING
-            notNull: true
           - name: isBlocked
             valueType: BOOLEAN
-            notNull: true
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: country
             valueType: STRING
-            notNull: true
           - name: city
             valueType: STRING
-            notNull: true
           - name: business
             valueType: STRING
-            notNull: true
           - name: description
             valueType: STRING
           - name: url
@@ -73,43 +58,32 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: type
             valueType: STRING
-            notNull: true
           - name: isBlocked
             valueType: BOOLEAN
-            notNull: true
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: lastLoginTime
             valueType: ZONED DATETIME
           - name: riskLevel
             valueType: FLOAT
-            notNull: true
     - nodeType:
         typeLabel: Loan
         implies:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: loanAmount
             valueType: FLOAT
-            notNull: true
           - name: balance
             valueType: FLOAT
-            notNull: true
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: loanUsage
             valueType: STRING
-            notNull: true
           - name: interestRate
             valueType: FLOAT
-            notNull: true
     edgeTypes:
     - edgeType:
         directed:
@@ -122,7 +96,6 @@ graphSchema:
           propertyTypes:
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -134,18 +107,14 @@ graphSchema:
           propertyTypes:
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: amount
             valueType: FLOAT
-            notNull: true
           - name: orderNum
             valueType: INTEGER
-            notNull: true
           - name: comment
             valueType: STRING
           - name: payType
             valueType: STRING
-            notNull: true
           - name: goodsType
             valueType: STRING
     - edgeType:
@@ -159,10 +128,8 @@ graphSchema:
           propertyTypes:
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: amount
             valueType: FLOAT
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -174,10 +141,8 @@ graphSchema:
           propertyTypes:
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: amount
             valueType: FLOAT
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -189,10 +154,8 @@ graphSchema:
           propertyTypes:
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: amount
             valueType: FLOAT
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -204,10 +167,8 @@ graphSchema:
           propertyTypes:
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: org
             valueType: STRING
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -219,10 +180,8 @@ graphSchema:
           propertyTypes:
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: relation
             valueType: STRING
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -234,10 +193,8 @@ graphSchema:
           propertyTypes:
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
           - name: ratio
             valueType: FLOAT
-            notNull: true
     - edgeType:
         directed:
           from:
@@ -251,7 +208,6 @@ graphSchema:
           propertyTypes:
           - name: createTime
             valueType: ZONED DATETIME
-            notNull: true
   constraints:
     personIdUnique:
       name: personIdUnique

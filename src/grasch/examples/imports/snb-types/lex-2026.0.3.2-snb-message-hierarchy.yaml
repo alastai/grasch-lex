@@ -9,21 +9,16 @@
         propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
           - name: creationDate
             valueType: ZONED DATETIME
-            notNull: true
           - name: locationIP
             valueType: STRING
-            notNull: true
           - name: browserUsed
             valueType: STRING
-            notNull: true
           - name: content
             valueType: STRING
           - name: length
             valueType: INTEGER
-            notNull: true
 
 - nodeType:
     typeLabel: Post

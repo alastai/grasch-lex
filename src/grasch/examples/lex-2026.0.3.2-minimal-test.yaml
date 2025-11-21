@@ -12,7 +12,6 @@ graphSchema:
           propertyTypes:
           - name: id
             valueType: INTEGER
-            notNull: true
     edgeTypes:
     - edgeType:
         undirected:
