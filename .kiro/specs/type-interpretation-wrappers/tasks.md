@@ -98,7 +98,7 @@
   - Implement `allowsSubtypes()` method
   - _Requirements: 4.6_
 
-- [ ] 5. Implement validation logic for type interpretations
+- [x] 5. Implement validation logic for type interpretations
 - [x] 5.1 Add abstract type validation
   - Check that abstract types are not directly instantiated
   - Raise error when direct instantiation of abstract type is detected
@@ -189,7 +189,7 @@
   - Verify invalid examples produce expected errors
   - _Requirements: 8.15_
 
-- [ ] 7. Update validation test reporting
+- [x] 7. Update validation test reporting
   - Update test scripts to report "pre-canonical validation: passed/failed"
   - Update test scripts to report "canonical validation: passed/failed"
   - Remove all references to deprecated "pre-import" and "post-import" terminology
