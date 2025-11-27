@@ -256,9 +256,9 @@ edgeTypes:
 
 **Note**: Endpoint TI overrides follow the general override rule but have specific syntax for placement within the edge type structure.
 
-## 5. Two-Phase Import Mechanism
+## 6. Two-Phase Import Mechanism
 
-### 5.1 Phase 1: Import Entire TI Wrapper + Content
+### 6.1 Phase 1: Import Entire TI Wrapper + Content
 
 **Location**: At partition block level (array items)
 
@@ -283,7 +283,7 @@ nodeTypes:
         - nodeType: {typeLabel: Employee, extends: Person}
 ```
 
-### 5.2 Phase 2: Import Content Only, Strip TI
+### 6.2 Phase 2: Import Content Only, Strip TI
 
 **Location**: At TI wrapper content level
 
@@ -312,9 +312,9 @@ nodeTypes:
 
 **Key Insight**: Phase 2 enables **TI override** - you can import type definitions and reinterpret them with a different TI.
 
-## 6. Singleton vs Array Distinction in YAML
+## 7. Singleton vs Array Distinction in YAML
 
-### 6.1 Singleton Set (Cardinality 1)
+### 7.1 Single Element (Not in Array)
 
 **YAML Representation**: Single type (not in array)
 
@@ -325,7 +325,7 @@ nodeTypes:
         nodeType: {typeLabel: Person}  # Singleton - no array brackets
 ```
 
-### 6.2 Multi-Element Set (Cardinality > 1)
+### 7.2 Multi-Element Set (Array)
 
 **YAML Representation**: Array of types
 
@@ -337,30 +337,32 @@ nodeTypes:
         - nodeType: {typeLabel: Company}
 ```
 
-### 6.3 Array with One Member vs Singleton
+### 7.3 Array with One Member vs Single Element
 
-These are DIFFERENT in YAML:
+These are DIFFERENT in YAML but both must be supported:
 
 ```yaml
-# Singleton set (preferred for single type)
+# Single element (natural YAML for one type)
 concrete:
   nodeType: {typeLabel: Person}
 
-# Array with one member (valid but verbose)
+# Array with one member (also valid)
 concrete:
   - nodeType: {typeLabel: Person}
 ```
+
+**Key Point**: The natural YAML syntax for a single element is NOT array syntax, but both representations must be accepted.
 
 **Schema Requirement**: Must use `anyOf` pattern to accept both:
 ```json
 {
   "anyOf": [
     {
-      "description": "Singleton set",
+      "description": "Single element (not in array)",
       "$ref": "#/$defs/NodeType"
     },
     {
-      "description": "Multi-element set",
+      "description": "Array (one or more elements)",
       "type": "array",
       "items": { "$ref": "#/$defs/NodeType" }
     }
@@ -368,7 +370,7 @@ concrete:
 }
 ```
 
-## 7. Canonicalization Behavior
+## 8. Canonicalization Behavior
 
 ### 7.1 Two-Level Consolidation
 
@@ -431,7 +433,7 @@ graphType:
 4. **Partition blocks**: Each unique TI becomes one partition block in the array
 5. **Order preservation**: Within each partition block, order may be preserved or normalized
 
-## 8. Schema Structure Alignment
+## 9. Schema Structure Alignment
 
 ### 8.1 GraphType Structure
 
