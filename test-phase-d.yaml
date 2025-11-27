@@ -1,0 +1,53 @@
+# Phase D Test: Undirected Edge with Endpoint TI wrappers
+
+graphSchema:
+  pathName: /test/phase-d
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            labels: [Person]
+            propertyTypes:
+              - name: name
+                valueType: STRING
+    
+    edgeTypes:
+      # Bare endpoints
+      - edgeType:
+          undirected:
+            between: Person
+            via: FRIENDS_WITH
+            and: Person
+          implies:
+            propertyTypes:
+              - name: since
+                valueType: DATE
+      
+      # 1-level TI on between
+      - edgeType:
+          undirected:
+            between:
+              abstract: Person
+            via: RELATED_TO
+            and: Person
+          implies:
+            propertyTypes:
+              - name: relationship
+                valueType: STRING
+      
+      # 2-level TI: properSubtypesOf on and (NEW!)
+      - edgeType:
+          undirected:
+            between: Person
+            via: COLLABORATES_WITH
+            and:
+              properSubtypesOf:
+                concrete: Person
+          implies:
+            propertyTypes:
+              - name: project
+                valueType: STRING
