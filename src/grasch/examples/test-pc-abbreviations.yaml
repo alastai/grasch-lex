@@ -1,0 +1,28 @@
+# Test PC Form: TI Abbreviations (Single-Level)
+# Purpose: Test that single-level TI abbreviations canonicalize correctly
+# Expected: Should produce same C form as other PC variants
+
+graphSchema:
+  graphType:
+    nodeTypes:
+      # Abbreviation: abstract: → subtypesOf:abstract:
+      abstract:
+        - nodeType:
+            typeLabel: Person
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: INTEGER
+                - name: name
+                  valueType: STRING
+      
+      # Abbreviation: concrete: → exactlyOf:concrete:
+      concrete:
+        - nodeType:
+            typeLabel: Company
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: INTEGER
+                - name: name
+                  valueType: STRING
