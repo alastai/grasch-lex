@@ -810,6 +810,190 @@
         }
       }
     },
+    "PartitionBlockItemNode": {
+      "description": "Item in nodeTypes array - can be bare type, TI-wrapped partition block, or Phase 1 import (import entire TI wrapper + content)",
+      "oneOf": [
+        {
+          "description": "Bare node type (singleton set with implicit exactlyOf:concrete TI)",
+          "$ref": "#/$defs/NodeType"
+        },
+        {
+          "description": "TI-wrapped partition block with import-capable contents",
+          "type": "object",
+          "patternProperties": {
+            "^(exactlyOf|subtypesOf|properSubtypesOf)$": {
+              "oneOf": [
+                {
+                  "description": "Two-level TI wrapper (interpretation + concreteness)",
+                  "type": "object",
+                  "patternProperties": {
+                    "^(abstract|concrete|final|sealed|extensible)$": {
+                      "$ref": "#/$defs/TIWrapperContentNode"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1,
+                  "maxProperties": 1
+                },
+                {
+                  "description": "Phase 1 Import: Import entire TI wrapper with its type definitions",
+                  "type": "object",
+                  "required": ["import"],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Path to file containing TI wrapper + type definitions"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 1
+        },
+        {
+          "description": "Phase 1 Import: Import partition block (TI wrapper + types)",
+          "type": "object",
+          "required": ["import"],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Path to file containing TI-wrapped partition block"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "PartitionBlockItemEdge": {
+      "description": "Item in edgeTypes array - can be bare type, TI-wrapped partition block, or Phase 1 import (import entire TI wrapper + content)",
+      "oneOf": [
+        {
+          "description": "Bare edge type (singleton set with implicit exactlyOf:concrete TI)",
+          "$ref": "#/$defs/EdgeType"
+        },
+        {
+          "description": "TI-wrapped partition block with import-capable contents",
+          "type": "object",
+          "patternProperties": {
+            "^(exactlyOf|subtypesOf|properSubtypesOf)$": {
+              "oneOf": [
+                {
+                  "description": "Two-level TI wrapper (interpretation + concreteness)",
+                  "type": "object",
+                  "patternProperties": {
+                    "^(abstract|concrete|final|sealed|extensible)$": {
+                      "$ref": "#/$defs/TIWrapperContentEdge"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1,
+                  "maxProperties": 1
+                },
+                {
+                  "description": "Phase 1 Import: Import entire TI wrapper with its type definitions",
+                  "type": "object",
+                  "required": ["import"],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Path to file containing TI wrapper + type definitions"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 1
+        },
+        {
+          "description": "Phase 1 Import: Import partition block (TI wrapper + types)",
+          "type": "object",
+          "required": ["import"],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Path to file containing TI-wrapped partition block"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "TIWrapperContentNode": {
+      "description": "Content within TI wrappers for node types - supports singleton sets, multi-element sets, and Phase 2 imports (import content only, strip TI)",
+      "oneOf": [
+        {
+          "description": "Inline type set (delimited by indentation)",
+          "anyOf": [
+            {
+              "description": "Singleton set (single type, cardinality 1)",
+              "$ref": "#/$defs/NodeType"
+            },
+            {
+              "description": "Multi-element set (array of types, cardinality > 1)",
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NodeType"
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        {
+          "description": "Phase 2 Import: Import type definitions only (TI will be stripped/merged, allowing outer TI to reinterpret)",
+          "type": "object",
+          "required": ["import"],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Path to file containing type definitions (TI wrapper will be stripped)"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "TIWrapperContentEdge": {
+      "description": "Content within TI wrappers for edge types - supports singleton sets, multi-element sets, and Phase 2 imports (import content only, strip TI)",
+      "oneOf": [
+        {
+          "description": "Inline type set (delimited by indentation)",
+          "anyOf": [
+            {
+              "description": "Singleton set (single type, cardinality 1)",
+              "$ref": "#/$defs/EdgeType"
+            },
+            {
+              "description": "Multi-element set (array of types, cardinality > 1)",
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/EdgeType"
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        {
+          "description": "Phase 2 Import: Import type definitions only (TI will be stripped/merged, allowing outer TI to reinterpret)",
+          "type": "object",
+          "required": ["import"],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Path to file containing type definitions (TI wrapper will be stripped)"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
     "NodeType": {
       "type": "object",
       "description": "Node type descriptor with flexible identification (LEX:2026.0.3.2 - labels optional when matching typeLabel)",
