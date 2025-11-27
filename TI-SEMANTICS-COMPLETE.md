@@ -477,29 +477,29 @@ NodeTypesArray
         └── import option (Phase 1)
 ```
 
-## 9. Required Schema Patterns
+## 10. Required Schema Patterns
 
-### 9.1 TI Wrapper Content Pattern
+### 10.1 TI Wrapper Content Pattern
 
-**Purpose**: Content within TI wrappers (the actual type sets)
+**Purpose**: Content within TI wrappers (the actual types)
 
 **Supports**:
-- Singleton sets (single type)
-- Multi-element sets (array of types)
+- Single element (one type, not in array)
+- Array (one or more types)
 - Phase 2 imports (import content only, strip TI)
 
 ```json
 "TIWrapperContentNode": {
   "oneOf": [
     {
-      "description": "Inline type set",
+      "description": "Inline types",
       "anyOf": [
         {
-          "description": "Singleton set",
+          "description": "Single element (not in array)",
           "$ref": "#/$defs/NodeType"
         },
         {
-          "description": "Multi-element set",
+          "description": "Array (one or more elements)",
           "type": "array",
           "items": { "$ref": "#/$defs/NodeType" }
         }
@@ -518,13 +518,13 @@ NodeTypesArray
 }
 ```
 
-### 9.2 Partition Block Item Pattern
+### 10.2 Partition Block Item Pattern
 
 **Purpose**: Items in nodeTypes/edgeTypes arrays
 
 **Supports**:
-- Bare types (singleton with implicit TI)
-- TI-wrapped partition blocks
+- Bare types (implicit TI: exactlyOf:concrete:)
+- TI-wrapped types (explicit TI override)
 - Phase 1 imports (import entire TI wrapper + content)
 
 ```json
@@ -574,7 +574,7 @@ NodeTypesArray
 }
 ```
 
-## 10. Summary Checklist
+## 11. Summary Checklist
 
 Before proceeding with spec updates, verify:
 
@@ -582,11 +582,29 @@ Before proceeding with spec updates, verify:
 - [ ] All 47 TI-wrappable locations identified
 - [ ] Valid TI combinations table complete
 - [ ] Two-phase import mechanism clearly explained
-- [ ] Singleton vs array distinction documented
-- [ ] Edge endpoint exception noted
-- [ ] Canonicalization behavior specified
+- [ ] Single element vs array distinction documented (natural YAML syntax)
+- [ ] TI override hierarchy documented (graphType default + override rules)
+- [ ] Canonicalization behavior specified (union + TI amalgamation)
 - [ ] Schema structure alignment verified
 - [ ] Required schema patterns defined
+
+## 12. Key Changes from Previous Understanding
+
+### 12.1 Sealed Semantics Correction
+**Old**: Sealed was understood as a general hierarchy closure mechanism
+**New**: Sealed makes all non-abstract types final + prevents additional subtypes
+
+### 12.2 TI Override Generalization
+**Old**: Edge endpoints were the only exception to TI inheritance
+**New**: General override rule - any level can override the TI from above, with graphType defaulting to exactlyOf:concrete:
+
+### 12.3 Singleton Terminology
+**Old**: "Singleton sets" as special cases
+**New**: "Single element" vs "array" - natural YAML syntax for one type is not array syntax, but both must be supported
+
+### 12.4 Canonicalization Clarification
+**Old**: Consolidation was understood but not fully detailed
+**New**: Explicit two-level process - union all instances, then amalgamate by TI
 
 ## Next Steps
 
