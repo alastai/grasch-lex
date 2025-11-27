@@ -22,10 +22,8 @@ graphSchema:
     edgeTypes:
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
-          to:
-            typeLabel: Company
+          from: Person
+          to: Company
           via: WORKS_FOR
         implies:
           propertyTypes:

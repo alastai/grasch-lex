@@ -106,6 +106,34 @@
 - [x] 8. Final checkpoint
   - Ensure all tests pass, ask the user if questions arise.
 
+- [ ] 9. Fix canonicalization and resolve C form validation failures
+  - [ ] 9.1 Analyze C form validation failures
+    - Examine one failing CANON file in detail
+    - Identify specific schema violations
+    - Document patterns in canonicalizer output
+    - _Requirements: 5.5, 6.5_
+  
+  - [ ] 9.2 Fix canonicalizer to handle type definitions correctly
+    - Update canonicalizer to wrap type definitions (not structures)
+    - Handle by-reference type definitions: Person, [X,Y], 0
+    - Handle inline type definitions: nodeType: typeLabel: Person
+    - Preserve definition form during canonicalization
+    - _Requirements: 5.5, 6.5_
+  
+  - [ ] 9.3 Update JSON Schema to accept both PC and C forms
+    - Ensure schema validates by-reference definitions
+    - Ensure schema validates inline definitions
+    - Ensure schema validates wrapped definitions
+    - Test with all 14 example files
+    - _Requirements: 5.5, 6.5_
+  
+  - [ ] 9.4 Verify all examples pass PC and C validation
+    - Run complete validation pipeline
+    - Verify 14/14 PC forms validate
+    - Verify 14/14 C forms validate
+    - Document any remaining issues
+    - _Requirements: 5.5, 6.5_
+
 - [ ] 9. Resolve C form validation failures
   - [ ] 9.1 Update validation script to write CANON files to examples directory
     - Modify validate_pc_and_c_forms.py to write to src/grasch/examples/

@@ -157,9 +157,11 @@ graphSchema:
     - edgeType:
         undirected:
           between:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           and:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           via:
             exactlyOf:
               concrete: KNOWS
@@ -170,11 +172,13 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           to:
-            typeIdentifier:
-            - Post
-            - Comment
+            exactlyOf:
+              concrete:
+              - Post
+              - Comment
           via:
             exactlyOf:
               concrete: LIKES
@@ -185,9 +189,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           to:
-            typeLabel: Tag
+            exactlyOf:
+              concrete: Tag
           via:
             exactlyOf:
               concrete: HAS_INTEREST
@@ -196,13 +202,15 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeIdentifier:
-            - Person
-            - Organisation
-            - Post
-            - Comment
+            exactlyOf:
+              concrete:
+              - Person
+              - Organisation
+              - Post
+              - Comment
           to:
-            typeLabel: Place
+            exactlyOf:
+              concrete: Place
           via:
             exactlyOf:
               concrete: IS_LOCATED_IN
@@ -211,9 +219,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           to:
-            typeLabel: Organisation
+            exactlyOf:
+              concrete: Organisation
           via:
             exactlyOf:
               concrete: STUDY_AT
@@ -224,9 +234,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           to:
-            typeLabel: Organisation
+            exactlyOf:
+              concrete: Organisation
           via:
             exactlyOf:
               concrete: WORK_AT
@@ -237,9 +249,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Forum
+            exactlyOf:
+              concrete: Forum
           to:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           via:
             exactlyOf:
               concrete: HAS_MEMBER
@@ -250,9 +264,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Forum
+            exactlyOf:
+              concrete: Forum
           to:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           via:
             exactlyOf:
               concrete: HAS_MODERATOR
@@ -261,9 +277,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Forum
+            exactlyOf:
+              concrete: Forum
           to:
-            typeLabel: Post
+            exactlyOf:
+              concrete: Post
           via:
             exactlyOf:
               concrete: CONTAINER_OF
@@ -272,11 +290,13 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeIdentifier:
-            - Post
-            - Comment
+            exactlyOf:
+              concrete:
+              - Post
+              - Comment
           to:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           via:
             exactlyOf:
               concrete: HAS_CREATOR
@@ -285,11 +305,13 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Comment
+            exactlyOf:
+              concrete: Comment
           to:
-            typeIdentifier:
-            - Post
-            - Comment
+            exactlyOf:
+              concrete:
+              - Post
+              - Comment
           via:
             exactlyOf:
               concrete: REPLY_OF
@@ -298,12 +320,14 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeIdentifier:
-            - Post
-            - Comment
-            - Forum
+            exactlyOf:
+              concrete:
+              - Post
+              - Comment
+              - Forum
           to:
-            typeLabel: Tag
+            exactlyOf:
+              concrete: Tag
           via:
             exactlyOf:
               concrete: HAS_TAG
@@ -312,9 +336,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Tag
+            exactlyOf:
+              concrete: Tag
           to:
-            typeLabel: TagClass
+            exactlyOf:
+              concrete: TagClass
           via:
             exactlyOf:
               concrete: HAS_TYPE
@@ -323,9 +349,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: TagClass
+            exactlyOf:
+              concrete: TagClass
           to:
-            typeLabel: TagClass
+            exactlyOf:
+              concrete: TagClass
           via:
             exactlyOf:
               concrete: IS_SUBCLASS_OF
@@ -334,9 +362,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Place
+            exactlyOf:
+              concrete: Place
           to:
-            typeLabel: Place
+            exactlyOf:
+              concrete: Place
           via:
             exactlyOf:
               concrete: IS_PART_OF

@@ -87,10 +87,8 @@ graphSchema:
     edgeTypes:
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
-          to:
-            typeLabel: Account
+          from: Person
+          to: Account
           via: OWN
         implies:
           propertyTypes:
@@ -98,10 +96,8 @@ graphSchema:
             valueType: ZONED DATETIME
     - edgeType:
         directed:
-          from:
-            typeLabel: Account
-          to:
-            typeLabel: Account
+          from: Account
+          to: Account
           via: TRANSFER
         implies:
           propertyTypes:
@@ -119,10 +115,8 @@ graphSchema:
             valueType: STRING
     - edgeType:
         directed:
-          from:
-            typeLabel: Account
-          to:
-            typeLabel: Account
+          from: Account
+          to: Account
           via: WITHDRAW
         implies:
           propertyTypes:
@@ -132,10 +126,8 @@ graphSchema:
             valueType: FLOAT
     - edgeType:
         directed:
-          from:
-            typeLabel: Account
-          to:
-            typeLabel: Loan
+          from: Account
+          to: Loan
           via: REPAY
         implies:
           propertyTypes:
@@ -145,10 +137,8 @@ graphSchema:
             valueType: FLOAT
     - edgeType:
         directed:
-          from:
-            typeLabel: Loan
-          to:
-            typeLabel: Account
+          from: Loan
+          to: Account
           via: DEPOSIT
         implies:
           propertyTypes:
@@ -158,10 +148,8 @@ graphSchema:
             valueType: FLOAT
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
-          to:
-            typeLabel: Loan
+          from: Person
+          to: Loan
           via: APPLY
         implies:
           propertyTypes:
@@ -171,10 +159,8 @@ graphSchema:
             valueType: STRING
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
-          to:
-            typeLabel: Person
+          from: Person
+          to: Person
           via: GUARANTEE
         implies:
           propertyTypes:
@@ -184,10 +170,8 @@ graphSchema:
             valueType: STRING
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
-          to:
-            typeLabel: Company
+          from: Person
+          to: Company
           via: INVEST
         implies:
           propertyTypes:
@@ -198,11 +182,9 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeIdentifier:
-            - Person
-            - Company
-          to:
-            typeLabel: Medium
+          - Person
+          - Company
+          to: Medium
           via: USE
         implies:
           propertyTypes:

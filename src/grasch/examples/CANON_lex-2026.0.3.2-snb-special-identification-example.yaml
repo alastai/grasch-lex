@@ -88,9 +88,11 @@ graphSchema:
     - edgeType:
         undirected:
           between:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           and:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           via:
             exactlyOf:
               concrete: KNOWS
@@ -101,9 +103,12 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           to:
-            index: 0
+            exactlyOf:
+              concrete:
+                index: 0
           via:
             exactlyOf:
               concrete: WORKS_AT
@@ -114,9 +119,12 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           to:
-            index: 1
+            exactlyOf:
+              concrete:
+                index: 1
           via:
             exactlyOf:
               concrete: MODERATES
@@ -125,11 +133,14 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           to:
-            typeLabels:
-            - Post
-            - Message
+            exactlyOf:
+              concrete:
+                typeLabels:
+                - Post
+                - Message
           via:
             exactlyOf:
               concrete: LIKES
@@ -140,11 +151,14 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           to:
-            typeLabels:
-            - Comment
-            - Message
+            exactlyOf:
+              concrete:
+                typeLabels:
+                - Comment
+                - Message
         implies:
           propertyTypes:
           - name: weight
@@ -152,9 +166,13 @@ graphSchema:
     - edgeType:
         undirected:
           between:
-            index: 0
+            exactlyOf:
+              concrete:
+                index: 0
           and:
-            index: 1
+            exactlyOf:
+              concrete:
+                index: 1
         implies:
           propertyTypes: []
   constraints:

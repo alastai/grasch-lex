@@ -74,9 +74,11 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            typeLabel: Person
+            exactlyOf:
+              concrete: Person
           to:
-            typeLabel: Company
+            exactlyOf:
+              concrete: Company
           via:
             exactlyOf:
               concrete: WORKS_FOR

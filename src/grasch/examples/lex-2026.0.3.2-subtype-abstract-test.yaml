@@ -80,10 +80,8 @@ graphSchema:
     edgeTypes:
     - edgeType:
         undirected:
-          between:
-            typeLabel: Person
-          and:
-            typeLabel: Person
+          between: Person
+          and: Person
           via: KNOWS
         implies:
           propertyTypes:
@@ -91,10 +89,8 @@ graphSchema:
             valueType: DATE
     - edgeType:
         undirected:
-          between:
-            typeLabel: Person
-          and:
-            typeLabel: Person
+          between: Person
+          and: Person
           via: FRIENDSHIP
         implies:
           supertypes: KNOWS
@@ -105,10 +101,8 @@ graphSchema:
             valueType: FLOAT
     - edgeType:
         undirected:
-          between:
-            typeLabel: Person
-          and:
-            typeLabel: Person
+          between: Person
+          and: Person
           via: PROFESSIONAL_RELATIONSHIP
         implies:
           supertypes:
@@ -120,10 +114,8 @@ graphSchema:
             valueType: STRING
     - edgeType:
         undirected:
-          between:
-            typeLabel: Person
-          and:
-            typeLabel: Person
+          between: Person
+          and: Person
           via: CLOSE_FRIEND
         extends: FRIENDSHIP
         adding:
@@ -132,10 +124,8 @@ graphSchema:
             valueType: INTEGER
     - edgeType:
         undirected:
-          between:
-            typeLabel: Person
-          and:
-            typeLabel: Person
+          between: Person
+          and: Person
           via: BEST_FRIEND
         extends:
         - CLOSE_FRIEND
@@ -157,10 +147,8 @@ graphSchema:
         edgeTypes:
         - edgeType:
             directed:
-              from:
-                typeLabel: Person
-              to:
-                typeLabel: Person
+              from: Person
+              to: Person
               via: RELATIONSHIP
             implies:
               propertyTypes:

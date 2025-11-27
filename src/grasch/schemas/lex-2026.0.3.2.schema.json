@@ -113,11 +113,29 @@
           "description": "Directory name"
         },
         "directories": {
-          "type": "array",
-          "description": "Subdirectories",
-          "items": {
-            "$ref": "#/$defs/Directory"
-          }
+          "oneOf": [
+            {
+              "type": "array",
+              "description": "Subdirectories",
+              "items": {
+                "$ref": "#/$defs/Directory"
+              }
+            },
+            {
+              "type": "object",
+              "description": "Import content from file",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Import content from file"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
         },
         "graphReferences": {
           "type": "array",
@@ -199,7 +217,25 @@
           "description": "The owner of the graph schema, an authorization identifier of a principal"
         },
         "graphType": {
-          "$ref": "#/$defs/GraphType"
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GraphType"
+            },
+            {
+              "type": "object",
+              "description": "Import content from file",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Import content from file"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
         },
         "constraints": {
           "type": "object",
@@ -253,7 +289,25 @@
                   "pattern": "^/.*"
                 },
                 "graphType": {
-                  "$ref": "#/$defs/GraphType"
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/GraphType"
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
                 }
               },
               "required": [
@@ -289,7 +343,25 @@
                   "pattern": "^/.*"
                 },
                 "graphType": {
-                  "$ref": "#/$defs/GraphType"
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/GraphType"
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
                 }
               },
               "minProperties": 2
@@ -457,33 +529,105 @@
               "description": "Abstracts that cannot be instantiated directly",
               "properties": {
                 "nodeTypes": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/$defs/NodeType"
-                  }
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
                 },
                 "edgeTypes": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/$defs/EdgeType"
-                  }
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
                 }
               },
               "additionalProperties": false
             },
             "nodeTypes": {
-              "type": "array",
-              "description": "Node types that subtypes (supertype can be instantiated)",
-              "items": {
-                "$ref": "#/$defs/NodeType"
-              }
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Node types that subtypes (supertype can be instantiated)",
+                  "items": {
+                    "$ref": "#/$defs/NodeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
             },
             "edgeTypes": {
-              "type": "array",
-              "description": "Edge types that subtypes (supertype can be instantiated)",
-              "items": {
-                "$ref": "#/$defs/EdgeType"
-              }
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Edge types that subtypes (supertype can be instantiated)",
+                  "items": {
+                    "$ref": "#/$defs/EdgeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
             }
           },
           "additionalProperties": false
@@ -1226,16 +1370,7 @@
           ],
           "properties": {
             "sealed": {
-              "type": "object",
-              "required": [
-                "nodeTypes"
-              ],
-              "properties": {
-                "nodeTypes": {
-                  "$ref": "#/$defs/NodeTypesArray"
-                }
-              },
-              "additionalProperties": false
+              "$ref": "#/$defs/NodeTypeSetOrImport"
             }
           },
           "additionalProperties": false
@@ -1719,16 +1854,7 @@
           ],
           "properties": {
             "sealed": {
-              "type": "object",
-              "required": [
-                "edgeTypes"
-              ],
-              "properties": {
-                "edgeTypes": {
-                  "$ref": "#/$defs/EdgeTypesArray"
-                }
-              },
-              "additionalProperties": false
+              "$ref": "#/$defs/EdgeTypeSetOrImport"
             }
           },
           "additionalProperties": false
@@ -2812,6 +2938,178 @@
         }
       },
       "additionalProperties": false
+    },
+    "NodeTypesSetOrImport": {
+      "description": "TI wrapper contents: set of NodeTypes (singleton or array) or import",
+      "oneOf": [
+        {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NodeType"
+            },
+            {
+              "$ref": "#/$defs/NodeTypesArray"
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypesSetOrImport": {
+      "description": "TI wrapper contents: set of EdgeTypes (singleton or array) or import",
+      "oneOf": [
+        {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EdgeType"
+            },
+            {
+              "$ref": "#/$defs/EdgeTypesArray"
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NodeTypeArrayOrImport": {
+      "description": "Array of NodeTypes or import - handles all set cardinalities",
+      "oneOf": [
+        {
+          "description": "Inline array of node types",
+          "$ref": "#/$defs/NodeTypesArray"
+        },
+        {
+          "description": "Import array of node types",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import NodeTypesArray from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypeArrayOrImport": {
+      "description": "Array of EdgeTypes or import - handles all set cardinalities",
+      "oneOf": [
+        {
+          "description": "Inline array of edge types",
+          "$ref": "#/$defs/EdgeTypesArray"
+        },
+        {
+          "description": "Import array of edge types",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import EdgeTypesArray from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NodeTypeSetOrImport": {
+      "description": "Set of node types with optional nodeTypes: wrapper (allows duplication/stripping)",
+      "oneOf": [
+        {
+          "description": "Inline array (no wrapper)",
+          "$ref": "#/$defs/NodeTypesArray"
+        },
+        {
+          "description": "With nodeTypes: wrapper (can be stripped during canonicalization)",
+          "type": "object",
+          "required": [
+            "nodeTypes"
+          ],
+          "properties": {
+            "nodeTypes": {
+              "$ref": "#/$defs/NodeTypeArrayOrImport"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "Import node type set",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import node type set from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypeSetOrImport": {
+      "description": "Set of edge types with optional edgeTypes: wrapper (allows duplication/stripping)",
+      "oneOf": [
+        {
+          "description": "Inline array (no wrapper)",
+          "$ref": "#/$defs/EdgeTypesArray"
+        },
+        {
+          "description": "With edgeTypes: wrapper (can be stripped during canonicalization)",
+          "type": "object",
+          "required": [
+            "edgeTypes"
+          ],
+          "properties": {
+            "edgeTypes": {
+              "$ref": "#/$defs/EdgeTypeArrayOrImport"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "Import edge type set",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import edge type set from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
     }
   }
 }

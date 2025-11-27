@@ -65,10 +65,8 @@ graphSchema:
     edgeTypes:
     - edgeType:
         undirected:
-          between:
-            typeLabel: Person
-          and:
-            typeLabel: Person
+          between: Person
+          and: Person
           via: KNOWS
         implies:
           propertyTypes:
@@ -76,8 +74,7 @@ graphSchema:
             valueType: ZONED DATETIME
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
+          from: Person
           to:
             index: 0
           via: WORKS_AT
@@ -87,8 +84,7 @@ graphSchema:
             valueType: DATE
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
+          from: Person
           to:
             index: 1
           via: MODERATES
@@ -96,8 +92,7 @@ graphSchema:
           propertyTypes: []
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
+          from: Person
           to:
             typeLabels:
             - Post
@@ -109,8 +104,7 @@ graphSchema:
             valueType: ZONED DATETIME
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
+          from: Person
           to:
             typeLabels:
             - Comment

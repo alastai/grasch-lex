@@ -64,10 +64,8 @@ graphSchema:
     edgeTypes:
     - edgeType:
         undirected:
-          between:
-            typeLabel: Person
-          and:
-            typeLabel: Person
+          between: Person
+          and: Person
           via: KNOWS
         implies:
           propertyTypes:
@@ -75,12 +73,10 @@ graphSchema:
             valueType: ZONED DATETIME
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
+          from: Person
           to:
-            typeIdentifier:
-            - Post
-            - Comment
+          - Post
+          - Comment
           via: LIKES
         implies:
           propertyTypes:
@@ -88,32 +84,26 @@ graphSchema:
             valueType: ZONED DATETIME
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
-          to:
-            typeLabel: Tag
+          from: Person
+          to: Tag
           via: HAS_INTEREST
         implies:
           propertyTypes: []
     - edgeType:
         directed:
           from:
-            typeIdentifier:
-            - Person
-            - Organisation
-            - Post
-            - Comment
-          to:
-            typeLabel: Place
+          - Person
+          - Organisation
+          - Post
+          - Comment
+          to: Place
           via: IS_LOCATED_IN
         implies:
           propertyTypes: []
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
-          to:
-            typeLabel: Organisation
+          from: Person
+          to: Organisation
           via: STUDY_AT
         implies:
           propertyTypes:
@@ -121,10 +111,8 @@ graphSchema:
             valueType: INTEGER
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
-          to:
-            typeLabel: Organisation
+          from: Person
+          to: Organisation
           via: WORK_AT
         implies:
           propertyTypes:
@@ -132,10 +120,8 @@ graphSchema:
             valueType: INTEGER
     - edgeType:
         directed:
-          from:
-            typeLabel: Forum
-          to:
-            typeLabel: Person
+          from: Forum
+          to: Person
           via: HAS_MEMBER
         implies:
           propertyTypes:
@@ -143,80 +129,64 @@ graphSchema:
             valueType: ZONED DATETIME
     - edgeType:
         directed:
-          from:
-            typeLabel: Forum
-          to:
-            typeLabel: Person
+          from: Forum
+          to: Person
           via: HAS_MODERATOR
         implies:
           propertyTypes: []
     - edgeType:
         directed:
-          from:
-            typeLabel: Forum
-          to:
-            typeLabel: Post
+          from: Forum
+          to: Post
           via: CONTAINER_OF
         implies:
           propertyTypes: []
     - edgeType:
         directed:
           from:
-            typeIdentifier:
-            - Post
-            - Comment
-          to:
-            typeLabel: Person
+          - Post
+          - Comment
+          to: Person
           via: HAS_CREATOR
         implies:
           propertyTypes: []
     - edgeType:
         directed:
-          from:
-            typeLabel: Comment
+          from: Comment
           to:
-            typeIdentifier:
-            - Post
-            - Comment
+          - Post
+          - Comment
           via: REPLY_OF
         implies:
           propertyTypes: []
     - edgeType:
         directed:
           from:
-            typeIdentifier:
-            - Post
-            - Comment
-            - Forum
-          to:
-            typeLabel: Tag
+          - Post
+          - Comment
+          - Forum
+          to: Tag
           via: HAS_TAG
         implies:
           propertyTypes: []
     - edgeType:
         directed:
-          from:
-            typeLabel: Tag
-          to:
-            typeLabel: TagClass
+          from: Tag
+          to: TagClass
           via: HAS_TYPE
         implies:
           propertyTypes: []
     - edgeType:
         directed:
-          from:
-            typeLabel: TagClass
-          to:
-            typeLabel: TagClass
+          from: TagClass
+          to: TagClass
           via: IS_SUBCLASS_OF
         implies:
           propertyTypes: []
     - edgeType:
         directed:
-          from:
-            typeLabel: Place
-          to:
-            typeLabel: Place
+          from: Place
+          to: Place
           via: IS_PART_OF
         implies:
           propertyTypes: []

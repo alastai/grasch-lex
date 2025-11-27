@@ -16,10 +16,8 @@ graphSchema:
     edgeTypes:
     - edgeType:
         directed:
-          from:
-            typeLabel: Person
-          to:
-            typeLabel: Post
+          from: Person
+          to: Post
           via: AUTHORED
         implies:
           propertyTypes:

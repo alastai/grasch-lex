@@ -38,9 +38,13 @@ graphSchema:
     - edgeType:
         undirected:
           between:
-            index: 0
+            exactlyOf:
+              concrete:
+                index: 0
           and:
-            index: 0
+            exactlyOf:
+              concrete:
+                index: 0
           via:
             exactlyOf:
               concrete: KNOWS

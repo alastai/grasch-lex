@@ -376,9 +376,11 @@ graphSchema:
             exactlyOf:
               concrete: PURCHASES
           to:
-            typeLabels:
-            - Product
-            - Sellable
+            exactlyOf:
+              concrete:
+                typeLabels:
+                - Product
+                - Sellable
         implies:
           propertyTypes:
           - name: purchaseDate
@@ -433,12 +435,14 @@ graphSchema:
     - edgeType:
         directed:
           from:
-            nodeType:
-              typeLabel: Person
-              implies:
-                propertyTypes:
-                - name: id
-                  valueType: INTEGER
+            exactlyOf:
+              concrete:
+                nodeType:
+                  typeLabel: Person
+                  implies:
+                    propertyTypes:
+                    - name: id
+                      valueType: INTEGER
           via:
             exactlyOf:
               concrete: CONNECTS_TO
@@ -454,16 +458,18 @@ graphSchema:
             exactlyOf:
               concrete: OWNS
           to:
-            nodeType:
-              typeLabel: Property
-              implies:
-                propertyTypes:
-                - name: id
-                  valueType: INTEGER
-                - name: address
-                  valueType: STRING
-                - name: value
-                  valueType: FLOAT
+            exactlyOf:
+              concrete:
+                nodeType:
+                  typeLabel: Property
+                  implies:
+                    propertyTypes:
+                    - name: id
+                      valueType: INTEGER
+                    - name: address
+                      valueType: STRING
+                    - name: value
+                      valueType: FLOAT
         implies:
           propertyTypes:
           - name: purchaseDate
@@ -477,12 +483,14 @@ graphSchema:
             exactlyOf:
               concrete: LINKED_TO
           and:
-            nodeType:
-              index: 99
-              implies:
-                propertyTypes:
-                - name: linkId
-                  valueType: STRING
+            exactlyOf:
+              concrete:
+                nodeType:
+                  index: 99
+                  implies:
+                    propertyTypes:
+                    - name: linkId
+                      valueType: STRING
     - edgeType:
         undirected:
           between:

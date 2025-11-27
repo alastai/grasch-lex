@@ -112,9 +112,11 @@ graph:
       - edgeType:
           directed:
             from:
-              typeLabel: Person
+              exactlyOf:
+                concrete: Person
             to:
-              typeLabel: Account
+              exactlyOf:
+                concrete: Account
             via:
               exactlyOf:
                 concrete: OWN
@@ -125,9 +127,11 @@ graph:
       - edgeType:
           directed:
             from:
-              typeLabel: Account
+              exactlyOf:
+                concrete: Account
             to:
-              typeLabel: Account
+              exactlyOf:
+                concrete: Account
             via:
               exactlyOf:
                 concrete: TRANSFER
@@ -148,9 +152,11 @@ graph:
       - edgeType:
           directed:
             from:
-              typeLabel: Account
+              exactlyOf:
+                concrete: Account
             to:
-              typeLabel: Account
+              exactlyOf:
+                concrete: Account
             via:
               exactlyOf:
                 concrete: WITHDRAW
@@ -163,9 +169,11 @@ graph:
       - edgeType:
           directed:
             from:
-              typeLabel: Account
+              exactlyOf:
+                concrete: Account
             to:
-              typeLabel: Loan
+              exactlyOf:
+                concrete: Loan
             via:
               exactlyOf:
                 concrete: REPAY
@@ -178,9 +186,11 @@ graph:
       - edgeType:
           directed:
             from:
-              typeLabel: Loan
+              exactlyOf:
+                concrete: Loan
             to:
-              typeLabel: Account
+              exactlyOf:
+                concrete: Account
             via:
               exactlyOf:
                 concrete: DEPOSIT
@@ -193,9 +203,11 @@ graph:
       - edgeType:
           directed:
             from:
-              typeLabel: Person
+              exactlyOf:
+                concrete: Person
             to:
-              typeLabel: Loan
+              exactlyOf:
+                concrete: Loan
             via:
               exactlyOf:
                 concrete: APPLY
@@ -208,9 +220,11 @@ graph:
       - edgeType:
           directed:
             from:
-              typeLabel: Person
+              exactlyOf:
+                concrete: Person
             to:
-              typeLabel: Person
+              exactlyOf:
+                concrete: Person
             via:
               exactlyOf:
                 concrete: GUARANTEE
@@ -223,9 +237,11 @@ graph:
       - edgeType:
           directed:
             from:
-              typeLabel: Person
+              exactlyOf:
+                concrete: Person
             to:
-              typeLabel: Company
+              exactlyOf:
+                concrete: Company
             via:
               exactlyOf:
                 concrete: INVEST
@@ -238,11 +254,13 @@ graph:
       - edgeType:
           directed:
             from:
-              typeIdentifier:
-              - Person
-              - Company
+              exactlyOf:
+                concrete:
+                - Person
+                - Company
             to:
-              typeLabel: Medium
+              exactlyOf:
+                concrete: Medium
             via:
               exactlyOf:
                 concrete: USE

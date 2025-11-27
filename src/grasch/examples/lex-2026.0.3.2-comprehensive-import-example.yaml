@@ -19,10 +19,8 @@ graphSchema:
     edgeTypes:
     - edgeType:
         undirected:
-          between:
-            typeLabel: Person
-          and:
-            typeLabel: Person
+          between: Person
+          and: Person
           via: KNOWS
         implies:
           propertyTypes: []

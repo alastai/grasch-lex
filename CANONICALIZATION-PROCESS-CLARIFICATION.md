@@ -37,67 +37,80 @@ nodeTypes:
 
 **Purpose**: Normalize all convenience syntax to canonical form
 
-**Critical Rule**: Type interpretation wrappers surround the **type identifier**, not the type definition structure.
-
-**Type Identifier Forms**:
-- `X` - single type label (string)
-- `[X, Y]` - type labels set (array)
-- `0` - type index for anonymous type (integer)
+**Critical Rules**:
+1. Type interpretation wrappers surround **type references** (edge endpoints, not type definitions)
+2. Type definitions inside wrappers are **BLACK BOX** - left completely untouched
+3. Edge endpoint identifiers can be simplified (no `typeLabel:` needed - YAML supports scalar values)
+4. Node/edge type definitions MUST keep `typeLabel:` (YAML doesn't support mixed content)
 
 **Transformations**:
 
-1. **Type interpretation wrappers** (surround identifier):
+1. **Type interpretation wrappers around type definitions** (content is BLACK BOX):
    ```yaml
    # PC form → C form
    abstract:
      nodeType:
        typeLabel: Message
+       implies:
+         propertyTypes: [...]
    
    →
    
    subtypesOf:
      abstract:
        nodeType:
-         typeLabel: Message
+         typeLabel: Message    # ← UNCHANGED (black box)
+         implies:
+           propertyTypes: [...] # ← UNCHANGED (black box)
+   
+   # The wrapper changes, but the nodeType content is UNTOUCHED
    ```
 
-2. **Edge endpoint wrappers** (surround identifier, NOT structure):
+2. **Edge endpoint wrappers** (CAN simplify identifiers):
    ```yaml
    # PC form → C form
-   from: Person              → from: exactlyOf: concrete: Person
-   to: Company               → to: exactlyOf: concrete: Company
-   via: KNOWS                → via: exactlyOf: concrete: KNOWS
+   from: Person              → from:
+                                 exactlyOf:
+                                   concrete: Person
    
-   # NOT this (WRONG):
-   from: typeLabel: Person   → from: exactlyOf: concrete: typeLabel: Person
-   
-   # The wrapper surrounds the VALUE (Person), not the key-value pair
-   ```
-
-3. **Type identifier simplification**:
-   ```yaml
-   # PC form (verbose) → C form (simplified)
+   # OR if PC has verbose form:
    from:
-     typeLabel: Person       → from: exactlyOf: concrete: Person
+     typeLabel: Person       → from:
+                                 exactlyOf:
+                                   concrete: Person
    
-   to:
-     typeLabels: [X, Y]      → to: exactlyOf: concrete: [X, Y]
-   
-   via:
-     typeLabel: KNOWS        → via: exactlyOf: concrete: KNOWS
+   # The typeLabel: is NOT needed in edge endpoints (scalar value works)
    ```
 
-4. **Default wrapper insertion**:
+3. **Default wrapper insertion** (for edge endpoints):
    ```yaml
    # PC form (omitted wrapper) → C form (explicit default)
-   from: Person              → from: exactlyOf: concrete: Person
-   nodeType: Person          → nodeType: exactlyOf: concrete: Person
+   from: Person              → from:
+                                 exactlyOf:
+                                   concrete: Person
+   
+   via: KNOWS                → via:
+                                 exactlyOf:
+                                   concrete: KNOWS
+   ```
+
+4. **Type definitions remain unchanged**:
+   ```yaml
+   # PC form → C form (NO CHANGE to content)
+   nodeType:
+     typeLabel: Person       → nodeType:
+     implies:                    typeLabel: Person    # ← SAME
+       propertyTypes: [...]      implies:             # ← SAME
+                                   propertyTypes: [...] # ← SAME
+   
+   # typeLabel: MUST stay in nodeType (YAML requirement)
    ```
 
 **Result**: Canonical form with:
 - Explicit type interpretation wrappers
-- Simplified type identifiers (no `typeLabel:` keys)
-- Normalized structure
+- Type definitions UNCHANGED (black box)
+- Edge endpoint identifiers simplified (no `typeLabel:` key)
+- Normalized wrapper structure
 
 ## Critical Requirements
 
@@ -170,28 +183,26 @@ Pick a simple failing file (e.g., `minimal-import-example.yaml`):
 
 ### Step 2: Check Wrapper Canonicalization
 
-Verify type interpretation wrappers surround identifiers correctly:
+Verify type interpretation wrappers treat type definitions as black box:
 ```yaml
-# PC form (verbose)
+# PC form
 nodeTypes:
   - abstract:
       nodeType:
         typeLabel: Message
+        implies:
+          propertyTypes: [...]
 
-# Expected C form (simplified identifier)
-nodeTypes:
-  - subtypesOf:
-      abstract:
-        nodeType: Message
-
-# NOT this (WRONG - keeps verbose form):
+# Expected C form (content UNCHANGED)
 nodeTypes:
   - subtypesOf:
       abstract:
         nodeType:
-          typeLabel: Message
+          typeLabel: Message      # ← SAME (black box)
+          implies:
+            propertyTypes: [...]  # ← SAME (black box)
 
-# Check: Are identifiers simplified to bare values?
+# Check: Is the nodeType content completely untouched?
 ```
 
 ```yaml
@@ -202,7 +213,7 @@ edgeType:
     via: KNOWS
     to: Person
 
-# Expected C form
+# Expected C form (identifiers CAN be simplified)
 edgeType:
   directed:
     from:
@@ -215,7 +226,8 @@ edgeType:
       exactlyOf:
         concrete: Person
 
-# Check: Do wrappers surround the VALUE, not the structure?
+# Check: Are edge endpoints wrapped correctly?
+# Check: Are identifiers simplified (no typeLabel: key)?
 ```
 
 ### Step 3: Check Import Resolution
