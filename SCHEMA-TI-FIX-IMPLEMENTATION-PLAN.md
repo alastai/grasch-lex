@@ -33,11 +33,13 @@ At each location, support:
 - Test with minimal example
 
 **Steps**:
-1. [ ] Create reusable TI pattern definitions in `$defs`
-2. [ ] Update `NodeType` definition to support TI wrappers
-3. [ ] Create minimal test YAML with single nodeType + TI variants
-4. [ ] Validate test passes
-5. [ ] Document what was changed
+1. [x] Create reusable TI pattern definitions in `$defs` - Already existed in NodeTypeItem
+2. [x] Update `NodeType` definition to support TI wrappers - Added 2-level properSubtypesOf
+3. [x] Create minimal test YAML with single nodeType + TI variants - test-phase-a-corrected.yaml
+4. [x] Validate test passes - ✅ PASSED
+5. [x] Document what was changed - PHASE-A-COMPLETE.md
+
+**Result**: ✅ COMPLETE - Schema already had comprehensive TI support. Added missing 2-level properSubtypesOf wrapper.
 
 **Test Example**:
 ```yaml
@@ -60,10 +62,12 @@ graphSchema:
 - Endpoints use bare nodeType references (no TI)
 
 **Steps**:
-1. [ ] Update `EdgeType` definition to support TI wrappers
-2. [ ] Create test YAML with single edgeType + TI variants
-3. [ ] Validate test passes
-4. [ ] Document what was changed
+1. [x] Update `EdgeType` definition to support TI wrappers - Added 2-level properSubtypesOf
+2. [x] Create test YAML with single edgeType + TI variants - test-phase-b-edgetype-ti.yaml
+3. [x] Validate test passes - ✅ PASSED
+4. [x] Document what was changed - Phase B complete
+
+**Result**: ✅ COMPLETE - Schema already had comprehensive TI support. Added missing 2-level properSubtypesOf wrapper.
 
 **Test Example**:
 ```yaml
@@ -165,18 +169,41 @@ graphSchema:
 3. **Sealed with nested nodeTypes not supported** - Sealed wrapper structure incorrect
 4. **YAML syntax errors** - Some test files need correction
 
+## Progress Tracking
+
+### Completed Phases
+- [x] Phase A: Single NodeType ✅
+- [x] Phase B: Single EdgeType ✅
+- [ ] Phase C: Directed Edge with Endpoint TIs
+- [ ] Phase D: Undirected Edge with Endpoint TIs
+- [ ] Phase E: Full Schema Fix (all 8 locations)
+
+### Current Phase
+**Phase C: Directed Edge with Endpoint TIs** ⬅️ CURRENT
+
 ## Success Criteria
 
+### Phase A-D Success Criteria
+- [ ] Each phase's test example validates successfully
+- [ ] Schema remains valid JSON after each phase
+- [ ] No regressions in existing examples
+- [ ] Changes documented in phase completion notes
+
+### Final Success Criteria (Phase E)
 - [ ] All 8 TI locations support 0/1/2-level wrappers
 - [ ] Phase 3 test files validate successfully
 - [ ] All 14 existing examples still validate
 - [ ] Schema is valid JSON
 - [ ] No regressions in existing functionality
 
-## Estimated Effort
+## Session Continuity Notes
 
-This is a **large schema modification** touching multiple definitions. Estimated 2-3 hours of focused work.
+**Context Preservation**: This plan documents the phased approach so work can continue across sessions:
+- Each phase is self-contained with clear scope
+- Test examples demonstrate what must work
+- Progress tracking shows what's complete
+- Next phase is always clearly identified
 
 ## Next Action
 
-Proceed with Step 1: Create reusable schema definitions for TI patterns.
+**START Phase A**: Fix schema for single nodeType with TI wrappers (Location 6: nodeTypeInterpretation)
