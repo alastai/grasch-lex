@@ -17,7 +17,13 @@ This document consolidates ALL clarifications about Type Interpretation (TI) sem
 
 ### 1.2 TI Scope and Extent
 - **TI scope extends to contained types**: A TI wrapper applies to all node types and/or edge types within its indentation boundary
-- **Exception**: Edge type endpoints can have their own TI wrappers that override the edge type's TI at the endpoint level (ONLY exception)
+- **Default TI at graphType level**: `exactlyOf:concrete:` (implicit, can be overridden)
+- **TI Override Rule**: At any level from `nodeTypes`/`edgeTypes` downwards, a different TI can override the one from above
+  - Example: If `nodeTypes` is `concrete:`, a contained `-nodeType` can be `abstract:`
+  - Example: If `edgeTypes` is `abstract:`, a contained `-edgeType` can be `final:`
+- **Edge endpoint overrides**: Edge type endpoints (from/to) can have their own TI wrappers that override the edge type's TI
+  - Syntax for endpoint TI placement is unaffected by the general override rule
+  - Endpoints follow the same override principle
 
 ## 2. Valid TI Combinations
 
@@ -115,7 +121,72 @@ sealed:
       - nodeType: {typeLabel: B}
 ```
 
-## 4. TI-Wrappable Locations
+## 4. TI Override Hierarchy
+
+### 4.1 Default TI at GraphType Level
+
+**Implicit Default**: `exactlyOf:concrete:`
+
+All types at the `graphType` level are implicitly `exactlyOf:concrete:` unless explicitly overridden.
+
+### 4.2 Override Rules
+
+**General Rule**: At any level from `nodeTypes`/`edgeTypes` downwards, a different TI can override the one from above.
+
+**Override Hierarchy**:
+```
+graphType (default: exactlyOf:concrete:)
+  ↓ can be overridden by
+nodeTypes/edgeTypes level TI
+  ↓ can be overridden by
+individual -nodeType/-edgeType TI
+  ↓ can be overridden by (for edge types only)
+endpoint (from/to) TI
+```
+
+### 4.3 Override Examples
+
+**Example 1: Override at nodeTypes level**
+```yaml
+graphType:
+  nodeTypes:  # Inherits exactlyOf:concrete: from graphType
+    - nodeType: {typeLabel: Person}  # exactlyOf:concrete: (inherited)
+    - abstract:  # Override to abstract
+        nodeType: {typeLabel: Vehicle}
+```
+
+**Example 2: Override at individual type level**
+```yaml
+graphType:
+  concrete:  # Explicit concrete at nodeTypes level
+    nodeTypes:
+      - nodeType: {typeLabel: Person}  # concrete (inherited)
+      - abstract:  # Override to abstract
+          nodeType: {typeLabel: Vehicle}
+```
+
+**Example 3: Edge endpoint override**
+```yaml
+graphType:
+  edgeTypes:
+    - abstract:  # Edge type is abstract
+        edgeType:
+          from:
+            concrete:  # Override: endpoint is concrete
+              nodeType: {typeLabel: Person}
+          to:
+            abstract:  # Override: endpoint is abstract
+              nodeType: {typeLabel: Company}
+```
+
+### 4.4 Override Semantics
+
+- **Overrides are local**: They only affect the specific type or subtree
+- **No upward propagation**: Overriding a child doesn't change the parent's TI
+- **Explicit wins**: An explicit TI always overrides an inherited one
+- **Endpoint independence**: Edge endpoint TIs are independent of each other and the edge type's TI
+
+## 5. TI-Wrappable Locations
 
 ### 4.1 Location Categories
 
@@ -164,9 +235,9 @@ Based on TI-LOCATION-AUDIT.md, there are 47 TI-wrappable locations across 7 cate
 #### Category 7: EdgeTypesProperty TI Wrappers (9 locations)
 - (Same 9 patterns as NodeTypesProperty)
 
-### 4.2 Edge Endpoint Exception
+### 5.2 Edge Endpoint TI Placement
 
-Edge type endpoints (from/to) can have their own TI wrappers:
+Edge type endpoints (from/to) can have their own TI wrappers that override the edge type's TI:
 
 ```yaml
 edgeTypes:
@@ -174,16 +245,16 @@ edgeTypes:
       concrete:
         - edgeType:
             from:
-              subtypesOf:  # Endpoint-specific TI
+              subtypesOf:  # Endpoint-specific TI override
                 abstract:
                   - nodeType: {typeLabel: Person}
             to:
-              exactlyOf:  # Another endpoint-specific TI
+              exactlyOf:  # Another endpoint-specific TI override
                 concrete:
                   - nodeType: {typeLabel: Company}
 ```
 
-This is the ONLY exception to "TI extends down to contained types".
+**Note**: Endpoint TI overrides follow the general override rule but have specific syntax for placement within the edge type structure.
 
 ## 5. Two-Phase Import Mechanism
 
@@ -301,32 +372,64 @@ concrete:
 
 ### 7.1 Two-Level Consolidation
 
-**Level 1: Collection Consolidation**
-- All `nodeTypes` instances → ONE `nodeTypes` collection
-- All `edgeTypes` instances → ONE `edgeTypes` collection
+**Level 1: Collection Consolidation (Union of All Instances)**
+- **All `nodeTypes` instances** throughout the document → **ONE `nodeTypes` collection**
+- **All `edgeTypes` instances** throughout the document → **ONE `edgeTypes` collection**
+- This is a **union operation** - all node types from all locations are gathered together
+- All edge types from all locations are gathered together
 
-**Level 2: TI Amalgamation**
-- Within the single collection, types with the same TI → ONE partition block
-- Multiple `exactlyOf:concrete` blocks → merged into one
-- Multiple `subtypesOf:abstract` blocks → merged into one
+**Level 2: TI Amalgamation (Grouping by Interpretation)**
+- Within the single consolidated collection, **all types with the same TI** → **ONE partition block**
+- Multiple `exactlyOf:concrete` blocks → merged into one `exactlyOf:concrete` block
+- Multiple `subtypesOf:abstract` blocks → merged into one `subtypesOf:abstract` block
+- Result: Single `nodeTypes` array containing TI-partitioned subsets
+- Result: Single `edgeTypes` array containing TI-partitioned subsets
 
-### 7.2 Example Transformation
+### 7.2 Detailed Consolidation Process
+
+**Step 1: Gather all nodeTypes/edgeTypes**
+- Find every `nodeTypes` property in the document
+- Find every `edgeTypes` property in the document
+- Union all the types together
+
+**Step 2: Group by TI**
+- All `nodeType` instances with `exactlyOf:concrete` → one group
+- All `nodeType` instances with `subtypesOf:abstract` → one group
+- All `nodeType` instances with `final:` → one group
+- (Same for edgeType instances)
+
+**Step 3: Create consolidated structure**
+- One `nodeTypes` array with one partition block per unique TI
+- One `edgeTypes` array with one partition block per unique TI
+
+### 7.3 Example Transformation
 
 ```yaml
-# PC Form (multiple nodeTypes, scattered TIs)
+# PC Form (multiple nodeTypes instances, scattered TIs)
 graphType:
   nodeTypes:
     abstract: [type_a]
   concrete: [type_b]
   abstract:
     nodeTypes: [type_c]
+  subtypesOf:
+    abstract:
+      nodeTypes: [type_d]
 
 # C Form (consolidated and amalgamated)
 graphType:
   nodeTypes:
-    - abstract: [type_a, type_c]  # Amalgamated
-    - concrete: [type_b]
+    - abstract: [type_a, type_c, type_d]  # All abstract types amalgamated
+    - concrete: [type_b]                   # All concrete types amalgamated
 ```
+
+### 7.4 Key Consolidation Behaviors
+
+1. **Union, not replacement**: All instances are combined, not overwritten
+2. **TI-based grouping**: Types are grouped by their interpretation
+3. **Single collection**: Result is always one `nodeTypes` and one `edgeTypes`
+4. **Partition blocks**: Each unique TI becomes one partition block in the array
+5. **Order preservation**: Within each partition block, order may be preserved or normalized
 
 ## 8. Schema Structure Alignment
 
