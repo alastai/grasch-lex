@@ -150,17 +150,82 @@ graphSchema:
 
 ---
 
-### Phase E: Full Schema Fix (Future)
-**Goal**: Complete all 8 TI locations
+### Phase E: Array Subsequence TIs (Locations 4+5)
+**Goal**: Support TI wrappers for subsequences within nodeTypes/edgeTypes arrays
 
-**Remaining Locations**:
-1. graphTypeInterpretation - for the graphType property
-2. nodeTypesInterpretation - for nodeTypes arrays
-3. edgeTypesInterpretation - for edgeTypes arrays
-4. nodeTypeArrayInterpretation - for subsequence in nodeTypes array
-5. edgeTypeArrayInterpretation - for subsequence in edgeTypes array
+**Scope**:
+- Location 4: `nodeTypeArrayInterpretation` - TI for a subsequence within nodeTypes array
+- Location 5: `edgeTypeArrayInterpretation` - TI for a subsequence within edgeTypes array
+- Allows partitioning arrays with different TI semantics per partition
 
-**Steps**: TBD after Phases A-D complete
+**Steps**:
+1. [ ] Analyze current array structure in schema
+2. [ ] Design partition block syntax
+3. [ ] Update schema to support TI-wrapped subsequences
+4. [ ] Create test YAML with array partition examples
+5. [ ] Validate test passes
+6. [ ] Document what was changed
+
+---
+
+### Phase F: Array-Level TIs (Locations 2+3)
+**Goal**: Support TI wrappers for entire nodeTypes/edgeTypes arrays
+
+**Scope**:
+- Location 2: `nodeTypesInterpretation` - TI for entire nodeTypes array
+- Location 3: `edgeTypesInterpretation` - TI for entire edgeTypes array
+- Applies TI semantics to all types in the array
+
+**Steps**:
+1. [ ] Update NodeTypesProperty definition to support TI wrappers
+2. [ ] Update EdgeTypesProperty definition to support TI wrappers
+3. [ ] Create test YAML with array-level TI examples
+4. [ ] Validate test passes
+5. [ ] Document what was changed
+
+---
+
+### Phase G: GraphType TI (Location 1)
+**Goal**: Support TI wrappers for the entire graphType
+
+**Scope**:
+- Location 1: `graphTypeInterpretation` - TI for entire graphType property
+- Most complex location - wraps the entire type structure
+
+**Steps**:
+1. [ ] Update graphType definition to support TI wrappers
+2. [ ] Create test YAML with graphType-level TI examples
+3. [ ] Validate test passes
+4. [ ] Document what was changed
+
+---
+
+### Phase H: Test Overrides and Defaults
+**Goal**: Comprehensive testing of TI cascade, override, and default behavior
+
+**Scope**:
+- TI cascade rules (outer TI → inner TI precedence)
+- Default TI semantics (implicit exactlyOf: concrete:)
+- Override behavior at different nesting levels
+- Complex nested scenarios with all 8 TI locations
+
+**Steps**:
+1. [ ] Create test suite for TI override scenarios
+2. [ ] Test default behavior and cascade rules
+3. [ ] Validate all edge cases
+4. [ ] Document TI semantics and precedence rules
+
+---
+
+### Phase I: Test Imports (TBD)
+**Goal**: Test TI behavior with import statements
+
+**Scope**:
+- TI wrappers on import statements
+- TI inheritance across import boundaries
+- May be covered by wider imports-schema plan
+
+**Steps**: TBD - coordinate with imports-schema work
 
 ## Current Schema Issues (from Phase 3 tests)
 
@@ -172,14 +237,18 @@ graphSchema:
 ## Progress Tracking
 
 ### Completed Phases
-- [x] Phase A: Single NodeType ✅
-- [x] Phase B: Single EdgeType ✅
-- [ ] Phase C: Directed Edge with Endpoint TIs
-- [ ] Phase D: Undirected Edge with Endpoint TIs
-- [ ] Phase E: Full Schema Fix (all 8 locations)
+- [x] Phase A: Location 6 - Single NodeType ✅
+- [x] Phase B: Location 7 - Single EdgeType ✅
+- [x] Phase C: Location 8 (undirected) - Undirected Edge Endpoint TIs ✅
+- [x] Phase D: Location 8 (directed) - Directed Edge Endpoint TIs ✅
+- [ ] Phase E: Locations 4+5 - Array Subsequence TIs
+- [ ] Phase F: Locations 2+3 - Array-Level TIs
+- [ ] Phase G: Location 1 - GraphType TI
+- [ ] Phase H: Test Overrides and Defaults
+- [ ] Phase I: Test Imports (TBD)
 
 ### Current Phase
-**Phase C: Directed Edge with Endpoint TIs** ⬅️ CURRENT
+**Phase E: Array Subsequence TIs (Locations 4+5)** ⬅️ CURRENT
 
 ## Success Criteria
 
