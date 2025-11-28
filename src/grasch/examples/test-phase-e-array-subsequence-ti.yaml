@@ -1,0 +1,143 @@
+# Phase E Test: Array Subsequence TI wrappers
+# Tests TI wrappers around subsequences within nodeTypes and edgeTypes arrays
+
+graphSchema:
+  pathName: /test/phase-e
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+    
+    nodeTypes:
+      # Individual item (0-level bare)
+      - nodeType:
+          typeLabel: Person
+          implies:
+            labels: [Person]
+            propertyTypes:
+              - name: name
+                valueType: STRING
+      
+      # Subsequence with 1-level abstract wrapper
+      - abstract:
+          nodeTypes:
+            - nodeType:
+                typeLabel: Vehicle
+                implies:
+                  labels: [Vehicle]
+                  propertyTypes:
+                    - name: make
+                      valueType: STRING
+            - nodeType:
+                typeLabel: Car
+                implies:
+                  labels: [Car, Vehicle]
+                  propertyTypes:
+                    - name: make
+                      valueType: STRING
+                    - name: doors
+                      valueType: INTEGER
+      
+      # Individual item (1-level concrete wrapper)
+      - concrete:
+          nodeType:
+            typeLabel: Product
+            implies:
+              labels: [Product]
+              propertyTypes:
+                - name: sku
+                  valueType: STRING
+      
+      # Subsequence with 2-level subtypesOf: abstract: wrapper
+      - subtypesOf:
+          abstract:
+            nodeTypes:
+              - nodeType:
+                  typeLabel: Entity
+                  implies:
+                    labels: [Entity]
+                    propertyTypes:
+                      - name: id
+                        valueType: STRING
+              - nodeType:
+                  typeLabel: Organization
+                  implies:
+                    labels: [Organization, Entity]
+                    propertyTypes:
+                      - name: id
+                        valueType: STRING
+                      - name: name
+                        valueType: STRING
+      
+      # Individual item (0-level bare)
+      - nodeType:
+          typeLabel: Company
+          implies:
+            labels: [Company]
+            propertyTypes:
+              - name: name
+                valueType: STRING
+      
+      # Subsequence with 1-level properSubtypesOf wrapper
+      - properSubtypesOf:
+          nodeTypes:
+            - nodeType:
+                typeLabel: Asset
+                implies:
+                  labels: [Asset]
+                  propertyTypes:
+                    - name: value
+                      valueType: FLOAT
+            - nodeType:
+                typeLabel: RealEstate
+                implies:
+                  labels: [RealEstate, Asset]
+                  propertyTypes:
+                    - name: value
+                      valueType: FLOAT
+                    - name: address
+                      valueType: STRING
+    
+    edgeTypes:
+      # Individual item (0-level bare)
+      - edgeType:
+          directed:
+            from: Person
+            via: KNOWS
+            to: Person
+      
+      # Subsequence with 1-level abstract wrapper
+      - abstract:
+          edgeTypes:
+            - edgeType:
+                directed:
+                  from: Person
+                  via: MANAGES
+                  to: Person
+            - edgeType:
+                directed:
+                  from: Person
+                  via: SUPERVISES
+                  to: Person
+      
+      # Individual item (1-level concrete wrapper)
+      - concrete:
+          edgeType:
+            directed:
+              from: Person
+              via: WORKS_FOR
+              to: Company
+      
+      # Subsequence with 2-level subtypesOf: concrete: wrapper
+      - subtypesOf:
+          concrete:
+            edgeTypes:
+              - edgeType:
+                  directed:
+                    from: Company
+                    via: OWNS
+                    to: Asset
+              - edgeType:
+                  directed:
+                    from: Company
+                    via: LEASES
+                    to: RealEstate
