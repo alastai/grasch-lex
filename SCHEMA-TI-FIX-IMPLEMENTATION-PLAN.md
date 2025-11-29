@@ -24,19 +24,21 @@ The following documents have been superseded and moved to `archive/deprecated-de
 
 Fix `src/grasch/schemas/lex-2026.0.3.2.schema.json` to support all 8 TI locations with consistent TI structure options, following the authoritative design in `.kiro/specs/type-interpretation-wrappers/design.md`.
 
-## 8 TI Locations (from Design Document)
+## 9 TI Locations (Authoritative Numbering)
 
-Per the authoritative design document, Type Interpretation can be applied at 8 distinct locations:
+**Source**: `PHASES-A-D-DONE.md`, `TI-ARCHITECTURE-SPEC-UPDATE.md`
 
-1. **Location 1**: `graphSchema.graphType.typeInterpretation` (root-level TI)
-2. **Location 2**: `graphSchema.graphType.import` (import-level TI)
-3. **Location 3**: `graphSchema.graphType.import.typeInterpretation` (import TI content)
-4. **Location 4**: `graphSchema.graphType.nodeTypes` (nodeTypes array TI)
-5. **Location 5**: `graphSchema.graphType.edgeTypes` (edgeTypes array TI)
-6. **Location 6**: Individual `NodeType.typeInterpretation` (single node TI)
-7. **Location 7**: Individual `EdgeType.typeInterpretation` (single edge TI)
-8. **Location 8**: `EdgeType.endpoints[].typeInterpretation` (endpoint TI)
-9. **Location 9**: `EdgeType.endpoints[].directed.typeInterpretation` (directed endpoint TI)
+Type Interpretation can be applied at 9 distinct locations:
+
+1. **Location 1**: `graphTypeInterpretation` - for the graphType property
+2. **Location 2**: `nodeTypesInterpretation` - for nodeTypes arrays (entire collection)
+3. **Location 3**: `edgeTypesInterpretation` - for edgeTypes arrays (entire collection)
+4. **Location 4**: `nodeTypeArrayInterpretation` - for subsequence within nodeTypes array
+5. **Location 5**: `edgeTypeArrayInterpretation` - for subsequence within edgeTypes array
+6. **Location 6**: `nodeTypeInterpretation` - for a single nodeType
+7. **Location 7**: `edgeTypeInterpretation` - for a single edgeType
+8. **Location 8**: `edgeTypeEndpointNodeTypeInterpretation` - for undirected endpoints (between:/and:)
+9. **Location 9**: `edgeTypeEndpointNodeTypeInterpretation` - for directed endpoints (from:/to:)
 
 ## TI Structure Options (from Design Document)
 
@@ -67,7 +69,7 @@ Per the design document, certain combinations are logically invalid:
 #### Phase A: Location 6 - Single NodeType ✅ COMPLETE
 **Goal**: Fix schema to support TI wrappers for a single nodeType
 
-**Scope**: Location 6 - Individual `NodeType.typeInterpretation`
+**Scope**: Location 6 - `nodeTypeInterpretation` (single nodeType)
 
 **Result**: ✅ COMPLETE - Schema already had comprehensive TI support. Added missing 2-level properSubtypesOf wrapper.
 
@@ -82,7 +84,7 @@ Per the design document, certain combinations are logically invalid:
 #### Phase B: Location 7 - Single EdgeType ✅ COMPLETE
 **Goal**: Fix schema to support TI wrappers for a single edgeType (no endpoint TIs yet)
 
-**Scope**: Location 7 - Individual `EdgeType.typeInterpretation`
+**Scope**: Location 7 - `edgeTypeInterpretation` (single edgeType)
 
 **Result**: ✅ COMPLETE - Schema already had comprehensive TI support. Added missing 2-level properSubtypesOf wrapper.
 
@@ -97,7 +99,7 @@ Per the design document, certain combinations are logically invalid:
 #### Phase C: Location 8 - Undirected Edge Endpoint TIs ✅ COMPLETE
 **Goal**: Fix schema to support TI wrappers on undirected edge endpoints
 
-**Scope**: Location 8 - `EdgeType.endpoints[].typeInterpretation` (undirected: between:/and:)
+**Scope**: Location 8 - `edgeTypeEndpointNodeTypeInterpretation` (undirected: between:/and:)
 
 **Result**: ✅ COMPLETE - Implemented TI wrappers for undirected edge endpoints
 
@@ -112,7 +114,7 @@ Per the design document, certain combinations are logically invalid:
 #### Phase D: Location 9 - Directed Edge Endpoint TIs ✅ COMPLETE
 **Goal**: Fix schema to support TI wrappers on directed edge endpoints
 
-**Scope**: Location 9 - `EdgeType.endpoints[].directed.typeInterpretation` (directed: from:/to:)
+**Scope**: Location 9 - `edgeTypeEndpointNodeTypeInterpretation` (directed: from:/to:)
 
 **Result**: ✅ COMPLETE - Implemented TI wrappers for directed edge endpoints
 
@@ -127,30 +129,43 @@ Per the design document, certain combinations are logically invalid:
 ### CURRENT PHASE: Phase E - Array Subsequence TIs (Locations 4+5)
 
 #### Phase E: Locations 4+5 - Array Subsequence TIs 🔄 IN PROGRESS
+
+> **PROVISIONAL NOTE**: See `TEMP-NESTING-IDEAS.md` for evolving understanding of array-level TI structure. The fundamental unit is **XTypeArrayInterpretation** (nodeTypeArrayInterpretation / edgeTypeArrayInterpretation), which supports **nesting** rather than "partition blocks". This document captures current thinking before finalizing the design.
+
 **Goal**: Support TI wrappers for subsequences within nodeTypes/edgeTypes arrays
 
 **Scope**:
-- Location 4: `graphSchema.graphType.nodeTypes` (nodeTypes array TI)
-- Location 5: `graphSchema.graphType.edgeTypes` (edgeTypes array TI)
-- Allows partitioning arrays with different TI semantics per partition
+- Location 4: `nodeTypeArrayInterpretation` (subsequence within nodeTypes array)
+- Location 5: `edgeTypeArrayInterpretation` (subsequence within edgeTypes array)
+- Implements **nested array interpretations** (XTypeArrayInterpretation as recursive unit)
 
 **Key Requirements** (from design document):
 - Support 0-level, 1-level, and 2-level TI wrappers for array properties
+- Implement **nesting** (TI wrapping TI wrapping array)
 - Maintain backward compatibility with existing patterns
 - Ensure proper canonicalization
 - Validate against invalid combinations
 
+**Current Schema Issues**:
+- Existing `PartitionBlockItemNode/Edge` definitions use incorrect terminology
+- Should be refactored to `NodeTypeArrayInterpretation` / `EdgeTypeArrayInterpretation`
+- Need to support recursive nesting, not just partitioning
+
 **Steps**:
-1. [ ] Analyze current array structure in schema
-2. [ ] Design partition block syntax following design document patterns
-3. [ ] Update schema to support TI-wrapped subsequences
-4. [ ] Create test YAML with array partition examples
-5. [ ] Validate test passes
-6. [ ] Document what was changed
+1. [ ] Finalize XTypeArrayInterpretation concept with user (see TEMP-NESTING-IDEAS.md)
+2. [ ] Analyze current array structure in schema
+3. [ ] Design recursive nesting syntax following design document patterns
+4. [ ] Update schema to use correct terminology and support nesting
+5. [ ] Create test YAML with nested array interpretation examples
+6. [ ] Validate test passes
+7. [ ] Document what was changed
+8. [ ] Update design document with finalized concepts
 
 **Implementation Script**: `phase_e_fix_array_subsequence_ti.py`
 
 **Analysis Document**: `PHASE-E-ARRAY-SUBSEQUENCE-ANALYSIS.md`
+
+**Provisional Concepts**: `TEMP-NESTING-IDEAS.md` ⚠️
 
 ---
 
