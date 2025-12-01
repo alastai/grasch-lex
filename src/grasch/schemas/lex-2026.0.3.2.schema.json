@@ -838,7 +838,9 @@
                 {
                   "description": "Phase 1 Import: Import entire TI wrapper with its type definitions",
                   "type": "object",
-                  "required": ["import"],
+                  "required": [
+                    "import"
+                  ],
                   "properties": {
                     "import": {
                       "type": "string",
@@ -857,7 +859,9 @@
         {
           "description": "Phase 1 Import: Import partition block (TI wrapper + types)",
           "type": "object",
-          "required": ["import"],
+          "required": [
+            "import"
+          ],
           "properties": {
             "import": {
               "type": "string",
@@ -896,7 +900,9 @@
                 {
                   "description": "Phase 1 Import: Import entire TI wrapper with its type definitions",
                   "type": "object",
-                  "required": ["import"],
+                  "required": [
+                    "import"
+                  ],
                   "properties": {
                     "import": {
                       "type": "string",
@@ -915,7 +921,9 @@
         {
           "description": "Phase 1 Import: Import partition block (TI wrapper + types)",
           "type": "object",
-          "required": ["import"],
+          "required": [
+            "import"
+          ],
           "properties": {
             "import": {
               "type": "string",
@@ -949,7 +957,9 @@
         {
           "description": "Phase 2 Import: Import type definitions only (TI will be stripped/merged, allowing outer TI to reinterpret)",
           "type": "object",
-          "required": ["import"],
+          "required": [
+            "import"
+          ],
           "properties": {
             "import": {
               "type": "string",
@@ -983,7 +993,9 @@
         {
           "description": "Phase 2 Import: Import type definitions only (TI will be stripped/merged, allowing outer TI to reinterpret)",
           "type": "object",
-          "required": ["import"],
+          "required": [
+            "import"
+          ],
           "properties": {
             "import": {
               "type": "string",
@@ -1412,7 +1424,7 @@
       "additionalProperties": false
     },
     "NodeTypeItem": {
-      "description": "A single item in a nodeTypes array - can be a plain NodeType, wrapped with interpretation, or an import",
+      "description": "A single item in a nodeTypes array - can be a plain NodeType, wrapped with interpretation, an array subsequence (Location 4), or an import",
       "oneOf": [
         {
           "$ref": "#/$defs/NodeType",
@@ -1420,7 +1432,7 @@
         },
         {
           "type": "object",
-          "description": "One-level wrapper: abstract (maps to subtypesOf: abstract:)",
+          "description": "One-level wrapper: abstract (maps to subtypesOf: abstract:) - for SINGLE NodeType",
           "required": [
             "abstract"
           ],
@@ -1433,7 +1445,24 @@
         },
         {
           "type": "object",
-          "description": "One-level wrapper: concrete (maps to exactlyOf: concrete:)",
+          "description": "One-level wrapper: abstract - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NodeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: concrete (maps to exactlyOf: concrete:) - for SINGLE NodeType",
           "required": [
             "concrete"
           ],
@@ -1446,7 +1475,24 @@
         },
         {
           "type": "object",
-          "description": "One-level wrapper: properSubtypesOf (maps to subtypesOf: abstract:)",
+          "description": "One-level wrapper: concrete - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "concrete"
+          ],
+          "properties": {
+            "concrete": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NodeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: properSubtypesOf (maps to subtypesOf: abstract:) - for SINGLE NodeType",
           "required": [
             "properSubtypesOf"
           ],
@@ -1459,7 +1505,24 @@
         },
         {
           "type": "object",
-          "description": "Two-level wrapper: exactlyOf with concreteness",
+          "description": "One-level wrapper: properSubtypesOf - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NodeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: exactlyOf with concreteness - for SINGLE NodeType",
           "required": [
             "exactlyOf"
           ],
@@ -1497,12 +1560,96 @@
         },
         {
           "type": "object",
+          "description": "Two-level wrapper: exactlyOf with concreteness - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "exactlyOf"
+          ],
+          "properties": {
+            "exactlyOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
           "description": "Two-level wrapper: subtypesOf with concreteness",
           "required": [
             "subtypesOf"
           ],
           "properties": {
             "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/NodeType"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/NodeType"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: properSubtypesOf with concreteness",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
               "oneOf": [
                 {
                   "type": "object",
@@ -1987,6 +2134,44 @@
           ],
           "properties": {
             "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/EdgeType"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/EdgeType"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: properSubtypesOf with concreteness",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
               "oneOf": [
                 {
                   "type": "object",
@@ -2851,6 +3036,44 @@
           },
           "additionalProperties": false,
           "description": "Subtype matching with concreteness (two-level wrapper)"
+        },
+        {
+          "type": "object",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/EndpointReferenceBase"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/EndpointReferenceBase"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "description": "Proper subtypes with concreteness (two-level wrapper)"
         }
       ]
     },
