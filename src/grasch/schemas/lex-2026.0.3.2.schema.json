@@ -1606,7 +1606,7 @@
         },
         {
           "type": "object",
-          "description": "Two-level wrapper: subtypesOf with concreteness",
+          "description": "Two-level wrapper: subtypesOf with concreteness - for SINGLE NodeType",
           "required": [
             "subtypesOf"
           ],
@@ -1644,7 +1644,53 @@
         },
         {
           "type": "object",
-          "description": "Two-level wrapper: properSubtypesOf with concreteness",
+          "description": "Two-level wrapper: subtypesOf with concreteness - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: properSubtypesOf with concreteness - for SINGLE NodeType",
           "required": [
             "properSubtypesOf"
           ],
@@ -1671,6 +1717,52 @@
                   "properties": {
                     "abstract": {
                       "$ref": "#/$defs/NodeType"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: properSubtypesOf with concreteness - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
                     }
                   },
                   "additionalProperties": false
@@ -2043,7 +2135,7 @@
       ]
     },
     "EdgeTypeItem": {
-      "description": "A single item in an edgeTypes array - can be a plain EdgeType, wrapped with interpretation, or an import",
+      "description": "A single item in an edgeTypes array - can be a plain EdgeType, wrapped with interpretation, an array subsequence (Location 5), or an import",
       "oneOf": [
         {
           "$ref": "#/$defs/EdgeType",
@@ -2051,7 +2143,7 @@
         },
         {
           "type": "object",
-          "description": "One-level wrapper: abstract (maps to subtypesOf: abstract:)",
+          "description": "One-level wrapper: abstract (maps to subtypesOf: abstract:) - for SINGLE EdgeType",
           "required": [
             "abstract"
           ],
@@ -2064,7 +2156,24 @@
         },
         {
           "type": "object",
-          "description": "One-level wrapper: concrete (maps to exactlyOf: concrete:)",
+          "description": "One-level wrapper: abstract - for ARRAY subsequence (Location 5: edgeTypeArrayInterpretation)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/EdgeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: concrete (maps to exactlyOf: concrete:) - for SINGLE EdgeType",
           "required": [
             "concrete"
           ],
@@ -2077,13 +2186,47 @@
         },
         {
           "type": "object",
-          "description": "One-level wrapper: properSubtypesOf (maps to subtypesOf: abstract:)",
+          "description": "One-level wrapper: concrete - for ARRAY subsequence (Location 5: edgeTypeArrayInterpretation)",
+          "required": [
+            "concrete"
+          ],
+          "properties": {
+            "concrete": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/EdgeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: properSubtypesOf (maps to subtypesOf: abstract:) - for SINGLE EdgeType",
           "required": [
             "properSubtypesOf"
           ],
           "properties": {
             "properSubtypesOf": {
               "$ref": "#/$defs/EdgeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: properSubtypesOf - for ARRAY subsequence (Location 5: edgeTypeArrayInterpretation)",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/EdgeType"
+              },
+              "minItems": 1
             }
           },
           "additionalProperties": false
