@@ -10,6 +10,66 @@
 
 ---
 
+## Key Clarification: What Does "Explicit Properties" Mean?
+
+**Question:** Are we replacing the regex with `anyOf`?
+
+**Answer:** **NO.** We are replacing `patternProperties` with explicit named properties.
+
+### Current Approach (WRONG):
+```json
+{
+  "patternProperties": {
+    "^(abstract|concrete|exactlyOf|subtypesOf)$": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {...}
+      }
+    }
+  }
+}
+```
+
+This uses a **regex pattern** to match property names. The problem: JSON Schema can't distinguish between multiple properties that match the same pattern.
+
+### Proposed Approach (CORRECT):
+```json
+{
+  "properties": {
+    "abstract": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {...}
+      }
+    },
+    "concrete": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {...}
+      }
+    },
+    "exactlyOf": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {...}
+      }
+    },
+    "subtypesOf": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {...}
+      }
+    }
+  }
+}
+```
+
+This defines **four separate, named properties**. No regex, no `anyOf`, no `oneOf`. Just explicit property definitions.
+
+**Result:** Multiple siblings work naturally because `abstract`, `concrete`, `exactlyOf`, and `subtypesOf` are distinct properties.
+
+---
+
 ## The Sibling Problem: Detailed Assessment
 
 ### What We've Established
@@ -94,6 +154,12 @@ JSON Schema cannot distinguish which `patternProperty` definition should apply t
 
 **Approach:** Replace `patternProperties` with explicit property definitions for each TI wrapper.
 
+**Clarification on "Explicit Properties":**
+- **NOT using `anyOf`** - we define each TI wrapper as a distinct named property
+- The regex pattern `^(abstract|concrete|exactlyOf|subtypesOf)$` is REPLACED with four separate property definitions
+- Each property (`exactlyOf`, `subtypesOf`, `abstract`, `concrete`) is explicitly defined in the schema
+- Multiple siblings are allowed because they are different properties, not pattern-matched
+
 **Structure:**
 ```json
 {
@@ -112,31 +178,45 @@ JSON Schema cannot distinguish which `patternProperty` definition should apply t
         "edgeTypes": {"type": "array", "items": {...}}
       }
     },
-    "abstract": {...},
-    "concrete": {...}
+    "abstract": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {"type": "array", "items": {...}},
+        "edgeTypes": {"type": "array", "items": {...}}
+      }
+    },
+    "concrete": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {"type": "array", "items": {...}},
+        "edgeTypes": {"type": "array", "items": {...}}
+      }
+    }
   }
 }
 ```
 
 **Advantages:**
-- ✓ Allows multiple sibling TI wrappers
+- ✓ Allows multiple sibling TI wrappers naturally
 - ✓ Clear, explicit validation rules
 - ✓ Better error messages
 - ✓ Easier to understand and maintain
 - ✓ Solves both wrong-order AND sibling problems
+- ✓ No backward compatibility concerns - rewrite all YAML as needed
 
 **Disadvantages:**
-- More verbose schema
+- More verbose schema (but clearer)
 - Requires updating all 6 wrong locations
-- Breaking change for existing YAML documents
 
 **Feasibility:** HIGH - This is the standard JSON Schema approach
 
 ---
 
-### Option 2: OneOf with Explicit Branches
+### Option 2: OneOf with Explicit Branches (NOT RECOMMENDED)
 
 **Approach:** Use `oneOf` to enumerate all valid TI wrapper combinations.
+
+**Important Note:** This is **NOT** what Option 1 proposes. Option 1 uses explicit properties WITHOUT `oneOf` or `anyOf`.
 
 **Structure:**
 ```json
@@ -162,7 +242,14 @@ JSON Schema cannot distinguish which `patternProperty` definition should apply t
       },
       "required": ["subtypesOf"]
     },
-    // ... more branches for combinations
+    {
+      "properties": {
+        "exactlyOf": {...},
+        "subtypesOf": {...}
+      },
+      "required": ["exactlyOf", "subtypesOf"]
+    }
+    // ... exponential explosion of all possible combinations
   ]
 }
 ```
@@ -172,12 +259,15 @@ JSON Schema cannot distinguish which `patternProperty` definition should apply t
 - ✓ Precise validation
 
 **Disadvantages:**
-- ✗ Exponential explosion of combinations
+- ✗ Exponential explosion of combinations (2^4 = 16 branches for 4 TI wrappers)
 - ✗ Extremely verbose
 - ✗ Hard to maintain
 - ✗ Poor error messages
+- ✗ Unnecessary complexity
 
 **Feasibility:** LOW - Too complex for practical use
+
+**Why Option 1 is Better:** Option 1 achieves the same goal (multiple siblings) without `oneOf`/`anyOf` by simply defining each TI wrapper as its own property.
 
 ---
 
@@ -326,17 +416,16 @@ This works because `exactlyOf`, `subtypesOf`, and `abstract` are now distinct pr
 
 ### Backward Compatibility
 
-**Breaking Changes:**
-- YAML structure changes at 6 locations
-- Existing documents will need migration
-- Canonicalization logic must be updated
+**NO BACKWARD COMPATIBILITY REQUIRED:**
+- All YAML documents will be rewritten to match the corrected design
+- No migration scripts needed
+- Clean slate approach
 
-**Migration Path:**
-1. Update schema (Phase 1)
-2. Update canonicalizing preprocessor
-3. Provide migration script for existing YAML files
-4. Update all example files
-5. Update documentation
+**Implementation Path:**
+1. Update schema with explicit properties (all 6 wrong locations)
+2. Update canonicalizing preprocessor to handle new structure
+3. Rewrite all example YAML files to match new schema
+4. Update documentation to reflect correct patterns
 
 ### Testing Requirements
 
@@ -351,26 +440,31 @@ This works because `exactlyOf`, `subtypesOf`, and `abstract` are now distinct pr
 ### Estimated Effort
 
 **Schema Updates:** 2-3 hours
-- Rewrite 6 location definitions
-- Add explicit properties
-- Update references
+- Rewrite 6 location definitions with explicit properties
+- Remove all `patternProperties` for TI wrappers
+- Update references throughout schema
 
-**Preprocessor Updates:** 3-4 hours
-- Update canonicalization logic
-- Handle new explicit properties
-- Maintain backward compatibility during transition
+**Preprocessor Updates:** 2-3 hours
+- Update canonicalization logic for new structure
+- Handle explicit TI wrapper properties
+- No backward compatibility needed - simpler!
 
-**Testing:** 4-5 hours
-- Create test cases for all locations
-- Test sibling scenarios
-- Validate migration
+**YAML Rewriting:** 3-4 hours
+- Rewrite all example files to match new schema
+- Update test fixtures
+- Ensure consistency across all documents
 
-**Documentation:** 2-3 hours
-- Update examples
-- Write migration guide
+**Testing:** 3-4 hours
+- Create test cases for all 8 locations
+- Test sibling scenarios at each location
+- Validate all patterns work correctly
+
+**Documentation:** 1-2 hours
+- Update examples in documentation
 - Update spec documents
+- No migration guide needed!
 
-**Total:** 11-15 hours
+**Total:** 11-16 hours (similar effort, but cleaner result)
 
 ---
 
@@ -383,12 +477,19 @@ This works because `exactlyOf`, `subtypesOf`, and `abstract` are now distinct pr
 2. Enables multiple sibling TI wrappers
 3. Provides better validation and error messages
 4. Creates a more maintainable schema
+5. No backward compatibility concerns - clean implementation
+
+**Clarification on Implementation:**
+- **NOT using `anyOf` or `oneOf`** to replace the regex
+- **Using explicit named properties** instead: `exactlyOf`, `subtypesOf`, `abstract`, `concrete`
+- Each TI wrapper becomes its own distinct property in the schema
+- Multiple siblings work naturally because they are different properties
 
 **Next Steps:**
-1. Get approval for breaking changes
-2. Implement Phase 1 (fix wrong-order issues)
-3. Update preprocessor and tests
-4. Migrate existing examples
-5. Document the new structure
+1. ✓ Approval received - no backward compatibility needed
+2. Implement explicit properties at all 6 wrong locations
+3. Update preprocessor for new structure
+4. Rewrite all YAML examples to match corrected schema
+5. Update documentation
 
-The work is substantial but straightforward, and the result will be a more consistent, flexible, and correct schema implementation.
+The work is substantial but straightforward, and the result will be a more consistent, flexible, and correct schema implementation. The lack of backward compatibility constraints makes this cleaner and faster to implement.
