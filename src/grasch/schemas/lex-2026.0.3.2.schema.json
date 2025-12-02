@@ -204,8 +204,7 @@
       "type": "object",
       "description": "Graph schema specification - structural graph type plus constraints",
       "required": [
-        "pathName",
-        "graphType"
+        "pathName"
       ],
       "properties": {
         "pathName": {
@@ -245,7 +244,164 @@
           }
         }
       },
-      "additionalProperties": false
+      "patternProperties": {
+        "^(abstract|sealed|final|concrete)$": {
+          "type": "object",
+          "description": "One-level TI wrapper for graphType",
+          "properties": {
+            "graphType": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GraphType"
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "graphType"
+          ]
+        },
+        "^(exactlyOf|subtypesOf|properSubtypesOf)$": {
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "One-level TI wrapper (shorthand)",
+              "properties": {
+                "graphType": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/GraphType"
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "graphType"
+              ]
+            },
+            {
+              "type": "object",
+              "description": "Two-level TI wrapper (explicit)",
+              "patternProperties": {
+                "^(abstract|concrete|final|sealed)$": {
+                  "type": "object",
+                  "properties": {
+                    "graphType": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/GraphType"
+                        },
+                        {
+                          "type": "object",
+                          "description": "Import content from file",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string",
+                              "description": "Import content from file"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "graphType"
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1,
+              "maxProperties": 1
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "pathName",
+            "graphType"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "abstract"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "concrete"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "sealed"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "final"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "exactlyOf"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "subtypesOf"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "properSubtypesOf"
+          ]
+        }
+      ]
     },
     "GraphContent": {
       "type": "object",
