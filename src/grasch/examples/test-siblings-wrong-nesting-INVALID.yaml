@@ -1,0 +1,17 @@
+# Test: TI wrapper in wrong place (inside array instead of outside)
+# Expected: FAIL - Schema should reject wrong-order TI syntax
+
+graphSchema:
+  pathName: /test/siblings-wrong-nesting-INVALID
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # Wrong: TI wrapper INSIDE array item (should be OUTSIDE wrapping nodeTypes)
+    nodeTypes:
+      - abstract:
+          typeLabel: Entity
+          implies:
+            propertyTypes:
+              - name: id
+                valueType: STRING
