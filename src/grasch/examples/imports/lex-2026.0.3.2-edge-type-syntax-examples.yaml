@@ -8,77 +8,66 @@ edgeTypes:
   # DIRECTED EDGES - from:/to: syntax
   # ========================================
   
-  # Pattern 1: Basic directed edge with type labels
+  # Pattern 1: Basic directed edge with type references
   - edgeType:
       directed:
         from: Person
-        via: KNOWS
         to: Person
+        via: KNOWS
       implies:
         propertyTypes:
         - name: since
           valueType: DATE
   
-  # Pattern 2: Directed edge - via before from/to
+  # Pattern 2: Directed edge with arc synonym
   - edgeType:
       directed:
-        via: WORKS_FOR
         from: Person
         to: Company
-      implies:
-        propertyTypes:
-        - name: startDate
-          valueType: DATE
-  
-  # Pattern 2b: arc synonym for via
-  - edgeType:
-      directed:
         arc: EMPLOYED_BY
-        from: Person
-        to: Company
       implies:
         propertyTypes:
         - name: startDate
           valueType: DATE
   
-  # Pattern 3: Directed edge - via between from/to (no properties)
+  # Pattern 3: Directed edge without properties
   - edgeType:
       directed:
         from: Person
-        via: MANAGES
         to: Company
+        via: MANAGES
   
-  # Pattern 4: Self-loop using SAME (no properties)
+  # Pattern 4: Self-loop using SAME
   - edgeType:
       directed:
         from: Person
-        via: REPORTS_TO
         to: SAME
+        via: REPORTS_TO
   
   # Pattern 5: Self-loop using SELF
   - edgeType:
       directed:
         from: Employee
-        via: MENTORS
         to: SELF
+        via: MENTORS
       implies:
         propertyTypes:
         - name: startDate
           valueType: DATE
   
-  # Pattern 6: Using anonymous node type with index (no properties)
+  # Pattern 6: Using anonymous node type with index
   - edgeType:
       directed:
         from: Person
-        via: LINKS_TO
         to: 0
+        via: LINKS_TO
   
   # Pattern 7: Using typeIdentifier (array of labels)
   - edgeType:
       directed:
         from: ["Person", "Employee"]
-        via: CREATED_BY
         to: Company
+        via: CREATED_BY
       implies:
         propertyTypes:
         - name: creationDate
@@ -88,11 +77,11 @@ edgeTypes:
   - edgeType:
       directed:
         from: Person
-        via: PURCHASES
         to:
           typeLabels:
           - Product
           - Sellable
+        via: PURCHASES
       implies:
         propertyTypes:
         - name: purchaseDate
@@ -107,8 +96,8 @@ edgeTypes:
   - edgeType:
       directed:
         tail: Person
-        via: FOLLOWS
         head: Person
+        via: FOLLOWS
       implies:
         propertyTypes:
         - name: since
@@ -121,8 +110,8 @@ edgeTypes:
   - edgeType:
       directed:
         src: Person
-        via: SENDS_TO
         dst: Person
+        via: SENDS_TO
       implies:
         propertyTypes:
         - name: timestamp
@@ -132,8 +121,8 @@ edgeTypes:
   - edgeType:
       directed:
         src: Person
-        via: TRANSFERS_TO
         dest: Company
+        via: TRANSFERS_TO
       implies:
         propertyTypes:
         - name: amount
@@ -143,7 +132,7 @@ edgeTypes:
   # DIRECTED EDGES - Inline node type definitions
   # ========================================
   
-  # Inline definition of existing type (Person)
+  # Inline definition - demonstrates inline syntax (keep for reference)
   - edgeType:
       directed:
         from:
@@ -153,14 +142,13 @@ edgeTypes:
               propertyTypes:
               - name: id
                 valueType: INTEGER
-        via: CONNECTS_TO
         to: Company
+        via: CONNECTS_TO
   
   # Inline definition of NEW type not in node type spec
   - edgeType:
       directed:
         from: Person
-        via: OWNS
         to:
           nodeType:
             typeLabel: Property
@@ -172,6 +160,7 @@ edgeTypes:
                 valueType: STRING
               - name: value
                 valueType: FLOAT
+        via: OWNS
       implies:
         propertyTypes:
         - name: purchaseDate
@@ -181,7 +170,6 @@ edgeTypes:
   - edgeType:
       undirected:
         between: Company
-        via: LINKED_TO
         and:
           nodeType:
             index: 99
@@ -189,6 +177,7 @@ edgeTypes:
               propertyTypes:
               - name: linkId
                 valueType: STRING
+        via: LINKED_TO
   
   # ========================================
   # UNDIRECTED EDGES - between:/and: syntax
