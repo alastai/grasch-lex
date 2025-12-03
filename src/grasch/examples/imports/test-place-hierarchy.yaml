@@ -1,0 +1,29 @@
+# Import file: Place hierarchy for sealed testing
+# Contains abstract base and concrete subtypes
+
+- subtypesOf:
+    abstract:
+      nodeType:
+        typeLabel: Place
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+            - name: name
+              valueType: STRING
+
+- nodeType:
+    typeLabel: City
+    extends: Place
+    adding:
+      propertyTypes:
+        - name: population
+          valueType: INTEGER
+
+- nodeType:
+    typeLabel: Country
+    extends: Place
+    adding:
+      propertyTypes:
+        - name: capital
+          valueType: STRING

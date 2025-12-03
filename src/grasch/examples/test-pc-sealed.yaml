@@ -1,0 +1,37 @@
+# Test PC Form: Sealed Hierarchy
+# Purpose: Test sealed semantics (makes non-abstract types final, closes hierarchy)
+# Expected: Should produce C form with final types
+
+graphSchema:
+  graphType:
+    nodeTypes:
+      # Sealed hierarchy: Place (abstract), City (concrete→final), Country (concrete→final)
+      # Sealed makes all non-abstract types final
+      - sealed:
+          nodeTypes:
+            - subtypesOf:
+                abstract:
+                  nodeType:
+                    typeLabel: Place
+                    implies:
+                      propertyTypes:
+                        - name: id
+                          valueType: INTEGER
+                        - name: name
+                          valueType: STRING
+            
+            - nodeType:
+                typeLabel: City
+                extends: Place
+                adding:
+                  propertyTypes:
+                    - name: population
+                      valueType: INTEGER
+            
+            - nodeType:
+                typeLabel: Country
+                extends: Place
+                adding:
+                  propertyTypes:
+                    - name: capital
+                      valueType: STRING

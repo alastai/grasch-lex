@@ -1,0 +1,24 @@
+# Test: INVALID - Multiple label synonyms in same edge
+# Expected: FAIL - Cannot have both via and arc (or other combinations)
+
+graphSchema:
+  pathName: /test/edge-invalid-multiple
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            via: KNOWS
+            arc: KNOWS  # ERROR: Cannot have both via and arc
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person

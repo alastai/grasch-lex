@@ -171,26 +171,16 @@ Per the design document, certain combinations are logically invalid:
 
 ### FUTURE PHASES
 
-#### Phase F: Locations 2+3 - Import-Level TIs
-**Goal**: Support TI wrappers for import statements
+#### Phase F: Locations 1, 2, 3 - Graph and Array-Level TIs
+**Goal**: Support TI wrappers for graphType and entire nodeTypes/edgeTypes arrays
 
 **Scope**:
-- Location 2: `graphSchema.graphType.import` (import-level TI)
-- Location 3: `graphSchema.graphType.import.typeInterpretation` (import TI content)
-- Coordinate with import system design
+- Location 1: `graphTypeInterpretation` (for the graphType property)
+- Location 2: `nodeTypesInterpretation` (for entire nodeTypes array)
+- Location 3: `edgeTypesInterpretation` (for entire edgeTypes array)
+- Coordinate with import system design for how these interact with imports
 
-**Steps**: TBD - coordinate with `.kiro/specs/import-schema-consistency/design.md`
-
----
-
-#### Phase G: Location 1 - Root-Level TI
-**Goal**: Support TI wrappers for the entire graphType
-
-**Scope**:
-- Location 1: `graphSchema.graphType.typeInterpretation` (root-level TI)
-- Most complex location - wraps the entire type structure
-
-**Steps**: TBD
+**Steps**: TBD - requires completion of Phase E design discussion (see TEMP-NESTING-IDEAS.md)
 
 ---
 

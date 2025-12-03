@@ -1,0 +1,53 @@
+# Phase C Test: Directed Edge with Endpoint TI wrappers
+
+graphSchema:
+  pathName: /test/phase-c
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            labels: [Person]
+            propertyTypes:
+              - name: name
+                valueType: STRING
+    
+    edgeTypes:
+      # Bare endpoints
+      - edgeType:
+          directed:
+            from: Person
+            via: KNOWS
+            to: Person
+          implies:
+            propertyTypes:
+              - name: since
+                valueType: DATE
+      
+      # 1-level TI on from
+      - edgeType:
+          directed:
+            from:
+              abstract: Person
+            via: MANAGES
+            to: Person
+          implies:
+            propertyTypes:
+              - name: startDate
+                valueType: DATE
+      
+      # 2-level TI: properSubtypesOf on from (NEW!)
+      - edgeType:
+          directed:
+            from:
+              properSubtypesOf:
+                concrete: Person
+            via: MENTORS
+            to: Person
+          implies:
+            propertyTypes:
+              - name: since
+                valueType: DATE

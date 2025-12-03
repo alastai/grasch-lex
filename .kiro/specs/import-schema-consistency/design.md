@@ -6,6 +6,29 @@ This document designs the schema changes needed to support Type Interpretation (
 
 ## Architectural Principles
 
+### 0. Three-Level TI Architecture
+
+Type Interpretations operate at three distinct conceptual levels:
+
+**Level 1: TI Locations** - Where TI can be applied:
+- graphTypeInterpretation, nodeTypesInterpretation, edgeTypesInterpretation
+- nodeTypeArrayInterpretation, edgeTypeArrayInterpretation
+- nodeTypeInterpretation, edgeTypeInterpretation
+- edgeTypeEndpointNodeTypeInterpretation
+
+**Level 2: TI Structure** - How TI is expressed:
+- 2-level explicit: `subtypeOf: abstract:` or `exactlyOf: final:`
+- 1-level shorthand: `concrete:` or `abstract:`
+- 0-level bare: No wrapper (implicit default)
+
+**Level 3: Type Definition** - The actual type specification with labels, properties, etc.
+
+**Key Principles:**
+- **TI Override**: Outer TI immediately wrapping inner TI overrides the inner
+- **TI Default Cascade**: TI at higher level establishes default that can be overridden at lower levels
+- **Facet Independence**: Subtype interpretation facet (`subtypeOf`, `properSubtypesOf`, `exactlyOf`) is a toggle, NOT part of TI location name
+- **Exception**: Edge type endpoints can have their own TI wrappers
+
 ### 1. TI as Unit of Import
 - **Type Interpretations are the unit of import** - you import at the TI level, not at individual type level
 - **TIs wrap sets of types** (partition blocks), not individual types

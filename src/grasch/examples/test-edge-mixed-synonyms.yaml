@@ -1,0 +1,68 @@
+# Test: Multiple edges using different label synonyms
+# Expected: PASS - All synonym combinations should work
+
+graphSchema:
+  pathName: /test/edge-mixed-synonyms
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      # Directed with via (preferred)
+      - edgeType:
+          directed:
+            via: KNOWS
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+      
+      # Directed with arc (synonym)
+      - edgeType:
+          directed:
+            arc: FOLLOWS
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+      
+      # Directed with typeLabel (generic)
+      - edgeType:
+          directed:
+            typeLabel: LIKES
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+      
+      # Undirected with via (current usage)
+      - edgeType:
+          undirected:
+            via: FRIENDS_WITH
+            between:
+              nodeType:
+                typeLabel: Person
+            and:
+              nodeType:
+                typeLabel: Person
+      
+      # Undirected with typeLabel (generic)
+      - edgeType:
+          undirected:
+            typeLabel: COLLEAGUES_WITH
+            between:
+              nodeType:
+                typeLabel: Person
+            and:
+              nodeType:
+                typeLabel: Person

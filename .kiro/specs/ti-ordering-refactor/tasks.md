@@ -1,0 +1,380 @@
+# Implementation Plan: TI Ordering Refactor
+
+This implementation plan breaks down the TI ordering refactoring into discrete, manageable tasks. Each task builds incrementally on previous work.
+
+## Task Overview
+
+- **Phase 1**: Schema Analysis and Preparation (1-2 hours)
+- **Phase 2**: Schema Fixes (3-4 hours)  
+- **Phase 3**: Test File Updates (2-3 hours)
+- **Phase 4**: Validation and Documentation (1-2 hours)
+
+**Total Estimated Time**: 7-11 hours
+
+---
+
+## Phase 1: Schema Analysis and Preparation
+
+### - [ ] 1. Analyze Location 1 (GraphType) Pattern
+
+Read and document the CORRECT pattern from Location 1 in the schema
+
+- Open `src/grasch/schemas/lex-2026.0.3.2.schema.json`
+- Find Location 1 (GraphType) - approximately lines 433-800
+- Document the exact `patternProperties` structure
+- Note how interpretation facets wrap concreteness facets wrap content
+- Create reference notes for replication
+- _Requirements: 1.1, 1.2_
+
+### - [ ] 2. Identify Schema Locations for Fixes
+
+Locate the exact line numbers for each of the 6 broken locations
+
+- Find Location 2 (NodeTypesProperty) definition
+- Find Location 3 (EdgeTypesProperty) definition
+- Find Location 4 (NodeTypeItem) definition
+- Find Location 5 (EdgeTypeItem) definition
+- Find Location 6 (Individual NodeType) definition
+- Find Location 7 (EdgeType Content) definition
+- Document current structure at each location
+- _Requirements: 2.1-2.7_
+
+### - [ ] 3. Create Schema Backup
+
+Backup the original schema before making changes
+
+- Copy `src/grasch/schemas/lex-2026.0.3.2.schema.json` to `src/grasch/schemas/lex-2026.0.3.2.schema.json.backup`
+- Verify backup is complete and valid JSON
+- _Requirements: 7.1_
+
+---
+
+## Phase 2: Schema Fixes (7 Locations - CORRECTED)
+
+**Phase 2 Scope - CORRECTED**: Fix **7 broken locations** (1-7) identified in Phase 1 analysis. Location 8 is already working from previous phases.
+
+**Critical Discovery**: Location 1 (GraphSchemaContent) does NOT support TI wrappers around `graphType`. This was incorrectly assumed to be working.
+
+**Reference Pattern**: GraphType's `patternProperties` implementation (lines 433-800 in schema) is the CORRECT pattern. Use this as the reference for all fixes.
+
+### - [ ] 4. Fix Location 1 (graphTypeInterpretation) - NEW TASK
+
+Add TI wrapper support to GraphSchemaContent (wraps the graphType property)
+
+- Locate GraphSchemaContent definition in schema (lines 203-250)
+- Add `patternProperties` to support TI wrappers around `graphType`
+- Use GraphType's pattern as reference (lines 433-800)
+- Allow 0-level (bare `graphType`), 1-level, and 2-level TI syntax
+- Ensure only ONE `graphType` can exist (but it can be TI-wrapped)
+- Enable TI wrappers as alternatives to bare `graphType`
+- Validate JSON syntax
+- _Requirements: 1.1, 2.1, 9.1_
+
+### - [ ] 5. Test Location 1 Fix
+
+Validate that Location 1 fix works correctly
+
+- Create test file `src/grasch/examples/test-location-1-graphtype-ti.yaml`
+- Test 0-level: bare `graphType`
+- Test 1-level: `abstract: { graphType: {...} }`
+- Test 2-level: `subtypesOf: { abstract: { graphType: {...} } }`
+- Validate all three forms
+- _Requirements: 8.1_
+
+### - [ ] 6. Fix Location 2 (nodeTypesInterpretation)
+
+Fix NodeTypesProperty to support sibling TI-wrapped properties
+
+- Locate NodeTypesProperty definition in schema (lines 1824-2150)
+- **Problem**: Currently uses `oneOf` pattern (only one option allowed)
+- **Target**: Support inline arrays at GraphType level (GraphType already has correct `patternProperties`)
+- Note: GraphType level (lines 433-800) already correct - use as reference
+- Fix NodeTypesProperty definition to work with GraphType's pattern
+- Validate JSON syntax
+- _Requirements: 1.1, 2.2, 9.1_
+
+### - [ ] 7. Test Location 2 Fix
+
+Validate that Location 2 fix works correctly
+
+- Run `python validate_phase_e_locations_2_3.py`
+- Expect failures (tests use wrong syntax - this is correct)
+- Document which test files need updates
+- _Requirements: 8.1_
+
+### - [ ] 8. Fix Location 3 (edgeTypesInterpretation)
+
+Fix EdgeTypesProperty to support sibling TI-wrapped properties
+
+- Locate EdgeTypesProperty definition in schema (lines 2535-2850)
+- **Problem**: Currently uses `oneOf` pattern (only one option allowed)
+- **Target**: Support inline arrays at GraphType level (GraphType already has correct `patternProperties`)
+- Note: GraphType level already correct - use as reference
+- Fix EdgeTypesProperty definition to work with GraphType's pattern
+- Validate JSON syntax
+- _Requirements: 1.1, 2.3, 9.1_
+
+### - [ ] 9. Test Location 3 Fix
+
+Validate that Location 3 fix works correctly
+
+- Run `python validate_phase_e_locations_2_3.py`
+- Expect failures (tests use wrong syntax)
+- Document which test files need updates
+- _Requirements: 8.1_
+
+### - [ ] 10. Fix Location 4 (nodeTypeArrayInterpretation)
+
+Apply correct TI pattern to nodeTypeArrayInterpretation (wraps SUBSEQUENCES within nodeTypes array)
+
+- Locate NodeTypeItem definition in schema (~line 2200)
+- Restructure to allow TI wrappers wrapping array subsequences (partition blocks)
+- Ensure TI wrappers can wrap individual array items as siblings
+- Add support for 0-level, 1-level, 2-level syntax
+- Validate JSON syntax
+- _Requirements: 1.1, 2.4, 9.1_
+
+### - [ ] 11. Fix Location 5 (edgeTypeArrayInterpretation)
+
+Apply correct TI pattern to edgeTypeArrayInterpretation (wraps SUBSEQUENCES within edgeTypes array)
+
+- Locate EdgeTypeItem definition in schema (~line 2900)
+- Restructure to allow TI wrappers wrapping array subsequences (partition blocks)
+- Ensure TI wrappers can wrap individual array items as siblings
+- Add support for 0-level, 1-level, 2-level syntax
+- Validate JSON syntax
+- _Requirements: 1.1, 2.5, 9.1_
+
+### - [ ] 12. Test Locations 4-5 Fixes
+
+Validate that Locations 4-5 fixes work correctly
+
+- Run `python validate_phase_e_locations_4_5.py`
+- Expect failures (tests use wrong syntax)
+- Document which test files need updates
+- _Requirements: 8.1_
+
+### - [ ] 13. Fix Location 6 (nodeTypeInterpretation)
+
+Add TI support to nodeTypeInterpretation (wraps a single nodeType)
+
+- Locate Individual NodeType definition in schema (lines 1009-1310)
+- Add sibling properties pattern wrapping NodeType content
+- Implement full 2-level TI pattern
+- Add support for 0-level, 1-level, 2-level syntax
+- Validate JSON syntax
+- _Requirements: 1.1, 2.6, 9.1_
+
+### - [ ] 14. Fix Location 7 (edgeTypeInterpretation)
+
+Add TI support to edgeTypeInterpretation (wraps a single edgeType)
+
+- Locate EdgeType Content definition in schema (lines 1313-1800)
+- Add sibling properties pattern wrapping EdgeType content
+- Implement full 2-level TI pattern
+- Add support for 0-level, 1-level, 2-level syntax
+- Validate JSON syntax
+- _Requirements: 1.1, 2.7, 9.1_
+
+### - [ ] 15. Verify Location 8 (edgeTypeEndpointNodeTypeInterpretation) Unchanged
+
+Confirm Location 8 (edgeTypeEndpointNodeTypeInterpretation - wraps endpoint references) still works correctly
+
+- Verify EndpointReference definition unchanged (lines 3168, 3443)
+- Run `python validate_phase_c.py` (tests Location 8)
+- Confirm all tests still pass
+- _Requirements: 6.1_
+
+---
+
+## Phase 3: Test File Updates
+
+### - [ ] 16. Identify Failing Test Files
+
+Run validation to identify which test files need syntax updates
+
+- Run `python validate_all_examples.py`
+- Document all failing files
+- Categorize by location (1, 2, 3, 4, 5, 6, 7)
+- Note: Failures are expected and correct - tests use wrong syntax
+- _Requirements: 3.1, 3.2_
+
+### - [ ] 17. Create Location 1 Test Files
+
+Create test files for Location 1 (GraphSchemaContent with TI wrappers)
+
+- Create `src/grasch/examples/test-location-1-bare.yaml` (0-level)
+- Create `src/grasch/examples/test-location-1-one-level.yaml` (1-level)
+- Create `src/grasch/examples/test-location-1-two-level.yaml` (2-level)
+- Validate all test files
+- _Requirements: 3.3, 3.4_
+
+### - [ ] 18. Update Phase E Location 2 Test Files
+
+Fix test files for Location 2 (NodeTypesProperty)
+
+- Update `src/grasch/examples/test-phase-e-location-2.yaml`
+- Update `src/grasch/examples/test-phase-e-location-2-two-level.yaml`
+- Move TI wrappers from inside nodeTypes to outside
+- Preserve test semantics
+- Validate updated files
+- _Requirements: 3.3, 3.4_
+
+### - [ ] 19. Update Phase E Location 3 Test Files
+
+Fix test files for Location 3 (EdgeTypesProperty)
+
+- Update `src/grasch/examples/test-phase-e-location-3.yaml`
+- Update `src/grasch/examples/test-phase-e-location-3-two-level.yaml`
+- Move TI wrappers from inside edgeTypes to outside
+- Preserve test semantics
+- Validate updated files
+- _Requirements: 3.3, 3.4_
+
+### - [ ] 20. Update Phase E Locations 2-3 Combined Test Files
+
+Fix combined test files for Locations 2-3
+
+- Update `src/grasch/examples/test-phase-e-locations-2-3.yaml`
+- Update `src/grasch/examples/test-phase-e-locations-2-3-advanced.yaml`
+- Move TI wrappers to correct positions
+- Preserve test semantics
+- Validate updated files
+- _Requirements: 3.3, 3.4_
+
+### - [ ] 21. Update Phase E Locations 4-5 Test Files
+
+Fix test files for Locations 4-5 (array items)
+
+- Update `src/grasch/examples/test-phase-e-locations-4-5.yaml`
+- Move TI wrappers to correct positions for array items
+- Preserve test semantics
+- Validate updated files
+- _Requirements: 3.3, 3.4_
+
+### - [ ] 22. Create Sibling Behavior Test Files
+
+Create new test files to validate sibling TI wrapper behavior
+
+- Create `src/grasch/examples/test-siblings-location-1.yaml` (Location 1 siblings - positive)
+- Create `src/grasch/examples/test-siblings-locations-2-3.yaml` (Locations 2-3 siblings - positive)
+- Create `src/grasch/examples/test-siblings-mixed.yaml` (mixed locations - positive)
+- Create `src/grasch/examples/test-siblings-duplicate-INVALID.yaml` (duplicate keys - negative)
+- _Requirements: 4.1-4.7, 5.1-5.7_
+
+### - [ ] 23. Create Sibling Validation Script
+
+Create automated test script for sibling behavior
+
+- Create `test_sibling_validation.py`
+- Implement positive test cases (should pass)
+- Implement negative test cases (should fail)
+- Add clear pass/fail reporting
+- _Requirements: 5.5_
+
+---
+
+## Phase 4: Validation and Documentation
+
+### - [ ] 24. Run Comprehensive Validation
+
+Validate all examples with fixed schema and updated tests
+
+- Run `python validate_all_examples.py`
+- Confirm all valid examples pass
+- Confirm invalid examples fail appropriately
+- Document any unexpected results
+- _Requirements: 8.2, 8.3, 8.4_
+
+### - [ ] 25. Run Location-Specific Validation
+
+Validate each location independently
+
+- Run validation for Location 1 (new tests)
+- Run `python validate_phase_e_locations_2_3.py` - should pass
+- Run `python validate_phase_e_locations_4_5.py` - should pass
+- Run `python test_sibling_validation.py` - should pass
+- Document results
+- _Requirements: 8.1, 8.5_
+
+### - [ ] 26. Verify Phases A-D Still Pass
+
+Confirm no regressions in previously working locations
+
+- Run `python validate_phase_a_corrected.py` - should pass
+- Run `python validate_phase_b.py` - should pass
+- Run `python validate_phase_c.py` - should pass
+- Run `python validate_phase_d.py` - should pass
+- Confirm Locations 6, 7, 8 still work correctly
+- _Requirements: 6.2, 6.4_
+
+### - [ ] 27. Document Schema Changes
+
+Create documentation of all schema changes made
+
+- List each location fixed (now 7 locations, not 6)
+- Document pattern applied at each location
+- Note line numbers changed
+- Explain rationale for each change
+- Highlight Location 1 as new discovery
+- _Requirements: 7.2_
+
+### - [ ] 28. Document Test File Changes
+
+Create documentation of all test file changes
+
+- List each test file updated
+- Document syntax changes made
+- Explain why changes were necessary
+- Note semantic preservation
+- Include new Location 1 test files
+- _Requirements: 7.3_
+
+### - [ ] 29. Create Completion Summary
+
+Write comprehensive summary of refactoring work
+
+- Summarize schema fixes (7 locations, not 6)
+- Highlight Location 1 as critical discovery
+- Summarize test updates (number of files)
+- Report validation results (pass/fail counts)
+- Document success criteria met
+- Note any issues or deviations
+- _Requirements: 7.4, 10.1-10.6_
+
+### - [ ] 30. Update TI Documentation Index
+
+Update the TI documentation index to reflect completed work
+
+- Mark this spec as complete
+- Update status of TI implementation roadmap
+- Link completion summary
+- Archive any superseded documents
+- _Requirements: 7.5, 7.6_
+
+---
+
+## Success Criteria Checklist
+
+After completing all tasks, verify these criteria are met:
+
+- [ ] All 8 locations support 0/1/2-level TI syntax (7 fixed + 1 already working)
+- [ ] Location 1 (GraphSchemaContent) supports TI wrappers around graphType
+- [ ] Locations 2-3 support multiple sibling TI-wrapped properties
+- [ ] TI wrappers appear BEFORE content at all locations
+- [ ] Multiple siblings with different interpretation facets work
+- [ ] YAML duplicate key constraint properly enforced
+- [ ] All test files validate with corrected syntax
+- [ ] Phases A-D validation still passes (no regressions)
+- [ ] Sibling behavior tests pass at all levels
+
+---
+
+## Notes
+
+- **Incremental Testing**: Test after each location fix to catch issues early
+- **Backup**: Keep schema backup until all validation passes
+- **Expected Failures**: Test failures after schema fixes are CORRECT - they indicate tests need updating
+- **Mindset**: Fix the schema to match the design, then fix the tests to match the design
+- **Documentation**: Document as you go - don't wait until the end
+

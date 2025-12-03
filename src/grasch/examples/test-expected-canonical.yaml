@@ -1,0 +1,66 @@
+# Expected Canonical (C) Form
+# Purpose: All PC variants should canonicalize to this form
+# Features:
+# - Two-level TI structure (interpretation + concreteness)
+# - No abbreviations
+# - No imports
+# - Single nodeTypes collection
+# - TI amalgamation applied
+
+graphSchema:
+  graphType:
+    nodeTypes:
+      # Person: subtypesOf + abstract (from all PC variants)
+      - subtypesOf:
+          abstract:
+            - nodeType:
+                typeLabel: Person
+                implies:
+                  propertyTypes:
+                    - name: id
+                      valueType: INTEGER
+                    - name: name
+                      valueType: STRING
+      
+      # Company: exactlyOf + concrete (from all PC variants)
+      - exactlyOf:
+          concrete:
+            - nodeType:
+                typeLabel: Company
+                implies:
+                  propertyTypes:
+                    - name: id
+                      valueType: INTEGER
+                    - name: name
+                      valueType: STRING
+      
+      # Place: subtypesOf + abstract (from sealed variant)
+      - subtypesOf:
+          abstract:
+            - nodeType:
+                typeLabel: Place
+                implies:
+                  propertyTypes:
+                    - name: id
+                      valueType: INTEGER
+                    - name: name
+                      valueType: STRING
+      
+      # City and Country: exactlyOf + final (made final by sealed)
+      - exactlyOf:
+          final:
+            - nodeType:
+                typeLabel: City
+                extends: Place
+                adding:
+                  propertyTypes:
+                    - name: population
+                      valueType: INTEGER
+            
+            - nodeType:
+                typeLabel: Country
+                extends: Place
+                adding:
+                  propertyTypes:
+                    - name: capital
+                      valueType: STRING

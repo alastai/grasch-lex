@@ -1,0 +1,3803 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grasch.org/schemas/lex-2026.0.3.2.json",
+  "title": "LEX:2026.0.3.2 JSON Schema",
+  "description": "JSON Schema for specifications of graph catalogs, graph schemas and graph instances, based on LEX-100r3 with mandatory labels, subtyping, and import support",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "catalog"
+      ],
+      "properties": {
+        "catalog": {
+          "$ref": "#/$defs/CatalogContent"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "graphSchema"
+      ],
+      "properties": {
+        "graphSchema": {
+          "$ref": "#/$defs/GraphSchemaContent"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "graph"
+      ],
+      "properties": {
+        "graph": {
+          "$ref": "#/$defs/GraphContent"
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "$defs": {
+    "CatalogContent": {
+      "type": "object",
+      "description": "Graph catalog specification - a hierarchical collection of named primary catalog objects",
+      "required": [
+        "IRI"
+      ],
+      "properties": {
+        "IRI": {
+          "type": "string",
+          "format": "iri",
+          "description": "IRI for global catalog identification"
+        },
+        "directories": {
+          "oneOf": [
+            {
+              "type": "array",
+              "description": "Inline array of directory nodes",
+              "items": {
+                "$ref": "#/$defs/Directory"
+              }
+            },
+            {
+              "type": "object",
+              "description": "Import directories from file",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Import directory structure from file"
+                }
+              },
+              "maxProperties": 1
+            },
+            {
+              "type": "object",
+              "description": "Mixed: import directories with additional inline directories",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string"
+                },
+                "additionalDirectories": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/Directory"
+                  }
+                }
+              },
+              "minProperties": 2
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Directory": {
+      "type": "object",
+      "description": "Directory node in catalog tree",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Directory name"
+        },
+        "directories": {
+          "oneOf": [
+            {
+              "type": "array",
+              "description": "Subdirectories",
+              "items": {
+                "$ref": "#/$defs/Directory"
+              }
+            },
+            {
+              "type": "object",
+              "description": "Import content from file",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Import content from file"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "graphReferences": {
+          "type": "array",
+          "description": "Graph references in this directory",
+          "items": {
+            "$ref": "#/$defs/GraphReference"
+          }
+        },
+        "graphSchemaReferences": {
+          "type": "array",
+          "description": "Graph schema references in this directory",
+          "items": {
+            "$ref": "#/$defs/GraphSchemaReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "GraphReference": {
+      "type": "object",
+      "description": "Graph reference in catalog",
+      "required": [
+        "name",
+        "qualifiedName"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Graph name"
+        },
+        "qualifiedName": {
+          "type": "string",
+          "description": "Fully qualified name for this graph"
+        },
+        "filePath": {
+          "type": "string",
+          "description": "Optional file path to graph definition"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GraphSchemaReference": {
+      "type": "object",
+      "description": "Graph schema reference in catalog",
+      "required": [
+        "name",
+        "qualifiedName"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Graph schema name"
+        },
+        "qualifiedName": {
+          "type": "string",
+          "description": "Fully qualified name for this graph schema"
+        },
+        "filePath": {
+          "type": "string",
+          "description": "Optional file path to graph schema definition"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GraphSchemaContent": {
+      "type": "object",
+      "description": "Graph schema specification - structural graph type plus constraints",
+      "required": [
+        "pathName",
+        "graphType"
+      ],
+      "properties": {
+        "pathName": {
+          "type": "string",
+          "description": "Path name for the graph schema"
+        },
+        "principal": {
+          "type": "string",
+          "description": "The owner of the graph schema, an authorization identifier of a principal"
+        },
+        "graphType": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GraphType"
+            },
+            {
+              "type": "object",
+              "description": "Import content from file",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Import content from file"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "constraints": {
+          "type": "object",
+          "description": "A map of constraint names to constraint descriptors (optional)",
+          "additionalProperties": {
+            "$ref": "#/$defs/Constraint"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "GraphContent": {
+      "type": "object",
+      "description": "Graph instance specification - with optional schema, constraints, and storage schema",
+      "required": [
+        "pathName"
+      ],
+      "properties": {
+        "pathName": {
+          "type": "string",
+          "description": "Path name for the graph instance"
+        },
+        "principal": {
+          "type": "string",
+          "description": "The owner of the graph, an authorization identifier of a principal"
+        },
+        "valueTypeSystemName": {
+          "type": "string",
+          "description": "The name of the value type system used by this graph (optional, defaults to CANONICAL)",
+          "enum": [
+            "CANONICAL",
+            "CYPHER",
+            "GQL",
+            "SQL"
+          ],
+          "default": "CANONICAL"
+        },
+        "graphSchema": {
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "Inline graphSchema definition",
+              "not": {
+                "required": [
+                  "import"
+                ]
+              },
+              "properties": {
+                "pathName": {
+                  "type": "string",
+                  "pattern": "^/.*"
+                },
+                "graphType": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/GraphType"
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "pathName",
+                "graphType"
+              ]
+            },
+            {
+              "type": "object",
+              "description": "Import graphSchema from file",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string"
+                }
+              },
+              "maxProperties": 1
+            },
+            {
+              "type": "object",
+              "description": "Mixed: import graphSchema with overrides",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string"
+                },
+                "pathName": {
+                  "type": "string",
+                  "pattern": "^/.*"
+                },
+                "graphType": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/GraphType"
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "minProperties": 2
+            }
+          ]
+        },
+        "graphStorageSchema": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/StorageSchema",
+              "description": "Inline storage schema definition"
+            },
+            {
+              "type": "object",
+              "description": "Import storage schema from file",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string"
+                }
+              },
+              "maxProperties": 1
+            },
+            {
+              "type": "object",
+              "description": "Mixed: import storage schema with overrides",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string"
+                },
+                "storageType": {
+                  "type": "string"
+                }
+              },
+              "minProperties": 2
+            }
+          ]
+        },
+        "subtypesOfSchemaType": {
+          "type": "object",
+          "description": "Preserved for future work - subtype relationships"
+        },
+        "constraints": {
+          "type": "object",
+          "description": "A map of constraint names to constraint descriptors (optional)",
+          "additionalProperties": {
+            "$ref": "#/$defs/Constraint"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "StorageSchema": {
+      "type": "object",
+      "description": "Storage schema for graph serialization - placeholder for future GraphAr integration",
+      "properties": {
+        "storageType": {
+          "type": "string",
+          "description": "Storage type identifier (e.g., file format)"
+        }
+      },
+      "additionalProperties": true
+    },
+    "GraphType": {
+      "type": "object",
+      "description": "Graph type descriptor defining the structural graph type",
+      "required": [
+        "propertyGraphDataModel"
+      ],
+      "properties": {
+        "graphPreferredName": {
+          "type": "string",
+          "enum": [
+            "GRAPH",
+            "PROPERTY GRAPH"
+          ],
+          "description": "Implementation-defined preferred name for graph"
+        },
+        "nodePreferredName": {
+          "type": "string",
+          "enum": [
+            "NODE",
+            "VERTEX"
+          ],
+          "description": "Implementation-defined preferred name for nodes"
+        },
+        "edgePreferredName": {
+          "type": "string",
+          "enum": [
+            "EDGE",
+            "RELATIONSHIP"
+          ],
+          "description": "Implementation-defined preferred name for edges"
+        },
+        "nodeTypeMinimumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1,
+          "description": "Minimum number of labels for node types (LEX:2026.0.3 - now mandatory, minimum 1)"
+        },
+        "nodeTypeMaximumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of labels for node types"
+        },
+        "nodeTypeMinimumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of property types for node types"
+        },
+        "nodeTypeMaximumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of property types for node types"
+        },
+        "edgeTypeMinimumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1,
+          "description": "Minimum number of labels for edge types (LEX:2026.0.3 - now mandatory, minimum 1)"
+        },
+        "edgeTypeMaximumLabels": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of labels for edge types"
+        },
+        "edgeTypeMinimumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of property types for edge types"
+        },
+        "edgeTypeMaximumPropertyTypes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of property types for edge types"
+        },
+        "typeInterpretation": {
+          "type": "string",
+          "enum": [
+            "exactlyOf",
+            "subtypesOf",
+            "properSubtypesOf"
+          ],
+          "default": "exactlyOf",
+          "description": "How types are interpreted during validation (LEX:2026.0.3)"
+        },
+        "import": {
+          "type": "string",
+          "description": "Import file path for graph type defaults"
+        },
+        "nodeTypes": {
+          "$ref": "#/$defs/NodeTypesProperty"
+        },
+        "subtypesOf": {
+          "type": "object",
+          "description": "Subtypes of specified element types (covariant matching)",
+          "properties": {
+            "abstract": {
+              "type": "object",
+              "description": "Abstracts that cannot be instantiated directly",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "nodeTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Node types that subtypes (supertype can be instantiated)",
+                  "items": {
+                    "$ref": "#/$defs/NodeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "edgeTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Edge types that subtypes (supertype can be instantiated)",
+                  "items": {
+                    "$ref": "#/$defs/EdgeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "edgeTypes": {
+          "$ref": "#/$defs/EdgeTypesProperty"
+        },
+        "propertyGraphDataModel": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Import file path for default values"
+                }
+              },
+              "required": [
+                "import"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "description": "Inline default values for graph type",
+              "properties": {
+                "valueTypeSystemName": {
+                  "type": "string",
+                  "description": "The name of the value type system used by this graph schema (optional, defaults to CANONICAL)",
+                  "enum": [
+                    "CANONICAL",
+                    "CYPHER",
+                    "GQL",
+                    "SQL"
+                  ],
+                  "default": "CANONICAL"
+                },
+                "graphPreferredName": {
+                  "type": "string"
+                },
+                "nodePreferredName": {
+                  "type": "string"
+                },
+                "edgePreferredName": {
+                  "type": "string"
+                },
+                "nodeTypeMinimumLabels": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "nodeTypeMaximumLabels": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "nodeTypeMinimumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "nodeTypeMaximumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "edgeTypeMinimumLabels": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "edgeTypeMaximumLabels": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "edgeTypeMinimumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "edgeTypeMaximumPropertyTypes": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "additionalProperties": true,
+      "patternProperties": {
+        "^(abstract|sealed|final|concrete)$": {
+          "type": "object",
+          "description": "One-level wrapper for concreteness (maps to two-level canonical form)",
+          "properties": {
+            "nodeTypes": {
+              "$ref": "#/$defs/NodeTypesArray"
+            },
+            "edgeTypes": {
+              "$ref": "#/$defs/EdgeTypesArray"
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        },
+        "^(properSubtypesOf)$": {
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "One-level wrapper (maps to subtypesOf: abstract:)",
+              "properties": {
+                "nodeTypes": {
+                  "$ref": "#/$defs/NodeTypesArray"
+                },
+                "edgeTypes": {
+                  "$ref": "#/$defs/EdgeTypesArray"
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1
+            },
+            {
+              "type": "object",
+              "description": "Two-level wrapper with concreteness",
+              "patternProperties": {
+                "^(abstract|concrete)$": {
+                  "type": "object",
+                  "properties": {
+                    "nodeTypes": {
+                      "$ref": "#/$defs/NodeTypesArray"
+                    },
+                    "edgeTypes": {
+                      "$ref": "#/$defs/EdgeTypesArray"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1,
+              "maxProperties": 1
+            }
+          ]
+        },
+        "^(exactlyOf|subtypesOf)$": {
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "Subtype matching mode without concreteness wrapper",
+              "properties": {
+                "nodeTypes": {
+                  "$ref": "#/$defs/NodeTypesArray"
+                },
+                "edgeTypes": {
+                  "$ref": "#/$defs/EdgeTypesArray"
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1
+            },
+            {
+              "type": "object",
+              "description": "Two-level wrapper: subtype matching mode with concreteness",
+              "patternProperties": {
+                "^(abstract|concrete)$": {
+                  "type": "object",
+                  "properties": {
+                    "nodeTypes": {
+                      "$ref": "#/$defs/NodeTypesArray"
+                    },
+                    "edgeTypes": {
+                      "$ref": "#/$defs/EdgeTypesArray"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1,
+              "maxProperties": 1
+            }
+          ]
+        }
+      }
+    },
+    "PartitionBlockItemNode": {
+      "description": "Item in nodeTypes array - can be bare type, TI-wrapped partition block, or Phase 1 import (import entire TI wrapper + content)",
+      "oneOf": [
+        {
+          "description": "Bare node type (singleton set with implicit exactlyOf:concrete TI)",
+          "$ref": "#/$defs/NodeType"
+        },
+        {
+          "description": "TI-wrapped partition block with import-capable contents",
+          "type": "object",
+          "patternProperties": {
+            "^(exactlyOf|subtypesOf|properSubtypesOf)$": {
+              "oneOf": [
+                {
+                  "description": "Two-level TI wrapper (interpretation + concreteness)",
+                  "type": "object",
+                  "patternProperties": {
+                    "^(abstract|concrete|final|sealed|extensible)$": {
+                      "$ref": "#/$defs/TIWrapperContentNode"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1,
+                  "maxProperties": 1
+                },
+                {
+                  "description": "Phase 1 Import: Import entire TI wrapper with its type definitions",
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Path to file containing TI wrapper + type definitions"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 1
+        },
+        {
+          "description": "Phase 1 Import: Import partition block (TI wrapper + types)",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Path to file containing TI-wrapped partition block"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "PartitionBlockItemEdge": {
+      "description": "Item in edgeTypes array - can be bare type, TI-wrapped partition block, or Phase 1 import (import entire TI wrapper + content)",
+      "oneOf": [
+        {
+          "description": "Bare edge type (singleton set with implicit exactlyOf:concrete TI)",
+          "$ref": "#/$defs/EdgeType"
+        },
+        {
+          "description": "TI-wrapped partition block with import-capable contents",
+          "type": "object",
+          "patternProperties": {
+            "^(exactlyOf|subtypesOf|properSubtypesOf)$": {
+              "oneOf": [
+                {
+                  "description": "Two-level TI wrapper (interpretation + concreteness)",
+                  "type": "object",
+                  "patternProperties": {
+                    "^(abstract|concrete|final|sealed|extensible)$": {
+                      "$ref": "#/$defs/TIWrapperContentEdge"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1,
+                  "maxProperties": 1
+                },
+                {
+                  "description": "Phase 1 Import: Import entire TI wrapper with its type definitions",
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Path to file containing TI wrapper + type definitions"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 1
+        },
+        {
+          "description": "Phase 1 Import: Import partition block (TI wrapper + types)",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Path to file containing TI-wrapped partition block"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "TIWrapperContentNode": {
+      "description": "Content within TI wrappers for node types - supports singleton sets, multi-element sets, and Phase 2 imports (import content only, strip TI)",
+      "oneOf": [
+        {
+          "description": "Inline type set (delimited by indentation)",
+          "anyOf": [
+            {
+              "description": "Singleton set (single type, cardinality 1)",
+              "$ref": "#/$defs/NodeType"
+            },
+            {
+              "description": "Multi-element set (array of types, cardinality > 1)",
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NodeType"
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        {
+          "description": "Phase 2 Import: Import type definitions only (TI will be stripped/merged, allowing outer TI to reinterpret)",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Path to file containing type definitions (TI wrapper will be stripped)"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "TIWrapperContentEdge": {
+      "description": "Content within TI wrappers for edge types - supports singleton sets, multi-element sets, and Phase 2 imports (import content only, strip TI)",
+      "oneOf": [
+        {
+          "description": "Inline type set (delimited by indentation)",
+          "anyOf": [
+            {
+              "description": "Singleton set (single type, cardinality 1)",
+              "$ref": "#/$defs/EdgeType"
+            },
+            {
+              "description": "Multi-element set (array of types, cardinality > 1)",
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/EdgeType"
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        {
+          "description": "Phase 2 Import: Import type definitions only (TI will be stripped/merged, allowing outer TI to reinterpret)",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Path to file containing type definitions (TI wrapper will be stripped)"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NodeType": {
+      "type": "object",
+      "description": "Node type descriptor with flexible identification (LEX:2026.0.3.2 - labels optional when matching typeLabel)",
+      "properties": {
+        "nodeType": {
+          "type": "object",
+          "description": "Node type container with identifier and implies or extends",
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Integer index for node type identification"
+                },
+                "implies": {
+                  "$ref": "#/$defs/ImpliesDescriptor"
+                }
+              },
+              "required": [
+                "index",
+                "implies"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "typeLabel": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z]",
+                  "description": "Single label that serves as type name (preferred in LEX:2026.0.3)"
+                },
+                "implies": {
+                  "$ref": "#/$defs/ImpliesDescriptor"
+                }
+              },
+              "required": [
+                "typeLabel"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "typeLabel": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z]",
+                  "description": "Single label that serves as type name"
+                },
+                "extends": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "description": "Single supertype this type extends"
+                    },
+                    {
+                      "type": "array",
+                      "description": "Supertypes this type extends (synonym for supertypes)",
+                      "items": {
+                        "type": "string"
+                      },
+                      "uniqueItems": true,
+                      "minItems": 1
+                    }
+                  ]
+                },
+                "adding": {
+                  "$ref": "#/$defs/AddingDescriptor"
+                }
+              },
+              "required": [
+                "typeLabel",
+                "extends"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "typeIdentifier": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[a-zA-Z]"
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "description": "Array of labels that identify this type"
+                },
+                "implies": {
+                  "$ref": "#/$defs/ImpliesDescriptor"
+                }
+              },
+              "required": [
+                "typeIdentifier",
+                "implies"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "typeLabels": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[a-zA-Z]"
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "description": "Array of labels for multi-label node types"
+                },
+                "implies": {
+                  "$ref": "#/$defs/ImpliesDescriptor"
+                }
+              },
+              "required": [
+                "typeLabels",
+                "implies"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "nodeType"
+      ],
+      "additionalProperties": false
+    },
+    "ImpliesDescriptor": {
+      "type": "object",
+      "description": "Container for supertypes, labels, and property types (LEX:2026.0.3 structure)",
+      "properties": {
+        "supertypes": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Single supertype label"
+            },
+            {
+              "type": "array",
+              "description": "Set of supertype labels (LEX:2026.0.3 - enables subtyping)",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            }
+          ]
+        },
+        "labels": {
+          "type": "array",
+          "description": "Set of labels for this type (optional if only typeLabel)",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "propertyTypes": {
+          "oneOf": [
+            {
+              "type": "array",
+              "description": "Set of property type descriptors",
+              "items": {
+                "$ref": "#/$defs/PropertyType"
+              }
+            },
+            {
+              "type": "string",
+              "pattern": "^\\$ref\\(",
+              "description": "Import property types via $ref"
+            }
+          ]
+        },
+        "extensionInterpretation": {
+          "type": "object",
+          "description": "Controls whether type can be extended (LEX:2026.0.3)",
+          "properties": {
+            "open": {
+              "type": "boolean",
+              "description": "If true, allows undefined subtypes"
+            },
+            "closed": {
+              "type": "boolean",
+              "description": "If true, only defined subtypes allowed (default)"
+            }
+          },
+          "oneOf": [
+            {
+              "required": [
+                "open"
+              ]
+            },
+            {
+              "required": [
+                "closed"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "propertyTypes"
+      ],
+      "additionalProperties": false
+    },
+    "AddingDescriptor": {
+      "type": "object",
+      "description": "Container for labels and property types being added to a supertype (used with extends)",
+      "properties": {
+        "labels": {
+          "type": "array",
+          "description": "Additional labels beyond typeLabel (typeLabel never included)",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "propertyTypes": {
+          "type": "array",
+          "description": "New property types being added (inherited properties not included)",
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "NodeTypeIdentifier": {
+      "description": "Flexible node type identification - index, type name label, or type identifying labels",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "index": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Integer index for node type identification"
+            }
+          },
+          "required": [
+            "index"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeLabel": {
+              "type": "string",
+              "pattern": "^[a-zA-Z]",
+              "description": "Single label that serves as type name (preferred in LEX:2026.0.3)"
+            }
+          },
+          "required": [
+            "typeLabel"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeIdentifier": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-zA-Z]"
+              },
+              "uniqueItems": true,
+              "minItems": 1,
+              "description": "Array of labels that identify this type"
+            }
+          },
+          "required": [
+            "typeIdentifier"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeLabels": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-zA-Z]"
+              },
+              "uniqueItems": true,
+              "minItems": 1,
+              "description": "Array of labels for multi-label node type references"
+            }
+          },
+          "required": [
+            "typeLabels"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeType": {
+      "type": "object",
+      "description": "Edge type descriptor using LEX-2026 directed/undirected syntax",
+      "properties": {
+        "edgeType": {
+          "type": "object",
+          "description": "Edge type with directed or undirected specification",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/DirectedEdgeDescriptor"
+            },
+            {
+              "$ref": "#/$defs/UndirectedEdgeDescriptor"
+            }
+          ]
+        }
+      },
+      "required": [
+        "edgeType"
+      ],
+      "additionalProperties": false
+    },
+    "EdgeTypeIdentifier": {
+      "description": "Flexible edge type identification - index, type name label, or type identifying labels",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "edgeTypeIndex": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Integer index for edge type identification"
+            }
+          },
+          "required": [
+            "edgeTypeIndex"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeLabel": {
+              "type": "string",
+              "pattern": "^[a-zA-Z]",
+              "description": "Single label that serves as type name (preferred in LEX:2026.0.3)"
+            }
+          },
+          "required": [
+            "typeLabel"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "typeIdentifier": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-zA-Z]"
+              },
+              "uniqueItems": true,
+              "minItems": 1,
+              "description": "Set of labels that uniquely identify this type"
+            }
+          },
+          "required": [
+            "typeIdentifier"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "PropertyType": {
+      "type": "object",
+      "description": "Property type descriptor",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Property name"
+        },
+        "valueType": {
+          "type": "string",
+          "enum": [
+            "STRING",
+            "INTEGER",
+            "FLOAT",
+            "BOOLEAN",
+            "VECTOR",
+            "LIST",
+            "RECORD",
+            "DATE",
+            "LOCAL TIME",
+            "ZONED TIME",
+            "LOCAL DATETIME",
+            "ZONED DATETIME",
+            "DURATION",
+            "JSON"
+          ],
+          "description": "Value type name from the canonical VTS"
+        },
+        "notNull": {
+          "type": "boolean",
+          "description": "Whether the property is NOT NULL (default: false, meaning nullable)"
+        }
+      },
+      "required": [
+        "name",
+        "valueType"
+      ],
+      "additionalProperties": false
+    },
+    "NodeTypeItem": {
+      "description": "A single item in a nodeTypes array - can be a plain NodeType, wrapped with interpretation, an array subsequence (Location 4), or an import",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NodeType",
+          "description": "Zero-level wrapper (bare NodeType, defaults to exactlyOf: concrete:)"
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: abstract (maps to subtypesOf: abstract:) - for SINGLE NodeType",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "$ref": "#/$defs/NodeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: abstract - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NodeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: concrete (maps to exactlyOf: concrete:) - for SINGLE NodeType",
+          "required": [
+            "concrete"
+          ],
+          "properties": {
+            "concrete": {
+              "$ref": "#/$defs/NodeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: concrete - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "concrete"
+          ],
+          "properties": {
+            "concrete": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NodeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: properSubtypesOf (maps to subtypesOf: abstract:) - for SINGLE NodeType",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "$ref": "#/$defs/NodeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: properSubtypesOf - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/NodeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: exactlyOf with concreteness - for SINGLE NodeType",
+          "required": [
+            "exactlyOf"
+          ],
+          "properties": {
+            "exactlyOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/NodeType"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/NodeType"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: exactlyOf with concreteness - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "exactlyOf"
+          ],
+          "properties": {
+            "exactlyOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: subtypesOf with concreteness - for SINGLE NodeType",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/NodeType"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/NodeType"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: subtypesOf with concreteness - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: properSubtypesOf with concreteness - for SINGLE NodeType",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/NodeType"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/NodeType"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: properSubtypesOf with concreteness - for ARRAY subsequence (Location 4: nodeTypeArrayInterpretation)",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Final node type (cannot be subtyped)",
+          "required": [
+            "final"
+          ],
+          "properties": {
+            "final": {
+              "$ref": "#/$defs/NodeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Sealed hierarchy of node types",
+          "required": [
+            "sealed"
+          ],
+          "properties": {
+            "sealed": {
+              "$ref": "#/$defs/NodeTypeSetOrImport"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Import node type from file",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import node type from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NodeTypesArray": {
+      "type": "array",
+      "description": "Array of node type items",
+      "items": {
+        "$ref": "#/$defs/NodeTypeItem"
+      }
+    },
+    "NodeTypesProperty": {
+      "description": "The nodeTypes property with optional type interpretation wrappers",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NodeTypesArray",
+          "description": "Zero-level: bare array (defaults to exactlyOf: concrete: for each item)"
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: abstract (maps to subtypesOf: abstract:)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/NodeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: concrete (maps to exactlyOf: concrete:)",
+          "required": [
+            "concrete"
+          ],
+          "properties": {
+            "concrete": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/NodeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: properSubtypesOf (maps to subtypesOf: abstract:)",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/NodeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: exactlyOf with concreteness",
+          "required": [
+            "exactlyOf"
+          ],
+          "properties": {
+            "exactlyOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/NodeTypesArray"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/NodeTypesArray"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: subtypesOf with concreteness",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/NodeTypesArray"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/NodeTypesArray"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Final wrapper (cannot be subtyped)",
+          "required": [
+            "final"
+          ],
+          "properties": {
+            "final": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/NodeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Sealed wrapper (closed hierarchy)",
+          "required": [
+            "sealed"
+          ],
+          "properties": {
+            "sealed": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/NodeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Import nodeTypes from file",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import nodeTypes with interpretation from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypeItem": {
+      "description": "A single item in an edgeTypes array - can be a plain EdgeType, wrapped with interpretation, an array subsequence (Location 5), or an import",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/EdgeType",
+          "description": "Zero-level wrapper (bare EdgeType, defaults to exactlyOf: concrete:)"
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: abstract (maps to subtypesOf: abstract:) - for SINGLE EdgeType",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "$ref": "#/$defs/EdgeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: abstract - for ARRAY subsequence (Location 5: edgeTypeArrayInterpretation)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/EdgeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: concrete (maps to exactlyOf: concrete:) - for SINGLE EdgeType",
+          "required": [
+            "concrete"
+          ],
+          "properties": {
+            "concrete": {
+              "$ref": "#/$defs/EdgeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: concrete - for ARRAY subsequence (Location 5: edgeTypeArrayInterpretation)",
+          "required": [
+            "concrete"
+          ],
+          "properties": {
+            "concrete": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/EdgeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: properSubtypesOf (maps to subtypesOf: abstract:) - for SINGLE EdgeType",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "$ref": "#/$defs/EdgeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: properSubtypesOf - for ARRAY subsequence (Location 5: edgeTypeArrayInterpretation)",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/EdgeType"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: exactlyOf with concreteness - for SINGLE EdgeType",
+          "required": [
+            "exactlyOf"
+          ],
+          "properties": {
+            "exactlyOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/EdgeType"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/EdgeType"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: exactlyOf with concreteness - for ARRAY subsequence (Location 5: edgeTypeArrayInterpretation)",
+          "required": [
+            "exactlyOf"
+          ],
+          "properties": {
+            "exactlyOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: subtypesOf with concreteness - for SINGLE EdgeType",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/EdgeType"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/EdgeType"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: subtypesOf with concreteness - for ARRAY subsequence (Location 5: edgeTypeArrayInterpretation)",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: properSubtypesOf with concreteness - for SINGLE EdgeType",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/EdgeType"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/EdgeType"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: properSubtypesOf with concreteness - for ARRAY subsequence (Location 5: edgeTypeArrayInterpretation)",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Final edge type (cannot be subtyped)",
+          "required": [
+            "final"
+          ],
+          "properties": {
+            "final": {
+              "$ref": "#/$defs/EdgeType"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Sealed hierarchy of edge types",
+          "required": [
+            "sealed"
+          ],
+          "properties": {
+            "sealed": {
+              "$ref": "#/$defs/EdgeTypeSetOrImport"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Import edge type from file",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import edge type from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypesArray": {
+      "type": "array",
+      "description": "Array of edge type items",
+      "items": {
+        "$ref": "#/$defs/EdgeTypeItem"
+      }
+    },
+    "EdgeTypesProperty": {
+      "description": "The edgeTypes property with optional type interpretation wrappers",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/EdgeTypesArray",
+          "description": "Zero-level: bare array (defaults to exactlyOf: concrete: for each item)"
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: abstract (maps to subtypesOf: abstract:)",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/EdgeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: concrete (maps to exactlyOf: concrete:)",
+          "required": [
+            "concrete"
+          ],
+          "properties": {
+            "concrete": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/EdgeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "One-level wrapper: properSubtypesOf (maps to subtypesOf: abstract:)",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/EdgeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: exactlyOf with concreteness",
+          "required": [
+            "exactlyOf"
+          ],
+          "properties": {
+            "exactlyOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/EdgeTypesArray"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/EdgeTypesArray"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Two-level wrapper: subtypesOf with concreteness",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/EdgeTypesArray"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/EdgeTypesArray"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Final wrapper (cannot be subtyped)",
+          "required": [
+            "final"
+          ],
+          "properties": {
+            "final": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/EdgeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Sealed wrapper (closed hierarchy)",
+          "required": [
+            "sealed"
+          ],
+          "properties": {
+            "sealed": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/EdgeTypesArray"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Import edgeTypes from file",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import edgeTypes with interpretation from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Constraint": {
+      "type": "object",
+      "description": "Constraint descriptor",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Constraint name"
+        },
+        "rule": {
+          "$ref": "#/$defs/ConstraintRule"
+        }
+      },
+      "required": [
+        "name",
+        "rule"
+      ],
+      "additionalProperties": false
+    },
+    "ConstraintRule": {
+      "type": "object",
+      "description": "Constraint rule descriptor",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "enum": [
+            "KEY",
+            "UNIQUE"
+          ],
+          "description": "Constraint subject type"
+        },
+        "constraintPattern": {
+          "type": "string",
+          "description": "Constraint pattern specification"
+        },
+        "uniqueKeyComponentPropertyNames": {
+          "type": "array",
+          "description": "Set of property names for unique key components",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "subject",
+        "constraintPattern",
+        "uniqueKeyComponentPropertyNames"
+      ],
+      "additionalProperties": false
+    },
+    "canonicalBoolean": {
+      "data.boolean": {
+        "type": "boolean"
+      },
+      "gql.boolean": "BOOLEAN",
+      "sql.boolean": "BOOLEAN",
+      "canonical.boolean": "BOOLEAN"
+    },
+    "canonicalString": {
+      "data.string": {
+        "type": "string",
+        "maxLength": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "gql.string": "STRING",
+      "sql.string": "VARCHAR",
+      "canonical.string": "STRING"
+    },
+    "canonicalInteger": {
+      "data.int64": {
+        "type": "integer",
+        "minimum": -9223372036854775808,
+        "maximum": 9223372036854775807
+      },
+      "gql.int64": "BIGINT",
+      "sql.int64": "BIGINT",
+      "canonical.int64": "INTEGER"
+    },
+    "canonicalFloat": {
+      "data.float64": {
+        "type": "number"
+      },
+      "gql.float64": "DOUBLE",
+      "sql.float64": "DOUBLE PRECISION",
+      "canonical.float64": "FLOAT"
+    },
+    "canonicalDate": {
+      "data.date": {
+        "type": "string",
+        "format": "date"
+      },
+      "gql.date": "DATE",
+      "sql.date": "DATE",
+      "canonical.date": "DATE"
+    },
+    "canonicalLocalTime": {
+      "data.time": {
+        "type": "string",
+        "format": "time",
+        "precision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        }
+      },
+      "gql.time": "LOCAL TIME",
+      "sql.time": "TIME",
+      "canonical.time": "LOCAL TIME"
+    },
+    "canonicalZonedTime": {
+      "data.timeWithTimezone": {
+        "type": "string",
+        "format": "time",
+        "precision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        }
+      },
+      "gql.timeWithTimezone": "ZONED TIME",
+      "sql.timeWithTimezone": "TIME WITH TIME ZONE",
+      "canonical.timeWithTimezone": "ZONED TIME"
+    },
+    "canonicalLocalDatetime": {
+      "data.datetime": {
+        "type": "string",
+        "format": "date-time",
+        "precision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        }
+      },
+      "gql.datetime": "LOCAL DATETIME",
+      "sql.datetime": "TIMESTAMP",
+      "canonical.datetime": "LOCAL DATETIME"
+    },
+    "canonicalZonedDatetime": {
+      "data.datetimeWithTimezone": {
+        "type": "string",
+        "format": "date-time",
+        "precision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        }
+      },
+      "gql.datetimeWithTimezone": "ZONED DATETIME",
+      "sql.datetimeWithTimezone": "TIMESTAMP WITH TIME ZONE",
+      "canonical.datetimeWithTimezone": "ZONED DATETIME"
+    },
+    "canonicalDuration": {
+      "data.duration": {
+        "type": "string",
+        "format": "duration",
+        "fields": {
+          "type": "string",
+          "enum": [
+            "YEAR",
+            "MONTH",
+            "DAY",
+            "HOUR",
+            "MINUTE",
+            "SECOND"
+          ]
+        }
+      },
+      "gql.duration": "DURATION",
+      "sql.duration": "INTERVAL",
+      "canonical.duration": "DURATION"
+    },
+    "canonicalList": {
+      "data.array": {
+        "type": "array",
+        "elementType": {
+          "type": "string"
+        },
+        "maxCardinality": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "gql.array": "LIST",
+      "sql.array": "ARRAY",
+      "canonical.array": "LIST"
+    },
+    "canonicalRecord": {
+      "data.record": {
+        "type": "object",
+        "fields": {
+          "type": "object"
+        }
+      },
+      "gql.record": "RECORD",
+      "sql.record": "ROW",
+      "canonical.record": "RECORD"
+    },
+    "canonicalVector": {
+      "data.vector": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "dimension": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "elementType": {
+          "type": "string",
+          "enum": [
+            "float32",
+            "float64",
+            "int32",
+            "int64"
+          ]
+        }
+      },
+      "gql.vector": "VECTOR",
+      "sql.vector": "VECTOR",
+      "canonical.vector": "VECTOR"
+    },
+    "canonicalJson": {
+      "data.json": {
+        "type": [
+          "object",
+          "array",
+          "string",
+          "number",
+          "boolean",
+          "null"
+        ]
+      },
+      "gql.json": "undefined",
+      "sql.json": "JSON",
+      "canonical.json": "JSON"
+    },
+    "EndpointReference": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Type label, or SAME/SELF for self-loops"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Type identifier (array of labels)"
+        },
+        {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Type index"
+        },
+        {
+          "type": "object",
+          "required": [
+            "typeLabels"
+          ],
+          "properties": {
+            "typeLabels": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "typeLabel"
+          ],
+          "properties": {
+            "typeLabel": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "typeIdentifier"
+          ],
+          "properties": {
+            "typeIdentifier": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "index"
+          ],
+          "properties": {
+            "index": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "nodeType"
+          ],
+          "properties": {
+            "nodeType": {
+              "type": "object",
+              "description": "Inline node type specification",
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "typeLabel"
+                  ],
+                  "properties": {
+                    "typeLabel": {
+                      "type": "string"
+                    },
+                    "implies": {
+                      "$ref": "#/$defs/ImpliesDescriptor"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "index"
+                  ],
+                  "properties": {
+                    "index": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "implies": {
+                      "$ref": "#/$defs/ImpliesDescriptor"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "description": "Inline node type definition"
+        },
+        {
+          "type": "object",
+          "required": [
+            "abstract"
+          ],
+          "properties": {
+            "abstract": {
+              "$ref": "#/$defs/EndpointReferenceBase"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Abstract type reference (one-level wrapper)"
+        },
+        {
+          "type": "object",
+          "required": [
+            "concrete"
+          ],
+          "properties": {
+            "concrete": {
+              "$ref": "#/$defs/EndpointReferenceBase"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Concrete type reference (one-level wrapper)"
+        },
+        {
+          "type": "object",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "$ref": "#/$defs/EndpointReferenceBase"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Proper subtypes only (one-level wrapper)"
+        },
+        {
+          "type": "object",
+          "required": [
+            "exactlyOf"
+          ],
+          "properties": {
+            "exactlyOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/EndpointReferenceBase"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/EndpointReferenceBase"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "description": "Exact match with concreteness (two-level wrapper)"
+        },
+        {
+          "type": "object",
+          "required": [
+            "subtypesOf"
+          ],
+          "properties": {
+            "subtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/EndpointReferenceBase"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/EndpointReferenceBase"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "description": "Subtype matching with concreteness (two-level wrapper)"
+        },
+        {
+          "type": "object",
+          "required": [
+            "properSubtypesOf"
+          ],
+          "properties": {
+            "properSubtypesOf": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "concrete"
+                  ],
+                  "properties": {
+                    "concrete": {
+                      "$ref": "#/$defs/EndpointReferenceBase"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "abstract"
+                  ],
+                  "properties": {
+                    "abstract": {
+                      "$ref": "#/$defs/EndpointReferenceBase"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "description": "Proper subtypes with concreteness (two-level wrapper)"
+        }
+      ]
+    },
+    "EndpointReferenceBase": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Type label, or SAME/SELF for self-loops"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Type identifier (array of labels)"
+        },
+        {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Type index"
+        },
+        {
+          "type": "object",
+          "required": [
+            "typeLabels"
+          ],
+          "properties": {
+            "typeLabels": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "typeLabel"
+          ],
+          "properties": {
+            "typeLabel": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "typeIdentifier"
+          ],
+          "properties": {
+            "typeIdentifier": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "index"
+          ],
+          "properties": {
+            "index": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "nodeType"
+          ],
+          "properties": {
+            "nodeType": {
+              "type": "object",
+              "description": "Inline node type specification",
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "typeLabel"
+                  ],
+                  "properties": {
+                    "typeLabel": {
+                      "type": "string"
+                    },
+                    "implies": {
+                      "$ref": "#/$defs/ImpliesDescriptor"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "index"
+                  ],
+                  "properties": {
+                    "index": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "implies": {
+                      "$ref": "#/$defs/ImpliesDescriptor"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "description": "Inline node type definition"
+        }
+      ]
+    },
+    "DirectedEdgeDescriptor": {
+      "type": "object",
+      "description": "Directed edge type with from/to endpoints",
+      "required": [
+        "directed"
+      ],
+      "properties": {
+        "directed": {
+          "type": "object",
+          "description": "Directed edge specification with endpoint names",
+          "properties": {
+            "from": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "to": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "tail": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "head": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "src": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "dst": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "dest": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "via": {
+              "type": "string",
+              "description": "Edge label"
+            },
+            "arc": {
+              "type": "string",
+              "description": "Edge label (synonym for via)"
+            }
+          },
+          "oneOf": [
+            {
+              "required": [
+                "from",
+                "to"
+              ]
+            },
+            {
+              "required": [
+                "tail",
+                "head"
+              ]
+            },
+            {
+              "required": [
+                "src",
+                "dst"
+              ]
+            },
+            {
+              "required": [
+                "src",
+                "dest"
+              ]
+            }
+          ]
+        },
+        "implies": {
+          "$ref": "#/$defs/ImpliesDescriptor"
+        },
+        "extends": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Single supertype"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Multiple supertypes"
+            }
+          ]
+        },
+        "adding": {
+          "$ref": "#/$defs/AddingDescriptor"
+        }
+      },
+      "additionalProperties": false
+    },
+    "UndirectedEdgeDescriptor": {
+      "type": "object",
+      "description": "Undirected edge type with between/and endpoints",
+      "required": [
+        "undirected"
+      ],
+      "properties": {
+        "undirected": {
+          "type": "object",
+          "description": "Undirected edge specification",
+          "required": [
+            "between",
+            "and"
+          ],
+          "properties": {
+            "between": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "and": {
+              "$ref": "#/$defs/EndpointReference"
+            },
+            "via": {
+              "type": "string",
+              "description": "Edge label"
+            },
+            "arc": {
+              "type": "string",
+              "description": "Edge label (synonym for via)"
+            }
+          }
+        },
+        "implies": {
+          "$ref": "#/$defs/ImpliesDescriptor"
+        },
+        "extends": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Single supertype"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Multiple supertypes"
+            }
+          ]
+        },
+        "adding": {
+          "$ref": "#/$defs/AddingDescriptor"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NodeTypesSetOrImport": {
+      "description": "TI wrapper contents: set of NodeTypes (singleton or array) or import",
+      "oneOf": [
+        {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NodeType"
+            },
+            {
+              "$ref": "#/$defs/NodeTypesArray"
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypesSetOrImport": {
+      "description": "TI wrapper contents: set of EdgeTypes (singleton or array) or import",
+      "oneOf": [
+        {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EdgeType"
+            },
+            {
+              "$ref": "#/$defs/EdgeTypesArray"
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NodeTypeArrayOrImport": {
+      "description": "Array of NodeTypes or import - handles all set cardinalities",
+      "oneOf": [
+        {
+          "description": "Inline array of node types",
+          "$ref": "#/$defs/NodeTypesArray"
+        },
+        {
+          "description": "Import array of node types",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import NodeTypesArray from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypeArrayOrImport": {
+      "description": "Array of EdgeTypes or import - handles all set cardinalities",
+      "oneOf": [
+        {
+          "description": "Inline array of edge types",
+          "$ref": "#/$defs/EdgeTypesArray"
+        },
+        {
+          "description": "Import array of edge types",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import EdgeTypesArray from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NodeTypeSetOrImport": {
+      "description": "Set of node types with optional nodeTypes: wrapper (allows duplication/stripping)",
+      "oneOf": [
+        {
+          "description": "Inline array (no wrapper)",
+          "$ref": "#/$defs/NodeTypesArray"
+        },
+        {
+          "description": "With nodeTypes: wrapper (can be stripped during canonicalization)",
+          "type": "object",
+          "required": [
+            "nodeTypes"
+          ],
+          "properties": {
+            "nodeTypes": {
+              "$ref": "#/$defs/NodeTypeArrayOrImport"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "Import node type set",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import node type set from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EdgeTypeSetOrImport": {
+      "description": "Set of edge types with optional edgeTypes: wrapper (allows duplication/stripping)",
+      "oneOf": [
+        {
+          "description": "Inline array (no wrapper)",
+          "$ref": "#/$defs/EdgeTypesArray"
+        },
+        {
+          "description": "With edgeTypes: wrapper (can be stripped during canonicalization)",
+          "type": "object",
+          "required": [
+            "edgeTypes"
+          ],
+          "properties": {
+            "edgeTypes": {
+              "$ref": "#/$defs/EdgeTypeArrayOrImport"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "Import edge type set",
+          "type": "object",
+          "required": [
+            "import"
+          ],
+          "properties": {
+            "import": {
+              "type": "string",
+              "description": "Import edge type set from file"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

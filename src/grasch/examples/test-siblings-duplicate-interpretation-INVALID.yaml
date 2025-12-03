@@ -1,0 +1,31 @@
+# Test: Same interpretation facet appearing twice
+# Expected: FAIL - YAML does not allow duplicate keys
+
+graphSchema:
+  pathName: /test/siblings-duplicate-interpretation-INVALID
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # First abstract wrapper
+    abstract:
+      nodeTypes:
+        - nodeType:
+            typeLabel: Entity
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: STRING
+    
+    # Duplicate abstract wrapper - YAML will reject this
+    abstract:
+      edgeTypes:
+        - edgeType:
+            typeLabel: RELATIONSHIP
+            directed:
+              from:
+                nodeType:
+                  typeLabel: Entity
+              to:
+                nodeType:
+                  typeLabel: Entity

@@ -230,11 +230,11 @@ The existing schema uses incorrect terminology:
 **Context Preservation**: This document captures the current state of design discussion to enable continuation across sessions:
 
 1. **Correct Location Numbering**: Established and documented (Locations 1-9)
-2. **Current Phase**: Phase A - Understanding TI usage patterns at Locations 1-5
+2. **Current Phase**: Phase E.A - Understanding TI usage patterns at Locations 1-5
 3. **Prior Session Input**: User provided refined YAML examples showing distinction between:
    - `nodeTypesInterpretation` (Location 2) - wraps whole nodeTypes property
    - `nodeTypeArrayInterpretation` (Location 4) - wraps subsequences within array
-4. **Next Steps**: Complete Phase A before moving to Phase B (nested semantics)
+4. **Next Steps**: Complete Phase E.A before moving to Phase E.B (nested semantics)
 
 ## User Guidance from Current Session
 
@@ -251,4 +251,4 @@ The existing schema uses incorrect terminology:
 
 ---
 
-**NOTE**: This document should be deleted once the concepts are properly integrated into the main design document and implementation plan, after completing Phases A, B, and C.
+**NOTE**: This document should be deleted once the concepts are properly integrated into the main design document and implementation plan, after completing Phases E.A, E.B, and E.C.

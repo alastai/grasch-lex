@@ -1,10 +1,104 @@
 # Design Document: Type Interpretation Wrapper System
 
+> **PROVISIONAL NOTE**: Array-level type interpretation concepts (Locations 4+5) are under active development. See `TEMP-NESTING-IDEAS.md` for current thinking on XTypeArrayInterpretation as the recursive unit for nested array interpretations. This supersedes earlier "partition block" terminology.
+
 ## Overview
 
-The type interpretation wrapper system provides a flexible YAML syntax for controlling how element type references are validated in LEX-2026 schemas. The system uses wrapper keywords that surround type reference values to specify two independent semantic dimensions: subtype matching mode (variance) and concreteness (instantiability).
+The type interpretation wrapper system provides a flexible YAML syntax for controlling how element type references are validated in LEX-2026 schemas. The system operates at three distinct conceptual levels:
+
+1. **TI Locations**: Where type interpretations can be applied (graphType, nodeTypes, individual nodeType, etc.)
+2. **TI Structure**: How the interpretation is expressed (0-level/bare, 1-level/shorthand, 2-level/explicit)
+3. **Type Definition**: The actual element type specification with labels, properties, etc.
+
+Within each TI structure, two independent semantic facets can be specified:
+- **Subtype Interpretation Facet**: `subtypeOf`, `properSubtypesOf`, or `exactlyOf`
+- **Concreteness Facet**: `abstract`, `concrete`, `final`, or `sealed`
+
+These facets are toggles that any TI can contain - they are NOT part of the TI location name.
 
 ## Architecture
+
+### Three-Level TI Architecture
+
+The type interpretation system operates at three distinct conceptual levels:
+
+#### Level 1: TI Locations (Where TI Can Appear)
+
+These are the structural positions where type interpretations can be applied:
+
+| Location Name | Applies To | Scope |
+|---------------|------------|-------|
+| `graphTypeInterpretation` | graphType property | Single graph type |
+| `nodeTypesInterpretation` | nodeTypes array | Entire collection of node types |
+| `edgeTypesInterpretation` | edgeTypes array | Entire collection of edge types |
+| `nodeTypeArrayInterpretation` | Subsequence in nodeTypes | Subset of node types |
+| `edgeTypeArrayInterpretation` | Subsequence in edgeTypes | Subset of edge types |
+| `nodeTypeInterpretation` | Single nodeType | Individual node type |
+| `edgeTypeInterpretation` | Single edgeType | Individual edge type |
+| `edgeTypeEndpointNodeTypeInterpretation` | from:/to:/between:/and: | Node type at edge endpoint |
+
+#### Level 2: TI Structure (How TI Is Expressed)
+
+At each location, the TI can be expressed in three forms:
+
+| Form | Syntax Example | Canonical Form |
+|------|----------------|----------------|
+| 0-level (bare) | `nodeType: Person` | Implicit `exactlyOf: concrete:` |
+| 1-level (shorthand) | `abstract: { nodeType: Person }` | `subtypesOf: { abstract: { nodeType: Person } }` |
+| 2-level (explicit) | `subtypesOf: { abstract: { nodeType: Person } }` | (already canonical) |
+
+#### Level 3: Type Definition
+
+After the TI wrappers comes the actual type definition:
+
+```yaml
+nodeType:
+  typeLabel: Person
+  properties:
+    - name: age
+      valueType: INTEGER
+  extends: Entity
+```
+
+### TI Facets (Not Part of Location Names)
+
+The subtype interpretation facet (`subtypeOf`, `properSubtypesOf`, `exactlyOf`) is a toggle that ANY TI can contain. It is NOT part of the TI location name. Similarly, the concreteness facet (`abstract`, `concrete`, `final`, `sealed`) is independent.
+
+**Valid Combinations** (after canonicalization):
+- `exactlyOf: concrete:` - Exact match, can be instantiated
+- `exactlyOf: abstract:` - Exact match, cannot be instantiated
+- `exactlyOf: final:` - Exact match, cannot be extended
+- `subtypesOf: concrete:` - Allows subtypes, can be instantiated
+- `subtypesOf: abstract:` - Allows subtypes, cannot be instantiated
+- `subtypesOf: sealed:` - Allows subtypes within sealed hierarchy
+
+### TI Override and Default Cascade
+
+**TI Override**: When an outer TI immediately wraps an inner TI, the outer TI "knocks out" (overrides) the inner TI.
+
+```yaml
+# Outer TI overrides inner TI
+subtypesOf:
+  abstract:
+    exactlyOf:  # This inner TI is overridden
+      concrete:
+        nodeType: Person
+# Result: Person is interpreted as subtypesOf:abstract, not exactlyOf:concrete
+```
+
+**TI Default Cascade**: A TI at a higher level establishes a default that can be overridden at lower levels.
+
+```yaml
+# Higher-level TI establishes default
+graphType:
+  subtypesOf:
+    abstract:
+      nodeTypes:
+        - nodeType: Person  # Inherits subtypesOf:abstract from graphType
+        - exactlyOf:
+            concrete:
+              nodeType: Company  # Overrides with exactlyOf:concrete
+```
 
 ### Single Schema, Two Valid Forms
 

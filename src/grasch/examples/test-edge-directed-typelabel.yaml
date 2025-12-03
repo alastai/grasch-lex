@@ -1,0 +1,23 @@
+# Test: Directed edge using typeLabel: (generic synonym)
+# Expected: PASS
+
+graphSchema:
+  pathName: /test/edge-directed-typelabel
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            typeLabel: KNOWS
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person

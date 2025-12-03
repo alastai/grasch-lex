@@ -1,0 +1,23 @@
+# Test: Directed edge using arc: (synonym for via)
+# Expected: PASS
+
+graphSchema:
+  pathName: /test/edge-directed-arc
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            arc: KNOWS
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person

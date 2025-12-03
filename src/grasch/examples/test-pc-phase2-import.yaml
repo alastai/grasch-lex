@@ -1,0 +1,18 @@
+# Test PC Form: Phase 2 Import (Import Content Only, TI Override)
+# Purpose: Test importing type definitions and reinterpreting with different TI
+# Expected: Should produce same C form as other PC variants
+
+graphSchema:
+  graphType:
+    nodeTypes:
+      # Phase 2: Import content only, strip original TI, apply new TI
+      # The imported file has subtypesOf:abstract
+      # But we want to reinterpret as subtypesOf:abstract (same in this case)
+      - subtypesOf:
+          abstract:
+            import: "imports/test-person-types.yaml"
+      
+      # Import and wrap with concrete (exactlyOf:concrete)
+      - exactlyOf:
+          concrete:
+            import: "imports/test-company-types.yaml"

@@ -614,6 +614,225 @@ Edges: catalog_to_type (connects GQLSchema to TypeNode)
        type_to_lattice (connects TypeNode to ContentTypeLattice)
 ```
 
+## LEX-2026.0.3.2 Edge Type Syntax Specification
+
+### Overview
+
+This section documents the complete and corrected syntax for edge type definitions in LEX-2026.0.3.2, including property synonyms, ordering rules, subtyping options, and endpoint specifications.
+
+### Edge Type Property Synonyms
+
+#### Edge Label Properties (Mutually Exclusive)
+- **Primary**: `via:`
+- **Synonyms**: `arc:`, `typeLabel:`
+- **Semantics**: All three have identical semantics and are mutually exclusive
+- **Usage**: Specifies the label(s) for the edge type
+
+#### Source Endpoint Properties (Mutually Exclusive)
+- **Primary**: `from:`
+- **Synonyms**: `src:`, `source:`, `tail:`
+- **Semantics**: All have identical semantics and are mutually exclusive
+- **Usage**: Specifies the source node type for directed edges
+
+#### Destination Endpoint Properties (Mutually Exclusive)
+- **Primary**: `to:`
+- **Synonyms**: `dst:`, `dest:`, `destination:`, `head:`
+- **Semantics**: All have identical semantics and are mutually exclusive
+- **Usage**: Specifies the destination node type for directed edges
+
+#### Special Property: `and:`
+
+**CRITICAL**: `and:` is NOT a synonym for any other property. It is a distinct, required property for undirected edges that specifies the second endpoint.
+
+- **Usage**: Required for undirected edges to specify the second endpoint
+- **Not a synonym**: Does not replace or substitute for `via:`, `arc:`, or `typeLabel:`
+
+### Property Ordering Rules
+
+Edge type properties must appear in a specific order:
+
+#### For Directed Edges
+```yaml
+directed:
+  from: <node_type>      # Source endpoint (or synonym)
+  to: <node_type>        # Destination endpoint (or synonym)
+  via: <edge_label>      # Edge label (or synonym) - MUST come after endpoints
+  implies: <parent>      # Subtyping (optional) - MUST come after via:
+  # OR
+  extends: <parent>      # Alternative subtyping (optional)
+  adding:                # Additional properties (optional, requires extends:)
+    labels: ...
+    propertyTypes: ...
+  propertyTypes: ...     # Property definitions (optional)
+```
+
+**Ordering Rule**: `from:` → `to:` → `via:` (or their synonyms) → `implies:` or `extends:`/`adding:` → `propertyTypes:`
+
+#### For Undirected Edges
+```yaml
+undirected:
+  between: <node_type>   # First endpoint
+  and: <node_type>       # Second endpoint (REQUIRED, not a synonym)
+  via: <edge_label>      # Edge label (or synonym) - MUST come after endpoints
+  implies: <parent>      # Subtyping (optional) - MUST come after via:
+  # OR
+  extends: <parent>      # Alternative subtyping (optional)
+  adding:                # Additional properties (optional, requires extends:)
+    labels: ...
+    propertyTypes: ...
+  propertyTypes: ...     # Property definitions (optional)
+```
+
+**Ordering Rule**: `between:` → `and:` → `via:` (or their synonyms) → `implies:` or `extends:`/`adding:` → `propertyTypes:`
+
+### Subtyping Syntax Options
+
+Within both `directed:` and `undirected:` edge type definitions, there are two mutually exclusive approaches for subtyping:
+
+#### Option 1: Using `implies:`
+```yaml
+implies: ParentEdgeType
+```
+
+- Simple parent type reference
+- Cannot be combined with `extends:`/`adding:`
+
+#### Option 2: Using `extends:` and `adding:`
+```yaml
+extends: ParentEdgeType
+adding:
+  labels: ?              # Optional additional labels
+  propertyTypes: ?       # Optional additional property types
+```
+
+**Rules**:
+- `extends:` can appear without `adding:`
+- `adding:` CANNOT appear without `extends:`
+- These are mutually exclusive with `implies:` (use either `implies:` OR the `extends:`/`adding:` pair, not both)
+- When `adding:` is present, its children are `labels:` (optional) and `propertyTypes:` (optional)
+
+### Endpoint Node Type Specifications
+
+For any endpoint node type properties (`to:`, `from:`, `via:`, `between:`, `and:`, or their synonyms), the value can be specified in two ways:
+
+#### 1. Type Reference (Simple String)
+References a previously defined node type by its type label:
+
+```yaml
+from: Person
+to: Company
+```
+
+#### 2. Inline Node Type Definition
+A full inline node type definition starting with `nodeType:`:
+
+```yaml
+from:
+  nodeType:
+    typeLabel: Person
+    implies: Entity
+    propertyTypes:
+      - name: age
+        type: INTEGER
+```
+
+The inline definition can optionally include:
+- `typeLabel:` - The label for the inline node type
+- `implies:` OR `extends:`/`adding:` - Subtyping relationships
+- `propertyTypes:` - Property definitions
+- Any other valid node type properties
+
+### Complete Examples
+
+#### Example 1: Directed Edge with Type References
+```yaml
+edgeTypes:
+  - directed:
+      from: Person
+      to: Company
+      via: WORKS_FOR
+      propertyTypes:
+        - name: since
+          type: DATE
+        - name: role
+          type: STRING
+```
+
+#### Example 2: Directed Edge with Subtyping
+```yaml
+edgeTypes:
+  - directed:
+      from: Employee
+      to: Department
+      via: MANAGES
+      extends: WORKS_IN
+      adding:
+        propertyTypes:
+          - name: managementLevel
+            type: STRING
+```
+
+#### Example 3: Undirected Edge with Type References
+```yaml
+edgeTypes:
+  - undirected:
+      between: Person
+      and: Person
+      via: COLLABORATES_WITH
+      propertyTypes:
+        - name: projectCount
+          type: INTEGER
+        - name: since
+          type: DATE
+```
+
+#### Example 4: Directed Edge with Inline Node Type
+```yaml
+edgeTypes:
+  - directed:
+      from:
+        nodeType:
+          typeLabel: TemporaryWorker
+          implies: Person
+          propertyTypes:
+            - name: contractEnd
+              type: DATE
+      to: Company
+      via: CONTRACTS_WITH
+      propertyTypes:
+        - name: hourlyRate
+          type: DECIMAL
+```
+
+#### Example 5: Using Synonyms
+```yaml
+edgeTypes:
+  - directed:
+      src: Author          # Synonym for from:
+      dst: Book            # Synonym for to:
+      arc: WROTE           # Synonym for via:
+      implies: CREATED
+```
+
+### Validation Rules
+
+1. **Synonym Exclusivity**: Only one synonym from each group can be used per edge type definition
+2. **Property Order**: Properties must appear in the specified order
+3. **Subtyping Exclusivity**: Cannot use both `implies:` and `extends:`/`adding:` in the same definition
+4. **Adding Dependency**: `adding:` requires `extends:` to be present
+5. **Undirected `and:` Requirement**: Undirected edges must have both `between:` and `and:` properties
+6. **Via Placement**: Edge label property (`via:` or synonyms) must come after endpoint specifications
+7. **Subtyping Placement**: Subtyping (`implies:` or `extends:`/`adding:`) must come after edge label
+
+### Schema Validation Implications
+
+The JSON Schema for LEX-2026.0.3.2 must enforce:
+- Property ordering through schema structure
+- Mutual exclusivity of synonym groups
+- Dependency between `extends:` and `adding:`
+- Required properties for directed vs undirected edges
+- Proper nesting of inline node type definitions
+
 ## Error Handling
 
 ### Exception Hierarchy

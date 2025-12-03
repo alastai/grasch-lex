@@ -1,0 +1,16 @@
+# Test PC Form: Phase 1 Import (Import TI + Content)
+# Purpose: Test importing entire TI wrapper with types (preserves TI)
+# Expected: Should produce same C form as other PC variants
+
+graphSchema:
+  graphType:
+    nodeTypes:
+      # Phase 1: Import entire TI wrapper + content
+      # The imported file contains subtypesOf:abstract wrapper
+      # This import preserves that TI wrapper
+      - import: "imports/test-person-types.yaml"
+      
+      # Import bare types (no TI wrapper in imported file)
+      # These get wrapped with concrete: (default)
+      concrete:
+        import: "imports/test-company-types.yaml"

@@ -1,0 +1,27 @@
+# Test: Duplicate bare nodeTypes property
+# Expected: FAIL - YAML does not allow duplicate keys
+# Note: This will fail at YAML parsing level, not schema validation
+
+graphSchema:
+  pathName: /test/siblings-duplicate-bare-INVALID
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # First nodeTypes
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+    
+    # Duplicate nodeTypes - YAML will reject this
+    nodeTypes:
+      - nodeType:
+          typeLabel: Company
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING

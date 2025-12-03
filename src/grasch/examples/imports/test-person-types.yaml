@@ -1,0 +1,13 @@
+# Import file: Person type with TI wrapper
+# Used for Phase 1 and Phase 2 import tests
+
+subtypesOf:
+  abstract:
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+            - name: id
+              valueType: INTEGER
+            - name: name
+              valueType: STRING

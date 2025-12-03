@@ -1,8 +1,8 @@
 # Project Structure Cleanup Plan
 
-**Status**: Ready for execution  
-**Priority**: High - Improves maintainability  
-**Estimated Time**: 2-3 hours
+**Status**: BLOCKED - Requires grasch/kiro distinction clarification  
+**Priority**: High - Improves maintainability (once unblocked)  
+**Estimated Time**: 2-3 hours (after clarification adds 30-60 min)
 
 ## Current Problem
 

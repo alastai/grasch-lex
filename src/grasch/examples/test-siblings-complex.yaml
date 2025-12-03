@@ -1,0 +1,77 @@
+# Test: Complex combination of all sibling patterns
+# Expected: PASS - All valid sibling combinations together
+
+graphSchema:
+  pathName: /test/siblings-complex
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # Bare nodeTypes (0-level)
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+    
+    # Bare edgeTypes (0-level)
+    edgeTypes:
+      - edgeType:
+          typeLabel: KNOWS
+          directed:
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+    
+    # 1-level abstract nodeTypes
+    abstract:
+      nodeTypes:
+        - nodeType:
+            typeLabel: Entity
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: STRING
+    
+    # 1-level concrete edgeTypes
+    concrete:
+      edgeTypes:
+        - edgeType:
+            typeLabel: WORKS_AT
+            directed:
+              from:
+                nodeType:
+                  typeLabel: Person
+              to:
+                nodeType:
+                  typeLabel: Company
+    
+    # 2-level exactlyOf:concrete nodeTypes
+    exactlyOf:
+      concrete:
+        nodeTypes:
+          - nodeType:
+              typeLabel: Company
+              implies:
+                propertyTypes:
+                  - name: name
+                    valueType: STRING
+    
+    # 2-level subtypesOf:abstract edgeTypes
+    subtypesOf:
+      abstract:
+        edgeTypes:
+          - edgeType:
+              typeLabel: RELATIONSHIP
+              directed:
+                from:
+                  nodeType:
+                    typeLabel: Entity
+                to:
+                  nodeType:
+                    typeLabel: Entity

@@ -1,0 +1,23 @@
+# Test: Undirected edge using via: (currently used in examples)
+# Expected: PASS
+
+graphSchema:
+  pathName: /test/edge-undirected-via
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      - edgeType:
+          undirected:
+            via: FRIENDS_WITH
+            between:
+              nodeType:
+                typeLabel: Person
+            and:
+              nodeType:
+                typeLabel: Person

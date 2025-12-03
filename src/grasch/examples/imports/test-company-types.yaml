@@ -1,0 +1,11 @@
+# Import file: Company type (bare, no TI wrapper)
+# Used for testing import of unwrapped types
+
+- nodeType:
+    typeLabel: Company
+    implies:
+      propertyTypes:
+        - name: id
+          valueType: INTEGER
+        - name: name
+          valueType: STRING

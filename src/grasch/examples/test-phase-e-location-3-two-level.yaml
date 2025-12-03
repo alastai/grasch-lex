@@ -1,0 +1,57 @@
+# Test Phase E - Location 3: edgeTypesInterpretation (Two-level wrapper)
+# exactlyOf + concrete wrapping entire edgeTypes property
+
+graphSchema:
+  pathName: /test/phase-e-location-3-two-level
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # Need at least one nodeType for valid graph
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+      - nodeType:
+          typeLabel: Company
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+    
+    # Location 3: Two-level wrapper
+    # exactlyOf + concrete wrapping entire edgeTypes
+    exactlyOf:
+      concrete:
+        edgeTypes:
+          - edgeType:
+              typeLabel: KNOWS
+              directed:
+                from:
+                  nodeType:
+                    typeLabel: Person
+                to:
+                  nodeType:
+                    typeLabel: Person
+                via:
+                  implies:
+                    propertyTypes:
+                      - name: since
+                        valueType: INTEGER
+          - edgeType:
+              typeLabel: WORKS_AT
+              directed:
+                from:
+                  nodeType:
+                    typeLabel: Person
+                to:
+                  nodeType:
+                    typeLabel: Company
+                via:
+                  implies:
+                    propertyTypes:
+                      - name: role
+                        valueType: STRING
