@@ -674,7 +674,8 @@
           "description": "Import file path for graph type defaults"
         },
         "nodeTypes": {
-          "$ref": "#/$defs/NodeTypesProperty"
+          "$ref": "#/$defs/NodeTypesArray",
+          "description": "Bare nodeTypes array (implicit exactlyOf:concrete for each item)"
         },
         "subtypesOf": {
           "type": "object",
@@ -789,7 +790,8 @@
           "additionalProperties": false
         },
         "edgeTypes": {
-          "$ref": "#/$defs/EdgeTypesProperty"
+          "$ref": "#/$defs/EdgeTypesArray",
+          "description": "Bare edgeTypes array (implicit exactlyOf:concrete for each item)"
         },
         "propertyGraphDataModel": {
           "oneOf": [
