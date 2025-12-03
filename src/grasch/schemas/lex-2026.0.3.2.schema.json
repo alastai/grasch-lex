@@ -3640,7 +3640,7 @@
     },
     "DirectedEdgeDescriptor": {
       "type": "object",
-      "description": "Directed edge type with from/to endpoints",
+      "description": "Directed edge type with from/to endpoints. Property order: endpoints → via/arc/typeLabel → implies OR extends/adding → propertyTypes",
       "required": [
         "directed"
       ],
@@ -3664,23 +3664,32 @@
             "src": {
               "$ref": "#/$defs/EndpointReference"
             },
+            "source": {
+              "$ref": "#/$defs/EndpointReference"
+            },
             "dst": {
               "$ref": "#/$defs/EndpointReference"
             },
             "dest": {
               "$ref": "#/$defs/EndpointReference"
             },
+            "destination": {
+              "$ref": "#/$defs/EndpointReference"
+            },
             "via": {
               "type": "string",
-              "description": "Edge label (preferred for directed edges)"
+              "description": "Edge label (primary). Mutually exclusive with arc and typeLabel"
             },
             "arc": {
               "type": "string",
-              "description": "Edge label (synonym for via)"
+              "description": "Edge label (synonym for via). Mutually exclusive with via and typeLabel"
             },
             "typeLabel": {
               "type": "string",
-              "description": "Edge label (generic synonym, works for both directed and undirected)"
+              "description": "Edge label (synonym for via). Mutually exclusive with via and arc"
+            },
+            "propertyTypes": {
+              "$ref": "#/$defs/PropertyTypesArray"
             }
           },
           "oneOf": [
@@ -3707,6 +3716,24 @@
                 "src",
                 "dest"
               ]
+            },
+            {
+              "required": [
+                "source",
+                "dst"
+              ]
+            },
+            {
+              "required": [
+                "source",
+                "dest"
+              ]
+            },
+            {
+              "required": [
+                "source",
+                "destination"
+              ]
             }
           ]
         },
@@ -3717,55 +3744,88 @@
           "oneOf": [
             {
               "type": "string",
-              "description": "Single supertype"
+              "description": "Single supertype. Mutually exclusive with implies"
             },
             {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "Multiple supertypes"
+              "description": "Multiple supertypes. Mutually exclusive with implies"
             }
           ]
         },
         "adding": {
-          "$ref": "#/$defs/AddingDescriptor"
+          "$ref": "#/$defs/AddingDescriptor",
+          "description": "Additional labels/properties. Requires extends to be present"
         }
       },
+      "oneOf": [
+        {
+          "required": [
+            "directed"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "implies",
+                  "extends"
+                ]
+              },
+              {
+                "required": [
+                  "adding"
+                ],
+                "not": {
+                  "required": [
+                    "extends"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
       "additionalProperties": false
     },
     "UndirectedEdgeDescriptor": {
       "type": "object",
-      "description": "Undirected edge type with between/and endpoints",
+      "description": "Undirected edge type with between/and endpoints. Property order: between → and → via/arc/typeLabel → implies OR extends/adding → propertyTypes. NOTE: 'and' is NOT a synonym for via/arc/typeLabel",
       "required": [
         "undirected"
       ],
       "properties": {
         "undirected": {
           "type": "object",
-          "description": "Undirected edge specification",
+          "description": "Undirected edge specification. REQUIRED: both 'between' and 'and' properties",
           "required": [
             "between",
             "and"
           ],
           "properties": {
             "between": {
-              "$ref": "#/$defs/EndpointReference"
+              "$ref": "#/$defs/EndpointReference",
+              "description": "First endpoint node type"
             },
             "and": {
-              "$ref": "#/$defs/EndpointReference"
+              "$ref": "#/$defs/EndpointReference",
+              "description": "Second endpoint node type. This is NOT a synonym for via/arc/typeLabel"
             },
             "via": {
               "type": "string",
-              "description": "Edge label (currently used in examples)"
+              "description": "Edge label (primary). Mutually exclusive with arc and typeLabel"
             },
             "arc": {
               "type": "string",
-              "description": "Edge label (synonym for via)"
+              "description": "Edge label (synonym for via). Mutually exclusive with via and typeLabel"
             },
             "typeLabel": {
               "type": "string",
-              "description": "Edge label (generic synonym, works for both directed and undirected)"
+              "description": "Edge label (synonym for via). Mutually exclusive with via and arc"
+            },
+            "propertyTypes": {
+              "$ref": "#/$defs/PropertyTypesArray"
             }
           }
         },
@@ -3776,21 +3836,49 @@
           "oneOf": [
             {
               "type": "string",
-              "description": "Single supertype"
+              "description": "Single supertype. Mutually exclusive with implies"
             },
             {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "Multiple supertypes"
+              "description": "Multiple supertypes. Mutually exclusive with implies"
             }
           ]
         },
         "adding": {
-          "$ref": "#/$defs/AddingDescriptor"
+          "$ref": "#/$defs/AddingDescriptor",
+          "description": "Additional labels/properties. Requires extends to be present"
         }
       },
+      "oneOf": [
+        {
+          "required": [
+            "undirected"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "implies",
+                  "extends"
+                ]
+              },
+              {
+                "required": [
+                  "adding"
+                ],
+                "not": {
+                  "required": [
+                    "extends"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
       "additionalProperties": false
     },
     "NodeTypesSetOrImport": {
