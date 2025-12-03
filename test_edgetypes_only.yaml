@@ -1,0 +1,17 @@
+# Test: Just edgeTypes alone
+graphSchema:
+  pathName: /test/edgetypes-only
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    edgeTypes:
+      - edgeType:
+          typeLabel: KNOWS
+          directed:
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
