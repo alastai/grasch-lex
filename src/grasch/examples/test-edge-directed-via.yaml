@@ -1,0 +1,23 @@
+# Test: Directed edge using via: (preferred for directed edges)
+# Expected: PASS
+
+graphSchema:
+  pathName: /test/edge-directed-via
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            via: KNOWS
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
