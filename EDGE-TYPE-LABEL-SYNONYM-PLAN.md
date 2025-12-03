@@ -8,6 +8,59 @@
 
 Standardize edge type label syntax across all examples and schema to support `typeLabel`, `via`, `arc`, and `and` as synonyms, with proper placement inside `directed:` or `undirected:` blocks.
 
+## IMPORTANT REVISION - Property Ordering Mandate
+
+**Date**: 2024-12-03  
+**Status**: REGISTERED - Awaiting next instruction before implementation
+
+### Mandated Property Order
+
+The following property orders are now **mandatory** for edge types:
+
+**Directed Edge Type:**
+```yaml
+edgeType:
+  directed:
+    from:        # 1. Source endpoint
+    to:          # 2. Target endpoint  
+    via:         # 3. Edge label (or arc: or typeLabel:)
+    implies:     # 4. Optional: Content specification
+      labels:    #    - Optional: Label types
+      propertyTypes:  # - Optional: Property types
+```
+
+**Undirected Edge Type:**
+```yaml
+edgeType:
+  undirected:
+    between:     # 1. Endpoints specification (array of 2 node types)
+    and:         # 2. Edge label (synonym: via: or typeLabel:)
+    via:         # 2. Edge label (synonym: and: or typeLabel:) - SAME LEVEL as and:
+    implies:     # 3. Optional: Content specification
+      labels:    #    - Optional: Label types
+      propertyTypes:  # - Optional: Property types
+```
+
+**Note**: For undirected edges, `between:`, `and:`, and `via:` are **three sibling keys** at the same level. Only one of `and:`, `via:`, or `typeLabel:` should be used (they are synonyms).
+
+### Key Points
+
+1. **This is about ordering only** - not about which properties are required/optional
+2. **`from:`/`to:` come before `via:`** in directed edges
+3. **`between:`, `and:`, `via:` are three sibling keys** in undirected edges (only one of `and:`/`via:`/`typeLabel:` should be used)
+4. **`implies:` always comes last** (when present)
+5. **Within `implies:`**, `labels:` comes before `propertyTypes:` (when both present)
+
+### Implementation Scope
+
+This ordering requirement affects:
+- JSON Schema validation (must enforce property order)
+- All example YAML files (must follow order)
+- All test YAML files (must follow order)
+- Documentation and guides
+
+**WAITING FOR NEXT INSTRUCTION BEFORE IMPLEMENTING THESE CHANGES**
+
 ## Current State Analysis
 
 ### Current Patterns in Use
