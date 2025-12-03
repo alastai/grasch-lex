@@ -3672,11 +3672,15 @@
             },
             "via": {
               "type": "string",
-              "description": "Edge label"
+              "description": "Edge label (preferred for directed edges)"
             },
             "arc": {
               "type": "string",
               "description": "Edge label (synonym for via)"
+            },
+            "typeLabel": {
+              "type": "string",
+              "description": "Edge label (generic synonym, works for both directed and undirected)"
             }
           },
           "oneOf": [
@@ -3753,11 +3757,15 @@
             },
             "via": {
               "type": "string",
-              "description": "Edge label"
+              "description": "Edge label (currently used in examples)"
             },
             "arc": {
               "type": "string",
               "description": "Edge label (synonym for via)"
+            },
+            "typeLabel": {
+              "type": "string",
+              "description": "Edge label (generic synonym, works for both directed and undirected)"
             }
           }
         },
