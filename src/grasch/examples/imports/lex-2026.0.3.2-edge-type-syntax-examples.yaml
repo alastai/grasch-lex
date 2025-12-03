@@ -187,36 +187,25 @@ edgeTypes:
   - edgeType:
       undirected:
         between: Person
-        via: COLLABORATES_WITH
         and: Person
+        via: COLLABORATES_WITH
       implies:
         propertyTypes:
         - name: projectName
           valueType: STRING
   
-  # Pattern 2: via before between/and
+  # Pattern 2: arc synonym for via
   - edgeType:
       undirected:
-        via: PARTNERS_WITH
         between: Company
         and: Company
-      implies:
-        propertyTypes:
-        - name: since
-          valueType: DATE
-  
-  # Pattern 2b: arc synonym for via
-  - edgeType:
-      undirected:
         arc: ALLIED_WITH
-        between: Company
-        and: Company
       implies:
         propertyTypes:
         - name: since
           valueType: DATE
   
-  # Pattern 3: via after between/and (no properties)
+  # Pattern 3: Undirected edge without properties
   - edgeType:
       undirected:
         between: Person
@@ -227,8 +216,8 @@ edgeTypes:
   - edgeType:
       undirected:
         between: Person
-        via: SIMILAR_TO
         and: SAME
+        via: SIMILAR_TO
       implies:
         propertyTypes:
         - name: similarity
@@ -238,26 +227,26 @@ edgeTypes:
   - edgeType:
       undirected:
         between: Person
-        via: RELATED_TO
         and: SELF
+        via: RELATED_TO
       implies:
         propertyTypes:
         - name: relationship
           valueType: STRING
   
-  # Pattern 6: Using index reference (no properties)
+  # Pattern 6: Using index reference
   - edgeType:
       undirected:
         between: 0
-        via: ASSOCIATED_WITH
         and: Person
+        via: ASSOCIATED_WITH
   
   # Pattern 7: Using typeIdentifier (string array)
   - edgeType:
       undirected:
         between: ["Person", "Employee"]
-        via: WORKS_WITH
         and: Person
+        via: WORKS_WITH
       implies:
         propertyTypes:
         - name: project
@@ -271,8 +260,8 @@ edgeTypes:
   - edgeType:
       undirected:
         between: Person
-        via: KNOWS
         and: Person
+        via: KNOWS
       implies:
         propertyTypes:
         - name: since
@@ -282,8 +271,8 @@ edgeTypes:
   - edgeType:
       undirected:
         between: Person
-        arc: CLOSE_FRIEND
         and: Person
+        arc: CLOSE_FRIEND
       extends: KNOWS
       adding:
         propertyTypes:
@@ -296,8 +285,8 @@ edgeTypes:
   - edgeType:
       undirected:
         between: Person
-        via: BEST_FRIEND
         and: Person
+        via: BEST_FRIEND
       extends: [CLOSE_FRIEND]
       adding:
         propertyTypes:
@@ -308,8 +297,8 @@ edgeTypes:
   - edgeType:
       directed:
         from: Person
-        via: RELATIONSHIP
         to: Person
+        via: RELATIONSHIP
       implies:
         propertyTypes:
         - name: startDate
@@ -319,8 +308,8 @@ edgeTypes:
   - edgeType:
       directed:
         from: Person
-        arc: MARRIED_TO
         to: Person
+        arc: MARRIED_TO
       extends: RELATIONSHIP
       adding:
         propertyTypes:
@@ -333,8 +322,8 @@ edgeTypes:
   - edgeType:
       directed:
         from: Person
-        via: ENGAGED_TO
         to: Person
+        via: ENGAGED_TO
       extends: RELATIONSHIP
       adding:
         propertyTypes:
@@ -373,8 +362,8 @@ edgeTypes:
       edgeType:
         directed:
           from: Person
-          via: RELATIONSHIP
           to: Person
+          via: RELATIONSHIP
         implies:
           propertyTypes:
           - name: since
@@ -384,8 +373,8 @@ edgeTypes:
   - edgeType:
       directed:
         from: Person
-        via: FRIENDSHIP
         to: Person
+        via: FRIENDSHIP
       implies:
         supertypes: [RELATIONSHIP]
         propertyTypes:
@@ -396,8 +385,8 @@ edgeTypes:
   - edgeType:
       directed:
         from: Person
-        via: PROFESSIONAL_RELATIONSHIP
         to: Person
+        via: PROFESSIONAL_RELATIONSHIP
       implies:
         supertypes: RELATIONSHIP
         propertyTypes:
@@ -409,8 +398,8 @@ edgeTypes:
       edgeType:
         undirected:
           between: Company
-          via: PARTNERSHIP
           and: Company
+          via: PARTNERSHIP
         implies:
           propertyTypes:
           - name: startDate
@@ -420,8 +409,8 @@ edgeTypes:
   - edgeType:
       undirected:
         between: Company
-        via: STRATEGIC_PARTNERSHIP
         and: Company
+        via: STRATEGIC_PARTNERSHIP
       implies:
         supertypes: PARTNERSHIP
         propertyTypes:
@@ -437,9 +426,9 @@ edgeTypes:
   - edgeType:
       directed:
         from: Employee
-        via: MANAGES
         to:
           abstract: Person
+        via: MANAGES
       implies:
         propertyTypes:
         - name: startDate
@@ -449,9 +438,9 @@ edgeTypes:
   - edgeType:
       directed:
         from: Manager
-        via: SUPERVISES
         to:
           abstract: Person
+        via: SUPERVISES
       implies:
         propertyTypes:
         - name: role
@@ -462,9 +451,9 @@ edgeTypes:
       directed:
         from:
           abstract: Person
-        via: REPORTS_TO
         to:
           abstract: Person
+        via: REPORTS_TO
       implies:
         propertyTypes: []
   
@@ -473,8 +462,8 @@ edgeTypes:
       undirected:
         between:
           abstract: Person
-        via: COLLABORATES_ON
         and: Company
+        via: COLLABORATES_ON
       implies:
         propertyTypes:
         - name: projectName
