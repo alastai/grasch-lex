@@ -3638,9 +3638,29 @@
         }
       ]
     },
+    "EdgeLabelProperty": {
+      "description": "Edge label can be either a simple string or an object with implies child containing properties/labels",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Simple edge label (no properties)"
+        },
+        {
+          "type": "object",
+          "description": "Edge label with properties/labels via implies",
+          "properties": {
+            "implies": {
+              "$ref": "#/$defs/ImpliesDescriptor"
+            }
+          },
+          "required": ["implies"],
+          "additionalProperties": false
+        }
+      ]
+    },
     "DirectedEdgeDescriptor": {
       "type": "object",
-      "description": "Directed edge type with from/to endpoints. Property order: endpoints → via/arc/typeLabel → implies OR extends/adding → propertyTypes",
+      "description": "Directed edge type with from/to endpoints. Edge labels (via/arc/typeLabel) can be string or object with implies child",
       "required": [
         "directed"
       ],
@@ -3677,19 +3697,16 @@
               "$ref": "#/$defs/EndpointReference"
             },
             "via": {
-              "type": "string",
+              "$ref": "#/$defs/EdgeLabelProperty",
               "description": "Edge label (primary). Mutually exclusive with arc and typeLabel"
             },
             "arc": {
-              "type": "string",
+              "$ref": "#/$defs/EdgeLabelProperty",
               "description": "Edge label (synonym for via). Mutually exclusive with via and typeLabel"
             },
             "typeLabel": {
-              "type": "string",
+              "$ref": "#/$defs/EdgeLabelProperty",
               "description": "Edge label (synonym for via). Mutually exclusive with via and arc"
-            },
-            "propertyTypes": {
-              "$ref": "#/$defs/PropertyTypesArray"
             }
           },
           "oneOf": [
@@ -3737,21 +3754,18 @@
             }
           ]
         },
-        "implies": {
-          "$ref": "#/$defs/ImpliesDescriptor"
-        },
         "extends": {
           "oneOf": [
             {
               "type": "string",
-              "description": "Single supertype. Mutually exclusive with implies"
+              "description": "Single supertype"
             },
             {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "Multiple supertypes. Mutually exclusive with implies"
+              "description": "Multiple supertypes"
             }
           ]
         },
@@ -3766,24 +3780,14 @@
             "directed"
           ],
           "not": {
-            "anyOf": [
-              {
-                "required": [
-                  "implies",
-                  "extends"
-                ]
-              },
-              {
-                "required": [
-                  "adding"
-                ],
-                "not": {
-                  "required": [
-                    "extends"
-                  ]
-                }
-              }
-            ]
+            "required": [
+              "adding"
+            ],
+            "not": {
+              "required": [
+                "extends"
+              ]
+            }
           }
         }
       ],
@@ -3791,7 +3795,7 @@
     },
     "UndirectedEdgeDescriptor": {
       "type": "object",
-      "description": "Undirected edge type with between/and endpoints. Property order: between → and → via/arc/typeLabel → implies OR extends/adding → propertyTypes. NOTE: 'and' is NOT a synonym for via/arc/typeLabel",
+      "description": "Undirected edge type with between/and endpoints. Edge labels (via/arc/typeLabel) can be string or object with implies child. NOTE: 'and' is NOT a synonym for via/arc/typeLabel",
       "required": [
         "undirected"
       ],
@@ -3813,37 +3817,31 @@
               "description": "Second endpoint node type. This is NOT a synonym for via/arc/typeLabel"
             },
             "via": {
-              "type": "string",
+              "$ref": "#/$defs/EdgeLabelProperty",
               "description": "Edge label (primary). Mutually exclusive with arc and typeLabel"
             },
             "arc": {
-              "type": "string",
+              "$ref": "#/$defs/EdgeLabelProperty",
               "description": "Edge label (synonym for via). Mutually exclusive with via and typeLabel"
             },
             "typeLabel": {
-              "type": "string",
+              "$ref": "#/$defs/EdgeLabelProperty",
               "description": "Edge label (synonym for via). Mutually exclusive with via and arc"
-            },
-            "propertyTypes": {
-              "$ref": "#/$defs/PropertyTypesArray"
             }
           }
-        },
-        "implies": {
-          "$ref": "#/$defs/ImpliesDescriptor"
         },
         "extends": {
           "oneOf": [
             {
               "type": "string",
-              "description": "Single supertype. Mutually exclusive with implies"
+              "description": "Single supertype"
             },
             {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "Multiple supertypes. Mutually exclusive with implies"
+              "description": "Multiple supertypes"
             }
           ]
         },
@@ -3858,24 +3856,14 @@
             "undirected"
           ],
           "not": {
-            "anyOf": [
-              {
-                "required": [
-                  "implies",
-                  "extends"
-                ]
-              },
-              {
-                "required": [
-                  "adding"
-                ],
-                "not": {
-                  "required": [
-                    "extends"
-                  ]
-                }
-              }
-            ]
+            "required": [
+              "adding"
+            ],
+            "not": {
+              "required": [
+                "extends"
+              ]
+            }
           }
         }
       ],
