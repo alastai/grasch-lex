@@ -109,11 +109,11 @@ edgeTypes:
       directed:
         from: Person
         to: Person
-        via: KNOWS  # CORRECT: via is a string label
-      implies:  # CORRECT: implies is at edgeType level
-        propertyTypes:
-          - name: since
-            valueType: INTEGER
+        via: KNOWS  # When no implies, via is a string
+          implies:  # CORRECT: implies is a child of via
+            propertyTypes:  # CORRECT: propertyTypes is a child of implies
+            - name: since
+              valueType: INTEGER
 ```
 
 #### Issue 3: Complex Files Not Yet Addressed
@@ -212,9 +212,10 @@ edgeType:
    - Type reference: Simple string (e.g., `Person`)
    - Inline definition: Object with `nodeType:` key
 
-6. **NEW: `implies:` Structure**:
-   - `implies:` is at `edgeType` level (after `directed:`/`undirected:`)
-   - `propertyTypes:` and `labels:` are **children** of `implies:`, not siblings
+6. **CRITICAL: `implies:` Structure**:
+   - `implies:` is a **child of the edge label property** (`via:`, `arc:`, or `typeLabel:`)
+   - `propertyTypes:` and `labels:` are **children** of `implies:`
+   - This means `via:` (and synonyms) is an **object**, not a string, when `implies:` is present
 
 ## Files Requiring Updates
 
