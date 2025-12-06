@@ -2,11 +2,12 @@
 
 **Date**: 2024-12-06 (Updated)  
 **Issue**: Edge label containers must always be objects with `typeLabel:` child  
-**Status**: Ready to implement
+**Status**: Ready to implement  
+**Context**: Design iteration for clean, correct first implementation
 
 ## CRITICAL CORRECTION (2024-12-06)
 
-**Previous understanding was WRONG**: Edge labels cannot be polymorphic (string OR object) due to YAML constraints.
+**Previous understanding was incorrect**: Edge labels cannot be polymorphic (string OR object) due to YAML constraints.
 
 **Correct understanding**: 
 - Edge label containers (`via:`, `arc:`) are ALWAYS objects
@@ -142,23 +143,23 @@ edgeType:
 **Priority 1 - Simple Test Files** (6 files):
 - `test-edge-directed-via.yaml`
 - `test-edge-directed-arc.yaml`
-- `test-edge-directed-typelabel.yaml` (needs restructuring - no longer valid name)
+- `test-edge-directed-typelabel.yaml` (needs restructuring)
 - `test-edge-undirected-via.yaml`
-- `test-edge-undirected-typelabel.yaml` (needs restructuring - no longer valid name)
+- `test-edge-undirected-typelabel.yaml` (needs restructuring)
 - `test-edge-mixed-synonyms.yaml`
 
 **Changes**: 
 ```yaml
-# OLD (WRONG)
+# INCORRECT FORM
 via: KNOWS
 
-# NEW (CORRECT)
+# CORRECT FORM
 via:
   typeLabel: KNOWS
 ```
-- Convert all edge labels from string to object form
+- Update all edge labels to use object form
 - Move any `implies:` blocks to be children of edge label container
-- Change inline node types to type references where appropriate
+- Adjust inline node types to type references where appropriate
 
 **Priority 2 - Files with Properties**:
 - `test-edge-property-ordering.yaml`
@@ -167,12 +168,12 @@ via:
 
 **Changes**: 
 ```yaml
-# OLD (WRONG)
+# INCORRECT FORM
 via: KNOWS
 implies:
   propertyTypes: [...]
 
-# NEW (CORRECT)
+# CORRECT FORM
 via:
   typeLabel: KNOWS
   implies:
@@ -185,7 +186,7 @@ via:
 - `lex-2026.0.3.2-finbench-schema.yaml`
 - `lex-2026.0.3.2-finbench-sf1-graph.yaml`
 
-**Changes**: Systematic review and update
+**Changes**: Systematic update to correct structure
 
 ### Phase 3: Phase E Location 3 Files
 
@@ -194,9 +195,9 @@ via:
 - `test-phase-e-location-3-two-level.yaml`
 
 **Changes**:
-- Fix document structure issues
-- Fix edge label structure (via: as object with implies:)
-- Change inline node types to references
+- Correct document structure
+- Update edge label structure (via: as object with implies:)
+- Adjust inline node types to references
 
 ### Phase 4: Design Documentation
 
@@ -215,7 +216,7 @@ via:
 **Changes**:
 - Update all edge type examples to show object form
 - Add section explaining polymorphism is at endpoint level
-- Update synonym documentation (remove `typeLabel:` from synonyms)
+- Update synonym documentation (clarify `typeLabel:` is a child property)
 - Add note on consistency with `nodeType` pattern
 - Update property ordering rules with correct structure
 
@@ -226,7 +227,7 @@ via:
 The following activities are part of E.0.3, NOT E.0.2:
 
 1. Run schema validation on all updated files
-2. Verify Phases A-D still pass (regression test)
+2. Verify Phases A-D still pass
 3. Test Phase E Location 3 files
 4. Document any issues found
 5. Create validation scripts if needed
@@ -262,18 +263,18 @@ The following activities are part of E.0.3, NOT E.0.2:
 - [ ] Phase E Location 3 files updated
 - [ ] Complex schema files updated
 - [ ] Design documentation updated with correct examples
-- [ ] No files use old string form for edge labels
+- [ ] All files use correct object form for edge labels
 
 ## E.0.3 Success Criteria (Validation Phase)
 
-- [ ] All updated files validate against new schema
-- [ ] Phases A-D regression tests still pass
+- [ ] All updated files validate against schema
+- [ ] Phases A-D tests still pass
 - [ ] Phase E Location 3 files validate successfully
 - [ ] No validation errors in any example files
 
 ## Next Steps
 
-1. **Review this updated plan** with user
+1. **Review this plan** with user
 2. **Implement Phase 1**: JSON Schema updates
 3. **Implement Phase 2**: Example file updates (all priorities)
 4. **Implement Phase 5**: Design documentation updates
