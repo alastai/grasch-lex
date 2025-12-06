@@ -145,37 +145,40 @@ graphSchema:
       - edgeType:
           directed:
             from: Person
-            via: WORKS_FOR
             to: Company
-          implies:
-            propertyTypes:
-              - name: since
-                valueType: INTEGER
+            via:
+              typeLabel: WORKS_FOR
+              implies:
+                propertyTypes:
+                  - name: since
+                    valueType: INTEGER
       
       # Abstract edge type - using modern directed: syntax
       - abstract:
           edgeType:
             directed:
               from: Person
-              via: RELATIONSHIP
               to: Person
-            implies:
-              propertyTypes:
-                - name: since
-                  valueType: INTEGER
+              via:
+                typeLabel: RELATIONSHIP
+                implies:
+                  propertyTypes:
+                    - name: since
+                      valueType: INTEGER
       
       # Concrete edge type with explicit wrapper
       - concrete:
           edgeType:
             directed:
               from: Person
-              via: KNOWS
               to: Person
-            extends: RELATIONSHIP
-            adding:
-              propertyTypes:
-                - name: howMet
-                  valueType: STRING
+              via:
+                typeLabel: KNOWS
+                extends: RELATIONSHIP
+                adding:
+                  propertyTypes:
+                    - name: howMet
+                      valueType: STRING
       
       # Two-level wrapper on edge type - using modern undirected: syntax
       - subtypesOf:
@@ -183,25 +186,27 @@ graphSchema:
             edgeType:
               undirected:
                 between: Entity
-                via: CONNECTED_TO
                 and: Entity
-              implies:
-                propertyTypes: []
+                arc:
+                  typeLabel: CONNECTED_TO
+                  implies:
+                    propertyTypes: []
       
       # ===== EDGE TYPE COMPONENT-LEVEL WRAPPERS =====
       
-      # Wrappers on individual edge components (from, via, to)
+      # Wrappers on individual edge components (from, to, between, and)
       - edgeType:
           directed:
             from:
               abstract: Person
-            via: MANAGES
             to:
               concrete: Person
-          implies:
-            propertyTypes:
-              - name: startDate
-                valueType: DATE
+            via:
+              typeLabel: MANAGES
+              implies:
+                propertyTypes:
+                  - name: startDate
+                    valueType: DATE
       
       # Two-level wrappers on edge components
       - edgeType:
@@ -209,11 +214,12 @@ graphSchema:
             from:
               subtypesOf:
                 concrete: Person
-            via: SUPERVISES
             to:
               exactlyOf:
                 abstract: Person
-          implies:
-            propertyTypes:
-              - name: role
-                valueType: STRING
+            via:
+              typeLabel: SUPERVISES
+              implies:
+                propertyTypes:
+                  - name: role
+                    valueType: STRING

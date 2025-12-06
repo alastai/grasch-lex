@@ -1,63 +1,70 @@
 # Comprehensive Type Interpretation Wrapper Examples
 # Demonstrates all wrapper patterns and edge type component-level interpretations
 
-graphType: 
-  subtypesOf:
-    abstract: SocialNetwork
-
-propertyGraphDataModel:
-  defaults:
-    nodeLabelsAre: required
-    edgeLabelsAre: required
-
-# Array-level wrapper (Task 6.5)
-nodeTypes:
-  subtypesOf:
-    - Person          # Item in wrapped array
-    - Organization    # Item in wrapped array
-    - abstract: Entity  # Mixed: wrapped item in wrapped array (Task 6.8)
-
-# Individual item wrappers (Task 6.6)
-edgeTypes:
-  - typeLabel: KNOWS
-    directed:
-      from: Person
-      via: KNOWS
-      to: Person
+graphSchema:
+  pathName: /examples/comprehensive-wrappers
   
-  # Wrapper around entire edgeType (Task 6.9)
-  - subtypesOf:
-      abstract:
-        typeLabel: RELATIONSHIP
-        directed:
-          from:
-            subtypesOf:
-              abstract: Entity
-          via: RELATIONSHIP
-          to:
-            subtypesOf:
-              abstract: Entity
-  
-  # Component-level wrappers (Task 6.9)
-  - typeLabel: MANAGES
-    directed:
-      from:
-        exactlyOf:
-          concrete: Person
-      via:
-        exactlyOf:
-          concrete: MANAGES
-      to:
-        subtypesOf:
-          abstract: Person
-  
-  # Undirected edge with component wrappers (Task 6.9)
-  - typeLabel: FRIEND
-    undirected:
-      between:
-        subtypesOf:
-          concrete: Person
-      arc: FRIEND
-      and:
-        subtypesOf:
-          concrete: Person
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+    
+    # Individual item wrappers with mixed patterns
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+      - nodeType:
+          typeLabel: Organization
+      - abstract:
+          nodeType:
+            typeLabel: Entity
+      - subtypesOf:
+          concrete:
+            nodeType:
+              typeLabel: Company
+    
+    # Individual item wrappers (Task 6.6)
+    edgeTypes:
+      - edgeType:
+          directed:
+            from: Person
+            to: Person
+            via:
+              typeLabel: KNOWS
+      
+      # Wrapper around entire edgeType (Task 6.9)
+      - subtypesOf:
+          abstract:
+            edgeType:
+              directed:
+                from:
+                  subtypesOf:
+                    abstract: Entity
+                to:
+                  subtypesOf:
+                    abstract: Entity
+                via:
+                  typeLabel: RELATIONSHIP
+      
+      # Component-level wrappers on node type references
+      - edgeType:
+          directed:
+            from:
+              exactlyOf:
+                concrete: Person
+            to:
+              subtypesOf:
+                abstract: Person
+            via:
+              typeLabel: MANAGES
+      
+      # Undirected edge with component wrappers on node type references
+      - edgeType:
+          undirected:
+            between:
+              subtypesOf:
+                concrete: Person
+            and:
+              subtypesOf:
+                concrete: Person
+            arc:
+              typeLabel: FRIEND

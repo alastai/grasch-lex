@@ -1,37 +1,46 @@
 # Two-Level Wrapper Examples
 # Demonstrates all four valid canonical wrapper combinations
 
-graphType: ComprehensiveGraph
-
-propertyGraphDataModel:
-  defaults:
-    nodeLabelsAre: required
-    edgeLabelsAre: required
-
-nodeTypes:
-  # Combination 1: exactlyOf: concrete: (most common, default)
-  - exactlyOf:
-      concrete: ConcreteExact
+graphSchema:
+  pathName: /examples/two-level-wrappers
   
-  # Combination 2: exactlyOf: abstract: (edge case - abstract but no subtypes allowed)
-  - exactlyOf:
-      abstract: AbstractExact
-  
-  # Combination 3: subtypesOf: concrete: (concrete base with subtype matching)
-  - subtypesOf:
-      concrete: ConcreteWithSubtypes
-  
-  # Combination 4: subtypesOf: abstract: (most common for abstract base types)
-  - subtypesOf:
-      abstract: AbstractWithSubtypes
-
-edgeTypes:
-  - typeLabel: RELATIONSHIP
-    directed:
-      from:
-        subtypesOf:
-          abstract: Entity
-      via: RELATIONSHIP
-      to:
-        exactlyOf:
-          concrete: ConcreteExact
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+    
+    nodeTypes:
+      # Combination 1: exactlyOf: concrete: (most common, default)
+      - exactlyOf:
+          concrete:
+            nodeType:
+              typeLabel: ConcreteExact
+      
+      # Combination 2: exactlyOf: abstract: (edge case - abstract but no subtypes allowed)
+      - exactlyOf:
+          abstract:
+            nodeType:
+              typeLabel: AbstractExact
+      
+      # Combination 3: subtypesOf: concrete: (concrete base with subtype matching)
+      - subtypesOf:
+          concrete:
+            nodeType:
+              typeLabel: ConcreteWithSubtypes
+      
+      # Combination 4: subtypesOf: abstract: (most common for abstract base types)
+      - subtypesOf:
+          abstract:
+            nodeType:
+              typeLabel: AbstractWithSubtypes
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            from:
+              subtypesOf:
+                abstract: Entity
+            to:
+              exactlyOf:
+                concrete: ConcreteExact
+            via:
+              typeLabel: RELATIONSHIP

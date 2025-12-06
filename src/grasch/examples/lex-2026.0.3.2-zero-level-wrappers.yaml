@@ -2,20 +2,23 @@
 # Demonstrates bare type references (no wrappers)
 # Default interpretation: exactlyOf: concrete:
 
-graphType: SocialNetwork
-
-propertyGraphDataModel:
-  defaults:
-    nodeLabelsAre: required
-    edgeLabelsAre: required
-
-nodeTypes:
-  - Person  # Bare reference - defaults to exactlyOf: concrete:
-  - Company
-
-edgeTypes:
-  - typeLabel: WORKS_FOR
-    directed:
-      from: Person      # Bare reference
-      via: WORKS_FOR    # Bare reference
-      to: Company       # Bare reference
+graphSchema:
+  pathName: /examples/zero-level-wrappers
+  
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person  # Bare reference - defaults to exactlyOf: concrete:
+      - nodeType:
+          typeLabel: Company
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            from: Person      # Bare reference
+            to: Company       # Bare reference
+            via:
+              typeLabel: WORKS_FOR    # Edge label as object with typeLabel child
