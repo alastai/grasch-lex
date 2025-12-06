@@ -37,7 +37,11 @@ Fix EdgeTypesProperty to support sibling TI-wrapped properties
 - [ ] 10.1 Abandon pattern properties for sibling TI behavior
   - Replace `patternProperties` with explicit properties (without oneOf) wherever we need sibling TI behavior
   - Use explicit properties: `concrete:`, `abstract:`, `sealed:`, `final:` as siblings to content properties
-  - Where we want to permit a single TI wrapper (e.g., around `graphType` in GraphSchemaContent), use oneOf
+  - Where we want to permit a single TI wrapper, use oneOf:
+    - **Location 1**: Around `graphType` in GraphSchemaContent (single graphType property)
+    - **Location 6**: Around individual `nodeType` content (Phases A-D, already complete ✅)
+    - **Location 7**: Around individual `edgeType` content (Phases A-D, already complete ✅)
+    - **Location 8**: Around endpoint `nodeType` references in edgeTypes (Phases C-D, already complete ✅)
   - Support all TI levels:
     - **0-level**: Direct specification (e.g., bare `nodeTypes:` or `edgeTypes:`)
     - **1-level**: Concreteness facets (`abstract:`, `concrete:`, `sealed:`, `final:`)
@@ -198,6 +202,29 @@ Use `oneOf` to allow exactly one option:
 
 ---
 
+## Location Number Verification
+
+Based on the tasks.md file and Phase structure:
+
+**Locations Using Single TI Wrapper (oneOf pattern)**:
+- **Location 1**: GraphSchemaContent → `graphType` property (wraps the entire graphType object)
+- **Location 6**: Individual NodeType content (Phase A ✅ Complete)
+- **Location 7**: Individual EdgeType content (Phase B ✅ Complete)
+- **Location 8**: Endpoint NodeType references in directed edges (Phase C ✅ Complete)
+- **Location 9**: Endpoint NodeType references in undirected edges (Phase D ✅ Complete)
+
+**Locations Using Sibling TI Wrappers (explicit properties without oneOf)**:
+- **Location 2**: NodeTypesProperty at GraphType level (Phase E - this spec)
+- **Location 3**: EdgeTypesProperty at GraphType level (Phase E - this spec)
+- **Location 4**: NodeTypeItem within nodeTypes array (Phase E - this spec)
+- **Location 5**: EdgeTypeItem within edgeTypes array (Phase E - this spec)
+
+**Status Confirmation**:
+- ✅ Locations 6, 7, 8, 9 are already complete from Phases A-D
+- 🔄 Locations 1, 2, 3, 4, 5 are part of Phase E (current spec)
+- ✅ Location 1 was verified as already working correctly (no changes needed)
+- 🔄 Locations 2-5 need fixes (this spec's focus)
+
 ## Summary of Approach
 
 ### For Sibling TI Behavior (Locations 2-7 at GraphType level):
@@ -206,11 +233,21 @@ Use `oneOf` to allow exactly one option:
 - These can coexist as siblings with bare properties (`nodeTypes:`, `edgeTypes:`)
 - Example: `graphType: { nodeTypes: [...], concrete: { edgeTypes: [...] } }`
 
-### For Single TI Wrapper (Location 1 - GraphSchemaContent):
+### For Single TI Wrapper (Locations 1, 6, 7, 8):
 - **Use oneOf to allow exactly one option**
-- Options: bare `graphType:` OR `concrete: { graphType: ... }` OR `abstract: { graphType: ... }` etc.
-- Only ONE can be present at a time
-- Example: `graphSchema: { pathName: /x, concrete: { graphType: {...} } }`
+- **Location 1** (GraphSchemaContent): Around `graphType` property
+  - Options: bare `graphType:` OR `concrete: { graphType: ... }` OR `abstract: { graphType: ... }` etc.
+  - Only ONE can be present at a time
+  - Example: `graphSchema: { pathName: /x, concrete: { graphType: {...} } }`
+- **Location 6** (Individual NodeType): Around single nodeType content (✅ Already complete - Phases A-D)
+  - Options: bare `nodeType:` OR `concrete: { nodeType: ... }` OR `abstract: { nodeType: ... }` etc.
+  - Example: `nodeTypes: [{ concrete: { nodeType: { typeLabel: Person, ... } } }]`
+- **Location 7** (Individual EdgeType): Around single edgeType content (✅ Already complete - Phases A-D)
+  - Options: bare `edgeType:` OR `concrete: { edgeType: ... }` OR `abstract: { edgeType: ... }` etc.
+  - Example: `edgeTypes: [{ concrete: { edgeType: { directed: {...}, ... } } }]`
+- **Location 8** (Endpoint NodeType): Around endpoint nodeType references (✅ Already complete - Phases C-D)
+  - Options: bare `nodeType:` OR `concrete: { nodeType: ... }` OR `abstract: { nodeType: ... }` etc.
+  - Example: `from: { concrete: { nodeType: { typeLabel: Person } } }`
 
 ### Shorthand Semantics:
 - `abstract:` = `properSubtypesOf: { abstract: ... }`
@@ -218,8 +255,49 @@ Use `oneOf` to allow exactly one option:
 
 ---
 
+## Design Note: Double Wrapping and TI Override (Future - Canonicalization Phase)
+
+**Context**: At every location where TI wrappers are permitted, the schema will allow "double wrapping" where TI wrappers can be nested.
+
+**Example of Double Wrapping**:
+```yaml
+subtypesOf:
+  abstract:
+    exactlyOf:
+      concrete:
+        nodeType:
+          typeLabel: Person
+```
+
+**Semantics**:
+- When double wrapping occurs, the **outer TI wrapper overrides the inner TI wrapper**
+- In the example above, `subtypesOf: abstract:` overrides `exactlyOf: concrete:`
+- The effective interpretation is `subtypesOf` with `abstract` concreteness
+
+**Purpose**:
+- This supports **importation of definitions that include TI wrappers**
+- When importing a type definition that already has a TI wrapper, you can wrap it with a different TI to override the imported interpretation
+- Example: Import a `concrete` type but use it as `abstract` in your schema
+
+**Canonicalization**:
+- This is **not normal behavior** and would never appear in a canonicalized YAML document
+- During canonicalization, the inner TI wrapper would be removed, leaving only the outer (effective) wrapper
+- Canonical form: `subtypesOf: { abstract: { nodeType: { typeLabel: Person } } }`
+
+**Implementation Status**:
+- ⏸️ **Deferred to Phase H (Canonicalization)**
+- No implementation required at this stage (Phase E)
+- The schema will naturally permit this structure (it won't explicitly prevent nested TI wrappers)
+- Canonicalization logic will handle the override semantics and simplification
+
+**Applies To**:
+- All locations where TI wrappers are permitted (Locations 1-9)
+- Both single TI wrapper locations (1, 6, 7, 8, 9) and sibling TI wrapper locations (2, 3, 4, 5)
+
+---
+
 ## Files to Update
 
 1. `.kiro/specs/ti-ordering-refactor/tasks.md` - Add subtask 10.1
-2. `.kiro/specs/ti-ordering-refactor/design.md` - Add shorthand semantics section and update architecture section
+2. `.kiro/specs/ti-ordering-refactor/design.md` - Add shorthand semantics section, update architecture section, and add double wrapping design note
 
