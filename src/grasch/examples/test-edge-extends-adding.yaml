@@ -1,0 +1,53 @@
+# Test: Edge type using extends:/adding: pattern
+# Expected: PASS - Demonstrates subtyping with extends and adding
+
+graphSchema:
+  pathName: /test/edge-extends-adding
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      # Base edge type
+      - edgeType:
+          directed:
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+            via: KNOWS
+      
+      # Extended edge type with extends only
+      - edgeType:
+          directed:
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+            via: KNOWS_WELL
+            extends: KNOWS
+      
+      # Extended edge type with extends and adding
+      - edgeType:
+          directed:
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+            via: KNOWS_SINCE
+            extends: KNOWS
+            adding:
+              propertyTypes:
+                - propertyType:
+                    propertyName: since
+                    valueType: DATE

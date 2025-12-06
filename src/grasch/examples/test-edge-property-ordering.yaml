@@ -1,0 +1,55 @@
+# Test: Edge type demonstrating correct property ordering
+# Expected: PASS - Shows required property order with comments
+
+graphSchema:
+  pathName: /test/edge-property-ordering
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      # Directed edge with full property ordering
+      # Order: from → to → via → subtyping → propertyTypes
+      - edgeType:
+          directed:
+            # Step 1: Source endpoint
+            from:
+              nodeType:
+                typeLabel: Person
+            # Step 2: Destination endpoint
+            to:
+              nodeType:
+                typeLabel: Person
+            # Step 3: Edge label
+            via: KNOWS
+            # Step 4: Subtyping (optional)
+            extends: RELATIONSHIP
+            # Step 5: Property types (optional)
+            propertyTypes:
+              - propertyType:
+                  propertyName: since
+                  valueType: DATE
+      
+      # Undirected edge with full property ordering
+      # Order: between → and → via → subtyping → propertyTypes
+      - edgeType:
+          undirected:
+            # Step 1: First endpoint
+            between:
+              nodeType:
+                typeLabel: Person
+            # Step 2: Second endpoint (required for undirected)
+            and:
+              nodeType:
+                typeLabel: Person
+            # Step 3: Edge label
+            via: FRIENDS_WITH
+            # Step 4: Property types (optional)
+            propertyTypes:
+              - propertyType:
+                  propertyName: since
+                  valueType: DATE

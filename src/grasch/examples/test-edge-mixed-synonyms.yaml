@@ -15,54 +15,34 @@ graphSchema:
       # Directed with via (preferred)
       - edgeType:
           directed:
+            from: Person
+            to: Person
             via: KNOWS
-            from:
-              nodeType:
-                typeLabel: Person
-            to:
-              nodeType:
-                typeLabel: Person
       
       # Directed with arc (synonym)
       - edgeType:
           directed:
+            from: Person
+            to: Person
             arc: FOLLOWS
-            from:
-              nodeType:
-                typeLabel: Person
-            to:
-              nodeType:
-                typeLabel: Person
       
       # Directed with typeLabel (generic)
       - edgeType:
           directed:
+            from: Person
+            to: Person
             typeLabel: LIKES
-            from:
-              nodeType:
-                typeLabel: Person
-            to:
-              nodeType:
-                typeLabel: Person
       
       # Undirected with via (current usage)
       - edgeType:
           undirected:
+            between: Person
+            and: Person
             via: FRIENDS_WITH
-            between:
-              nodeType:
-                typeLabel: Person
-            and:
-              nodeType:
-                typeLabel: Person
       
       # Undirected with typeLabel (generic)
       - edgeType:
           undirected:
+            between: Person
+            and: Person
             typeLabel: COLLEAGUES_WITH
-            between:
-              nodeType:
-                typeLabel: Person
-            and:
-              nodeType:
-                typeLabel: Person

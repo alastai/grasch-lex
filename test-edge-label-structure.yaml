@@ -1,0 +1,30 @@
+# Test file for new edge label structure
+# Testing both string and object forms
+
+graphSchema:
+  pathName: /test/edge-label-structure
+  graphType:
+    propertyGraphDataModel:
+      import: defaults/property-graph-data-model.yaml
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    edgeTypes:
+      # Test 1: Simple string label (no properties)
+      - edgeType:
+          directed:
+            from: Person
+            to: Person
+            via: KNOWS
+      
+      # Test 2: Object label with implies and properties
+      # Question: How do we specify the label value (FRIENDS_WITH) when via is an object?
+      - edgeType:
+          directed:
+            from: Person
+            to: Person
+            via:
+              implies:
+                propertyTypes:
+                - name: since
+                  valueType: DATE

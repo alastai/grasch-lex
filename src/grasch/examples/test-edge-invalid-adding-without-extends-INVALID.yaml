@@ -1,0 +1,29 @@
+# Test: INVALID - adding without extends
+# Expected: FAIL - adding requires extends to be present
+
+graphSchema:
+  pathName: /test/edge-invalid-adding-without-extends
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+            via: KNOWS
+            # ERROR: Cannot have adding without extends
+            adding:
+              propertyTypes:
+                - propertyType:
+                    propertyName: since
+                    valueType: DATE

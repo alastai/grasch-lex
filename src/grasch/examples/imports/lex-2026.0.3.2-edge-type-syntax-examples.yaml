@@ -2,6 +2,14 @@
 # Comprehensive demonstration of all edge type syntax variations
 # Note: This file defines only edgeTypes and can be imported into graph types
 # Node types are defined in lex-2026.0.3.2-node-type-syntax-examples.yaml
+#
+# PROPERTY ORDERING (REQUIRED):
+#   Directed edges:   from → to → via/arc/typeLabel → extends/implies → propertyTypes
+#   Undirected edges: between → and → via/arc/typeLabel → extends/implies → propertyTypes
+#
+# SIMPLIFICATION: This file uses type references (e.g., from: Person) rather than
+# inline nodeType definitions for clarity and realism. Inline definitions are shown
+# only where necessary for demonstration purposes.
 
 edgeTypes:
   # ========================================

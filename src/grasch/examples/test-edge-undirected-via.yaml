@@ -14,10 +14,6 @@ graphSchema:
     edgeTypes:
       - edgeType:
           undirected:
+            between: Person
+            and: Person
             via: FRIENDS_WITH
-            between:
-              nodeType:
-                typeLabel: Person
-            and:
-              nodeType:
-                typeLabel: Person

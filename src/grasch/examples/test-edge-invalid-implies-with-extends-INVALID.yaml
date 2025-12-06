@@ -1,0 +1,26 @@
+# Test: INVALID - implies mixed with extends
+# Expected: FAIL - Cannot have both implies and extends
+
+graphSchema:
+  pathName: /test/edge-invalid-implies-with-extends
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+            via: KNOWS
+            # ERROR: Cannot have both implies and extends
+            implies: RELATIONSHIP
+            extends: SOCIAL_LINK

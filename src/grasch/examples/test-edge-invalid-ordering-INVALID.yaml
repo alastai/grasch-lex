@@ -1,0 +1,28 @@
+# Test: INVALID - Incorrect property ordering
+# Expected: FAIL - propertyTypes should come after via, not before
+
+graphSchema:
+  pathName: /test/edge-invalid-ordering
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            from:
+              nodeType:
+                typeLabel: Person
+            to:
+              nodeType:
+                typeLabel: Person
+            # ERROR: propertyTypes should come AFTER via
+            propertyTypes:
+              - propertyType:
+                  propertyName: since
+                  valueType: DATE
+            via: KNOWS

@@ -8,9 +8,9 @@ This validation uses the single LEX-2026.0.3.2 schema which validates both:
 
 **Total files tested:** 14
 
-**Valid:** 14
+**Valid:** 12
 
-**Invalid:** 0
+**Invalid:** 2
 
 **Pre-canonical files:** 12
 
@@ -19,8 +19,6 @@ This validation uses the single LEX-2026.0.3.2 schema which validates both:
 ## ✅ Valid Files
 
 - lex-2026.0.3.2-minimal-test.yaml
-  - Pre-canonical validation: **passed**
-- lex-2026.0.3.2-all-import-patterns.yaml
   - Pre-canonical validation: **passed**
 - lex-2026.0.3.2-complete-import-example.yaml
   - Pre-canonical validation: **passed**
@@ -44,6 +42,14 @@ This validation uses the single LEX-2026.0.3.2 schema which validates both:
   - Pre-canonical validation: **passed**
 - lex-2026.0.3.2-subtype-abstract-test.yaml
   - Pre-canonical validation: **passed**
-- lex-2026.0.3.2-type-definition-syntax-examples.yaml
-  - Pre-canonical validation: **passed**
+
+## ❌ Invalid Files
+
+### lex-2026.0.3.2-all-import-patterns.yaml
+
+  Path:  - {'graphSchema': {'pathName': '/examples/all-import-patterns', 'graphType': {'propertyGraphDataModel': {'import': 'imports/lex-2026.0.3.2-property-graph-data-model.yaml'}, 'nodeTypes': {'import': 'imports/lex-2026.0.3.2-node-type-syntax-examples.yaml'}, 'edgeTypes': {'import': 'imports/lex-2026.0.3.2-edge-type-syntax-examples.yaml'}}}} is not valid under any of the given schemas
+
+### lex-2026.0.3.2-type-definition-syntax-examples.yaml
+
+  Path:  - {'graphSchema': {'pathName': '/examples/type-definition-syntax', 'graphType': {'propertyGraphDataModel': {'import': 'imports/lex-2026.0.3.2-property-graph-data-model.yaml'}, 'nodeTypes': {'import': 'imports/lex-2026.0.3.2-node-type-syntax-examples.yaml'}, 'edgeTypes': {'import': 'imports/lex-2026.0.3.2-edge-type-syntax-examples.yaml'}}}} is not valid under any of the given schemas
 

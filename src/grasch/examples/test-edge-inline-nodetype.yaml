@@ -1,0 +1,47 @@
+# Test: Edge type with inline node type definitions at endpoints
+# Expected: PASS - Demonstrates inline nodeType definitions
+
+graphSchema:
+  pathName: /test/edge-inline-nodetype
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    edgeTypes:
+      # Directed edge with inline node type definitions
+      - edgeType:
+          directed:
+            from:
+              nodeType:
+                typeLabel: Person
+                propertyTypes:
+                  - propertyType:
+                      propertyName: name
+                      valueType: STRING
+            to:
+              nodeType:
+                typeLabel: Organization
+                propertyTypes:
+                  - propertyType:
+                      propertyName: name
+                      valueType: STRING
+            via: WORKS_FOR
+      
+      # Undirected edge with inline node type definitions
+      - edgeType:
+          undirected:
+            between:
+              nodeType:
+                typeLabel: Person
+                propertyTypes:
+                  - propertyType:
+                      propertyName: name
+                      valueType: STRING
+            and:
+              nodeType:
+                typeLabel: Person
+                propertyTypes:
+                  - propertyType:
+                      propertyName: name
+                      valueType: STRING
+            via: FRIENDS_WITH

@@ -232,6 +232,49 @@ Phase 2 fixes **7 broken locations** identified during analysis. Location 8 is a
 **Semantics**: Wraps a single edgeType definition  
 **Phase 2 Task**: Fix this location
 
+### Edge Label Container Structure (E02 Integration)
+
+**Critical Prerequisite**: Before implementing TI wrappers at Locations 3, 5, and 7, edge label containers must be corrected.
+
+**Current Issue**: Edge label containers (`via:`, `arc:`) are incorrectly defined as polymorphic (string OR object).
+
+**Correct Structure**: Edge label containers are ALWAYS objects with `typeLabel:` as required child property.
+
+**Pattern 1 - Simple Edge (No Properties)**:
+```yaml
+via:
+  typeLabel: KNOWS  # Required child of via
+```
+
+**Pattern 2 - Edge with Properties**:
+```yaml
+via:
+  typeLabel: KNOWS  # Required child
+  implies:          # Sibling to typeLabel
+    propertyTypes:
+      - name: since
+        valueType: INTEGER
+```
+
+**Pattern 3 - Edge with Subtyping**:
+```yaml
+via:
+  typeLabel: KNOWS
+  extends: RELATIONSHIP  # Sibling to typeLabel
+  adding:                # Sibling to extends
+    propertyTypes:
+      - name: since
+        valueType: INTEGER
+```
+
+**Schema Changes Required**:
+1. Redefine `via:` and `arc:` as ALWAYS objects (not oneOf string/object)
+2. Make `typeLabel:` a REQUIRED child property
+3. Remove `typeLabel:` from synonym group (it's now a child property only)
+4. Move `implies:`, `extends:`, `adding:` to be children of edge label container
+
+**Rationale**: This makes edge label containers consistent with `nodeType` pattern (always an object with `typeLabel:` child).
+
 ### Test File Updates
 
 Test YAML files currently use wrong-order syntax because they were written for the broken schema. After fixing the schema, these files must be updated:
