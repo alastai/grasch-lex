@@ -1,8 +1,18 @@
-# E.0.2 - Comprehensive Fix Plan: Edge Label Structure with `implies:`
+# E.0.2 - Comprehensive Fix Plan: Edge Label Structure (REVISED)
 
-**Date**: 2024-12-04  
-**Issue**: Edge label properties must support both string and object forms  
+**Date**: 2024-12-06 (Updated)  
+**Issue**: Edge label containers must always be objects with `typeLabel:` child  
 **Status**: Ready to implement
+
+## CRITICAL CORRECTION (2024-12-06)
+
+**Previous understanding was WRONG**: Edge labels cannot be polymorphic (string OR object) due to YAML constraints.
+
+**Correct understanding**: 
+- Edge label containers (`via:`, `arc:`) are ALWAYS objects
+- `typeLabel:` is a REQUIRED child property (not a synonym)
+- Polymorphism is at the ENDPOINT level (string reference OR inline nodeType)
+- This makes the pattern consistent with `nodeType`
 
 ## Confirmed Correct Structure
 
@@ -10,9 +20,10 @@
 ```yaml
 edgeType:
   directed:
-    from: Person
+    from: Person  # Polymorphic endpoint: string reference
     to: Person
-    via: KNOWS  # String - simple label
+    via:
+      typeLabel: KNOWS  # Required child of via
 ```
 
 ### Pattern 2: Edge with Properties
@@ -21,11 +32,48 @@ edgeType:
   directed:
     from: Person
     to: Person
-    via: KNOWS  # Label value
-      implies:  # Child of via:
-        propertyTypes:  # Child of implies:
+    via:
+      typeLabel: KNOWS  # Required child
+      implies:          # Sibling to typeLabel
+        propertyTypes:  # Child of implies
         - name: since
           valueType: INTEGER
+```
+
+### Pattern 3: Edge with Subtyping
+```yaml
+edgeType:
+  directed:
+    from: Person
+    to: Person
+    via:
+      typeLabel: KNOWS
+      extends: RELATIONSHIP  # Sibling to typeLabel
+      adding:                # Sibling to extends
+        propertyTypes:
+          - name: since
+            valueType: INTEGER
+```
+
+### Pattern 4: Polymorphic Endpoint (Inline NodeType)
+```yaml
+edgeType:
+  directed:
+    from: Person  # String reference
+    to:           # Inline definition (polymorphic endpoint)
+      nodeType:
+        typeLabel: Cat
+        extends: DomesticAnimal
+        adding:
+          propertyTypes:
+            - name: CatRegistryChipNumber
+              valueType: STRING
+    via:
+      typeLabel: OWNER
+      implies:
+        propertyTypes:
+          - name: since
+            valueType: INTEGER
 ```
 
 ## Implementation Plan
@@ -36,59 +84,100 @@ edgeType:
 
 **Changes Required**:
 
-1. **Redefine edge label properties** (`via:`, `arc:`, `typeLabel:`):
+1. **Redefine edge label containers** (`via:`, `arc:`) as ALWAYS objects:
    ```json
    "via": {
+     "type": "object",
+     "description": "Edge label container (always an object)",
+     "properties": {
+       "typeLabel": {
+         "type": "string",
+         "description": "The edge label value (REQUIRED)"
+       },
+       "implies": {
+         "$ref": "#/$defs/ImpliesPattern"
+       },
+       "extends": {
+         "type": "string"
+       },
+       "adding": {
+         "$ref": "#/$defs/AddingPattern"
+       }
+     },
+     "required": ["typeLabel"],
+     "additionalProperties": false
+   }
+   ```
+
+2. **Apply same pattern to `arc:`** (synonym of `via:`)
+
+3. **Remove `typeLabel:` as a synonym** - it's now a CHILD property only
+
+4. **Define polymorphic endpoints**:
+   ```json
+   "EndpointReference": {
      "oneOf": [
        {
          "type": "string",
-         "description": "Simple edge label"
+         "description": "Reference to existing nodeType by label"
        },
        {
          "type": "object",
-         "description": "Edge label with properties",
+         "description": "Inline nodeType definition",
          "properties": {
-           "implies": {
-             "type": "object",
-             "properties": {
-               "labels": {...},
-               "propertyTypes": {...}
-             }
+           "nodeType": {
+             "$ref": "#/$defs/NodeTypeContent"
            }
          },
-         "required": ["implies"]
+         "required": ["nodeType"]
        }
      ]
    }
    ```
 
-2. **Apply same pattern to synonyms**: `arc:`, `typeLabel:`
-
-3. **Update `extends:`/`adding:` pattern** to work with this structure
-
-4. **Remove old `implies:` at `edgeType` level** (it's now under edge label)
+5. **Remove old `implies:` at `edgeType` level** (it's now under edge label container)
 
 ### Phase 2: Example File Updates
 
 **Priority 1 - Simple Test Files** (6 files):
 - `test-edge-directed-via.yaml`
 - `test-edge-directed-arc.yaml`
-- `test-edge-directed-typelabel.yaml`
+- `test-edge-directed-typelabel.yaml` (needs restructuring - no longer valid name)
 - `test-edge-undirected-via.yaml`
-- `test-edge-undirected-typelabel.yaml`
+- `test-edge-undirected-typelabel.yaml` (needs restructuring - no longer valid name)
 - `test-edge-mixed-synonyms.yaml`
 
 **Changes**: 
-- Keep simple edges as strings
-- Move any `implies:` blocks to be children of edge label property
-- Change inline node types to type references
+```yaml
+# OLD (WRONG)
+via: KNOWS
 
-**Priority 2 - New Test Files** (created in Phase 2):
+# NEW (CORRECT)
+via:
+  typeLabel: KNOWS
+```
+- Convert all edge labels from string to object form
+- Move any `implies:` blocks to be children of edge label container
+- Change inline node types to type references where appropriate
+
+**Priority 2 - Files with Properties**:
 - `test-edge-property-ordering.yaml`
 - `test-edge-extends-adding.yaml`
-- Others created recently
+- Any files with `implies:` or `extends:`/`adding:`
 
-**Changes**: Update to new structure
+**Changes**: 
+```yaml
+# OLD (WRONG)
+via: KNOWS
+implies:
+  propertyTypes: [...]
+
+# NEW (CORRECT)
+via:
+  typeLabel: KNOWS
+  implies:
+    propertyTypes: [...]
+```
 
 **Priority 3 - Complex Files**:
 - `imports/lex-2026.0.3.2-edge-type-syntax-examples.yaml` (~50+ edges)
@@ -119,12 +208,28 @@ edgeType:
 - Clarify `implies:` is child of edge label
 - Update property ordering rules
 
-### Phase 5: Validation & Testing
+### Phase 5: Design Documentation Updates
+
+**File**: `.kiro/specs/property-graph-schema/design.md`
+
+**Changes**:
+- Update all edge type examples to show object form
+- Add section explaining polymorphism is at endpoint level
+- Update synonym documentation (remove `typeLabel:` from synonyms)
+- Add note on consistency with `nodeType` pattern
+- Update property ordering rules with correct structure
+
+---
+
+## E.0.3 Scope (Validation & Testing)
+
+The following activities are part of E.0.3, NOT E.0.2:
 
 1. Run schema validation on all updated files
 2. Verify Phases A-D still pass (regression test)
 3. Test Phase E Location 3 files
 4. Document any issues found
+5. Create validation scripts if needed
 
 ## Execution Order
 
@@ -135,26 +240,42 @@ edgeType:
 5. **Complex files** - Systematic updates
 6. **Final validation** - Ensure everything passes
 
-## Key Points
+## Key Architectural Principles
 
-- Edge label properties are **polymorphic**: string OR object
-- When object form is used, `implies:` is **required** child
-- `propertyTypes:` and `labels:` are children of `implies:`
-- This is a **major structural change** from previous understanding
-- ALL files with edge types need review
+1. **Consistent Container Pattern**: Both `nodeType` and edge label containers (`via:`, `arc:`) follow the same pattern - always objects with `typeLabel:` as required child
 
-## Success Criteria
+2. **Polymorphism at Endpoint Level**: Endpoints can be string references OR inline `nodeType` objects
 
-- [ ] JSON Schema correctly defines polymorphic edge label properties
-- [ ] All simple test files validate successfully
-- [ ] Phase E Location 3 files validate successfully
-- [ ] Design documentation shows correct structure
+3. **Edge Label Containers are NOT Polymorphic**: `via:` and `arc:` are ALWAYS objects, NEVER strings
+
+4. **Synonym Groups (Revised)**:
+   - Edge label containers: `via:`, `arc:` (mutually exclusive)
+   - `typeLabel:` is a CHILD property, NOT a synonym
+   - Endpoint synonyms still valid: `from:`/`src:`/`source:`/`tail:` and `to:`/`dst:`/`dest:`/`destination:`/`head:`
+
+## E.0.2 Success Criteria
+
+- [ ] JSON Schema correctly defines edge label containers as objects with required `typeLabel:`
+- [ ] JSON Schema defines polymorphic endpoints (string OR inline object)
+- [ ] All simple test files updated to use object form
+- [ ] All files with properties updated (`implies:`, `extends:`/`adding:`)
+- [ ] Phase E Location 3 files updated
+- [ ] Complex schema files updated
+- [ ] Design documentation updated with correct examples
+- [ ] No files use old string form for edge labels
+
+## E.0.3 Success Criteria (Validation Phase)
+
+- [ ] All updated files validate against new schema
 - [ ] Phases A-D regression tests still pass
-- [ ] Complex files updated and validated
+- [ ] Phase E Location 3 files validate successfully
+- [ ] No validation errors in any example files
 
-## Next Step
+## Next Steps
 
-**START WITH**: JSON Schema updates (Phase 1)
-
-This is the foundation - nothing else can be fixed until the schema is correct.
+1. **Review this updated plan** with user
+2. **Implement Phase 1**: JSON Schema updates
+3. **Implement Phase 2**: Example file updates (all priorities)
+4. **Implement Phase 5**: Design documentation updates
+5. **Move to E.0.3**: Validation and testing
 
