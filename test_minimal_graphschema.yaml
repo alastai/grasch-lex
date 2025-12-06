@@ -1,0 +1,8 @@
+graphSchema:
+  pathName: /test/minimal
+  graphType:
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            labels: [Person]
