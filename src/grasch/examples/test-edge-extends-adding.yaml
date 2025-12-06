@@ -15,39 +15,29 @@ graphSchema:
       # Base edge type
       - edgeType:
           directed:
-            from:
-              nodeType:
-                typeLabel: Person
-            to:
-              nodeType:
-                typeLabel: Person
-            via: KNOWS
+            from: Person
+            to: Person
+            via:
+              typeLabel: KNOWS
       
       # Extended edge type with extends only
       - edgeType:
           directed:
-            from:
-              nodeType:
-                typeLabel: Person
-            to:
-              nodeType:
-                typeLabel: Person
-            via: KNOWS_WELL
-            extends: KNOWS
+            from: Person
+            to: Person
+            via:
+              typeLabel: KNOWS_WELL
+              extends: KNOWS
       
       # Extended edge type with extends and adding
       - edgeType:
           directed:
-            from:
-              nodeType:
-                typeLabel: Person
-            to:
-              nodeType:
-                typeLabel: Person
-            via: KNOWS_SINCE
-            extends: KNOWS
-            adding:
-              propertyTypes:
-                - propertyType:
-                    propertyName: since
+            from: Person
+            to: Person
+            via:
+              typeLabel: KNOWS_SINCE
+              extends: KNOWS
+              adding:
+                propertyTypes:
+                  - name: since
                     valueType: DATE

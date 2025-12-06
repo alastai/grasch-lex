@@ -16,4 +16,5 @@ graphSchema:
           directed:
             from: Person
             to: Person
-            via: KNOWS
+            via:
+              typeLabel: KNOWS

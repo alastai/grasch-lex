@@ -17,32 +17,37 @@ graphSchema:
           directed:
             from: Person
             to: Person
-            via: KNOWS
+            via:
+              typeLabel: KNOWS
       
       # Directed with arc (synonym)
       - edgeType:
           directed:
             from: Person
             to: Person
-            arc: FOLLOWS
+            arc:
+              typeLabel: FOLLOWS
       
       # Directed with typeLabel (generic)
       - edgeType:
           directed:
             from: Person
             to: Person
-            typeLabel: LIKES
+            typeLabel:
+              typeLabel: LIKES
       
       # Undirected with via (current usage)
       - edgeType:
           undirected:
             between: Person
             and: Person
-            via: FRIENDS_WITH
+            via:
+              typeLabel: FRIENDS_WITH
       
       # Undirected with typeLabel (generic)
       - edgeType:
           undirected:
             between: Person
             and: Person
-            typeLabel: COLLEAGUES_WITH
+            typeLabel:
+              typeLabel: COLLEAGUES_WITH

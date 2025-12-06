@@ -16,4 +16,5 @@ graphSchema:
           undirected:
             between: Person
             and: Person
-            via: FRIENDS_WITH
+            via:
+              typeLabel: FRIENDS_WITH

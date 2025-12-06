@@ -26,9 +26,8 @@ graphSchema:
               extends: RELATIONSHIP
               implies:
                 propertyTypes:
-                  - propertyType:
-                      propertyName: since
-                      valueType: DATE
+                  - name: since
+                    valueType: DATE
       
       # Undirected edge with full property ordering
       # Order: between → and → via (with typeLabel and implies)
@@ -43,6 +42,5 @@ graphSchema:
               typeLabel: FRIENDS_WITH
               implies:
                 propertyTypes:
-                  - propertyType:
-                      propertyName: since
-                      valueType: DATE
+                  - name: since
+                    valueType: DATE
