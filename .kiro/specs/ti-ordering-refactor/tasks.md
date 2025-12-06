@@ -94,9 +94,11 @@ Backup the original schema before making changes
 
 **Reference Pattern**: GraphType's `patternProperties` implementation (lines 433-800 in schema) is the CORRECT pattern. Use this as the reference for all fixes.
 
-### - [ ] 4. Fix Edge Label Container Structure (E02 - PREREQUISITE)
+### - [x] 4. Fix Edge Label Container Structure (E02 - PREREQUISITE) ✅ COMPLETE
 
 **CRITICAL**: Must complete BEFORE Locations 3, 5, 7 (which involve edge types)
+
+**Completed**: Changed EdgeLabelProperty from polymorphic to always-object form with required `typeLabel:` child. Moved `extends:`/`adding:` from edgeType level to edge label container level. JSON schema validated successfully.
 
 Correct edge label containers to always be objects with `typeLabel:` child
 
@@ -138,7 +140,9 @@ Add TI wrapper support to GraphSchemaContent (wraps the graphType property)
 - Validate JSON syntax
 - _Requirements: 1.1, 2.1, 9.1_
 
-### - [ ] 6. Test Edge Label Container Fix (E02)
+### - [x] 6. Test Edge Label Container Fix (E02) ✅ COMPLETE
+
+**Completed**: Updated all 8 test files to use object form with `typeLabel:` child. Simplified endpoints to use string references. All files pass validation.
 
 Validate that edge label container fix works correctly
 
