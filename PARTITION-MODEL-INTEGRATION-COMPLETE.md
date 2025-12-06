@@ -5,127 +5,131 @@
 
 ## Summary
 
-Successfully integrated the partition model clarification into the TI ordering refactor spec documents, replacing nesting concepts with partition concepts.
+Successfully integrated the partition model clarification and proposed design updates into the TI ordering refactor specification documents.
 
 ## Changes Made
 
-### 1. `.kiro/specs/ti-ordering-refactor/design.md`
+### 1. Updated `.kiro/specs/ti-ordering-refactor/design.md`
 
-#### Added: Partition Model Section
-- New section "Partition Model for Array-Level TIs" after "Three-Level TI System"
-- Explains partition structure with clear examples
-- Distinguishes three concepts: Collection (Location 2), Partition Block (Location 4), Single Type (Location 6)
-- Clarifies partition vs nesting (partition is our model, nesting is NOT)
+#### Added Shorthand Semantics Section
+- Documented that `abstract:` is shorthand for `properSubtypesOf: { abstract: ... }`
+- Documented that `concrete:` is shorthand for `exactlyOf: { concrete: ... }`
+- Placed after "Three-Level TI System" section in Architecture
 
-#### Updated: Location 4 Description
-**Before**: "Restructure array item schema to support TI wrappers as partition blocks"  
-**After**: "Allow array items to be either bare types OR partition blocks (TI-wrapped subsequences)"  
-**Added**: "Key Distinction: A partition block (subsequence) is NOT the same as a single type (Location 6)"
+#### Enhanced Partition Model Section
+- Added "Sibling Collections at GraphType Level" subsection
+- Clarified that multiple collections can be siblings: `nodeTypes:`, `edgeTypes:`, etc.
+- Provided example showing sibling collections with different TI wrappers
 
-#### Updated: Location 5 Description
-**Before**: "Restructure array item schema to support TI wrappers as partition blocks"  
-**After**: "Allow array items to be either bare types OR partition blocks (TI-wrapped subsequences)"  
-**Added**: "Key Distinction: A partition block (subsequence) is NOT the same as a single type (Location 7)"
+#### Updated Core Pattern Section
+- Replaced "Core Pattern (from Location 1 - GraphType)" with "Core Pattern: Explicit Properties Without OneOf"
+- Added rationale for using explicit properties instead of pattern properties
+- Provided detailed JSON Schema examples for both sibling TI wrappers and single TI wrappers
+- Documented supported TI levels (0-level, 1-level, 2-level)
 
-#### Updated: Locations 4-5 Example
-**Before**: Showed single items with TI wrappers  
-**After**: Shows partition blocks containing multiple items (arrays)
+#### Updated Examples
+- Fixed "Locations 4-5" example in "Sibling TI Wrapper Support" to show partition blocks correctly
+- Ensured all examples use partition model terminology (not nesting)
 
-**Before**:
-```yaml
-nodeTypes:
-  - typeLabel: Person                    # Bare item
-  - exactlyOf:                          # TI-wrapped item
-      concrete:
-        typeLabel: Company
-```
+#### Added Double Wrapping Design Note
+- Documented double wrapping semantics (outer wrapper overrides inner)
+- Explained purpose: supports importation of definitions with TI wrappers
+- Clarified this is deferred to Phase H (Canonicalization)
+- Noted it applies to all locations (1-9)
 
-**After**:
-```yaml
-nodeTypes:
-  - typeLabel: Person                    # Bare item (no partition)
-  - exactlyOf:                          # Partition block 1
-      concrete:
-        - typeLabel: Company
-        - typeLabel: Organization
-```
+### 2. Updated `.kiro/specs/ti-ordering-refactor/tasks.md`
 
-#### Removed: "Nested TI" Reference
-**Before**: "Test nested TI (e.g., GraphType + NodeTypeItem)"  
-**After**: "Test partition blocks within collections (Locations 4-5)"
+#### Added Subtask 10.1
+- Under Task 10 (Fix Location 3)
+- Documents the explicit properties approach for sibling TI behavior
+- Lists locations using single TI wrapper (oneOf pattern): 1, 6, 7, 8
+- Lists locations using sibling TI wrappers (explicit properties): 2, 3, 4, 5
+- Provides rationale for the approach
 
-### 2. `.kiro/specs/ti-ordering-refactor/tasks.md`
+#### Updated Task 12 (Location 4)
+- Enhanced description to clarify partition model
+- Added "Key Distinction" bullet explaining difference between partition block and single type
+- Provided examples: `abstract: [{ typeLabel: X }]` vs `abstract: { typeLabel: X }`
+- Updated note to emphasize partition model (NOT nesting model)
 
-#### Updated: Task 12 (Location 4)
-**Before**: "Apply correct TI pattern to nodeTypeArrayInterpretation (wraps SUBSEQUENCES within nodeTypes array)"  
-**After**: "Apply partition model to nodeTypeArrayInterpretation (partition blocks within nodeTypes array)"
+#### Updated Task 13 (Location 5)
+- Enhanced description to clarify partition model
+- Added "Key Distinction" bullet explaining difference between partition block and single type
+- Provided examples: `abstract: [{ typeLabel: X }]` vs `abstract: { typeLabel: X }`
+- Updated note to emphasize partition model (NOT nesting model)
 
-**Added Details**:
-- "Allow array items to be EITHER bare types OR partition blocks (TI-wrapped subsequences)"
-- "Partition blocks are siblings within the array (not nested)"
-- "Each partition block contains an array of types (cardinality ≥ 1)"
-- "Distinguish partition blocks (Location 4) from single types (Location 6)"
-- "_Note: Partition model, not nesting model_"
+## Key Concepts Integrated
 
-#### Updated: Task 13 (Location 5)
-**Before**: "Apply correct TI pattern to edgeTypeArrayInterpretation (wraps SUBSEQUENCES within edgeTypes array)"  
-**After**: "Apply partition model to edgeTypeArrayInterpretation (partition blocks within edgeTypes array)"
+### Three Distinct TI Location Types
 
-**Added Details**:
-- "Allow array items to be EITHER bare types OR partition blocks (TI-wrapped subsequences)"
-- "Partition blocks are siblings within the array (not nested)"
-- "Each partition block contains an array of types (cardinality ≥ 1)"
-- "Distinguish partition blocks (Location 5) from single types (Location 7)"
-- "_Note: Partition model, not nesting model_"
+1. **Location 2/3 - Types Collection** (`nodeTypesInterpretation` / `edgeTypesInterpretation`)
+   - Wraps ENTIRE collection property
+   - Multiple collections can be siblings at graphType level
 
-## Key Concepts Now Clearly Documented
+2. **Location 4/5 - Types Array/Subsequence** (`nodeTypeArrayInterpretation` / `edgeTypeArrayInterpretation`)
+   - Wraps PARTITION BLOCK (subsequence) within collection
+   - Partitions divide collection into blocks, each with its own TI
+   - NOT nesting - it's partitioning an array into segments
 
-### Three Distinct Concepts
-
-1. **Collection (Locations 2-3)**: Entire `nodeTypes:` or `edgeTypes:` property
-2. **Partition Block (Locations 4-5)**: Subsequence within an array
-3. **Single Type (Locations 6-7)**: Individual type definition (atomic unit)
+3. **Location 6/7 - Single Type** (`nodeTypeInterpretation` / `edgeTypeInterpretation`)
+   - Wraps SINGLE type definition
+   - DISTINCT from subsequence with cardinality 1
+   - Atomic unit, not a partition block
 
 ### Partition vs Nesting
 
-**Partition Model** (✅ Our Model):
-- Divides array into sibling blocks
-- Each block can have its own TI
+**Partition Model** (CORRECT - what we're using):
+- Divides arrays into sibling blocks
 - No recursion or nesting of arrays
+- Each block can have its own TI wrapper
 
-**Nesting Model** (❌ NOT Our Model):
+**Nesting Model** (INCORRECT - NOT what we're using):
 - Recursive arrays within arrays
-- TI wrappers containing more TI wrappers
-- Complex nested structure
+- Would allow `nodeTypes: [{ abstract: { nodeTypes: [...] } }]`
+- We explicitly do NOT support this
 
-### Sibling Collections
+### Implementation Approach
 
-Multiple collections can be siblings at graphType level:
-```yaml
-graphType:
-  nodeTypes: [...]        # Collection 1
-  edgeTypes: [...]        # Collection 2
-  abstract:               # Collection 3 (TI-wrapped nodeTypes)
-    nodeTypes: [...]
-```
+**For Sibling TI Behavior** (Locations 2-5):
+- Use explicit properties WITHOUT oneOf
+- Properties: `concrete:`, `abstract:`, `sealed:`, `final:`, `exactlyOf:`, `subtypesOf:`, `properSubtypesOf:`
+- Can coexist as siblings with bare properties
+
+**For Single TI Wrapper** (Locations 1, 6, 7, 8, 9):
+- Use oneOf to allow exactly one option
+- Only ONE wrapper can be present at a time
 
 ## Files Updated
 
-1. `.kiro/specs/ti-ordering-refactor/design.md` - 5 changes
-2. `.kiro/specs/ti-ordering-refactor/tasks.md` - 2 changes
+1. `.kiro/specs/ti-ordering-refactor/design.md` - 7 changes
+2. `.kiro/specs/ti-ordering-refactor/tasks.md` - 3 changes
+
+## Source Documents
+
+- `PARTITION-MODEL-CLARIFICATION.md` - Analysis of partition model
+- `PROPOSED-TASK-10-SUBTASK-AND-DESIGN-UPDATES.md` - Proposed changes for explicit properties approach
 
 ## Verification
 
-All changes maintain consistency with:
-- The partition model as described by the user
-- The distinction between collection, partition block, and single type
-- The requirement that partition blocks are siblings (not nested)
-- The clarification that a partition block with cardinality 1 is different from a single type
+All changes have been applied successfully:
+- ✅ Shorthand semantics section added
+- ✅ Partition model section enhanced
+- ✅ Core pattern section updated with explicit properties approach
+- ✅ Examples updated to show partition blocks correctly
+- ✅ Double wrapping design note added
+- ✅ Subtask 10.1 added to tasks.md
+- ✅ Tasks 12 and 13 updated with partition model clarification
 
 ## Next Steps
 
-The spec documents now correctly describe the partition model. Implementation can proceed with:
-1. Schema changes for Locations 2-5 using partition model
-2. Test file creation showing partition structure
-3. Validation that partition blocks work as siblings
+The specification documents are now complete and ready for implementation. The user can:
 
+1. Review the updated design.md and tasks.md files
+2. Begin implementing tasks by opening tasks.md and clicking "Start task" next to task items
+3. Follow the partition model (not nesting model) when implementing Locations 4-5
+4. Use explicit properties approach for sibling TI behavior (Locations 2-5)
+5. Use oneOf pattern for single TI wrappers (Locations 1, 6, 7, 8, 9)
+
+## Status
+
+**COMPLETE** - All partition model clarifications and proposed updates have been successfully integrated into the specification documents.
