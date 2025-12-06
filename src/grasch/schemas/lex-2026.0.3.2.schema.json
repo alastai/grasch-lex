@@ -3639,24 +3639,39 @@
       ]
     },
     "EdgeLabelProperty": {
-      "description": "Edge label can be either a simple string or an object with implies child containing properties/labels",
-      "oneOf": [
-        {
+      "type": "object",
+      "description": "Edge label container (always an object with required typeLabel child)",
+      "properties": {
+        "typeLabel": {
           "type": "string",
-          "description": "Simple edge label (no properties)"
+          "description": "The edge label value (REQUIRED)"
         },
-        {
-          "type": "object",
-          "description": "Edge label with properties/labels via implies",
-          "properties": {
-            "implies": {
-              "$ref": "#/$defs/ImpliesDescriptor"
+        "implies": {
+          "$ref": "#/$defs/ImpliesDescriptor",
+          "description": "Properties and labels for this edge type"
+        },
+        "extends": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Single supertype"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Multiple supertypes"
             }
-          },
-          "required": ["implies"],
-          "additionalProperties": false
+          ]
+        },
+        "adding": {
+          "$ref": "#/$defs/AddingDescriptor",
+          "description": "Additional labels/properties. Requires extends to be present"
         }
-      ]
+      },
+      "required": ["typeLabel"],
+      "additionalProperties": false
     },
     "DirectedEdgeDescriptor": {
       "type": "object",
@@ -3753,44 +3768,8 @@
               ]
             }
           ]
-        },
-        "extends": {
-          "oneOf": [
-            {
-              "type": "string",
-              "description": "Single supertype"
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Multiple supertypes"
-            }
-          ]
-        },
-        "adding": {
-          "$ref": "#/$defs/AddingDescriptor",
-          "description": "Additional labels/properties. Requires extends to be present"
         }
       },
-      "oneOf": [
-        {
-          "required": [
-            "directed"
-          ],
-          "not": {
-            "required": [
-              "adding"
-            ],
-            "not": {
-              "required": [
-                "extends"
-              ]
-            }
-          }
-        }
-      ],
       "additionalProperties": false
     },
     "UndirectedEdgeDescriptor": {
@@ -3829,44 +3808,8 @@
               "description": "Edge label (synonym for via). Mutually exclusive with via and arc"
             }
           }
-        },
-        "extends": {
-          "oneOf": [
-            {
-              "type": "string",
-              "description": "Single supertype"
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Multiple supertypes"
-            }
-          ]
-        },
-        "adding": {
-          "$ref": "#/$defs/AddingDescriptor",
-          "description": "Additional labels/properties. Requires extends to be present"
         }
       },
-      "oneOf": [
-        {
-          "required": [
-            "undirected"
-          ],
-          "not": {
-            "required": [
-              "adding"
-            ],
-            "not": {
-              "required": [
-                "extends"
-              ]
-            }
-          }
-        }
-      ],
       "additionalProperties": false
     },
     "NodeTypesSetOrImport": {
