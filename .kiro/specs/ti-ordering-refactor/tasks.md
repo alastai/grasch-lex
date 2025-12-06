@@ -94,11 +94,11 @@ Backup the original schema before making changes
 
 **Reference Pattern**: GraphType's `patternProperties` implementation (lines 433-800 in schema) is the CORRECT pattern. Use this as the reference for all fixes.
 
-### - [x] 4. Fix Edge Label Container Structure (E02 - PREREQUISITE) ✅ COMPLETE
+### - [ ] 4. Fix Edge Label Container Structure (E02 - PREREQUISITE)
 
 **CRITICAL**: Must complete BEFORE Locations 3, 5, 7 (which involve edge types)
 
-**Completed**: Changed EdgeLabelProperty from polymorphic to always-object form with required `typeLabel:` child. Moved `extends:`/`adding:` from edgeType level to edge label container level. JSON schema validated successfully.
+**Status**: Schema changes complete, initial test files updated. Additional test files need analysis and updates.
 
 Correct edge label containers to always be objects with `typeLabel:` child
 
@@ -125,6 +125,15 @@ Correct edge label containers to always be objects with `typeLabel:` child
 - _Requirements: 1.1, 8.1_
 - _Reference: E02-COMPREHENSIVE-FIX-PLAN.md_
 
+**Sub-tasks to complete:**
+- [ ] 4.1 Commit current schema and test file changes to GitHub
+- [ ] 4.2 Find all YAML files in workspace (excluding archive/deprecated, LEX < 0.3.2)
+- [ ] 4.3 Analyze YAML files to identify those with edgeTypes
+- [ ] 4.4 Determine which files are additive (not duplicative) to test suite
+- [ ] 4.5 Move additive test files to appropriate test directory location
+- [ ] 4.6 Update all identified files with new edge label structure
+- [ ] 4.7 Validate all updated files pass schema validation
+
 ### - [x] 5. Fix Location 1 (graphTypeInterpretation) ✅ ALREADY COMPLETE
 
 **Note**: Verified that GraphSchemaContent already supports TI wrappers correctly. No schema changes needed.
@@ -140,9 +149,9 @@ Add TI wrapper support to GraphSchemaContent (wraps the graphType property)
 - Validate JSON syntax
 - _Requirements: 1.1, 2.1, 9.1_
 
-### - [x] 6. Test Edge Label Container Fix (E02) ✅ COMPLETE
+### - [ ] 6. Test Edge Label Container Fix (E02)
 
-**Completed**: Updated all 8 test files to use object form with `typeLabel:` child. Simplified endpoints to use string references. All files pass validation.
+**Status**: Initial 8 test files updated and validated. Additional test files need analysis and updates.
 
 Validate that edge label container fix works correctly
 
@@ -160,6 +169,14 @@ Validate that edge label container fix works correctly
 - Verify schema rejects old string form
 - _Requirements: 3.1, 3.2, 3.3_
 - _Reference: E02-COMPREHENSIVE-FIX-PLAN.md Phase 2_
+
+**Sub-tasks to complete:**
+- [ ] 6.1 Analyze all workspace YAML files with edgeTypes (from task 4.3)
+- [ ] 6.2 Update test-siblings-* files and other test files with edgeTypes
+- [ ] 6.3 Update test-phase-* files that use edgeTypes
+- [ ] 6.4 Update test-edge-invalid-* files (negative test cases)
+- [ ] 6.5 Validate all updated test files
+- [ ] 6.6 Document which files were updated and why
 
 ### - [x] 7. Test Location 1 Fix ✅ ALREADY COMPLETE
 
