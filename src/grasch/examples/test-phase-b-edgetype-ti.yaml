@@ -28,12 +28,13 @@ graphSchema:
       - edgeType:
           directed:
             from: Person
-            via: KNOWS
             to: Person
-          implies:
-            propertyTypes:
-              - name: since
-                valueType: DATE
+            via:
+              typeLabel: KNOWS
+              implies:
+                propertyTypes:
+                  - name: since
+                    valueType: DATE
       
       # 1-level: Shorthand - abstract
       - abstract:
