@@ -13,43 +13,36 @@ graphSchema:
     
     edgeTypes:
       # Directed edge with full property ordering
-      # Order: from → to → via → subtyping → propertyTypes
+      # Order: from → to → via (with typeLabel, extends, implies)
       - edgeType:
           directed:
-            # Step 1: Source endpoint
-            from:
-              nodeType:
-                typeLabel: Person
-            # Step 2: Destination endpoint
-            to:
-              nodeType:
-                typeLabel: Person
-            # Step 3: Edge label
-            via: KNOWS
-            # Step 4: Subtyping (optional)
-            extends: RELATIONSHIP
-            # Step 5: Property types (optional)
-            propertyTypes:
-              - propertyType:
-                  propertyName: since
-                  valueType: DATE
+            # Step 1: Source endpoint (simplified to string reference)
+            from: Person
+            # Step 2: Destination endpoint (simplified to string reference)
+            to: Person
+            # Step 3: Edge label container with typeLabel, extends, and implies
+            via:
+              typeLabel: KNOWS
+              extends: RELATIONSHIP
+              implies:
+                propertyTypes:
+                  - propertyType:
+                      propertyName: since
+                      valueType: DATE
       
       # Undirected edge with full property ordering
-      # Order: between → and → via → subtyping → propertyTypes
+      # Order: between → and → via (with typeLabel and implies)
       - edgeType:
           undirected:
-            # Step 1: First endpoint
-            between:
-              nodeType:
-                typeLabel: Person
-            # Step 2: Second endpoint (required for undirected)
-            and:
-              nodeType:
-                typeLabel: Person
-            # Step 3: Edge label
-            via: FRIENDS_WITH
-            # Step 4: Property types (optional)
-            propertyTypes:
-              - propertyType:
-                  propertyName: since
-                  valueType: DATE
+            # Step 1: First endpoint (simplified to string reference)
+            between: Person
+            # Step 2: Second endpoint (simplified to string reference)
+            and: Person
+            # Step 3: Edge label container with typeLabel and implies
+            via:
+              typeLabel: FRIENDS_WITH
+              implies:
+                propertyTypes:
+                  - propertyType:
+                      propertyName: since
+                      valueType: DATE
