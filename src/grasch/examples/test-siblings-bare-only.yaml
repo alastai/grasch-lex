@@ -19,10 +19,7 @@ graphSchema:
     edgeTypes:
       - edgeType:
           directed:
-            from:
-              nodeType:
-                typeLabel: Person
-            to:
-              nodeType:
-                typeLabel: Person
-            via: KNOWS
+            from: Person
+            to: Person
+            via:
+              typeLabel: KNOWS
