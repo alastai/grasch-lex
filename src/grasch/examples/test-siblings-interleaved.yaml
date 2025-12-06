@@ -19,14 +19,11 @@ graphSchema:
     # Bare edgeTypes (0-level)
     edgeTypes:
       - edgeType:
-          typeLabel: KNOWS
           directed:
-            from:
-              nodeType:
-                typeLabel: Person
-            to:
-              nodeType:
-                typeLabel: Person
+            from: Person
+            to: Person
+            via:
+              typeLabel: KNOWS
     
     # 1-level TI-wrapped nodeTypes (sibling)
     abstract:
@@ -42,11 +39,8 @@ graphSchema:
     concrete:
       edgeTypes:
         - edgeType:
-            typeLabel: WORKS_AT
             directed:
-              from:
-                nodeType:
-                  typeLabel: Person
-              to:
-                nodeType:
-                  typeLabel: Company
+              from: Person
+              to: Company
+              via:
+                typeLabel: WORKS_AT
