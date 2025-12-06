@@ -61,6 +61,22 @@ These definitions are from an earlier design and are **not referenced anywhere**
         }
       }
     },
+    "properSubtypesOf": {              // ✅ 2-level (ALREADY EXISTS)
+      "properties": {
+        "concrete": {
+          "properties": {
+            "nodeTypes": { ... },
+            "edgeTypes": { ... }
+          }
+        },
+        "abstract": {
+          "properties": {
+            "nodeTypes": { ... },
+            "edgeTypes": { ... }
+          }
+        }
+      }
+    },
     "propertyGraphDataModel": { ... }
   }
 }
@@ -81,6 +97,8 @@ These definitions are from an earlier design and are **not referenced anywhere**
   }
 }
 ```
+
+**Note**: Location 1 (GraphSchemaContent) already has all three 2-level interpretation facets (`exactlyOf`, `subtypesOf`, `properSubtypesOf`), so no changes needed there.
 
 ## Required Changes
 
