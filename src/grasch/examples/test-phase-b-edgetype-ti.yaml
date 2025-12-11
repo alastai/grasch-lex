@@ -1,5 +1,5 @@
 # Phase B Test: EdgeType with TI wrappers (no endpoint TIs yet)
-# Tests 0-level (bare), 1-level (shorthand), and 2-level (explicit) TI wrappers
+# Tests simplified single-level TI system: 0-level (bare), 1-level synonyms, and 1-level primary forms
 
 graphSchema:
   pathName: /test/phase-b
@@ -41,7 +41,8 @@ graphSchema:
           edgeType:
             directed:
               from: Person
-              via: MANAGES
+              via:
+                typeLabel: MANAGES
               to: Person
             implies:
               propertyTypes:
@@ -53,19 +54,21 @@ graphSchema:
           edgeType:
             directed:
               from: Person
-              via: WORKS_FOR
+              via:
+                typeLabel: WORKS_FOR
               to: Company
             implies:
               propertyTypes:
                 - name: position
                   valueType: STRING
       
-      # 1-level: Shorthand - final
-      - final:
+      # 1-level: Shorthand - exactlyOf (final not yet implemented)
+      - exactlyOf:
           edgeType:
             directed:
               from: Person
-              via: OWNS
+              via:
+                typeLabel: OWNS
               to: Company
             implies:
               propertyTypes:
@@ -77,87 +80,88 @@ graphSchema:
           edgeType:
             undirected:
               between: Person
-              via: RELATED_TO
+              via:
+                typeLabel: RELATED_TO
               and: Person
             implies:
               propertyTypes:
                 - name: relationship
                   valueType: STRING
       
-      # 2-level: Explicit - exactlyOf: concrete:
-      - exactlyOf:
-          concrete:
-            edgeType:
-              directed:
-                from: Person
-                via: LIVES_IN
-                to: Person
-              implies:
-                propertyTypes:
-                  - name: since
-                    valueType: DATE
+      # 1-level: Primary form - exactlyOfConcrete
+      - exactlyOfConcrete:
+          edgeType:
+            directed:
+              from: Person
+              via:
+                typeLabel: LIVES_IN
+              to: Person
+            implies:
+              propertyTypes:
+                - name: since
+                  valueType: DATE
       
-      # 2-level: Explicit - exactlyOf: abstract:
-      - exactlyOf:
-          abstract:
-            edgeType:
-              directed:
-                from: Person
-                via: INTERACTS_WITH
-                to: Person
-              implies:
-                propertyTypes:
-                  - name: timestamp
-                    valueType: ZONED DATETIME
+      # 1-level: Primary form - subtypeOfAbstract
+      - subtypeOfAbstract:
+          edgeType:
+            directed:
+              from: Person
+              via:
+                typeLabel: INTERACTS_WITH
+              to: Person
+            implies:
+              propertyTypes:
+                - name: timestamp
+                  valueType: ZONED DATETIME
       
-      # 2-level: Explicit - subtypesOf: concrete:
-      - subtypesOf:
-          concrete:
-            edgeType:
-              directed:
-                from: Person
-                via: SUPERVISES
-                to: Person
-              implies:
-                propertyTypes:
-                  - name: level
-                    valueType: INTEGER
+      # 1-level: Primary form - subtypeOfConcrete
+      - subtypeOfConcrete:
+          edgeType:
+            directed:
+              from: Person
+              via:
+                typeLabel: SUPERVISES
+              to: Person
+            implies:
+              propertyTypes:
+                - name: level
+                  valueType: INTEGER
       
-      # 2-level: Explicit - subtypesOf: abstract:
-      - subtypesOf:
-          abstract:
-            edgeType:
-              undirected:
-                between: Person
-                via: COLLABORATES_WITH
-                and: Person
-              implies:
-                propertyTypes:
-                  - name: project
-                    valueType: STRING
+      # 1-level: Primary form - subtypeOfAbstract
+      - subtypeOfAbstract:
+          edgeType:
+            undirected:
+              between: Person
+              via:
+                typeLabel: COLLABORATES_WITH
+              and: Person
+            implies:
+              propertyTypes:
+                - name: project
+                  valueType: STRING
       
-      # 2-level: Explicit - properSubtypesOf: concrete: (NEW!)
-      - properSubtypesOf:
-          concrete:
-            edgeType:
-              directed:
-                from: Person
-                via: REPORTS_TO
-                to: Person
-              implies:
-                propertyTypes:
-                  - name: department
-                    valueType: STRING
+      # 1-level: Synonym - properSubtypeOf (maps to subtypeOfAbstract)
+      - properSubtypeOf:
+          edgeType:
+            directed:
+              from: Person
+              via:
+                typeLabel: REPORTS_TO
+              to: Person
+            implies:
+              propertyTypes:
+                - name: department
+                  valueType: STRING
       
-      # 2-level: Explicit - properSubtypesOf: abstract: (NEW!)
-      - properSubtypesOf:
-          abstract:
-            edgeType:
-              directed:
-                from: Person
-                via: INFLUENCES
-                to: Person
-              implies:
-                propertyTypes:
-                  - name: strength
-                    valueType: FLOAT
+      # 1-level: Synonym - subtypeOf (maps to subtypeOfConcrete)
+      - subtypeOf:
+          edgeType:
+            directed:
+              from: Person
+              via:
+                typeLabel: INFLUENCES
+              to: Person
+            implies:
+              propertyTypes:
+                - name: strength
+                  valueType: FLOAT
