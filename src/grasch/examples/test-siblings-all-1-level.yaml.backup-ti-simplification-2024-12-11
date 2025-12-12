@@ -1,0 +1,28 @@
+# Test: Multiple 1-level TI wrappers with different interpretation facets
+# Expected: PASS - Different interpretation facets can be siblings
+
+graphSchema:
+  pathName: /test/siblings-all-1-level
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # 1-level abstract nodeTypes
+    abstract:
+      nodeTypes:
+        - nodeType:
+            typeLabel: Entity
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: STRING
+    
+    # 1-level concrete nodeTypes (different interpretation facet - sibling)
+    concrete:
+      nodeTypes:
+        - nodeType:
+            typeLabel: Person
+            implies:
+              propertyTypes:
+                - name: name
+                  valueType: STRING

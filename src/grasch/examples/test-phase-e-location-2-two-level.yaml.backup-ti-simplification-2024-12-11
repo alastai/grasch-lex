@@ -1,0 +1,26 @@
+# Test Phase E - Location 2: nodeTypesInterpretation (Two-level wrapper)
+# subtypesOf + abstract wrapping entire nodeTypes property
+
+graphSchema:
+  pathName: /test/phase-e-location-2-two-level
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # Location 2: Two-level wrapper
+    # subtypesOf + abstract wrapping entire nodeTypes
+    subtypesOf:
+      abstract:
+        nodeTypes:
+          - nodeType:
+              typeLabel: Entity
+              implies:
+                propertyTypes:
+                  - name: id
+                    valueType: STRING
+          - nodeType:
+              typeLabel: Thing
+              implies:
+                propertyTypes:
+                  - name: uuid
+                    valueType: STRING

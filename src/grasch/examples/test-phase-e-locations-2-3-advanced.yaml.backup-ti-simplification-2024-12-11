@@ -1,0 +1,66 @@
+# Test Phase E - Locations 2+3: Advanced patterns
+# Testing two-level wrappers
+
+graphSchema:
+  pathName: /test/phase-e-locations-2-3-advanced
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # ========================================
+    # Location 2: Two-level wrapper
+    # subtypesOf + abstract wrapping entire nodeTypes
+    # ========================================
+    
+    subtypesOf:
+      abstract:
+        nodeTypes:
+          - nodeType:
+              typeLabel: Entity
+              implies:
+                propertyTypes:
+                  - name: id
+                    valueType: STRING
+          - nodeType:
+              typeLabel: Thing
+              implies:
+                propertyTypes:
+                  - name: uuid
+                    valueType: STRING
+    
+    # ========================================
+    # Location 3: Two-level wrapper
+    # exactlyOf + concrete wrapping entire edgeTypes
+    # ========================================
+    
+    exactlyOf:
+      concrete:
+        edgeTypes:
+          - edgeType:
+              typeLabel: KNOWS
+              directed:
+                from:
+                  nodeType:
+                    typeLabel: Entity
+                to:
+                  nodeType:
+                    typeLabel: Entity
+                via:
+                  implies:
+                    propertyTypes:
+                      - name: since
+                        valueType: INTEGER
+          - edgeType:
+              typeLabel: WORKS_AT
+              directed:
+                from:
+                  nodeType:
+                    typeLabel: Entity
+                to:
+                  nodeType:
+                    typeLabel: Thing
+                via:
+                  implies:
+                    propertyTypes:
+                      - name: role
+                        valueType: STRING

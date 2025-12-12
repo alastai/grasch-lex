@@ -1,0 +1,25 @@
+# Test: Multiple bare nodeTypes and edgeTypes as siblings
+# Expected: PASS - Basic sibling pattern with no TI wrappers
+
+graphSchema:
+  pathName: /test/siblings-bare-only
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # Multiple bare properties as siblings
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+    
+    edgeTypes:
+      - edgeType:
+          directed:
+            from: Person
+            to: Person
+            via:
+              typeLabel: KNOWS

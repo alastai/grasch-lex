@@ -204,8 +204,7 @@
       "type": "object",
       "description": "Graph schema specification - structural graph type plus constraints",
       "required": [
-        "pathName",
-        "graphType"
+        "pathName"
       ],
       "properties": {
         "pathName": {
@@ -245,7 +244,164 @@
           }
         }
       },
-      "additionalProperties": false
+      "patternProperties": {
+        "^(abstract|sealed|final|concrete)$": {
+          "type": "object",
+          "description": "One-level TI wrapper for graphType",
+          "properties": {
+            "graphType": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GraphType"
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "graphType"
+          ]
+        },
+        "^(exactlyOf|subtypesOf|properSubtypesOf)$": {
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "One-level TI wrapper (shorthand)",
+              "properties": {
+                "graphType": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/GraphType"
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "graphType"
+              ]
+            },
+            {
+              "type": "object",
+              "description": "Two-level TI wrapper (explicit)",
+              "patternProperties": {
+                "^(abstract|concrete|final|sealed)$": {
+                  "type": "object",
+                  "properties": {
+                    "graphType": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/GraphType"
+                        },
+                        {
+                          "type": "object",
+                          "description": "Import content from file",
+                          "required": [
+                            "import"
+                          ],
+                          "properties": {
+                            "import": {
+                              "type": "string",
+                              "description": "Import content from file"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "graphType"
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1,
+              "maxProperties": 1
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "pathName",
+            "graphType"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "abstract"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "concrete"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "sealed"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "final"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "exactlyOf"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "subtypesOf"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "properSubtypesOf"
+          ]
+        }
+      ]
     },
     "GraphContent": {
       "type": "object",
@@ -518,7 +674,8 @@
           "description": "Import file path for graph type defaults"
         },
         "nodeTypes": {
-          "$ref": "#/$defs/NodeTypesProperty"
+          "$ref": "#/$defs/NodeTypesArray",
+          "description": "Bare nodeTypes array (implicit exactlyOf:concrete for each item)"
         },
         "subtypesOf": {
           "type": "object",
@@ -633,7 +790,8 @@
           "additionalProperties": false
         },
         "edgeTypes": {
-          "$ref": "#/$defs/EdgeTypesProperty"
+          "$ref": "#/$defs/EdgeTypesArray",
+          "description": "Bare edgeTypes array (implicit exactlyOf:concrete for each item)"
         },
         "propertyGraphDataModel": {
           "oneOf": [
@@ -710,6 +868,340 @@
               "additionalProperties": false
             }
           ]
+        },
+        "exactlyOf": {
+          "type": "object",
+          "description": "Exact type matching (invariant matching)",
+          "properties": {
+            "concrete": {
+              "type": "object",
+              "description": "Concrete types that can be instantiated",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "abstract": {
+              "type": "object",
+              "description": "Abstract types that cannot be instantiated directly",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "nodeTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Node types with exact matching (default concrete)",
+                  "items": {
+                    "$ref": "#/$defs/NodeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "edgeTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Edge types with exact matching (default concrete)",
+                  "items": {
+                    "$ref": "#/$defs/EdgeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "properSubtypesOf": {
+          "type": "object",
+          "description": "Proper subtype matching (covariant matching, excluding supertype)",
+          "properties": {
+            "concrete": {
+              "type": "object",
+              "description": "Concrete types that can be instantiated",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "abstract": {
+              "type": "object",
+              "description": "Abstract types that cannot be instantiated directly",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "nodeTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Node types with proper subtype matching (default abstract)",
+                  "items": {
+                    "$ref": "#/$defs/NodeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "edgeTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Edge types with proper subtype matching (default abstract)",
+                  "items": {
+                    "$ref": "#/$defs/EdgeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": true,
@@ -3480,9 +3972,46 @@
         }
       ]
     },
+    "EdgeLabelProperty": {
+      "type": "object",
+      "description": "Edge label container (always an object with required typeLabel child)",
+      "properties": {
+        "typeLabel": {
+          "type": "string",
+          "description": "The edge label value (REQUIRED)"
+        },
+        "implies": {
+          "$ref": "#/$defs/ImpliesDescriptor",
+          "description": "Properties and labels for this edge type"
+        },
+        "extends": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Single supertype"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Multiple supertypes"
+            }
+          ]
+        },
+        "adding": {
+          "$ref": "#/$defs/AddingDescriptor",
+          "description": "Additional labels/properties. Requires extends to be present"
+        }
+      },
+      "required": [
+        "typeLabel"
+      ],
+      "additionalProperties": false
+    },
     "DirectedEdgeDescriptor": {
       "type": "object",
-      "description": "Directed edge type with from/to endpoints",
+      "description": "Directed edge type with from/to endpoints. Edge labels (via/arc/typeLabel) can be string or object with implies child",
       "required": [
         "directed"
       ],
@@ -3506,19 +4035,29 @@
             "src": {
               "$ref": "#/$defs/EndpointReference"
             },
+            "source": {
+              "$ref": "#/$defs/EndpointReference"
+            },
             "dst": {
               "$ref": "#/$defs/EndpointReference"
             },
             "dest": {
               "$ref": "#/$defs/EndpointReference"
             },
+            "destination": {
+              "$ref": "#/$defs/EndpointReference"
+            },
             "via": {
-              "type": "string",
-              "description": "Edge label"
+              "$ref": "#/$defs/EdgeLabelProperty",
+              "description": "Edge label (primary). Mutually exclusive with arc and typeLabel"
             },
             "arc": {
-              "type": "string",
-              "description": "Edge label (synonym for via)"
+              "$ref": "#/$defs/EdgeLabelProperty",
+              "description": "Edge label (synonym for via). Mutually exclusive with via and typeLabel"
+            },
+            "typeLabel": {
+              "$ref": "#/$defs/EdgeLabelProperty",
+              "description": "Edge label (synonym for via). Mutually exclusive with via and arc"
             }
           },
           "oneOf": [
@@ -3545,84 +4084,66 @@
                 "src",
                 "dest"
               ]
-            }
-          ]
-        },
-        "implies": {
-          "$ref": "#/$defs/ImpliesDescriptor"
-        },
-        "extends": {
-          "oneOf": [
-            {
-              "type": "string",
-              "description": "Single supertype"
             },
             {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Multiple supertypes"
+              "required": [
+                "source",
+                "dst"
+              ]
+            },
+            {
+              "required": [
+                "source",
+                "dest"
+              ]
+            },
+            {
+              "required": [
+                "source",
+                "destination"
+              ]
             }
           ]
-        },
-        "adding": {
-          "$ref": "#/$defs/AddingDescriptor"
         }
       },
       "additionalProperties": false
     },
     "UndirectedEdgeDescriptor": {
       "type": "object",
-      "description": "Undirected edge type with between/and endpoints",
+      "description": "Undirected edge type with between/and endpoints. Edge labels (via/arc/typeLabel) can be string or object with implies child. NOTE: 'and' is NOT a synonym for via/arc/typeLabel",
       "required": [
         "undirected"
       ],
       "properties": {
         "undirected": {
           "type": "object",
-          "description": "Undirected edge specification",
+          "description": "Undirected edge specification. REQUIRED: both 'between' and 'and' properties",
           "required": [
             "between",
             "and"
           ],
           "properties": {
             "between": {
-              "$ref": "#/$defs/EndpointReference"
+              "$ref": "#/$defs/EndpointReference",
+              "description": "First endpoint node type"
             },
             "and": {
-              "$ref": "#/$defs/EndpointReference"
+              "$ref": "#/$defs/EndpointReference",
+              "description": "Second endpoint node type. This is NOT a synonym for via/arc/typeLabel"
             },
             "via": {
-              "type": "string",
-              "description": "Edge label"
+              "$ref": "#/$defs/EdgeLabelProperty",
+              "description": "Edge label (primary). Mutually exclusive with arc and typeLabel"
             },
             "arc": {
-              "type": "string",
-              "description": "Edge label (synonym for via)"
+              "$ref": "#/$defs/EdgeLabelProperty",
+              "description": "Edge label (synonym for via). Mutually exclusive with via and typeLabel"
+            },
+            "typeLabel": {
+              "$ref": "#/$defs/EdgeLabelProperty",
+              "description": "Edge label (synonym for via). Mutually exclusive with via and arc"
             }
           }
-        },
-        "implies": {
-          "$ref": "#/$defs/ImpliesDescriptor"
-        },
-        "extends": {
-          "oneOf": [
-            {
-              "type": "string",
-              "description": "Single supertype"
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Multiple supertypes"
-            }
-          ]
-        },
-        "adding": {
-          "$ref": "#/$defs/AddingDescriptor"
         }
       },
       "additionalProperties": false

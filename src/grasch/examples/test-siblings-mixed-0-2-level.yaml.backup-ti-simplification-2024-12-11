@@ -1,0 +1,28 @@
+# Test: Bare nodeTypes + 2-level TI-wrapped nodeTypes as siblings
+# Expected: PASS - Mixed 0-level and 2-level TI wrappers
+
+graphSchema:
+  pathName: /test/siblings-mixed-0-2-level
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # Bare nodeTypes (0-level)
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+    
+    # 2-level TI-wrapped nodeTypes (sibling to bare)
+    subtypesOf:
+      abstract:
+        nodeTypes:
+          - nodeType:
+              typeLabel: Entity
+              implies:
+                propertyTypes:
+                  - name: id
+                    valueType: STRING

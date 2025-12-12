@@ -1,0 +1,207 @@
+graphSchema:
+  pathName: /benchmarks/ldbc/snb
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model.yaml
+    nodeTypes:
+    - nodeType:
+        typeLabel: Person
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+          - name: firstName
+            valueType: STRING
+          - name: lastName
+            valueType: STRING
+          - name: gender
+            valueType: STRING
+          - name: birthday
+            valueType: DATE
+          - name: creationDate
+            valueType: ZONED DATETIME
+          - name: locationIP
+            valueType: STRING
+          - name: browserUsed
+            valueType: STRING
+          - name: language
+            valueType: LIST
+          - name: email
+            valueType: LIST
+    - import: imports/snb-types/lex-2026.0.3.2-snb-organisation-hierarchy.yaml
+    - import: imports/snb-types/lex-2026.0.3.2-snb-place-hierarchy.yaml
+    - nodeType:
+        typeLabel: Tag
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+          - name: name
+            valueType: STRING
+          - name: url
+            valueType: STRING
+    - nodeType:
+        typeLabel: TagClass
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+          - name: name
+            valueType: STRING
+          - name: url
+            valueType: STRING
+    - nodeType:
+        typeLabel: Forum
+        implies:
+          propertyTypes:
+          - name: id
+            valueType: INTEGER
+          - name: title
+            valueType: STRING
+          - name: creationDate
+            valueType: ZONED DATETIME
+    - import: imports/snb-types/lex-2026.0.3.2-snb-message-hierarchy.yaml
+    edgeTypes:
+    - edgeType:
+        undirected:
+          between: Person
+          and: Person
+          via: KNOWS
+        implies:
+          propertyTypes:
+          - name: creationDate
+            valueType: ZONED DATETIME
+    - edgeType:
+        directed:
+          from: Person
+          to:
+          - Post
+          - Comment
+          via: LIKES
+        implies:
+          propertyTypes:
+          - name: creationDate
+            valueType: ZONED DATETIME
+    - edgeType:
+        directed:
+          from: Person
+          to: Tag
+          via: HAS_INTEREST
+        implies:
+          propertyTypes: []
+    - edgeType:
+        directed:
+          from:
+          - Person
+          - Organisation
+          - Post
+          - Comment
+          to: Place
+          via: IS_LOCATED_IN
+        implies:
+          propertyTypes: []
+    - edgeType:
+        directed:
+          from: Person
+          to: Organisation
+          via: STUDY_AT
+        implies:
+          propertyTypes:
+          - name: classYear
+            valueType: INTEGER
+    - edgeType:
+        directed:
+          from: Person
+          to: Organisation
+          via: WORK_AT
+        implies:
+          propertyTypes:
+          - name: workFrom
+            valueType: INTEGER
+    - edgeType:
+        directed:
+          from: Forum
+          to: Person
+          via: HAS_MEMBER
+        implies:
+          propertyTypes:
+          - name: joinDate
+            valueType: ZONED DATETIME
+    - edgeType:
+        directed:
+          from: Forum
+          to: Person
+          via: HAS_MODERATOR
+        implies:
+          propertyTypes: []
+    - edgeType:
+        directed:
+          from: Forum
+          to: Post
+          via: CONTAINER_OF
+        implies:
+          propertyTypes: []
+    - edgeType:
+        directed:
+          from:
+          - Post
+          - Comment
+          to: Person
+          via: HAS_CREATOR
+        implies:
+          propertyTypes: []
+    - edgeType:
+        directed:
+          from: Comment
+          to:
+          - Post
+          - Comment
+          via: REPLY_OF
+        implies:
+          propertyTypes: []
+    - edgeType:
+        directed:
+          from:
+          - Post
+          - Comment
+          - Forum
+          to: Tag
+          via: HAS_TAG
+        implies:
+          propertyTypes: []
+    - edgeType:
+        directed:
+          from: Tag
+          to: TagClass
+          via: HAS_TYPE
+        implies:
+          propertyTypes: []
+    - edgeType:
+        directed:
+          from: TagClass
+          to: TagClass
+          via: IS_SUBCLASS_OF
+        implies:
+          propertyTypes: []
+    - edgeType:
+        directed:
+          from: Place
+          to: Place
+          via: IS_PART_OF
+        implies:
+          propertyTypes: []
+  constraints:
+    personIdUnique:
+      name: personIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Person
+        uniqueKeyComponentPropertyNames:
+        - id
+    postIdUnique:
+      name: postIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Post
+        uniqueKeyComponentPropertyNames:
+        - id

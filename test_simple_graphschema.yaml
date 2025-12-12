@@ -1,0 +1,8 @@
+graphSchema:
+  pathName: /test/simple
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person

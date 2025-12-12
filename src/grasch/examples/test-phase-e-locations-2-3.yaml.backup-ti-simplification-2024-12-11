@@ -1,0 +1,68 @@
+# Test Phase E - Locations 2+3: nodeTypesInterpretation & edgeTypesInterpretation
+# These wrap the ENTIRE nodeTypes or edgeTypes property
+
+graphSchema:
+  pathName: /test/phase-e-locations-2-3
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # ========================================
+    # Location 2: nodeTypesInterpretation
+    # Test 2.1: One-level wrapper (abstract)
+    # Wraps the ENTIRE nodeTypes property
+    # All node types in this array are interpreted as subtypesOf:abstract
+    # ========================================
+    
+    abstract:
+      nodeTypes:
+        - nodeType:
+            typeLabel: Entity
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: STRING
+        - nodeType:
+            typeLabel: Thing
+            implies:
+              propertyTypes:
+                - name: name
+                  valueType: STRING
+    
+    # ========================================
+    # Location 3: edgeTypesInterpretation  
+    # Test 3.1: One-level wrapper (concrete)
+    # Wraps the ENTIRE edgeTypes property
+    # All edge types in this array are interpreted as exactlyOf:concrete
+    # ========================================
+    
+    concrete:
+      edgeTypes:
+        - edgeType:
+            typeLabel: KNOWS
+            directed:
+              from:
+                nodeType:
+                  typeLabel: Entity
+              to:
+                nodeType:
+                  typeLabel: Entity
+              via:
+                implies:
+                  propertyTypes:
+                    - name: since
+                      valueType: INTEGER
+        - edgeType:
+            typeLabel: WORKS_AT
+            directed:
+              from:
+                nodeType:
+                  typeLabel: Entity
+              to:
+                nodeType:
+                  typeLabel: Thing
+              via:
+                implies:
+                  propertyTypes:
+                    - name: role
+                      valueType: STRING

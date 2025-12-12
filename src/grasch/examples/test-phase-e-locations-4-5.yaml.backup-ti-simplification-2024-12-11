@@ -1,0 +1,103 @@
+# Test file for Phase E - Stage 1: Locations 4+5 (Array Subsequence Interpretations)
+# Tests nodeTypeArrayInterpretation and edgeTypeArrayInterpretation
+
+graphSchema:
+  pathName: /test/phase-e/locations-4-5
+  graphType:
+    propertyGraphDataModel:
+      valueTypeSystemName: CANONICAL
+    
+    # Test Location 4: nodeTypeArrayInterpretation
+    nodeTypes:
+      # Bare item (existing - Location 6)
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+      
+      # 1-level TI wrapped array subsequence (NEW - Location 4)
+      - abstract:
+          - nodeType:
+              typeLabel: Vehicle
+              implies:
+                propertyTypes:
+                  - name: model
+                    valueType: STRING
+          - nodeType:
+              typeLabel: Car
+              implies:
+                supertypes: Vehicle
+                propertyTypes:
+                  - name: doors
+                    valueType: INTEGER
+      
+      # 2-level TI wrapped array subsequence (NEW - Location 4)
+      - subtypesOf:
+          abstract:
+            - nodeType:
+                typeLabel: Message
+                implies:
+                  propertyTypes:
+                    - name: content
+                      valueType: STRING
+            - nodeType:
+                typeLabel: Post
+                implies:
+                  supertypes: Message
+                  propertyTypes:
+                    - name: likes
+                      valueType: INTEGER
+      
+      # Singleton array subsequence (NEW - Location 4)
+      - concrete:
+          - nodeType:
+              typeLabel: Company
+              implies:
+                propertyTypes:
+                  - name: name
+                    valueType: STRING
+    
+    # Test Location 5: edgeTypeArrayInterpretation
+    edgeTypes:
+      # Bare item (existing - Location 7)
+      - edgeType:
+          directed:
+            from: Person
+            to: Person
+            via: KNOWS
+          implies:
+            propertyTypes:
+              - name: since
+                valueType: INTEGER
+      
+      # 1-level TI wrapped array subsequence (NEW - Location 5)
+      - abstract:
+          - edgeType:
+              directed:
+                from: Person
+                to: Vehicle
+                via: DRIVES
+              implies:
+                propertyTypes: []
+          - edgeType:
+              directed:
+                from: Person
+                to: Vehicle
+                via: OWNS
+              implies:
+                propertyTypes: []
+      
+      # 2-level TI wrapped array subsequence (NEW - Location 5)
+      - exactlyOf:
+          concrete:
+            - edgeType:
+                directed:
+                  from: Person
+                  to: Company
+                  via: WORKS_AT
+                implies:
+                  propertyTypes:
+                    - name: role
+                      valueType: STRING

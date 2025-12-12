@@ -2,6 +2,7 @@
 # Tests 0-level (bare), 1-level (shorthand), and 2-level (explicit) TI wrappers
 
 graphSchema:
+  pathName: /test/phase-a
   graphType:
     nodeTypes:
       # 0-level: Bare nodeType (implicit exactlyOf: concrete:)

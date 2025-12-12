@@ -1,0 +1,46 @@
+# Test: Interleaved nodeTypes, edgeTypes, nodeTypes, edgeTypes pattern
+# Expected: PASS - This is the critical requirement from Requirement 4.4
+
+graphSchema:
+  pathName: /test/siblings-interleaved
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model-defaults.yaml
+    
+    # Bare nodeTypes (0-level)
+    nodeTypes:
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: name
+                valueType: STRING
+    
+    # Bare edgeTypes (0-level)
+    edgeTypes:
+      - edgeType:
+          directed:
+            from: Person
+            to: Person
+            via:
+              typeLabel: KNOWS
+    
+    # 1-level TI-wrapped nodeTypes (sibling)
+    abstract:
+      nodeTypes:
+        - nodeType:
+            typeLabel: Entity
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: STRING
+    
+    # 1-level TI-wrapped edgeTypes (sibling)
+    concrete:
+      edgeTypes:
+        - edgeType:
+            directed:
+              from: Person
+              to: Company
+              via:
+                typeLabel: WORKS_AT

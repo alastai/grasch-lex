@@ -6,20 +6,23 @@
 
 ## Summary
 
-I have identified the exact line numbers and documented the current structure for each of the 6 locations that need to be fixed (Locations 2-7). Location 1 was already verified as correct in Task 1.
+I have identified the exact line numbers and documented the current structure for each of the 7 locations that need to be fixed (Locations 1-7). All 7 locations have issues preventing proper sibling TI wrapper support.
 
 ## Schema Locations Identified
 
 ### Location 1: graphTypeInterpretation (GraphSchemaContent)
-**Status**: ✅ ALREADY CORRECT (verified in Task 1)  
+**Status**: ❌ NEEDS FIX  
 **Line Number**: 203-260  
 **Definition Name**: `GraphSchemaContent`
 
 **Current Structure**:
 - Has `patternProperties` for TI wrappers: `^(abstract|sealed|final|concrete)$`
-- Supports 0-level (bare `graphType`), 1-level, and 2-level TI syntax
-- Already implements the correct pattern
-- No changes needed
+- Has `oneOf` constraint at the end requiring exactly one of: pathName+graphType, pathName+abstract, pathName+concrete, etc.
+- This `oneOf` prevents sibling TI-wrapped properties
+
+**Problem**: The `oneOf` constraint at the end of GraphSchemaContent (lines ~390-420) enforces that you can have EITHER bare `graphType` OR one TI wrapper, but NOT multiple sibling TI-wrapped `graphType` properties.
+
+**Target**: Remove or modify the `oneOf` constraint to allow multiple sibling properties with different TI wrappers, while still ensuring at least one `graphType` (bare or wrapped) exists.
 
 ---
 

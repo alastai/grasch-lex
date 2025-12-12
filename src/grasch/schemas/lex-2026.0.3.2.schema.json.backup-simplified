@@ -202,21 +202,47 @@
     },
     "GraphSchemaContent": {
       "type": "object",
-      "description": "Graph schema specification with single-level TI system using explicit properties",
+      "description": "Graph schema specification - structural graph type plus constraints",
       "required": [
         "pathName"
       ],
-      "oneOf": [
-        {
+      "properties": {
+        "pathName": {
+          "type": "string",
+          "description": "Path name for the graph schema"
+        },
+        "principal": {
+          "type": "string",
+          "description": "The owner of the graph schema, an authorization identifier of a principal"
+        },
+        "graphType": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GraphType"
+            },
+            {
+              "type": "object",
+              "description": "Import content from file",
+              "required": [
+                "import"
+              ],
+              "properties": {
+                "import": {
+                  "type": "string",
+                  "description": "Import content from file"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "abstract": {
+          "type": "object",
+          "description": "One-level TI wrapper: abstract (maps to subtypesOf: abstract:)",
+          "required": [
+            "graphType"
+          ],
           "properties": {
-            "pathName": {
-              "type": "string",
-              "description": "Path name for the graph schema"
-            },
-            "principal": {
-              "type": "string",
-              "description": "The owner of the graph schema, an authorization identifier of a principal"
-            },
             "graphType": {
               "oneOf": [
                 {
@@ -241,151 +267,111 @@
           },
           "additionalProperties": false
         },
-        {
+        "concrete": {
+          "type": "object",
+          "description": "One-level TI wrapper: concrete (maps to exactlyOf: concrete:)",
+          "required": [
+            "graphType"
+          ],
           "properties": {
-            "pathName": {
-              "type": "string",
-              "description": "Path name for the graph schema"
-            },
-            "principal": {
-              "type": "string",
-              "description": "The owner of the graph schema, an authorization identifier of a principal"
-            },
-            "exactlyOfConcrete": {
-              "type": "object",
-              "description": "Primary TI form: exact type matching, concrete (instantiable) types",
-              "required": [
-                "graphType"
-              ],
-              "properties": {
-                "graphType": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/GraphType"
-                    },
-                    {
-                      "type": "object",
-                      "description": "Import content from file",
-                      "required": [
-                        "import"
-                      ],
-                      "properties": {
-                        "import": {
-                          "type": "string",
-                          "description": "Import content from file"
-                        }
-                      },
-                      "additionalProperties": false
+            "graphType": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GraphType"
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
                     }
-                  ]
+                  },
+                  "additionalProperties": false
                 }
-              },
-              "additionalProperties": false
+              ]
             }
           },
           "additionalProperties": false
         },
-        {
+        "sealed": {
+          "type": "object",
+          "description": "One-level TI wrapper: sealed (closed hierarchy)",
+          "required": [
+            "graphType"
+          ],
           "properties": {
-            "pathName": {
-              "type": "string",
-              "description": "Path name for the graph schema"
-            },
-            "principal": {
-              "type": "string",
-              "description": "The owner of the graph schema, an authorization identifier of a principal"
-            },
-            "subtypeOfConcrete": {
-              "type": "object",
-              "description": "Primary TI form: subtype matching, concrete (instantiable) types",
-              "required": [
-                "graphType"
-              ],
-              "properties": {
-                "graphType": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/GraphType"
-                    },
-                    {
-                      "type": "object",
-                      "description": "Import content from file",
-                      "required": [
-                        "import"
-                      ],
-                      "properties": {
-                        "import": {
-                          "type": "string",
-                          "description": "Import content from file"
-                        }
-                      },
-                      "additionalProperties": false
+            "graphType": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GraphType"
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
                     }
-                  ]
+                  },
+                  "additionalProperties": false
                 }
-              },
-              "additionalProperties": false
+              ]
             }
           },
           "additionalProperties": false
         },
-        {
+        "final": {
+          "type": "object",
+          "description": "One-level TI wrapper: final (cannot be subtyped)",
+          "required": [
+            "graphType"
+          ],
           "properties": {
-            "pathName": {
-              "type": "string",
-              "description": "Path name for the graph schema"
-            },
-            "principal": {
-              "type": "string",
-              "description": "The owner of the graph schema, an authorization identifier of a principal"
-            },
-            "subtypeOfAbstract": {
-              "type": "object",
-              "description": "Primary TI form: subtype matching, abstract (non-instantiable) types",
-              "required": [
-                "graphType"
-              ],
-              "properties": {
-                "graphType": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/GraphType"
-                    },
-                    {
-                      "type": "object",
-                      "description": "Import content from file",
-                      "required": [
-                        "import"
-                      ],
-                      "properties": {
-                        "import": {
-                          "type": "string",
-                          "description": "Import content from file"
-                        }
-                      },
-                      "additionalProperties": false
+            "graphType": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GraphType"
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
                     }
-                  ]
+                  },
+                  "additionalProperties": false
                 }
-              },
-              "additionalProperties": false
+              ]
             }
           },
           "additionalProperties": false
         },
-        {
+        "exactlyOf": {
+          "type": "object",
+          "description": "Two-level TI wrapper: exactlyOf with concreteness",
+          "required": [
+            "concrete",
+            "abstract"
+          ],
+          "minProperties": 1,
+          "maxProperties": 1,
           "properties": {
-            "pathName": {
-              "type": "string",
-              "description": "Path name for the graph schema"
-            },
-            "principal": {
-              "type": "string",
-              "description": "The owner of the graph schema, an authorization identifier of a principal"
-            },
             "concrete": {
               "type": "object",
-              "description": "Synonym for exactlyOfConcrete: exact type matching, concrete types",
               "required": [
                 "graphType"
               ],
@@ -403,8 +389,36 @@
                       ],
                       "properties": {
                         "import": {
-                          "type": "string",
-                          "description": "Import content from file"
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "abstract": {
+              "type": "object",
+              "required": [
+                "graphType"
+              ],
+              "properties": {
+                "graphType": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/GraphType"
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string"
                         }
                       },
                       "additionalProperties": false
@@ -417,19 +431,18 @@
           },
           "additionalProperties": false
         },
-        {
+        "subtypesOf": {
+          "type": "object",
+          "description": "Two-level TI wrapper: subtypesOf with concreteness",
+          "required": [
+            "concrete",
+            "abstract"
+          ],
+          "minProperties": 1,
+          "maxProperties": 1,
           "properties": {
-            "pathName": {
-              "type": "string",
-              "description": "Path name for the graph schema"
-            },
-            "principal": {
-              "type": "string",
-              "description": "The owner of the graph schema, an authorization identifier of a principal"
-            },
-            "exactlyOf": {
+            "concrete": {
               "type": "object",
-              "description": "Synonym for exactlyOfConcrete: exact type matching, concrete types",
               "required": [
                 "graphType"
               ],
@@ -447,8 +460,36 @@
                       ],
                       "properties": {
                         "import": {
-                          "type": "string",
-                          "description": "Import content from file"
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "abstract": {
+              "type": "object",
+              "required": [
+                "graphType"
+              ],
+              "properties": {
+                "graphType": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/GraphType"
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string"
                         }
                       },
                       "additionalProperties": false
@@ -461,19 +502,18 @@
           },
           "additionalProperties": false
         },
-        {
+        "properSubtypesOf": {
+          "type": "object",
+          "description": "Two-level TI wrapper: properSubtypesOf with concreteness",
+          "required": [
+            "concrete",
+            "abstract"
+          ],
+          "minProperties": 1,
+          "maxProperties": 1,
           "properties": {
-            "pathName": {
-              "type": "string",
-              "description": "Path name for the graph schema"
-            },
-            "principal": {
-              "type": "string",
-              "description": "The owner of the graph schema, an authorization identifier of a principal"
-            },
-            "subtypeOf": {
+            "concrete": {
               "type": "object",
-              "description": "Synonym for subtypeOfConcrete: subtype matching, concrete types",
               "required": [
                 "graphType"
               ],
@@ -491,8 +531,36 @@
                       ],
                       "properties": {
                         "import": {
-                          "type": "string",
-                          "description": "Import content from file"
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "abstract": {
+              "type": "object",
+              "required": [
+                "graphType"
+              ],
+              "properties": {
+                "graphType": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/GraphType"
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string"
                         }
                       },
                       "additionalProperties": false
@@ -505,49 +573,63 @@
           },
           "additionalProperties": false
         },
+        "constraints": {
+          "type": "object",
+          "description": "A map of constraint names to constraint descriptors (optional)",
+          "additionalProperties": {
+            "$ref": "#/$defs/Constraint"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
         {
-          "properties": {
-            "pathName": {
-              "type": "string",
-              "description": "Path name for the graph schema"
-            },
-            "principal": {
-              "type": "string",
-              "description": "The owner of the graph schema, an authorization identifier of a principal"
-            },
-            "properSubtypeOf": {
-              "type": "object",
-              "description": "Synonym for subtypeOfAbstract: subtype matching, abstract types",
-              "required": [
-                "graphType"
-              ],
-              "properties": {
-                "graphType": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/GraphType"
-                    },
-                    {
-                      "type": "object",
-                      "description": "Import content from file",
-                      "required": [
-                        "import"
-                      ],
-                      "properties": {
-                        "import": {
-                          "type": "string",
-                          "description": "Import content from file"
-                        }
-                      },
-                      "additionalProperties": false
-                    }
-                  ]
-                }
-              },
-              "additionalProperties": false
-            }
-          },
-          "additionalProperties": false
+          "required": [
+            "pathName",
+            "graphType"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "abstract"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "concrete"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "sealed"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "final"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "exactlyOf"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "subtypesOf"
+          ]
+        },
+        {
+          "required": [
+            "pathName",
+            "properSubtypesOf"
+          ]
         }
       ]
     },
@@ -736,7 +818,7 @@
     },
     "GraphType": {
       "type": "object",
-      "description": "Graph type descriptor with simplified single-level TI system",
+      "description": "Graph type descriptor defining the structural graph type",
       "required": [
         "propertyGraphDataModel"
       ],
@@ -806,6 +888,140 @@
           "type": "integer",
           "minimum": 0,
           "description": "Maximum number of property types for edge types"
+        },
+        "typeInterpretation": {
+          "type": "string",
+          "enum": [
+            "exactlyOf",
+            "subtypesOf",
+            "properSubtypesOf"
+          ],
+          "default": "exactlyOf",
+          "description": "How types are interpreted during validation (LEX:2026.0.3)"
+        },
+        "import": {
+          "type": "string",
+          "description": "Import file path for graph type defaults"
+        },
+        "nodeTypes": {
+          "$ref": "#/$defs/NodeTypesArray",
+          "description": "Bare nodeTypes array (implicit exactlyOf:concrete for each item)"
+        },
+        "subtypesOf": {
+          "type": "object",
+          "description": "Subtypes of specified element types (covariant matching)",
+          "properties": {
+            "abstract": {
+              "type": "object",
+              "description": "Abstracts that cannot be instantiated directly",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "nodeTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Node types that subtypes (supertype can be instantiated)",
+                  "items": {
+                    "$ref": "#/$defs/NodeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "edgeTypes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Edge types that subtypes (supertype can be instantiated)",
+                  "items": {
+                    "$ref": "#/$defs/EdgeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "edgeTypes": {
+          "$ref": "#/$defs/EdgeTypesArray",
+          "description": "Bare edgeTypes array (implicit exactlyOf:concrete for each item)"
         },
         "propertyGraphDataModel": {
           "oneOf": [
@@ -883,153 +1099,438 @@
             }
           ]
         },
-        "import": {
-          "type": "string",
-          "description": "Import file path for graph type defaults"
-        },
-        "nodeTypes": {
-          "$ref": "#/$defs/NodeTypesArray",
-          "description": "Bare nodeTypes array (implicit exactlyOfConcrete semantics)"
-        },
-        "edgeTypes": {
-          "$ref": "#/$defs/EdgeTypesArray",
-          "description": "Bare edgeTypes array (implicit exactlyOfConcrete semantics)"
-        },
-        "exactlyOfConcrete": {
-          "type": "object",
-          "description": "Exact type matching, concrete (instantiable) types",
-          "properties": {
-            "nodeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/NodeType"
-              }
-            },
-            "edgeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/EdgeType"
-              }
-            }
-          },
-          "additionalProperties": false
-        },
-        "subtypeOfConcrete": {
-          "type": "object",
-          "description": "Subtype matching, concrete (instantiable) types",
-          "properties": {
-            "nodeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/NodeType"
-              }
-            },
-            "edgeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/EdgeType"
-              }
-            }
-          },
-          "additionalProperties": false
-        },
-        "subtypeOfAbstract": {
-          "type": "object",
-          "description": "Subtype matching, abstract (non-instantiable) types",
-          "properties": {
-            "nodeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/NodeType"
-              }
-            },
-            "edgeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/EdgeType"
-              }
-            }
-          },
-          "additionalProperties": false
-        },
-        "concrete": {
-          "type": "object",
-          "description": "Synonym for exactlyOfConcrete - exact matching, concrete types",
-          "properties": {
-            "nodeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/NodeType"
-              }
-            },
-            "edgeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/EdgeType"
-              }
-            }
-          },
-          "additionalProperties": false
-        },
         "exactlyOf": {
           "type": "object",
-          "description": "Synonym for exactlyOfConcrete - exact matching, concrete types",
+          "description": "Exact type matching (invariant matching)",
           "properties": {
+            "concrete": {
+              "type": "object",
+              "description": "Concrete types that can be instantiated",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "abstract": {
+              "type": "object",
+              "description": "Abstract types that cannot be instantiated directly",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
             "nodeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/NodeType"
-              }
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Node types with exact matching (default concrete)",
+                  "items": {
+                    "$ref": "#/$defs/NodeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
             },
             "edgeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/EdgeType"
-              }
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Edge types with exact matching (default concrete)",
+                  "items": {
+                    "$ref": "#/$defs/EdgeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
             }
           },
           "additionalProperties": false
         },
-        "subtypeOf": {
+        "properSubtypesOf": {
           "type": "object",
-          "description": "Synonym for subtypeOfConcrete - subtype matching, concrete types",
+          "description": "Proper subtype matching (covariant matching, excluding supertype)",
           "properties": {
+            "concrete": {
+              "type": "object",
+              "description": "Concrete types that can be instantiated",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "abstract": {
+              "type": "object",
+              "description": "Abstract types that cannot be instantiated directly",
+              "properties": {
+                "nodeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/NodeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "edgeTypes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/EdgeType"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "description": "Import content from file",
+                      "required": [
+                        "import"
+                      ],
+                      "properties": {
+                        "import": {
+                          "type": "string",
+                          "description": "Import content from file"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
             "nodeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/NodeType"
-              }
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Node types with proper subtype matching (default abstract)",
+                  "items": {
+                    "$ref": "#/$defs/NodeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
             },
             "edgeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/EdgeType"
-              }
-            }
-          },
-          "additionalProperties": false
-        },
-        "properSubtypeOf": {
-          "type": "object",
-          "description": "Synonym for subtypeOfAbstract - subtype matching, abstract types",
-          "properties": {
-            "nodeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/NodeType"
-              }
-            },
-            "edgeTypes": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/EdgeType"
-              }
+              "oneOf": [
+                {
+                  "type": "array",
+                  "description": "Edge types with proper subtype matching (default abstract)",
+                  "items": {
+                    "$ref": "#/$defs/EdgeType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "description": "Import content from file",
+                  "required": [
+                    "import"
+                  ],
+                  "properties": {
+                    "import": {
+                      "type": "string",
+                      "description": "Import content from file"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
             }
           },
           "additionalProperties": false
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true,
+      "patternProperties": {
+        "^(abstract|sealed|final|concrete)$": {
+          "type": "object",
+          "description": "One-level wrapper for concreteness (maps to two-level canonical form)",
+          "properties": {
+            "nodeTypes": {
+              "$ref": "#/$defs/NodeTypesArray"
+            },
+            "edgeTypes": {
+              "$ref": "#/$defs/EdgeTypesArray"
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        },
+        "^(properSubtypesOf)$": {
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "One-level wrapper (maps to subtypesOf: abstract:)",
+              "properties": {
+                "nodeTypes": {
+                  "$ref": "#/$defs/NodeTypesArray"
+                },
+                "edgeTypes": {
+                  "$ref": "#/$defs/EdgeTypesArray"
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1
+            },
+            {
+              "type": "object",
+              "description": "Two-level wrapper with concreteness",
+              "patternProperties": {
+                "^(abstract|concrete)$": {
+                  "type": "object",
+                  "properties": {
+                    "nodeTypes": {
+                      "$ref": "#/$defs/NodeTypesArray"
+                    },
+                    "edgeTypes": {
+                      "$ref": "#/$defs/EdgeTypesArray"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1,
+              "maxProperties": 1
+            }
+          ]
+        },
+        "^(exactlyOf|subtypesOf)$": {
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "Subtype matching mode without concreteness wrapper",
+              "properties": {
+                "nodeTypes": {
+                  "$ref": "#/$defs/NodeTypesArray"
+                },
+                "edgeTypes": {
+                  "$ref": "#/$defs/EdgeTypesArray"
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1
+            },
+            {
+              "type": "object",
+              "description": "Two-level wrapper: subtype matching mode with concreteness",
+              "patternProperties": {
+                "^(abstract|concrete)$": {
+                  "type": "object",
+                  "properties": {
+                    "nodeTypes": {
+                      "$ref": "#/$defs/NodeTypesArray"
+                    },
+                    "edgeTypes": {
+                      "$ref": "#/$defs/EdgeTypesArray"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1,
+              "maxProperties": 1
+            }
+          ]
+        }
+      }
     },
     "PartitionBlockItemNode": {
       "description": "Item in nodeTypes array - can be bare type, TI-wrapped partition block, or Phase 1 import (import entire TI wrapper + content)",

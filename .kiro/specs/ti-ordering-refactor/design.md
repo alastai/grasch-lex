@@ -1,236 +1,785 @@
-# Design Document: Type Interpretation Ordering Refactor
+# Design Document: Type Interpretation System Simplification
 
-**Version**: 1.0  
-**Date**: 2024-12-02  
+**Version**: 2.0  
+**Date**: 2024-12-11  
 **Status**: Active Design Document  
 **Related Requirements**: `.kiro/specs/ti-ordering-refactor/requirements.md`
 
 ## Overview
 
-This document describes the design for refactoring the LEX-2026.0.3.2 JSON Schema to fix incorrect Type Interpretation (TI) wrapper ordering at 6 out of 8 locations. The refactoring will ensure TI wrappers appear BEFORE content (not after), enabling proper 0-level/1-level/2-level TI syntax support across all locations.
+This document describes the design for fundamentally simplifying the LEX-2026.0.3.2 Type Interpretation (TI) system from a complex two-level architecture to a streamlined single-level system. The simplification includes four major architectural changes: eliminating freestanding types, preventing all forms of TI nesting, and consolidating the TI system into three primary forms with synonyms. This represents a major architectural improvement that will significantly reduce complexity while maintaining full semantic expressiveness.
 
-**Context**: This work completes the Type Interpretation implementation begun in `.kiro/specs/type-interpretation-wrappers/` and documented in `TI-SCHEMA-ORDERING-FIX-DESIGN.md`. During Phases A-D implementation (see `PHASES-A-D-COMPLETE.md`), we discovered that 6 out of 8 TI locations have wrong-order patterns. This spec defines the refactoring to fix those locations.
+**Context**: This work represents a fundamental redesign of the Type Interpretation system based on lessons learned from the complex two-level implementation. The four simplification changes eliminate architectural complexity while maintaining full semantic capability, making the system significantly easier to understand, implement, and maintain.
 
-## Problem Statement
+## MAJOR SIMPLIFICATION: TI Only Applies to Sub-Arrays
 
-The current schema has TWO critical bugs:
+**FUNDAMENTAL DESIGN CHANGE**: TI wrappers are **ELIMINATED** at graphType and collection levels. TI **ONLY** applies to sub-arrays within type collections.
 
-### Bug 1: Wrong TI Wrapper Ordering
-TI wrappers appear AFTER content properties at 6 locations, which breaks the fundamental TI architecture.
+**Type Collections**: Properties like `nodeTypes:`, `edgeTypes:` that contain arrays - **NO TI wrappers allowed**
+**Type Arrays**: The actual `[...]` arrays inside collections - **NO TI wrappers at array level**  
+**Sub-Arrays**: Subsequences within arrays - **TI wrappers ONLY apply here**
 
-**Current (Wrong)**:
+**TI Application - SIMPLIFIED**:
+1. **Sub-Array Level ONLY**: TI wraps subsequences within the array content inside collections
+2. **Endpoint Level**: TI wraps endpoint references within edge types
+3. **Default Behavior**: All types without explicit TI are semantically equivalent to `exactlyOfConcrete`
+
+**Key Insight**: TI wrappers apply **ONLY** to sub-arrays (subsequences) within collections. Collection properties (`nodeTypes:`, `edgeTypes:`) and graphType itself **NEVER** have TI wrappers. This eliminates 3 locations and significantly simplifies the system.
+
+## NodeTypeItem/EdgeTypeItem: Essential for Array Subsequence Model
+
+**CRITICAL CLARIFICATION**: NodeTypeItem and EdgeTypeItem are **NOT redundant** - they are essential for enabling the array subsequence partitioning model.
+
+**What NodeTypeItem/EdgeTypeItem Define**:
+- What can appear as elements within `nodeTypes`/`edgeTypes` arrays
+- Support for bare types: `{ typeLabel: Person }`
+- Support for TI-wrapped individual types: `exactlyOfConcrete: { typeLabel: Person }`
+- Support for TI-wrapped array subsequences: `subtypeOfAbstract: [{ typeLabel: Vehicle }, { typeLabel: Car }]`
+
+**Array Subsequence Partitioning Example**:
 ```yaml
-nodeTypes:
-  - exactlyOf:      # TI INSIDE array item
-      concrete:
-        typeLabel: Person
+nodeTypes:                              # Collection containing array
+  - typeLabel: Person                   # Bare element (NodeTypeItem)
+  - subtypeOfAbstract:                  # TI-wrapped subsequence (NodeTypeItem)
+      - typeLabel: Vehicle              # Array within subsequence
+      - typeLabel: Car
+  - exactlyOfConcrete:                  # Another TI-wrapped subsequence (NodeTypeItem)
+      - typeLabel: Company
+      - typeLabel: Organization
 ```
 
-**Target (Correct)**:
+**Why NodeTypeItem/EdgeTypeItem Are Essential**:
+1. **Array Element Definition**: Define what can be array elements (bare types, TI-wrapped types, TI-wrapped subsequences)
+2. **Subsequence Support**: Enable partitioning arrays into TI-wrapped subsequences
+3. **Flexible Structure**: Allow mixing bare elements with TI-wrapped subsequences in the same array
+4. **Schema Validation**: Provide proper validation for complex array structures
+
+**Without NodeTypeItem/EdgeTypeItem**: Arrays could only contain uniform elements, eliminating the powerful subsequence partitioning capability that makes the TI system flexible and expressive.
+
+## Simplification Rationale
+
+The current two-level TI system has proven overly complex and difficult to implement correctly. This design addresses four fundamental issues:
+
+### Issue 1: Complex Two-Level Architecture
+The current system requires understanding both interpretation facets (`exactlyOf`, `subtypesOf`, `properSubtypesOf`) and concreteness facets (`abstract`, `concrete`, `final`, `sealed`), creating 6+ valid combinations.
+
+**Current (Complex)**:
 ```yaml
-exactlyOf:          # TI OUTSIDE, wrapping nodeTypes
+# Two-level nesting with multiple facets
+exactlyOf:
   concrete:
-    nodeTypes:
-      - typeLabel: Person
-```
-
-### Bug 2: Sibling TI Wrappers Rejected (CRITICAL)
-The schema uses `patternProperties` that CONFLICT with regular `properties`, preventing multiple sibling `nodeTypes`/`edgeTypes` with different TI wrappers.
-
-**Current (Broken)**:
-```yaml
-graphType:
-  nodeTypes: [...]        # Regular property
-  concrete:               # Pattern property - CONFLICTS!
-    edgeTypes: [...]      # Schema rejects this as invalid
-```
-
-**Target (Required)**:
-```yaml
-graphType:
-  nodeTypes: [...]        # Bare nodeTypes (0-level)
-  abstract:               # TI-wrapped nodeTypes (sibling)
     nodeTypes: [...]
-  edgeTypes: [...]        # Bare edgeTypes (0-level)
-  concrete:               # TI-wrapped edgeTypes (sibling)
+subtypesOf:
+  abstract:
     edgeTypes: [...]
 ```
 
-**Root Cause**: JSON Schema's `patternProperties` and regular `properties` with the same nested property names create conflicts. The schema needs to be restructured to allow BOTH bare properties AND TI-wrapped properties as siblings.
+**Simplified (Single-Level)**:
+```yaml
+# Single-level with clear semantics
+exactlyOfConcrete:
+  nodeTypes: [...]
+subtypeOfAbstract:
+  edgeTypes: [...]
+```
 
-## Phase 2 Scope Summary - CORRECTED
+### Issue 2: Freestanding Type Inconsistency
+The current system allows both freestanding types and array-based types, creating inconsistent organization patterns.
 
-**What Phase 2 Fixes**: **7 broken locations** (Locations 1-7) where TI wrappers are missing or in the wrong order.
+**Current (Inconsistent)**:
+```yaml
+graphType:
+  nodeType: {...}        # Freestanding type
+  nodeTypes: [...]       # Array of types
+```
+
+**Simplified (Consistent)**:
+```yaml
+graphType:
+  nodeTypes: [...]       # Only arrays allowed
+  subtypeOfConcrete:
+    nodeTypes: [...]     # TI-wrapped arrays
+```
+
+### Issue 3: TI Nesting Complexity
+The current system's two-level architecture inherently allows confusing nesting patterns.
+
+**Current (Confusing)**:
+```yaml
+exactlyOf:
+  concrete:
+    subtypesOf:          # Nested TI - confusing semantics
+      abstract: [...]
+```
+
+**Simplified (Clear)**:
+```yaml
+exactlyOfConcrete: [...]     # Single level - clear semantics
+subtypeOfAbstract: [...]     # No nesting possible
+```
+
+### Issue 4: Synonym Proliferation Without Clear Mapping
+The current system has multiple synonyms without clear canonical forms, leading to inconsistent usage.
+
+## Phase 2 Scope Summary - MAJOR SIMPLIFICATION
+
+**What Phase 2 Eliminates**: **Locations 1-3** (graphType TI, collection-level TI) - completely removed from the system
+
+**What Phase 2 Fixes**: **2 broken locations** (Locations 4-5) where TI sub-array wrappers are in the wrong order.
 
 **What Phase 2 Does NOT Fix**: 
 - Location 8 (edgeTypeEndpointNodeTypeInterpretation) - Already working from previous phases
 
-**Critical Discovery - Location 1 Needs Fixing**:
-- GraphSchemaContent currently does NOT support TI wrappers around `graphType`
-- It only allows ONE bare `graphType` property (enforced by `"additionalProperties": false`)
-- **User Requirement**: TI wrappers (0/1/2-level) should be able to wrap the ONE `graphType`
-- **Example needed**:
-  ```yaml
-  graphSchema:
-    pathName: /mySchema
-    # Option 1: Bare (0-level)
-    graphType: { ... }
-    # OR Option 2: 1-level TI
-    abstract:
-      graphType: { ... }
-    # OR Option 3: 2-level TI
-    subtypesOf:
-      abstract:
-        graphType: { ... }
-  ```
+**Critical Discovery - Tasks 10-11 Correction**:
+- **Vestigial Definitions**: `NodeTypesProperty` and `EdgeTypesProperty` definitions exist in schema but are NOT REFERENCED anywhere
+  - These are remnants from an earlier design at lines ~2470-2700 and ~3181-3400
+  - They must be completely DELETED from the schema
+- **Missing Level-1 TI Wrappers**: GraphType definition is missing 1-level TI wrappers
+  - GraphType currently has: 0-level (bare) and 2-level (explicit) TI wrappers
+  - GraphType is MISSING: 1-level (shorthand) TI wrappers `concrete:` and `abstract:`
+  - These must be added as explicit properties in GraphType with both nodeTypes and edgeTypes children
 
-**Locations 2-3 Clarification**:
-- GraphType (the content WITHIN Location 1) already has correct `patternProperties` pattern
-- BUT NodeTypesProperty and EdgeTypesProperty use wrong `oneOf` pattern
-- **User Requirement**: Multiple `nodeTypes` and `edgeTypes` properties as siblings, each with its own TI wrapper
-- **Example needed**:
-  ```yaml
-  graphType:
-    nodeTypes: [...]        # Bare (0-level)
-    abstract:               # 1-level TI (sibling)
+**What GraphType Currently Has**:
+```yaml
+graphType:
+  nodeTypes: [...]              # ✅ 0-level (bare)
+  edgeTypes: [...]              # ✅ 0-level (bare)
+  exactlyOf:                    # ✅ 2-level
+    concrete:
       nodeTypes: [...]
-    exactlyOf:              # 2-level TI (sibling)
-      concrete:
-        nodeTypes: [...]
-  ```
+      edgeTypes: [...]
+  subtypesOf:                   # ✅ 2-level
+    abstract:
+      nodeTypes: [...]
+      edgeTypes: [...]
+  properSubtypesOf:             # ✅ 2-level
+    concrete/abstract:
+      nodeTypes: [...]
+      edgeTypes: [...]
+```
 
-**Reference Pattern**: GraphType's existing `patternProperties` implementation is the correct pattern to replicate.
+**What GraphType Needs (1-level TI wrappers)**:
+```yaml
+graphType:
+  concrete:                     # ❌ MISSING 1-level (shorthand for exactlyOf:concrete:)
+    nodeTypes: [...]
+    edgeTypes: [...]
+  abstract:                     # ❌ MISSING 1-level (shorthand for properSubtypesOf:abstract:)
+    nodeTypes: [...]
+    edgeTypes: [...]
+```
+
+**Reference**: See `TASKS-10-11-CORRECTION-ANALYSIS.md` for detailed analysis.
+
+## CORE DESIGN PRINCIPLE: Explicit Properties Only
+
+**FUNDAMENTAL GUARDRAIL**: This design uses **explicit properties exclusively**. Pattern properties (`patternProperties`) are **NEVER** used anywhere in the schema.
+
+**Why Explicit Properties Are Required**:
+1. **Predictable behavior**: Each property is explicitly defined with clear semantics
+2. **IDE support**: Better autocomplete, validation, and development experience
+3. **No conflicts**: Eliminates JSON Schema conflicts between pattern and regular properties
+4. **Maintainability**: Clear, readable schema structure that's easy to understand and modify
+5. **Sibling support**: Enables multiple TI wrappers with different facets at the same level
+
+**Pattern Properties Are Prohibited**:
+- Pattern properties create unpredictable conflicts with regular properties
+- They prevent proper sibling TI wrapper support
+- They make the schema harder to understand and maintain
+- They are incompatible with our design goals
+
+**The Explicit Properties Approach**:
+- **For single-wrapper locations** (Location 1): Use `oneOf` with explicit properties for each TI level
+- **For sibling-wrapper locations** (Locations 2-7): Use explicit sibling properties without oneOf
+- **All TI keywords**: `concrete`, `abstract`, `exactlyOf`, `subtypesOf`, `properSubtypesOf` are explicit properties
+- **Reference pattern**: Phases A-D (Locations 6-8) demonstrate the CORRECT explicit properties approach
+
+**Current Schema Issues to Fix**:
+- Location 1 (GraphSchemaContent) currently uses `patternProperties` - this must be **ELIMINATED**
+- REMOVE all `patternProperties` from GraphSchemaContent
+- ADD explicit properties: `graphType`, `concrete`, `abstract`, `exactlyOf`, `subtypesOf`, `properSubtypesOf`
+- Use `oneOf` to ensure exactly one graphType (bare or wrapped) exists
+- Each TI property explicitly contains `graphType` as a child
+
+**This Is Non-Negotiable**: Any use of `patternProperties` in the schema is considered a bug and must be replaced with explicit properties.
 
 ## Architecture
 
-### Three-Level TI System
+### Single-Level TI System
 
-Type Interpretations operate at three expression levels:
+Type Interpretations operate at two expression levels:
 
-1. **0-Level (Bare)**: `typeLabel: Person` - No wrapper, implicit `exactlyOf:concrete:`
-2. **1-Level (Shorthand)**: `abstract: { typeLabel: Person }` - One wrapper keyword
-3. **2-Level (Explicit)**: `subtypesOf: { abstract: { typeLabel: Person } }` - Two wrapper keywords
+1. **0-Level (Bare)**: `typeLabel: Person` - No wrapper, implicit `exactlyOfConcrete` semantics
+2. **1-Level (Wrapped)**: Single TI wrapper keyword
+   - **Primary Forms**: `exactlyOfConcrete: { nodeTypes: [...] }`, `subtypeOfConcrete: { nodeTypes: [...] }`, `subtypeOfAbstract: { nodeTypes: [...] }`
+   - **Synonyms**: `concrete: { nodeTypes: [...] }`, `subtypeOf: { nodeTypes: [...] }`, `properSubtypeOf: { nodeTypes: [...] }`
 
-This is implemented using JSON Schema `patternProperties` to match TI keywords.
+This is implemented using explicit JSON Schema properties for each TI keyword, with canonicalization mapping synonyms to primary forms.
 
-### Eight TI Locations
+### Three Primary TI Forms
 
-The authoritative location taxonomy (from `TEMP-NESTING-IDEAS.md`):
+The simplified system has exactly three primary TI forms with clear semantics:
+
+1. **`exactlyOfConcrete`**: Exact type matching, concrete (instantiable) types
+   - **Synonyms**: `exactlyOf`, `concrete`
+   - **Semantics**: Types must match exactly, can be instantiated
+   - **Example**: `exactlyOfConcrete: { nodeTypes: [{ typeLabel: Person }] }`
+
+2. **`subtypeOfConcrete`**: Subtype matching, concrete (instantiable) types  
+   - **Synonyms**: `subtypeOf`
+   - **Semantics**: Allows subtypes, can be instantiated
+   - **Example**: `subtypeOfConcrete: { nodeTypes: [{ typeLabel: Vehicle }] }`
+
+3. **`subtypeOfAbstract`**: Subtype matching, abstract (non-instantiable) types
+   - **Synonyms**: `properSubtypeOf`
+   - **Semantics**: Allows subtypes, cannot be instantiated (abstract)
+   - **Example**: `subtypeOfAbstract: { nodeTypes: [{ typeLabel: Entity }] }`
+
+**Important Distinction**: The keywords `final:` and `sealed:` are **NOT** part of the type interpretation system. They belong to the **type finalization** system, which is a separate concern that will be addressed in a future phase.
+
+### Synonym Mapping and Canonicalization
+
+The TI synonyms provide convenient shorthand syntax that maps to canonical primary forms during preprocessing:
+
+**Synonym Mappings**:
+- **`concrete:`** → **`exactlyOfConcrete:`**
+  - Meaning: Exact type matching, concrete (instantiable) types
+  - Example: `concrete: { nodeTypes: [...] }` → `exactlyOfConcrete: { nodeTypes: [...] }`
+
+- **`exactlyOf:`** → **`exactlyOfConcrete:`**
+  - Meaning: Same as `concrete:`, exact type matching
+  - Example: `exactlyOf: { nodeTypes: [...] }` → `exactlyOfConcrete: { nodeTypes: [...] }`
+
+- **`subtypeOf:`** → **`subtypeOfConcrete:`**
+  - Meaning: Subtype matching, concrete (instantiable) types
+  - Example: `subtypeOf: { nodeTypes: [...] }` → `subtypeOfConcrete: { nodeTypes: [...] }`
+
+- **`properSubtypeOf:`** → **`subtypeOfAbstract:`**
+  - Meaning: Subtype matching, abstract (non-instantiable) types
+  - Example: `properSubtypeOf: { nodeTypes: [...] }` → `subtypeOfAbstract: { nodeTypes: [...] }`
+
+**Canonicalization Process**: During preprocessing, all synonyms are automatically converted to their canonical primary forms, ensuring consistent internal representation while maintaining author-friendly syntax.
+
+### Array-Only Organization Model
+
+**All Locations** use a consistent array-only organization model with clear distinction between collections and array content:
+
+**Collection vs Array Structure**:
+- **Type Collections**: Properties like `nodeTypes:`, `edgeTypes:` that contain arrays
+- **Type Arrays**: The actual `[...]` arrays inside collections
+- **Array Content**: Individual elements and subsequences within type arrays
+- **TI Application**: TI wrappers apply to collections, array content, and subsequences - NOT to collection properties themselves
+
+**Example - nodeTypes Collection with TI Sub-Arrays (COMPLETE SYNTAX)**:
+```yaml
+graphType:
+  nodeTypes:                             # Type collection (NO TI wrappers at this level)
+    - nodeType: Person                   # Abbreviated syntax (simple typeLabel only)
+    - nodeType:                          # Full syntax with properties
+        typeLabel: Company
+        implies:
+          propertyTypes:
+            - name: founded
+              valueType: DATE
+    - nodeType:                          # Multiple type labels
+        typeLabels: [Cat, Dog]
+        implies:
+          propertyTypes:
+            - name: age
+              valueType: INTEGER
+    - abstract:                          # TI-wrapped sub-array 1
+        - nodeType:
+            typeLabel: Entity
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: STRING
+        - nodeType:
+            typeLabel: Vehicle
+            extends: Entity
+            adding:
+              propertyTypes:
+                - name: wheels
+                  valueType: INTEGER
+    - concrete:                          # TI-wrapped sub-array 2
+        - nodeType: Organization         # Abbreviated syntax within TI sub-array
+        - nodeType:
+            typeLabel: Department
+            extends: Organization
+    - nodeType: Location                 # Bare elements can continue after TI sub-arrays
+    - nodeType:                          # Another bare element with properties
+        typeLabel: Event
+        implies:
+          propertyTypes:
+            - name: date
+              valueType: DATETIME
+```
+
+**Key Organizational Principles**:
+1. **Collections Contain Arrays**: `nodeTypes:` and `edgeTypes:` are collection properties containing arrays
+2. **TI Wraps Content**: TI wrappers apply to array content and subsequences, not collection properties
+3. **Array Subsequences**: Arrays can be partitioned into TI-wrapped subsequences
+4. **Sibling Structure**: TI subsequences are siblings within arrays, never nested
+5. **No Freestanding Types**: All types must be array elements or subsequence elements
+
+**Eliminated Patterns**:
+- ❌ Freestanding types: `nodeType: { typeLabel: Person }`
+- ❌ Mixed organization: Some freestanding, some in arrays
+- ❌ TI nesting: One TI wrapper containing another
+- ❌ TI on collection properties: TI wrappers do not apply to `nodeTypes:` or `edgeTypes:` properties themselves
+
+### Sub-Array TI Within Collections - SIMPLIFIED MODEL
+
+TI wrappers **ONLY** apply to sub-arrays within collections. No TI at graphType or collection level:
+
+```yaml
+graphType:
+  nodeTypes:                   # Collection (NO TI wrappers allowed at this level)
+    - nodeType: Person         # Abbreviated syntax (simple typeLabel only)
+    - nodeType:                # Full syntax with properties
+        typeLabel: Company
+        implies:
+          propertyTypes:
+            - name: founded
+              valueType: DATE
+    - nodeType:                # Multiple type labels
+        typeLabels: [Cat, Dog]
+    - subtypeOfAbstract:       # TI-wrapped sub-array
+        - nodeType:
+            typeLabel: Entity
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: STRING
+        - nodeType: Vehicle     # Abbreviated syntax within TI sub-array
+    - exactlyOfConcrete:       # Another TI-wrapped sub-array  
+        - nodeType: Organization
+        - nodeType:
+            typeLabel: Department
+            extends: Organization
+    - nodeType: Location       # Bare elements can continue after TI sub-arrays
+    - nodeType:                # Another bare element with properties
+        typeLabel: Event
+        implies:
+          propertyTypes:
+            - name: date
+              valueType: DATETIME
+    - concrete:                # Another TI-wrapped sub-array (synonym)
+        - nodeType: Product
+        - nodeType: Service
+    - nodeType: User           # More bare elements after TI sub-arrays
+  edgeTypes:                   # Collection (NO TI wrappers allowed at this level)
+    - edgeType:                # Full syntax
+        via:
+          typeLabel: KNOWS
+    - abstract:                # TI-wrapped sub-array (synonym)
+        - edgeType:
+            via:
+              typeLabel: RELATIONSHIP
+            implies:
+              propertyTypes:
+                - name: strength
+                  valueType: FLOAT
+    - edgeType:                # Bare elements can continue after TI sub-arrays
+        via:
+          typeLabel: WORKS_FOR
+        extends: RELATIONSHIP
+        adding:
+          propertyTypes:
+            - name: since
+              valueType: DATE
+```
+
+**Using Synonyms (Pre-Canonical Form)**:
+```yaml
+graphType:
+  nodeTypes:
+    - nodeType:
+        typeLabel: Person
+    - properSubtypeOf:         # Synonym for subtypeOfAbstract
+        - nodeType:
+            typeLabel: Entity
+    - concrete:                # Synonym for exactlyOfConcrete
+        - nodeType:
+            typeLabel: Company
+```
+
+**Syntax Variations**:
+1. **Abbreviated Syntax**: For simple types with only a typeLabel: `- nodeType: Person`
+2. **Full Syntax**: For types with properties: `- nodeType: { typeLabel: Person, implies: {...} }`
+3. **Multiple Labels**: For types with multiple labels: `- nodeType: { typeLabels: [Cat, Dog] }`
+4. **Extension Syntax**: For types that extend others: `- nodeType: { typeLabel: Car, extends: Vehicle, adding: {...} }`
+
+**Complete Example - All Syntax Possibilities**:
+```yaml
+graphType:
+  nodeTypes:
+    # Abbreviated syntax - simple typeLabel only
+    - nodeType: Person
+    
+    # Full syntax with single typeLabel and implies (labels + propertyTypes)
+    - nodeType:
+        typeLabel: Company
+        implies:
+          labels: [Organization, Entity]
+          propertyTypes:
+            - name: founded
+              valueType: DATE
+            - name: employees
+              valueType: INTEGER
+    
+    # Multiple typeLabels with implies
+    - nodeType:
+        typeLabels: [Cat, Dog, Pet]
+        implies:
+          labels: [Animal, LivingThing]
+          propertyTypes:
+            - name: age
+              valueType: INTEGER
+            - name: name
+              valueType: STRING
+    
+    # Extension with adding (labels + propertyTypes)
+    - nodeType:
+        typeLabel: Employee
+        extends: Person
+        adding:
+          labels: [Worker, Staff]
+          propertyTypes:
+            - name: employeeId
+              valueType: STRING
+            - name: salary
+              valueType: DECIMAL
+    
+    # TI-wrapped sub-array with abstract types
+    - abstract:
+        - nodeType:
+            typeLabel: Vehicle
+            implies:
+              labels: [Transport, Machine]
+              propertyTypes:
+                - name: wheels
+                  valueType: INTEGER
+        - nodeType: Engine  # Abbreviated within TI sub-array
+    
+    # More bare elements after TI sub-array
+    - nodeType: Location
+    
+    # Another TI-wrapped sub-array with concrete types
+    - concrete:
+        - nodeType:
+            typeLabel: Car
+            extends: Vehicle
+            adding:
+              labels: [Automobile]
+              propertyTypes:
+                - name: model
+                  valueType: STRING
+        - nodeType:
+            typeLabels: [Truck, Lorry]
+            extends: Vehicle
+    
+    # Final bare elements
+    - nodeType: Event
+    
+  edgeTypes:
+    # Abbreviated syntax for edge types
+    - edgeType:
+        via:
+          typeLabel: KNOWS
+    
+    # Full syntax with implies
+    - edgeType:
+        via:
+          typeLabel: WORKS_FOR
+        implies:
+          labels: [Employment, Relationship]
+          propertyTypes:
+            - name: since
+              valueType: DATE
+            - name: position
+              valueType: STRING
+    
+    # Extension syntax for edge types
+    - edgeType:
+        via:
+          typeLabel: MANAGES
+        extends: WORKS_FOR
+        adding:
+          labels: [Leadership]
+          propertyTypes:
+            - name: teamSize
+              valueType: INTEGER
+    
+    # TI-wrapped sub-array for edge types
+    - abstract:
+        - edgeType:
+            via:
+              typeLabel: RELATIONSHIP
+            implies:
+              labels: [Connection, Link]
+              propertyTypes:
+                - name: strength
+                  valueType: FLOAT
+```
+
+**Key Syntax Rules**:
+- `implies:` can contain both `labels:` and `propertyTypes:` (both optional)
+- `adding:` works the same way: can add both `labels:` and `propertyTypes:` to existing sets
+- Abbreviated syntax `- nodeType: Person` is equivalent to `- nodeType: { typeLabel: Person }`
+- TI sub-arrays can contain any mix of abbreviated and full syntax
+- Bare elements and TI sub-arrays can be freely intermixed
+
+**Default 0-Level Behavior - SIMPLIFIED**:
+When no TI wrapper is specified around a sub-array, elements are semantically equivalent to `exactlyOfConcrete`. This provides clear default behavior with no ambiguity.
+
+## Default 0-Level Behavior: Semantic Equivalence to exactlyOfConcrete
+
+**CRITICAL DESIGN DECISION**: When no TI wrapper is specified, the behavior is **semantically equivalent** to `exactlyOfConcrete`, not merely "implicit" or "default".
+
+**What This Means**:
+- `nodeTypes: [{ typeLabel: Person }]` is functionally identical to `exactlyOfConcrete: { nodeTypes: [{ typeLabel: Person }] }`
+- The system processes both forms with identical semantics
+- No ambiguity exists about the interpretation of bare (0-level) types
+- The default provides concrete, instantiable type matching behavior
+
+**Implementation**:
+- Schema validation treats both forms as valid
+- Canonicalization may normalize bare forms to explicit `exactlyOfConcrete` wrappers
+- Runtime behavior is identical between bare and explicitly wrapped forms
+- Documentation clearly states the semantic equivalence
+
+**Rationale**:
+- Eliminates confusion about "what does bare mean?"
+- Provides sensible default behavior (concrete, exact matching)
+- Maintains backward compatibility with existing schemas
+- Simplifies mental model: bare = exactlyOfConcrete
+
+### Three TI Locations - MAJOR SIMPLIFICATION
+
+The dramatically simplified location taxonomy - TI only applies to sub-arrays:
 
 | # | Location Name | Description | Current Status | Fix Required |
 |---|---------------|-------------|----------------|--------------|
-| 1 | `graphTypeInterpretation` | Wraps the graphType property | ✗ WRONG | Add TI support |
-| 2 | `nodeTypesInterpretation` | Wraps ENTIRE nodeTypes array property | ✗ WRONG | Fix pattern |
-| 3 | `edgeTypesInterpretation` | Wraps ENTIRE edgeTypes array property | ✗ WRONG | Fix pattern |
-| 4 | `nodeTypeArrayInterpretation` | Wraps SUBSEQUENCE within nodeTypes array | ✗ WRONG | Reorder pattern |
-| 5 | `edgeTypeArrayInterpretation` | Wraps SUBSEQUENCE within edgeTypes array | ✗ WRONG | Reorder pattern |
-| 6 | `nodeTypeInterpretation` | Wraps a single nodeType | ✗ WRONG | Add TI support |
-| 7 | `edgeTypeInterpretation` | Wraps a single edgeType | ✗ WRONG | Add TI support |
-| 8 | `edgeTypeEndpointNodeTypeInterpretation` | Wraps endpoint references | ✓ CORRECT | None - already working |
+| 1 | **ELIMINATED** | graphType TI → No TI at graphType level | N/A | N/A |
+| 2 | **ELIMINATED** | nodeTypes collection TI → No TI at collection level | N/A | N/A |
+| 3 | **ELIMINATED** | edgeTypes collection TI → No TI at collection level | N/A | N/A |
+| 4 | `nodeTypeSubArrayInterpretation` | TI wraps sub-arrays within nodeTypes collection | ✗ WRONG | Fix pattern |
+| 5 | `edgeTypeSubArrayInterpretation` | TI wraps sub-arrays within edgeTypes collection | ✗ WRONG | Fix pattern |
+| 7 | `edgeTypeEndpointNodeTypeInterpretation` | TI wraps endpoint references | ✓ CORRECT | None - already working |
 
-**Phase 2 Scope - CORRECTED**: This refactoring fixes **7 broken locations** (1-7). Location 8 is already working from previous phases.
+**Phase 2 Scope - MAJOR SIMPLIFICATION**: This refactoring fixes **2 broken locations** (4-5). Location 7 is already working. Locations 1-3 are **ELIMINATED** entirely.
+
+**Key Insight**: TI complexity is dramatically reduced by eliminating graphType-level and collection-level TI. TI **ONLY** applies to sub-arrays within collections and endpoint references.
 
 **Key Discovery**: Location 1 (GraphSchemaContent) does NOT currently support TI wrappers around `graphType`. It only allows ONE bare `graphType` property. We need to add `patternProperties` to enable TI wrappers.
 
-**Reference Pattern**: GraphType (the CONTENT of Location 1) already has the correct `patternProperties` pattern. We'll use this as the reference for fixing all locations.
+**CRITICAL CORRECTION**: GraphType's `patternProperties` pattern is WRONG and violates our core design principle. The correct reference pattern is the explicit properties with oneOf approach used in Phases A-D (Locations 6-8). We must ELIMINATE all pattern properties and use explicit properties exclusively.
 
 ## Design Solution
 
-### Core Pattern (from Location 1 - GraphType)
+### Core Pattern: Explicit Properties for Single-Level TI
 
-The correct pattern uses `patternProperties` to wrap content:
+**Design Decision**: Use explicit properties for each TI keyword in a flat, single-level structure.
+
+**Rationale**:
+- **Simplicity**: Single-level structure eliminates complex nesting patterns
+- **Clarity**: Each TI form has clear, unambiguous semantics
+- **Sibling support**: Allows multiple TI wrappers with different forms at the same level
+- **IDE support**: Better autocomplete and validation with explicit properties
+- **Consistency**: Same pattern applies to all locations
+
+**Pattern for Sibling TI Wrappers** (e.g., at GraphType level):
 
 ```json
 {
+  "type": "object",
   "properties": {
-    "nodeTypes": {"type": "array", "items": {...}}
-  },
-  "patternProperties": {
-    "^(exactlyOf|subtypesOf|properSubtypesOf)$": {
-      "oneOf": [
-        {
-          "properties": {
-            "nodeTypes": {"type": "array", "items": {...}}
-          }
+    "nodeTypes": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/NodeType"}
+    },
+    "edgeTypes": {
+      "type": "array", 
+      "items": {"$ref": "#/$defs/EdgeType"}
+    },
+    "exactlyOfConcrete": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/NodeType"}
         },
-        {
-          "patternProperties": {
-            "^(abstract|concrete|final|sealed)$": {
-              "properties": {
-                "nodeTypes": {"type": "array", "items": {...}}
-              }
-            }
-          }
+        "edgeTypes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/EdgeType"}
         }
-      ]
+      }
+    },
+    "subtypeOfConcrete": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/NodeType"}
+        },
+        "edgeTypes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/EdgeType"}
+        }
+      }
+    },
+    "subtypeOfAbstract": {
+      "type": "object",
+      "properties": {
+        "nodeTypes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/NodeType"}
+        },
+        "edgeTypes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/EdgeType"}
+        }
+      }
+    },
+    "concrete": {
+      "type": "object",
+      "description": "Synonym for exactlyOfConcrete",
+      "properties": {
+        "nodeTypes": {"type": "array", "items": {"$ref": "#/$defs/NodeType"}},
+        "edgeTypes": {"type": "array", "items": {"$ref": "#/$defs/EdgeType"}}
+      }
+    },
+    "subtypeOf": {
+      "type": "object", 
+      "description": "Synonym for subtypeOfConcrete",
+      "properties": {
+        "nodeTypes": {"type": "array", "items": {"$ref": "#/$defs/NodeType"}},
+        "edgeTypes": {"type": "array", "items": {"$ref": "#/$defs/EdgeType"}}
+      }
+    },
+    "properSubtypeOf": {
+      "type": "object",
+      "description": "Synonym for subtypeOfAbstract", 
+      "properties": {
+        "nodeTypes": {"type": "array", "items": {"$ref": "#/$defs/NodeType"}},
+        "edgeTypes": {"type": "array", "items": {"$ref": "#/$defs/EdgeType"}}
+      }
     }
   }
 }
 ```
 
+**Pattern for Single TI Wrapper** (e.g., around `graphType` in GraphSchemaContent):
+
+Use `oneOf` to allow exactly one option:
+
+```json
+{
+  "oneOf": [
+    {
+      "properties": {
+        "graphType": {"$ref": "#/$defs/GraphType"}
+      }
+    },
+    {
+      "properties": {
+        "concrete": {
+          "type": "object",
+          "properties": {
+            "graphType": {"$ref": "#/$defs/GraphType"}
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "abstract": {
+          "type": "object",
+          "properties": {
+            "graphType": {"$ref": "#/$defs/GraphType"}
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
+**Supported TI Levels**:
+- **0-level**: Bare properties (e.g., `nodeTypes:`, `edgeTypes:`) - implicit `exactlyOfConcrete`
+- **1-level**: Single TI wrappers using primary forms (`exactlyOfConcrete:`, `subtypeOfConcrete:`, `subtypeOfAbstract:`)
+- **1-level**: Single TI wrappers using synonyms (`concrete:`, `subtypeOf:`, `properSubtypeOf:`, `exactlyOf:`)
+
 ### Key Principles
 
-1. **Wrapper Before Content**: `patternProperties` must appear at the same level as `properties`, wrapping the content property
-2. **Two-Level Nesting**: Interpretation facet (outer) → Concreteness facet (inner) → Content property
-3. **Pattern Consistency**: Same structure at all 8 locations
-4. **Sibling Support**: Different interpretation facets can be siblings (YAML allows this)
+1. **Single-Level Structure**: TI wrappers are single keywords with no nesting
+2. **Wrapper Before Content**: TI wrappers must appear at the same level as content properties  
+3. **Array-Only Organization**: All types must be contained in arrays, no freestanding types
+4. **No TI Nesting**: TI wrappers cannot contain other TI wrappers at any level
+5. **Pattern Consistency**: Same single-level structure at all locations
+6. **Sibling Support**: Different TI forms can be siblings using explicit properties
+7. **Canonicalization**: Synonyms are automatically mapped to primary forms
 
 ## Component Design
 
-### Schema Modifications (Phase 2 Scope: 7 Locations)
+### Schema Modifications (Phase 2 Scope: 2 Locations)
 
-Phase 2 fixes **7 broken locations** identified during analysis. Location 8 is already working from previous implementation phases.
+Phase 2 fixes **2 broken locations** (4-5) and **eliminates 3 locations** (1-3) entirely. Location 7 (endpoint TI) is already working from previous implementation phases.
 
-**Reference Pattern**: GraphType's `patternProperties` implementation (lines 433-800) is the correct pattern to use for all fixes.
+**CRITICAL: Pattern Properties Violate Design Principle**: GraphType's `patternProperties` implementation (lines 433-800) violates our core design principle and must be eliminated. The correct reference pattern is the explicit properties with oneOf approach from Phases A-D (Locations 6-8).
 
-#### Location 1: graphTypeInterpretation
-**Current**: GraphSchemaContent only allows ONE bare `graphType` property  
-**Target**: Add `patternProperties` to allow TI wrappers (0/1/2-level) around `graphType`  
-**Change**: Add `patternProperties` pattern to GraphSchemaContent, similar to GraphType  
-**Semantics**: TI wrappers can wrap the single `graphType` property  
-**Phase 2 Task**: **NEW - Add TI support to GraphSchemaContent**
+#### Location 1: ELIMINATED - graphTypeInterpretation
+**Status**: **COMPLETELY ELIMINATED** - No TI wrappers allowed at graphType level  
+**Rationale**: Simplifies system by removing graphType-level TI complexity  
+**Implementation**: Remove any existing graphType TI support from schema  
+**Semantics**: graphType contains only bare collections with no TI wrappers  
+**Phase 2 Task**: **ELIMINATE all graphType TI support**
 
-#### Location 2: nodeTypesInterpretation
-**Current**: `nodeTypes` property with TI inside array items  
-**Target**: `patternProperties` wrapping ENTIRE `nodeTypes` array property  
-**Change**: Move TI pattern from array item level to property level  
-**Semantics**: Wraps the complete nodeTypes collection  
-**Phase 2 Task**: Fix this location
+#### Location 2: ELIMINATED - nodeTypesInterpretation  
+**Status**: **COMPLETELY ELIMINATED** - No TI wrappers allowed at collection level  
+**Rationale**: Simplifies system by removing collection-level TI complexity  
+**Implementation**: Remove any existing collection-level TI support from schema  
+**Semantics**: nodeTypes collection contains only array elements and sub-arrays  
+**Phase 2 Task**: **ELIMINATE all collection-level TI support**
 
-#### Location 3: edgeTypesInterpretation
-**Current**: `edgeTypes` property with TI inside array items  
-**Target**: `patternProperties` wrapping ENTIRE `edgeTypes` array property  
-**Change**: Move TI pattern from array item level to property level  
-**Semantics**: Wraps the complete edgeTypes collection  
-**Phase 2 Task**: Fix this location
+#### Location 3: ELIMINATED - edgeTypesInterpretation
+**Status**: **COMPLETELY ELIMINATED** - No TI wrappers allowed at collection level  
+**Rationale**: Simplifies system by removing collection-level TI complexity  
+**Implementation**: Remove any existing collection-level TI support from schema  
+**Semantics**: edgeTypes collection contains only array elements and sub-arrays  
+**Phase 2 Task**: **ELIMINATE all collection-level TI support**
 
-#### Location 4: nodeTypeArrayInterpretation
-**Current**: Array items with TI inside item content  
-**Target**: `patternProperties` wrapping SUBSEQUENCES within `nodeTypes` array  
-**Change**: Restructure array item schema to support TI wrappers as partition blocks  
-**Semantics**: Wraps subsequences (partition blocks) within the nodeTypes array  
-**Phase 2 Task**: Fix this location
+#### Location 4: nodeTypeSubArrayInterpretation
+**Current**: TI wrappers in wrong order (inside content instead of outside)  
+**Target**: Support TI wrappers around sub-arrays within `nodeTypes` collection  
+**Change**: Fix TI wrapper ordering - TI keywords must wrap sub-arrays, not be inside them  
+**Schema Definition**: NodeTypeItem allows bare types OR TI-wrapped sub-arrays  
+**Semantics**: Partitions the nodeTypes array into sub-arrays, each with its own TI  
+**Example**: `nodeTypes: [{ nodeType: { typeLabel: Person } }, abstract: [{ nodeType: { typeLabel: Entity } }]]`  
+**Phase 2 Task**: Fix TI wrapper ordering for sub-arrays
 
-#### Location 5: edgeTypeArrayInterpretation
-**Current**: Array items with TI inside item content  
-**Target**: `patternProperties` wrapping SUBSEQUENCES within `edgeTypes` array  
-**Change**: Restructure array item schema to support TI wrappers as partition blocks  
-**Semantics**: Wraps subsequences (partition blocks) within the edgeTypes array  
-**Phase 2 Task**: Fix this location
+#### Location 5: edgeTypeSubArrayInterpretation  
+**Current**: TI wrappers in wrong order (inside content instead of outside)  
+**Target**: Support TI wrappers around sub-arrays within `edgeTypes` collection  
+**Change**: Fix TI wrapper ordering - TI keywords must wrap sub-arrays, not be inside them  
+**Schema Definition**: EdgeTypeItem allows bare types OR TI-wrapped sub-arrays  
+**Semantics**: Partitions the edgeTypes array into sub-arrays, each with its own TI  
+**Example**: `edgeTypes: [{ edgeType: { via: { typeLabel: KNOWS } } }, concrete: [{ edgeType: { via: { typeLabel: WORKS_FOR } } }]]`  
+**Phase 2 Task**: Fix TI wrapper ordering for sub-arrays
 
-#### Location 6: nodeTypeInterpretation
-**Current**: No TI support  
-**Target**: Add `patternProperties` wrapping single NodeType content  
-**Change**: Add complete TI pattern to NodeType definition  
-**Semantics**: Wraps a single nodeType definition  
-**Phase 2 Task**: Fix this location
+#### Location 6: ELIMINATED - Single NodeType Interpretation
+**Status**: **ELIMINATED** - Single nodeTypes are replaced by singleton subsequences within arrays  
+**Rationale**: Individual nodeType TI is a special case of Location 4 (array subsequence TI)  
+**Implementation**: Use singleton array subsequence: `exactlyOfConcrete: [{ typeLabel: Person }]`  
+**Phase 2 Task**: No separate implementation needed - covered by Location 4
 
-#### Location 7: edgeTypeInterpretation
-**Current**: No TI support  
-**Target**: Add `patternProperties` wrapping single EdgeType content  
-**Change**: Add complete TI pattern to EdgeType definition  
-**Semantics**: Wraps a single edgeType definition  
-**Phase 2 Task**: Fix this location
+#### Location 7: edgeTypeEndpointNodeTypeInterpretation (Renumbered from Location 9)
+**Current**: Already working from previous phases  
+**Target**: No changes needed  
+**Change**: None - this location is already correctly implemented  
+**Semantics**: Wraps endpoint node type references within edge types  
+**Phase 2 Task**: None - already working
 
 ### Edge Label Container Structure (E02 Integration)
 
@@ -293,12 +842,12 @@ Test YAML files currently use wrong-order syntax because they were written for t
 
 ### Sibling TI Wrapper Support - Schema Fix Required
 
-**THE CRITICAL FIX**: The schema must be restructured to allow `patternProperties` to coexist with regular `properties` without conflicts. This requires:
+**THE CRITICAL FIX**: The schema must be restructured to use explicit properties exclusively for all TI wrappers. This requires:
 
-1. **Remove `additionalProperties: false`** constraints that prevent pattern properties
-2. **Allow multiple properties with same name** at different nesting levels (bare vs wrapped)
-3. **Use `unevaluatedProperties: false`** instead of `additionalProperties: false` where needed
-4. **Test extensively** with positive and negative test cases
+1. **Replace all `patternProperties`** with explicit properties for each TI keyword
+2. **Use explicit sibling properties** to allow multiple TI wrappers with different facets
+3. **Use `oneOf` constraints** where only one TI wrapper is allowed (single-wrapper locations)
+4. **Test extensively** with positive and negative test cases to ensure sibling behavior works correctly
 
 The schema will support multiple sibling TI wrappers with different interpretation facets at multiple levels:
 
@@ -333,16 +882,18 @@ subtypesOf:         # Another TI-wrapped nodeTypes array (sibling)
       - typeLabel: Entity
 ```
 
-**Locations 4-5 (nodeTypeArrayInterpretation/edgeTypeArrayInterpretation) - Multiple Item Interpretations as Siblings**:
+**Locations 4-5 (nodeTypeArrayInterpretation/edgeTypeArrayInterpretation) - Array Subsequences as Siblings**:
 ```yaml
-nodeTypes:          # Array containing multiple interpretations as siblings
-  - typeLabel: Person                    # Bare item
-  - exactlyOf:                          # TI-wrapped item (sibling)
+nodeTypes:          # Array divided into subsequences
+  - typeLabel: Person                    # Bare array element
+  - exactlyOf:                          # Array subsequence 1 (TI-wrapped)
       concrete:
-        typeLabel: Company
-  - subtypesOf:                         # Another TI-wrapped item (sibling)
+        - typeLabel: Company
+        - typeLabel: Organization
+  - subtypesOf:                         # Array subsequence 2 (TI-wrapped)
       abstract:
-        typeLabel: Entity
+        - typeLabel: Entity
+        - typeLabel: Thing
 ```
 
 **Invalid (YAML Constraint)**:
@@ -433,8 +984,8 @@ GraphSchema
 
 **Cross-Location Tests**:
 - Test TI at multiple locations simultaneously
-- Test nested TI (e.g., GraphType + NodeTypeItem)
-- Test mixed bare and wrapped syntax
+- Test partition blocks within collections (Locations 4-5)
+- Test mixed bare and wrapped syntax at all levels
 
 **Sibling Behavior Tests**:
 - Test multiple different interpretation facets as siblings
@@ -464,8 +1015,8 @@ GraphSchema
 ### Phase 2: Schema Fixes (3-4 hours)
 1. Fix Location 2 (NodeTypesProperty)
 2. Fix Location 3 (EdgeTypesProperty)
-3. Fix Location 4 (NodeTypeItem)
-4. Fix Location 5 (EdgeTypeItem)
+3. Fix Location 4 (NodeTypeArray - array-level partition blocks)
+4. Fix Location 5 (EdgeTypeArray - array-level partition blocks)
 5. Fix Location 6 (Individual NodeType)
 6. Fix Location 7 (EdgeType Content)
 7. Test after each fix
@@ -484,13 +1035,13 @@ GraphSchema
 
 ## Success Criteria
 
-1. ✓ All 8 locations support 0/1/2-level TI syntax
-2. ✓ TI wrappers appear BEFORE content at all locations
-3. ✓ Multiple siblings with different interpretation facets work
-4. ✓ YAML duplicate key constraint properly enforced
-5. ✓ All test files validate with corrected syntax
-6. ✓ Phases A-D validation still passes (no regressions)
-7. ✓ Sibling behavior tests pass
+1. ✓ Locations 1-3 completely eliminated (no graphType or collection-level TI)
+2. ✓ Locations 4-5 support TI wrappers around sub-arrays with correct ordering
+3. ✓ Location 7 (endpoint TI) continues working (no changes needed)
+4. ✓ TI wrappers appear BEFORE content at remaining locations
+5. ✓ Default exactlyOfConcrete semantics for bare elements
+6. ✓ All test files validate with simplified syntax
+7. ✓ No regressions in existing functionality
 
 ## Risks & Mitigation
 
@@ -505,6 +1056,40 @@ GraphSchema
 
 **Risk**: Preprocessor incompatibility  
 **Mitigation**: Preprocessor already handles correct syntax; no changes needed
+
+## Type Finalization (Future Work)
+
+**Status**: Out of scope for this specification - to be addressed in a separate phase/stage.
+
+Type finalization is a **separate system** from type interpretation. While type interpretation controls how types are validated and instantiated (exact match vs. subtype matching), type finalization controls inheritance and extension behavior.
+
+### Finalization Keywords
+
+- `final:` - Prevents further subtyping (no types can extend this type)
+- `sealed:` - Allows subtyping but restricts where subtypes can be defined
+
+### Relationship to Type Interpretation
+
+Type finalization and type interpretation are **orthogonal concerns**:
+- Type interpretation: Controls matching semantics (exact, subtype, proper subtype)
+- Type finalization: Controls inheritance/extension permissions
+
+They can be combined:
+```yaml
+# Example: Abstract type that is also final (can be matched by subtypes, but no new subtypes allowed)
+final:
+  abstract:
+    nodeTypes:
+      - typeLabel: BaseEntity
+```
+
+### Implementation Plan
+
+Type finalization will be addressed in **Phase F** (or a dedicated stage) after type interpretations (Phases A-E) are complete. This will include:
+1. Schema changes to support `final:` and `sealed:` keywords
+2. Validation rules for finalization constraints
+3. Test files demonstrating finalization behavior
+4. Documentation updates
 
 ## Relationship to Existing Work
 
@@ -529,3 +1114,42 @@ This design document is part of the broader Type Interpretation implementation e
 - `.kiro/specs/type-interpretation-wrappers/tasks.md` - Original TI tasks
 
 This refactoring completes the TI implementation by fixing the 6 broken locations identified during Phases A-D implementation.
+
+## Design Note: Double Wrapping and TI Override (Future - Canonicalization Phase)
+
+**Context**: At every location where TI wrappers are permitted, the schema will allow "double wrapping" where TI wrappers can be nested.
+
+**Example of Double Wrapping**:
+```yaml
+subtypesOf:
+  abstract:
+    exactlyOf:
+      concrete:
+        nodeType:
+          typeLabel: Person
+```
+
+**Semantics**:
+- When double wrapping occurs, the **outer TI wrapper overrides the inner TI wrapper**
+- In the example above, `subtypesOf: abstract:` overrides `exactlyOf: concrete:`
+- The effective interpretation is `subtypesOf` with `abstract` concreteness
+
+**Purpose**:
+- This supports **importation of definitions that include TI wrappers**
+- When importing a type definition that already has a TI wrapper, you can wrap it with a different TI to override the imported interpretation
+- Example: Import a `concrete` type but use it as `abstract` in your schema
+
+**Canonicalization**:
+- This is **not normal behavior** and would never appear in a canonicalized YAML document
+- During canonicalization, the inner TI wrapper would be removed, leaving only the outer (effective) wrapper
+- Canonical form: `subtypesOf: { abstract: { nodeType: { typeLabel: Person } } }`
+
+**Implementation Status**:
+- ⏸️ **Deferred to Phase H (Canonicalization)**
+- No implementation required at this stage (Phase E)
+- The schema will naturally permit this structure (it won't explicitly prevent nested TI wrappers)
+- Canonicalization logic will handle the override semantics and simplification
+
+**Applies To**:
+- All locations where TI wrappers are permitted (Locations 1-9)
+- Both single TI wrapper locations (1, 6, 7, 8, 9) and sibling TI wrapper locations (2, 3, 4, 5)
