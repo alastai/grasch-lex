@@ -34,13 +34,13 @@ This document describes the design for fundamentally simplifying the LEX-2026.0.
 - What can appear as elements within `nodeTypes`/`edgeTypes` arrays
 - Support for bare types: `{ typeLabel: Person }`
 - Support for TI-wrapped individual types: `exactlyOfConcrete: { typeLabel: Person }`
-- Support for TI-wrapped array subsequences: `subtypeOfAbstract: [{ typeLabel: Vehicle }, { typeLabel: Car }]`
+- Support for TI-wrapped array subsequences: `subtypesOfAbstract: [{ typeLabel: Vehicle }, { typeLabel: Car }]`
 
 **Array Subsequence Partitioning Example**:
 ```yaml
 nodeTypes:                              # Collection containing array
   - typeLabel: Person                   # Bare element (NodeTypeItem)
-  - subtypeOfAbstract:                  # TI-wrapped subsequence (NodeTypeItem)
+  - subtypesOfAbstract:                 # TI-wrapped subsequence (NodeTypeItem)
       - typeLabel: Vehicle              # Array within subsequence
       - typeLabel: Car
   - exactlyOfConcrete:                  # Another TI-wrapped subsequence (NodeTypeItem)
@@ -79,7 +79,7 @@ subtypesOf:
 # Single-level with clear semantics
 exactlyOfConcrete:
   nodeTypes: [...]
-subtypeOfAbstract:
+subtypesOfAbstract:
   edgeTypes: [...]
 ```
 
@@ -97,7 +97,7 @@ graphType:
 ```yaml
 graphType:
   nodeTypes: [...]       # Only arrays allowed
-  subtypeOfConcrete:
+  subtypesOfConcrete:
     nodeTypes: [...]     # TI-wrapped arrays
 ```
 
@@ -115,7 +115,7 @@ exactlyOf:
 **Simplified (Clear)**:
 ```yaml
 exactlyOfConcrete: [...]     # Single level - clear semantics
-subtypeOfAbstract: [...]     # No nesting possible
+subtypesOfAbstract: [...]     # No nesting possible
 ```
 
 ### Issue 4: Synonym Proliferation Without Clear Mapping
@@ -211,8 +211,8 @@ Type Interpretations operate at two expression levels:
 
 1. **0-Level (Bare)**: `typeLabel: Person` - No wrapper, implicit `exactlyOfConcrete` semantics
 2. **1-Level (Wrapped)**: Single TI wrapper keyword
-   - **Primary Forms**: `exactlyOfConcrete: { nodeTypes: [...] }`, `subtypeOfConcrete: { nodeTypes: [...] }`, `subtypeOfAbstract: { nodeTypes: [...] }`
-   - **Synonyms**: `concrete: { nodeTypes: [...] }`, `subtypeOf: { nodeTypes: [...] }`, `properSubtypeOf: { nodeTypes: [...] }`
+   - **Primary Forms**: `exactlyOfConcrete: { nodeTypes: [...] }`, `subtypesOfConcrete: { nodeTypes: [...] }`, `subtypesOfAbstract: { nodeTypes: [...] }`
+   - **Synonyms**: `concrete: { nodeTypes: [...] }`, `subtypesOf: { nodeTypes: [...] }`, `properSubtypesOf: { nodeTypes: [...] }`, `abstract: { nodeTypes: [...] }`
 
 This is implemented using explicit JSON Schema properties for each TI keyword, with canonicalization mapping synonyms to primary forms.
 
@@ -225,15 +225,15 @@ The simplified system has exactly three primary TI forms with clear semantics:
    - **Semantics**: Types must match exactly, can be instantiated
    - **Example**: `exactlyOfConcrete: { nodeTypes: [{ typeLabel: Person }] }`
 
-2. **`subtypeOfConcrete`**: Subtype matching, concrete (instantiable) types  
-   - **Synonyms**: `subtypeOf`
+2. **`subtypesOfConcrete`**: Subtype matching, concrete (instantiable) types  
+   - **Synonyms**: `subtypesOf`
    - **Semantics**: Allows subtypes, can be instantiated
-   - **Example**: `subtypeOfConcrete: { nodeTypes: [{ typeLabel: Vehicle }] }`
+   - **Example**: `subtypesOfConcrete: { nodeTypes: [{ typeLabel: Vehicle }] }`
 
-3. **`subtypeOfAbstract`**: Subtype matching, abstract (non-instantiable) types
-   - **Synonyms**: `properSubtypeOf`
+3. **`subtypesOfAbstract`**: Subtype matching, abstract (non-instantiable) types
+   - **Synonyms**: `properSubtypesOf`, `abstract`
    - **Semantics**: Allows subtypes, cannot be instantiated (abstract)
-   - **Example**: `subtypeOfAbstract: { nodeTypes: [{ typeLabel: Entity }] }`
+   - **Example**: `subtypesOfAbstract: { nodeTypes: [{ typeLabel: Entity }] }`
 
 **Important Distinction**: The keywords `final:` and `sealed:` are **NOT** part of the type interpretation system. They belong to the **type finalization** system, which is a separate concern that will be addressed in a future phase.
 
@@ -250,13 +250,17 @@ The TI synonyms provide convenient shorthand syntax that maps to canonical prima
   - Meaning: Same as `concrete:`, exact type matching
   - Example: `exactlyOf: { nodeTypes: [...] }` → `exactlyOfConcrete: { nodeTypes: [...] }`
 
-- **`subtypeOf:`** → **`subtypeOfConcrete:`**
+- **`subtypesOf:`** → **`subtypesOfConcrete:`**
   - Meaning: Subtype matching, concrete (instantiable) types
-  - Example: `subtypeOf: { nodeTypes: [...] }` → `subtypeOfConcrete: { nodeTypes: [...] }`
+  - Example: `subtypesOf: { nodeTypes: [...] }` → `subtypesOfConcrete: { nodeTypes: [...] }`
 
-- **`properSubtypeOf:`** → **`subtypeOfAbstract:`**
+- **`properSubtypesOf:`** → **`subtypesOfAbstract:`**
   - Meaning: Subtype matching, abstract (non-instantiable) types
-  - Example: `properSubtypeOf: { nodeTypes: [...] }` → `subtypeOfAbstract: { nodeTypes: [...] }`
+  - Example: `properSubtypesOf: { nodeTypes: [...] }` → `subtypesOfAbstract: { nodeTypes: [...] }`
+
+- **`abstract:`** → **`subtypesOfAbstract:`**
+  - Meaning: Same as `properSubtypesOf:`, subtype matching with abstract types
+  - Example: `abstract: { nodeTypes: [...] }` → `subtypesOfAbstract: { nodeTypes: [...] }`
 
 **Canonicalization Process**: During preprocessing, all synonyms are automatically converted to their canonical primary forms, ensuring consistent internal representation while maintaining author-friendly syntax.
 
@@ -344,7 +348,7 @@ graphType:
               valueType: DATE
     - nodeType:                # Multiple type labels
         typeLabels: [Cat, Dog]
-    - subtypeOfAbstract:       # TI-wrapped sub-array
+    - subtypesOfAbstract:      # TI-wrapped sub-array
         - nodeType:
             typeLabel: Entity
             implies:
@@ -369,25 +373,38 @@ graphType:
         - nodeType: Service
     - nodeType: User           # More bare elements after TI sub-arrays
   edgeTypes:                   # Collection (NO TI wrappers allowed at this level)
-    - edgeType:                # Full syntax
-        via:
-          typeLabel: KNOWS
+    - edgeType:                # Directed edge - abbreviated syntax
+        directed:
+          from: Person
+          to: Person
+          via: KNOWS
     - abstract:                # TI-wrapped sub-array (synonym)
         - edgeType:
-            via:
-              typeLabel: RELATIONSHIP
-            implies:
-              propertyTypes:
-                - name: strength
-                  valueType: FLOAT
+            directed:
+              from: Entity
+              to: Entity
+              via:
+                typeLabel: RELATIONSHIP
+              implies:
+                propertyTypes:
+                  - name: strength
+                    valueType: FLOAT
+        - edgeType:
+            undirected:
+              between: Location
+              and: Location
+              via: CONNECTED_TO
     - edgeType:                # Bare elements can continue after TI sub-arrays
-        via:
-          typeLabel: WORKS_FOR
-        extends: RELATIONSHIP
-        adding:
-          propertyTypes:
-            - name: since
-              valueType: DATE
+        directed:
+          from: Person
+          to: Company
+          via:
+            typeLabel: WORKS_FOR
+          extends: RELATIONSHIP
+          adding:
+            propertyTypes:
+              - name: since
+                valueType: DATE
 ```
 
 **Using Synonyms (Pre-Canonical Form)**:
@@ -396,7 +413,7 @@ graphType:
   nodeTypes:
     - nodeType:
         typeLabel: Person
-    - properSubtypeOf:         # Synonym for subtypeOfAbstract
+    - properSubtypesOf:        # Synonym for subtypesOfAbstract
         - nodeType:
             typeLabel: Entity
     - concrete:                # Synonym for exactlyOfConcrete
@@ -410,9 +427,17 @@ graphType:
 3. **Multiple Labels**: For types with multiple labels: `- nodeType: { typeLabels: [Cat, Dog] }`
 4. **Extension Syntax**: For types that extend others: `- nodeType: { typeLabel: Car, extends: Vehicle, adding: {...} }`
 
-**Complete Example - All Syntax Possibilities**:
+## 🎯 SIMPLIFIED TYPE INTERPRETATION DESIGN
+
+**⭐ CRITICAL DESIGN EXAMPLE ⭐**
+
+This example represents the **SIMPLIFIED TYPE INTERPRETATION DESIGN** - the current inflection point in our TI system architecture. This is the target design that eliminates the complex two-level TI architecture in favor of a streamlined single-level system.
+
+**Complete Example - All Syntax Possibilities with Interleaved Collections**:
 ```yaml
 graphType:
+  # Interleaved nodeTypes and edgeTypes collections demonstrate flexible organization
+  
   nodeTypes:
     # Abbreviated syntax - simple typeLabel only
     - nodeType: Person
@@ -427,7 +452,29 @@ graphType:
               valueType: DATE
             - name: employees
               valueType: INTEGER
+  
+  edgeTypes:
+    # Directed edge - abbreviated syntax
+    - edgeType:
+        from: Person
+        to: Person
+        via: KNOWS
     
+    # Directed edge - full syntax with implies
+    - edgeType:
+        from: Person
+        to: Company
+        via:
+          typeLabel: WORKS_FOR
+          implies:
+            labels: [Employment, Relationship]
+            propertyTypes:
+              - name: since
+                valueType: DATE
+              - name: position
+                valueType: STRING
+  
+  nodeTypes:
     # Multiple typeLabels with implies
     - nodeType:
         typeLabels: [Cat, Dog, Pet]
@@ -461,7 +508,46 @@ graphType:
                 - name: wheels
                   valueType: INTEGER
         - nodeType: Engine  # Abbreviated within TI sub-array
+  
+  edgeTypes:
+    # Undirected edge - abbreviated syntax
+    - edgeType:
+        between: Person
+        and: Person
+        via: FRIENDS_WITH
     
+    # Undirected edge - full syntax
+    - edgeType:
+        between: Person
+        and: Person
+        via:
+          typeLabel: MARRIED_TO
+          implies:
+            labels: [Friendship, SocialConnection]
+            propertyTypes:
+              - name: since
+                valueType: DATE
+              - name: closeness
+                valueType: FLOAT
+    
+    # TI-wrapped sub-array for edge types
+    - abstract:
+        - edgeType:
+            from: Entity
+            to: Entity
+            via:
+              typeLabel: RELATIONSHIP
+              implies:
+                labels: [Connection, Link]
+                propertyTypes:
+                  - name: strength
+                    valueType: FLOAT
+        - edgeType:
+            between: Location
+            and: Location
+            via: CONNECTED_TO
+  
+  nodeTypes:
     # More bare elements after TI sub-array
     - nodeType: Location
     
@@ -481,47 +567,95 @@ graphType:
     
     # Final bare elements
     - nodeType: Event
-    
+  
   edgeTypes:
-    # Abbreviated syntax for edge types
-    - edgeType:
-        via:
-          typeLabel: KNOWS
-    
-    # Full syntax with implies
-    - edgeType:
-        via:
-          typeLabel: WORKS_FOR
-        implies:
-          labels: [Employment, Relationship]
-          propertyTypes:
-            - name: since
-              valueType: DATE
-            - name: position
-              valueType: STRING
-    
     # Extension syntax for edge types
     - edgeType:
+        from: Person
+        to: Company
         via:
           typeLabel: MANAGES
-        extends: WORKS_FOR
-        adding:
-          labels: [Leadership]
-          propertyTypes:
-            - name: teamSize
-              valueType: INTEGER
+          extends: WORKS_FOR
+          adding:
+            labels: [Leadership]
+            propertyTypes:
+              - name: teamSize
+                valueType: INTEGER
     
-    # TI-wrapped sub-array for edge types
+    # Final edge type
+    - edgeType:
+        from: Vehicle
+        to: Location
+        via: LOCATED_AT
+```
+
+**🎯 END OF SIMPLIFIED TYPE INTERPRETATION DESIGN EXAMPLE**
+
+This example demonstrates the complete simplified TI architecture with:
+- ✅ Single-level TI wrappers (no nesting)
+- ✅ Array-only organization (no freestanding types)  
+- ✅ TI sub-arrays within collections only
+- ✅ Clear syntax variations (abbreviated, full, extension)
+- ✅ Mixed bare elements and TI-wrapped subsequences
+- ✅ Interleaved type collections (nodeTypes and edgeTypes mixed)
+- ✅ Corrected edge abbreviated syntax (`via: KNOWS`)
+
+### Complete Synonym Demonstration
+
+**All TI Canonical Forms and Synonyms**:
+```yaml
+graphType:
+  nodeTypes:
+    # Primary canonical forms
+    - exactlyOfConcrete:
+        - nodeType: Person
+        - nodeType: Company
+    
+    - subtypesOfConcrete:
+        - nodeType: Vehicle
+        - nodeType: Machine
+    
+    - subtypesOfAbstract:
+        - nodeType: Entity
+        - nodeType: Thing
+    
+    # Synonym forms (equivalent to above)
+    - concrete:              # → exactlyOfConcrete
+        - nodeType: Product
+        - nodeType: Service
+    
+    - exactlyOf:             # → exactlyOfConcrete  
+        - nodeType: Location
+        - nodeType: Address
+    
+    - subtypesOf:            # → subtypesOfConcrete
+        - nodeType: Animal
+        - nodeType: Plant
+    
+    - properSubtypesOf:      # → subtypesOfAbstract
+        - nodeType: Concept
+        - nodeType: Idea
+    
+    - abstract:              # → subtypesOfAbstract
+        - nodeType: BaseType
+        - nodeType: Interface
+  
+  edgeTypes:
+    # Synonyms work the same way for edge types
+    - concrete:
+        - edgeType:
+            from: Person
+            to: Company
+            via: WORKS_FOR
+    
     - abstract:
         - edgeType:
-            via:
-              typeLabel: RELATIONSHIP
-            implies:
-              labels: [Connection, Link]
-              propertyTypes:
-                - name: strength
-                  valueType: FLOAT
+            from: Entity
+            to: Entity
+            via: RELATES_TO
 ```
+
+**⚠️ IMPLEMENTATION NOTE**: When agreeing to any implementation, remind the user to create an example that fully demonstrates synonyms (`concrete:`, `subtypesOf:`, `properSubtypesOf:`, `abstract:`, `exactlyOf:`) in addition to the primary forms (`exactlyOfConcrete:`, `subtypesOfConcrete:`, `subtypesOfAbstract:`).
 
 **Key Syntax Rules**:
 - `implies:` can contain both `labels:` and `propertyTypes:` (both optional)
@@ -616,7 +750,7 @@ The dramatically simplified location taxonomy - TI only applies to sub-arrays:
         }
       }
     },
-    "subtypeOfConcrete": {
+    "subtypesOfConcrete": {
       "type": "object",
       "properties": {
         "nodeTypes": {
@@ -629,7 +763,7 @@ The dramatically simplified location taxonomy - TI only applies to sub-arrays:
         }
       }
     },
-    "subtypeOfAbstract": {
+    "subtypesOfAbstract": {
       "type": "object",
       "properties": {
         "nodeTypes": {
@@ -650,17 +784,25 @@ The dramatically simplified location taxonomy - TI only applies to sub-arrays:
         "edgeTypes": {"type": "array", "items": {"$ref": "#/$defs/EdgeType"}}
       }
     },
-    "subtypeOf": {
+    "subtypesOf": {
       "type": "object", 
-      "description": "Synonym for subtypeOfConcrete",
+      "description": "Synonym for subtypesOfConcrete",
       "properties": {
         "nodeTypes": {"type": "array", "items": {"$ref": "#/$defs/NodeType"}},
         "edgeTypes": {"type": "array", "items": {"$ref": "#/$defs/EdgeType"}}
       }
     },
-    "properSubtypeOf": {
+    "properSubtypesOf": {
       "type": "object",
-      "description": "Synonym for subtypeOfAbstract", 
+      "description": "Synonym for subtypesOfAbstract", 
+      "properties": {
+        "nodeTypes": {"type": "array", "items": {"$ref": "#/$defs/NodeType"}},
+        "edgeTypes": {"type": "array", "items": {"$ref": "#/$defs/EdgeType"}}
+      }
+    },
+    "abstract": {
+      "type": "object",
+      "description": "Synonym for subtypesOfAbstract", 
       "properties": {
         "nodeTypes": {"type": "array", "items": {"$ref": "#/$defs/NodeType"}},
         "edgeTypes": {"type": "array", "items": {"$ref": "#/$defs/EdgeType"}}
@@ -708,8 +850,8 @@ Use `oneOf` to allow exactly one option:
 
 **Supported TI Levels**:
 - **0-level**: Bare properties (e.g., `nodeTypes:`, `edgeTypes:`) - implicit `exactlyOfConcrete`
-- **1-level**: Single TI wrappers using primary forms (`exactlyOfConcrete:`, `subtypeOfConcrete:`, `subtypeOfAbstract:`)
-- **1-level**: Single TI wrappers using synonyms (`concrete:`, `subtypeOf:`, `properSubtypeOf:`, `exactlyOf:`)
+- **1-level**: Single TI wrappers using primary forms (`exactlyOfConcrete:`, `subtypesOfConcrete:`, `subtypesOfAbstract:`)
+- **1-level**: Single TI wrappers using synonyms (`concrete:`, `subtypesOf:`, `properSubtypesOf:`, `abstract:`, `exactlyOf:`)
 
 ### Key Principles
 

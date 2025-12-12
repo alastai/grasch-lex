@@ -1,14 +1,24 @@
-# Type Interpretation System Simplification - Current Inflection Point
+# Type Interpretation System Simplification - SUPERSEDED
 
 **Date**: 2024-12-12  
-**Status**: CRITICAL DESIGN INFLECTION POINT  
+**Status**: SUPERSEDED - See design.md for latest and correct design  
 **Context**: Major architectural simplification of LEX-2026 Type Interpretation system
 
-## Executive Summary
+## ⚠️ DOCUMENT SUPERSEDED
 
-We have reached a critical inflection point in the Type Interpretation (TI) system design. The corrected example in the TI ordering refactor design document represents the **SIMPLIFIED TYPE INTERPRETATION DESIGN** - a fundamental shift from a complex two-level architecture to a streamlined single-level system.
+**This document has been superseded by the official design document.**
 
-**⚠️ CRITICAL WARNING**: Any current implementation plans are questionable and should NOT be executed without explicit user approval. This simplification represents a major architectural change that affects all TI-related work.
+**For the latest and correct Type Interpretation design, see:**
+**`.kiro/specs/ti-ordering-refactor/design.md`**
+
+The design.md document contains:
+- ✅ Corrected comprehensive example with proper edge syntax (`via: KNOWS`)
+- ✅ Correct TI canonical forms (plural: `subtypesOfConcrete`, `subtypesOfAbstract`)
+- ✅ All corrected synonym mappings including new `abstract` synonym
+- ✅ Complete synonym demonstration section
+- ✅ Internally consistent and authoritative specification
+
+**Do not use this document for implementation - use design.md instead.**
 
 ## The Simplified Design
 
