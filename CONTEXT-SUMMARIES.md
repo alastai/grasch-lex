@@ -5,12 +5,13 @@
 ## Active Context Documents
 
 ### SIMPLIFY-TYPE-INTERPRETATION.md
-**Created**: 2024-12-12 | **Revised**: 2024-12-15  
+**Created**: 2024-12-12 | **Revised**: 2024-12-15 (Latest)  
 **Purpose**: Summary document for TI system simplification - **PRIMARY AUTHORITY: design.md**  
-**Status**: REVISED - Points to `.kiro/specs/ti-ordering-refactor/design.md` as single source of truth  
-**Key Update**: Design.md corrected with NodeTypeArray/EdgeTypeArray terminology and pattern properties exclusion  
+**Status**: WIP - Edge Type Syntax Corrections Applied  
+**Latest Update**: Successfully corrected edge type syntax in SNB inline schema with proper indentation structure  
+**Key Achievement**: Fixed fundamental edge type syntax issues (short/long forms, proper indentation levels)  
 **Contains**: Summary and context - **implementation must use design.md**  
-**Impact**: Fundamental shift from complex two-level to streamlined single-level system
+**Impact**: Significant syntax improvement, overall TI simplification work in progress
 
 ### SIMPLIFY-TI-CONTEXT.md
 **Created**: 2024-12-11  

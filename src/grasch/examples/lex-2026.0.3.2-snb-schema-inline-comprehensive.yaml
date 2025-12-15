@@ -1,0 +1,347 @@
+graphSchema:
+  pathName: /benchmarks/ldbc/snb-inline-comprehensive
+  graphType:
+    propertyGraphDataModel:
+      import: imports/lex-2026.0.3.2-property-graph-data-model.yaml
+    
+    nodeTypes:
+      # Person node type - matches original SNB specification
+      - nodeType:
+          typeLabel: Person
+          implies:
+            propertyTypes:
+              - name: id
+                valueType: INTEGER
+              - name: firstName
+                valueType: STRING
+              - name: lastName
+                valueType: STRING
+              - name: gender
+                valueType: STRING
+              - name: birthday
+                valueType: DATE
+              - name: creationDate
+                valueType: ZONED DATETIME
+              - name: locationIP
+                valueType: STRING
+              - name: browserUsed
+                valueType: STRING
+              - name: language
+                valueType: LIST
+              - name: email
+                valueType: LIST
+      
+      # Organisation hierarchy - abstract supertype with concrete subtypes
+      - abstract:
+          nodeType:
+            typeLabel: Organisation
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: INTEGER
+                - name: type
+                  valueType: STRING
+                - name: name
+                  valueType: STRING
+                - name: url
+                  valueType: STRING
+      
+      - nodeType:
+          typeLabel: Company
+          extends: Organisation
+      
+      - nodeType:
+          typeLabel: University
+          extends: Organisation
+      
+      # Place hierarchy - abstract supertype with concrete subtypes
+      - abstract:
+          nodeType:
+            typeLabel: Place
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: INTEGER
+                - name: name
+                  valueType: STRING
+                - name: url
+                  valueType: STRING
+                - name: type
+                  valueType: STRING
+      
+      - nodeType:
+          typeLabel: City
+          extends: Place
+      
+      - nodeType:
+          typeLabel: Country
+          extends: Place
+      
+      - nodeType:
+          typeLabel: Continent
+          extends: Place
+      
+      # Message hierarchy - abstract supertype with concrete subtypes
+      - abstract:
+          nodeType:
+            typeLabel: Message
+            implies:
+              propertyTypes:
+                - name: id
+                  valueType: INTEGER
+                - name: creationDate
+                  valueType: ZONED DATETIME
+                - name: locationIP
+                  valueType: STRING
+                - name: browserUsed
+                  valueType: STRING
+                - name: content
+                  valueType: STRING
+                - name: length
+                  valueType: INTEGER
+      
+      - nodeType:
+          typeLabel: Post
+          extends: Message
+          adding:
+            propertyTypes:
+              - name: imageFile
+                valueType: STRING
+              - name: language
+                valueType: STRING
+      
+      - nodeType:
+          typeLabel: Comment
+          extends: Message
+      
+      # Additional concrete node types
+      - nodeType:
+          typeLabel: Tag
+          implies:
+            propertyTypes:
+              - name: id
+                valueType: INTEGER
+              - name: name
+                valueType: STRING
+              - name: url
+                valueType: STRING
+      
+      - nodeType:
+          typeLabel: TagClass
+          implies:
+            propertyTypes:
+              - name: id
+                valueType: INTEGER
+              - name: name
+                valueType: STRING
+              - name: url
+                valueType: STRING
+      
+      - nodeType:
+          typeLabel: Forum
+          implies:
+            propertyTypes:
+              - name: id
+                valueType: INTEGER
+              - name: title
+                valueType: STRING
+              - name: creationDate
+                valueType: ZONED DATETIME
+    
+    edgeTypes:
+      # Social relationships
+      - edgeType:
+          undirected:
+            between: Person
+            and: Person
+            via:
+              typeLabel: KNOWS
+              implies:
+                propertyTypes:
+                  - name: creationDate
+                    valueType: ZONED DATETIME
+      
+      # Content interactions - using abstract supertype with TI wrapper
+      - edgeType:
+          directed:
+            from: Person
+            to:
+              properSubtypesOf: Message
+            via:
+              typeLabel: LIKES
+              implies:
+                propertyTypes:
+                  - name: creationDate
+                    valueType: ZONED DATETIME
+      
+      # Interest relationships
+      - edgeType:
+          directed:
+            from: Person
+            to: Tag
+            via: HAS_INTEREST
+      
+      # Location relationships - using abstract supertype with TI wrapper
+      - edgeType:
+          directed:
+            from: Person
+            to:
+              properSubtypesOf: Place
+            via: IS_LOCATED_IN
+      
+      - edgeType:
+          directed:
+            from:
+              properSubtypesOf: Organisation
+            to:
+              properSubtypesOf: Place
+            via: IS_LOCATED_IN
+      
+      - edgeType:
+          directed:
+            from:
+              properSubtypesOf: Message
+            to:
+              properSubtypesOf: Place
+            via: IS_LOCATED_IN
+      
+      # Organizational relationships
+      - edgeType:
+          directed:
+            from: Person
+            to:
+              properSubtypesOf: Organisation
+            via:
+              typeLabel: STUDY_AT
+              implies:
+                propertyTypes:
+                  - name: classYear
+                    valueType: INTEGER
+      
+      - edgeType:
+          directed:
+            from: Person
+            to:
+              properSubtypesOf: Organisation
+            via:
+              typeLabel: WORK_AT
+              implies:
+                propertyTypes:
+                  - name: workFrom
+                    valueType: INTEGER
+      
+      # Forum relationships
+      - edgeType:
+          directed:
+            from: Forum
+            to: Person
+            via:
+              typeLabel: HAS_MEMBER
+              implies:
+                propertyTypes:
+                  - name: joinDate
+                    valueType: ZONED DATETIME
+      
+      - edgeType:
+          directed:
+            from: Forum
+            to: Person
+            via: HAS_MODERATOR
+      
+      - edgeType:
+          directed:
+            from: Forum
+            to: Post
+            via: CONTAINER_OF
+      
+      # Content creation relationships - using abstract supertype with TI wrapper
+      - edgeType:
+          directed:
+            from:
+              properSubtypesOf: Message
+            to: Person
+            via: HAS_CREATOR
+      
+      # Reply relationships - using abstract supertype with TI wrapper
+      - edgeType:
+          directed:
+            from: Comment
+            to:
+              properSubtypesOf: Message
+            via: REPLY_OF
+      
+      # Tagging relationships - using abstract supertype with TI wrapper
+      - edgeType:
+          directed:
+            from:
+              properSubtypesOf: Message
+            to: Tag
+            via: HAS_TAG
+      
+      - edgeType:
+          directed:
+            from: Forum
+            to: Tag
+            via: HAS_TAG
+      
+      # Hierarchical relationships
+      - edgeType:
+          directed:
+            from: Tag
+            to: TagClass
+            via: HAS_TYPE
+      
+      - edgeType:
+          directed:
+            from: TagClass
+            to: TagClass
+            via: IS_SUBCLASS_OF
+      
+      - edgeType:
+          directed:
+            from:
+              properSubtypesOf: Place
+            to:
+              properSubtypesOf: Place
+            via: IS_PART_OF
+  
+  constraints:
+    personIdUnique:
+      name: personIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Person
+        uniqueKeyComponentPropertyNames:
+          - id
+    
+    postIdUnique:
+      name: postIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Post
+        uniqueKeyComponentPropertyNames:
+          - id
+    
+    organisationIdUnique:
+      name: organisationIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Organisation
+        uniqueKeyComponentPropertyNames:
+          - id
+    
+    placeIdUnique:
+      name: placeIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Place
+        uniqueKeyComponentPropertyNames:
+          - id
+    
+    messageIdUnique:
+      name: messageIdUnique
+      rule:
+        subject: UNIQUE
+        constraintPattern: Message
+        uniqueKeyComponentPropertyNames:
+          - id

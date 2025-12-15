@@ -1,8 +1,37 @@
 # Type Interpretation System Simplification - REVISED
 
 **Date**: 2024-12-15  
-**Status**: REVISED - Primary authority is design.md  
+**Status**: WIP - Edge Type Syntax Corrections Applied  
 **Context**: Major architectural simplification of LEX-2026 Type Interpretation system
+
+## 🔄 LATEST UPDATE: Edge Type Syntax Corrections (2024-12-15)
+
+**Status**: Work in Progress - Improvement Applied  
+**File Updated**: `src/grasch/examples/lex-2026.0.3.2-snb-schema-inline-comprehensive.yaml`
+
+### Edge Type Syntax Corrections Applied
+
+Successfully corrected the edge type syntax throughout the SNB inline schema to follow proper LEX-2026.0.3.2 indentation structure:
+
+**Correct Indentation Levels**:
+- Level 1: `edgeTypes:`
+- Level 2: `- edgeType:`
+- Level 3: `undirected:` / `directed:`
+- Level 4: `between:`, `and:`, `via:` / `from:`, `to:`, `via:`
+- Level 5: `typeLabel:` (child of `via:` when properties needed)
+
+**Two Forms Implemented**:
+- **Short Form**: `via: LABEL_NAME` (11 edges without properties)
+- **Long Form**: `via:` with nested `typeLabel:` and `implies:` (5 edges with properties)
+
+**Key Improvements**:
+- ✅ Fixed fundamental indentation structure issues
+- ✅ Moved `implies:` from wrong level (edgeType) to correct level (via child)
+- ✅ Applied appropriate short/long form based on property requirements
+- ✅ Maintained all abstract supertype TI wrappers at endpoint level
+- ✅ Preserved functional equivalence to original import-based schema
+
+**Status**: This represents a significant improvement in syntax correctness, though the overall TI simplification work remains in progress and not yet fully finalized.
 
 ## 🎯 PRIMARY AUTHORITY: design.md
 
