@@ -1,24 +1,27 @@
-# Type Interpretation System Simplification - SUPERSEDED
+# Type Interpretation System Simplification - REVISED
 
-**Date**: 2024-12-12  
-**Status**: SUPERSEDED - See design.md for latest and correct design  
+**Date**: 2024-12-15  
+**Status**: REVISED - Primary authority is design.md  
 **Context**: Major architectural simplification of LEX-2026 Type Interpretation system
 
-## ⚠️ DOCUMENT SUPERSEDED
+## 🎯 PRIMARY AUTHORITY: design.md
 
-**This document has been superseded by the official design document.**
-
-**For the latest and correct Type Interpretation design, see:**
+**The authoritative and complete Type Interpretation design is:**
 **`.kiro/specs/ti-ordering-refactor/design.md`**
 
-The design.md document contains:
-- ✅ Corrected comprehensive example with proper edge syntax (`via: KNOWS`)
-- ✅ Correct TI canonical forms (plural: `subtypesOfConcrete`, `subtypesOfAbstract`)
-- ✅ All corrected synonym mappings including new `abstract` synonym
-- ✅ Complete synonym demonstration section
-- ✅ Internally consistent and authoritative specification
+**This document serves as a summary and reference. For implementation, always consult design.md.**
 
-**Do not use this document for implementation - use design.md instead.**
+The design.md document is the **single source of truth** and contains:
+- ✅ **Complete specification** with all architectural details
+- ✅ **Corrected comprehensive example** with proper syntax
+- ✅ **Explicit properties approach** - pattern properties absolutely excluded
+- ✅ **NodeTypeArray/EdgeTypeArray terminology** (corrected from NodeTypeItem/EdgeTypeItem)
+- ✅ **Three primary TI forms** with complete synonym mappings
+- ✅ **Single-level TI system** with no nesting allowed
+- ✅ **Array-only organization** - no freestanding types
+- ✅ **Sub-array TI application** - TI only applies to subsequences within collections
+
+**Implementation Rule**: Always reference design.md for implementation decisions. This document provides context and summary only.
 
 ## The Simplified Design
 

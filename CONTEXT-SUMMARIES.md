@@ -5,11 +5,11 @@
 ## Active Context Documents
 
 ### SIMPLIFY-TYPE-INTERPRETATION.md
-**Created**: 2024-12-12  
-**Purpose**: Documents the critical inflection point in TI system design with the SIMPLIFIED TYPE INTERPRETATION DESIGN  
-**Status**: CRITICAL - Major architectural change requiring user approval  
-**Key Warning**: Current implementation plans are questionable and should NOT be executed without explicit user approval  
-**Contains**: Complete corrected example demonstrating simplified single-level TI architecture  
+**Created**: 2024-12-12 | **Revised**: 2024-12-15  
+**Purpose**: Summary document for TI system simplification - **PRIMARY AUTHORITY: design.md**  
+**Status**: REVISED - Points to `.kiro/specs/ti-ordering-refactor/design.md` as single source of truth  
+**Key Update**: Design.md corrected with NodeTypeArray/EdgeTypeArray terminology and pattern properties exclusion  
+**Contains**: Summary and context - **implementation must use design.md**  
 **Impact**: Fundamental shift from complex two-level to streamlined single-level system
 
 ### SIMPLIFY-TI-CONTEXT.md
@@ -33,8 +33,11 @@
 
 ### Update Status
 - ✅ Requirements document updated with single-level TI system
-- ✅ Design document updated with simplified architecture
+- ✅ Design document updated with simplified architecture (CORRECTED 2024-12-15)
+- ✅ Design document corrected: NodeTypeArray/EdgeTypeArray terminology
+- ✅ Design document corrected: Pattern properties absolutely excluded
 - ✅ Tasks document updated with new implementation plan
+- ✅ SIMPLIFY-TYPE-INTERPRETATION.md revised to point to design.md as primary authority
 
 ## Usage Guidelines
 
@@ -54,4 +57,7 @@
 1. ✅ Context summary created (SIMPLIFY-TI-CONTEXT.md)
 2. ✅ Backups created for all three specification documents
 3. ✅ Context summaries index created (this document)
-4. ⏳ **READY FOR SPECIFICATION UPDATES** - awaiting user approval to proceed
+4. ✅ Design document corrected with NodeTypeArray/EdgeTypeArray terminology
+5. ✅ Design document corrected to absolutely exclude pattern properties
+6. ✅ SIMPLIFY-TYPE-INTERPRETATION.md revised to establish design.md as primary authority
+7. ⏳ **READY FOR GRADUAL IMPLEMENTATION** - awaiting user instructions for careful, step-by-step implementation

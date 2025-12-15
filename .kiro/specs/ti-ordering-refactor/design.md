@@ -26,35 +26,34 @@ This document describes the design for fundamentally simplifying the LEX-2026.0.
 
 **Key Insight**: TI wrappers apply **ONLY** to sub-arrays (subsequences) within collections. Collection properties (`nodeTypes:`, `edgeTypes:`) and graphType itself **NEVER** have TI wrappers. This eliminates 3 locations and significantly simplifies the system.
 
-## NodeTypeItem/EdgeTypeItem: Essential for Array Subsequence Model
+## NodeTypeArray/EdgeTypeArray: Essential for Array Subsequence Model
 
-**CRITICAL CLARIFICATION**: NodeTypeItem and EdgeTypeItem are **NOT redundant** - they are essential for enabling the array subsequence partitioning model.
+**CRITICAL CLARIFICATION**: NodeTypeArray and EdgeTypeArray are **NOT redundant** - they are essential for enabling the array subsequence partitioning model.
 
-**What NodeTypeItem/EdgeTypeItem Define**:
+**What NodeTypeArray/EdgeTypeArray Define**:
 - What can appear as elements within `nodeTypes`/`edgeTypes` arrays
 - Support for bare types: `{ typeLabel: Person }`
-- Support for TI-wrapped individual types: `exactlyOfConcrete: { typeLabel: Person }`
 - Support for TI-wrapped array subsequences: `subtypesOfAbstract: [{ typeLabel: Vehicle }, { typeLabel: Car }]`
 
 **Array Subsequence Partitioning Example**:
 ```yaml
 nodeTypes:                              # Collection containing array
-  - typeLabel: Person                   # Bare element (NodeTypeItem)
-  - subtypesOfAbstract:                 # TI-wrapped subsequence (NodeTypeItem)
+  - typeLabel: Person                   # Bare element (NodeTypeArray)
+  - subtypesOfAbstract:                 # TI-wrapped subsequence (NodeTypeArray)
       - typeLabel: Vehicle              # Array within subsequence
       - typeLabel: Car
-  - exactlyOfConcrete:                  # Another TI-wrapped subsequence (NodeTypeItem)
+  - exactlyOfConcrete:                  # Another TI-wrapped subsequence (NodeTypeArray)
       - typeLabel: Company
       - typeLabel: Organization
 ```
 
-**Why NodeTypeItem/EdgeTypeItem Are Essential**:
-1. **Array Element Definition**: Define what can be array elements (bare types, TI-wrapped types, TI-wrapped subsequences)
+**Why NodeTypeArray/EdgeTypeArray Are Essential**:
+1. **Array Element Definition**: Define what can be array elements (bare types, TI-wrapped subsequences)
 2. **Subsequence Support**: Enable partitioning arrays into TI-wrapped subsequences
 3. **Flexible Structure**: Allow mixing bare elements with TI-wrapped subsequences in the same array
 4. **Schema Validation**: Provide proper validation for complex array structures
 
-**Without NodeTypeItem/EdgeTypeItem**: Arrays could only contain uniform elements, eliminating the powerful subsequence partitioning capability that makes the TI system flexible and expressive.
+**Without NodeTypeArray/EdgeTypeArray**: Arrays could only contain uniform elements, eliminating the powerful subsequence partitioning capability that makes the TI system flexible and expressive.
 
 ## Simplification Rationale
 
@@ -896,7 +895,7 @@ Phase 2 fixes **2 broken locations** (4-5) and **eliminates 3 locations** (1-3) 
 **Current**: TI wrappers in wrong order (inside content instead of outside)  
 **Target**: Support TI wrappers around sub-arrays within `nodeTypes` collection  
 **Change**: Fix TI wrapper ordering - TI keywords must wrap sub-arrays, not be inside them  
-**Schema Definition**: NodeTypeItem allows bare types OR TI-wrapped sub-arrays  
+**Schema Definition**: NodeTypeArray allows bare types OR TI-wrapped sub-arrays  
 **Semantics**: Partitions the nodeTypes array into sub-arrays, each with its own TI  
 **Example**: `nodeTypes: [{ nodeType: { typeLabel: Person } }, abstract: [{ nodeType: { typeLabel: Entity } }]]`  
 **Phase 2 Task**: Fix TI wrapper ordering for sub-arrays
@@ -905,7 +904,7 @@ Phase 2 fixes **2 broken locations** (4-5) and **eliminates 3 locations** (1-3) 
 **Current**: TI wrappers in wrong order (inside content instead of outside)  
 **Target**: Support TI wrappers around sub-arrays within `edgeTypes` collection  
 **Change**: Fix TI wrapper ordering - TI keywords must wrap sub-arrays, not be inside them  
-**Schema Definition**: EdgeTypeItem allows bare types OR TI-wrapped sub-arrays  
+**Schema Definition**: EdgeTypeArray allows bare types OR TI-wrapped sub-arrays  
 **Semantics**: Partitions the edgeTypes array into sub-arrays, each with its own TI  
 **Example**: `edgeTypes: [{ edgeType: { via: { typeLabel: KNOWS } } }, concrete: [{ edgeType: { via: { typeLabel: WORKS_FOR } } }]]`  
 **Phase 2 Task**: Fix TI wrapper ordering for sub-arrays
