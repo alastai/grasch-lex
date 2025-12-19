@@ -24,11 +24,12 @@ The SNB inline schema has been **successfully corrected** and is ready:
 - ✅ **IDE compatible**: Survived autofix/formatting without issues  
 - ✅ **Abstract supertype references**: Proper use of `properSubtypesOf: Message/Organisation/Place`
 
-### Design Document Status: 🔄 NEEDS UPDATE
-The design document requires updates to:
-- Document the correct edge type syntax patterns (short form vs long form)
-- Update the comprehensive syntax example to use correct edge type syntax
-- Ensure consistency with the corrected SNB inline schema
+### Design Document Status: ✅ COMPREHENSIVE EXAMPLE COMPLETE
+The design document has been updated with:
+- ✅ **External file reference**: Points to `lex-2026.0.4.0-comprehensive-syntax-example.yaml`
+- ✅ **Subtyping extension syntax**: 7 detailed examples demonstrating all `<:` operator patterns
+- ✅ **All original features preserved**: Complete TI architecture, syntax variations, interleaved collections
+- 🔄 **Still needs**: Direct documentation of edge type syntax patterns in design.md text
 
 ## Iterative Update Process
 
@@ -145,9 +146,10 @@ directed:
 ### Implementation Status
 
 - **Analysis**: Complete
-- **Documentation**: Pending (to be added to design.md)
+- **Documentation**: ✅ **COMPLETE** - Added to design.md with external file reference
+- **Comprehensive Example**: ✅ **COMPLETE** - `src/grasch/examples/lex-2026.0.4.0-comprehensive-syntax-example.yaml` created with 7 detailed subtyping extension examples
 - **Schema Updates**: Pending
-- **Examples**: Pending
+- **Examples**: ✅ **COMPLETE** - All subtyping extension patterns demonstrated
 
 ## Next Steps
 
