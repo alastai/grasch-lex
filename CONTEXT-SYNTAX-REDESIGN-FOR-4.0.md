@@ -23,11 +23,17 @@ The SNB inline schema should be **left alone** during the 4.0 syntax redesign:
 - ⏳ **Future work**: Will be updated after comprehensive example is complete
 - 📝 **Previous state**: Was corrected for 3.2 syntax but needs 4.0 updates later
 
-### Design Document Status: ✅ COMPREHENSIVE EXAMPLE COMPLETE
+### Design Document Status: ✅ COMPREHENSIVE EXAMPLE PASS 1 COMPLETE
 The design document has been updated with:
 - ✅ **External file reference**: Points to `lex-2026.0.4.0-comprehensive-syntax-example.yaml`
-- ✅ **Endpoint subtype extension syntax**: 7 detailed examples demonstrating all `<:` operator patterns
+- ✅ **PASS 1 COMPLETE**: Systematic edge type syntax patterns organized into 5 sections:
+  - Section 1: Basic Edge Type Syntax Patterns (6 variations: short/long forms with via/typeLabel, directed/undirected)
+  - Section 2: Extension Patterns (4 variations: short/long form extensions)
+  - Section 3: Abstract Edge Types (2 variations: directed/undirected abstract forms)
+  - Section 4: Subtyping Extension Syntax (9 detailed examples demonstrating all `<:` operator patterns)
+  - Section 5: Additional Edge Types (for completeness)
 - ✅ **All original features preserved**: Complete TI architecture, syntax variations, interleaved collections
+- 🔄 **PASS 2 PLANNED**: Add endpoint TI wrapper variations combined with subtyping extensions
 - 🔄 **Still needs**: Direct documentation of edge type syntax patterns in design.md text
 
 ## Iterative Update Process
@@ -173,18 +179,80 @@ directed:
 - **Schema Updates**: Pending
 - **Examples**: ✅ **COMPLETE** - All subtyping extension patterns demonstrated
 
+## Comprehensive Example Pass 2 Plan
+
+**PASS 2 OBJECTIVE**: Add endpoint TI wrapper variations combined with subtyping extension syntax to demonstrate the full power of the combined syntax.
+
+### Pass 2 Additions Planned
+
+**Section 6: Endpoint TI Wrapper Variations**
+- Basic TI wrappers: `exactlyOfConcrete:`, `subtypesOfConcrete:`, `subtypesOfAbstract:`
+- TI wrappers with plain type references: `exactlyOfConcrete: [Person]`
+- TI wrappers with subtype extensions: `subtypesOfConcrete: [LLC <: Company]`
+
+**Section 7: Combined TI Wrapper + Subtyping Extension Syntax**
+- All TI wrapper types combined with `<:` operator
+- Multiple endpoint combinations (0, 1, 2 endpoints with TI wrappers)
+- Mixed scenarios: some endpoints with TI wrappers, others with plain references
+
+**Section 8: Advanced Combined Patterns**
+- Complex inheritance chains with TI wrappers
+- Abstract types with subtype extensions
+- Edge cases and boundary conditions
+
+### Key Examples to Add
+
+```yaml
+# TI wrapper with subtype extension
+edgeType:
+  typeLabel: ADVANCED_SUPERVISES
+  extends: WORKS_FOR
+  directed:
+    from: subtypesOfConcrete: [Employee <: Person]
+    to: exactlyOfConcrete: [LLC <: Company]
+  adding:
+    labels: [AdvancedLeadership]
+
+# Mixed TI wrapper and plain reference
+edgeType:
+  typeLabel: MIXED_MANAGEMENT
+  extends: WORKS_FOR
+  directed:
+    from: Person                           # Plain reference
+    to: properSubtypesOf: [Corporation <: Company]  # TI wrapper with subtype extension
+```
+
 ## Next Steps
 
+### Immediate (Pass 1 Complete)
 1. **Update design.md** with correct edge type syntax documentation **INCLUDING** the new endpoint subtype extension syntax
-2. **Update comprehensive syntax example** in design.md to demonstrate the `<:` operator
-3. **Verify consistency** across all three documents
-4. **Only then proceed** to consequential changes (JSON Schema, other examples, tests)
+2. **Verify Pass 1 comprehensive example** is complete and consistent
+3. **Commit and push Pass 1 changes**
+
+### Phase 2 (Pass 2 Implementation)
+4. **Implement Pass 2** - Add endpoint TI wrapper variations combined with subtyping extensions
+5. **Update comprehensive syntax example** in design.md to demonstrate the combined syntax
+6. **Verify consistency** across all documents
+
+### Phase 3 (Final Integration)
+7. **Only then proceed** to consequential changes (JSON Schema, other examples, tests)
 
 ## Success Criteria
 
+### Pass 1 (✅ COMPLETE)
+- ✅ **Comprehensive example Pass 1**: Systematic edge type syntax patterns organized into 5 sections
+- ✅ **Basic syntax coverage**: All fundamental edge type syntax combinations demonstrated
+- ✅ **Subtyping extension syntax**: All `<:` operator patterns with endpoint extensions
+- ✅ **Organized structure**: Clear sections with comprehensive examples
+
+### Pass 2 (🔄 PLANNED)
+- [ ] **Endpoint TI wrapper variations**: Add TI wrapper examples combined with subtyping extensions
+- [ ] **Combined syntax demonstration**: Show full power of TI wrappers + `<:` operator
+- [ ] **Advanced patterns**: Complex inheritance and mixed scenarios
+
 ### Phase 1 (Current Focus)
 - [ ] Design.md documents correct edge type syntax patterns
-- [ ] Comprehensive syntax example uses correct edge type syntax
+- [ ] Comprehensive syntax example Pass 2 complete
 - [ ] Design.md and comprehensive example are consistent with each other
 
 ### Phase 2 (Future)

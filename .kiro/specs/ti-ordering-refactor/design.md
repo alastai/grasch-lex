@@ -433,160 +433,8 @@ graphType:
 This example represents the **SIMPLIFIED TYPE INTERPRETATION DESIGN** - the current inflection point in our TI system architecture. This is the target design that eliminates the complex two-level TI architecture in favor of a streamlined single-level system.
 
 **Complete Example - All Syntax Possibilities with Interleaved Collections**:
-```yaml
-graphType:
-  # Interleaved nodeTypes and edgeTypes collections demonstrate flexible organization
-  
-  nodeTypes:
-    # Abbreviated syntax - simple typeLabel only
-    - nodeType: Person
-    
-    # Full syntax with single typeLabel and implies (labels + propertyTypes)
-    - nodeType:
-        typeLabel: Company
-        implies:
-          labels: [Organization, Entity]
-          propertyTypes:
-            - name: founded
-              valueType: DATE
-            - name: employees
-              valueType: INTEGER
-  
-  edgeTypes:
-    # Directed edge - abbreviated syntax
-    - edgeType:
-        from: Person
-        to: Person
-        via: KNOWS
-    
-    # Directed edge - full syntax with implies
-    - edgeType:
-        from: Person
-        to: Company
-        via:
-          typeLabel: WORKS_FOR
-          implies:
-            labels: [Employment, Relationship]
-            propertyTypes:
-              - name: since
-                valueType: DATE
-              - name: position
-                valueType: STRING
-  
-  nodeTypes:
-    # Multiple typeLabels with implies
-    - nodeType:
-        typeLabels: [Cat, Dog, Pet]
-        implies:
-          labels: [Animal, LivingThing]
-          propertyTypes:
-            - name: age
-              valueType: INTEGER
-            - name: name
-              valueType: STRING
-    
-    # Extension with adding (labels + propertyTypes)
-    - nodeType:
-        typeLabel: Employee
-        extends: Person
-        adding:
-          labels: [Worker, Staff]
-          propertyTypes:
-            - name: employeeId
-              valueType: STRING
-            - name: salary
-              valueType: DECIMAL
-    
-    # TI-wrapped sub-array with abstract types
-    - abstract:
-        - nodeType:
-            typeLabel: Vehicle
-            implies:
-              labels: [Transport, Machine]
-              propertyTypes:
-                - name: wheels
-                  valueType: INTEGER
-        - nodeType: Engine  # Abbreviated within TI sub-array
-  
-  edgeTypes:
-    # Undirected edge - abbreviated syntax
-    - edgeType:
-        between: Person
-        and: Person
-        via: FRIENDS_WITH
-    
-    # Undirected edge - full syntax
-    - edgeType:
-        between: Person
-        and: Person
-        via:
-          typeLabel: MARRIED_TO
-          implies:
-            labels: [Friendship, SocialConnection]
-            propertyTypes:
-              - name: since
-                valueType: DATE
-              - name: closeness
-                valueType: FLOAT
-    
-    # TI-wrapped sub-array for edge types
-    - abstract:
-        - edgeType:
-            from: Entity
-            to: Entity
-            via:
-              typeLabel: RELATIONSHIP
-              implies:
-                labels: [Connection, Link]
-                propertyTypes:
-                  - name: strength
-                    valueType: FLOAT
-        - edgeType:
-            between: Location
-            and: Location
-            via: CONNECTED_TO
-  
-  nodeTypes:
-    # More bare elements after TI sub-array
-    - nodeType: Location
-    
-    # Another TI-wrapped sub-array with concrete types
-    - concrete:
-        - nodeType:
-            typeLabel: Car
-            extends: Vehicle
-            adding:
-              labels: [Automobile]
-              propertyTypes:
-                - name: model
-                  valueType: STRING
-        - nodeType:
-            typeLabels: [Truck, Lorry]
-            extends: Vehicle
-    
-    # Final bare elements
-    - nodeType: Event
-  
-  edgeTypes:
-    # Extension syntax for edge types
-    - edgeType:
-        from: Person
-        to: Company
-        via:
-          typeLabel: MANAGES
-          extends: WORKS_FOR
-          adding:
-            labels: [Leadership]
-            propertyTypes:
-              - name: teamSize
-                valueType: INTEGER
-    
-    # Final edge type
-    - edgeType:
-        from: Vehicle
-        to: Location
-        via: LOCATED_AT
-```
+
+*See external file: `src/grasch/examples/lex-2026.0.4.0-comprehensive-syntax-example.yaml`*
 
 **🎯 END OF SIMPLIFIED TYPE INTERPRETATION DESIGN EXAMPLE**
 
@@ -597,7 +445,61 @@ This example demonstrates the complete simplified TI architecture with:
 - ✅ Clear syntax variations (abbreviated, full, extension)
 - ✅ Mixed bare elements and TI-wrapped subsequences
 - ✅ Interleaved type collections (nodeTypes and edgeTypes mixed)
-- ✅ Corrected edge abbreviated syntax (`via: KNOWS`)
+- ✅ **NEW**: Edge type reordering with label-first syntax
+- ✅ **NEW**: Structural equivalence between directed and undirected forms
+
+### Edge Type Syntax Forms - Directed vs Undirected Equivalence
+
+**Key Insight**: Directed and undirected edge types are structurally identical with respect to long and short forms. They differ only in orientation keywords and endpoint properties:
+
+**Directed Forms:**
+```yaml
+# Long form - directed
+- edgeType:
+    via: KNOWS
+    implies:
+      directed:
+        from: Person
+        to: Person
+      propertyTypes:
+        - name: since
+          valueType: DATE
+
+# Short form - directed (extends without orientation)
+- edgeType:
+    via: MANAGES
+    extends: WORKS_FOR
+    # No directed: property - not extending orientation
+```
+
+**Undirected Forms:**
+```yaml
+# Long form - undirected (structurally identical)
+- edgeType:
+    via: FRIENDS_WITH
+    implies:
+      undirected:
+        between: Person
+        and: Person
+      propertyTypes:
+        - name: closeness
+          valueType: FLOAT
+
+# Short form - undirected (extends without orientation)
+- edgeType:
+    via: CLOSE_TO
+    extends: FRIENDS_WITH
+    # No undirected: property - not extending orientation
+```
+
+**Structural Pattern:**
+1. **Edge label first**: `via: LABEL` or `typeLabel: LABEL`
+2. **Then implies/extends**: `implies:` or `extends:`
+3. **Then orientation** (if extending): `directed:` or `undirected:` (directly under `extends:`)
+4. **Then endpoints**: `from:/to:` or `between:/and:`
+5. **Then attributes**: `propertyTypes:` and/or `labels:` (under `adding:` when extending)
+
+**Short Form Definition**: Without orientation, additional propertyTypes, or additional labels.
 
 ### Complete Synonym Demonstration
 
@@ -638,6 +540,13 @@ graphType:
     - abstract:              # → subtypesOfAbstract
         - nodeType: BaseType
         - nodeType: Interface
+    
+    # New direct abstract syntax
+    - abstractNodeType: AbstractEntity
+    - abstractNodeType:
+        typeLabel: AbstractConcept
+        implies:
+          labels: [Conceptual]
   
   edgeTypes:
     # Synonyms work the same way for edge types
@@ -652,6 +561,12 @@ graphType:
             from: Entity
             to: Entity
             via: RELATES_TO
+    
+    # New direct abstract edge syntax
+    - abstractEdgeType:
+        from: Entity
+        to: Entity
+        via: ABSTRACT_RELATION
 ```
 
 **⚠️ IMPLEMENTATION NOTE**: When agreeing to any implementation, remind the user to create an example that fully demonstrates synonyms (`concrete:`, `subtypesOf:`, `properSubtypesOf:`, `abstract:`, `exactlyOf:`) in addition to the primary forms (`exactlyOfConcrete:`, `subtypesOfConcrete:`, `subtypesOfAbstract:`).

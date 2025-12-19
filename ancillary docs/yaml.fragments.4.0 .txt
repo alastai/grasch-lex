@@ -1,0 +1,32 @@
+﻿nodeTypes:
+     - nodeType:
+        typeLabel: Foo
+        implies: 
+* abstractNodeType:
+        typeLabel: Bar
+    - nodeType: 
+        typeLabel: BarBar
+        extends: Bar
+        adding: 
+            propertyTypes:
+                name: far
+                valueType: STRING
+    isolated:
+        _ exactlyOf: [Foo]
+        _ exactlyOf: ANY DEFINED TYPE
+        _ openSubtypesOf: [Foo]
+
+
+edgeTypes:
+    _ edgeType:
+        typeLabel: FooBar
+        implies:
+            directed:
+               from: exactlyOf: Foo
+                to: properSubtypeOf: Bar
+           
+    _ edgeType:
+        typeLabel: BarFoo
+         extends: FooBar
+             to: Bar 
+             adding:

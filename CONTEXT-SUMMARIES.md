@@ -4,10 +4,20 @@
 
 ## Active Context Documents
 
+### CONTEXT-SYNTAX-REDESIGN-FOR-4.0.md
+**Created**: 2024-12-18 (Latest - HEAD DOCUMENT)  
+**Purpose**: Document iterative process of updating design.md, comprehensive syntax example, and SNB inline example for LEX-2026.0.4.0  
+**Status**: Active - Current Phase  
+**Phase**: Syntax Redesign and Documentation Update  
+**Key Focus**: Iterative updates to three core documents before consequential changes  
+**Back-References**: Links to SIMPLIFY-TYPE-INTERPRETATION.md, SIMPLIFY-TI-CONTEXT.md, SNB-INLINE-SCHEMA-CORRECTION-COMPLETE.md  
+**Authority**: design.md remains primary authority for implementation  
+**Impact**: Establishes careful change management for syntax redesign phase
+
 ### SIMPLIFY-TYPE-INTERPRETATION.md
-**Created**: 2024-12-12 | **Revised**: 2024-12-15 (Latest)  
+**Created**: 2024-12-12 | **Revised**: 2024-12-15  
 **Purpose**: Summary document for TI system simplification - **PRIMARY AUTHORITY: design.md**  
-**Status**: WIP - Edge Type Syntax Corrections Applied  
+**Status**: Referenced by CONTEXT-SYNTAX-REDESIGN-FOR-4.0.md  
 **Latest Update**: Successfully corrected edge type syntax in SNB inline schema with proper indentation structure  
 **Key Achievement**: Fixed fundamental edge type syntax issues (short/long forms, proper indentation levels)  
 **Contains**: Summary and context - **implementation must use design.md**  
@@ -61,4 +71,7 @@
 4. ✅ Design document corrected with NodeTypeArray/EdgeTypeArray terminology
 5. ✅ Design document corrected to absolutely exclude pattern properties
 6. ✅ SIMPLIFY-TYPE-INTERPRETATION.md revised to establish design.md as primary authority
-7. ⏳ **READY FOR GRADUAL IMPLEMENTATION** - awaiting user instructions for careful, step-by-step implementation
+7. ✅ SNB inline schema corrected with proper edge type syntax (SNB-INLINE-SCHEMA-CORRECTION-COMPLETE.md)
+8. ✅ **CONTEXT-SYNTAX-REDESIGN-FOR-4.0.md created** - establishes current phase of iterative documentation updates
+9. ⏳ **ACTIVE PHASE**: Iterative updates to design.md, comprehensive syntax example, and SNB inline example
+10. 🔄 **NEXT**: Update design.md with correct edge type syntax documentation (awaiting user approval)
