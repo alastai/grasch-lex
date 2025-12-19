@@ -96,10 +96,63 @@ This document continues work from:
 - **SNB inline schema** serves as the reference implementation example
 - **Comprehensive syntax example** in design.md demonstrates all syntax possibilities
 
+## Edge Type Subtyping Extension Syntax (NEW for LEX-2026.0.4.0)
+
+**CRITICAL NEW FEATURE**: Edge type subtyping extension syntax using the `<:` operator for endpoint properties.
+
+### Proposed Syntax Example
+
+```yaml
+edgeType:
+  typeLabel: SUPERVISES
+  extends: WORKS_FOR
+  directed:
+    # from: Person -- no need to state because not being extended
+    to: LLC <: Company # LLC is a subtype of Company, this is the extension being specified
+  adding:
+    labels: [Leadership]
+    propertyTypes:
+      - name: teamSize
+        valueType: INTEGER
+```
+
+### Syntax Rules
+
+**Pattern**: `WS <: WS` (whitespace around the `<:` operator)
+
+**Scope**: Applies to all endpoint properties:
+- `from:`
+- `to:`
+- `between:`
+- `and:`
+
+**Usage Constraint**: This subtyping extension syntax is **ONLY** to be used when the orientation property (`directed:`/`undirected:`) follows the `extends:` property. Otherwise, plain type references should be used.
+
+**Default Behavior**: Omission of an endpoint property (including if the whole orientation is omitted) is equivalent to:
+```yaml
+directed:
+  from: Person <: Person
+  to: Company <: Company
+```
+
+### Analysis Completed
+
+- ✅ **Easy to parse**: Pattern can be parsed with regex
+- ✅ **Clear semantic intent**: Expresses subtyping relationships explicitly
+- ✅ **Backward compatibility**: Maintains compatibility with plain type names
+- ✅ **Consistent pattern**: Uses familiar `<:` subtyping operator
+
+### Implementation Status
+
+- **Analysis**: Complete
+- **Documentation**: Pending (to be added to design.md)
+- **Schema Updates**: Pending
+- **Examples**: Pending
+
 ## Next Steps
 
-1. **Update design.md** with correct edge type syntax documentation
-2. **Update comprehensive syntax example** in design.md
+1. **Update design.md** with correct edge type syntax documentation **INCLUDING** the new subtyping extension syntax
+2. **Update comprehensive syntax example** in design.md to demonstrate the `<:` operator
 3. **Verify consistency** across all three documents
 4. **Only then proceed** to consequential changes (JSON Schema, other examples, tests)
 
