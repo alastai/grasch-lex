@@ -77,3 +77,4 @@
 9. ✅ **ACTIVE PHASE**: Iterative updates to LEX-2026.0.4.0-design.md, comprehensive syntax example, and SNB inline example
 10. ✅ **PASS 2 COMPLETE**: Added endpoint TI wrapper variations combined with subtyping extensions to comprehensive syntax example
 11. ✅ **FILE REORGANIZATION**: Created `.kiro/specs/lex-2026.0.4.0/` directory structure with LEX-2026.0.4.0 prefixed files
+12. ✅ **DESIGN CORRECTIONS COMPLETE**: Applied TI wrapper terminology corrections, fixed subtype extension syntax, documented design principles
