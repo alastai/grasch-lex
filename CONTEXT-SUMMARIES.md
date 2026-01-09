@@ -11,8 +11,9 @@
 **Phase**: Syntax Redesign and Documentation Update  
 **Key Focus**: Iterative updates to three core documents before consequential changes  
 **Back-References**: Links to SIMPLIFY-TYPE-INTERPRETATION.md, SIMPLIFY-TI-CONTEXT.md, SNB-INLINE-SCHEMA-CORRECTION-COMPLETE.md  
-**Authority**: design.md remains primary authority for implementation  
-**Impact**: Establishes careful change management for syntax redesign phase
+**Authority**: LEX-2026.0.4.0-design.md remains primary authority for implementation  
+**Impact**: Establishes careful change management for syntax redesign phase  
+**New Location**: `.kiro/specs/lex-2026.0.4.0/LEX-2026.0.4.0-context-syntax-redesign.md`
 
 ### SIMPLIFY-TYPE-INTERPRETATION.md
 **Created**: 2024-12-12 | **Revised**: 2024-12-15  
@@ -72,6 +73,7 @@
 5. ✅ Design document corrected to absolutely exclude pattern properties
 6. ✅ SIMPLIFY-TYPE-INTERPRETATION.md revised to establish design.md as primary authority
 7. ✅ SNB inline schema corrected with proper edge type syntax (SNB-INLINE-SCHEMA-CORRECTION-COMPLETE.md)
-8. ✅ **CONTEXT-SYNTAX-REDESIGN-FOR-4.0.md created** - establishes current phase of iterative documentation updates
-9. ⏳ **ACTIVE PHASE**: Iterative updates to design.md, comprehensive syntax example, and SNB inline example
-10. 🔄 **NEXT**: Update design.md with correct edge type syntax documentation (awaiting user approval)
+8. ✅ **LEX-2026.0.4.0 context document created** - establishes current phase of iterative documentation updates
+9. ✅ **ACTIVE PHASE**: Iterative updates to LEX-2026.0.4.0-design.md, comprehensive syntax example, and SNB inline example
+10. ✅ **PASS 2 COMPLETE**: Added endpoint TI wrapper variations combined with subtyping extensions to comprehensive syntax example
+11. ✅ **FILE REORGANIZATION**: Created `.kiro/specs/lex-2026.0.4.0/` directory structure with LEX-2026.0.4.0 prefixed files
