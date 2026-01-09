@@ -1,0 +1,558 @@
+# LEX-2026.0.4.0 Comprehensive Syntax Example
+# This example demonstrates the complete simplified TI architecture with edge type subtyping extension syntax
+#
+# PASS 1: Basic edge type syntax patterns and subtyping extension syntax
+# PASS 2: Endpoint TI wrapper variations combined with subtyping extensions
+
+graphType:
+  # Interleaved nodeTypes and edgeTypes collections demonstrate flexible organization
+  
+  nodeTypes:
+    # Abbreviated syntax - simple typeLabel only
+    - nodeType: Person
+    
+    # Full syntax with single typeLabel and implies (labels + propertyTypes)
+    - nodeType:
+        typeLabel: Company
+        implies:
+          labels: [Organization, Entity]
+          propertyTypes:
+            - name: founded
+              valueType: DATE
+            - name: employees
+              valueType: INTEGER
+    
+    # Additional node types for edge extension examples
+    - nodeType:
+        typeLabel: LLC
+        extends: Company
+        adding:
+          labels: [LimitedLiability]
+          propertyTypes:
+            - name: members
+              valueType: INTEGER
+    
+    - nodeType:
+        typeLabel: Corporation
+        extends: Company
+        adding:
+          labels: [PublicCompany]
+          propertyTypes:
+            - name: stockSymbol
+              valueType: STRING
+    
+    # Additional node types for Pass 2 TI wrapper examples
+    - nodeType:
+        typeLabel: Manager
+        extends: Employee
+        adding:
+          labels: [Management, Leadership]
+          propertyTypes:
+            - name: teamSize
+              valueType: INTEGER
+    
+    - nodeType:
+        typeLabel: Organization
+        implies:
+          labels: [Entity, Structure]
+          propertyTypes:
+            - name: foundedYear
+              valueType: INTEGER
+  
+  edgeTypes:
+    # ========================================
+    # SECTION 1: BASIC EDGE TYPE SYNTAX PATTERNS
+    # ========================================
+    
+    # 1.1 Short form - via: (no properties, no orientation specified)
+    - edgeType:
+        via: SIMPLE_LINK
+    
+    # 1.2 Short form - typeLabel: (no properties, no orientation specified)  
+    - edgeType:
+        typeLabel: BASIC_CONNECTION
+    
+    # 1.3 Long form - via: + implies: (directed with properties)
+    - edgeType:
+        via: KNOWS
+        implies:
+          directed:
+            from: Person
+            to: Person
+          propertyTypes:
+            - name: since
+              valueType: DATE
+    
+    # 1.4 Long form - typeLabel: + implies: (directed with properties and labels)
+    - edgeType:
+        typeLabel: WORKS_FOR
+        implies:
+          directed:
+            from: Person
+            to: Company
+          labels: [Employment, Relationship]
+          propertyTypes:
+            - name: position
+              valueType: STRING
+    
+    # 1.5 Long form - via: + implies: (undirected with properties)
+    - edgeType:
+        via: FRIENDS_WITH
+        implies:
+          undirected:
+            between: Person
+            and: Person
+          propertyTypes:
+            - name: closeness
+              valueType: FLOAT
+    
+    # 1.6 Long form - typeLabel: + implies: (undirected with properties and labels)
+    - edgeType:
+        typeLabel: MARRIED_TO
+        implies:
+          undirected:
+            between: Person
+            and: Person
+          labels: [Marriage, SocialConnection]
+          propertyTypes:
+            - name: since
+              valueType: DATE
+  nodeTypes:
+    # Multiple typeLabels with implies
+    - nodeType:
+        typeLabels: [Cat, Dog, Pet]
+        implies:
+          labels: [Animal, LivingThing]
+          propertyTypes:
+            - name: age
+              valueType: INTEGER
+            - name: name
+              valueType: STRING
+    
+    # Extension with adding (labels + propertyTypes)
+    - nodeType:
+        typeLabel: Employee
+        extends: Person
+        adding:
+          labels: [Worker, Staff]
+          propertyTypes:
+            - name: employeeId
+              valueType: STRING
+            - name: salary
+              valueType: DECIMAL
+    
+    # Abstract node types using new syntax
+    - abstractNodeType:
+        typeLabel: Vehicle
+        implies:
+          labels: [Transport, Machine]
+          propertyTypes:
+            - name: wheels
+              valueType: INTEGER
+    - abstractNodeType:
+        typeLabel: Engine
+  
+  edgeTypes:
+    # ========================================
+    # SECTION 2: EXTENSION PATTERNS
+    # ========================================
+    
+    # 2.1 Short form extension - via: (no orientation change)
+    - edgeType:
+        via: MANAGES
+        extends: WORKS_FOR
+        # No directed: property - inherits orientation from base type
+    
+    # 2.2 Short form extension - typeLabel: (no orientation change)
+    - edgeType:
+        typeLabel: SUPERVISES_BASIC
+        extends: WORKS_FOR
+        # No directed: property - inherits orientation from base type
+        adding:
+          labels: [BasicSupervision]
+    
+    # 2.3 Long form extension - via: (with orientation specification)
+    - edgeType:
+        via: LEADS
+        extends: WORKS_FOR
+        directed:
+          from: Person
+          to: Company
+        adding:
+          labels: [Leadership]
+          propertyTypes:
+            - name: teamSize
+              valueType: INTEGER
+    
+    # 2.4 Long form extension - typeLabel: (with orientation specification)
+    - edgeType:
+        typeLabel: EXECUTIVE_MANAGES
+        extends: WORKS_FOR
+        directed:
+          from: Person
+          to: Company
+        adding:
+          labels: [ExecutiveManagement, HighLevel]
+          propertyTypes:
+            - name: reportingLevel
+              valueType: INTEGER
+    
+    # ========================================
+    # SECTION 3: ABSTRACT EDGE TYPES
+    # ========================================
+    
+    # 3.1 Abstract edge - directed long form with typeLabel
+    - abstractEdgeType:
+        typeLabel: RELATIONSHIP
+        implies:
+          directed:
+            from: Entity
+            to: Entity
+          labels: [Connection, Link]
+          propertyTypes:
+            - name: strength
+              valueType: FLOAT
+    
+    # 3.2 Abstract edge - undirected long form with via
+    - abstractEdgeType:
+        via: CONNECTED_TO
+        implies:
+          undirected:
+            between: Location
+            and: Location
+  nodeTypes:
+    # More bare elements after TI sub-array
+    - nodeType: Location
+    
+    # Concrete node types (keeping concrete wrapper for now as it's not abstract)
+    - concrete:
+        - nodeType:
+            typeLabel: Car
+            extends: Vehicle
+            adding:
+              labels: [Automobile]
+              propertyTypes:
+                - name: model
+                  valueType: STRING
+        - nodeType:
+            typeLabels: [Truck, Lorry]
+            extends: Vehicle
+    
+    # Final bare elements
+    - nodeType: Event
+  
+  edgeTypes:
+    # ========================================
+    # SECTION 4: SUBTYPING EXTENSION SYNTAX (NEW FOR LEX-2026.0.4.0)
+    # ========================================
+    
+    # 4.1 Extension with 0 endpoints extended (inherits both endpoints)
+    - edgeType:
+        typeLabel: BASIC_SUPERVISION
+        extends: WORKS_FOR
+        # No directed: property - inherits from: Person, to: Company
+        adding:
+          labels: [BasicSupervision]
+    
+    # 4.2 Extension with 1 endpoint extended (to: endpoint only)
+    - edgeType:
+        typeLabel: SUPERVISES
+        extends: WORKS_FOR
+        directed:
+          # from: Person -- inherited, no need to state
+          to: LLC <: Company # LLC is a subtype of Company, this is the extension being specified
+        adding:
+          labels: [Leadership]
+          propertyTypes:
+            - name: teamSize
+              valueType: INTEGER
+    
+    # 4.3 Extension with 1 endpoint extended (from: endpoint only)
+    - edgeType:
+        typeLabel: EMPLOYEE_WORKS_FOR
+        extends: WORKS_FOR
+        directed:
+          from: Employee <: Person # Employee is a subtype of Person
+          # to: Company -- inherited from base type
+        adding:
+          labels: [EmployeeRelationship]
+          propertyTypes:
+            - name: startDate
+              valueType: DATE
+    
+    # 4.4 Extension with 2 endpoints extended (both from: and to:)
+    - edgeType:
+        typeLabel: EXECUTIVE_MANAGES
+        extends: WORKS_FOR
+        directed:
+          from: Employee <: Person # Employee is a subtype of Person
+          to: Corporation <: Company # Corporation is a subtype of Company
+        adding:
+          labels: [ExecutiveManagement, HighLevel]
+          propertyTypes:
+            - name: reportingLevel
+              valueType: INTEGER
+            - name: budgetAuthority
+              valueType: DECIMAL
+    
+    # 4.5 Undirected extension with 1 endpoint extended (between:)
+    - edgeType:
+        typeLabel: EMPLOYEE_FRIENDSHIP
+        extends: FRIENDS_WITH
+        undirected:
+          between: Employee <: Person # Employee is a subtype of Person
+          # and: Person -- inherited from base type
+        adding:
+          labels: [WorkplaceFriendship]
+          propertyTypes:
+            - name: workRelated
+              valueType: BOOLEAN
+    
+    # 4.6 Undirected extension with 1 endpoint extended (and:)
+    - edgeType:
+        typeLabel: PERSON_COMPANY_CONNECTION
+        extends: CONNECTED_TO
+        undirected:
+          # between: Location -- inherited from base type
+          and: Company <: Location # Company is a subtype of Location (for this example)
+        adding:
+          labels: [BusinessLocation]
+    
+    # 4.7 Undirected extension with 2 endpoints extended (both between: and and:)
+    - edgeType:
+        typeLabel: BUSINESS_PARTNERSHIP
+        extends: CONNECTED_TO
+        undirected:
+          between: LLC <: Location # LLC is a subtype of Location (for this example)
+          and: Corporation <: Location # Corporation is a subtype of Location
+        adding:
+          labels: [BusinessRelationship, Partnership]
+          propertyTypes:
+            - name: contractValue
+              valueType: DECIMAL
+            - name: duration
+              valueType: STRING
+    
+    # 4.8 Extension with 0 labels added, 1 property type added
+    - edgeType:
+        typeLabel: SIMPLE_SUPERVISION
+        extends: WORKS_FOR
+        directed:
+          to: LLC <: Company
+        adding:
+          propertyTypes:
+            - name: directReports
+              valueType: INTEGER
+    
+    # 4.9 Extension with 2 labels added, 0 property types added
+    - edgeType:
+        typeLabel: LABELED_SUPERVISION
+        extends: WORKS_FOR
+        directed:
+          to: Corporation <: Company
+        adding:
+          labels: [CorporateLeadership, StructuredManagement]
+    
+    # ========================================
+    # SECTION 5: ADDITIONAL EDGE TYPES
+    # ========================================
+    
+    # Final edge type - long form for completeness
+    - edgeType:
+        via: LOCATED_AT
+        implies:
+          directed:
+            from: Vehicle
+            to: Location
+    
+    # ========================================
+    # SECTION 6: ENDPOINT TI WRAPPER VARIATIONS (PASS 2)
+    # ========================================
+    
+    # 6.1 Basic TI wrappers without subtype extensions
+    - edgeType:
+        typeLabel: EXACT_PERSON_WORKS
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOf: [Person]
+          to: subtypesOf: [Company]
+        adding:
+          labels: [ExactPersonWork]
+    
+    # 6.2 TI wrappers with array syntax
+    - edgeType:
+        typeLabel: MULTIPLE_PERSON_TYPES
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOf: [Person, Employee]
+          to: properSubtypesOf: [Organization]
+        adding:
+          labels: [MultiplePersonTypes]
+    
+    # 6.3 Mixed TI wrapper and plain reference
+    - edgeType:
+        typeLabel: MIXED_REFERENCE_STYLE
+        extends: WORKS_FOR
+        directed:
+          from: Person                    # Plain reference
+          to: subtypesOf: [Company]  # TI wrapper
+        adding:
+          labels: [MixedStyle]
+    
+    # ========================================
+    # SECTION 7: COMBINED TI WRAPPER + SUBTYPING EXTENSION SYNTAX (PASS 2)
+    # ========================================
+    
+    # 7.1 exactlyOf with subtype extension
+    - edgeType:
+        typeLabel: EXACT_EMPLOYEE_SUPERVISES
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOf: Employee <: Person
+          to: exactlyOf: LLC <: Company
+        adding:
+          labels: [ExactEmployeeSupervision]
+          propertyTypes:
+            - name: supervisionLevel
+              valueType: STRING
+    
+    # 7.2 subtypesOf with subtype extension
+    - edgeType:
+        typeLabel: EMPLOYEE_SUBTYPES_MANAGE
+        extends: WORKS_FOR
+        directed:
+          from: subtypesOf: Employee <: Person
+          to: subtypesOf: Corporation <: Company
+        adding:
+          labels: [EmployeeSubtypeManagement]
+          propertyTypes:
+            - name: managementStyle
+              valueType: STRING
+    
+    # 7.3 properSubtypesOf with subtype extension
+    - edgeType:
+        typeLabel: PROPER_EMPLOYEE_LEADS
+        extends: WORKS_FOR
+        directed:
+          from: properSubtypesOf: Employee <: Person
+          to: properSubtypesOf: LLC <: Company
+        adding:
+          labels: [ProperEmployeeLeadership]
+          propertyTypes:
+            - name: leadershipType
+              valueType: STRING
+    
+    # 7.4 properSubtypesOf with abstract type and subtype extension
+    - edgeType:
+        typeLabel: ABSTRACT_VEHICLE_CONNECTION
+        extends: LOCATED_AT
+        directed:
+          from: properSubtypesOf: Car <: Vehicle
+          to: properSubtypesOf: Company <: Location
+        adding:
+          labels: [AbstractVehicleLocation]
+    
+    # 7.5 Mixed TI wrapper types with subtype extensions
+    - edgeType:
+        typeLabel: MIXED_TI_WRAPPERS
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOf: Employee <: Person      # Exact wrapper with subtype
+          to: subtypesOf: Corporation <: Company   # Subtypes wrapper with subtype
+        adding:
+          labels: [MixedTIWrappers]
+          propertyTypes:
+            - name: relationshipComplexity
+              valueType: INTEGER
+    
+    # 7.6 Array syntax with mixed subtype extensions
+    - edgeType:
+        typeLabel: ARRAY_MIXED_SUBTYPES
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOf: [Person, Employee <: Person]  # Mixed: plain and subtype extension
+          to: subtypesOf: [Company, LLC <: Company]      # Mixed: plain and subtype extension
+        adding:
+          labels: [ArrayMixedSubtypes]
+    
+    # 7.7 Undirected with TI wrappers and subtype extensions
+    - edgeType:
+        typeLabel: UNDIRECTED_TI_SUBTYPES
+        extends: FRIENDS_WITH
+        undirected:
+          between: exactlyOf: Employee <: Person
+          and: subtypesOf: Employee <: Person
+        adding:
+          labels: [UndirectedTISubtypes]
+          propertyTypes:
+            - name: workplaceFriendship
+              valueType: BOOLEAN
+    
+    # ========================================
+    # SECTION 8: ADVANCED COMBINED PATTERNS (PASS 2)
+    # ========================================
+    
+    # 8.1 Complex inheritance chain with TI wrappers
+    - edgeType:
+        typeLabel: COMPLEX_INHERITANCE_CHAIN
+        extends: WORKS_FOR
+        directed:
+          from: properSubtypesOf: Employee <: Person
+          to: exactlyOf: Corporation <: Company
+        adding:
+          labels: [ComplexInheritance, MultiLevel]
+          propertyTypes:
+            - name: inheritanceDepth
+              valueType: INTEGER
+            - name: complexityScore
+              valueType: FLOAT
+    
+    # 8.2 Abstract types with subtype extensions and TI wrappers
+    - edgeType:
+        typeLabel: ABSTRACT_WITH_TI_SUBTYPES
+        extends: RELATIONSHIP
+        directed:
+          from: properSubtypesOf: Person <: Entity
+          to: properSubtypesOf: Company <: Entity
+        adding:
+          labels: [AbstractTISubtypes]
+          propertyTypes:
+            - name: abstractionLevel
+              valueType: STRING
+    
+    # 8.3 Edge case: Single endpoint with TI wrapper, other inherited
+    - edgeType:
+        typeLabel: SINGLE_ENDPOINT_TI
+        extends: WORKS_FOR
+        directed:
+          # from: Person -- inherited from base type
+          to: exactlyOf: LLC <: Company  # Only 'to' endpoint specified with TI wrapper
+        adding:
+          labels: [SingleEndpointTI]
+    
+    # 8.4 Edge case: Empty array in TI wrapper (should be valid but unusual)
+    - edgeType:
+        typeLabel: EMPTY_ARRAY_TI
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOf: []  # Empty array - unusual but syntactically valid
+          to: subtypesOf: [Company]
+        adding:
+          labels: [EmptyArrayTI]
+    
+    # 8.5 Maximum complexity: All features combined
+    - edgeType:
+        typeLabel: MAXIMUM_COMPLEXITY
+        extends: WORKS_FOR
+        directed:
+          from: properSubtypesOf: [Employee <: Person, Manager <: Employee]  # Multiple subtypes in array
+          to: exactlyOf: [LLC <: Company, Corporation <: Company]    # Multiple subtypes in array
+        adding:
+          labels: [MaximumComplexity, AllFeatures, Advanced]
+          propertyTypes:
+            - name: complexityLevel
+              valueType: INTEGER
+            - name: featureCount
+              valueType: INTEGER
+            - name: processingTime
+              valueType: FLOAT
