@@ -2,6 +2,28 @@
 
 **Purpose**: Track important context and summary documents created during the project lifecycle.
 
+## Context Continuity Protocol
+
+**How to answer "Where are we up to?"**
+
+This document implements a context continuity protocol designed to maintain work continuity across session boundaries:
+
+### Protocol Steps:
+1. **Start here** - Read CONTEXT-SUMMARIES.md (this document)
+2. **Find HEAD DOCUMENT** - Look for the document marked "(Latest - HEAD DOCUMENT)" in the Active Context Documents section
+3. **Read HEAD DOCUMENT** - Open the HEAD DOCUMENT for detailed current status, progress, and next steps
+4. **Review progress sections** - The HEAD DOCUMENT contains comprehensive progress tracking and current phase information
+
+### Current HEAD DOCUMENT:
+**`.kiro/specs/lex-2026.0.4.0/LEX-2026.0.4.0-context-syntax-redesign.md`** - Contains the most recent progress and current status
+
+### Protocol Authority:
+- **CONTEXT-SUMMARIES.md** (this file) = Navigation index with pointers to context documents
+- **HEAD DOCUMENT** = Detailed current status, progress tracking, and next steps
+- **`.kiro/steering/context-continuity.md`** = Full protocol specification and implementation guidelines
+
+This protocol ensures that work can be resumed accurately after session resets or context transfers.
+
 ## Active Context Documents
 
 ### CONTEXT-SYNTAX-REDESIGN-FOR-4.0.md

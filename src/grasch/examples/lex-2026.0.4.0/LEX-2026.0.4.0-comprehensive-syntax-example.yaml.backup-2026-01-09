@@ -2,7 +2,7 @@
 # This example demonstrates the complete simplified TI architecture with edge type subtyping extension syntax
 #
 # PASS 1: Basic edge type syntax patterns and subtyping extension syntax
-# PASS 2: (TODO) Add endpoint TI wrapper variations combined with subtyping extensions
+# PASS 2: Endpoint TI wrapper variations combined with subtyping extensions
 
 graphType:
   # Interleaved nodeTypes and edgeTypes collections demonstrate flexible organization
@@ -40,6 +40,24 @@ graphType:
           propertyTypes:
             - name: stockSymbol
               valueType: STRING
+    
+    # Additional node types for Pass 2 TI wrapper examples
+    - nodeType:
+        typeLabel: Manager
+        extends: Employee
+        adding:
+          labels: [Management, Leadership]
+          propertyTypes:
+            - name: teamSize
+              valueType: INTEGER
+    
+    - nodeType:
+        typeLabel: Organization
+        implies:
+          labels: [Entity, Structure]
+          propertyTypes:
+            - name: foundedYear
+              valueType: INTEGER
   
   edgeTypes:
     # ========================================
@@ -346,3 +364,195 @@ graphType:
           directed:
             from: Vehicle
             to: Location
+    
+    # ========================================
+    # SECTION 6: ENDPOINT TI WRAPPER VARIATIONS (PASS 2)
+    # ========================================
+    
+    # 6.1 Basic TI wrappers without subtype extensions
+    - edgeType:
+        typeLabel: EXACT_PERSON_WORKS
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOfConcrete: [Person]
+          to: subtypesOfConcrete: [Company]
+        adding:
+          labels: [ExactPersonWork]
+    
+    # 6.2 TI wrappers with array syntax
+    - edgeType:
+        typeLabel: MULTIPLE_PERSON_TYPES
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOfConcrete: [Person, Employee]
+          to: subtypesOfAbstract: [Organization]
+        adding:
+          labels: [MultiplePersonTypes]
+    
+    # 6.3 Mixed TI wrapper and plain reference
+    - edgeType:
+        typeLabel: MIXED_REFERENCE_STYLE
+        extends: WORKS_FOR
+        directed:
+          from: Person                    # Plain reference
+          to: subtypesOfConcrete: [Company]  # TI wrapper
+        adding:
+          labels: [MixedStyle]
+    
+    # ========================================
+    # SECTION 7: COMBINED TI WRAPPER + SUBTYPING EXTENSION SYNTAX (PASS 2)
+    # ========================================
+    
+    # 7.1 exactlyOfConcrete with subtype extension
+    - edgeType:
+        typeLabel: EXACT_EMPLOYEE_SUPERVISES
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOfConcrete: [Employee <: Person]
+          to: exactlyOfConcrete: [LLC <: Company]
+        adding:
+          labels: [ExactEmployeeSupervision]
+          propertyTypes:
+            - name: supervisionLevel
+              valueType: STRING
+    
+    # 7.2 subtypesOfConcrete with subtype extension
+    - edgeType:
+        typeLabel: EMPLOYEE_SUBTYPES_MANAGE
+        extends: WORKS_FOR
+        directed:
+          from: subtypesOfConcrete: [Employee <: Person]
+          to: subtypesOfConcrete: [Corporation <: Company]
+        adding:
+          labels: [EmployeeSubtypeManagement]
+          propertyTypes:
+            - name: managementStyle
+              valueType: STRING
+    
+    # 7.3 properSubtypesOf with subtype extension
+    - edgeType:
+        typeLabel: PROPER_EMPLOYEE_LEADS
+        extends: WORKS_FOR
+        directed:
+          from: properSubtypesOf: [Employee <: Person]
+          to: properSubtypesOf: [LLC <: Company]
+        adding:
+          labels: [ProperEmployeeLeadership]
+          propertyTypes:
+            - name: leadershipType
+              valueType: STRING
+    
+    # 7.4 subtypesOfAbstract with subtype extension
+    - edgeType:
+        typeLabel: ABSTRACT_VEHICLE_CONNECTION
+        extends: LOCATED_AT
+        directed:
+          from: subtypesOfAbstract: [Car <: Vehicle]
+          to: subtypesOfAbstract: [Company <: Location]
+        adding:
+          labels: [AbstractVehicleLocation]
+    
+    # 7.5 Mixed TI wrapper types with subtype extensions
+    - edgeType:
+        typeLabel: MIXED_TI_WRAPPERS
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOfConcrete: [Employee <: Person]      # Exact wrapper with subtype
+          to: subtypesOfConcrete: [Corporation <: Company]   # Subtypes wrapper with subtype
+        adding:
+          labels: [MixedTIWrappers]
+          propertyTypes:
+            - name: relationshipComplexity
+              valueType: INTEGER
+    
+    # 7.6 Array syntax with mixed subtype extensions
+    - edgeType:
+        typeLabel: ARRAY_MIXED_SUBTYPES
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOfConcrete: [Person, Employee <: Person]  # Mixed: plain and subtype extension
+          to: subtypesOfConcrete: [Company, LLC <: Company]      # Mixed: plain and subtype extension
+        adding:
+          labels: [ArrayMixedSubtypes]
+    
+    # 7.7 Undirected with TI wrappers and subtype extensions
+    - edgeType:
+        typeLabel: UNDIRECTED_TI_SUBTYPES
+        extends: FRIENDS_WITH
+        undirected:
+          between: exactlyOfConcrete: [Employee <: Person]
+          and: subtypesOfConcrete: [Employee <: Person]
+        adding:
+          labels: [UndirectedTISubtypes]
+          propertyTypes:
+            - name: workplaceFriendship
+              valueType: BOOLEAN
+    
+    # ========================================
+    # SECTION 8: ADVANCED COMBINED PATTERNS (PASS 2)
+    # ========================================
+    
+    # 8.1 Complex inheritance chain with TI wrappers
+    - edgeType:
+        typeLabel: COMPLEX_INHERITANCE_CHAIN
+        extends: WORKS_FOR
+        directed:
+          from: properSubtypesOf: [Employee <: Person]
+          to: exactlyOfConcrete: [Corporation <: Company]
+        adding:
+          labels: [ComplexInheritance, MultiLevel]
+          propertyTypes:
+            - name: inheritanceDepth
+              valueType: INTEGER
+            - name: complexityScore
+              valueType: FLOAT
+    
+    # 8.2 Abstract types with subtype extensions and TI wrappers
+    - edgeType:
+        typeLabel: ABSTRACT_WITH_TI_SUBTYPES
+        extends: RELATIONSHIP
+        directed:
+          from: subtypesOfAbstract: [Person <: Entity]
+          to: subtypesOfAbstract: [Company <: Entity]
+        adding:
+          labels: [AbstractTISubtypes]
+          propertyTypes:
+            - name: abstractionLevel
+              valueType: STRING
+    
+    # 8.3 Edge case: Single endpoint with TI wrapper, other inherited
+    - edgeType:
+        typeLabel: SINGLE_ENDPOINT_TI
+        extends: WORKS_FOR
+        directed:
+          # from: Person -- inherited from base type
+          to: exactlyOfConcrete: [LLC <: Company]  # Only 'to' endpoint specified with TI wrapper
+        adding:
+          labels: [SingleEndpointTI]
+    
+    # 8.4 Edge case: Empty array in TI wrapper (should be valid but unusual)
+    - edgeType:
+        typeLabel: EMPTY_ARRAY_TI
+        extends: WORKS_FOR
+        directed:
+          from: exactlyOfConcrete: []  # Empty array - unusual but syntactically valid
+          to: subtypesOfConcrete: [Company]
+        adding:
+          labels: [EmptyArrayTI]
+    
+    # 8.5 Maximum complexity: All features combined
+    - edgeType:
+        typeLabel: MAXIMUM_COMPLEXITY
+        extends: WORKS_FOR
+        directed:
+          from: properSubtypesOf: [Employee <: Person, Manager <: Employee]  # Multiple subtypes in array
+          to: exactlyOfConcrete: [LLC <: Company, Corporation <: Company]    # Multiple subtypes in array
+        adding:
+          labels: [MaximumComplexity, AllFeatures, Advanced]
+          propertyTypes:
+            - name: complexityLevel
+              valueType: INTEGER
+            - name: featureCount
+              valueType: INTEGER
+            - name: processingTime
+              valueType: FLOAT
